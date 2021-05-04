@@ -1,0 +1,5 @@
+<Root>
+  <CodeModule Name="ModulePublisherHostProcess" VersionControlItem="$/OpenVersion/Visual Studio.NET Projects/ModulePublisherHostProcess" VSnetProject="ModulePublisherHostProcess.csproj" VSnetSolution="..\ModulePublisher\ModulePublisher.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.*" Identity="77f05500-fd97-46c5-9df2-05290e6ad744">
+    <Reference Name="ModulePublisher" FileSystemPath="..\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+  </CodeModule>
+</Root>
