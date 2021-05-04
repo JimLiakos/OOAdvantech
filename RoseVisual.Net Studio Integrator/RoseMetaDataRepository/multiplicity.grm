@@ -1,0 +1,33 @@
+"Name"     = 'Enter the name of the grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+
+"Start Symbol" = <Program>
+
+! ------------------------------------------------- Sets
+
+{ID Head}      = {Letter} + [_]
+{ID Tail}      = {Alphanumeric} + [_]
+{String Chars} = {Printable} + {HT} - ["]
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*
+StringLiteral = '"' {String Chars}* '"'
+NumericLiteral = [-]? {digit}+ [FRDSIL]?
+TillDots= ..*  
+
+! ------------------------------------------------- Rules
+
+<Program> ::= <MultiplicityStatament>
+<MultiplicityStatament>::=<LowLimit>  <TillStatament>|<Exactly>|<Unspecified>
+
+<LowLimit>::=NumericLiteral 
+<Unspecified>::=<Many>
+<Many>::='n'|'*'
+<UpLimit>::=<Many>|NumericLiteral
+<TillStatament>::=<TillChars> <UpLimit>
+<TillChars>::=TillDots | '-' 
+<Exactly>::=NumericLiteral
+

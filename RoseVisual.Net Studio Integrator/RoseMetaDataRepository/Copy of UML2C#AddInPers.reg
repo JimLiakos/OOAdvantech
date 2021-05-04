@@ -1,0 +1,18 @@
+REGEDIT4
+[HKEY_LOCAL_MACHINE\SOFTWARE\Rational Software\Rose\AddIns\UML TO VS]
+"Active"="Yes"
+"Copyright"="Copyright © 1997-2002 Hlemejouras Software Corp."
+"InstallDir"="X:\source\\OpenVersions\\RoseVisual.Net Studio Integrator\\RoseMetaDataRepository"
+"LanguageAddIn"="Yes"
+"OLEServer"="RoseMetaDataRepository.VSCodeElementsSynchronizer"
+"Version"="1.0" 
+"ToolDisplayName"="C#." 
+"ToolName"="C#." 
+"ToolList"="C#.
+
+
+REGEDIT4
+[HKEY_LOCAL_MACHINE\SOFTWARE\Rational Software\Rose\AddIns\UML TO VS\Events]
+"OnActivate"="Interface"
+"OnDeactivate"="Interface"
+

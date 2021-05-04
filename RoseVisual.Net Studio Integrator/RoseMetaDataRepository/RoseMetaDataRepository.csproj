@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B925A690-3F68-4D9C-9394-B94BC1D8FCBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoseMetaDataRepository</RootNamespace>
+    <AssemblyName>RoseMetadaRepository</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\envdte.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyGrid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fdc3bca30692134b" />
+    <Reference Include="RationalRose, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cd6a4e3d8c5a6c7d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\RationalRose.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class.cs" />
+    <Compile Include="ClassifierPresentation.cs" />
+    <Compile Include="ClassifierMember.cs" />
+    <Compile Include="ClassifierMembersView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassifierMembersView.Designer.cs">
+      <DependentUpon>ClassifierMembersView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CodeModelSychronizer.cs" />
+    <Compile Include="CodeModelSychronizeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeModelSychronizeView.Designer.cs">
+      <DependentUpon>CodeModelSychronizeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentPresentation.cs" />
+    <Compile Include="ContainedItemsSynchronizer.cs" />
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="Interface.cs" />
+    <Compile Include="MetaObjectMapper.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="ModelItemIdentityView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelItemIdentityView.Designer.cs">
+      <DependentUpon>ModelItemIdentityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Namespace.cs" />
+    <Compile Include="Generalization.cs" />
+    <Compile Include="Method.cs" />
+    <Compile Include="Attribute.cs" />
+    <Compile Include="AttributeRealization.cs" />
+    <Compile Include="Association.cs" />
+    <Compile Include="AssociationEnd.cs" />
+    <Compile Include="AssociationEndRealization.cs" />
+    <Compile Include="RoseAccessTypeConverter.cs" />
+    <Compile Include="RoseModelItem.cs" />
+    <Compile Include="RoseVisualStudioBridge.cs" />
+    <Compile Include="Struct.cs" />
+    <Compile Include="SychronizationItem.cs" />
+    <Compile Include="UnknownClassifier.cs" />
+    <Compile Include="Operation.cs" />
+    <Compile Include="Realization.cs" />
+    <Compile Include="ProjectSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectSelectionForm.Designer.cs">
+      <DependentUpon>ProjectSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MetaObjectCreator.cs" />
+    <Compile Include="RoseObjectProxy.cs" />
+    <Compile Include="SolutionPresentation.cs" />
+    <Compile Include="VSCodeElementsSynchronizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PersistenceLayer\DotNetPersistenceLayer\CodeMetaDataRepository\CodeMetaDataRepository.csproj">
+      <Project>{E7709134-01FB-49BB-A6D3-5D32C6C61F1F}</Project>
+      <Name>CodeMetaDataRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantechFacade\OOAdvantechFacade.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantech\OOAdvantech.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PersistenceLayer\DotNetPersistenceLayer\Parser\Parser.csproj">
+      <Project>{7BBFF192-81B1-474C-856C-391D9012D0E7}</Project>
+      <Name>Parser</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserInterface\UserInterface\UserInterface.csproj">
+      <Project>{E0E5873E-E5E4-46F6-94F1-731C172CC1C6}</Project>
+      <Name>UserInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\ConnectableControls.csproj">
+      <Project>{E83F3B97-6DC3-4744-B246-55174E74DAED}</Project>
+      <Name>ConnectableControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\UserInterfaceMetaData\UserInterfaceMetaData.csproj">
+      <Project>{8F696A41-0F2A-476D-B140-42E21805CEA3}</Project>
+      <Name>UserInterfaceMetaData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.csproj">
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Name>ModulePublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoseAddinFacade\RoseAddinFacade.csproj">
+      <Project>{DC89C532-F995-42A0-A09C-4F23944DA00D}</Project>
+      <Name>RoseAddinFacade</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectSelectionForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClassifierMembersView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ClassifierMembersView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelItemIdentityView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ModelItemIdentityView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multiplicity.cgt" />
+    <EmbeddedResource Include="Resources\OpenSolution.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\role.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ImplAttr.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ImplOperation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NavigableRole.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PrivateAttribute.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PrivateOperation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ProtectedAttribute.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ProtectedOperation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PublicAttribute.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CodeModelSychronizeView.resx">
+      <DependentUpon>CodeModelSychronizeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PublicOperation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RealizedAssociation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PrivateRealizedAssociation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProtectedRealizedAssociation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SealedRealizedAssociation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RealizedField.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PrivateRealizedField.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProtectedRealizedField.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SealedRealizedField.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

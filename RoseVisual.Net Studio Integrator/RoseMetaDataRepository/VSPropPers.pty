@@ -1,0 +1,539 @@
+
+(object Petal
+    version    	43
+    _written   	"Rose 6.5.9232.10"
+    charSet    	161)
+
+(list Attribute_Set
+  (object Attribute
+	tool       	"C#"
+	name       	"propertyId"
+	value      	"809135966")
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Project"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"StopOnError"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Directory"
+		value      	"AUTO GENERATE")
+	    (object Attribute
+		tool       	"C#"
+		name       	"GeneratePreserveRegions"
+		value      	TRUE)))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Class"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Synchronize"
+		value      	TRUE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Namespace"
+		value      	"")
+		(object Attribute
+		tool       	"C#"
+		name       	"FullNameAttributes"
+		value      	TRUE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Generate Backward ID"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Identity"
+		value      	"")))
+	(object Attribute
+	tool            "C#"
+	name            "default__Inherit"
+	value           (list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Synchronize"
+		value      	TRUE)))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Param"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Parameter [in]"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Parameter [out]"
+		value      	FALSE)))
+
+
+    (object Attribute
+		tool            "C#"
+		name            "default__Association"
+		value           (list Attribute_Set
+    (object Attribute
+		tool       	"C#"
+		name       	"Association Attributes"
+		value      	TRUE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Generate Backward ID"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Identity"
+		value      	"")
+		(object Attribute
+		tool       	"C#"
+		name       	"General Association Identity"
+		value      	"")))
+
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Module-Spec"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Synchronize"
+		value      	TRUE)
+			(object Attribute
+		tool       	"C#"
+		name       	"Solution File"
+		value      	"")
+	    (object Attribute
+		tool       	"C#"
+		name       	"Project File"
+		value      	"")
+	    (object Attribute
+		tool       	"C#"
+		name       	"Assembly File"
+		value      	"")
+	    (object Attribute
+		tool       	"C#"
+		name       	"ModuleID"
+		value      	"")))
+
+
+
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Operation"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Synchronize"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Abstract"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"virtual"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"override"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"static"
+		value      	FALSE)))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Attribute"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Synchronize"
+		value      	TRUE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Generate Backward ID"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Identity"
+		value      	"")
+	    (object Attribute
+		tool       	"C#"
+		name       	"Abstract"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"virtual"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"override"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"static"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"As Property"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Property Data"
+		value      	"")
+		(object Attribute
+		tool       	"C#"
+		name       	"Auto Generate Property Data"
+		value      	TRUE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Exclude from documentation"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Property Data exclude from documentation"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Write"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Read"
+		value      	TRUE)
+		(object Attribute
+		tool            "C#"
+		name            "GenerateGetOperation"
+		value           FALSE)
+	    (object Attribute
+		tool            "C#"
+		name            "GenerateSetOperation"
+		value           FALSE)))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Has"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"IsReadOnly"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"BoundedHasRelType"
+		value      	("HasRelTypeSet" 47))))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Role"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Synchronize"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"ContainerClass"
+		value      	"")
+		(object Attribute
+		tool       	"C#"
+		name       	"Identity"
+		value      	"")
+
+	    (object Attribute
+		tool       	"C#"
+		name       	"As Property"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Property Data"
+		value      	"")
+		(object Attribute
+		tool       	"C#"
+		name       	"Auto Generate Property Data"
+		value      	TRUE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Exclude from documentation"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"Property Data exclude from documentation"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Abstract"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"virtual"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"override"
+		value      	FALSE)
+		(object Attribute
+		tool       	"C#"
+		name       	"static"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Write"
+		value      	TRUE)
+	    (object Attribute
+		tool       	"C#"
+		name       	"Read"
+		value      	TRUE)
+	    (object Attribute
+		tool            "C#"
+		name            "GenerateGetOperation"
+		value           FALSE)
+	    (object Attribute
+		tool            "C#"
+		name            "GenerateSetOperation"
+		value           FALSE)
+		 (object Attribute
+		tool            "C#"
+		name            "Indexer"
+		value           FALSE)))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Uses"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"GenerateForwardReference"
+		value      	FALSE)))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Subsystem"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Directory"
+		value      	"AUTO GENERATE")))
+    (object Attribute
+	tool       	"C#"
+	name       	"default__Category"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"C#"
+		name       	"Root Namespace"
+		value      	FALSE)
+		    (object Attribute
+		tool       	"C#"
+		name       	"FullName"
+		value      	"")))		
+
+   
+     (object Attribute
+	tool       	"Persistent"
+	name       	"default__Class"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Default Storage"
+		value      	"")
+		(object Attribute
+		tool       	"Persistent"
+		name       	"History Class"
+		value      	FALSE)))
+
+    (object Attribute
+	tool       	"Persistent"
+	name       	"default__Role"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Referential Integrity"
+		value      	FALSE)
+		(object Attribute
+		tool       	"Persistent"
+		name       	"Cascade Delete"
+		value      	FALSE)
+		(object Attribute
+		tool            "Persistent"
+		name            "Loading Type"
+		value           ("LoadingTypeSet" 2))
+		(object Attribute
+		tool            "Persistent"
+		name            "LoadingTypeSet"
+		value           (list Attribute_Set
+		    (object Attribute
+			tool            "Persistent"
+			name            "On Construction"
+			value           1)
+		    (object Attribute
+			tool            "Persistent"
+			name            "Lazy Fetching"
+			value           2)))
+		(object Attribute
+		tool       	"Persistent"
+		name       	"Member that implement"
+		value      	"Auto Generate")))
+
+	(object Attribute
+	tool            "Persistent"
+	name            "default__Inherit"
+	value           (list Attribute_Set
+	    (object Attribute
+		tool            "Persistent"
+		name            "Default Inheritance"
+		value           FALSE)
+		(object Attribute
+		tool            "Persistent"
+		name            "MappingType"
+		value           ("MappingTypeSet" 2))
+		(object Attribute
+		tool            "Persistent"
+		name            "MappingTypeSet"
+		value           (list Attribute_Set
+		    (object Attribute
+			tool            "Persistent"
+			name            "One table per hierarchy"
+			value           1)
+		    (object Attribute
+			tool            "Persistent"
+			name            "One table per concrete class"
+			value           2)
+		    (object Attribute
+			tool            "Persistent"
+			name            "One table per class"
+			value           3)))))
+    (object Attribute
+	tool       	"Persistent"
+	name       	"default__Attribute"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Persistent"
+		value      	FALSE)
+		(object Attribute
+		tool            "Persistent"
+		name            "Loading Type"
+		value           ("LoadingTypeSet" 1))
+		(object Attribute
+		tool            "Persistent"
+		name            "LoadingTypeSet"
+		value           (list Attribute_Set
+		    (object Attribute
+			tool            "Persistent"
+			name            "On Construction"
+			value           1)
+		    (object Attribute
+			tool            "Persistent"
+			name            "Lazy Fetching"
+			value           2)))
+		(object Attribute
+			tool            "Persistent"
+			name            "Length"
+			value           0)
+		(object Attribute
+		tool       	"Persistent"
+		name       	"Member that implement"
+		value      	"Auto Generate")
+					
+		(object Attribute
+		tool            "Persistent"
+		name            "Association Class Role"
+		value           ("AssociationClassRoleSet" 1))
+		(object Attribute
+		tool            "Persistent"
+		name            "AssociationClassRoleSet"
+		value           (list Attribute_Set
+		    (object Attribute
+			tool            "Persistent"
+			name            "None"
+			value           1)
+			(object Attribute
+			tool            "Persistent"
+			name            "RoleA"
+			value           2)
+		    (object Attribute
+			tool            "Persistent"
+			name            "RoleB"
+			value           3)))))
+    (object Attribute
+	tool       	"Persistent"
+	name       	"default__Subsystem"
+	value      	(list Attribute_Set
+		(object Attribute
+		tool       	"Persistent"
+		name       	"Storage"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Location"
+		value      	"")
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Type"
+		value      	("DataBaseTypesSet" 45))
+		 (object Attribute
+		tool            "Persistent"
+		name            "DataBaseTypesSet"
+		value           (list Attribute_Set
+		    (object Attribute
+			tool            "Persistent"
+			name            "MS SQL Server"
+			value           45)
+		    (object Attribute
+			tool            "Persistent"
+			name            "MS Access"
+			value           44)))))
+
+
+    (object Attribute
+	tool       	"Persistent"
+	name       	"default__Module-Spec"
+	value      	(list Attribute_Set
+		(object Attribute
+		tool       	"Persistent"
+		name       	"Storage"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Location"
+		value      	"")
+	    (object Attribute
+		tool       	"Persistent"
+		name       	"Type"
+		value      	("DataBaseTypesSet" 45))
+		 (object Attribute
+		tool            "Persistent"
+		name            "DataBaseTypesSet"
+		value           (list Attribute_Set
+		    (object Attribute
+			tool            "Persistent"
+			name            "MS SQL Server"
+			value           45)
+		    (object Attribute
+			tool            "Persistent"
+			name            "MS Access"
+			value           44)))))
+    (object Attribute
+		tool            "Persistent"
+		name            "default__Association"
+		value           (list Attribute_Set
+    (object Attribute
+		tool       	"Persistent"
+		name       	"Persistent"
+		value      	FALSE)))
+	(object Attribute
+	tool       	"OCL"
+	name       	"default__Class"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"OCL"
+		name       	"Invariants"
+		value      	"")))
+    (object Attribute
+	tool       	"OCL"
+	name       	"default__Attribute"
+	value      	(list Attribute_Set
+	    (object Attribute
+		tool       	"OCL"
+		name       	"Invariants"
+		value      	"")))))
+
+

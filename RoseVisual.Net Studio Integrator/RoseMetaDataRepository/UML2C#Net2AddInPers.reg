@@ -1,0 +1,20 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Rational Software\Rose\AddIns\UMLTO.Net2]
+"Active"="Yes"
+"Copyright"="Copyright © 1997-2002 Hlemejouras Software Corp."
+"InstallDir"="E:\\X-Drive\\source\\OpenVersions\\RoseVisual.Net Studio Integrator\\RoseMetaDataRepository"
+"LanguageAddIn"="Yes"
+"OLEServer"="RoseMetaDataRepository.VSNet2CodeElementsSynchronizer"
+"Version"="1.0" 
+"ToolDisplayName"="Net2" 
+"ToolName"="Net2" 
+"ToolList"="Net2"
+
+
+REGEDIT4
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Rational Software\Rose\AddIns\UMLTO.Net2\Events]
+"OnActivate"="Interface"
+"OnDeactivate"="Interface"
+
+
