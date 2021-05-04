@@ -1,0 +1,979 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object Class_Category "ModulePublisher"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"3EE57A620285"
+    external_docs 	(list external_doc_list
+	(object external_doc
+	    external_doc_path 	"X:\\source\\Visual Studio.NET Projects\\ModulePublisher\\Bags on Module Publisher.doc"))
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "ClassRepository"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{82B498BC-BBAD-4B8B-8ABA-427F459A980E}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"ModulePublisher.ClassRepository")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"ModulePublisher.ClassRepository")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"C:\\myproject\\terpo\\OpenVersions\\Visual Studio.NET Projects\\ModulePublisher\\ClassRepository.cs")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"3EE57A620287")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"5")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{5DA2479B-219A-45DB-A0E5-DFD979F8F075}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"3EE579A5020B")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"ModulePublisher")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	""))
+	    quid       	"3EE57A620287"
+	    documentation 	"Summary description for Class1."
+	    operations 	(list Operations
+		(object Operation "GetClassAssemblyName"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D6181ABB-F104-4911-AD88-6ECAE5C5C841}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EE57A6202A3"))
+		    quid       	"3EE57A6202A3"
+		    parameters 	(list Parameters
+			(object Parameter "ClassFullName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{FA5B62D8-0E19-4C76-A230-80ACC73C5E51}"))
+			    quid       	"3EE57A6202A4"
+			    type       	"string")
+			(object Parameter "Version"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{704463C8-92DD-4C22-A4A4-B01902A777CB}"))
+			    quid       	"3EE57A6202AD"
+			    type       	"string"))
+		    result     	"string"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "GetClassAssemblyFile"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{A77F9050-0CFA-441C-93CF-47E66750FE83}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EE57A6202AE"))
+		    quid       	"3EE57A6202AE"
+		    parameters 	(list Parameters
+			(object Parameter "ClassFullName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1B69A654-6727-448E-B4BC-AC51E202B5CF}"))
+			    quid       	"3EE57A6202AF"
+			    type       	"string")
+			(object Parameter "Version"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6556CFDB-65A2-4049-8729-7FBB2C174C54}"))
+			    quid       	"3EE57A6202B7"
+			    type       	"string"))
+		    result     	"string"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "CreateInstance"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D76DF29A-D255-4FB9-9C25-2F1E0557FEB7}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EE57A6202B8"))
+		    quid       	"3EE57A6202B8"
+		    parameters 	(list Parameters
+			(object Parameter "ClassFullName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5B021E2B-F5C9-4E72-B977-ABCD02CC5C89}"))
+			    quid       	"3EE57A6202B9"
+			    type       	"string")
+			(object Parameter "Version"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{B98AB197-7EF1-4484-BC01-BFA188849B8C}"))
+			    quid       	"3EE57A6202BA"
+			    type       	"string")
+			(object Parameter "ctorParams"
+			    quid       	"421B50570327"
+			    type       	"params object[]"))
+		    result     	"object"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Publish"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ACA2C2A9-6DA4-4E7A-ABB3-A7EE22BA87EB}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"4")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EE57A6202C1"))
+		    quid       	"3EE57A6202C1"
+		    parameters 	(list Parameters
+			(object Parameter "ModuleFile"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{331E28C2-0272-4650-8595-A4026F01CEFD}"))
+			    quid       	"3EE57A6202C2"
+			    type       	"string")
+			(object Parameter "Version"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1AB82B6B-300F-4C42-B559-0E7026E899D7}"))
+			    quid       	"3EE57A6202C3"
+			    type       	"string")
+			(object Parameter "Encrypted"
+			    quid       	"421B50570337"
+			    type       	"bool"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetType"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"5")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3F31DF010079")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{BDAF9415-A8A2-4BD6-9528-E5FAE646F60F}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"3F31DF010079"
+		    parameters 	(list Parameters
+			(object Parameter "ClassFullName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{E8B05EA8-CF9F-4AA4-894A-D180015F60DE}"))
+			    quid       	"3F31DF6300E8"
+			    type       	"string")
+			(object Parameter "Version"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{14221131-2EFF-4DD2-8921-9DD6CFF6D9D8}"))
+			    quid       	"3F31DF6300E9"
+			    type       	"string"))
+		    result     	"Type"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Initialize"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7D986B5C-A742-494C-B728-F9E315EC9807}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B505701E1"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "GetAssemblyDataFromFullName"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{17E3024C-9CEF-43AB-A2E3-61CDD6CD1006}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B505701EF"
+		    parameters 	(list Parameters
+			(object Parameter "fullName"
+			    quid       	"421B505701FF"
+			    type       	"string")
+			(object Parameter "name"
+			    quid       	"421B5057020E"
+			    type       	"out string")
+			(object Parameter "version"
+			    quid       	"421B5057020F"
+			    type       	"out string")
+			(object Parameter "culture"
+			    quid       	"421B5057021E"
+			    type       	"out string")
+			(object Parameter "publicKeyToken"
+			    quid       	"421B5057021F"
+			    type       	"out string"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "MyResolveEventHandler"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{41252044-5F32-4C55-A9D3-6963AF0030DD}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B5057022D"
+		    parameters 	(list Parameters
+			(object Parameter "sender"
+			    quid       	"421B5057023D"
+			    type       	"object")
+			(object Parameter "args"
+			    quid       	"421B5057023E"
+			    type       	"ResolveEventArgs"
+			    quidu      	"3ECF3D7A038A"))
+		    result     	"Assembly"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "GetClassInfo"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D89274C2-5BF3-4858-8DC4-6A13A05338FF}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B5057024D"
+		    parameters 	(list Parameters
+			(object Parameter "ClassFullName"
+			    quid       	"421B5057025C"
+			    type       	"string")
+			(object Parameter "Version"
+			    quid       	"421B5057026C"
+			    type       	"string")
+			(object Parameter "AssemblyName"
+			    quid       	"421B5057026D"
+			    type       	"ref string")
+			(object Parameter "AssemblyFullName"
+			    quid       	"421B5057027C"
+			    type       	"ref string")
+			(object Parameter "GlobalAssemblyCache"
+			    quid       	"421B5057027D"
+			    type       	"ref bool")
+			(object Parameter "AssemblyDllFile"
+			    quid       	"421B5057028B"
+			    type       	"ref string")
+			(object Parameter "Encrypted"
+			    quid       	"421B5057028C"
+			    type       	"ref bool"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "EncryptandPublish"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{90FC54F2-8B54-427E-A205-E8795D8FCC23}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B5057029B"
+		    parameters 	(list Parameters
+			(object Parameter "ModuleFile"
+			    quid       	"421B505702AA"
+			    type       	"string")
+			(object Parameter "Version"
+			    quid       	"421B505702AB"
+			    type       	"string"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "PublishEncrypted"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4A71545A-9F9C-4DB6-9AB3-C70963EE9429}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B505702BA"
+		    parameters 	(list Parameters
+			(object Parameter "ModuleFile"
+			    quid       	"421B505702CA"
+			    type       	"string")
+			(object Parameter "Version"
+			    quid       	"421B505702CB"
+			    type       	"string"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Publish"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2B0862DE-A314-4540-8243-FDB4B50B1227}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B505702D9"
+		    parameters 	(list Parameters
+			(object Parameter "ModuleFile"
+			    quid       	"421B505702E9"
+			    type       	"string")
+			(object Parameter "Version"
+			    quid       	"421B505702EA"
+			    type       	"string"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Remove"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0075BACB-9E7B-4ACE-9468-A04886C08C6B}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE))
+		    quid       	"421B505702F9"
+		    parameters 	(list Parameters
+			(object Parameter "moduleFile"
+			    quid       	"421B50570308"
+			    type       	"string")
+			(object Parameter "version"
+			    quid       	"421B50570309"
+			    type       	"string")
+			(object Parameter "encrypted"
+			    quid       	"421B50570318"
+			    type       	"bool"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Intitalized"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{428479D9-92C7-43ED-B6BB-238F9FB658C2}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"421B50570347"
+		    type       	"bool"))
+	    module     	"Component View::OOAdvantech::ModulePublisher::ModulePublisher"
+	    quidu      	"3EE579A5020B"
+	    language   	"C#")
+	(object Association "$UNNAMED$0"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{E679C0B4-35D7-4F8A-98FB-822795B9808A}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"421B5058020E")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"3aa6aa5b-4ab6-48ba-b055-b10838ae9134"))
+	    quid       	"421B5058020E"
+	    roles      	(list role_list
+		(object Role "Types"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"mMetaObjectID"
+			    value      	"{82B498BC-BBAD-4B8B-8ABA-427F459A980E}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{592ED6A4-4DF2-4E62-A127-C0451AD65E22}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"421B5058021E"))
+		    quid       	"421B5058021E"
+		    label      	"Types"
+		    supplier   	"Logical View::.Net::mscorlib.dll::System::Collections::Hashtable"
+		    quidu      	"3ECF3D7F00FD"
+		    exportControl 	"Private"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$1"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3F3930B6-3744-43FD-BDC5-FE06E1807ABA}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"421B50580220"))
+		    quid       	"421B50580220"
+		    supplier   	"Logical View::OOAdvantech::ModulePublisher::ClassRepository"
+		    quidu      	"3EE57A620287")))
+	(object Association "$UNNAMED$2"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{E2BE1637-0371-4719-A540-5B49A4DA35D7}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"421B50580124")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"5a282961-a28a-41f1-803b-51d1d22690c9"))
+	    quid       	"421B50580124"
+	    roles      	(list role_list
+		(object Role "ClassesAssemblies"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"mMetaObjectID"
+			    value      	"{82B498BC-BBAD-4B8B-8ABA-427F459A980E}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{317A5FA2-EB51-48EC-8282-F588C892598F}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"421B50580125"))
+		    quid       	"421B50580125"
+		    label      	"ClassesAssemblies"
+		    supplier   	"Logical View::.Net::mscorlib.dll::System::Collections::Hashtable"
+		    quidu      	"3ECF3D7F00FD"
+		    exportControl 	"Private"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$3"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7A13A4AD-6D51-474A-A551-F13B3E51F050}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"421B50580127"))
+		    quid       	"421B50580127"
+		    supplier   	"Logical View::OOAdvantech::ModulePublisher::ClassRepository"
+		    quidu      	"3EE57A620287")))
+	(object Association "$UNNAMED$4"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{AEBC821B-A4F3-42A7-B922-9278C4C5DED7}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"421B5058002A")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"25d0bfa6-6f8f-4b59-8be3-584ed4b4857c"))
+	    quid       	"421B5058002A"
+	    roles      	(list role_list
+		(object Role "ClassesAssemblyNames"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"mMetaObjectID"
+			    value      	"{82B498BC-BBAD-4B8B-8ABA-427F459A980E}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{C35D58F9-EEA8-4824-A64D-A82FC07F489F}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"421B5058002B"))
+		    quid       	"421B5058002B"
+		    label      	"ClassesAssemblyNames"
+		    supplier   	"Logical View::.Net::mscorlib.dll::System::Collections::Hashtable"
+		    quidu      	"3ECF3D7F00FD"
+		    exportControl 	"Private"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$5"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0224C570-EEF7-4268-AF72-61AFB9950AD1}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"421B5058003A"))
+		    quid       	"421B5058003A"
+		    supplier   	"Logical View::OOAdvantech::ModulePublisher::ClassRepository"
+		    quidu      	"3EE57A620287"))))
+    logical_presentations 	(list unit_reference_list
+	(object ClassDiagram "Main"
+	    quid       	"3EE57A940100"
+	    title      	"Main"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	0
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::ModulePublisher::ClassRepository" @1
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(466, 572)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@1
+			location   	(368, 497)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	196
+			justify    	0
+			label      	"ClassRepository")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3EE57A620287"
+		    width      	214
+		    height     	174
+		    annotation 	8
+		    autoResize 	TRUE)))))

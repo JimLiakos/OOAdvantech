@@ -1,0 +1,5 @@
+<Root>
+  <CodeModule Name="ModulePublisher" VersionControlItem="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" VSnetProject="ModulePublisher.csproj" VSnetSolution="..\..\PersistenceLayer\DotNetPersistenceLayer\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.0.0" Identity="7b68f205-091e-4f48-8661-c517d1e3ab8a">
+    <Reference Name="AssemblyCrypto" FileSystemPath="..\..\PersistenceLayer\DotNetPersistenceLayer\AssemblyCrypto\AssemblyCrypto.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/AssemblyCrypto" Version="1.0.0.0" />
+  </CodeModule>
+</Root>
