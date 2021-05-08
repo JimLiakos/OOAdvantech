@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E51D9BB5-D696-43B4-995F-2BA6E2D29073}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>MetaDataRepository</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MetaDataRepository</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>MetaDataRepository.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>MetaDataRepository.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\PersistenceLayer\PersistenceLayer.csproj">
+      <Name>PersistenceLayer</Name>
+      <Project>{2B0234D0-7D3E-478F-AD5D-8A681CD0A59A}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Remoting\Remoting.csproj">
+      <Name>Remoting</Name>
+      <Project>{C4F6459C-4114-4A4F-8595-22B3A01C25CA}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Association.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationClass.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationClassRole.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationEnd.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationEndBehavior.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationEndRealization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Attribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AttributeRealization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BackwardCompatibilityID.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BehavioralFeature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BuildAssemblyMetadataAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Component.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ContainedItemsSynchronizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeleteCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dependency.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EndPoint.cs" />
+    <Compile Include="Enumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Feature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generalization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GenerateFacadeProxy.cs" />
+    <Compile Include="Interface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InterfaceImplementor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IObjectIdentityType.cs" />
+    <Compile Include="MetaDataException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaObjectCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaObjectCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaObjectID.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Method.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MultiplicityRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Namespace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DerivedTemplateParameter.cs" />
+    <Compile Include="ObjectActivationCall.cs" />
+    <Compile Include="ObjectIdentityType.cs" />
+    <Compile Include="RemoteCallBackClient.cs" />
+    <Compile Include="SorageMetaData.cs" />
+    <Compile Include="TemplateParameter.cs" />
+    <Compile Include="TemplateSignature.cs" />
+    <Compile Include="TemplateBinding.cs" />
+    <Compile Include="TemplateParameterSubstitution.cs" />
+    <Compile Include="Templateable.cs" />
+    <Compile Include="ParameterableElement.cs" />
+    <Compile Include="StorageCellsLink.cs" />
+    <Compile Include="StorageCell.cs" />
+    <Compile Include="Operation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Package.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parameter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PersistentMemberAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Realization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Relationship.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Storage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StructuralFeature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structure.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SynchronizerSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValueTypePath.cs" />
+    <None Include="MetaDataRepository.cat" />
+    <None Include="MetaDataRepository.sub" />
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

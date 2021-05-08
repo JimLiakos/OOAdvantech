@@ -1,0 +1,7 @@
+<Root>
+  <CodeModule Identity="2a1522e5-4695-40a0-961b-bff97ac69c3a" Name="MetaDataRepository" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/MetaDataRepository" VSnetProject="MetaDataRepository.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.0.0">
+    <Reference Name="PersistenceLayer" FileSystemPath="..\PersistenceLayer\PersistenceLayer.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistenceLayer" Version="1.0.0.0" />
+    <Reference Name="Remoting" FileSystemPath="..\Remoting\Remoting.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Remoting" Version="1.0.0.0" />
+    <Reference Name="Transactions" FileSystemPath="..\Transactions\Transactions.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Transactions" Version="1.0.0.0" />
+  </CodeModule>
+</Root>
