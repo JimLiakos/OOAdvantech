@@ -1,0 +1,11 @@
+; AssemblyCryptoNativeCode.def : Declares the module parameters for the DLL.
+
+LIBRARY      "AssemblyCryptoNativeCode"
+
+EXPORTS
+MakeNative			@1 PRIVATE
+LoadAssembly		@2 PRIVATE
+LoadAssemblyDebug	@3 PRIVATE
+LoadRawAssembly		@4 PRIVATE
+LoadRawAssemblyDebug @5 PRIVATE
+    ; Explicit exports can go here

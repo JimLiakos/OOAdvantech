@@ -1,0 +1,6 @@
+<Root>
+  <CodeModule Name="OOAdvantech" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/OOAdvantech" VSnetProject="OOAdvantech.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0" Identity="ee73414e-e16b-4852-b5a5-c1e52ff96034">
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.1.0" />
+    <Reference Name="TransactionManagmentSystem" FileSystemPath="..\TransactionManagmentSystem\TransactionManagmentSystem.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/TransactionManagmentSystem" Version="1.0.1.0" />
+  </CodeModule>
+</Root>

@@ -1,0 +1,7 @@
+<Root>
+  <CodeModule Identity="2812885d-90b6-4521-8e1c-f4199d579030" Name="DotNetMetaDataRepository" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/DotNetMetaDataRepository" VSnetProject="DotNetMetaDataRepository.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0">
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+    <Reference Name="OOAdvantech" FileSystemPath="..\OOAdvantech\OOAdvantech.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/OOAdvantech" Version="1.0.1.0" />
+    <Reference Name="Parser" FileSystemPath="..\Parser\Parser.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Parser" Version="1.0.1.0" />
+  </CodeModule>
+</Root>

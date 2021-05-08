@@ -1,0 +1,33 @@
+<Root>
+	<NextObjID ObjID="VT(3)1"/>
+	<Associations>
+		<ClassAttributes Name="" AssociationID="" RoleAName="Attributes" RoleBName="RoleB" RoleAClassID="{0CF72E78-C642-11D4-A315-0000C00028AA}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+		<MModuleClasses Name="" AssociationID="" RoleAName="Classes" RoleBName="theModule" RoleAClassID="{03ADF068-C7AA-11D4-B649-009027648439}" RoleBClassID="{CACDE775-B429-11D4-A308-0000C00028AA}"/>
+		<ObjectStoreModules Name="ObjectStoreModules" AssociationID="" RoleAName="theModules" RoleBName="theObjectStorages" RoleAClassID="{CACDE775-B429-11D4-A308-0000C00028AA}" RoleBClassID="{EF95F8C3-57FB-4292-9A8D-CC8AB1A93508}"/>
+		<ClassRoles Name="" AssociationID="" RoleAName="AssociationRoles" RoleBName="Class" RoleAClassID="{8DCABE4D-52AA-11D5-A39A-0000C00028AA}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+		<GeneralizationReletion Name="" AssociationID="" RoleAName="Generalizations" RoleBName="Child" RoleAClassID="{09063931-4E38-458B-870C-A197EED5B460}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+		<SpecializationRelation Name="" AssociationID="" RoleAName="Specializations" RoleBName="Parent" RoleAClassID="{09063931-4E38-458B-870C-A197EED5B460}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+		<AssociationClass Name="" AssociationID="" RoleAName="LinkClass" RoleBName="LinkAssociation" RoleAClassID="{03ADF068-C7AA-11D4-B649-009027648439}" RoleBClassID="{961CECAA-99A1-4693-B12C-C663AAA10B67}"/>
+		<RolesOfAssociation Name="" AssociationID="" RoleAName="Roles" RoleBName="Association" RoleAClassID="{8DCABE4D-52AA-11D5-A39A-0000C00028AA}" RoleBClassID="{961CECAA-99A1-4693-B12C-C663AAA10B67}"/><UsedTables Name="" AssociationID="" RoleAName="MappedRDBMSTables" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+		<ObjectIdentity Name="" AssociationID="" RoleAName="theOIDColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+		<AbtractClassObject Name="" AssociationID="" RoleAName="AbstractClassView" RoleBName="RoleB" RoleAClassID="{3FF0337A-9930-47B6-AAA0-67FF1A39AEE8}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+		<ProducetheIDs Name="" AssociationID="" RoleAName="TheMainTable" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+		<ConcreteClassObject Name="" AssociationID="" RoleAName="ConcreteClassView" RoleBName="RoleB" RoleAClassID="{3FF0337A-9930-47B6-AAA0-67FF1A39AEE8}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+		<KeyColumns Name="" AssociationID="" RoleAName="Columns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}"/>
+		<ReferenceColumns Name="" AssociationID="" RoleAName="RefColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}"/>
+		<ReferenceTable Name="" AssociationID="" RoleAName="RefTable" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}"/>
+		<AttributeColoumnMap Name="" AssociationID="" RoleAName="RDBMSColumn" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{F5B16A76-303E-4C64-A18D-078756B16E5B}"/>
+		<AssociationEndColumns Name="" AssociationID="" RoleAName="theColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{C2EA4E96-F17B-435E-A957-459031D0FACC}"/>
+		<AssociationTable Name="" AssociationID="" RoleAName="theTable" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{E3374349-BE7A-45A1-8F72-8368F5A27A16}"/>
+		<TableKeys Name="" AssociationID="" RoleAName="Keys" RoleBName="RoleB" RoleAClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}" RoleBClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}"/>
+		<TableColumns Name="" AssociationID="" RoleAName="theTableColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}"/>
+		<MustBeDeleted Name="" AssociationID="" RoleAName="theColumnsForDeletion" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}"/>
+		<ClassOperations Name="" AssociationID="" RoleAName="Operations" RoleBName="Class" RoleAClassID="{0CF72E76-C642-11D4-A315-0000C00028AA}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+		<OperationParameters Name="" AssociationID="" RoleAName="Parameters" RoleBName="MemberOf" RoleAClassID="{B809DEBA-D10B-11D4-B659-009027648439}" RoleBClassID="{0CF72E76-C642-11D4-A315-0000C00028AA}"/>
+		<AttributePropertyData Name="" AssociationID="" RoleAName="PropertyData" RoleBName="Property" RoleAClassID="{71A5D23F-CE82-4586-B968-B41780844FEF}" RoleBClassID="{71A5D23F-CE82-4586-B968-B41780844FEF}"/><RolePropertyData Name="" AssociationID="" RoleAName="PropertyData" RoleBName="Property" RoleAClassID="{71A5D23F-CE82-4586-B968-B41780844FEF}" RoleBClassID="{550B2E45-582B-4E5A-883E-92B756AE68F6}"/>
+		<AccessClassObjectsThrough Name="AccessClassObjectsThrough" AssociationID="" RoleAName="ContainerClass" RoleBName="RoleB" RoleAClassID="{3382C7C1-F08F-41E4-9DE8-AB51C4B6A36E}" RoleBClassID="{550B2E45-582B-4E5A-883E-92B756AE68F6}"/>
+		<NestedClassAss Name="OrderItems" AssociationID="" RoleAName="NestedClasses" RoleBName="ParentClass" RoleAClassID="{03ADF068-C7AA-11D4-B649-009027648439}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+		<Association Name="" AssociationID="" RoleAName="RoleA" RoleBName="RoleB" RoleAClassID="RoleAClassID" RoleBClassID="RoleBClassID"/>
+	</Associations>
+	<ObjectCollections/>
+</Root>

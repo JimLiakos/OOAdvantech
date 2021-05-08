@@ -1,0 +1,269 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CFEA0A11-F583-4751-BE83-2EA0363B868B}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>DotNetMetaDataRepository</AssemblyName>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DotNetMetaDataRepository</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkSubset>Client</TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.csproj">
+      <Name>ModulePublisher</Name>
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parser\Parser.csproj">
+      <Project>{7BBFF192-81B1-474C-856C-391D9012D0E7}</Project>
+      <Name>Parser</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OQL\CompositePart.cs" />
+    <Compile Include="OQL\DataLoaderMetadata.cs" />
+    <Compile Include="OQL\MemroryObjectsDataLoader.cs" />
+    <Compile Include="OQL\DataGrouping.cs" />
+    <Compile Include="OQL\AggregateExpressionDataNode.cs" />
+    <Compile Include="OQL\ArithmeticExpression.cs" />
+    <Compile Include="Assembly.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComparisonTerm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\CompositeArithmeticExpression.cs" />
+    <Compile Include="DataPath.cs" />
+    <Compile Include="OQL\ClientStructureSet.cs" />
+    <Compile Include="OQL\DataNodeAgent.cs" />
+    <Compile Include="OQL\DataNodesRows.cs" />
+    <Compile Include="OQL\DataRetrieveNode.cs" />
+    <Compile Include="OQL\DataSetHelper.cs" />
+    <Compile Include="OQL\DistributedObjectQuery.cs" />
+    <Compile Include="DotNetAssociation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetAssociationEnd.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetAssociationEndRealization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetAttributeRealization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetClass.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetEnumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetInterface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetMethod.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetNamespace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetPrimitive.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetStructure.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InterfaceMapping.cs" />
+    <Compile Include="MetaObjectCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaObjectMapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DotNetTemplateParameter.cs" />
+    <Compile Include="OQL\EnumerablePart.cs" />
+    <Compile Include="OQL\GroupDataNode.cs" />
+    <Compile Include="OQL\GroupingKey.cs" />
+    <Compile Include="OQL\MemoryCell.cs" />
+    <Compile Include="OQL\MemoryObjectsContext.cs" />
+    <Compile Include="OQL\ObjectQuery.cs" />
+    <Compile Include="OQL\DataLoader.cs" />
+    <Compile Include="OQL\ComparisonTerm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\Criterion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\DataDimension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\DataSource.cs" />
+    <Compile Include="OQL\LiteralComparisonItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\MemberCollection.cs" />
+    <Compile Include="OQL\MemberObject.cs" />
+    <Compile Include="OQL\Member.cs" />
+    <Compile Include="OQL\MemberList.cs" />
+    <Compile Include="OQL\ObjectsDataRetriever.cs" />
+    <Compile Include="OQL\RecursiveMember.cs" />
+    <Compile Include="OQL\RelationshipData.cs" />
+    <Compile Include="OQL\StructureSet.cs" />
+    <Compile Include="OQL\ObjectComparisonItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\ObjectIDComparisonItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\OjectAttributeComparisonItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\OQLStatements.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\ParameterComparisonItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\Path.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\PathMember.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\SearchFactor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\SearchIterm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OQL\SerchCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parameter.cs" />
+    <Compile Include="OQL\QueryOnRootObject.cs" />
+    <Compile Include="OQL\RootObjectDataLoader.cs" />
+    <Compile Include="OQL\RootObjectDataSource.cs" />
+    <Compile Include="OQL\StorageDataLoader.cs" />
+    <Compile Include="OQL\StorageDataSource.cs" />
+    <Compile Include="OQL\Scalar.cs" />
+    <Compile Include="OQL\ScalarFromLiteral.cs" />
+    <Compile Include="OQL\ScalarFromData.cs" />
+    <Compile Include="OQL\QueryResultType.cs" />
+    <Compile Include="OQL\QueryResultPart.cs" />
+    <Compile Include="OQL\SinglePart.cs" />
+    <Compile Include="OQL\QueryResultDataLoader.cs" />
+    <Compile Include="TemplateSignature.cs" />
+    <Compile Include="Type.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="..\OQLParserGrammar\OQL.cgt">
+      <Link>OQL\OQL.cgt</Link>
+    </EmbeddedResource>
+    <None Include="StrongName.snk" />
+    <EmbeddedResource Include="OQL\OQLGrammar" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
