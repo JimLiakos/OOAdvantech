@@ -1,0 +1,130 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5802B17-B3A0-4E40-A393-D1C57A53EDCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OOAdvantech.Linq</RootNamespace>
+    <AssemblyName>Linq</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkSubset>Client</TargetFrameworkSubset>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataRetrieveNode.cs" />
+    <Compile Include="DataNodesRows.cs" />
+    <Compile Include="DynamicTypeProperty.cs" />
+    <Compile Include="GroupingDataRetriever.cs" />
+    <Compile Include="QueryExpressions\EnumerableContainsExpressionTreeNode.cs" />
+    <Compile Include="Grouping.cs" />
+    <Compile Include="QueryExpressions\AggregateFunctionExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\ArithmeticExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\BinaryExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\ConstantExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\ContainsAnyExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\FetchingExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\GroupByExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\GroupKeyExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\LikeExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\NewExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\ObjectMethodCallExpressionTreeNode .cs" />
+    <Compile Include="QueryExpressions\OfTypeExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\OrderByExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\RecursiveLoadExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\TypeAsExpressionTreeNode.cs" />
+    <Compile Include="Translators\ExpressionVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValuesRetrieveExpressions\NewExpressionTreeNode.cs" />
+    <Compile Include="ValuesRetrieveExpressions\MemberAccessExpressionTreeNode.cs" />
+    <Compile Include="ValuesRetrieveExpressions\ParameterExpressionTreeNode.cs" />
+    <Compile Include="ValuesRetrieveExpressions\SelectExpressionTreeNode.cs" />
+    <Compile Include="ValuesRetrieveExpressions\ConstantExpressionTreeNode.cs" />
+    <Compile Include="ILINQObjectQuery.cs" />
+    <None Include="LINQObjectQuery.cs" />
+    <Compile Include="BridgeList.cs" />
+    <Compile Include="ExpressionTreeNode.cs" />
+    <Compile Include="IStorageProvider.cs" />
+    <Compile Include="LINQStorageObjectQuery.cs" />
+    <Compile Include="ObjectCollection.cs" />
+    <Compile Include="ObjectStorageQuery.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="StorageProvider.cs" />
+    <Compile Include="Translators\QueryTranslator.cs" />
+    <Compile Include="TypeHelper.cs" />
+    <Compile Include="QueryExpressions\MemberAccessExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\MethodCallAsCollectionSourceExpressionTreeNode.cs" />
+    <Compile Include="ObjectValuesCollector.cs" />
+    <Compile Include="QueryExpressions\ParameterExpressionTreeNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Translators\RetrieveObjectMemberTranslator.cs" />
+    <Compile Include="QueryExpressions\SelectExpressionTreeNode.cs" />
+    <Compile Include="QueryExpressions\WhereExpressionTreeNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetMetaDataRepository\DotNetMetaDataRepository.csproj">
+      <Project>{CFEA0A11-F583-4751-BE83-2EA0363B868B}</Project>
+      <Name>DotNetMetaDataRepository</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Parser\Parser.csproj">
+      <Project>{7BBFF192-81B1-474C-856C-391D9012D0E7}</Project>
+      <Name>Parser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

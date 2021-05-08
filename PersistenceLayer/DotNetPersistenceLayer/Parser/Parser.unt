@@ -1,0 +1,6 @@
+<Root>
+  <CodeModule Identity="de4c6f87-d232-4f11-99ea-892d3ed913cc" Name="Parser" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Parser" VSnetProject="Parser.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0">
+    <Reference Name="ParserWr" FileSystemPath="..\ParserWr\ParserWr.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/ParserWr" Version="1.0.1.0" />
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.1.0" />
+  </CodeModule>
+</Root>
