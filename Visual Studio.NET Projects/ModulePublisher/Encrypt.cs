@@ -10,7 +10,6 @@ namespace ModulePublisher
 	public class Encrypt:System.Attribute
 	{ 
 
-
 		/// <MetaDataID>{ABD7A663-101A-477A-88AD-929025C454E2}</MetaDataID>
 		public Encrypt()
 		{
