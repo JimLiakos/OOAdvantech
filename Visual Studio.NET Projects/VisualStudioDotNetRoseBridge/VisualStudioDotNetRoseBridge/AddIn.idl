@@ -1,0 +1,26 @@
+// AddIn.idl : IDL source for AddIn
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (AddIn.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(BB35152B-F009-4A04-9696-E4B9B021C450),
+	version(1.0),
+	helpstring("VisualStudioDotNetRoseBridge 1.0 Type Library")
+]
+library VisualStudioDotNetRoseBridgeLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(92F667F6-BC55-4855-9FEE-1EA5AEBBEBCE),
+		helpstring("Connect Class")
+	]
+	coclass Connect
+	{
+		[default] interface IUnknown;
+	};
+};

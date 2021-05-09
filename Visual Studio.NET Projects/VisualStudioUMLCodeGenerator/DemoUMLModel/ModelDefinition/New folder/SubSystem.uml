@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="90e528fe-7593-4513-8199-66b7763ec35f"
+  name="SubSystem" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="8bc54446-1022-4075-bb7c-cc6f5f94978d"
+        name="IOrder"
+        isAbstract="false"
+        isLeaf="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="6c914129-893c-407e-aa6f-bc8d568bb619"
+            name="OSM Interface"
+            profile="OOAdvantechProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ef4d5b34-6f03-4ef2-aa67-5e6d44d2ea6e">
+                <propertyInstance
+                  Id="14ce613e-30e4-4249-bf7f-cbb8f8dd00c2"
+                  name="Identity" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="08e4c28b-1508-414f-b9b2-16998b64e239">
+                <propertyInstance
+                  Id="f5477061-0cec-4f74-98a2-e94c639c3ebe"
+                  name="Persistent"
+                  value="Transient" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="77cb9569-afa3-4d68-a1e6-4b1eed3c112a">
+                <propertyInstance
+                  Id="83d27cef-8a23-42ac-a1eb-627d181dd0eb"
+                  name="ExtensionData"
+                  value="&lt;Main Identity=&quot;8bc54446-1022-4075-bb7c-cc6f5f94978d&quot; /&gt;" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+          <stereotypeInstance
+            Id="aaa2543f-4784-417d-9480-718244c24335"
+            name="interface"
+            profile="OOAdvantechProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="52e032ec-b2ec-4daf-bc6e-e88ba6365281">
+                <propertyInstance
+                  Id="9836de7d-944d-4903-b383-823ad0b670a3"
+                  name="Identity" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e20fc6ba-4872-47c4-bda5-963abe5d8012">
+                <propertyInstance
+                  Id="e194d0b6-2616-49b7-9678-4925273856bb"
+                  name="Persistent"
+                  value="Transient" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="01decf12-49c3-4227-9532-ebab995efa28">
+                <propertyInstance
+                  Id="5e6b3714-277a-4468-afcb-a662e2029b34"
+                  name="ExtensionData" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

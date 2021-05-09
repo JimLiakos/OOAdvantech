@@ -1,0 +1,26 @@
+HKCR
+{
+	VisualStudioDotNetRoseBridge.Connect.1 = s 'Connect Class'
+	{
+		CLSID = s '{92F667F6-BC55-4855-9FEE-1EA5AEBBEBCE}'
+	}
+	VisualStudioDotNetRoseBridge.Connect = s 'Connect Class'
+	{
+		CLSID = s '{92F667F6-BC55-4855-9FEE-1EA5AEBBEBCE}'
+		CurVer = s 'VisualStudioDotNetRoseBridge.Connect.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove '{92F667F6-BC55-4855-9FEE-1EA5AEBBEBCE}' = s 'Connect Class'
+		{
+			ProgID = s 'VisualStudioDotNetRoseBridge.Connect.1'
+			VersionIndependentProgID = s 'VisualStudioDotNetRoseBridge.Connect'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{BB35152B-F009-4A04-9696-E4B9B021C450}'
+		}
+	}
+}

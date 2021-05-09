@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="6e1f4baf-1369-41eb-a01d-e2a44d5f6041" name="DemoModel" linkedPackageId="aaacebcf-38ed-4abe-887f-c84d3a07cbf1" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="0941ea1d-3d03-46a0-8629-ced8e15e8956" name="DemoUMLModelProject" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance Id="1529293f-5719-4294-8210-86b7f8f0f086" name="implement" profile="StandardProfileL2">
+            <elementDefinition Id="3566cae1-ebc7-4ac5-aca5-e4a249a6cfc1" />
+          </stereotypeInstance>
+          <stereotypeInstance Id="58e1f788-236d-4c43-bc0c-791fdbe22c00" name="component" profile="OOAdvantechProfile">
+            <elementDefinition Id="8f888819-3ad7-4158-82db-1a3b86018b0d" />
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="b454cd10-31c0-49d9-aa49-a534aa3872d0">
+                <propertyInstance Id="b807ebe5-2665-49c8-88c1-ed150ee35eec" name="Synchronize" value="True">
+                  <elementDefinition Id="babbd7d2-700c-4252-85e0-392ec8dfb5c1" />
+                </propertyInstance>
+                <elementDefinition Id="2bde134c-75ae-4022-b27b-859d1edca1dc" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="39a1a546-9691-4a29-a665-625636b81bd4">
+                <propertyInstance Id="ef0a5641-e5fd-47c7-b2a3-dccc5f430a03" name="Identity">
+                  <elementDefinition Id="47912766-1fba-4937-aa22-69bd8ea5573c" />
+                </propertyInstance>
+                <elementDefinition Id="333cff11-17e7-41fb-b455-6d72e28011d6" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="46911fcf-31a4-4214-8836-1fc33ea806f4">
+                <propertyInstance Id="d858a0b9-56cd-4f3f-a3ff-60b452770f14" name="SolutionPath">
+                  <elementDefinition Id="cdc35daf-a9ae-4051-a371-95aec953b05f" />
+                </propertyInstance>
+                <elementDefinition Id="5591e7c7-1b8d-4d2c-8f39-589bc7a79c8b" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="c4759f38-2a2a-49ee-b658-4cf656f45f8c">
+                <propertyInstance Id="4f4eccf5-ad39-4c2a-a43d-3f8ff0762656" name="ProjectPath">
+                  <elementDefinition Id="45699586-b948-42a8-9e38-029e83d4cdde" />
+                </propertyInstance>
+                <elementDefinition Id="9489b11b-ab7d-46a7-8f50-0d892ad0a6ee" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="fef142c0-1ab5-49ec-9848-4cd26c7309f0">
+                <propertyInstance Id="c5319621-2f94-40da-9ccd-c80db6b4e6f6" name="ExtensionData" value="&lt;Main Identity=&quot;151f6b91-1cc6-4742-ae88-2c311e5dbe54&quot; AssignedProjectIdentity=&quot;{5907D64C-F9A0-4501-92A9-623BCA70CA71}&quot;&gt;&#xD;&#xA;  &lt;AssignedClasses&gt;&#xD;&#xA;    &lt;b1546892-6134-4c70-90c1-e49ea875b32d /&gt;&#xD;&#xA;    &lt;ID_8bc54446-1022-4075-bb7c-cc6f5f94978d /&gt;&#xD;&#xA;    &lt;ID_57bc461d-65bf-452f-a123-6050c395199b /&gt;&#xD;&#xA;    &lt;ID_b1546892-6134-4c70-90c1-e49ea875b32d /&gt;&#xD;&#xA;    &lt;ID_9b9b98ed-19b2-4422-a9f2-9a3b782e2b70 /&gt;&#xD;&#xA;    &lt;ID_56d73b4c-7e91-486c-8094-c99452d9e819 /&gt;&#xD;&#xA;    &lt;ID_6ddaac90-d04c-42f1-b817-a60707306769 /&gt;&#xD;&#xA;    &lt;ID_f520a5d8-1c5d-4e49-b58b-e17a8e0a7169 /&gt;&#xD;&#xA;    &lt;ID_8938d4c4-6191-4f10-adae-f3d4a309eb6a /&gt;&#xD;&#xA;    &lt;ID_b180ea7a-5200-4852-bb3e-5314b33ee5b2 /&gt;&#xD;&#xA;    &lt;ID_2f531f6a-7810-4a52-8d05-49331b2ab715 /&gt;&#xD;&#xA;  &lt;/AssignedClasses&gt;&#xD;&#xA;  &lt;Properties&gt;&#xD;&#xA;    &lt;MetaData MetaObjectID=&quot;151f6b91-1cc6-4742-ae88-2c311e5dbe54&quot; /&gt;&#xD;&#xA;  &lt;/Properties&gt;&#xD;&#xA;&lt;/Main&gt;">
+                  <elementDefinition Id="1360aab4-51ce-42d5-87e5-77be8f77edb4" />
+                </propertyInstance>
+                <elementDefinition Id="f1306e74-348d-4745-a849-8c47384a22c0" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <elementDefinition Id="151f6b91-1cc6-4742-ae88-2c311e5dbe54" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="9b595728-e188-4337-9d39-331beb08f06c" name="DemoUMLModelProject1" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance Id="9d250920-9a09-42bc-8a7b-42a14c4b9b14" name="implement" profile="StandardProfileL2">
+            <elementDefinition Id="0219ce28-b098-472c-9eb7-3a07ff2d3023" />
+          </stereotypeInstance>
+          <stereotypeInstance Id="80b459cf-281c-42e7-a4b8-4de4962c26f0" name="component" profile="OOAdvantechProfile">
+            <elementDefinition Id="f00b22e1-2b52-4224-85ef-677f10963c80" />
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="7af24cec-cccc-4c44-9f49-45459270077d">
+                <propertyInstance Id="59ed38ac-21d0-4cf0-adb8-6a8a998e9e3c" name="Synchronize" value="True">
+                  <elementDefinition Id="a7658dbe-0630-4957-b6ee-7c55cbc9cfc5" />
+                </propertyInstance>
+                <elementDefinition Id="b6fbaa3b-7a92-49d3-8898-8aa37beb4496" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="8fbb1924-55c3-4e8c-9561-9a3594da6d95">
+                <propertyInstance Id="87feed80-058a-4cd3-a526-3d2eba80e36d" name="Identity">
+                  <elementDefinition Id="2438e4dd-5e58-4bb2-8421-9dffa3d882b1" />
+                </propertyInstance>
+                <elementDefinition Id="533acc12-5dc3-4b09-ad51-8d8c103e56ed" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="77445986-0c1f-45b6-a9cb-ea7c33767103">
+                <propertyInstance Id="9f154e41-a993-40fe-aed4-6f57eb300009" name="SolutionPath">
+                  <elementDefinition Id="e1279c49-657e-4ae0-b6a2-c3dd0a2ef593" />
+                </propertyInstance>
+                <elementDefinition Id="aeaddb1a-0fde-440d-88a4-7bf5c3d2c2a5" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="3034c1b9-621a-488b-b410-c0c77586926d">
+                <propertyInstance Id="e59939f2-319c-4ddc-988c-c82af8fa4aba" name="ProjectPath">
+                  <elementDefinition Id="3465ea45-b3b6-4bc2-89a6-8448b2db6db4" />
+                </propertyInstance>
+                <elementDefinition Id="93352c0e-0c7e-4443-8cf7-c13137fe6fc9" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="4eb7a3f2-b81d-4073-910f-c8b0dd06c8d8">
+                <propertyInstance Id="75879f47-0321-4aa4-b58e-f1083c8a7c68" name="ExtensionData" value="&lt;Main Identity=&quot;01f52257-c839-499a-a124-16aaf9d243b0&quot;&gt;&#xD;&#xA;  &lt;AssignedClasses /&gt;&#xD;&#xA;  &lt;Properties&gt;&#xD;&#xA;    &lt;MetaData MetaObjectID=&quot;01f52257-c839-499a-a124-16aaf9d243b0&quot; /&gt;&#xD;&#xA;  &lt;/Properties&gt;&#xD;&#xA;&lt;/Main&gt;">
+                  <elementDefinition Id="74391b39-0510-47a7-8d1b-9b6a62b9c043" />
+                </propertyInstance>
+                <elementDefinition Id="d7c95345-95d4-4941-bf3c-891f5ab61dfa" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <elementDefinition Id="01f52257-c839-499a-a124-16aaf9d243b0" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="e2db999a-e648-4e04-918e-c2c1686c5045" name="Component1" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance Id="970ae1b0-840c-4904-ae0b-417b73088771" name="class" profile="OOAdvantechProfile">
+            <elementDefinition Id="a88a8538-88dd-41f6-9da2-c3f4035f503d" />
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="556eff66-11da-408d-ae4a-693bc7a150a7">
+                <propertyInstance Id="e5591aea-e1d5-44da-a2bc-e6abe3400e16" name="Synchronize" value="True">
+                  <elementDefinition Id="3b52ed4d-0b60-4faa-845a-b2175a26f35e" />
+                </propertyInstance>
+                <elementDefinition Id="6029a1bd-2cf1-4782-a24c-b6df66b319a7" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="6d7862cf-efed-4856-baca-2aaafe5b04e8">
+                <propertyInstance Id="00ab870d-e370-49e7-ad89-807580a16bac" name="Identity">
+                  <elementDefinition Id="f28bb951-e3ee-430c-bd6e-f5630c895b3e" />
+                </propertyInstance>
+                <elementDefinition Id="f44fe6e6-9e6a-4335-8cd5-71cc6a386b13" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="6ae76c50-0746-4d39-901f-d0ed31253b32">
+                <propertyInstance Id="bd8894f5-68cb-444e-a150-5ceb953d7253" name="Persistent" value="Transient">
+                  <elementDefinition Id="cf3f963f-826b-49d1-b824-489099974874" />
+                </propertyInstance>
+                <elementDefinition Id="bdf1d540-539b-48ff-9594-6088b6821ea7" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="0a2dfc72-6db5-4bc8-b7ee-8f03b621a266">
+                <propertyInstance Id="57391196-089f-4e33-ad18-afa9678b546f" name="ExtensionData" value="&lt;Main Identity=&quot;894aa4cf-b700-4f5f-945d-53e389bf2e21&quot;&gt;&#xD;&#xA;  &lt;Properties&gt;&#xD;&#xA;    &lt;MetaData MetaObjectID=&quot;894aa4cf-b700-4f5f-945d-53e389bf2e21&quot; /&gt;&#xD;&#xA;  &lt;/Properties&gt;&#xD;&#xA;&lt;/Main&gt;">
+                  <elementDefinition Id="214b8376-41c3-45ee-a3e0-d3ce32407496" />
+                </propertyInstance>
+                <elementDefinition Id="4c61bd85-34bd-487f-9bdc-2af29769c4c5" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+          <stereotypeInstance Id="fcba70d9-251f-468e-8d63-3a54a0761769" name="class1" profile="OOAdvantechProfile">
+            <elementDefinition Id="ee996d79-7c8e-4414-b2cd-6ffd9b95b3c1" />
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="7d8633f9-0f72-4cab-8623-8fb75b12b54d">
+                <propertyInstance Id="cdb27044-c05a-476f-9b7e-c6dc3168ae13" name="Synchronize" value="True">
+                  <elementDefinition Id="37ccb409-af62-4d8c-8271-c7a9c1088499" />
+                </propertyInstance>
+                <elementDefinition Id="66c48c59-9c04-4b2a-a683-45252223a2bb" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="f0845910-1bc8-47dd-8aa1-796c90942ff7">
+                <propertyInstance Id="3abf95f4-12d8-4ffa-b2df-68d3f2eb3a16" name="Identity">
+                  <elementDefinition Id="7fbdef29-3b7c-42ca-9912-42d067493e97" />
+                </propertyInstance>
+                <elementDefinition Id="9193f98b-9505-4150-9de2-40da506605ad" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="167f5653-b8af-4ee1-82a6-4ba36e2d6cd8">
+                <propertyInstance Id="82cffcde-55e3-4cde-8a07-7560ae458e2a" name="Persistent" value="Transient">
+                  <elementDefinition Id="d5871200-d398-4601-b42e-2bf12b4bfcbb" />
+                </propertyInstance>
+                <elementDefinition Id="e5c4a512-5710-4ab5-9cdd-aedd6d8a6bb2" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances Id="acf11b2f-c746-4cb8-8f9a-10efc0b48876">
+                <propertyInstance Id="bcc50280-a7cd-4320-b81d-637262c1778a" name="ExtensionData">
+                  <elementDefinition Id="138c6189-b9f5-4ccc-9492-f343451cac63" />
+                </propertyInstance>
+                <elementDefinition Id="cc78dc37-e60d-407b-8ad1-afb89fccd6f7" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <elementDefinition Id="894aa4cf-b700-4f5f-945d-53e389bf2e21" />
+      </component>
+    </componentModelHasComponents>
+  </packagedElements>
+  <package Id="aaacebcf-38ed-4abe-887f-c84d3a07cbf1" name="DemoUMLModel">
+    <elementDefinition Id="9272f353-a24d-4c26-801d-402f1d2ca1ed" />
+    <profileInstances>
+      <packageHasProfileInstances Id="583ff7b2-9850-4f2f-81aa-5c2e8888893d">
+        <profileInstance Id="bc759dfb-b477-4ae5-9e65-43ea9e0666a2" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="b929452d-1fa3-4021-b81e-4dca4f5a7fa9">
+        <profileInstance Id="95551a15-6a52-4ecc-b46c-8d5aee46528e" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="8d4c92c6-7173-4db3-a964-41cb629481db">
+        <profileInstance Id="a381bdd1-a96a-432b-97fd-11ba2c0c76fc" name="CSharpProfile">
+          <elementDefinition Id="348eb586-6e9c-40a8-acd1-667d575813cf" />
+        </profileInstance>
+        <elementDefinition Id="69eb3228-fcf1-492c-97d8-187191a4aa83" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="82442c31-e6e8-46bc-b9cb-59235f11c0be">
+        <profileInstance Id="b158f19b-1a71-4bfc-b0d2-8c629b94eda7" name="OOAdvantechProfile">
+          <elementDefinition Id="5e55374d-4a81-4981-84b0-3d7a3864959d" />
+        </profileInstance>
+        <elementDefinition Id="a5f8da02-30d1-4c5f-af51-0196be3da6f7" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</componentModel>

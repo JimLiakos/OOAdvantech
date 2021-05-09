@@ -1,0 +1,51 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisualStudioDotNetRoseBridge", "VisualStudioDotNetRoseBridge\VisualStudioDotNetRoseBridge.vcproj", "{22727919-945D-4F85-A94B-8E83D2610B3D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "VisualStudioDotNetRoseBridgeSetup", "VisualStudioDotNetRoseBridgeSetup\VisualStudioDotNetRoseBridgeSetup.vdproj", "{03DF8721-760C-4C70-94E1-970B6B2DAD70}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModulePublisherHostProcess", "..\ModulePublisherHostProcess\ModulePublisherHostProcess.csproj", "{F0F48C30-E130-4CFC-8286-19CBE33D1D9C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModulePublisher", "..\ModulePublisher\ModulePublisher.csproj", "{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BuildControllAddinSetup", "..\BuildControllAddin\BuildControllAddinSetup\BuildControllAddinSetup.vdproj", "{B0896042-A1BF-40F6-9C06-D2127947ABC9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{22727919-945D-4F85-A94B-8E83D2610B3D}.Debug.ActiveCfg = Debug|Win32
+		{22727919-945D-4F85-A94B-8E83D2610B3D}.Debug.Build.0 = Debug|Win32
+		{22727919-945D-4F85-A94B-8E83D2610B3D}.Release.ActiveCfg = Release|Win32
+		{22727919-945D-4F85-A94B-8E83D2610B3D}.Release.Build.0 = Release|Win32
+		{03DF8721-760C-4C70-94E1-970B6B2DAD70}.Debug.ActiveCfg = Debug
+		{03DF8721-760C-4C70-94E1-970B6B2DAD70}.Release.ActiveCfg = Release
+		{F0F48C30-E130-4CFC-8286-19CBE33D1D9C}.Debug.ActiveCfg = Debug|.NET
+		{F0F48C30-E130-4CFC-8286-19CBE33D1D9C}.Debug.Build.0 = Debug|.NET
+		{F0F48C30-E130-4CFC-8286-19CBE33D1D9C}.Release.ActiveCfg = Release|.NET
+		{F0F48C30-E130-4CFC-8286-19CBE33D1D9C}.Release.Build.0 = Release|.NET
+		{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}.Debug.ActiveCfg = Debug|.NET
+		{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}.Debug.Build.0 = Debug|.NET
+		{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}.Release.ActiveCfg = Release|.NET
+		{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}.Release.Build.0 = Release|.NET
+		{B0896042-A1BF-40F6-9C06-D2127947ABC9}.Debug.ActiveCfg = Debug
+		{B0896042-A1BF-40F6-9C06-D2127947ABC9}.Debug.Build.0 = Debug
+		{B0896042-A1BF-40F6-9C06-D2127947ABC9}.Release.ActiveCfg = Release
+		{B0896042-A1BF-40F6-9C06-D2127947ABC9}.Release.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

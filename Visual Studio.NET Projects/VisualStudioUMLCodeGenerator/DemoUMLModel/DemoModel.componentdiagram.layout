@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DemoModel">
+  <componentModelMoniker Id="6e1f4baf-1369-41eb-a01d-e2a44d5f6041" />
+  <nestedChildShapes>
+    <componentShape Id="4902f323-61f5-49df-9808-253093a3e3f3" absoluteBounds="1.3020833730697632, 1.7916666269302368, 2.010416666666667, 1.1062500000000002" customColor="161, 199, 231" whiteBoxBoundsHeight="0" whiteBoxBoundsWidth="0" blackBoxBoundsHeight="0" blackBoxBoundsWidth="0" whiteBoxTopEdgeShapesCount="0" whiteBoxRightEdgeShapesCount="0" whiteBoxBottomEdgeShapesCount="0" whiteBoxLeftEdgeShapesCount="0" blackBoxTopEdgeShapesCount="0" blackBoxRightEdgeShapesCount="0" blackBoxBottomEdgeShapesCount="0" blackBoxLeftEdgeShapesCount="0">
+      <componentMoniker Id="0941ea1d-3d03-46a0-8629-ced8e15e8956" LastKnownName="DemoUMLModelProject" />
+    </componentShape>
+    <componentShape Id="258f1c50-31f9-48af-8e16-8f0a07aadc45" absoluteBounds="4.8020834922790527, 4.0208334922790527, 2.010416666666667, 1.1062500000000002" customColor="161, 199, 231" whiteBoxBoundsHeight="0" whiteBoxBoundsWidth="0" blackBoxBoundsHeight="0" blackBoxBoundsWidth="0" whiteBoxTopEdgeShapesCount="0" whiteBoxRightEdgeShapesCount="0" whiteBoxBottomEdgeShapesCount="0" whiteBoxLeftEdgeShapesCount="0" blackBoxTopEdgeShapesCount="0" blackBoxRightEdgeShapesCount="0" blackBoxBottomEdgeShapesCount="0" blackBoxLeftEdgeShapesCount="0">
+      <componentMoniker Id="9b595728-e188-4337-9d39-331beb08f06c" LastKnownName="DemoUMLModelProject1" />
+    </componentShape>
+    <componentShape Id="079fe165-642f-4da0-bd45-63f1ead3f858" absoluteBounds="1.0625, 3.625, 1.5, 0.95" customColor="161, 199, 231" whiteBoxBoundsHeight="0" whiteBoxBoundsWidth="0" blackBoxBoundsHeight="0" blackBoxBoundsWidth="0" whiteBoxTopEdgeShapesCount="0" whiteBoxRightEdgeShapesCount="0" whiteBoxBottomEdgeShapesCount="0" whiteBoxLeftEdgeShapesCount="0" blackBoxTopEdgeShapesCount="0" blackBoxRightEdgeShapesCount="0" blackBoxBottomEdgeShapesCount="0" blackBoxLeftEdgeShapesCount="0">
+      <componentMoniker Id="e2db999a-e648-4e04-918e-c2c1686c5045" LastKnownName="Component1" />
+    </componentShape>
+  </nestedChildShapes>
+</componentDiagram>
