@@ -1,0 +1,23 @@
+"Name"     = 'Enter the name of the grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+
+"Start Symbol" = <Composite_Expression>
+! ------------------------------------------------- Sets
+
+{ID Head}      = {Letter} + [_]
+{ID Tail}      = {Alphanumeric} + [_]
+{String Chars} = {Printable} + {HT} - ["]
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*
+StringLiteral = '"' {String Chars}* '"'
+!String = {String Chars}* 
+
+! ------------------------------------------------- Rules
+
+<Composite_Expression> ::= <Composite_Expression_REPEATER>
+<Composite_Expression_REPEATER>::= <String_TERMINAL>  '+' <Composite_Expression_REPEATER> |<String_TERMINAL> 
+<String_TERMINAL>::=StringLiteral 

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>Parser</AssemblyName>
+    <RootNamespace>Parser</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\DfaState.cs" Link="GoldParser\DfaState.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\Grammar.cs" Link="GoldParser\Grammar.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\LRAction.cs" Link="GoldParser\LRAction.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\LRState.cs" Link="GoldParser\LRState.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\LRStateAction.cs" Link="GoldParser\LRStateAction.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\NonTerminalNode.cs" Link="GoldParser\NonTerminalNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\ObjectMap.cs" Link="GoldParser\ObjectMap.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\ParseActionDelegate.cs" Link="GoldParser\ParseActionDelegate.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\ParseMessage.cs" Link="GoldParser\ParseMessage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\Parser.cs" Link="GoldParser\Parser.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\Rule.cs" Link="GoldParser\Rule.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\SourceLineReadCallback.cs" Link="GoldParser\SourceLineReadCallback.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\SR.cs" Link="GoldParser\SR.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\Symbol.cs" Link="GoldParser\Symbol.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\SymbolType.cs" Link="GoldParser\SymbolType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\SyntaxNode.cs" Link="GoldParser\SyntaxNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\TerminalNode.cs" Link="GoldParser\TerminalNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\GoldParser\TreeParser.cs" Link="GoldParser\TreeParser.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\Parser.cs" Link="Parser.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\ParserNode.cs" Link="ParserNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Parser\ParserNodeCollection.cs" Link="ParserNodeCollection.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="GoldParser\" />
+  </ItemGroup>
+
+</Project>

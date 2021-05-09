@@ -1,0 +1,3284 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object Class_Category "Transactios"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    attributes 	(list Attribute_Set
+	(object Attribute
+	    tool       	"MetaData"
+	    name       	"MetaObjectID"
+	    value      	"OOAdvantech.Transactios"))
+    quid       	"44252E48035B"
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "ObjectStateTransition"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{57FE6E0A-1BDB-42FB-9A34-AB679208A73D}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.ObjectStateTransition")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"OOAdvantech.Transactions.ObjectStateTransition")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"E:\\myproject\\terpo\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\ObjectStateTransition.cs")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"40ED1F2E00FA")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"16")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{091FF0A1-1D3F-460A-B08E-F62572DFD98B}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	""))
+	    quid       	"40ED1F2E00FA"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{FDF5F09F-8F40-4021-879C-E9C10C92D205}"))
+		    quid       	"4198D109033C"
+		    supplier   	"Logical View::OOAdvantech::Transactios::SystemStateTransition"
+		    quidu      	"41B327B400F9"))
+	    used_nodes 	(list uses_relationship_list
+		(object Uses_Relationship
+		    quid       	"419532B20354"
+		    supplier   	"Logical View::OOAdvantech::TransactiosCore::LogicalThread"
+		    quidu      	"40F3A0EB010B"))
+	    operations 	(list Operations
+		(object Operation "ObjectStateTransition"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4AA8A7AF-6EDD-41B6-A2DF-BD76746502E4}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40ED1F2E0167")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"9"))
+		    quid       	"40ED1F2E0167"
+		    documentation 	"Initialize the object state transition for the object objectUnderStateTransition."
+		    parameters 	(list Parameters
+			(object Parameter "objectUnderStateTransition"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{B8257D80-E34D-43C6-BEB8-1D44C6273AFA}"))
+			    quid       	"40ED1F2E0177"
+			    documentation 	"The object will change its state."
+			    type       	"object")
+			(object Parameter "TransactionType"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{21DE657F-1077-4F13-9796-A5356A94227C}"))
+			    quid       	"40ED1F2E0178"
+			    documentation 	"The way will use the transaction system."
+			    type       	"TransactionOption"
+			    quidu      	"3FB47C28027A"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "InternalCtr"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4061C481-8A05-4B68-958C-175E855BD6AC}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40ED1F2E0179")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"10"))
+		    quid       	"40ED1F2E0179"
+		    documentation 	"This constructor is a trick to avoid the code duplication."
+		    parameters 	(list Parameters
+			(object Parameter "objectUnderStateTransition"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{44951972-3CEF-4377-8BB0-A182B4BB7FA7}"))
+			    quid       	"40ED1F2E0196"
+			    type       	"object")
+			(object Parameter "TransactionType"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{B4E987C4-1121-46C9-85A9-ECBDD500E734}"))
+			    quid       	"40ED1F2E0197"
+			    type       	"TransactionOption"
+			    quidu      	"3FB47C28027A"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "ObjectStateTransition"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3A1D9C5F-D7FC-48CB-9122-8A913DC34CA4}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40ED1F2E0198")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"11"))
+		    quid       	"40ED1F2E0198"
+		    documentation 	"Initialize the object state transition for the object objectUnderStateTransition."
+		    parameters 	(list Parameters
+			(object Parameter "objectUnderStateTransition"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{A45F70D6-21F6-4DCB-8CDE-46C23BCB01C5}"))
+			    quid       	"40ED1F2E01A5"
+			    documentation 	"The object will change its state."
+			    type       	"object"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "ObjectUnderStateTransition"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0AF376A9-647E-4467-9432-10BA6CED01BE}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40ED1F2E0261")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2"))
+		    quid       	"40ED1F2E0261"
+		    type       	"object"))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "SystemStateTransition"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{69770F13-5E1F-4B18-A2EB-6A0B30C2B42D}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.SystemStateTransition")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"OOAdvantech.Transactions.SystemStateTransition")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\SystemStateTransition.cs")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"41B327B400F9")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"18")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{DBF1A950-98F2-43E1-82BA-B60B3EE8B71D}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"OOAdvantech.Transactions")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{69770F13-5E1F-4B18-A2EB-6A0B30C2B42D}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"{69770F13-5E1F-4B18-A2EB-6A0B30C2B42D}"))
+	    quid       	"41B327B400F9"
+	    used_nodes 	(list uses_relationship_list
+		(object Uses_Relationship
+		    quid       	"41B3289401A5"
+		    documentation 	"Unmarsal the transaction stream"
+		    supplier   	"Logical View::OOAdvantech::TransactiosCore::LogicalThread"
+		    quidu      	"40F3A0EB010B"))
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{A6AD6C3A-0817-44E7-965D-E2093E8CCD91}"))
+		    quid       	"442AFADB0119"
+		    supplier   	"Logical View::.Net::mscorlib.dll::IDisposable"
+		    quidu      	"3ECF3D7C0148"))
+	    operations 	(list Operations
+		(object Operation "Dispose"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2A4E625D-6F91-4936-AD84-15ADB229B55B}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"9")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B40135"))
+		    quid       	"41B327B40135"
+		    documentation 	"Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources. Called when program go out of the using scoop define the end of object state transition."
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "SystemStateTransition"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{41F18CBD-91B6-4582-BA48-44EEEBEF6F1A}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"12")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B4015D"))
+		    quid       	"41B327B4015D"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "SystemStateTransition"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{071C65E4-C37B-46E4-9D4B-B7D011620145}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"13")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B40167"))
+		    quid       	"41B327B40167"
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{25F0D80D-C75C-433E-9974-CC3DD71431B9}"))
+			    quid       	"41B327B4017B"
+			    type       	"Transaction"
+			    quidu      	"40F0D74B036C"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "SystemStateTransition"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7D158754-AFCA-41BE-B7BE-A5E774D8AB75}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"14")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B4017C"))
+		    quid       	"41B327B4017C"
+		    parameters 	(list Parameters
+			(object Parameter "transactionOption"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{F71D7668-52A3-42AA-A73F-3EDFF3397DA6}"))
+			    quid       	"41B327B40185"
+			    type       	"TransactionOption"
+			    quidu      	"3FB47C28027A"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "IinitializeTransaction"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{447EE597-AB2F-4B7F-ADA8-D8FFEB010E97}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"15")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B40186"))
+		    quid       	"41B327B40186"
+		    parameters 	(list Parameters
+			(object Parameter "transactionOption"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{86FC8DB0-0224-4207-886B-00F6A4E6E5D5}"))
+			    quid       	"41B327B4018F"
+			    type       	"TransactionOption"
+			    quidu      	"3FB47C28027A"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "IsLocked"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{A5119080-CBAE-4533-91D3-E5E05D034712}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"17")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"442AF3D60232"))
+		    quid       	"442AF3D60232"
+		    parameters 	(list Parameters
+			(object Parameter "transactionalObject"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{8CF7C537-21B9-45E7-8BC3-8D3B9DE9886A}"))
+			    quid       	"442AF3D60242"
+			    type       	"object"))
+		    result     	"bool"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "IsLocked"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{E5762863-7481-48CC-B745-E7438C2663FF}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"18")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"442AF3D60251"))
+		    quid       	"442AF3D60251"
+		    parameters 	(list Parameters
+			(object Parameter "properties"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{E6030E8E-483C-44C6-86A0-D25233D32620}"))
+			    quid       	"442AF3D60252"
+			    type       	"ExtensionProperties"
+			    quidu      	"419E50E001EE"))
+		    result     	"bool"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "IsTransactionInitiator"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{549FD13F-96A5-4919-837B-B0770326F06A}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B401AD")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_IsTransactionInitiator")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Identity"
+			    value      	"+2"))
+		    quid       	"41B327B401AD"
+		    documentation 	
+|This property indicating whether the object state transition has begun 
+|a new transaction or shares a transaction which already exists.
+		    
+		    type       	"bool"
+		    exportControl 	"Public")
+		(object ClassAttribute "Consistent"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4296D484-D8FA-4CED-B1F0-4269E0BA3146}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4217B41D0177")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"16")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Identity"
+			    value      	"+16")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Consistent"))
+		    quid       	"4217B41D0177"
+		    documentation 	
+|The Consistent property tels to the transaction system that 
+|system is in consistent state and can commit the transaction 
+|of system state transition. If you don't declare the Consistent 
+|property true and go out of the system state transition scoop 
+|then transaction system consider that system is inconsistent 
+|state and roll back to consistent state.
+		    
+		    type       	"bool"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "TransactionAttribute"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{DD1786DB-E67C-4A8C-8A96-228A1630D512}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"40FA9E3A0160")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.TransactionAttribute")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"OOAdvantech.Transactions.TransactionAttribute")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\TransactionAttribute.cs")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{DC2F052E-996F-4ECE-8568-9E13F387E239}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	""))
+	    quid       	"40FA9E3A0160"
+	    documentation 	"Indicates that the class can be participating in transaction context."
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{05A97419-78FB-4685-9700-8D8503E9C3BE}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40FA9E6B01B0"))
+		    quid       	"40FA9E6B01B0"
+		    supplier   	"Logical View::.Net::mscorlib.dll::Attribute"
+		    quidu      	"3ECF3D7B007F"))
+	    operations 	(list Operations
+		(object Operation "TransactionAttribute"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{CDD3F6D8-75F7-4F26-8B00-5652C1EFFD18}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40FA9E6B016A"))
+		    quid       	"40FA9E6B016A"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "TransactionInterop"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"43F08E80032A")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{B8EAB444-28F2-4AD0-8FE6-14E62073CE74}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.TransactionInterop")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"OOAdvantech.Transactions.TransactionInterop")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{39402C62-12B4-481C-A587-BDB0876AE296}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{B8EAB444-28F2-4AD0-8FE6-14E62073CE74}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\TransactionInterop.cs")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"{B8EAB444-28F2-4AD0-8FE6-14E62073CE74}"))
+	    quid       	"43F08E80032A"
+	    operations 	(list Operations
+		(object Operation "GetSystemTransaction"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"43F08EC1026E")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0B44E2A6-71F1-4B7B-951C-1B57E04721C3}"))
+		    quid       	"43F08EC1026E"
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{F5EC723F-0FF8-4172-91F1-846F3CF27E55}"))
+			    quid       	"43F08F38001B"
+			    type       	"Transaction"
+			    quidu      	"40F0D74B036C"))
+		    result     	"object"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "TransactionManager"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"40F58A0D00EC")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{ED70A12C-AE44-4150-AA2D-12EB530DE2C7}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.TransactionManager")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"OOAdvantech.Transactions.TransactionManager")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"17")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{D274F790-4932-4D9E-8A77-E6F1C7DA7140}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"E:\\myproject\\terpo\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\TransactionManagment.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{ED70A12C-AE44-4150-AA2D-12EB530DE2C7}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"OOAdvantech.Transactions")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"{ED70A12C-AE44-4150-AA2D-12EB530DE2C7}"))
+	    quid       	"40F58A0D00EC"
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{C99F7841-BAC3-4974-9C70-442A9D924139}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"43DB1E2803C8"))
+		    quid       	"43DB1E2803C8"
+		    supplier   	"Logical View::OOAdvantech::Remoting::IExtMarshalByRefObject"
+		    quidu      	"416244F90271"))
+	    operations 	(list Operations
+		(object Operation "RegisterTransactionContextProvider"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{891B28AD-F9BC-4349-B7D4-4C0040F28C29}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"14")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"44255EE50213"))
+		    quid       	"44255EE50213"
+		    documentation 	
+|This method register to the transaction system a transaction context 
+|provider for the transaction context extention.
+		    
+		    parameters 	(list Parameters
+			(object Parameter "transactionedContextProvider"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{BCBAC61D-793C-4827-A3D4-C44C3FDA1E7B}"))
+			    quid       	"44255EE50232"
+			    type       	"ITransactionContextProvider"
+			    quidu      	"40FBC76E038A"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetTransactionContexts"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{A1D6A359-1DE9-4D4C-BE35-25897C8632F3}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"15")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"44255EE50233"))
+		    quid       	"44255EE50233"
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{E137CD3D-B32D-45B4-98F1-A72B9F2ABCBF}"))
+			    quid       	"44255EE50242"
+			    type       	"Transaction"
+			    quidu      	"40F0D74B036C"))
+		    result     	"System.Collections.ArrayList"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetTransactionContext"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{9B2875C0-DC02-4560-AC3A-32D5ABA790E8}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"16")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"44255EE50251"))
+		    quid       	"44255EE50251"
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1923E1E7-CF73-4E8F-A6C5-65862441AA9E}"))
+			    quid       	"44255EE50261"
+			    type       	"Transaction"
+			    quidu      	"40F0D74B036C"))
+		    result     	"ITransactionContext"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0
+		    quidu      	"417CF7B10251")
+		(object Operation "EnlistObjectOnActiveTransaction"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{9A80D30F-0822-4E1D-88F6-C8AE21C8D582}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"17")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"44255EE50271"))
+		    quid       	"44255EE50271"
+		    parameters 	(list Parameters
+			(object Parameter "transactionedObject"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6C992727-8489-407A-B139-FCF6187C1F6D}"))
+			    quid       	"44255EE50272"
+			    type       	"object"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#"
+	    abstract   	TRUE)
+	(object Class "ITransactionContextProvider"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"40FBC76E038A")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{398995B6-CF82-4D81-9CE3-721D1BFBF30E}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.ITransactionContextProvider")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"3")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{507FAF98-9F44-45D8-ACF9-0C1819B32466}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\ITransactioContextProvider.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"OOAdvantech.Transactions")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{398995B6-CF82-4D81-9CE3-721D1BFBF30E}"))
+	    quid       	"40FBC76E038A"
+	    documentation 	
+|The transaction context extender providers register to the transaction system through the RegisterTransactionContextProvider of transaction manager
+|
+|
+	    
+	    stereotype 	"Interface"
+	    used_nodes 	(list uses_relationship_list
+		(object Uses_Relationship
+		    quid       	"431FD7740128"
+		    supplier   	"Logical View::OOAdvantech::Transactios::ITransactionContextExtender"
+		    quidu      	"4179ED5003B1"))
+	    operations 	(list Operations
+		(object Operation "CreateTransactionContext"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40FBC79E02EE")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D5434704-6543-45F2-AF96-30C230EB5A91}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False"))
+		    quid       	"40FBC79E02EE"
+		    documentation 	"This method returns a transaction context extender for the transaction of transaction parameter."
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5118BFFE-BC07-421A-ADC3-C3431AA90D2B}"))
+			    quid       	"40FBC7D5008C"
+			    documentation 	"This parameter defines the transaction of transaction context extender.  "
+			    type       	"Transaction"
+			    quidu      	"40F0D74B036C"))
+		    result     	"ITransactionContextExtender"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0
+		    quidu      	"4179ED5003B1"))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "ITransactionContext"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"417CF7B10251")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{F76833F6-17F0-47A5-BF9A-3629828694EA}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.ITransactionContext")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"0")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{E293F4AB-8B3D-45BA-820A-9135DA567590}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\ITransactionContext.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"OOAdvantech.Transactions")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{F76833F6-17F0-47A5-BF9A-3629828694EA}"))
+	    quid       	"417CF7B10251"
+	    stereotype 	"Interface"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Status"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"7")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"417CF7EB035B")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{CAB88F32-1685-4525-AF7E-FC7B3A775ACA}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_State")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Identity"
+			    value      	"+7")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"417CF7EB035B"))
+		    quid       	"417CF7EB035B"
+		    type       	"OOAdvantech.Transactions.ObjectsStateManagerStatus"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "ITransactionContextExtender"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"4179ED5003B1")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{E7D09B5C-3C3F-4BDA-AD45-22834BFAC4B6}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.ITransactionContextExtender")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"7")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{AE83F5BE-A7A2-4E80-B2EC-99A38F7DB8B1}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\ITransactionContextExtender.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"OOAdvantech.Transactions")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{E7D09B5C-3C3F-4BDA-AD45-22834BFAC4B6}"))
+	    quid       	"4179ED5003B1"
+	    documentation 	
+|Through this interface the transaction system propagate the two phase commit mechanism.   
+|The transaction context extender classes must implement this interface.
+|An example of transaction context extender is the extender for persistent object. 
+|This context extender ensures that the state of persistent object after the transaction commit is durable.
+|
+	    
+	    stereotype 	"Interface"
+	    operations 	(list Operations
+		(object Operation "Abort"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{CEFF9E1E-DFDC-48A3-9201-82D4579FD493}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4179EDE00336")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False"))
+		    quid       	"4179EDE00336"
+		    documentation 	"Raise abort event to the extender of transaction context. The extender of transaction context must implement this operation to act when transaction aborted."
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Commit"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5E47411A-A0B2-47C6-8672-44ACB1A04C9C}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4179EDE00337")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False"))
+		    quid       	"4179EDE00337"
+		    documentation 	"Raise commit event to the extender of transaction context. The extender of transaction context must implement this operation to act when transaction committed happen."
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "EnlistObject"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2E8DA797-86DF-4876-AE61-221C04B1F405}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"15")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4179EDE00340")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False"))
+		    quid       	"4179EDE00340"
+		    documentation 	"Raise enlistment event to the extender of transaction context. The extender of transaction context must implement this operation to act when enlistment happen."
+		    parameters 	(list Parameters
+			(object Parameter "TransactionedObject"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{356527DD-D7CC-4BBC-9D4F-A3507F1C3BB4}"))
+			    quid       	"4179EDE00341"
+			    type       	"object"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Prepare"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{DE88E23B-2D82-4F02-8508-45FC95F3B490}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4425782A0213")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"7"))
+		    quid       	"4425782A0213"
+		    documentation 	"Raise prepare event to the extender of transaction context. The extender of transaction context must implement this operation to act when prepare happen."
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "ITransactionalObject"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"419D12EF0273")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{F7FFDD8E-FAB3-4D6A-B07F-CE0AB7E82C7F}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Transactions.TransactionalObject")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"5")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{5FF4C177-6A8E-4246-8009-2155F2BEC2DF}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"40ECDB16008C")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"E:\\myproject\\terpo\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\Transactions\\TransactionalObject.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"OOAdvantech.Transactions")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{F7FFDD8E-FAB3-4D6A-B07F-CE0AB7E82C7F}"))
+	    quid       	"419D12EF0273"
+	    documentation 	
+|
+| The implemation of this intarface from a class means that 
+| the instances of class manipulates their state in a transaction context.
+|
+	    
+	    stereotype 	"Interface"
+	    operations 	(list Operations
+		(object Operation "MarkChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"419D14430181")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{CE2FC4E9-1356-4EA2-9758-ABC7AD7632F4}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"419D14430181"))
+		    quid       	"419D14430181"
+		    documentation 	
+|
+|The MarkChanges called when the instance enlisted in transaction. 
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    quid       	"492F998502EE"
+			    documentation 	
+|
+|This parameter defines the transaction where the instance enlisted.
+|The instance mark the original state
+|
+			    
+			    type       	"OOAdvantech.Transactions.Transaction"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "UndoChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"419D149C02E8")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{EBB9E78C-DB9E-44FF-AA32-910F7B835C61}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"419D149C02E8"))
+		    quid       	"419D149C02E8"
+		    documentation 	
+|
+|The UndoChanges called when the transaction rollback the instance must be returns 
+|to the original state. 
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    quid       	"492F99890196"
+			    documentation 	
+|
+|Defines the rollback transaction.
+|
+			    
+			    type       	"OOAdvantech.Transactions.Transaction"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CommitChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{C131BF2B-D514-41A6-86E9-9D4F7AEFDF6C}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"4")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FB388802AC")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"42FB388802AC"))
+		    quid       	"42FB388802AC"
+		    documentation 	
+|
+|The CommitChanges called when the transaction committed the instance can drop the original state data. 
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    quid       	"492F9989029F"
+			    documentation 	
+|
+|Defines the committed transaction.
+|
+			    
+			    type       	"OOAdvantech.Transactions.Transaction"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "MergeChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	"False")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"5")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"45509DA9032C")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8AAC87FB-2652-437D-80AA-B7E343434038}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"45509DA9032C"))
+		    quid       	"45509DA9032C"
+		    documentation 	
+|
+|The MergeChanges called when a nested transaction committed. 
+|The instance must be transfer the changes in master transaction if use the (record change style) 
+|or transfer origin state of nested transaction to the master transaction if the there isn’t origin state for it, 
+|in case where use (mark origin state style).
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "masterTransaction"
+			    quid       	"492F99850186"
+			    documentation 	
+|
+|Difines the master transaction.
+|
+			    
+			    type       	"OOAdvantech.Transactions.Transaction")
+			(object Parameter "nestedTransaction"
+			    quid       	"492F998501F4"
+			    documentation 	
+|
+|Difines the nested committed transaction.
+|
+			    
+			    type       	"OOAdvantech.Transactions.Transaction"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "MarkChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{27bf615a-2f2e-46df-8851-fb3f317eef22}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"492F998803A9"))
+		    quid       	"492F998803A9"
+		    documentation 	
+|
+|The MarkChanges called when the instance enlisted partially in transaction. 
+|The instance mark the original state for the fields of fiels parameter.
+| 
+		    
+		    parameters 	(list Parameters
+			(object Parameter "transaction"
+			    quid       	"492F9989004E"
+			    documentation 	
+|
+|This parameter defines the transaction where the instance enlisted partially
+| 
+			    
+			    type       	"OOAdvantech.Transactions.Transaction")
+			(object Parameter "fields"
+			    quid       	"492F9989008C"
+			    documentation 	
+|
+| Defines the fields where the instance mark the origin state
+| 
+			    
+			    type       	"System.Reflection.FieldInfo"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Class "ServerLockControlSession"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{0bca7def-65d6-4c1a-bb42-92364620a14c}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"4D39FC19000F"
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"4D39FD5A001F"
+		    supplier   	"Logical View::OOAdvantech::Remoting::IExtMarshalByRefObject"
+		    quidu      	"416244F90271"))
+	    operations 	(list Operations
+		(object Operation "ServerLockControlSession"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ea80ed2b-cb58-422f-8dff-aad739c79d26}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD5D02FD"))
+		    quid       	"4D39FD5D02FD"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "~ServerLockControlSession"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{eaa0bfe0-9706-4a75-bcf0-8938b3b00727}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD5E001F"))
+		    quid       	"4D39FD5E001F"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "Assign"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4cbbe878-26e7-4b94-831e-4ef511199790}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD61029F"))
+		    quid       	"4D39FD61029F"
+		    documentation 	
+|
+|Assign the objects who client wants to know the lock state. 
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "lockRequestObjects"
+			    quid       	"4D39FD61031C"
+			    documentation 	
+|
+|This parameter defines a collection with the objects where client wants to know lock state 
+|
+			    
+			    type       	"OOAdvantech.Collections.Generic.List<object>")
+			(object Parameter "remoteCall"
+			    quid       	"4D39FD61038A"
+			    documentation 	
+|
+|This parameter defines the position of caller. 
+|If the caller is out of process then the value of parameter is true
+|
+			    
+			    type       	"bool"))
+		    result     	"OOAdvantech.Collections.Generic.Dictionary`2[[System.Object,mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089][System.Object,mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "OnObjectLocked"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0a642e14-8a9f-4704-aed6-87c699a54bc9}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD620271"))
+		    quid       	"4D39FD620271"
+		    parameters 	(list Parameters
+			(object Parameter "_object"
+			    quid       	"4D39FD6202DE"
+			    type       	"object")
+			(object Parameter "memberInfos"
+			    quid       	"4D39FD62034B"
+			    type       	"System.Reflection.MemberInfo[]")
+			(object Parameter "transaction"
+			    quid       	"4D39FD62038A"
+			    type       	"OOAdvantech.Transactions.Transaction"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "SessionIdentity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{591106c9-2eda-4705-b4e0-d684aed97747}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD6303D8")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"4D39FD6303D8"
+		    type       	"System.Guid")
+		(object ClassAttribute "SessionTransaction"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{00b8d60f-4484-4aac-bb0c-db7913bde874}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD640177")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"4D39FD640177"
+		    type       	"OOAdvantech.Transactions.Transaction")
+		(object ClassAttribute "ObjectLockedConsumer"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5df4039a-e2f3-46b1-a4f8-b82d8547d423}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD640280")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"4D39FD640280"
+		    type       	"OOAdvantech.Transactions.ServerLockControlSession.WeakReferenceObjectLockedConsumer")
+		(object ClassAttribute "LockRequestObjects"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3cfed7ea-4c9b-4bd3-92ef-dfb7c5be0afe}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4D39FD64038A")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"4D39FD64038A"
+		    type       	"OOAdvantech.Collections.Generic.List<object>"))
+	    module     	"Component View::OOAdvantech::Transactions::Transactions"
+	    quidu      	"40ECDB16008C"
+	    language   	"C#")
+	(object Association "$UNNAMED$0"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{2EE6C5C1-37F8-4CB0-936E-1326EFE57ACC}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{2EE6C5C1-37F8-4CB0-936E-1326EFE57ACC}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Association Attributes"
+		    value      	FALSE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"41B327B4032A"))
+	    quid       	"41B327B4032A"
+	    roles      	(list role_list
+		(object Role "StateTransitionTransaction"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"mMetaObjectID"
+			    value      	"{69770F13-5E1F-4B18-A2EB-6A0B30C2B42D}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{063F3C96-0D3C-4A98-8B42-1616278C3AD7}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"5")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B4032B")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"41B327B4032B"))
+		    quid       	"41B327B4032B"
+		    documentation 	"Define transaction which used for the state transition."
+		    label      	"StateTransitionTransaction"
+		    supplier   	"Logical View::OOAdvantech::TransactiosCore::Transaction"
+		    quidu      	"40F0D74B036C"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$1"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8C9F1C78-9C65-4C11-82A4-D1FC7A95AD50}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41B327B4032D")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"9")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"41B327B4032D"))
+		    quid       	"41B327B4032D"
+		    supplier   	"Logical View::OOAdvantech::Transactios::SystemStateTransition"
+		    quidu      	"41B327B400F9")))
+	(object Association "$UNNAMED$2"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{3634D8C6-2163-40CF-A274-B2373ADC0296}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{898CD61E-671A-4D02-BB23-91E05F482757}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Association Attributes"
+		    value      	FALSE))
+	    quid       	"41318A420170"
+	    roles      	(list role_list
+		(object Role "TransactionedContextProviders"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"mMetaObjectID"
+			    value      	"{ED70A12C-AE44-4150-AA2D-12EB530DE2C7}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "Collections.Generic.List<ITransactionContextProvider>"))
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8738304A-6CA2-4CDD-B3A6-EB68B5BD90A5}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41318A42017A")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"10")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_TransactionedContextProviders"))
+		    quid       	"41318A42017A"
+		    label      	"TransactionedContextProviders"
+		    supplier   	"Logical View::OOAdvantech::Transactios::ITransactionContextProvider"
+		    quidu      	"40FBC76E038A"
+		    client_cardinality 	(value cardinality "0..*")
+		    exportControl 	"Implementation"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$3"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{62052A6B-9F2B-442A-93DA-8B01FA7049BB}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41318A42017C")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3"))
+		    quid       	"41318A42017C"
+		    supplier   	"Logical View::OOAdvantech::Transactios::TransactionManager"
+		    quidu      	"40F58A0D00EC")))
+	(object Association "$UNNAMED$4"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{8C893A5F-099F-4ED9-BE0A-9039930BAC09}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{8C893A5F-099F-4ED9-BE0A-9039930BAC09}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Association Attributes"
+		    value      	FALSE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"4179ED9C0189"))
+	    quid       	"4179ED9C0189"
+	    roles      	(list role_list
+		(object Role "Extenders"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4179ED9D0018")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{AA7F89B0-2DB1-4773-A4AD-3AB443C092A3}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"26")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "Collections.Generic.List<ITransactionContextExtender>"))
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4179ED9D0018"))
+		    quid       	"4179ED9D0018"
+		    label      	"Extenders"
+		    supplier   	"Logical View::OOAdvantech::Transactios::ITransactionContextExtender"
+		    quidu      	"4179ED5003B1"
+		    client_cardinality 	(value cardinality "0..*")
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$5"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{DB3D8D78-A31E-4489-A7ED-DF4D5723D735}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4179ED9D001A")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"4179ED9D001A"))
+		    quid       	"4179ED9D001A"
+		    supplier   	"Logical View::OOAdvantech::Transactios::ITransactionContext"
+		    quidu      	"417CF7B10251"))))
+    logical_presentations 	(list unit_reference_list
+	(object ClassDiagram "Main"
+	    quid       	"44252FAA036B"
+	    title      	"Main"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	0
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::ObjectStateTransition" @1
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(319, 1121)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@1
+			location   	(103, 1021)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	432
+			justify    	0
+			label      	"ObjectStateTransition")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"40ED1F2E00FA"
+		    width      	450
+		    height     	225
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::SystemStateTransition" @2
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(331, 578)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@2
+			location   	(81, 469)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	501
+			justify    	0
+			label      	"SystemStateTransition")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"41B327B400F9"
+		    width      	519
+		    height     	243
+		    annotation 	8)
+		(object InheritView "" @3
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"4198D109033C"
+		    client     	@1
+		    supplier   	@2
+		    line_style 	3
+		    origin_attachment 	(319, 1009)
+		    terminal_attachment 	(319, 699))
+		(object ClassView "Class" "Logical View::OOAdvantech::TransactiosCore::Transaction" @4
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(1288, 580)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	TRUE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@4
+			location   	(1123, 481)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	330
+			justify    	0
+			label      	"Transaction")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"40F0D74B036C"
+		    width      	348
+		    height     	222
+		    annotation 	8)
+		(object AssociationViewNew "$UNNAMED$0" @5
+		    location   	(851, 578)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"41B327B4032A"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$1" @6
+			    Parent_View 	@5
+			    location   	(-365, 44)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @7
+				Parent_View 	@6
+				location   	(642, 537)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				hidden     	TRUE
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	""
+				pctDist    	0.800000
+				height     	42
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"41B327B4032D"
+			    client     	@5
+			    supplier   	@2
+			    line_style 	0)
+			(object RoleView "StateTransitionTransaction" @8
+			    Parent_View 	@5
+			    location   	(-365, 44)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @9
+				Parent_View 	@8
+				location   	(1052, 410)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	507
+				justify    	0
+				label      	"+StateTransitionTransaction"
+				pctDist    	0.768639
+				height     	170
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"41B327B4032B"
+			    client     	@5
+			    supplier   	@4
+			    line_style 	0)))
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::TransactionAttribute" @10
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(2429, 765)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@10
+			location   	(2216, 681)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	426
+			justify    	0
+			label      	"TransactionAttribute")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"40FA9E3A0160"
+		    width      	444
+		    height     	193
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::TransactionInterop" @11
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(2438, 1047)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@11
+			location   	(2222, 965)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	432
+			justify    	0
+			label      	"TransactionInterop")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"43F08E80032A"
+		    width      	450
+		    height     	188
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::ITransactionalObject" @12
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(2413, 459)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@12
+			location   	(2191, 440)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	445
+			justify    	0
+			label      	"ITransactionalObject")
+		    icon       	"Interface"
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"419D12EF0273"
+		    width      	463
+		    height     	238
+		    annotation 	8)))
+	(object ClassDiagram "Transaction context extension"
+	    quid       	"44255E13008C"
+	    title      	"Transaction context extension"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	519
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::TransactionManager" @13
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(446, 1240)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	TRUE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@13
+			location   	(117, 1134)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	658
+			justify    	0
+			label      	"TransactionManager")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"40F58A0D00EC"
+		    compartment 	(object Compartment
+			Parent_View 	@13
+			location   	(117, 1195)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	728
+			compartmentItems 	(list Compartment
+			    "+ RegisterTransactionContextProvider()"))
+		    width      	676
+		    height     	237
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::ITransactionContextProvider" @14
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(1639, 1212)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@14
+			location   	(1361, 1131)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	557
+			justify    	0
+			label      	"ITransactionContextProvider")
+		    icon       	"Interface"
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"40FBC76E038A"
+		    compartment 	(object Compartment
+			Parent_View 	@14
+			location   	(1361, 1192)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	553
+			compartmentItems 	(list Compartment
+			    "+ CreateTransactionContext()"))
+		    width      	575
+		    height     	362
+		    annotation 	8)
+		(object AssociationViewNew "$UNNAMED$2" @15
+		    location   	(1068, 1247)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"41318A420170"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$3" @16
+			    Parent_View 	@15
+			    location   	(312, -144)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @17
+				Parent_View 	@16
+				location   	(841, 1206)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				hidden     	TRUE
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	""
+				pctDist    	0.800000
+				height     	42
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"41318A42017C"
+			    client     	@15
+			    supplier   	@13
+			    line_style 	3
+			    origin_attachment 	(1068, 1247)
+			    terminal_attachment 	(784, 1247))
+			(object RoleView "TransactionedContextProviders" @18
+			    Parent_View 	@15
+			    location   	(312, -144)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @19
+				Parent_View 	@18
+				location   	(1105, 1067)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	561
+				justify    	0
+				label      	"TransactionedContextProviders"
+				pctDist    	0.135314
+				height     	181
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"41318A42017A"
+			    client     	@15
+			    supplier   	@14
+			    line_style 	3
+			    origin_attachment 	(1068, 1247)
+			    terminal_attachment 	(1352, 1247)
+			    label      	(object SegLabel @20
+				Parent_View 	@18
+				location   	(1279, 1177)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.742857
+				height     	71
+				orientation 	0))))
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::ITransactionContext" @21
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    location   	(506, 700)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@21
+			location   	(234, 653)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	545
+			justify    	0
+			label      	"ITransactionContext")
+		    icon       	"Interface"
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"417CF7B10251"
+		    width      	563
+		    height     	294
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::ITransactionContextExtender" @22
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(2630, 1253)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@22
+			location   	(2289, 1106)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	682
+			justify    	0
+			label      	"ITransactionContextExtender")
+		    icon       	"Interface"
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8454016
+		    quidu      	"4179ED5003B1"
+		    compartment 	(object Compartment
+			Parent_View 	@22
+			location   	(2289, 1167)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	5
+			max_width  	321
+			compartmentItems 	(list Compartment
+			    "+ Abort()"
+			    "+ Commit()"
+			    "+ EnlistObject()"
+			    "+ Prepare()"))
+		    width      	700
+		    height     	494
+		    annotation 	8)
+		(object AssociationViewNew "$UNNAMED$4" @23
+		    location   	(1856, 719)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"4179ED9C0189"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$5" @24
+			    Parent_View 	@23
+			    location   	(-239, -1202)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @25
+				Parent_View 	@24
+				location   	(1001, 678)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				hidden     	TRUE
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	""
+				pctDist    	0.800000
+				height     	42
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"4179ED9D001A"
+			    client     	@23
+			    supplier   	@21
+			    line_style 	3
+			    origin_attachment 	(1856, 719)
+			    terminal_attachment 	(787, 719))
+			(object RoleView "Extenders" @26
+			    Parent_View 	@23
+			    location   	(-239, -1202)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @27
+				Parent_View 	@26
+				location   	(2259, 674)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	214
+				justify    	0
+				label      	"+Extenders"
+				pctDist    	0.377120
+				height     	46
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"4179ED9D0018"
+			    client     	@23
+			    supplier   	@22
+			    vertices   	(list Points
+				(1856, 719)
+				(2638, 719)
+				(2638, 1006))
+			    line_style 	3
+			    origin_attachment 	(1856, 719)
+			    terminal_attachment 	(2638, 1006)
+			    label      	(object SegLabel @28
+				Parent_View 	@26
+				location   	(2585, 899)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))))
+		(object UsesView "" @29
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"431FD7740128"
+		    client     	@14
+		    supplier   	@22
+		    line_style 	3
+		    origin_attachment 	(1926, 1209)
+		    terminal_attachment 	(2280, 1209))
+		(object Label @30
+		    location   	(34, 41)
+		    font       	(object Font
+			size       	12
+			face       	"Arial"
+			charSet    	161
+			bold       	TRUE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    nlines     	5
+		    max_width  	1076
+		    label      	"Transaction context extension mechanism gives the opportunity to extend the functionality of object state manipulation in transaction context.")))
+	(object ClassDiagram "UserInterfaceLockControl"
+	    quid       	"4D39FBB30271"
+	    title      	"UserInterfaceLockControl"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	0
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::Transactios::ServerLockControlSession" @31
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(950, 612)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@31
+			location   	(668, 496)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	564
+			justify    	0
+			label      	"ServerLockControlSession")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"4D39FC19000F"
+		    width      	582
+		    height     	257
+		    annotation 	8)))))

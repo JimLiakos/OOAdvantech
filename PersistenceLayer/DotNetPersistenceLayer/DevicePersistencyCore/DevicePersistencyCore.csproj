@@ -1,0 +1,649 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5A395337-6D62-408B-BCEB-2D7F67B26A00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevicePersistencyCore</RootNamespace>
+    <AssemblyName>DevicePersistencyCore</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>PocketPC</PlatformFamilyName>
+    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
+    <OSVersion>5.1</OSVersion>
+    <DeployDirSuffix>DevicePersistencyCore</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FormFactorID>
+    </FormFactorID>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PocketPC;NETCompactFramework </DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;PocketPC;NETCompactFramework </DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3be235df1c8d2ad3, processorArchitecture=MSIL" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\DotNetMetaDataRepository\Assembly.cs">
+      <Link>DotNetMetaDataRepository\Assembly.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DataPath.cs">
+      <Link>DotNetMetaDataRepository\DataPath.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetAssociation.cs">
+      <Link>DotNetMetaDataRepository\DotNetAssociation.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetAssociationEnd.cs">
+      <Link>DotNetMetaDataRepository\DotNetAssociationEnd.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetAssociationEndRealization.cs">
+      <Link>DotNetMetaDataRepository\DotNetAssociationEndRealization.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetAttribute.cs">
+      <Link>DotNetMetaDataRepository\DotNetAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetAttributeRealization.cs">
+      <Link>DotNetMetaDataRepository\DotNetAttributeRealization.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetClass.cs">
+      <Link>DotNetMetaDataRepository\DotNetClass.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetEnumeration.cs">
+      <Link>DotNetMetaDataRepository\DotNetEnumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetInterface.cs">
+      <Link>DotNetMetaDataRepository\DotNetInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetMethod.cs">
+      <Link>DotNetMetaDataRepository\DotNetMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetNamespace.cs">
+      <Link>DotNetMetaDataRepository\DotNetNamespace.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetOperation.cs">
+      <Link>DotNetMetaDataRepository\DotNetOperation.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetPrimitive.cs">
+      <Link>DotNetMetaDataRepository\DotNetPrimitive.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetPrimitiveType.cs">
+      <Link>DotNetMetaDataRepository\DotNetPrimitiveType.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetStructure.cs">
+      <Link>DotNetMetaDataRepository\DotNetStructure.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\DotNetTemplateParameter.cs">
+      <Link>DotNetMetaDataRepository\DotNetTemplateParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\InterfaceMapping.cs">
+      <Link>DotNetMetaDataRepository\InterfaceMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\MetaObjectCollection.cs">
+      <Link>DotNetMetaDataRepository\MetaObjectCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\MetaObjectMapper.cs">
+      <Link>DotNetMetaDataRepository\MetaObjectMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\ComparisonTerm.cs">
+      <Link>DotNetMetaDataRepository\OQL\ComparisonTerm.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\Criterion.cs">
+      <Link>DotNetMetaDataRepository\OQL\Criterion.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\DataDimension.cs">
+      <Link>DotNetMetaDataRepository\OQL\DataDimension.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\DataLoader.cs">
+      <Link>DotNetMetaDataRepository\OQL\DataLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\DataSource.cs">
+      <Link>DotNetMetaDataRepository\OQL\DataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\DistributedObjectQuery.cs">
+      <Link>DotNetMetaDataRepository\OQL\DistributedObjectQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\LiteralComparisonItem.cs">
+      <Link>DotNetMetaDataRepository\OQL\LiteralComparisonItem.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\Member.cs">
+      <Link>DotNetMetaDataRepository\OQL\Member.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\MemberCollection.cs">
+      <Link>DotNetMetaDataRepository\OQL\MemberCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\MemberList.cs">
+      <Link>DotNetMetaDataRepository\OQL\MemberList.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\MemberObject.cs">
+      <Link>DotNetMetaDataRepository\OQL\MemberObject.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\ObjectComparisonItem.cs">
+      <Link>DotNetMetaDataRepository\OQL\ObjectComparisonItem.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\ObjectIDComparisonItem.cs">
+      <Link>DotNetMetaDataRepository\OQL\ObjectIDComparisonItem.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\ObjectQuery.cs">
+      <Link>DotNetMetaDataRepository\OQL\ObjectQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\OjectAttributeComparisonItem.cs">
+      <Link>DotNetMetaDataRepository\OQL\OjectAttributeComparisonItem.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\OQLStatements.cs">
+      <Link>DotNetMetaDataRepository\O?L\OQLStatements.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\ParameterComparisonItem.cs">
+      <Link>DotNetMetaDataRepository\OQL\ParameterComparisonItem.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\Path.cs">
+      <Link>DotNetMetaDataRepository\OQL\Path.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\PathMember.cs">
+      <Link>DotNetMetaDataRepository\OQL\PathMember.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\QueryOnRootObject.cs">
+      <Link>DotNetMetaDataRepository\OQL\QueryOnRootObject.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\RecursiveMember.cs">
+      <Link>DotNetMetaDataRepository\OQL\RecursiveMember.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\RelationshipData.cs">
+      <Link>DotNetMetaDataRepository\OQL\RelationshipData.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\RootObjectDataLoader.cs">
+      <Link>DotNetMetaDataRepository\OQL\RootObjectDataLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\RootObjectDataSource.cs">
+      <Link>DotNetMetaDataRepository\OQL\RootObjectDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\SearchFactor.cs">
+      <Link>DotNetMetaDataRepository\OQL\SearchFactor.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\SearchIterm.cs">
+      <Link>DotNetMetaDataRepository\OQL\SearchIterm.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\SerchCondition.cs">
+      <Link>DotNetMetaDataRepository\OQL\SerchCondition.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\StorageDataLoader.cs">
+      <Link>DotNetMetaDataRepository\OQL\StorageDataLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\StorageDataSource.cs">
+      <Link>DotNetMetaDataRepository\OQL\StorageDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\OQL\StructureSet.cs">
+      <Link>DotNetMetaDataRepository\OQL\StructureSet.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\Parameter.cs">
+      <Link>DotNetMetaDataRepository\Parameter.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetMetaDataRepository\Type.cs">
+      <Link>DotNetMetaDataRepository\Type.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactFastPersistenceRunTime\ObjectStorage.cs">
+      <Link>MSSQLCompactFastPersistenceRunTime\ObjectStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactFastPersistenceRunTime\StorageProvider.cs">
+      <Link>MSSQLCompactFastPersistenceRunTime\StorageProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\ClassMemoryInstanceCollection.cs">
+      <Link>MSSQLCompactPersistenceRunTime\ClassMemoryInstanceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\Commands\LinkObjectsCommand.cs">
+      <Link>MSSQLCompactPersistenceRunTime\Commands\LinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\Commands\NewStorageInstanceCommand.cs">
+      <Link>MSSQLCompactPersistenceRunTime\Commands\NewStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\Commands\UpdateDatabaseMassivelly.cs">
+      <Link>MSSQLCompactPersistenceRunTime\Commands\UpdateDatabaseMassivelly.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\Commands\UpdateReferentialIntegrity.cs">
+      <Link>MSSQLCompactPersistenceRunTime\Commands\UpdateReferentialIntegrity.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\Commands\UpdateStorageInstanceCommand.cs">
+      <Link>MSSQLCompactPersistenceRunTime\Commands\UpdateStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\DataBase.cs">
+      <Link>MSSQLCompactPersistenceRunTime\DataBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\MemoryInstanceCollection.cs">
+      <Link>MSSQLCompactPersistenceRunTime\MemoryInstanceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\MSSQLCompactRDBMSSchema.cs">
+      <Link>MSSQLCompactPersistenceRunTime\MSSQLCompactRDBMSSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\ObjectQueryLanguage\DataLoader.cs">
+      <Link>MSSQLCompactPersistenceRunTime\ObjectQueryLanguage\DataLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\ObjectStorage.cs">
+      <Link>MSSQLCompactPersistenceRunTime\ObjectStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\RelResolver.cs">
+      <Link>MSSQLCompactPersistenceRunTime\RelResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\StorageInstanceRef.cs">
+      <Link>MSSQLCompactPersistenceRunTime\StorageInstanceRef.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\StorageProvider.cs">
+      <Link>MSSQLCompactPersistenceRunTime\StorageProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLCompactPersistenceRunTime\TypeDictionary.cs">
+      <Link>MSSQLCompactPersistenceRunTime\TypeDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\ADONetObjectStorage.cs">
+      <Link>MSSQLFastPersistenceRunTime\ADONetObjectStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\ClassBLOB.cs">
+      <Link>MSSQLFastPersistenceRunTime\ClassBLOB.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\DataLoader.cs">
+      <Link>MSSQLFastPersistenceRunTime\DataLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\Member.cs">
+      <Link>MSSQLFastPersistenceRunTime\Member.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastDeleteStorageInstanceCommand.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastDeleteStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastLinkObjectsCommand.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastLinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastNewStorageInstanceCommand.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastNewStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastObjectStorage.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastObjectStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastRelResolver.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastRelResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastStorageInstanceRef.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastStorageInstanceRef.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastUnlinkAllObjectCommand.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastUnlinkAllObjectCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastUnLinkObjectsCommand.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastUnLinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\MSSQLFastUpdateStorageInstanceCommand.cs">
+      <Link>MSSQLFastPersistenceRunTime\MSSQLFastUpdateStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLFastPersistenceRunTime\StorageCell.cs">
+      <Link>MSSQLFastPersistenceRunTime\StorageCell.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\MetaObjectsStack.cs">
+      <Link>MSSQLPersistenceRunTime\MetaObjectsStack.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\ObjectStorage.cs">
+      <Link>MSSQLPersistenceRunTime\ObjectStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\Column.cs">
+      <Link>RDBMSDataObjects\Column.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\DataBase.cs">
+      <Link>RDBMSDataObjects\DataBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\IRDBMSSchema.cs">
+      <Link>RDBMSDataObjects\IRDBMSSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\Key.cs">
+      <Link>RDBMSDataObjects\Key.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\StoreProcedure.cs">
+      <Link>RDBMSDataObjects\StoreProcedure.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\Table.cs">
+      <Link>RDBMSDataObjects\Table.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\RDBMSDataObjects\View.cs">
+      <Link>RDBMSDataObjects\View.cs</Link>
+    </Compile>
+    <Compile Include="..\MSSQLPersistenceRunTime\UpdateStorageSchema.cs">
+      <Link>MSSQLPersistenceRunTime\UpdateStorageSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\DfaState.cs">
+      <Link>Parser\GoldParser\DfaState.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\Grammar.cs">
+      <Link>Parser\GoldParser\Grammar.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\LRAction.cs">
+      <Link>Parser\GoldParser\LRAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\LRState.cs">
+      <Link>Parser\GoldParser\LRState.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\LRStateAction.cs">
+      <Link>Parser\GoldParser\LRStateAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\NonTerminalNode.cs">
+      <Link>Parser\GoldParser\NonTerminalNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\ObjectMap.cs">
+      <Link>Parser\GoldParser\ObjectMap.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\ParseActionDelegate.cs">
+      <Link>Parser\GoldParser\ParseActionDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\ParseMessage.cs">
+      <Link>Parser\GoldParser\ParseMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\Parser.cs">
+      <Link>Parser\GoldParser\Parser.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\Rule.cs">
+      <Link>Parser\GoldParser\Rule.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\SourceLineReadCallback.cs">
+      <Link>Parser\GoldParser\SourceLineReadCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\SR.cs">
+      <Link>Parser\GoldParser\SR.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\Symbol.cs">
+      <Link>Parser\GoldParser\Symbol.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\SymbolType.cs">
+      <Link>Parser\GoldParser\SymbolType.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\SyntaxNode.cs">
+      <Link>Parser\GoldParser\SyntaxNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\TerminalNode.cs">
+      <Link>Parser\GoldParser\TerminalNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\GoldParser\TreeParser.cs">
+      <Link>Parser\GoldParser\TreeParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\Parser.cs">
+      <Link>Parser\Parser.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\ParserNode.cs">
+      <Link>Parser\ParserNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Parser\ParserNodeCollection.cs">
+      <Link>Parser\ParserNodeCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\AssociationEndAgent.cs">
+      <Link>PersistenceLayerRunTime\AssociationEndAgent.cs</Link>
+    </Compile>
+    <EmbeddedResource Include="..\OQLParserGrammar\OQL.cgt">
+      <Link>DotNetMetaDataRepository\OQL\OQL.cgt</Link>
+    </EmbeddedResource>
+    <None Include="..\PersistenceLayerRunTime\ClientMember.cs">
+      <Link>PersistenceLayerRunTime\ClientMember.cs</Link>
+    </None>
+    <None Include="..\PersistenceLayerRunTime\ClientMemberList.cs">
+      <Link>PersistenceLayerRunTime\ClientMemberList.cs</Link>
+    </None>
+    <None Include="..\PersistenceLayerRunTime\ClientStorageSession.cs">
+      <Link>PersistenceLayerRunTime\ClientStorageSession.cs</Link>
+    </None>
+    <None Include="..\PersistenceLayerRunTime\ClientStructureSet.cs">
+      <Link>PersistenceLayerRunTime\ClientStructureSet.cs</Link>
+    </None>
+    <Compile Include="..\PersistenceLayerRunTime\DataLoader.cs">
+      <Link>PersistenceLayerRunTime\DataLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\DeleteStorageInstanceCommand.cs">
+      <Link>PersistenceLayerRunTime\DeleteStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\Exception.cs">
+      <Link>PersistenceLayerRunTime\Exception.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\InterSorageLinkObjectsCommand.cs">
+      <Link>PersistenceLayerRunTime\InterSorageLinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\InterSorageUnLinkObjectsCommand.cs">
+      <Link>PersistenceLayerRunTime\InterSorageUnLinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\LinkCommand.cs">
+      <Link>PersistenceLayerRunTime\LinkCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\LinkObjectsCommand.cs">
+      <Link>PersistenceLayerRunTime\LinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\NewStorageInstanceCommand.cs">
+      <Link>PersistenceLayerRunTime\NewStorageInstanceCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\OnMemoryObjectCollection.cs">
+      <Link>PersistenceLayerRunTime\OnMemoryObjectCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\OnMemoryUnlinkAllObjectCommand.cs">
+      <Link>PersistenceLayerRunTime\OnMemoryUnlinkAllObjectCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PersClassObjects.cs">
+      <Link>PersistenceLayerRunTime\PersClassObjects.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PersClassObjectsCollection.cs">
+      <Link>PersistenceLayerRunTime\PersClassObjectsCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PersistenceLayerTransactionContext.cs">
+      <Link>PersistenceLayerRunTime\PersistenceLayerTransactionContext.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PersistenceRuntimeFactory.cs">
+      <Link>Persistence?ayerRunTime\PersistenceRuntimeFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PersistencyService.cs">
+      <Link>PersistenceLayerRunTime\PersistencyService.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PersistentObjectSnapshot.cs">
+      <Link>PersistenceLayerRunTime\PersistentObjectSnapshot.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\PRTObjectCollectionFactory.cs">
+      <Link>PersistenceLayerRunTime\PRTObjectCollectionFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\RelResolver.cs">
+      <Link>PersistenceLayerRunTime\RelResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\StorageInstanceAgent.cs">
+      <Link>PersistenceLayerRunTime\StorageInstanceAgent.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\StorageInstanceRef.cs">
+      <Link>PersistenceLayerRunTime\StorageInstanceRef.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\StorageInstanceValuePathRef.cs">
+      <Link>PersistenceLayerRunTime\StorageInstanceValuePathRef.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\StorageProvider.cs">
+      <Link>PersistenceLayerRunTime\StorageProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\StorageServerInstanceLocator.cs">
+      <Link>PersistenceLayerRunTime\StorageServerInstanceLocator.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\StorageSession.cs">
+      <Link>PersistenceLayerRunTime\StorageSession.cs</Link>
+    </Compile>
+    <None Include="..\PersistenceLayerRunTime\StructureSet.cs">
+      <Link>PersistenceLayerRunTime\StructureSet.cs</Link>
+    </None>
+    <Compile Include="..\PersistenceLayerRunTime\TransactionCommand.cs">
+      <Link>PersistenceLayerRunTime\TransactionCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\TransactionCommandCollection.cs">
+      <Link>PersistenceLayerRunTime\TransactionCommandCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\TransactionContextProvider.cs">
+      <Link>PersistenceLayerRunTime\TransactionContextProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\UnlinkAllObjectLinksCommand.cs">
+      <Link>PersistenceLayerRunTime\UnlinkAllObjectLinksCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\UnLinkObjectsCommand.cs">
+      <Link>PersistenceLayerRunTime\UnLinkObjectsCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\UpdateReferentialIntegrity.cs">
+      <Link>PersistenceLayerRunTime\UpdateReferentialIntegrity.cs</Link>
+    </Compile>
+    <Compile Include="..\PersistenceLayerRunTime\UpdateStorageInstanceCommand.cs">
+      <Link>PersistenceLayerRunTime\UpdateStorageInstanceCommand.cs</Link>
+    </Compile>
+    <None Include="..\XMLPersistenceRunTime\XMLMemberList.cs">
+      <Link>XMLPersistenceRunTime\XMLMemberList.cs</Link>
+    </None>
+    <None Include="..\XMLPersistenceRunTime\XmlNewStorageInstanceCommand.cs">
+      <Link>XMLPersistenceRunTime\XmlNewStorageInstanceCommand.cs</Link>
+    </None>
+    <None Include="..\XMLPersistenceRunTime\XMLObjectMember.cs">
+      <Link>XMLPersistenceRunTime\XMLObjectMember.cs</Link>
+    </None>
+    <None Include="..\XMLPersistenceRunTime\XMLObjectStorage.cs">
+      <Link>XMLPersistenceRunTime\XMLObjectStorage.cs</Link>
+    </None>
+    <None Include="..\XMLPersistenceRunTime\XMLStorageInstanceRef.cs">
+      <Link>XMLPersistenceRunTime\XMLStorageInstanceRef.cs</Link>
+    </None>
+    <None Include="..\XMLPersistenceRunTime\XMLStorageProvider.cs">
+      <Link>XMLPersistenceRunTime\XMLStorageProvider.cs</Link>
+    </None>
+    <None Include="..\XMLPersistenceRunTime\XMLStructureSet.cs">
+      <Link>XMLPersistenceRunTime\XMLStructureSet.cs</Link>
+    </None>
+    <None Include="StrongName.snk" />
+    <Compile Include="..\RDBMSMetaDataRepository\HighLowIdentityColumnsGenerator.cs">
+      <Link>RDBMSMetaDataRepository\HighLowIdentityColumnsGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\IdentityColumnGenerator.cs">
+      <Link>RDBMSMetaDataRepository\IdentityColumnGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\MappedClassifier.cs">
+      <Link>RDBMSMetaDataRepository\MappedClassifier.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\OutStorageObjectCollection.cs">
+      <Link>RDBMSMetaDataRepository\OutStorageObjectCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSColumn.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSColumn.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSComponent.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSIdentityColumn.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSIdentityColumn.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSInterface.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSKey.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSKey.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingAssociation.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingAssociation.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingAssociationEnd.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingAssociationEnd.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingAttribute.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingClass.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingClass.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingGeneralization.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingGeneralization.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingPrimitive.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingPrimitive.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMappingStructure.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMappingStructure.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSMetaObjectCreator.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSMetaObjectCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSObjectCollection.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSObjectCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSObjectCollectionLink.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSObjectCollectionLink.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSObjectStorage.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSObjectStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSStoreProcedure.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSStoreProcedure.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSTable.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSTable.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\RDBMSView.cs">
+      <Link>RDBMSMetaDataRepository\RDBMSView.cs</Link>
+    </Compile>
+    <Compile Include="..\RDBMSMetaDataRepository\UUIDIdentityColumnsGenerator.cs">
+      <Link>RDBMSMetaDataRepository\UUIDIdentityColumnsGenerator.cs</Link>
+    </Compile>
+    <Compile Include="BinaryFormatter.cs" />
+    <Compile Include="ObjectID.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValuesParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceOOAdvantech\DeviceOOAdvantech.csproj">
+      <Project>{66454549-9EF4-4CBC-957A-BF2E7F0F1D?1}</Project>
+      <Name>DeviceOOAdvantech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceOOAdvantech\DeviceOOAdvantech.csproj">
+      <Project>{66454549-9EF4-4CBC-957A-BF2E7F0F1D31}</Project>
+      <Name>DeviceOOAdvantech</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Condition="'$(TargetFrameworkVersion)' == 'v1.0'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.v1.targets" />
+  <Import Condition="'$(TargetFrameworkVersion)' == 'v2.0'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Condition="'$(TargetFrameworkVersion)' == 'v3.5'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+</Project>

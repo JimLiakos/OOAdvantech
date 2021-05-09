@@ -1,0 +1,95 @@
+<Abstractions>
+  <NextObjID ObjID="25" />
+  <ObjectCollections>
+    <AbstractionsAndPersistency.Product ClassInstaditationName="AbstractionsAndPersistency.Product">
+      <Object oid="13" ReferentialIntegrityCount="1" Name="sprite" Vat="0,18" Amount="0">
+        <PriceLists>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.ProductPrice">14</oid>
+        </PriceLists>
+      </Object>
+    </AbstractionsAndPersistency.Product>
+    <AbstractionsAndPersistency.ProductPrice ClassInstaditationName="AbstractionsAndPersistency.ProductPrice">
+      <Object oid="14" ReferentialIntegrityCount="1" Name="sprite" RoleA="13" RoleAClassInstaditationName="AbstractionsAndPersistency.Product" RoleB="15" RoleBClassInstaditationName="AbstractionsAndPersistency.PriceList">
+        <ItemPriceRoleBName>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.OrderDetail">17</oid>
+        </ItemPriceRoleBName>
+      </Object>
+    </AbstractionsAndPersistency.ProductPrice>
+    <AbstractionsAndPersistency.PriceList ClassInstaditationName="AbstractionsAndPersistency.PriceList">
+      <Object oid="15" ReferentialIntegrityCount="1" Name="Retail Price List">
+        <Products>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.ProductPrice">14</oid>
+        </Products>
+      </Object>
+    </AbstractionsAndPersistency.PriceList>
+    <AbstractionsAndPersistency.Order ClassInstaditationName="AbstractionsAndPersistency.Order">
+      <Object oid="16" ReferentialIntegrityCount="2" Name="Loasas">
+        <OrderDetails>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.OrderDetail">17</oid>
+        </OrderDetails>
+        <Client>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.Client">18</oid>
+        </Client>
+      </Object>
+      <Object oid="22" ReferentialIntegrityCount="2" Name="Lora">
+        <OrderDetails>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.OrderDetail">23</oid>
+        </OrderDetails>
+        <Client>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.Client">24</oid>
+        </Client>
+      </Object>
+    </AbstractionsAndPersistency.Order>
+    <AbstractionsAndPersistency.OrderDetail ClassInstaditationName="AbstractionsAndPersistency.OrderDetail">
+      <Object oid="17" ReferentialIntegrityCount="1" Name="Sprite">
+        <Order>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.Order">16</oid>
+        </Order>
+        <Price>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.ProductPrice">14</oid>
+        </Price>
+      </Object>
+      <Object oid="23" ReferentialIntegrityCount="1" Name="coca cola">
+        <Order>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.Order">22</oid>
+        </Order>
+        <Price>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.SubProductPrice">20</oid>
+        </Price>
+      </Object>
+    </AbstractionsAndPersistency.OrderDetail>
+    <AbstractionsAndPersistency.Client ClassInstaditationName="AbstractionsAndPersistency.Client">
+      <Object oid="18" ReferentialIntegrityCount="0" Name="Liakos">
+        <Order>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.Order">16</oid>
+        </Order>
+      </Object>
+      <Object oid="24" ReferentialIntegrityCount="0" Name="coca cola">
+        <Order>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.Order">22</oid>
+        </Order>
+      </Object>
+    </AbstractionsAndPersistency.Client>
+    <AbstractionsAndPersistency.MaterialProduct ClassInstaditationName="AbstractionsAndPersistency.MaterialProduct">
+      <Object oid="19" ReferentialIntegrityCount="1" Name="coca cola" Vat="0,18" Amount="0">
+        <PriceLists>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.SubProductPrice">20</oid>
+        </PriceLists>
+      </Object>
+    </AbstractionsAndPersistency.MaterialProduct>
+    <AbstractionsAndPersistency.SubProductPrice ClassInstaditationName="AbstractionsAndPersistency.SubProductPrice">
+      <Object oid="20" ReferentialIntegrityCount="1" Name="coca cola new Name" name="coca cola name" RoleA="19" RoleAClassInstaditationName="AbstractionsAndPersistency.MaterialProduct" RoleB="21" RoleBClassInstaditationName="AbstractionsAndPersistency.SubPriceList">
+        <ItemPriceRoleBName>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.OrderDetail">23</oid>
+        </ItemPriceRoleBName>
+      </Object>
+    </AbstractionsAndPersistency.SubProductPrice>
+    <AbstractionsAndPersistency.SubPriceList ClassInstaditationName="AbstractionsAndPersistency.SubPriceList">
+      <Object oid="21" ReferentialIntegrityCount="1" Name="Trade Price List" ID="0">
+        <Products>
+          <oid ClassInstaditationName="AbstractionsAndPersistency.SubProductPrice">20</oid>
+        </Products>
+      </Object>
+    </AbstractionsAndPersistency.SubPriceList>
+  </ObjectCollections>
+</Abstractions>

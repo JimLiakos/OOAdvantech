@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stockSharedContentDefinitions fileAssetGuid="f2cc9539-6104-4979-82e2-3c6f3f5ac253" assetTypeId="MediaContent">
+  <item id="image002">
+    <image file="image002.jpg" />
+  </item>
+  <item id="image004">
+    <image file="image004.jpg" />
+  </item>
+  <item id="image006">
+    <image file="image006.jpg" />
+  </item>
+  <item id="image008">
+    <image file="image008.jpg" />
+  </item>
+  <item id="image010">
+    <image file="image010.jpg" />
+  </item>
+  <item id="image013">
+    <image file="image013.gif" />
+  </item>
+  <item id="image015">
+    <image file="image015.jpg" />
+  </item>
+  <item id="image003">
+    <image file="image003.gif" />
+  </item>
+  <item id="image001">
+    <image file="image001.gif">
+      <altText>*</altText>
+    </image>
+  </item>
+  <item id="image004">
+    <image file="image004.gif" />
+  </item>
+  <item id="image005">
+    <image file="image005.gif" />
+  </item>
+  <item id="image006">
+    <image file="image006.gif" />
+  </item>
+  <item id="image007">
+    <image file="image007.gif" />
+  </item>
+  <item id="image008">
+    <image file="image008.gif" />
+  </item>
+</stockSharedContentDefinitions>

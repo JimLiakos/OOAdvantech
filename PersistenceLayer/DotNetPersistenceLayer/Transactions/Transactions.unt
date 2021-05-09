@@ -1,0 +1,6 @@
+<Root>
+  <CodeModule Identity="69bacced-902d-4baf-9894-8f02b4f9d81d" Name="Transactions" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Transactions" VSnetProject="Transactions.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.0.0">
+    <Reference Name="Remoting" FileSystemPath="..\Remoting\Remoting.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Remoting" Version="1.0.0.0" />
+    <Reference Name="NativeTPMonitor" FileSystemPath="..\NativeTPMonitor\NativeTPMonitor.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/NativeTPMonitor" Version="1.0.0.0" />
+  </CodeModule>
+</Root>

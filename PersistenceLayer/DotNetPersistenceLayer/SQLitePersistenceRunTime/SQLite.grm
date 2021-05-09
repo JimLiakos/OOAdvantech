@@ -1,0 +1,180 @@
+! GOLD Parser Builder
+! Version 3.0.3
+!
+! You can automatically generate a basic grammar
+! by selecting 'New' from the File Menu.
+
+
+
+"Name" = 'T-SQL 2008 (strict subset)'
+       
+"Author" = 'Arsene von Wyss'
+       
+"About" = 'Parser for T-SQL.'
+    | 'This subset excludes ambiguous and deprecated SQL as well as some features not used by ModuleStore.'
+"Character Mapping" = 'Unicode'
+"Start Symbol" = <CreateTableStatement>
+
+{ID Head}      = {Letter} + [_]
+{ID Tail}      = {Alphanumeric} + [_]
+{String Chars} = {Printable} + {HT} - ["]
+{SingleQuated String Chars} = {Printable} + {HT} - ['']
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*
+
+{All}=[~!@#$%^&*()+|<>:?] 
+All={All}+
+SingleQuatedStringLiteral = '' {SingleQuated String Chars}* ''
+StringLiteral = '"' ( {String Chars} | '""' )* '"'
+
+NumericLiteral = [-]? {digit}+ [FRDSIL]?
+RealLiteral = [-]? {digit}* '.' {digit}+ ( 'E' [+-]? {Digit}+ )?
+
+
+!HexLiteral = 0x{Hex Ch}+
+
+
+<CreateTableStatement> ::= CREATE TABLE <TableNameQualified> <TableDefinitionGroup>
+
+
+
+
+<TableDefinitionGroup> ::= '(' <TableDefinitionList_REPEATER> ')'
+
+
+<TableDefinitionList_REPEATER> ::= <TableDefinition> ',' <TableDefinitionList_REPEATER>
+    | <TableDefinition>
+
+
+
+<TableDefinition> ::= <ColumnName_TERMINAL> <ColumnDefinition>
+    | <TableConstraint>
+
+
+<TableConstraint> ::= <PrimaryKey> 
+	|<ForeignKey>
+	| CONSTRAINT <ConstraintName_TERMINAL> UNIQUE <ConstraintCluster> '(' <IndexColumnList_REPEATER> ')' <ConstraintIndex>
+	| UNIQUE <ConstraintCluster> '(' <IndexColumnList_REPEATER> ')' <ConstraintIndex>
+     
+
+<PrimaryKey> ::=  PRIMARY KEY <ConstraintCluster> '(' <IndexColumns> ')' <ConstraintIndex>    
+		     |CONSTRAINT <ConstraintName_TERMINAL> PRIMARY KEY <ConstraintCluster> '(' <IndexColumns> ')' <ConstraintIndex>
+
+<IndexColumns> ::= <IndexColumnList_REPEATER> 
+<ForeignKey> ::=CONSTRAINT <ConstraintName_TERMINAL> FOREIGN KEY '(' <TableColumns> ')' REFERENCES <ReferenceTable_TERMINAL> <ReferenceTableColumns> <ForeignKeyActionList>
+		  |FOREIGN KEY '(' <TableColumns> ')' REFERENCES <ReferenceTable_TERMINAL> <ReferenceTableColumns> <ForeignKeyActionList>
+
+<ReferenceTable_TERMINAL> ::= <TableNameQualified> 
+
+<TableColumns> ::= <ColumnNameList_REPEATER> 
+
+<ReferenceTableColumns> ::= '(' <ColumnNameList_REPEATER> ')'
+    |
+
+
+<ColumnNameGroup> ::= '(' <ColumnNameList_REPEATER> ')'
+    |
+
+<ColumnNameList_REPEATER> ::= <ColumnName_TERMINAL> ',' <ColumnNameList_REPEATER>
+    | <ColumnName_TERMINAL>
+
+<IndexColumnList_REPEATER> ::= <IndexColumn> ',' <IndexColumnList_REPEATER>
+    | <IndexColumn>
+
+<IndexColumn> ::= <ColumnName_TERMINAL> <OrderType>
+
+<OrderType> ::= ASC
+    | DESC
+    |
+
+<ColumnDefinition> ::= <TypeNameQualified> <ColumnConstraintList_REPEATER>
+    !| AS <Expression> <ComputedColumnConstraintList>
+
+<ColumnConstraintList_REPEATER> ::= <ColumnConstraint> <ColumnConstraintList_REPEATER>
+    |
+
+<NamedColumnConstraint> ::= CONSTRAINT <ConstraintName_TERMINAL> PRIMARY KEY <ConstraintCluster> <ConstraintIndex>
+    | CONSTRAINT <ConstraintName_TERMINAL> UNIQUE <ConstraintCluster> <ConstraintIndex>
+    | CONSTRAINT <ConstraintName_TERMINAL> FOREIGN KEY REFERENCES <TableNameQualified> <OptionalForeignRefColumn> <ForeignKeyActionList>
+
+
+
+
+<ConstraintName_TERMINAL> ::= <ObjectName_TERMINAL>
+
+<OptionalForeignRefColumn> ::= '(' <ColumnName_TERMINAL> ')'
+    |
+
+<ForeignKeyActionList> ::= <ForeignKeyAction> <ForeignKeyActionList>
+    |
+
+<ForeignKeyAction> ::= ON DELETE NO ACTION
+    | ON DELETE CASCADE
+    | ON DELETE SET NULL
+    | ON DELETE SET DEFAULT
+    | ON UPDATE NO ACTION
+    | ON UPDATE CASCADE
+    | ON UPDATE SET NULL
+    | ON UPDATE SET DEFAULT
+
+<ConstraintIndex> ::= WITH FILLFACTOR '=' <IntegerLiteral>
+    | <IndexOptionGroup>
+
+<IndexOptionGroup> ::= WITH '(' <IndexOptionList> ')'
+    |
+
+<IndexOptionList> ::= <IndexOption> ',' <IndexOptionList>
+    | <IndexOption>
+<IndexOption> ::= Id '=' <IntegerLiteral>
+    | Identifier '=' <Toggle>
+
+<Toggle> ::= ON
+    | OFF
+
+<ConstraintCluster> ::= CLUSTERED
+    | NONCLUSTERED
+    |
+
+<ColumnConstraint> ::= <NamedColumnConstraint>
+    | COLLATE <CollationName>
+    | IDENTITY
+    | IDENTITY '(' IntegerLiteral ',' IntegerLiteral ')'
+    | ROWGUIDCOL
+    | NOT NULL
+    | NULL
+
+<CollationName> ::= Identifier
+
+<IntegerLiteral> ::= NumericLiteral
+    !| HexLiteral
+<SimpleTypeName_TERMINAL> ::= <ObjectName_TERMINAL>
+
+<TypeNameQualified> ::= <TypeName>
+    | <SchemaName> '.' <TypeName>
+
+
+<TypeName> ::= <SimpleTypeName_TERMINAL>
+		| Identifier '(' Identifier ')' ! e.g. VARCHAR(MAX)
+		| Identifier '(' <IntegerLiteral> ')' ! e.g. VARCHAR(20)
+		| Identifier '(' <IntegerLiteral>  ',' <IntegerLiteral>  ')' ! e.g. DECIMAL(10,5)
+
+    !| Id '(' Id ')' ! e.g. VARCHAR(MAX)
+    !| QuotedId '(' Id ')' ! e.g. VARCHAR(MAX)
+    !| Id '(' <IntegerLiteral> ')' ! e.g. VARCHAR(20)
+    !| QuotedId '(' <IntegerLiteral> ')' ! e.g. VARCHAR(20)
+    !| Id '(' <IntegerLiteral> ',' <IntegerLiteral> ')' ! e.g. DECIMAL(10,5)
+    !| QuotedId '(' <IntegerLiteral> ',' <IntegerLiteral> ')' ! e.g. DECIMAL(10,5)
+
+
+
+<ColumnName_TERMINAL> ::= <ObjectName_TERMINAL>
+
+<TableNameQualified> ::= <TableName_TERMINAL>
+    | <SchemaName> '.' <TableName_TERMINAL>
+
+<SchemaName> ::= <ObjectName_TERMINAL>
+
+<ObjectName_TERMINAL> ::= Identifier|'[' Identifier ']'    
+<TableName_TERMINAL> ::= <ObjectName_TERMINAL>

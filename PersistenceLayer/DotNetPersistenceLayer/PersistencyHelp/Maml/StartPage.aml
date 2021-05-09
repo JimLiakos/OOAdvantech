@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="46da6fa9-2656-45a4-9d83-7d69b124b16d" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>TODO: Move introduction text here</para>
+    </introduction>
+
+		
+			<table>
+				<row>
+					<entry>
+						<para>&#160;</para>
+						<para><!--[if gte vml 1]><v:shapetype 
+      id=_x0000_t75 coordsize = "21600,21600" o:preferrelative = "t" o:spt = 
+      "75" filled = "f" stroked = "f" path = 
+      " m@4@5 l@4@11@9@11@9@5 xe"><v:stroke joinstyle = 
+      "miter"></v:stroke><v:formulas><v:f eqn = 
+      "if lineDrawn pixelLineWidth 0 "></v:f><v:f eqn = "sum @0 1 0 "></v:f><v:f 
+      eqn = "sum 0 0 @1 "></v:f><v:f eqn = "prod @2 1 2 "></v:f><v:f eqn = 
+      "prod @3 21600 pixelWidth "></v:f><v:f eqn = 
+      "prod @3 21600 pixelHeight "></v:f><v:f eqn = "sum @0 0 1 "></v:f><v:f eqn 
+      = "prod @6 1 2 "></v:f><v:f eqn = "prod @7 21600 pixelWidth "></v:f><v:f 
+      eqn = "sum @8 21600 0 "></v:f><v:f eqn = 
+      "prod @7 21600 pixelHeight "></v:f><v:f eqn = 
+      "sum @10 21600 0 "></v:f></v:formulas><v:path o:extrusionok = "f" 
+      gradientshapeok = "t" o:connecttype = "rect"></v:path><o:lock 
+      aspectratio="t" v:ext="edit"></o:lock></v:shapetype><v:shape 
+      id=_x0000_i1025 style="WIDTH: 255pt; HEIGHT: 198.75pt" type = 
+      "#_x0000_t75" coordsize = "21600,21600"><v:imagedata o:title="image001" 
+      src = "StartPage_files/image003.gif"></v:imagedata></v:shape><![endif]--> 
+							<![if !vml]><mediaLink><image xlink:href="image003" /></mediaLink><![endif]></para>
+					</entry>
+					<entry>
+						<h3 style='mso-line-height-alt:1.5pt'>Welcome to the Visual Studio
+  .NET 2003 Release of the MSDN Library&#160; <o:p></o:p></h3>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<h5 style='MARGIN-LEFT:36pt;TEXT-INDENT:-18pt;mso-list:l0 level1 lfo2;tab-stops:18.3pt list 36.0pt'><![if 
+							!supportLists]><mediaLink><image xlink:href="image001" /></mediaLink>&#160;&#160;&#160;&#160;&#160;&#160; 
+								
+							<![endif]>MSDN Subscriptions <o:p></o:p></h5>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<h5 style='MARGIN-LEFT:36pt;TEXT-INDENT:-18pt;mso-list:l0 level1 lfo2;tab-stops:18.3pt list 36.0pt'><![if 
+							!supportLists]><mediaLink><image xlink:href="image001" /></mediaLink>&#160;&#160;&#160;&#160;&#160;&#160; 
+								
+							<![endif]>MSDN Online Resources <o:p></o:p></h5>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<h5 style='MARGIN-LEFT:36pt;TEXT-INDENT:-18pt;mso-list:l0 level1 lfo2;tab-stops:18.3pt list 36.0pt'><![if 
+							!supportLists]><mediaLink><image xlink:href="image001" /></mediaLink>&#160;&#160;&#160;&#160;&#160;&#160; 
+								
+							<![endif]>MSDN Library Viewer Help <o:p></o:p></h5>
+					</entry>
+				</row>
+			</table>
+			<para><o:p>&#160;</o:p>
+				</para>
+			<table>
+				<row>
+					<entry>
+						<para>&#160;</para>
+					</entry>
+					<entry>
+						<para><!--[if gte vml 1]><v:shape 
+      id=_x0000_i1026 style="WIDTH: 87.75pt; HEIGHT: 24pt" type = "#_x0000_t75" 
+      coordsize = "21600,21600"><v:imagedata o:title="image003" src = 
+      "StartPage_files/image004.gif"></v:imagedata></v:shape><![endif]--> 
+							<![if !vml]><mediaLink><image xlink:href="image004" /></mediaLink><![endif]><!--[if gte vml 1]><![endif]--> 
+							<![if !vml]><mediaLink><image xlink:href="image005" /></mediaLink><![endif]></para>
+					</entry>
+					<entry>
+						<para><ns0:link ns1:tabIndex="0" ns1:keywords="ctconwindowscenettestkit"><!--[if gte vml 1]><v:shape id=_x0000_i1027 
+      style="WIDTH: 87.75pt; HEIGHT: 24pt" type = "#_x0000_t75" coordsize = 
+      "21600,21600" alt = ""><v:imagedata src = "StartPage_files/image006.gif" 
+      o:href = 
+      "ms-help://MS.VSCC.2003/MS.MSDNQTR.2003FEB.1033/dnmsdn2/html/img_wince.gif"></v:imagedata></v:shape><![endif]--><![if !vml]><mediaLink><image xlink:href="image006" /></mediaLink><![endif]></ns0:link><!--[if gte vml 1]><![endif]--> 
+							<![if !vml]><mediaLink><image xlink:href="image005" /></mediaLink><![endif]></para>
+					</entry>
+					<entry>
+						<para><ns0:link ns1:tabIndex="0" ns1:keywords="mpintMPNET"><!--[if gte vml 1]><v:shape 
+      id=_x0000_i1028 style="WIDTH: 87.75pt; HEIGHT: 24pt" type = "#_x0000_t75" 
+      coordsize = "21600,21600" alt = ""><v:imagedata src = 
+      "StartPage_files/image007.gif" o:href = 
+      "ms-help://MS.VSCC.2003/MS.MSDNQTR.2003FEB.1033/dnmsdn2/html/img_mappointnet.gif"></v:imagedata></v:shape><![endif]--><![if !vml]><mediaLink><image xlink:href="image007" /></mediaLink><![endif]></ns0:link><!--[if gte vml 1]><![endif]--> 
+							<![if !vml]><mediaLink><image xlink:href="image005" /></mediaLink><![endif]></para>
+					</entry>
+					<entry>
+						<para><externalLink>
+  <linkText><!--[if gte vml 1]><v:shape id=_x0000_i1029        style="WIDTH: 87.75pt; HEIGHT: 24pt" type = "#_x0000_t75" coordsize =        "21600,21600" alt = "" href =        "ms-help://MS.VSCC.2003/../devref/DVS_Copyright_1270.htm" o:button =        "t"><v:imagedata src = "StartPage_files/image008.gif" o:href =        "ms-help://MS.VSCC.2003/MS.MSDNQTR.2003FEB.1033/dnmsdn2/html/img_visio.gif"></v:imagedata></v:shape><![endif]--><![if !vml]><mediaLink><image xlink:href="image008" /></mediaLink><![endif]></linkText>
+  <linkUri>ms-help://MS.VSCC.2003/MS.MSDNQTR.2003FEB.1033/dnmsdn2/html/img_visio.gif</linkUri>
+</externalLink><!--[if gte vml 1]><![endif]--> 
+							<![if !vml]><mediaLink><image xlink:href="image005" /></mediaLink><![endif]></para>
+					</entry>
+					<entry>
+						<para><para/>
+							&#160;</para>
+					</entry>
+					<entry>
+						<para><para/>
+							&#160;</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>&#160;</para>
+					</entry>
+					<entry>
+						<para>Extend the XML capabilities of SQL Server 2000 by
+  downloading SQLXML 3.0. SQLXML
+  3.0 introduces Web Services to SQL Server 2000, allowing Stored Procedures
+  and XML Templates to be exposed as a Web Service via SOAP. <o:p></o:p>
+							</para>
+					</entry>
+					<entry>
+						<para>&#160; <o:p></o:p></para>
+					</entry>
+					<entry>
+						<h3 style='mso-line-height-alt:1.5pt'>Test the porting of your drivers
+  to the Windows CE OS with the Windows CE .NET Test Kit (CETK).
+  The CETK improves on the DDTK
+  tool functionality by incorporating command-line tests into an easy-to-use
+  user interface. <o:p></o:p>
+							</h3>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+					<entry>
+						<para>&#160; <o:p></o:p></para>
+					</entry>
+					<entry>
+						<para>Download the latest documentation and sample code
+  for Microsoft MapPoint .NET, a hosted, programmable XML Web Service. Use this
+  technology to integrate location intelligence into your applications,
+  business processes, and Web sites. <o:p></o:p>
+							</para>
+					</entry>
+					<entry>
+						<para>Customize Microsoft Visio shapes with Developing
+  Microsoft Visio Solutions, a complete guide to creating solutions that solve
+  specific drawing problems. Get detailed information about using formulas to
+  design SmartShapes symbols that model real-world
+  objects and behavior.
+								<o:p></o:p>
+							</para>
+					</entry>
+					<entry>
+						<para>&#160; <o:p></o:p></para>
+					</entry>
+					<entry>
+						<para><o:p>&#160;</o:p>
+							</para>
+					</entry>
+				</row>
+			</table>
+			<para>&#160; <o:p></o:p></para>
+			<para>&#160;<o:p></o:p></para>
+			<para>&#160;<o:p></o:p></para>
+			<para>&#160;<o:p></o:p></para>
+			<para>&#160;<o:p></o:p></para>
+			<para>&#160;<o:p></o:p></para>
+			<para><o:p>&#160;</o:p>
+				</para>
+		
+	
+    <relatedTopics>
+    </relatedTopics>
+
+  </developerConceptualDocument>
+</topic>

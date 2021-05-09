@@ -1,0 +1,11 @@
+<Root>
+  <CodeModule Name="MetaDataLoadingSystem" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/MetaDataLoadingSystem" VSnetProject="MetaDataLoadingSystem.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.0.0" Identity="0d583db9-c5f8-4d12-93c5-1df39341e27d">
+    <Reference Name="PersistenceLayer" FileSystemPath="..\PersistenceLayer\PersistenceLayer.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistenceLayer" Version="1.0.0.0" />
+    <Reference Name="MetaDataRepository" FileSystemPath="..\MetaDataRepository\MetaDataRepository.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/MetaDataRepository" Version="1.0.0.0" />
+    <Reference Name="DotNetMetaDataRepository" FileSystemPath="..\DotNetMetaDataRepository\DotNetMetaDataRepository.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/DotNetMetaDataRepository" Version="1.0.0.0" />
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+    <Reference Name="PersistenceLayerRunTime" FileSystemPath="..\PersistenceLayerRunTime\PersistenceLayerRunTime.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistenceLayerRunTime" Version="1.0.0.0" />
+    <Reference Name="Remoting" FileSystemPath="..\Remoting\Remoting.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Remoting" Version="1.0.0.0" />
+    <Reference Name="Transactions" FileSystemPath="..\Transactions\Transactions.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Transactions" Version="1.0.0.0" />
+  </CodeModule>
+</Root>

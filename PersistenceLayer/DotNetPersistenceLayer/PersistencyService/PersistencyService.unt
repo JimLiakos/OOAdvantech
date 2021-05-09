@@ -1,0 +1,8 @@
+<Root>
+  <CodeModule Name="PersistencyService" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistencyService" VSnetProject="PersistencyService.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.0.0" Identity="df98a67c-59d5-4f33-a7e1-ee3ec349ea2e">
+    <Reference Name="Remoting" FileSystemPath="..\Remoting\Remoting.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Remoting" Version="1.0.0.0" />
+    <Reference Name="Transactions" FileSystemPath="..\Transactions\Transactions.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Transactions" Version="1.0.0.0" />
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+    <Reference Name="PersistenceLayer" FileSystemPath="..\PersistenceLayer\PersistenceLayer.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistenceLayer" Version="1.0.0.0" />
+  </CodeModule>
+</Root>

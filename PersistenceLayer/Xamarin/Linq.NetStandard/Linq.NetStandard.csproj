@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk" ProjectGUID="25e267ab-e123-4e06-baf3-52ac4db4b0d6">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>Linq</AssemblyName>
+    <RootNamespace>OOAdvantech.Linq</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\BridgeList.cs" Link="BridgeList.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\DataNodesRows.cs" Link="DataNodesRows.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\DataRetrieveNode.cs" Link="DataRetrieveNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\DynamicTypeProperty.cs" Link="DynamicTypeProperty.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ExpressionTreeNode.cs" Link="ExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\Grouping.cs" Link="Grouping.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\GroupingDataRetriever.cs" Link="GroupingDataRetriever.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ILINQObjectQuery.cs" Link="ILINQObjectQuery.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\IStorageProvider.cs" Link="IStorageProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\LINQStorageObjectQuery.cs" Link="LINQStorageObjectQuery.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ObjectCollection.cs" Link="ObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ObjectStorageQuery.cs" Link="ObjectStorageQuery.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ObjectValuesCollector.cs" Link="ObjectValuesCollector.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\AggregateFunctionExpressionTreeNode.cs" Link="QueryExpressions\AggregateFunctionExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\ArithmeticExpressionTreeNode.cs" Link="QueryExpressions\ArithmeticExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\BinaryExpressionTreeNode.cs" Link="QueryExpressions\BinaryExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\ConstantExpressionTreeNode.cs" Link="QueryExpressions\ConstantExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\ContainsAnyExpressionTreeNode.cs" Link="QueryExpressions\ContainsAnyExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\EnumerableContainsExpressionTreeNode.cs" Link="QueryExpressions\EnumerableContainsExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\FetchingExpressionTreeNode.cs" Link="QueryExpressions\FetchingExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\GroupByExpressionTreeNode.cs" Link="QueryExpressions\GroupByExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\GroupKeyExpressionTreeNode.cs" Link="QueryExpressions\GroupKeyExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\LikeExpressionTreeNode.cs" Link="QueryExpressions\LikeExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\MemberAccessExpressionTreeNode.cs" Link="QueryExpressions\MemberAccessExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\MethodCallAsCollectionSourceExpressionTreeNode.cs" Link="QueryExpressions\MethodCallAsCollectionSourceExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\NewExpressionTreeNode.cs" Link="QueryExpressions\NewExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\ObjectMethodCallExpressionTreeNode .cs" Link="QueryExpressions\ObjectMethodCallExpressionTreeNode .cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\OfTypeExpressionTreeNode.cs" Link="QueryExpressions\OfTypeExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\OrderByExpressionTreeNode.cs" Link="QueryExpressions\OrderByExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\ParameterExpressionTreeNode.cs" Link="QueryExpressions\ParameterExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\PartitionExpressionTreeNode.cs" Link="QueryExpressions\PartitionExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\RecursiveLoadExpressionTreeNode.cs" Link="QueryExpressions\RecursiveLoadExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\RefreshExpressionTreeNode.cs" Link="QueryExpressions\RefreshExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\SelectExpressionTreeNode.cs" Link="QueryExpressions\SelectExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\TypeAsExpressionTreeNode.cs" Link="QueryExpressions\TypeAsExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\QueryExpressions\WhereExpressionTreeNode.cs" Link="QueryExpressions\WhereExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\Storage.cs" Link="Storage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\StorageProvider.cs" Link="StorageProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\Translators\ExpressionVisitor.cs" Link="Translators\ExpressionVisitor.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\Translators\QueryTranslator.cs" Link="Translators\QueryTranslator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\Translators\RetrieveObjectMemberTranslator.cs" Link="Translators\RetrieveObjectMemberTranslator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\TypeHelper.cs" Link="TypeHelper.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ValuesRetrieveExpressions\ConstantExpressionTreeNode.cs" Link="ValuesRetrieveExpressions\ConstantExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ValuesRetrieveExpressions\MemberAccessExpressionTreeNode.cs" Link="ValuesRetrieveExpressions\MemberAccessExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ValuesRetrieveExpressions\NewExpressionTreeNode.cs" Link="ValuesRetrieveExpressions\NewExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ValuesRetrieveExpressions\ParameterExpressionTreeNode.cs" Link="ValuesRetrieveExpressions\ParameterExpressionTreeNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Linq\ValuesRetrieveExpressions\SelectExpressionTreeNode.cs" Link="ValuesRetrieveExpressions\SelectExpressionTreeNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="QueryExpressions\" />
+    <Folder Include="Translators\" />
+    <Folder Include="ValuesRetrieveExpressions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
+  </ItemGroup>
+</Project>

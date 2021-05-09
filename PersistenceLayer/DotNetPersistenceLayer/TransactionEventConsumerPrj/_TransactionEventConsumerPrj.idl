@@ -1,0 +1,43 @@
+import "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\include\prsht.idl";
+import "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\include\mshtml.idl";
+import "c:\program files\microsoft visual studio 8\vc\platformsdk\include\dimm.idl";
+import "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\include\mshtmhst.idl";
+import "c:\program files\microsoft visual studio 8\vc\platformsdk\include\docobj.idl";
+import "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\include\exdisp.idl";
+import "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\include\objsafe.idl";
+import "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\include\transact.idl";
+
+[
+	object,
+	uuid(C693EA9A-E5A0-4318-9C88-CC5E9F61677B),
+	dual,
+	helpstring("ITransactionEventConsumer Interface"),
+	pointer_default(unique)
+] 
+#line 15 "x:\\source\\openversions\\persistencelayer\\dotnetpersistencelayer\\transactioneventconsumerprj\\transactioneventconsumer.h"
+interface ITransactionEventConsumer : IDispatch {
+#line 17 "x:\\source\\openversions\\persistencelayer\\dotnetpersistencelayer\\transactioneventconsumerprj\\transactioneventconsumer.h"
+	[propget,id(1),helpstring("property ManagedObjectConsumer")] HRESULT  ManagedObjectConsumer([out,retval] IUnknown **pVal);
+	[propput,id(1),helpstring("property ManagedObjectConsumer")] HRESULT  ManagedObjectConsumer([in] IUnknown *newVal);
+	[propput,id(2),helpstring("property Transaction")] HRESULT  Transaction([in] IUnknown *newVal);
+};
+
+
+[ version(1.0), uuid(F2DAA1CB-62EF-4EAD-8B16-AA667D96C151), helpstring("TransactionEventConsumerPrj 1.0 Type Library") ]
+library TransactionEventConsumerPrj
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(F2263E18-DB20-4418-9A27-B761DD4E9690),
+		helpstring("TransactionEventConsumer Class")
+	] 
+#line 35 "x:\\source\\openversions\\persistencelayer\\dotnetpersistencelayer\\transactioneventconsumerprj\\transactioneventconsumer.h"
+	coclass CTransactionEventConsumer {
+		interface ITransactionEventConsumer;
+	};
+
+}
+

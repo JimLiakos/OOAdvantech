@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F19B4E7-9ECB-4897-A507-FE0C1638FADA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OraclePersistenceRunTime</RootNamespace>
+    <AssemblyName>OraclePersistenceRunTime</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OracleMetaDataPersistenceRunTime\EmbeddedStorageProvider.cs" />
+    <Compile Include="OracleMetaDataPersistenceRunTime\ObjectID.cs" />
+    <Compile Include="OracleMetaDataPersistenceRunTime\ObjectStorage.cs" />
+    <Compile Include="OracleMetaDataPersistenceRunTime\Storage.cs" />
+    <Compile Include="OracleMetaDataPersistenceRunTime\StorageProvider.cs" />
+    <Compile Include="OracleMetaDataPersistenceRunTime\TypeDictionary.cs" />
+    <Compile Include="OraclePersistenceRunTime\DataBase.cs" />
+    <Compile Include="OraclePersistenceRunTime\EmbeddedStorageProvider.cs" />
+    <None Include="OraclePersistenceRunTime\StorageInstanceRef.cs" />
+    <None Include="OraclePersistenceRunTime\ObjectQueryLanguage\DataLoader.cs" />
+    <None Include="OraclePersistenceRunTime\UUIDStoreprocedureBuilder.cs" />
+    <Compile Include="OraclePersistenceRunTime\ObjectStorage.cs" />
+    <Compile Include="OraclePersistenceRunTime\RDBMSSchema.cs" />
+    <None Include="OraclePersistenceRunTime\RelResolver.cs" />
+    <Compile Include="OraclePersistenceRunTime\StorageProvider.cs" />
+    <None Include="OraclePersistenceRunTime\StoreprocedureBuilder.cs" />
+    <None Include="StrongName.snk" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.csproj">
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Name>ModulePublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTime\PersistenceLayerRunTime.csproj">
+      <Project>{535EF442-4F9B-4B5B-B2E2-3939CFF13C58}</Project>
+      <Name>PersistenceLayerRunTime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataPersistenceRunTime\RDBMSMetaDataPersistenceRunTime.csproj">
+      <Project>{F2E7B104-78EF-4947-AB53-02356F588AB1}</Project>
+      <Name>RDBMSMetaDataPersistenceRunTime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataRepository\RDBMSMetaDataRepository.csproj">
+      <Project>{332C008B-4EEB-422B-A694-04C915F6769D}</Project>
+      <Name>RDBMSMetaDataRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSPersistenceRunTime\RDBMSPersistenceRunTime.csproj">
+      <Project>{1ECBFE6E-069F-4561-9F5E-78BBFAD71A4E}</Project>
+      <Name>RDBMSPersistenceRunTime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

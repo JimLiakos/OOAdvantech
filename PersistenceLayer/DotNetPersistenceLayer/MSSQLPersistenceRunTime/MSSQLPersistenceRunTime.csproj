@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8BAEC54B-D984-41A3-ABF8-112223260DFA}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>MSSQLPersistenceRunTime</AssemblyName>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MSSQLPersistenceRunTime</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.ServiceProcess">
+      <Name>System.ServiceProcess</Name>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.csproj">
+      <Name>ModulePublisher</Name>
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\MSSQLFastPersistenceRunTime\MSSQLFastPersistenceRunTime.csproj">
+      <Project>{C1BFFFDD-098E-40CA-B45D-127829D18B9C}</Project>
+      <Name>MSSQLFastPersistenceRunTime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech.csproj">
+      <Name>OOAdvantech</Name>
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTimeFacade\PersistenceLayerRunTimeFacade.csproj">
+      <Project>{F3823B06-8FB8-4B69-828F-18D2BE232DF8}</Project>
+      <Name>PersistenceLayerRunTimeFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTime\PersistenceLayerRunTime.csproj">
+      <Name>PersistenceLayerRunTime</Name>
+      <Project>{535EF442-4F9B-4B5B-B2E2-3939CFF13C58}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataPersistenceRunTime\RDBMSMetaDataPersistenceRunTime.csproj">
+      <Project>{F2E7B104-78EF-4947-AB53-02356F588AB1}</Project>
+      <Name>RDBMSMetaDataPersistenceRunTime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataRepository\RDBMSMetaDataRepository.csproj">
+      <Name>RDBMSMetaDataRepository</Name>
+      <Project>{332C008B-4EEB-422B-A694-04C915F6769D}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSPersistenceRunTime\RDBMSPersistenceRunTime.csproj">
+      <Project>{1ECBFE6E-069F-4561-9F5E-78BBFAD71A4E}</Project>
+      <Name>RDBMSPersistenceRunTime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataBase.cs" />
+    <None Include="Commands\InterSorageLinkCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\InterSorageLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\InterSorageUnLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\MSQLLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\MSSQLDeleteStorageInstanceCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\MSSQLNewStorageInstanceCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="EmbeddedStorageProvider.cs" />
+    <Compile Include="MSSQLRDBMSSchema.cs" />
+    <None Include="MSSQLRelResolver.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="MSSQLStorageInstanceRef.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="MSSQLStorageSession.cs">
+    </Compile>
+    <None Include="Commands\MSSQLUnlinkAllObjectCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\MSSQLUnLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\MSSQLUpdateReferentialIntegrity.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="ObjectQueryLanguage\DataLoader.cs" />
+    <None Include="Commands\OutStorageUnlinkAllObjectCmd.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\SplitClassActiveStorageCell.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="StorageProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="StoreprocedureBuilder.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\UnlinkAllObjectOfStorageCellLinkCmd.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\UpdateGlobalObjectCollectionIDs.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Commands\UpdateStorageInstanceCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="StrongName.snk" />
+    <None Include="UUIDStoreprocedureBuilder.cs">
+      <SubType>Code</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

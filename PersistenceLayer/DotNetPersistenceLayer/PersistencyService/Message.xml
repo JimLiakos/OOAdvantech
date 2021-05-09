@@ -1,0 +1,30 @@
+<Orders>
+  <PDAProperties>
+    <PDAName PDAName="Pda1" />
+    <OrderCode OrderCode="" />
+  </PDAProperties>
+  <Order>
+    <TableNumber TableNumber="6" />
+    <PrintReceipt PrintReceipt="1" />
+    <PrintOrder PrintOrder="1" />
+    <ChargeOrder ChargeOrder="1" />
+    <PriceList PriceList="PriceList" />
+    <Product OID="3">
+      <name name="Νέο είδος" />
+      <itemID itemID="0" />
+      <Quantity Quantity="1" />
+      <Product OID="24" IngrOrder="1">
+        <name name="-Συστατικό" />
+        <QuantityCode QuantityCode="1" />
+        <InReceipt InReceipt="0" />
+        <IngredPrice IngredPrice="1,7161157760068E-317" />
+      </Product>
+      <Product OID="27" IngrOrder="2">
+        <name name="Νέο Συστατικό" />
+        <QuantityCode QuantityCode="1" />
+        <InReceipt InReceipt="0" />
+        <IngredPrice IngredPrice="0" />
+      </Product>
+    </Product>
+  </Order>
+</Orders>

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>MetaDataLoadingSystem</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\DataLoader.cs" Link="DataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataDeleteStorageInstanceCommand.cs" Link="MetaDataDeleteStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataLinkObjectsCommand.cs" Link="MetaDataLinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataNewStorageInstanceCommand.cs" Link="MetaDataNewStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataRelResolver.cs" Link="MetaDataRelResolver.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataStorageInstanceRef.cs" Link="MetaDataStorageInstanceRef.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataStorageProvider.cs" Link="MetaDataStorageProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataStorageSession.cs" Link="MetaDataStorageSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataUnlinkAllObjectCommand.cs" Link="MetaDataUnlinkAllObjectCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataUnLinkObjectsCommand.cs" Link="MetaDataUnLinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataUpdateReferentialIntegrity.cs" Link="MetaDataUpdateReferentialIntegrity.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataUpdateStorageInstanceCommand.cs" Link="MetaDataUpdateStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\ObjectID.cs" Link="ObjectID.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\Storage.cs" Link="Storage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\StorageCell.cs" Link="StorageCell.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\StorageCellReference.cs" Link="StorageCellReference.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\UpdateLinkIndexCommand.cs" Link="UpdateLinkIndexCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\UpdateStorageMetadataCommand.cs" Link="UpdateStorageMetadataCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
+    <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj" />
+  </ItemGroup>
+  
+</Project>

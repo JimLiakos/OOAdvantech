@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>SQLitePersistenceRunTime</AssemblyName>
+    <RootNamespace>OOAdvantech.SQLitePersistenceRunTime</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\DataBase.cs" Link="DataBase.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\ObjectStorage.cs" Link="ObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteMetaDataPersistenceRunTime\ObjectStorage.cs" Link="SQLiteMetaDataPersistenceRunTime\ObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteMetaDataPersistenceRunTime\Storage.cs" Link="SQLiteMetaDataPersistenceRunTime\Storage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteMetaDataPersistenceRunTime\StorageProvider.cs" Link="SQLiteMetaDataPersistenceRunTime\StorageProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteMetaDataPersistenceRunTime\TypeDictionary.cs" Link="SQLiteMetaDataPersistenceRunTime\TypeDictionary.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteRDBMSSchema.cs" Link="SQLiteRDBMSSchema.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\StorageInstanceRef.cs" Link="StorageInstanceRef.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\StorageProvider.cs" Link="StorageProvider.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLite.cgt" Link="SQLite.cgt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SQLiteMetaDataPersistenceRunTime\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLite.cs" Link="SQLite.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteDataBaseConnection.cs" Link="SQLiteDataBaseConnection.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
+    <ProjectReference Include="..\Parser.NetStandard\Parser.NetStandard.csproj" />
+    <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj" />
+    <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj" />
+    <ProjectReference Include="..\RDBMSPersistenceRunTime.NetStandard\RDBMSPersistenceRunTime.NetStandard.csproj" />
+  </ItemGroup>
+  
+</Project>

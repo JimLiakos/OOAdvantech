@@ -1,0 +1,273 @@
+"Name"     = 'Enter the name of the grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+"Case Sensitive" = False
+"Start Symbol" = <Start>
+
+! ------------------------------------------------- Sets
+
+{ID Head}      = {Letter} +{Greek}+[_]
+{ID Tail}      = {Alphanumeric} +{Greek}+ [_]
+{allChars} ={Printable}+{Greek} 
+
+{String Chars} = {allChars}+ {HT} - ["]
+{SingleQuated String Chars} = {allChars}+ {HT} - ['']
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*|'[' {ID Head}{ID Tail}* ']'
+
+{All}=[~!#$%^&*+|<>:?] 
+All={All}+
+SingleQuatedStringLiteral = '' {SingleQuated String Chars}* ''
+StringLiteral = '"' ( {String Chars} | '""' )* '"'
+
+NumericLiteral = [-]? {digit}+ [FRDSIL]?
+RealLiteral = [-]? {digit}* '.' {digit}+ ( 'E' [+-]? {Digit}+ )?
+TrueLiteral = 'true'
+FalseLiteral = 'false'
+
+
+
+ 
+
+! ------------------------------------------------- Rules
+
+<Start> ::= <OQLStatament>
+ !Search_Condition>
+! <OQLStatament>
+
+
+<Date_Literal>::= <Date_Literal_WL_TERMINAL> <Locale_TERMINAL>|<Date_Literal_WL_TERMINAL>  
+<Locale_TERMINAL>::='LCID' '(' NumericLiteral ')'
+
+
+<Parameter_TERMINAL>::='@'Identifier
+
+
+<Date_Literal_WL_TERMINAL>::=  NumericLiteral '/' NumericLiteral '/' NumericLiteral NumericLiteral ':' NumericLiteral ':' NumericLiteral			
+				|NumericLiteral '/' NumericLiteral '/' NumericLiteral NumericLiteral ':' NumericLiteral ':' NumericLiteral 	Identifier		
+				|NumericLiteral '/' NumericLiteral '/' NumericLiteral NumericLiteral ':' NumericLiteral 
+				|NumericLiteral '/' NumericLiteral '/' NumericLiteral NumericLiteral ':' NumericLiteral 	Identifier		
+				|NumericLiteral '/' NumericLiteral '/' NumericLiteral
+
+<Literal>::=<StringLiteral_TERMINAL>|<SingleQuatedStringLiteral_TERMINAL>|<NumericLiteral_TERMINAL>|<RealLiteral_TERMINAL>|<Date_Literal>|<BooleanLiteral_TERMINAL>|<NULL_TERMINAL>
+
+<NULL_TERMINAL>::='NULL'
+
+
+<StringLiteral_TERMINAL>::=StringLiteral
+
+!<StringLiteral_SHOWTERMINALS>::=StringLiteral
+
+<SingleQuatedStringLiteral_TERMINAL>::=SingleQuatedStringLiteral
+!<SingleQuatedStringLiteral_SHOWTERMINALS>::=SingleQuatedStringLiteral
+
+<NumericLiteral_TERMINAL>::=NumericLiteral
+!<NumericLiteral_SHOWTERMINALS>::=NumericLiteral 
+
+<BooleanLiteral_TERMINAL>::=TrueLiteral | FalseLiteral 
+!<BooleanLiteral_SHOWTERMINALS>::=TrueLiteral | FalseLiteral 
+
+
+
+
+<RealLiteral_TERMINAL>::=RealLiteral 
+!<RealLiteral_SHOWTERMINALS>::=RealLiteral 
+
+
+
+<Keyword_TERMINAL>::='ObjectID'
+
+<Name_TERMINAL>::=Identifier |'[' Identifier ']'
+<Name_TERMINAL>::=<Keyword_TERMINAL>
+<All>::= All 
+<Name_ERROR_TERMINAL>::=<All> Identifier|Identifier <All>| Identifier <All> Identifier|<All>
+
+
+!<Ident_SHOWTERMINALS>::=Identifier 
+<OQLStatament>::=<Select_Expression>
+
+<Select_Expression>::=<Select_Clause> <From_Clause>
+			|<Select_Clause> <From_Clause> <Critiria_Expression>
+			|<Select_Clause> <From_Clause> <order_group_exp> 
+			|<Select_Clause> <From_Clause>  <Critiria_Expression> <order_group_exp> 
+
+<order_group_exp>::=<order_by_exp> |<group_by_exp> |<group_by_exp> <order_by_exp>|<order_by_exp> <group_by_exp>
+
+
+
+
+
+	
+
+
+	
+
+<Select_Clause>::='SELECT' <Select_List>  |'SELECT' <Select_List_ERROR>
+<Select_List>::=<Select_List_REPEATER> 
+<Select_List_REPEATER>::=<Select_Item> ',' <Select_List_REPEATER>|<Select_Item>
+<Select_List_ERROR>::=<Select_List_ERROR_REPEATER>
+<Select_List_ERROR_REPEATER>::=	<Select_List_REPEATER> <Select_List_REPEATER>
+					|<Select_List_ERROR_REPEATER> <Select_List_REPEATER>
+					|<Select_List_ERROR_REPEATER> '.' <Select_List_REPEATER>
+					|<Select_List_REPEATER> NonIdentifierChars <Select_List_REPEATER>
+
+
+
+
+
+<Select_Item>::= <Path>|<PathAlias>|<Function_Ref>
+
+!<Count>::='count' '(' <PathMember> ')'|'count' '('')' 
+
+!<Count>::='count' '(' <CountedPath> ')'|'count' '(' <CountedPath> <Critiria_Expression> ')'|'count' '('')' 
+<CountedPath>::=<Path>| <PathAlias>
+
+
+<Path>::=<ClassOrAlias> '.' <PathMember>
+	  |<ClassOrAlias> '.' <RecursivePathMember>
+	  |<ClassOrAlias> '.' <Function_Ref>
+	  |<ClassOrAlias> 
+	
+
+<PathMember>::=<Name_ERROR_TERMINAL> '.' <PathMember>
+		|<Name_ERROR_TERMINAL> 
+		|<Name_TERMINAL> '.' <PathMember>
+		|<Name_TERMINAL> '.' <RecursivePathMember>
+		|<Name_TERMINAL> '.' <Function_Ref>
+|<Name_TERMINAL>
+		
+
+
+		
+<RecursivePathMember>::=<RecursiveSpecs>
+			|<RecursiveSpecs>'.' <PathMember>
+
+<RecursiveSpecs>::='Recursive' '(' <Name_TERMINAL> ',' <NumericLiteral_TERMINAL> ')'
+			|'Recursive' '(' <Name_TERMINAL>')'
+
+
+
+<ClassOrAlias>::=<Name_TERMINAL>|<Name_ERROR_TERMINAL> 
+
+
+
+<PathAlias>::= <Path> <Name_ERROR_TERMINAL> 
+		|<Path> <Name_TERMINAL>
+	!	|'(' <OQLStatament> ')' <Name_TERMINAL>
+
+
+
+<TimePeriodPathAlias> ::=<PathAlias> <Time_Period>
+
+<From_Clause>::='FROM' <Objectcollection_Source_List>
+!|'FROM' <Objectcollection_Source_List_ERROR>
+
+ 
+
+<Objectcollection_Source_List>::=<Objectcollection_Source_List_REPEATER>
+<Objectcollection_Source_List_REPEATER>::=<Objectcollection_Source> ',' <Objectcollection_Source_List_REPEATER>|<Objectcollection_Source>
+
+<Objectcollection_Source_List_ERROR>::=<Objectcollection_Source_List_ERROR_REPEATER>
+<Objectcollection_Source_List_ERROR_REPEATER>::= <Objectcollection_Source_List_REPEATER> <Objectcollection_Source_List_REPEATER>
+					|<Objectcollection_Source_List_ERROR_REPEATER> <Objectcollection_Source_List_REPEATER>
+					|<Objectcollection_Source_List_ERROR_REPEATER> '.' <Objectcollection_Source_List_REPEATER>
+					|<Objectcollection_Source_List_REPEATER> NonIdentifierChars <Objectcollection_Source_List_REPEATER>
+
+
+ 
+
+<Objectcollection_Source>::=<Path>|<PathAlias>|<TimePeriodPathAlias>
+
+<Time_Period>::= 'TIMEPERIOD'  '('  <Date_Literal> '-' <Date_Literal> ')'
+
+
+<Critiria_Expression>::='WHERE' <Search_Condition>
+
+
+<Search_Condition>::=<Search_Condition_REPEATER>
+<Search_Condition_REPEATER> ::=<Search_Term> 'OR' <Search_Condition_REPEATER>|  <Search_Term>
+
+<Search_Term>::=<Search_Term_REPEATER>
+<Search_Term_REPEATER>::=<Search_Factor> 'AND' <Search_Term_REPEATER>|<Search_Factor>
+
+<Wildcard> ::= '*'
+
+!<Scalar_Expression>::=<Scalar_Expression_REPEATER>
+!<Scalar_Expression_REPEATER> ::=<Scalar_Term> <Scalar_Term_Op> <Scalar_Expression_REPEATER>|  <Scalar_Term>
+!<Scalar_Expression> ::=<Addition>| <Subtration>|<Scalar_Term>
+<Scalar_Expression> ::=<Addition>|<Subtration>|<Multiplicity>|<Divition>
+
+<Multiplicity>::=<Scalar_Factor> '*' <Scalar_Factor>
+<Divition>::=<Scalar_Factor> '/' <Scalar_Factor>
+<Addition>::=<Scalar_Term> '+' <Scalar_Term>
+<Subtration>::=<Scalar_Term> '-' <Scalar_Term>
+
+
+
+<Scalar_Term>::=<Scalar_Expression>|<Scalar_Factor>
+
+
+ 
+
+!<Scalar_Term>::=<Scalar_Term_REPEATER>
+!<Scalar_Term_REPEATER>::=<Scalar_Factor> <Scalar_Factor_Op> <Scalar_Term_REPEATER>|<Scalar_Factor>
+!<Scalar_Term>::=<Scalar_Factor> <Scalar_Factor_Op> <Scalar_Factor>|<Scalar_Factor>
+
+
+<Scalar_Factor>::= <Scalar_Item> |'(' <Scalar_Expression> ')'
+
+<Scalar_Item>::=<Path> |<Literal>|<Parameter_TERMINAL>| <Wildcard>
+
+<Function_Ref> ::=<OQL_Function_Name> '(' <Scalar_Expression> ')'|<OQL_Function_Name> '(' <Path> ')'
+!<OQL_Function_Name> '(' <PathMember> ')' 
+<OQL_Function_Name> ::=<AVG> |<MIN> |<MAX> |<SUM>|<COUNT> 
+
+
+<AVG> ::='AVG'
+<MIN> ::= 'MIN'
+<MAX> ::='MAX'
+<SUM> ::= 'SUM'
+<COUNT> ::='COUNT'
+<Scalar_Factor_Op> ::= '*' | '\'
+<Scalar_Term_Op> ::='-'| '+' 
+
+
+
+<order_by_exp>  ::= ORDER BY <order_by_expression_REPEATER>   
+                  
+
+<order_by_expression_REPEATER>    ::= <Path> <ascending_or_descending> ',' <order_by_expression_REPEATER>
+	                  | <Path> <ascending_or_descending>
+
+
+<ascending_or_descending>    ::= ASC
+                  | DESC
+                  |
+
+<group_by_exp>  ::=  GROUP BY <group_by_expression_REPEATER>   
+<group_by_expression_REPEATER>    ::= <Path> ',' <group_by_expression_REPEATER>| <Path>
+
+
+
+<Search_Factor>::= <Criterion>|'(' <Search_Condition> ')'
+<Criterion>::=  <Comparison_Item> <Comparison_Operator> <Comparison_Item>|<Comparison_Item> <Like_Operator> <Comparison_Item>
+
+<Comparison_Operator>::= '=' | '>' | '<' | '>=' | '<=' | '<>'
+<Like_Operator>::='LIKE'
+
+<Comparison_Operator_ERROR>::=<Name_ERROR_TERMINAL>|Identifier|<Name_ERROR_TERMINAL> <Comparison_Operator> <Name_ERROR_TERMINAL>|<Name_ERROR_TERMINAL> <Comparison_Operator>
+
+<Comparison_Item>::=<ObjectID>|<Path>|<Literal>|<Parameter_TERMINAL>
+
+<ObjectID>::= 'ObjectID' '(' <ObjectIDFieldList> ')'|'ObjectID' '(' <Literal> ')'
+<ObjectIDFieldList>::=<ObjectIDFieldList_REPEATER>
+<ObjectIDFieldList_REPEATER>::= <ObjectIDField> ',' <ObjectIDFieldList_REPEATER>|<ObjectIDField>
+<ObjectIDField>::=<Name_TERMINAL><ObjectIDFieldType> '=' <Literal>
+<ObjectIDFieldType>::='('<Path>')'
+!<ObjectIDField>::=<Name_TERMINAL> '=' <Literal>
+
+
+

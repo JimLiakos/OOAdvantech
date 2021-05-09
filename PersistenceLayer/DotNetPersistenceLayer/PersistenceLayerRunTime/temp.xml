@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PersistenceLayerRunTime</name>
+    </assembly>
+    <members>
+        <member name="M:PersistenceLayerRunTime.PersistencyContext.GetCallContexrTransaction">
+            <ModelID>{3351F817-D91F-4854-AADC-DC38BA65D8F8}</ModelID>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PersistencySetup", "PersistencySetup.vdproj", "{779AB752-7DDF-4C7E-97A0-B27AB0F1C53F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PersistencyMergeModule", "..\PersistencyMergeModule\PersistencyMergeModule.vdproj", "{87CDB9F1-A619-4570-8496-A6C17216C7B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistencyInstaller", "PersistencyInstaller\PersistencyInstaller.csproj", "{2B78996F-A90E-4D5B-B04E-731DC353108D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{779AB752-7DDF-4C7E-97A0-B27AB0F1C53F}.Debug|Any CPU.ActiveCfg = Debug
+		{779AB752-7DDF-4C7E-97A0-B27AB0F1C53F}.Debug|Any CPU.Build.0 = Debug
+		{779AB752-7DDF-4C7E-97A0-B27AB0F1C53F}.Release|Any CPU.ActiveCfg = Release
+		{779AB752-7DDF-4C7E-97A0-B27AB0F1C53F}.Release|Any CPU.Build.0 = Release
+		{87CDB9F1-A619-4570-8496-A6C17216C7B8}.Debug|Any CPU.ActiveCfg = Debug
+		{87CDB9F1-A619-4570-8496-A6C17216C7B8}.Debug|Any CPU.Build.0 = Debug
+		{87CDB9F1-A619-4570-8496-A6C17216C7B8}.Release|Any CPU.ActiveCfg = Release
+		{87CDB9F1-A619-4570-8496-A6C17216C7B8}.Release|Any CPU.Build.0 = Release
+		{2B78996F-A90E-4D5B-B04E-731DC353108D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B78996F-A90E-4D5B-B04E-731DC353108D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B78996F-A90E-4D5B-B04E-731DC353108D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B78996F-A90E-4D5B-B04E-731DC353108D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

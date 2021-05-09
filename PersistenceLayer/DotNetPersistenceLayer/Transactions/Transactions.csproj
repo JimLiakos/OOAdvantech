@@ -1,0 +1,187 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{75E29119-71F9-49EB-8E5E-EB072CE1B13D}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Transactions</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Transactions</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;DISTRIBUTED_TRANSACTIONS</DefineConstants>
+    <DocumentationFile>Transactions.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>Transactions.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting">
+      <Name>System.Runtime.Remoting</Name>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\Remoting\Remoting.csproj">
+      <Name>Remoting</Name>
+      <Project>{C4F6459C-4114-4A4F-8595-22B3A01C25CA}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CommittableTransaction.cs" />
+    <Compile Include="Exception.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionProperties.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITransactioContextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITransactionContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITransactionContextExtender.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITransactionEnlistment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LogicalThread.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LogicalThreadLock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NestedTransactionController.cs" />
+    <Compile Include="ServerLockControlSession.cs" />
+    <Compile Include="TransactionInterop.cs" />
+    <Compile Include="ObjectStateSnapshot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ObjectStateTransition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SystemStateTransition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Transaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionalObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionClientSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionClientSinkProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionedResourceManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionEnlistment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EnlistmentsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionManagment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionManagmentRunTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionRunTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionServerSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionServerSinkProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionSharedAttribute.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

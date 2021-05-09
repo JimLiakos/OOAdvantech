@@ -1,0 +1,2 @@
+select serm,count(table1.ger where table1.ger =12)
+from table1

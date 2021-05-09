@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+      <AssemblyName>PersistenceLayerRunTime</AssemblyName>
+      <RootNamespace>OOAdvantech.PersistenceLayerRunTime</RootNamespace>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTimeFacade\IObjectStorage.cs" Link="IObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTimeFacade\TransactionCommand.cs" Link="TransactionCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\AccountNumber.cs" Link="AccountNumber.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\AssociationEndAgent.cs" Link="AssociationEndAgent.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\BuildContainedObjectIndicies.cs" Link="BuildContainedObjectIndicies.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ClientStorageSession.cs" Link="ClientStorageSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\DataLoader.cs" Link="DataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\DeleteStorageInstanceCommand.cs" Link="DeleteStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\Exception.cs" Link="Exception.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\LinkCommand.cs" Link="LinkCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\LinkObjectsCommand.cs" Link="LinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\NewStorageInstanceCommand.cs" Link="NewStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ObjectsLink.cs" Link="ObjectsLink.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ObjectValuesCollectorService.cs" Link="ObjectValuesCollectorService.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\OnMemoryObjectCollection.cs" Link="OnMemoryObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\OnMemoryUnlinkAllObjectCommand.cs" Link="OnMemoryUnlinkAllObjectCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\PersClassObjects.cs" Link="PersClassObjects.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\PersClassObjectsCollection.cs" Link="PersClassObjectsCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\PersistenceLayerTransactionContext.cs" Link="PersistenceLayerTransactionContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\PersistenceRuntimeFactory.cs" Link="PersistenceRuntimeFactory.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\PersistencyService.cs" Link="PersistencyService.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\PRTObjectCollectionFactory.cs" Link="PRTObjectCollectionFactory.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\RelResolver.cs" Link="RelResolver.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageInstanceAgent.cs" Link="StorageInstanceAgent.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageInstanceRef.cs" Link="StorageInstanceRef.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageInstanceValuePathRef.cs" Link="StorageInstanceValuePathRef.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageProvider.cs" Link="StorageProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageServer.cs" Link="StorageServer.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageServerInstanceLocator.cs" Link="StorageServerInstanceLocator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\StorageSession.cs" Link="StorageSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\TransactionContextProvider.cs" Link="TransactionContextProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UnlinkAllObjectLinksCommand.cs" Link="UnlinkAllObjectLinksCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UnLinkObjectsCommand.cs" Link="UnLinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UpdateLinkIndexCommand.cs" Link="UpdateLinkIndexCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UpdateReferentialIntegrity.cs" Link="UpdateReferentialIntegrity.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UpdateStorageInstanceCommand.cs" Link="UpdateStorageInstanceCommand.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ClientMember.cs" Link="ClientMember.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ClientMemberList.cs" Link="ClientMemberList.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ClientStructureSet.cs" Link="ClientStructureSet.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\DataSetSurrogate.cs" Link="DataSetSurrogate.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\InterSorageLinkObjectsCommand.cs" Link="InterSorageLinkObjectsCommand.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\InterSorageUnLinkObjectsCommand.cs" Link="InterSorageUnLinkObjectsCommand.cs" />
+    <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\MemberCollectionAgent.cs" Link="MemberCollectionAgent.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
+    <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
+  </ItemGroup>
+  
+</Project>

@@ -1,0 +1,35 @@
+"Name"     = 'Enter the name of the grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+
+"Start Symbol" = <Program>
+
+! ------------------------------------------------- Sets
+
+{ID Head}      = {Letter} + [_]
+{ID Tail}      = {Alphanumeric} + [_]
+{String Chars} = {Printable} + {HT} - ['']
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*
+StringLiteral = '' {String Chars}* ''
+
+! ------------------------------------------------- Rules
+
+<Program> ::= <Generic_spec>
+
+<Generic_spec>::=<Generic_type>|<Generic_type> 'where' <parameter> ':' <Constraint> 
+<Generic_type>::=<Namespace_REPEATER> '<' <Generic_parameters> '>' 
+<Generic_parameters>::= <Generic_parameters_REPEATER>
+<Generic_parameters_REPEATER>::=<Generic_parameter> ',' <Generic_parameters_REPEATER>|<Generic_parameter>
+
+<Namespace_REPEATER>::=Identifier '.' <Namespace_REPEATER>|Identifier 
+
+
+<Generic_parameter>::=<type_spec>
+<type_spec>::= <Generic_spec>|<Namespace_REPEATER>
+
+<parameter>::=Identifier    
+<Constraint>::=<type_spec>

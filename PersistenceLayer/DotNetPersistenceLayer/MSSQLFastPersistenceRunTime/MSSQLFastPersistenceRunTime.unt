@@ -1,0 +1,10 @@
+<Root>
+  <CodeModule Name="MSSQLFastPersistenceRunTime" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/MSSQLFastPersistenceRunTime" VSnetProject="MSSQLFastPersistenceRunTime.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0" Identity="dfaa0fef-81a7-4757-9099-0ca4aa18ca3f">
+    <Reference Name="PersistenceLayerRunTime" FileSystemPath="..\PersistenceLayerRunTime\PersistenceLayerRunTime.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistenceLayerRunTime" Version="1.0.1.0" />
+    <Reference Name="DotNetMetaDataRepository" FileSystemPath="..\DotNetMetaDataRepository\DotNetMetaDataRepository.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/DotNetMetaDataRepository" Version="1.0.1.0" />
+    <Reference Name="BinaryFormatter" FileSystemPath="..\BinaryFormatter\BinaryFormatter.unt" SourceControlPath="" Version="" />
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+    <Reference Name="Parser" FileSystemPath="..\Parser\Parser.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Parser" Version="1.0.1.0" />
+    <Reference Name="OOAdvantech" FileSystemPath="..\OOAdvantech\OOAdvantech.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/OOAdvantech" Version="1.0.1.0" />
+  </CodeModule>
+</Root>

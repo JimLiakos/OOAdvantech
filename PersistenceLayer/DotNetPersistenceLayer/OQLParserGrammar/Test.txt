@@ -1,0 +1,2 @@
+select serma,sum(net*(nat-(par*ser-tra)))
+from lara

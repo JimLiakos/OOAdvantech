@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6ebd7384-0f6f-4ad8-958e-1f9e1f3a3b47" revisionNumber="0">
+  <developerWhitePaperDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>Optional abstract</para>
+    </summary>
+    
+    <byline>
+      <para>Required author's information</para>
+    </byline>
+    
+    <date>
+      <para>Rqeuired date</para>
+    </date>
+    
+    <summarySection>
+      <content>
+        <para>Required summary</para>
+      </content>
+    </summarySection>
+
+    <downloadCenterLink>
+      <content>
+        <para>Optional links to downloads</para>
+      </content>
+    </downloadCenterLink>
+
+    <appliesTo>
+      <content>
+        <para>Optional information on the purpose of this whitepaper</para>
+      </content>
+    </appliesTo>
+
+    <contents>
+      <content>
+        <para>Optional information on the contents of this whitepaper</para>
+      </content>
+    </contents>
+
+    <introduction>
+      <para>Required introduction</para>
+    </introduction>
+
+    <section>
+      <title>Optional section</title>
+
+      <content>
+        <para>Some topic content</para>
+      </content>
+    </section>
+    
+    <conclusion>
+      <content>
+        <para>Required conclusion</para>
+      </content>
+    </conclusion>
+
+    <relatedTopics>
+      <!-- Supported Link Types
+    
+         All of the following linking mechanisms may be used in the topic's content 
+         as well as in the related topics section.
+    
+    Linking to API reference documentation: 
+    
+		    <codeEntityReference>API reference ID</codeEntityReference>
+
+    Linking to external resources and custom HTML topics: 
+
+        <externalLink>
+          <linkText>  Required hyperlink text  </linkText>
+          <linkAlternateText>  Optional link title  </linkAlternateText>
+          <linkUri>  Required URI  </linkUri>
+        </externalLink>
+    
+    Linking to other conceptual topics: 
+    
+        <link xlink:href="GUID topic name (without file extension)" />
+                
+    Linking to named references:
+    
+        (Refer to the project's Help\Settings\links.xml file for more information)
+    
+        <link xref="id"> Optional link text </link>
+        <link vref="id or URI"> Optional link text </link>
+        
+    -->
+
+      <!-- Example Usage 
+
+      <codeEntityReference>T:MyNamespace.MyClass</codeEntityReference>
+      <codeEntityReference>P:MyNamespace.MyClass.MyProp</codeEntityReference>
+      <codeEntityReference>M:System.IO.File.OpenText(System.String)</codeEntityReference>
+
+      <externalLink>
+        <linkText>Sandcastle Styles</linkText>
+        <linkAlternateText>Sandcastle Styles on CodePlex</linkAlternateText>
+        <linkUri>http://www.codeplex.com/SandcastleStyles</linkUri>
+      </externalLink>
+
+      <externalLink>
+        <linkText>Change Log</linkText>
+        <linkUri>ChangeLog.html</linkUri>
+      </externalLink>
+
+      <link xlink:href="2BFD9215-1216-403d-8C46-8420A4D01B83"/>
+      
+      <link xref="home">Our Home Page</link>
+      <link vref="/controls/design.aspx">Control Architecture</link>
+      -->
+    </relatedTopics>
+
+    <additionalInformation>
+      <content>
+        <para>Optional additional information</para>
+      </content>
+    </additionalInformation>
+
+    <authorBio>
+      <content>
+        <para>Optional author's biography</para>
+      </content>
+    </authorBio>
+
+  </developerWhitePaperDocument>
+</topic>

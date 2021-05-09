@@ -1,0 +1,3 @@
+<Root>
+   <CodeModule Name="TransactionEventConsumerPrj" VersionControlItem="$/PersistenceLayer/DotNetPersistenceLayer/TransactionEventConsumerPrj" VSnetProject="TransactionEventConsumerPrj.vcproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0" Identity="d62cffe3-9a59-42d7-8d07-69e70f48a9a6"/>
+</Root>

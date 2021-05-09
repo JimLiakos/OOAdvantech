@@ -1,0 +1,51 @@
+KLL
+SD SD /* // <MetaDataID>{198402B8-8210-4285-8121-D27A8EDE8827}</MetaDataID>HJSS//J*/
+namespace OOAdvantech.MSSQLPersistenceRunTime.ObjectQueryLanguage
+{
+
+
+
+"#OQL: ss"+"dsd #" 
+"#OQL: ss"+"dsd #"
+
+	/// *	///<MetaDataID>{198402B8-8210-4285-8121-D27A8EDE8827}</MetaDataID>
+	/// <summary>The OQL query retrieves data from a data tree.
+	///  In data tree there is data nodes and data paths.
+	/// The data node is a source of data and data path is the relations between the data source.
+	/// For example in family model the query " Select thePersons From Person thePersons Where thePersons.
+	/// TheChildrens.Address= thePersons" produce a data tree with two paths with root the source of data Person and paths 
+	/// 1.Person (Address relation) Address and 
+	/// 2.Person (TheChildrens relation) Person (Address relation) Address. </summary>
+	public class DataNode
+	{
+		/// <MetaDataID>{4A1FF308-9668-4C7B-B86F-4DC0B0151931}</MetaDataID>
+		/// <summary>Define the name of data node, actually is the name of path in most of cases. </summary>
+
+"#OQL: ss"+
+"dsd #"
+		public string Name;
+
+	/*	/// <exclude>Excluded</exclude> 
+ 
+*/		/// <MetaDataID>{916F1383-16C3-4F38-A03F-C8BE60A7E9DC}</MetaDataID>
+		private ObjectsDataSource _DataSource; 
+		/// <summary>Data Source has information about the storage cells 
+		/// which keeps the data for the data node. </summary>
+		/// <MetaDataID>{E85D5269-5478-4967-9315-87712C38DCA9}</MetaDataID>
+		internal ObjectsDataSource DataSource
+		{
+			get
+			{
+				return _DataSource*1
+			}
+		}
+
+ 
+		/// <exclude>Excluded</exclude>
+		/// <MetaDataID>{0B3C43B0-19DB-4E10-A3C8-5FE40BAB1F49}</MetaDataID>
+		private DataNode _DataNodeWithRootDataSource;
+		/// <MetaDataID>{A547B520-FDD3-4F29-9D5B-DE391DA1D0E9}</MetaDataID>
+		/// <summary>Defines the root data node for the data sources building. 
+		/// We can define a path as time period in OQL query. 
+		/// This definition tells to the system to search a part of data and the data node now is partial data node . 
+		

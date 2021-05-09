@@ -1,0 +1,261 @@
+<Root>
+   <NextObjID ObjID="VT(3)49"/>
+   <Associations>
+      <ClassAttributes Name="OrderItems" AssociationID="" RoleAName="Attributes" RoleBName="RoleB" RoleAClassID="{0CF72E78-C642-11D4-A315-0000C00028AA}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+      <MModuleClasses Name="OrderItems" AssociationID="" RoleAName="Classes" RoleBName="theModule" RoleAClassID="{03ADF068-C7AA-11D4-B649-009027648439}" RoleBClassID="{CACDE775-B429-11D4-A308-0000C00028AA}"/>
+      <ObjectStoreModules Name="ObjectStoreModules" AssociationID="" RoleAName="theModules" RoleBName="theObjectStorages" RoleAClassID="{CACDE775-B429-11D4-A308-0000C00028AA}" RoleBClassID="{EF95F8C3-57FB-4292-9A8D-CC8AB1A93508}"/>
+      <ClassRoles Name="OrderItems" AssociationID="" RoleAName="AssociationRoles" RoleBName="Class" RoleAClassID="{8DCABE4D-52AA-11D5-A39A-0000C00028AA}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+      <GeneralizationReletion Name="OrderItems" AssociationID="" RoleAName="Generalizations" RoleBName="Child" RoleAClassID="{09063931-4E38-458B-870C-A197EED5B460}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+      <SpecializationRelation Name="OrderItems" AssociationID="" RoleAName="Specializations" RoleBName="Parent" RoleAClassID="{09063931-4E38-458B-870C-A197EED5B460}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+      <AssociationClass Name="OrderItems" AssociationID="" RoleAName="LinkClass" RoleBName="LinkAssociation" RoleAClassID="{03ADF068-C7AA-11D4-B649-009027648439}" RoleBClassID="{961CECAA-99A1-4693-B12C-C663AAA10B67}"/>
+      <RolesOfAssociation Name="OrderItems" AssociationID="" RoleAName="Roles" RoleBName="Association" RoleAClassID="{8DCABE4D-52AA-11D5-A39A-0000C00028AA}" RoleBClassID="{961CECAA-99A1-4693-B12C-C663AAA10B67}"/>
+      <UsedTables Name="OrderItems" AssociationID="" RoleAName="MappedRDBMSTables" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+      <ObjectIdentity Name="OrderItems" AssociationID="" RoleAName="theOIDColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+      <AbtractClassObject Name="OrderItems" AssociationID="" RoleAName="AbstractClassView" RoleBName="RoleB" RoleAClassID="{3FF0337A-9930-47B6-AAA0-67FF1A39AEE8}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+      <ProducetheIDs Name="OrderItems" AssociationID="" RoleAName="TheMainTable" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+      <ConcreteClassObject Name="OrderItems" AssociationID="" RoleAName="ConcreteClassView" RoleBName="RoleB" RoleAClassID="{3FF0337A-9930-47B6-AAA0-67FF1A39AEE8}" RoleBClassID="{F832A460-2331-44F2-9E1C-7904ED675448}"/>
+      <KeyColumns Name="OrderItems" AssociationID="" RoleAName="Columns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}"/>
+      <ReferenceColumns Name="OrderItems" AssociationID="" RoleAName="RefColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}"/>
+      <ReferenceTable Name="OrderItems" AssociationID="" RoleAName="RefTable" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}"/>
+      <AttributeColoumnMap Name="OrderItems" AssociationID="" RoleAName="RDBMSColumn" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{F5B16A76-303E-4C64-A18D-078756B16E5B}"/>
+      <AssociationEndColumns Name="OrderItems" AssociationID="" RoleAName="theColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{C2EA4E96-F17B-435E-A957-459031D0FACC}"/>
+      <AssociationTable Name="OrderItems" AssociationID="" RoleAName="theTable" RoleBName="RoleB" RoleAClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}" RoleBClassID="{E3374349-BE7A-45A1-8F72-8368F5A27A16}"/>
+      <TableKeys Name="OrderItems" AssociationID="" RoleAName="Keys" RoleBName="RoleB" RoleAClassID="{501E5A82-F24B-4632-B144-E6A060F10C54}" RoleBClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}"/>
+      <TableColumns Name="OrderItems" AssociationID="" RoleAName="theTableColumns" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}"/>
+      <MustBeDeleted Name="OrderItems" AssociationID="" RoleAName="theColumnsForDeletion" RoleBName="RoleB" RoleAClassID="{1BF7F120-8A10-4EFD-854F-F823DEC9E93E}" RoleBClassID="{2992D396-BA76-4428-9F74-089CF17F1F0B}"/>
+      <ClassOperations Name="OrderItems" AssociationID="" RoleAName="Operations" RoleBName="Class" RoleAClassID="{0CF72E76-C642-11D4-A315-0000C00028AA}" RoleBClassID="{03ADF068-C7AA-11D4-B649-009027648439}"/>
+      <OperationParameters Name="OrderItems" AssociationID="" RoleAName="Parameters" RoleBName="MemberOf" RoleAClassID="{B809DEBA-D10B-11D4-B659-009027648439}" RoleBClassID="{0CF72E76-C642-11D4-A315-0000C00028AA}"/>
+      <Association Name="OrderItems" AssociationID="" RoleAName="RoleA" RoleBName="RoleB" RoleAClassID="RoleAClassID" RoleBClassID="RoleBClassID"/>
+   </Associations>
+   <ObjectCollections>
+      <XMLMappingMObjectStorageClass CLSID="{3D027AD0-D6A2-4AE6-A0E8-026F89EDF146}">
+         <XMLMappingMObjectStorage oid="VT(3)2" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)MyStorage" VModelerID="VT(8)3DF9DB5B03A9">
+            <theModules oid="3"/>
+            <theModules oid="4"/>
+         </XMLMappingMObjectStorage>
+      </XMLMappingMObjectStorageClass>
+      <XMLMappingMModuleClass CLSID="{EF651217-26BE-4665-AA7E-76395EBF25D4}">
+         <XMLMappingMModule oid="VT(3)3" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)OQLTest" VModelerID="VT(8)3BE1735C02BF">
+            <theObjectStorages oid="2"/>
+            <Classes oid="5"/>
+            <Classes oid="6"/>
+            <Classes oid="7"/>
+         </XMLMappingMModule>
+         <XMLMappingMModule oid="VT(3)4" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Test" VModelerID="VT(8)3DEFC6E60119">
+            <theObjectStorages oid="2"/>
+            <Classes oid="42"/>
+            <Classes oid="43"/>
+         </XMLMappingMModule>
+      </XMLMappingMModuleClass>
+      <XMLMappingMClassClass CLSID="{854FB6CE-2B70-45D5-8488-67E22FC289CB}">
+         <XMLMappingMClass oid="VT(3)5" Comment="VT(8)" MClassID="VT(8)29C40073C52B4A43A462C6D487C15E27" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)C++{Code	Liakos
+}SQL{Table	Person
+View	mitsos
+}" Name="VT(8)Person" Persistent="VT(3)-1" VModelerID="VT(8)3BE171510271">
+            <theModule oid="3"/>
+            <Attributes oid="8"/>
+            <Attributes oid="9"/>
+            <Attributes oid="10"/>
+            <Attributes oid="11"/>
+            <Attributes oid="12"/>
+            <AssociationRoles oid="13"/>
+            <AssociationRoles oid="14"/>
+            <AssociationRoles oid="15"/>
+            <Generalizations oid="19"/>
+            <Operations oid="21"/>
+            <Operations oid="22"/>
+            <Operations oid="23"/>
+            <Operations oid="24"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)6" Comment="VT(8)" MClassID="VT(8)8E6D1FBAD6BC4BE59F38E82EA48CE40D" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)C++{Code	Liakos
+}SQL{Table	Address
+View	mitsos
+}" Name="VT(8)Address" Persistent="VT(3)-1" VModelerID="VT(8)3BE1717D037A">
+            <theModule oid="3"/>
+            <Attributes oid="28"/>
+            <Attributes oid="29"/>
+            <Attributes oid="30"/>
+            <AssociationRoles oid="17"/>
+            <AssociationRoles oid="31"/>
+            <Generalizations oid="34"/>
+            <Generalizations oid="35"/>
+            <Operations oid="37"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)7" Comment="VT(8)" MClassID="VT(8)DB2CA0DB9C094494A75F5FCB1B570540" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)C++{Code	Liakos
+}SQL{Table	Employee
+View	mitsos
+}" Name="VT(8)Employee" Persistent="VT(3)-1" VModelerID="VT(8)3C8FD2BA01BD">
+            <theModule oid="3"/>
+            <Attributes oid="39"/>
+            <Generalizations oid="40"/>
+            <Operations oid="41"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)20" Comment="VT(8)" MClassID="VT(8)CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" Persistent="VT(3)0" VModelerID="VT(8)3B2C1F75022F">
+            <Specializations oid="19"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)36" Comment="VT(8)" MClassID="VT(8)CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" Persistent="VT(3)0" VModelerID="VT(8)3B2C1F75022F">
+            <Specializations oid="34"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)42" Comment="VT(8)" MClassID="VT(8)1A9DC0384EB14DCDB4190E156E9311B8" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)C++{Code	Liakos
+}SQL{Table	TestClass
+View	mitsos
+}" Name="VT(8)TestClass" Persistent="VT(3)-1" VModelerID="VT(8)3DEFC68C01A6">
+            <theModule oid="4"/>
+            <Attributes oid="44"/>
+            <AssociationRoles oid="33"/>
+            <Generalizations oid="45"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)43" Comment="VT(8)" MClassID="VT(8)4A027925AC5C4A4A9C25510E739A64D2" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)C++{Code	Liakos
+}SQL{Table	TestClassB
+View	mitsos
+}" Name="VT(8)TestClassB" Persistent="VT(3)-1" VModelerID="VT(8)3DF30A5101D9">
+            <theModule oid="4"/>
+            <Attributes oid="47"/>
+            <Generalizations oid="48"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)46" Comment="VT(8)" MClassID="VT(8)CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" Persistent="VT(3)0" VModelerID="VT(8)3B2C1F75022F">
+            <Specializations oid="45"/>
+         </XMLMappingMClass>
+         <XMLMappingMClass oid="VT(3)49" Comment="VT(8)" MClassID="VT(8)CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" Persistent="VT(3)0" VModelerID="VT(8)3B2C1F75022F">
+            <Specializations oid="48"/>
+         </XMLMappingMClass>
+      </XMLMappingMClassClass>
+      <MAttributeClass CLSID="{0CF72E7B-C642-11D4-A315-0000C00028AA}">
+         <MAttribute oid="VT(3)8" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Age" Persistent="VT(3)1" Type="VT(8)long" VModelerID="VT(8)3BE171EE0128">
+            <RoleB oid="5"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)9" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Name" Persistent="VT(3)1" Type="VT(8)String" VModelerID="VT(8)3BE17209036B">
+            <RoleB oid="5"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)10" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)TheChildren" Persistent="VT(3)0" Type="VT(8)PersonPtr" VModelerID="VT(8)3DDB9881009C">
+            <RoleB oid="5"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)11" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)pAddressRelResolver" Persistent="VT(3)0" Type="VT(8)RelResolverPtr" VModelerID="VT(8)3DDB988100AB">
+            <RoleB oid="5"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)12" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)pParentRelResolver" Persistent="VT(3)0" Type="VT(8)RelResolverPtr" VModelerID="VT(8)3DDB988100CB">
+            <RoleB oid="5"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)28" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)City" Persistent="VT(3)1" Type="VT(8)String" VModelerID="VT(8)3BE1719100FA">
+            <RoleB oid="6"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)29" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Street" Persistent="VT(3)1" Type="VT(8)String" VModelerID="VT(8)3BE171D10167">
+            <RoleB oid="6"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)30" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Area" Persistent="VT(3)1" Type="VT(8)String" VModelerID="VT(8)3BE171E202FD">
+            <RoleB oid="6"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)39" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Salary" Persistent="VT(3)1" Type="VT(8)double" VModelerID="VT(8)3C8FD30A02B2">
+            <RoleB oid="7"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)44" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Name" Persistent="VT(3)1" Type="VT(8)String" VModelerID="VT(8)3DEFC6A70349">
+            <RoleB oid="42"/>
+         </MAttribute>
+         <MAttribute oid="VT(3)47" Comment="VT(8)" ExportControl="VT(3)0" InitialValue="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Name" Persistent="VT(3)1" Type="VT(8)String" VModelerID="VT(8)3DF30A6C015F">
+            <RoleB oid="43"/>
+         </MAttribute>
+      </MAttributeClass>
+      <MRoleClass CLSID="{8DCABE4E-52AA-11D5-A39A-0000C00028AA}">
+         <MRole oid="VT(3)13" CascadeDelete="VT(3)0" Comment="VT(8)" ExportControl="VT(3)0" IsRoleA="VT(3)0" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)ThePerson" Navigable="VT(3)0" PropagateDelete="VT(3)0" ReferentialIntegrity="VT(3)1" VModelerID="VT(8)3BE172730282">
+            <Class oid="5"/>
+            <Association oid="16"/>
+         </MRole>
+         <MRole oid="VT(3)14" CascadeDelete="VT(3)0" Comment="VT(8)" ExportControl="VT(3)0" IsRoleA="VT(3)1" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)TheChildren" Navigable="VT(3)0" PropagateDelete="VT(3)0" ReferentialIntegrity="VT(3)1" VModelerID="VT(8)3BE172A6031C">
+            <Class oid="5"/>
+            <Association oid="18"/>
+         </MRole>
+         <MRole oid="VT(3)15" CascadeDelete="VT(3)0" Comment="VT(8)" ExportControl="VT(3)0" IsRoleA="VT(3)0" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)TheParent:PersonPtr" Navigable="VT(3)0" PropagateDelete="VT(3)0" ReferentialIntegrity="VT(3)1" VModelerID="VT(8)3BE172A6031E">
+            <Class oid="5"/>
+            <Association oid="18"/>
+         </MRole>
+         <MRole oid="VT(3)17" CascadeDelete="VT(3)0" Comment="VT(8)" ExportControl="VT(3)0" IsRoleA="VT(3)1" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)TheAddress:AddressPtr" Navigable="VT(3)0" PropagateDelete="VT(3)1" ReferentialIntegrity="VT(3)1" VModelerID="VT(8)3BE172730280">
+            <Association oid="16"/>
+            <Class oid="6"/>
+         </MRole>
+         <MRole oid="VT(3)31" CascadeDelete="VT(3)0" Comment="VT(8)" ExportControl="VT(3)0" IsRoleA="VT(3)0" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)MRoleB" Navigable="VT(3)0" PropagateDelete="VT(3)0" ReferentialIntegrity="VT(3)0" VModelerID="VT(8)3DF2092402DF">
+            <Class oid="6"/>
+            <Association oid="32"/>
+         </MRole>
+         <MRole oid="VT(3)33" CascadeDelete="VT(3)0" Comment="VT(8)" ExportControl="VT(3)0" IsRoleA="VT(3)1" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)MRoleA" Navigable="VT(3)0" PropagateDelete="VT(3)0" ReferentialIntegrity="VT(3)0" VModelerID="VT(8)3DF2092402D5">
+            <Association oid="32"/>
+            <Class oid="42"/>
+         </MRole>
+      </MRoleClass>
+      <MAssociationClass CLSID="{F055BD22-15EA-4D85-B938-19595176DB92}">
+         <MAssociation oid="VT(3)16" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)LiveAt" Persistent="VT(3)1" VModelerID="VT(8)3BE172720222">
+            <Roles oid="13"/>
+            <Roles oid="17"/>
+         </MAssociation>
+         <MAssociation oid="VT(3)18" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)PersonChildren" Persistent="VT(3)1" VModelerID="VT(8)3BE172A500EA">
+            <Roles oid="14"/>
+            <Roles oid="15"/>
+         </MAssociation>
+         <MAssociation oid="VT(3)32" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Test" Persistent="VT(3)1" VModelerID="VT(8)3DF209230265">
+            <Roles oid="31"/>
+            <Roles oid="33"/>
+         </MAssociation>
+      </MAssociationClass>
+      <MInheritanceRelationClass CLSID="{2E35B40F-0FE1-4AD5-940E-49EB2579C6E9}">
+         <MInheritanceRelation oid="VT(3)19" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" VModelerID="VT(8)3D157E3C03AD">
+            <Child oid="5"/>
+            <Parent oid="20"/>
+         </MInheritanceRelation>
+         <MInheritanceRelation oid="VT(3)34" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" VModelerID="VT(8)3D156FC601AB">
+            <Child oid="6"/>
+            <Parent oid="36"/>
+         </MInheritanceRelation>
+         <MInheritanceRelation oid="VT(3)35" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" VModelerID="VT(8)3DF7D8E903D5">
+            <Child oid="6"/>
+         </MInheritanceRelation>
+         <MInheritanceRelation oid="VT(3)40" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" VModelerID="VT(8)3C8FD35D01DF">
+            <Child oid="7"/>
+         </MInheritanceRelation>
+         <MInheritanceRelation oid="VT(3)45" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" VModelerID="VT(8)3DF2FE0803D5">
+            <Child oid="42"/>
+            <Parent oid="46"/>
+         </MInheritanceRelation>
+         <MInheritanceRelation oid="VT(3)48" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)" VModelerID="VT(8)3DF30A89019D">
+            <Child oid="43"/>
+            <Parent oid="49"/>
+         </MInheritanceRelation>
+      </MInheritanceRelationClass>
+      <MOperationClass CLSID="{0CF72E7C-C642-11D4-A315-0000C00028AA}">
+         <MOperation oid="VT(3)21" Comment="VT(8)" ExportControl="VT(3)-842150451" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)PutName" VModelerID="VT(8)3CEF34CE0063" retType="VT(8)void">
+            <Class oid="5"/>
+            <Parameters oid="25"/>
+         </MOperation>
+         <MOperation oid="VT(3)22" Comment="VT(8)" ExportControl="VT(3)-842150451" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Person" VModelerID="VT(8)3D1ECA1902B5" retType="VT(8)">
+            <Class oid="5"/>
+         </MOperation>
+         <MOperation oid="VT(3)23" Comment="VT(8)" ExportControl="VT(3)-842150451" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)PutTheAddress" VModelerID="VT(8)3D3A838202C0" retType="VT(8)void">
+            <Class oid="5"/>
+            <Parameters oid="26"/>
+         </MOperation>
+         <MOperation oid="VT(3)24" Comment="VT(8)" ExportControl="VT(3)-842150451" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)PutTheParent" VModelerID="VT(8)3D3AA96F037F" retType="VT(8)void">
+            <Class oid="5"/>
+            <Parameters oid="27"/>
+         </MOperation>
+         <MOperation oid="VT(3)37" Comment="VT(8)" ExportControl="VT(3)-842150451" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)PutCity" VModelerID="VT(8)3CFA54F6039C" retType="VT(8)void">
+            <Class oid="6"/>
+            <Parameters oid="38"/>
+         </MOperation>
+         <MOperation oid="VT(3)41" Comment="VT(8)" ExportControl="VT(3)-842150451" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)Foo" VModelerID="VT(8)3D156E9C01AC" retType="VT(8)void">
+            <Class oid="7"/>
+         </MOperation>
+      </MOperationClass>
+      <MParameterClass CLSID="{03ADF06E-C7AA-11D4-B649-009027648439}">
+         <MParameter oid="VT(3)25" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)NewValue" Type="VT(8)String" VModelerID="VT(8)3CEF34E6039C">
+            <MemberOf oid="21"/>
+         </MParameter>
+         <MParameter oid="VT(3)26" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)NewValue" Type="VT(8)AddressPtr" VModelerID="VT(8)3D3A83930328">
+            <MemberOf oid="23"/>
+         </MParameter>
+         <MParameter oid="VT(3)27" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)NewValue" Type="VT(8)PersonPtr" VModelerID="VT(8)3D3AA96F0389">
+            <MemberOf oid="24"/>
+         </MParameter>
+         <MParameter oid="VT(3)38" Comment="VT(8)" MetaObjectID="VT(8)00000000000000000000000000000000" ModelPropertiesStream="VT(8)" Name="VT(8)NewValue" Type="VT(8)String" VModelerID="VT(8)3CFA5505000E">
+            <MemberOf oid="37"/>
+         </MParameter>
+      </MParameterClass>
+   </ObjectCollections>
+</Root>

@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{66454549-9EF4-4CBC-957A-BF2E7F0F1D31}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DeviceOOAdvantech</RootNamespace>
+    <AssemblyName>DeviceOOAdvantech</AssemblyName>
+    <DeployDirSuffix>DeviceOOAdvantech</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FormFactorID></FormFactorID>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags></FileUpgradeFlags>
+    <UpgradeBackupLocation></UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PocketPC;NETCompactFramework </DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;PocketPC;NETCompactFramework </DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\AssemblyReference.cs">
+      <Link>ModulePublisher\AssemblyReference.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ClassRepository.cs">
+      <Link>ModulePublisher\ClassRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\AssemblyCrypto\AssemblyCryptoBridge.cs">
+      <Link>AssemblyCrypto\AssemblyCryptoBridge.cs</Link>
+    </Compile>
+    <Compile Include="..\AssemblyCrypto\AssemblyLoader.cs">
+      <Link>AssemblyCrypto\AssemblyLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\addcommand.cs">
+      <Link>MetaDataRepository\addcommand.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\association.cs">
+      <Link>MetaDataRepository\association.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\associationattribute.cs">
+      <Link>MetaDataRepository\associationattribute.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\associationclass.cs">
+      <Link>MetaDataRepository\associationclass.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\associationclassrole.cs">
+      <Link>MetaDataRepository\associationclassrole.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\associationend.cs">
+      <Link>MetaDataRepository\associationend.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\associationendbehavior.cs">
+      <Link>MetaDataRepository\associationendbehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\associationendrealization.cs">
+      <Link>MetaDataRepository\associationendrealization.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\attribute.cs">
+      <Link>MetaDataRepository\attribute.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\attributerealization.cs">
+      <Link>MetaDataRepository\attributerealization.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\backwardcompatibilityid.cs">
+      <Link>MetaDataRepository\backwardcompatibilityid.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\behavioralfeature.cs">
+      <Link>MetaDataRepository\behavioralfeature.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\buildassemblymetadataattribute.cs">
+      <Link>MetaDataRepository\buildassemblymetadataattribute.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\class.cs">
+      <Link>MetaDataRepository\class.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\classifier.cs">
+      <Link>MetaDataRepository\classifier.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\component.cs">
+      <Link>MetaDataRepository\component.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\containeditemssynchronizer.cs">
+      <Link>MetaDataRepository\containeditemssynchronizer.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\datatype.cs">
+      <Link>MetaDataRepository\datatype.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\deletecommand.cs">
+      <Link>MetaDataRepository\deletecommand.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\dependency.cs">
+      <Link>MetaDataRepository\dependency.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\enumeration.cs">
+      <Link>MetaDataRepository\enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\feature.cs">
+      <Link>MetaDataRepository\feature.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\generalization.cs">
+      <Link>MetaDataRepository\generalization.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\interface.cs">
+      <Link>MetaDataRepository\interface.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\interfaceimplementor.cs">
+      <Link>MetaDataRepository\interfaceimplementor.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\metadataexception.cs">
+      <Link>MetaDataRepository\metadataexception.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\metaobject.cs">
+      <Link>MetaDataRepository\metaobject.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\metaobjectcollection.cs">
+      <Link>MetaDataRepository\metaobjectcollection.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\metaobjectcreator.cs">
+      <Link>MetaDataRepository\metaobjectcreator.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\metaobjectid.cs">
+      <Link>MetaDataRepository\metaobjectid.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\method.cs">
+      <Link>MetaDataRepository\method.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\model.cs">
+      <Link>MetaDataRepository\model.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\multiplicityrange.cs">
+      <Link>MetaDataRepository\multiplicityrange.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\namespace.cs">
+      <Link>MetaDataRepository\namespace.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\ObjectActivationCall.cs">
+      <Link>MetaDataRepository\ObjectActiva?ionCall.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\ObjectIdentityType.cs">
+      <Link>MetaDataRepository\ObjectIdentityType.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\operation.cs">
+      <Link>MetaDataRepository\operation.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\package.cs">
+      <Link>MetaDataRepository\package.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\parameter.cs">
+      <Link>MetaDataRepository\parameter.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\ParameterableElement.cs">
+      <Link>MetaDataRepository\ParameterableElement.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\persistent.cs">
+      <Link>MetaDataRepository\persistent.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\persistentmemberattribute.cs">
+      <Link>MetaDataRepository\persistentmemberattribute.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\primitive.cs">
+      <Link>MetaDataRepository\primitive.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\realization.cs">
+      <Link>MetaDataRepository\realization.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\relationship.cs">
+      <Link>MetaDataRepository\relationship.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\storage.cs">
+      <Link>MetaDataRepository\storage.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\StorageCell.cs">
+      <Link>MetaDataRepository\StorageCell.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\StorageCellsLink.cs">
+      <Link>MetaDataRepository\StorageCellsLink.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\structuralfeature.cs">
+      <Link>MetaDataRepository\structuralfeature.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\structure.cs">
+      <Link>MetaDataRepository\structure.cs</Link>
+    </Compile>
+    <Compile Include="..\metadatarepository\synchronizersession.cs">
+      <Link>MetaDataRepository\synchronizersession.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\Templateable.cs">
+      <Link>MetaDataRepository\Templateable.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\TemplateBinding.cs">
+      <Link>MetaDataRepository\TemplateBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\TemplateParameter.cs">
+      <Link>MetaDataRepository\TemplateParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\TemplateParameterSubstitution.cs">
+      <Link>MetaDataRepository\TemplateParameterSubstitution.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\TemplateSignature.cs">
+      <Link>MetaDataRepository\TemplateSignature.cs</Link>
+    </Compile>
+    <Compile Include="..\MetaDataRepository\ValueTypePath.cs">
+      <Link>MetaDataRepository\ValueTypePath.cs</Link>
+    </Compile>
+    <Compile Include="..\OOAdvantech\AccessorsBuilder.cs">
+      <Link>AccessorsBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\OOAdvantech\EventUnderProtection.cs">
+      <Link>EventUnderProtection.cs</Link>
+    </Compile>
+    <Compile Include="..\OOAdvantech\GenericCollections\PositionCompare.cs">
+      <Link>Collections\PositionCompare.cs</Link>
+    </Compile>
+    <Compile Include="..\OOAdvantech\MemberValue.cs">
+      <Link>MemberValue.cs</Link>
+    </Compile>
+    <Compile Include="..\OOAdvantech\ObjectsContext.cs">
+      <Link>ObjectsContext.cs</Link>
+    </Compile>
+    <Compile Include="..\OOAdvantech\ReaderWriterLock.cs">
+      <Link>ReaderWriterLock.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\ipersistencyservice.cs">
+      <Link>PersistenceLayer\ipersistencyservice.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\istorageserverinstancelocator.cs">
+      <Link>PersistenceLayer\istorageserverinstancelocator.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\member.cs">
+      <Link>PersistenceLayer\member.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\memberlist.cs">
+      <Link>PersistenceLayer\memberlist.cs</Link>
+    </Compile>
+    <Compile Include="..\?ersistencelayer\objectcollection.cs">
+      <Link>PersistenceLayer\objectcollection.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\objectcollectionfactory.cs">
+      <Link>PersistenceLayer\objectcollectionfactory.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\objectcontainer.cs">
+      <Link>PersistenceLayer\objectcontainer.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\objectstorage.cs">
+      <Link>PersistenceLayer\objectstorage.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\objectstorageinstanceconnection.cs">
+      <Link>PersistenceLayer\objectstorageinstanceconnection.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\set.cs">
+      <Link>PersistenceLayer\set.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\storageexception.cs">
+      <Link>PersistenceLayer\storageexception.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\storagesession.cs">
+      <Link>PersistenceLayer\storagesession.cs</Link>
+    </Compile>
+    <Compile Include="..\persistencelayer\structureset.cs">
+      <Link>PersistenceLayer\structureset.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\arraylist.cs">
+      <Link>Collections\arraylist.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\dictionary.cs">
+      <Link>Collections\dictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\Remoting\Hashtable.cs">
+      <Link>Collections\Hashtable.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\list.cs">
+      <Link>Collections\list.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\map.cs">
+      <Link>Collections\map.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\queue.cs">
+      <Link>Collections\queue.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\stack.cs">
+      <Link>Collections\stack.cs</Link>
+    </Compile>
+    <Compile Include="..\remoting\vector.cs">
+      <Link>Collections\vector.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\CommittableTransaction.cs">
+      <Link>Transactions\CommittableTransaction.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\EnlistmentsController.cs">
+      <Link>Transactions\EnlistmentsController.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\Exception.cs">
+      <Link>Transactions\Exception.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ExtensionProperties.cs">
+      <Link>Transactions\ExtensionProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ITransactioContextProvider.cs">
+      <Link>Transactions\ITransactioContextProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ITransactionContext.cs">
+      <Link>Transactions\ITransactionContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ITransactionContextExtender.cs">
+      <Link>Transactions\ITransactionContextExtender.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ITransactionEnlistment.cs">
+      <Link>Transactions\ITransactionEnlistment.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\LogicalThread.cs">
+      <Link>Transactions\LogicalThread.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\NestedTransactionController.cs">
+      <Link>Transactions\NestedTransactionController.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ObjectStateSnapshot.cs">
+      <Link>Transactions\ObjectStateSnapshot.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\ObjectStateTransition.cs">
+      <Link>Transactions\ObjectStateTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\SystemStateTransition.cs">
+      <Link>Transactions\SystemStateTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\Transaction.cs">
+      <Link>Transactions\Transaction.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionalObject.cs">
+      <Link>Transactions\TransactionalObjec?.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionAttribute.cs">
+      <Link>Transactions\TransactionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionContext.cs">
+      <Link>Transactions\TransactionContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionedResourceManager.cs">
+      <Link>Transactions\TransactionedResourceManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionEnlistment.cs">
+      <Link>Transactions\TransactionEnlistment.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionManagment.cs">
+      <Link>Transactions\TransactionManagment.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionManagmentRunTime.cs">
+      <Link>Transactions\TransactionManagmentRunTime.cs</Link>
+    </Compile>
+    <Compile Include="..\Transactions\TransactionRunTime.cs">
+      <Link>Transactions\TransactionRunTime.cs</Link>
+    </Compile>
+    <Compile Include="ClassRepository.cs" />
+    <Compile Include="FastAccessorImplementor.cs" />
+    <Compile Include="NativeTransactios.cs" />
+    <Compile Include="Remoting.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

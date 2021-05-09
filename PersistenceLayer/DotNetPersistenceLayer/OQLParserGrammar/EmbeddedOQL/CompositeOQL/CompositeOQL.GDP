@@ -1,0 +1,29 @@
+[Grammars]
+
+[Output]
+	CompositeOQL.GMR, CompositeOQL
+
+[Samples]
+
+
+[Breakpoints]
+
+[Project Info]
+Dependencies Modified
+Version = 2
+
+
+[Project Settings]
+	ParseEntireInput = Y
+	InsertErrorNodes = Y
+	ReportParseTimes = N
+	StepIntoTerminals = Y
+	StepIntoSpaces = N
+	StepIntoTokens = N
+	StackShowBacktrackSymbols = N
+	BuildDebugTree = Y
+	ExpandNodesOption = 0
+	DataSourceOption = 0
+	SaveCache = Y
+	SaveTree = Y
+	SaveErrors = Y

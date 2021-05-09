@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN" ><html dir="LTR" xmlns:MSHelp="http://msdn.microsoft.com/mshelp"><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>MoveToPage Method</title><xml><MSHelp:TOCTitle Title="MoveToPage Method" /><MSHelp:RLTitle Title="StructureSet.MoveToPage Method" /><MSHelp:Keyword Index="K" Term="StructureSet.MoveToPage method" /><MSHelp:Keyword Index="K" Term="MoveToPage method" /><MSHelp:Keyword Index="F" Term="OOAdvantech.PersistenceLayer.StructureSet.MoveToPage" /><MSHelp:Keyword Index="F" Term="StructureSet.MoveToPage" /><MSHelp:Keyword Index="A" Term="ndocOOAdvantechPersistenceLayerStructureSetClassMoveToPageTopic_3d629098" /><MSHelp:Attr Name="DocSet" Value="Documentation" /><MSHelp:Attr Name="DocSet" Value="NETFramework" /><MSHelp:Attr Name="TopicType" Value="kbSyntax" /><MSHelp:Attr Name="DevLang" Value="CSharp" /><MSHelp:Attr Name="DevLang" Value="VB" /><MSHelp:Attr Name="DevLang" Value="C++" /><MSHelp:Attr Name="DevLang" Value="JScript" /><MSHelp:Attr Name="DevLang" Value="VJ#" /><MSHelp:Attr Name="Technology" Value="WFC" /><MSHelp:Attr Name="Technology" Value="ManagedC" /><MSHelp:Attr Name="TechnologyVers" Value="kbWFC" /><MSHelp:Attr Name="TechnologyVers" Value="kbManagedC" /><MSHelp:Attr Name="Locale" Value="kbEnglish" /><MSHelp:Attr Name="HelpPriority" Value="3" /></xml><SCRIPT SRC="dtuelink.js"></SCRIPT></head><body topmargin="0" id="bodyID" class="dtBODY"><object id="obj_cook" classid="clsid:59CC0C20-679B-11D2-88BD-0800361A1803" style="display:none;"></object><div id="nsbanner"><div id="bannerrow1"><table class="bannerparthead" cellspacing="0"><tr id="hdr"><td class="runninghead" nowrap="true">OOAdvanceTech documented library</td><td class="product" nowrap="true"></td></tr></table></div><div id="TitleRow"><h1 class="dtH1">StructureSet.MoveToPage Method</h1></div></div><div id="nstext" valign="bottom"><div id="allHistory" class="saveHistory" onsave="saveAll()" onload="loadAll()"></div><p> The StructureSet operate as cursor you can set it at the page you want with MoveToPage method and then you can call the MoveNextPage method through the end. </p>
+<PRE class="syntax"><SPAN class="lang">[Visual Basic]
+</SPAN><b>MustOverride Public Sub MoveToPage( _ 
+   ByVal <MSHelp:link keywords="frlrfSystemInt32ClassTopic" indexMoniker="!DefaultAssociativeIndex" namespace="ms-help://MS.NETFrameworkSDKv1.1" tabindex="0">Integer</MSHelp:link> <i>pageNumber</i> _ 
+) 
+</b><SPAN class="lang">[C#]
+</SPAN><b>public abstract <MSHelp:link keywords="frlrfSystemVoidClassTopic" indexMoniker="!DefaultAssociativeIndex" namespace="ms-help://MS.NETFrameworkSDKv1.1" tabindex="0">void</MSHelp:link> MoveToPage(
+   <MSHelp:link keywords="frlrfSystemInt32ClassTopic" indexMoniker="!DefaultAssociativeIndex" namespace="ms-help://MS.NETFrameworkSDKv1.1" tabindex="0">int</MSHelp:link> <i>pageNumber</i>
+);
+</b><SPAN class="lang">[C++]
+</SPAN><b>public: abstract <MSHelp:link keywords="frlrfSystemVoidClassTopic" indexMoniker="!DefaultAssociativeIndex" namespace="ms-help://MS.NETFrameworkSDKv1.1" tabindex="0">void</MSHelp:link> MoveToPage(
+   <MSHelp:link keywords="frlrfSystemInt32ClassTopic" indexMoniker="!DefaultAssociativeIndex" namespace="ms-help://MS.NETFrameworkSDKv1.1" tabindex="0">int</MSHelp:link> <i>pageNumber</i>
+);
+</b><SPAN class="lang">[JScript]
+</SPAN><b>public abstract function MoveToPage(
+   <MSHelp:link keywords="frlrfSystemInt32ClassTopic" indexMoniker="!DefaultAssociativeIndex" namespace="ms-help://MS.NETFrameworkSDKv1.1" tabindex="0">int</MSHelp:link> <i>pageNumber</i>
+) ;
+</b></PRE><h4 class="dtH4">Example</h4><p><pre class="code"><span class="lang">[C#]</span>
+   StorageSession storage=StorageSession.OpenStorage("Town","TownServer","OOAdvantech.MSSQLPersistenceRunTime.StorageProvider");
+   string OQLQuery="SELECT person.Name Name,person.Address.Street Street "+
+   "FROM Person person "+
+   "WHERE person.Parent.Address.City=person.City";
+   StructureSet structureSet=storage.Execute(OQLQuery);
+   int startPageNumber=0;
+   structureSet.PageSize=100;
+   while(structureSet.MoveNextPage())
+   {
+       while(structureSet.MoveNext)
+       {
+           string name=structureSet.Members["Name"].Value as string;
+           string street=structureSet.Members["Street"].Value as string;
+           System.Console.WriteLine("Name: "+name+", Street: "+street);
+       }
+   }
+
+   //Alternatively you can use StructureSet like this.
+   if(structureSet.PageCount&gt;10)
+   {
+       structureSet.MoveToPage(9); //zero base
+       do
+       {
+           while(structureSet.MoveNext)
+           {
+               string name=structureSet.Members["Name"].Value as string;
+               string street=structureSet.Members["Street"].Value as string;
+               System.Console.WriteLine("Name: "+name+", Street: "+street);
+           }
+       }while(structureSet.MoveNextPage());
+   }
+   structureSet.Close();
+   
+   </pre><pre class="code"><span class="lang">[Visual Basic]</span>
+   Dim storage As StorageSession
+   Dim structureSet As StructureSet
+   Dim OQLQuery As String
+
+   storage = StorageSession.OpenStorage("Town", "TownServer", "OOAdvantech.MSSQLPersistenceRunTime.StorageProvider")
+   OQLQuery = "SELECT person.Name Name,person.Address.Street Street "
+   OQLQuery += "FROM Person person "
+   OQLQuery += "WHERE person.Parent.Address.City=person.City"
+   
+   structureSet = storage.Execute(OQLQuery)
+   Dim startPageNumber As Integer = 0
+   structureSet.PageSize = 100
+   While structureSet.MoveNextPage()
+       While structureSet.MoveNext
+           Dim name As String = structureSet("Name")
+           Dim street As String = structureSet("Street")
+           Console.WriteLine("Name: " + name + ", Street: " + street)
+       End While
+   End While
+
+   'Alternatively you can use StructureSet like this.
+   If structureSet.PageCount &gt; 10 Then
+       structureSet.MoveToPage(9)
+       Do
+           While structureSet.MoveNext
+               Dim name As String = structureSet("Name")
+               Dim street As String = structureSet("Street")
+               Console.WriteLine("Name: " + name + ", Street: " + street)
+           End While
+       Loop While structureSet.MoveNextPage()
+   End If
+   </pre></p><h4 class="dtH4">Requirements</h4><p><b class="le">Platforms: </b>Windows 98, Windows NT 4.0, Windows Millennium Edition, Windows 2000, Windows XP Home Edition, Windows XP Professional, Windows Server 2003 family</p><h4 class="dtH4">See Also</h4><p><a href="ndocOOAdvantechPersistenceLayerStructureSetClassTopic_3574010e.html">StructureSet Class</a> | <a href="ndocOOAdvantechPersistenceLayer_2571316d.html">OOAdvantech.PersistenceLayer Namespace</a></p><DIV CLASS="footer"><p><center><font color="red"><i>
+								Syntax based on .NET Framework version 1.1.<br>
+								Documentation version 1.0.0.0.
+							</i></font></center></p></DIV></div></body></html>

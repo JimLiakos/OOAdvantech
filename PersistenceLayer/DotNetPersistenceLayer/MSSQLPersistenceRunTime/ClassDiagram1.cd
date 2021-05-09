@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Times New Roman" Size="10" />
+  <Class Name="OOAdvantech.MSSQLPersistenceRunTime.ObjectQueryLanguage.DataLoader" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DataLoader.cs</FileName>
+      <HashCode>AQJIEAEBEAASIAhAACgQEAIAMBABAAQAAgAEEAMAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

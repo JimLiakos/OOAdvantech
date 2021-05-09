@@ -1,0 +1,4487 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object Class_Category "WindowsAzureTablesPersistenceRunTime"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    attributes 	(list Attribute_Set
+	(object Attribute
+	    tool       	"MetaData"
+	    name       	"MetaObjectID"
+	    value      	"OOAdvantech.WindowsAzureTablesPersistenceRunTime")
+	(object Attribute
+	    tool       	"C#"
+	    name       	"FullName"
+	    value      	"OOAdvantech.WindowsAzureTablesPersistenceRunTime"))
+    quid       	"5857C7EA03B0"
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "AzureTableExtraOperators"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{2d4ec483-3d16-4e96-821f-1a3f8ca470a3}"))
+	    quid       	"5857C8E90259"
+	    operations 	(list Operations
+		(object Operation "InsertEntity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8f4491db-e7ee-4a65-9564-10e8448ff67e}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C8EA03A9"))
+		    quid       	"5857C8EA03A9"
+		    parameters 	(list Parameters
+			(object Parameter "table"
+			    quid       	"5857C8EA03C9"
+			    type       	"Microsoft.WindowsAzure.Storage.Table.CloudTable")
+			(object Parameter "tableEntity"
+			    quid       	"5857C8EA03DF"
+			    type       	"Microsoft.WindowsAzure.Storage.Table.TableEntity"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+	    quidu      	"5857C8090174"
+	    language   	"C#")
+	(object Class "ObjectID"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{c7527658-16ef-4443-b843-41c0a938b7b0}"))
+	    quid       	"5857C9150238"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    quid       	"5857C915036B"
+		    supplier   	"Logical View::OOAdvantech::RDBMSPersistenceRunTime::ObjectID"
+		    quidu      	"52F2B87D03A2"))
+	    operations 	(list Operations
+		(object Operation "ObjectID"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{84b15932-74a4-47c1-b58f-effa0bb7624b}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C916006A"))
+		    quid       	"5857C916006A"
+		    parameters 	(list Parameters
+			(object Parameter "OID"
+			    quid       	"5857C9160093"
+			    type       	"System.Guid"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "ToString"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{bb176732-8b4f-4803-9b8e-592efe17dd13}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91600C8"))
+		    quid       	"5857C91600C8"
+		    result     	"string"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "ObjectIdentityType"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b5f0107e-5b07-479d-b675-040429e894ca}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C916017B")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"5857C916017B"
+		    type       	"OOAdvantech.MetaDataRepository.ObjectIdentityType"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+	    quidu      	"5857C8090174"
+	    language   	"C#")
+	(object Class "ObjectStorage"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{5afec19d-78b9-4d20-89f1-fb5b1453b9bc}"))
+	    quid       	"5857C91601D7"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    quid       	"5857C91602B3"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::ObjectStorage"
+		    quidu      	"40C55F4000D0"))
+	    operations 	(list Operations
+		(object Operation "AbortChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{deae242f-8ca7-4891-92e3-b5e3acaf536f}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C918002B"))
+		    quid       	"5857C918002B"
+		    parameters 	(list Parameters
+			(object Parameter "theTransaction"
+			    quid       	"5857C9180062"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "BeginChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2773b19e-7768-4762-9e2e-8166d2910565}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9180084"))
+		    quid       	"5857C9180084"
+		    parameters 	(list Parameters
+			(object Parameter "theTransaction"
+			    quid       	"5857C91800A8"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CommitChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{957ac9f6-3739-4a03-a926-31aa0a843c5e}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91800C0"))
+		    quid       	"5857C91800C0"
+		    parameters 	(list Parameters
+			(object Parameter "theTransaction"
+			    quid       	"5857C91800E5"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateBuildContainedObjectIndiciesCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{a86dcd77-b2df-4ea9-bd1c-f09a65ab3628}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91800FD"))
+		    quid       	"5857C91800FD"
+		    parameters 	(list Parameters
+			(object Parameter "collection"
+			    quid       	"5857C9180124"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.IndexedCollection"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateDataLoader"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{baa23a68-4b9c-4c50-95bb-b57b63941ee9}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9180150"))
+		    quid       	"5857C9180150"
+		    parameters 	(list Parameters
+			(object Parameter "dataNode"
+			    quid       	"5857C9180177"
+			    type       	"OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode")
+			(object Parameter "dataLoaderMetadata"
+			    quid       	"5857C918018A"
+			    type       	"OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoaderMetadata"))
+		    result     	"OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoader"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateDeleteStorageInstanceCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{61d86519-6e1a-4fcc-905a-146d210f368c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91801A5"))
+		    quid       	"5857C91801A5"
+		    parameters 	(list Parameters
+			(object Parameter "storageInstance"
+			    quid       	"5857C91801CC"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef")
+			(object Parameter "deleteOption"
+			    quid       	"5857C91801E2"
+			    type       	"OOAdvantech.PersistenceLayer.DeleteOptions"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateLinkCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3928fd3b-b615-4ca6-bc54-95615ba8c8a2}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91801FD"))
+		    quid       	"5857C91801FD"
+		    parameters 	(list Parameters
+			(object Parameter "roleA"
+			    quid       	"5857C9180238"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "roleB"
+			    quid       	"5857C9180254"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "relationObject"
+			    quid       	"5857C9180268"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "linkInitiatorAssociationEnd"
+			    quid       	"5857C918027C"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent")
+			(object Parameter "index"
+			    quid       	"5857C9180291"
+			    type       	"int"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateMoveStorageInstanceCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{9a19c39a-d673-482a-83de-2d9c8bc8bc84}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91802AC"))
+		    quid       	"5857C91802AC"
+		    parameters 	(list Parameters
+			(object Parameter "storageInstance"
+			    quid       	"5857C91802D1"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateNewStorageInstanceCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{55c6bc3f-6167-4651-8f17-b443c347b50e}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91802F6"))
+		    quid       	"5857C91802F6"
+		    parameters 	(list Parameters
+			(object Parameter "storageInstance"
+			    quid       	"5857C918032B"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateStorageInstanceRef"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2ec71d8c-cf3c-4829-bab9-fc8dc98479f9}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9180346"))
+		    quid       	"5857C9180346"
+		    parameters 	(list Parameters
+			(object Parameter "memoryInstance"
+			    quid       	"5857C918036C"
+			    type       	"object")
+			(object Parameter "objectID"
+			    quid       	"5857C918037F"
+			    type       	"OOAdvantech.PersistenceLayer.ObjectID"))
+		    result     	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateStorageInstanceRef"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{f6b3605d-54f3-451e-829a-0c37899ea9ce}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9180399"))
+		    quid       	"5857C9180399"
+		    parameters 	(list Parameters
+			(object Parameter "memoryInstance"
+			    quid       	"5857C91803C0"
+			    type       	"object")
+			(object Parameter "objectID"
+			    quid       	"5857C91803E4"
+			    type       	"OOAdvantech.PersistenceLayer.ObjectID")
+			(object Parameter "storageCell"
+			    quid       	"5857C919000F"
+			    type       	"OOAdvantech.MetaDataRepository.StorageCell"))
+		    result     	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateUnlinkAllObjectCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{716651a0-f252-4f89-ad4b-8ff73c22bda8}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C919002E"))
+		    quid       	"5857C919002E"
+		    parameters 	(list Parameters
+			(object Parameter "sourceStorageInstance"
+			    quid       	"5857C9190053"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "associationEnd"
+			    quid       	"5857C9190066"
+			    type       	"OOAdvantech.DotNetMetaDataRepository.AssociationEnd"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateUnlinkAllObjectCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{52f21a88-4868-4fa8-b073-9639c8b30c3a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9190081"))
+		    quid       	"5857C9190081"
+		    parameters 	(list Parameters
+			(object Parameter "deletedOutStorageInstanceRef"
+			    quid       	"5857C91900B8"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "AssociationEnd"
+			    quid       	"5857C91900CC"
+			    type       	"OOAdvantech.MetaDataRepository.AssociationEnd")
+			(object Parameter "LinkedObjectsStorageCell"
+			    quid       	"5857C91900DF"
+			    type       	"OOAdvantech.MetaDataRepository.StorageCell"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateUnLinkCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ed28148a-24c1-4699-89dd-4616ab3959f0}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91900FF"))
+		    quid       	"5857C91900FF"
+		    parameters 	(list Parameters
+			(object Parameter "roleA"
+			    quid       	"5857C9190125"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "roleB"
+			    quid       	"5857C919013C"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "relationObject"
+			    quid       	"5857C919014F"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "linkInitiatorAssociationEnd"
+			    quid       	"5857C9190162"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent")
+			(object Parameter "index"
+			    quid       	"5857C9190176"
+			    type       	"int"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateUpdateLinkIndexCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{515a7ca5-2739-45f5-af0b-2d5b2fc5373a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91901A2"))
+		    quid       	"5857C91901A2"
+		    parameters 	(list Parameters
+			(object Parameter "roleA"
+			    quid       	"5857C91901C8"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "roleB"
+			    quid       	"5857C91901DB"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "relationObject"
+			    quid       	"5857C91901EE"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+			(object Parameter "linkInitiatorAssociationEnd"
+			    quid       	"5857C9190200"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent")
+			(object Parameter "index"
+			    quid       	"5857C9190215"
+			    type       	"int"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateUpdateReferentialIntegrity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1a749457-a83b-4d5c-9b6d-7a47479ca83f}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9190234"))
+		    quid       	"5857C9190234"
+		    parameters 	(list Parameters
+			(object Parameter "storageInstanceRef"
+			    quid       	"5857C919026A"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "CreateUpdateStorageInstanceCommand"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{63d5cdea-3ecc-4f51-ad74-a6529219099c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9190289"))
+		    quid       	"5857C9190289"
+		    parameters 	(list Parameters
+			(object Parameter "storageInstanceRef"
+			    quid       	"5857C91902B2"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Execute"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{049266c6-c5ca-41ea-8a6e-07dd5a8d790a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91902D2"))
+		    quid       	"5857C91902D2"
+		    parameters 	(list Parameters
+			(object Parameter "OQLStatement"
+			    quid       	"5857C919030C"
+			    type       	"string"))
+		    result     	"OOAdvantech.Collections.StructureSet"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetLinkedStorageCells"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{04d74df9-daa4-44dc-96a9-c05a4aea5821}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C919032C"))
+		    quid       	"5857C919032C"
+		    parameters 	(list Parameters
+			(object Parameter "associationEnd"
+			    quid       	"5857C9190355"
+			    type       	"OOAdvantech.MetaDataRepository.AssociationEnd")
+			(object Parameter "valueTypePath"
+			    quid       	"5857C919036A"
+			    type       	"OOAdvantech.MetaDataRepository.ValueTypePath")
+			(object Parameter "relatedStorageCell"
+			    quid       	"5857C9190380"
+			    type       	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"))
+		    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.RelatedStorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetObject"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{56a4e228-96ee-437d-b730-ce5230da8535}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91903B1"))
+		    quid       	"5857C91903B1"
+		    parameters 	(list Parameters
+			(object Parameter "persistentObjectUri"
+			    quid       	"5857C91A0004"
+			    type       	"string"))
+		    result     	"object"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetPersistentObjectUri"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{88bbfd07-cc25-4c87-80fb-b3a81bd1389d}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A0026"))
+		    quid       	"5857C91A0026"
+		    parameters 	(list Parameters
+			(object Parameter "obj"
+			    quid       	"5857C91A0060"
+			    type       	"object"))
+		    result     	"string"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetRelationObjectsStorageCells"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{31ebca65-fbde-442a-9bd9-db659d4c3224}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A007F"))
+		    quid       	"5857C91A007F"
+		    parameters 	(list Parameters
+			(object Parameter "association"
+			    quid       	"5857C91A00BA"
+			    type       	"OOAdvantech.MetaDataRepository.Association")
+			(object Parameter "relatedStorageCells"
+			    quid       	"5857C91A00D0"
+			    type       	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]")
+			(object Parameter "storageCellsRole"
+			    quid       	"5857C91A00F6"
+			    type       	"OOAdvantech.MetaDataRepository.Roles"))
+		    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetStorageCell"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{25b3b659-7ae6-4442-97dd-ed28d34c1f0a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A0115"))
+		    quid       	"5857C91A0115"
+		    parameters 	(list Parameters
+			(object Parameter "ObjectID"
+			    quid       	"5857C91A0140"
+			    type       	"object"))
+		    result     	"OOAdvantech.MetaDataRepository.StorageCell"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetStorageCell"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{13eccb73-4fff-451c-9156-9555d0036856}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A0174"))
+		    quid       	"5857C91A0174"
+		    parameters 	(list Parameters
+			(object Parameter "storageCellSerialNumber"
+			    quid       	"5857C91A019F"
+			    type       	"int"))
+		    result     	"OOAdvantech.MetaDataRepository.StorageCell"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetStorageCell"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b6026ca6-1f6a-45f0-89d7-5026e4f2483d}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A01C0"))
+		    quid       	"5857C91A01C0"
+		    parameters 	(list Parameters
+			(object Parameter "storageInstanceAgent"
+			    quid       	"5857C91A01FA"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent"))
+		    result     	"OOAdvantech.MetaDataRepository.StorageCell"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetStorageCells"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{be4ce408-b2d7-49a6-83d5-47bec9167591}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A022A"))
+		    quid       	"5857C91A022A"
+		    parameters 	(list Parameters
+			(object Parameter "classifier"
+			    quid       	"5857C91A0251"
+			    type       	"OOAdvantech.MetaDataRepository.Classifier"))
+		    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetStorageCells"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0f5a3db0-fff4-49ff-84d6-8f38458057e6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A0274"))
+		    quid       	"5857C91A0274"
+		    parameters 	(list Parameters
+			(object Parameter "classifier"
+			    quid       	"5857C91A02B0"
+			    type       	"OOAdvantech.MetaDataRepository.Classifier")
+			(object Parameter "timePeriodStartDate"
+			    quid       	"5857C91A02C6"
+			    type       	"System.DateTime")
+			(object Parameter "timePeriodEndDate"
+			    quid       	"5857C91A02DD"
+			    type       	"System.DateTime"))
+		    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetTemporaryObjectID"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{13d370ab-1bc3-4df4-8ce8-3dc630b38690}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A0303"))
+		    quid       	"5857C91A0303"
+		    result     	"OOAdvantech.PersistenceLayer.ObjectID"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "MakeChangesDurable"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{59ea159e-8116-47e8-b40e-a7913ac73d89}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A0360"))
+		    quid       	"5857C91A0360"
+		    parameters 	(list Parameters
+			(object Parameter "theTransaction"
+			    quid       	"5857C91A0387"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "PrepareForChanges"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7cf92080-f2b8-4140-94ed-3b1589bce361}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91A03AA"))
+		    quid       	"5857C91A03AA"
+		    parameters 	(list Parameters
+			(object Parameter "theTransaction"
+			    quid       	"5857C91A03E5"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetStorageCellReference"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{407bee5a-791c-4687-b706-92d87c18c760}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91B0020"))
+		    quid       	"5857C91B0020"
+		    parameters 	(list Parameters
+			(object Parameter "storageCell"
+			    quid       	"5857C91B0049"
+			    type       	"OOAdvantech.MetaDataRepository.StorageCell"))
+		    result     	"OOAdvantech.MetaDataRepository.StorageCellReference"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "StorageMetaData"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{fa8859af-abc4-46ef-864b-be94f908bfa6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91B0083"))
+		    quid       	"5857C91B0083"
+		    type       	"OOAdvantech.PersistenceLayer.Storage"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+	    quidu      	"5857C8090174"
+	    language   	"C#")
+	(object Class "TableEntity"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{e252a4b4-f322-424a-815b-9ec502f55e5d}"))
+	    quid       	"5857C91B00EE"
+	    operations 	(list Operations
+		(object Operation "TableEntity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{fad9a1c2-c27d-4702-96f9-e3e6f08eafab}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91C02AD"))
+		    quid       	"5857C91C02AD"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Value"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{f1e63820-7d94-478a-8d02-2f35fd483e22}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91C031A"))
+		    quid       	"5857C91C031A"
+		    parameters 	(list Parameters
+			(object Parameter "name"
+			    quid       	"5857C91C0344"
+			    type       	"string"))
+		    result     	"string"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "TrySetMember"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{e7d2f873-e573-477a-baeb-1b132b2abf05}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91C036F"))
+		    quid       	"5857C91C036F"
+		    parameters 	(list Parameters
+			(object Parameter "binder"
+			    quid       	"5857C91C0397"
+			    type       	"System.Dynamic.SetMemberBinder")
+			(object Parameter "value"
+			    quid       	"5857C91C03AE"
+			    type       	"object"))
+		    result     	"bool"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "ReadEntity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7f0f66dc-442e-4165-8975-e3ff4d0cea94}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91D01E1"))
+		    quid       	"5857C91D01E1"
+		    parameters 	(list Parameters
+			(object Parameter "properties"
+			    quid       	"5857C91D020F"
+			    type       	"System.Collections.Generic.IDictionary<string,Microsoft.WindowsAzure.Storage.Table.EntityProperty>")
+			(object Parameter "operationContext"
+			    quid       	"5857C91D0227"
+			    type       	"Microsoft.WindowsAzure.Storage.OperationContext"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "WriteEntity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{397d79d5-b974-48a6-8712-858fedc4410d}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91D0255"))
+		    quid       	"5857C91D0255"
+		    parameters 	(list Parameters
+			(object Parameter "operationContext"
+			    quid       	"5857C91D027B"
+			    type       	"Microsoft.WindowsAzure.Storage.OperationContext"))
+		    result     	"System.Collections.Generic.IDictionary`2"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetNames"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8cca6ba4-e798-4ab4-9f06-a27d97d0a9d6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91D02E9"))
+		    quid       	"5857C91D02E9"
+		    result     	"System.Collections.Generic.IEnumerable`1[[System.String,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetTypes"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{94296144-f7c7-4c27-9d31-79f010456fe6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91D0348"))
+		    quid       	"5857C91D0348"
+		    result     	"System.Collections.Generic.IEnumerable`1[[System.Type,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetValues"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8f2f34a5-6f00-4a8b-b116-66d6d44207bf}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91D038E"))
+		    quid       	"5857C91D038E"
+		    result     	"System.Collections.Generic.IEnumerable`1[[System.Object,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetEntityProperty"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{836d79b0-8330-4cf5-839c-b8e8092bc1a7}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91E0109"))
+		    quid       	"5857C91E0109"
+		    parameters 	(list Parameters
+			(object Parameter "key"
+			    quid       	"5857C91E0147"
+			    type       	"string")
+			(object Parameter "value"
+			    quid       	"5857C91E0164"
+			    type       	"object"))
+		    result     	"Microsoft.WindowsAzure.Storage.Table.EntityProperty"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "GetType"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b9c759e1-a7e3-4309-ae45-a2539b41079f}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91E02E1"))
+		    quid       	"5857C91E02E1"
+		    parameters 	(list Parameters
+			(object Parameter "edmType"
+			    quid       	"5857C91E0329"
+			    type       	"Microsoft.WindowsAzure.Storage.Table.EdmType"))
+		    result     	"System.Type"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "GetValue"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{fb596293-4fdf-4a9f-bea2-b40b70885b8a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91E039B"))
+		    quid       	"5857C91E039B"
+		    parameters 	(list Parameters
+			(object Parameter "property"
+			    quid       	"5857C91F000D"
+			    type       	"Microsoft.WindowsAzure.Storage.Table.EntityProperty"))
+		    result     	"object"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Properties"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4e9c0615-e300-4d7a-accb-8afe26a3a4dc}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91F00F5")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"5857C91F00F5"
+		    type       	"System.Collections.Generic.IDictionary<string,Microsoft.WindowsAzure.Storage.Table.EntityProperty>"
+		    exportControl 	"Public")
+		(object ClassAttribute "this"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{714b4c63-427e-44a9-9a0e-499761832831}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91F02EA")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"5857C91F02EA"
+		    type       	"object"
+		    exportControl 	"Public")
+		(object ClassAttribute "PartitionKey"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{dab261d8-ae60-44e4-9bde-55137cf5ac23}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C91F03A2"))
+		    quid       	"5857C91F03A2"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "RowKey"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5065acb6-8c0f-42de-a3fd-53e131376fd1}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9200023"))
+		    quid       	"5857C9200023"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Timestamp"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5509ac6b-f718-480c-a07d-3ecc51ec2ea4}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9200084"))
+		    quid       	"5857C9200084"
+		    type       	"System.DateTimeOffset"
+		    exportControl 	"Public")
+		(object ClassAttribute "ETag"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{fb93c5f7-9c3b-4db7-a313-8967d89161b9}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C92000DD"))
+		    quid       	"5857C92000DD"
+		    type       	"string"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+	    quidu      	"5857C8090174"
+	    language   	"C#")
+	(object Class "ICustomMemberProvider"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{822b70ee-843b-482c-a65f-3929febbc91d}"))
+	    quid       	"5857C920013E"
+	    stereotype 	"Interface"
+	    operations 	(list Operations
+		(object Operation "GetNames"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{6d4b735f-cd56-4a1e-94cc-a99c6dc09ac6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C92003AB"))
+		    quid       	"5857C92003AB"
+		    result     	"System.Collections.Generic.IEnumerable`1[[System.String,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetTypes"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0676e485-ed71-443b-8579-31ffca65be3c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C9210157"))
+		    quid       	"5857C9210157"
+		    result     	"System.Collections.Generic.IEnumerable`1[[System.Type,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetValues"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{40b9bb7d-786e-4c1b-abd2-387f71f58716}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"5857C92102F0"))
+		    quid       	"5857C92102F0"
+		    result     	"System.Collections.Generic.IEnumerable`1[[System.Object,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+	    quidu      	"5857C8090174"
+	    language   	"C#")
+	(object Class "CloudBlockBlobArchive"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{a2789092-809a-42f4-b4a2-df740e641652}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"5D942BBE005A"
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"5D942C8C0246"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::IBackupArchive"
+		    quidu      	"5D93AB7C0050"))
+	    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+	    quidu      	"5857C8090174"
+	    language   	"C#")
+	(object Class_Category "AzureTableMetaDataPersistenceRunTime"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime"))
+	    quid       	"5857C8EE00C4"
+	    exportControl 	"Public"
+	    logical_models 	(list unit_reference_list
+		(object Class "StorageMetadata"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ecdb7768-48a2-43e3-b21b-636f2b1ea537}"))
+		    quid       	"5857C8EF0288"
+		    operations 	(list Operations
+			(object Operation "ClassBLOBData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1b785e20-b377-4286-8e76-9f3f593c5993}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F00088"))
+			    quid       	"5857C8F00088"
+			    documentation 	
+|
+|Initializes a new instance of the  class.
+|Your entity type must expose a parameter-less constructor
+|
+			    
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "ClassBLOBData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d76811bf-b312-48fc-8966-9b8f4cae2918}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F000FD"))
+			    quid       	"5857C8F000FD"
+			    documentation 	
+|
+|Initializes a new instance of the  class.
+|Defines the PK and RK.
+|
+			    
+			    parameters 	(list Parameters
+				(object Parameter "partitionKey"
+				    quid       	"5857C8F0011B"
+				    documentation 	"The last name."
+				    type       	"string")
+				(object Parameter "rowKey"
+				    quid       	"5857C8F0013D"
+				    documentation 	"The first name."
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "ClassData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{167e91eb-852f-4a8b-86c8-5aef201baafa}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F00274")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5857C8F00274"
+			    type       	"byte"
+			    exportControl 	"Public")
+			(object ClassAttribute "MetaObjectIdentity"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{f3b3e37e-e7f1-4dff-87bb-ad84f711eee2}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F10028")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5857C8F10028"
+			    type       	"string"
+			    exportControl 	"Public"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "Member"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{e299b644-6ded-43c8-9ef9-fb44a11186e3}"))
+		    quid       	"5857C8F100A9"
+		    operations 	(list Operations
+			(object Operation "LoadRelatedObjectsData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{95bd9f7d-a983-4d36-aee7-4824b495be0b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F10369"))
+			    quid       	"5857C8F10369"
+			    parameters 	(list Parameters
+				(object Parameter "byteStream"
+				    quid       	"5857C8F10389"
+				    type       	"System.Byte[]")
+				(object Parameter "storageInstanceRef"
+				    quid       	"5857C8F1039D"
+				    type       	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageInstanceRef")
+				(object Parameter "offset"
+				    quid       	"5857C8F103BE"
+				    type       	"int")
+				(object Parameter "nextAvailablePos"
+				    quid       	"5857C8F103D1"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "LoadMemberData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{7236DC30-3D9E-4374-B887-4418817372ED}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F2003D"))
+			    quid       	"5857C8F2003D"
+			    parameters 	(list Parameters
+				(object Parameter "byteStream"
+				    quid       	"5857C8F2005D"
+				    type       	"System.Byte[]")
+				(object Parameter "storageInstanceRef"
+				    quid       	"5857C8F2006E"
+				    type       	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageInstanceRef")
+				(object Parameter "offset"
+				    quid       	"5857C8F20080"
+				    type       	"int")
+				(object Parameter "nextAvailablePos"
+				    quid       	"5857C8F20095"
+				    type       	"int"))
+			    result     	"object"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "SaveMemberData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{D9BE173D-FE9D-4C0B-9A05-E55122066740}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F20274"))
+			    quid       	"5857C8F20274"
+			    parameters 	(list Parameters
+				(object Parameter "memoryStream"
+				    quid       	"5857C8F20295"
+				    type       	"System.IO.MemoryStream")
+				(object Parameter "storageInstanceRef"
+				    quid       	"5857C8F202A7"
+				    type       	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageInstanceRef"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "Serialize"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9D8297B0-9C73-49F9-AEB1-2073DE3215CC}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F202EF"))
+			    quid       	"5857C8F202EF"
+			    parameters 	(list Parameters
+				(object Parameter "byteStream"
+				    quid       	"5857C8F20314"
+				    type       	"System.Byte[]")
+				(object Parameter "offset"
+				    quid       	"5857C8F20329"
+				    type       	"int")
+				(object Parameter "nextAvailablePos"
+				    quid       	"5857C8F2034B"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "Member"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{EF144D34-AADF-4969-8E16-87E892DA16E8}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F203A7"))
+			    quid       	"5857C8F203A7"
+			    parameters 	(list Parameters
+				(object Parameter "_class"
+				    quid       	"5857C8F203C9"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.Class")
+				(object Parameter "metaObject"
+				    quid       	"5857C8F203E4"
+				    type       	"OOAdvantech.MetaDataRepository.MetaObject"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "Member"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9D0A9F77-4677-46B9-8EED-5DA990E67949}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F30067"))
+			    quid       	"5857C8F30067"
+			    parameters 	(list Parameters
+				(object Parameter "_class"
+				    quid       	"5857C8F30098"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.Class")
+				(object Parameter "byteStream"
+				    quid       	"5857C8F300AE"
+				    type       	"System.Byte[]")
+				(object Parameter "offset"
+				    quid       	"5857C8F300C4"
+				    type       	"int")
+				(object Parameter "nextAvailablePos"
+				    quid       	"5857C8F300D8"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "Buffer"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{933A071B-CA12-478C-B30F-F2A20EFAABBE}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F30241")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F30241"
+			    type       	"byte")
+			(object ClassAttribute "MetaData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{E09419DB-D709-4992-9773-8BDA3F259300}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F3030E")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F3030E"
+			    type       	"OOAdvantech.MetaDataRepository.MetaObject"
+			    exportControl 	"Public")
+			(object ClassAttribute "Type"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6ac35e6f-4d73-4820-83db-09b80f379743}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F40093")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F40093"
+			    type       	"System.Type")
+			(object ClassAttribute "FieldInfo"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{A9B40393-9E5E-46FC-A158-B78B104FD14B}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F401CA")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F401CA"
+			    type       	"System.Reflection.FieldInfo"
+			    exportControl 	"Public")
+			(object ClassAttribute "FastFieldAccessor"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9afb21f1-6302-410e-be93-f80746c3e95b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F40230")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F40230"
+			    type       	"OOAdvantech.AccessorBuilder.FieldPropertyAccessor"
+			    exportControl 	"Public")
+			(object ClassAttribute "TypeFullName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{064C378A-193E-4285-8458-49D96661EED9}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F40311")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F40311"
+			    type       	"string")
+			(object ClassAttribute "TypeAssemblyName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a7b83bb4-0232-4c7c-818b-c79d3ad3a1ae}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F50009")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8F50009"
+			    type       	"string"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "ObjectBLOBData"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5987006d-6ce7-4702-9ba7-57d8c87add80}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"5857C8F5005B"
+		    operations 	(list Operations
+			(object Operation "ObjectBLOBData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{02986e07-a622-457c-b905-426a8b6341ae}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F50214"))
+			    quid       	"5857C8F50214"
+			    documentation 	
+|
+|Initializes a new instance of the  class.
+|Your entity type must expose a parameter-less constructor
+|
+			    
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "ObjectBLOBData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{e1595b35-af2b-497c-870a-3d0446384779}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F50285"))
+			    quid       	"5857C8F50285"
+			    documentation 	
+|
+|Initializes a new instance of the  class.
+|Defines the PK and RK.
+|
+			    
+			    parameters 	(list Parameters
+				(object Parameter "partitionKey"
+				    quid       	"5857C8F502A4"
+				    documentation 	"The last name."
+				    type       	"string")
+				(object Parameter "rowKey"
+				    quid       	"5857C8F502C2"
+				    documentation 	"The first name."
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "ObjectData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{2746d151-5c1a-4623-bd98-5f077305dafe}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F6001B")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5857C8F6001B"
+			    type       	"byte"
+			    exportControl 	"Public")
+			(object ClassAttribute "ClassBLOBSID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6a00075a-e044-4944-a4a8-c5df33dac37a}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F60125")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5857C8F60125"
+			    type       	"string"
+			    exportControl 	"Public"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "ObjectStorage"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{9b821af1-931e-4ef6-bb98-b4b12f7d606a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"5857C8F601A0"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C8F602AC"
+			    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::ObjectStorage"
+			    quidu      	"40C55F4000D0"))
+		    operations 	(list Operations
+			(object Operation "ObjectStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{e4799edd-7fb5-4153-9b78-34cde92800dc}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F90127"))
+			    quid       	"5857C8F90127"
+			    parameters 	(list Parameters
+				(object Parameter "storageName"
+				    quid       	"5857C8F9014E"
+				    type       	"string")
+				(object Parameter "storageLocation"
+				    quid       	"5857C8F90161"
+				    type       	"string")
+				(object Parameter "newStorage"
+				    quid       	"5857C8F90177"
+				    type       	"bool")
+				(object Parameter "account"
+				    quid       	"5857C8F9018C"
+				    type       	"Microsoft.WindowsAzure.Storage.CloudStorageAccount"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "LoadStorageObjects"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{df561233-c7f1-40db-8ea1-639beb0caee5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F901C9"))
+			    quid       	"5857C8F901C9"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Protected"
+			    uid        	0)
+			(object Operation "AbortChanges"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{42d05b9f-e9b2-4525-8f89-e86cfc33a92b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F9020A"))
+			    quid       	"5857C8F9020A"
+			    parameters 	(list Parameters
+				(object Parameter "theTransaction"
+				    quid       	"5857C8F9022F"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "BeginChanges"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{508a84f5-c499-4e87-8e46-e0c616c763ed}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F90256"))
+			    quid       	"5857C8F90256"
+			    parameters 	(list Parameters
+				(object Parameter "theTransaction"
+				    quid       	"5857C8F90275"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CommitChanges"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d42ab603-1e76-4214-8c1c-568d87962719}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F90294"))
+			    quid       	"5857C8F90294"
+			    parameters 	(list Parameters
+				(object Parameter "theTransaction"
+				    quid       	"5857C8F902B0"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateBuildContainedObjectIndiciesCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5562bb79-ce50-4880-8312-ab4888faee4d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F902CB"))
+			    quid       	"5857C8F902CB"
+			    parameters 	(list Parameters
+				(object Parameter "collection"
+				    quid       	"5857C8F902ED"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.IndexedCollection"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateDataLoader"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{866a7294-9b18-437e-95ac-949c6ca48d6b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F90312"))
+			    quid       	"5857C8F90312"
+			    parameters 	(list Parameters
+				(object Parameter "dataNode"
+				    quid       	"5857C8F90342"
+				    type       	"OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode")
+				(object Parameter "dataLoaderMetadata"
+				    quid       	"5857C8F90353"
+				    type       	"OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoaderMetadata"))
+			    result     	"OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoader"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateDeleteStorageInstanceCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{70b10743-6daa-4116-90a7-d3f8b6d6dc01}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F90371"))
+			    quid       	"5857C8F90371"
+			    parameters 	(list Parameters
+				(object Parameter "storageInstance"
+				    quid       	"5857C8F90396"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef")
+				(object Parameter "deleteOption"
+				    quid       	"5857C8F903AC"
+				    type       	"OOAdvantech.PersistenceLayer.DeleteOptions"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateLinkCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c8133e3f-a1d9-41f6-81d6-ea77db5fd540}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8F903CE"))
+			    quid       	"5857C8F903CE"
+			    parameters 	(list Parameters
+				(object Parameter "roleA"
+				    quid       	"5857C8FA0009"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "roleB"
+				    quid       	"5857C8FA001B"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "relationObject"
+				    quid       	"5857C8FA002E"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "linkInitiatorAssociationEnd"
+				    quid       	"5857C8FA0042"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent")
+				(object Parameter "index"
+				    quid       	"5857C8FA0056"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateMoveStorageInstanceCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{7569a474-2719-4ccd-a479-6318b2d979aa}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA007A"))
+			    quid       	"5857C8FA007A"
+			    parameters 	(list Parameters
+				(object Parameter "storageInstance"
+				    quid       	"5857C8FA009B"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateNewStorageInstanceCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6319d67a-0965-483a-a816-1b95f457332f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA00BC"))
+			    quid       	"5857C8FA00BC"
+			    parameters 	(list Parameters
+				(object Parameter "storageInstance"
+				    quid       	"5857C8FA00E9"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateUnlinkAllObjectCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d720e308-773d-46c0-b3bd-2dbcd2448478}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA010B"))
+			    quid       	"5857C8FA010B"
+			    parameters 	(list Parameters
+				(object Parameter "sourceStorageInstance"
+				    quid       	"5857C8FA012B"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "associationEnd"
+				    quid       	"5857C8FA013C"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.AssociationEnd"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateUnLinkCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a285268c-d551-43c2-bb9b-ac2e90eaf5f3}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA0160"))
+			    quid       	"5857C8FA0160"
+			    parameters 	(list Parameters
+				(object Parameter "roleA"
+				    quid       	"5857C8FA017F"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "roleB"
+				    quid       	"5857C8FA018E"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "relationObject"
+				    quid       	"5857C8FA019D"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "linkInitiatorAssociationEnd"
+				    quid       	"5857C8FA01AD"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent")
+				(object Parameter "index"
+				    quid       	"5857C8FA01BF"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateUpdateLinkIndexCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{40bfb28f-47d8-4510-ad89-d71cfb1516f6}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA01E6"))
+			    quid       	"5857C8FA01E6"
+			    parameters 	(list Parameters
+				(object Parameter "roleA"
+				    quid       	"5857C8FA0205"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "roleB"
+				    quid       	"5857C8FA0214"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "relationObject"
+				    quid       	"5857C8FA0224"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "linkInitiatorAssociationEnd"
+				    quid       	"5857C8FA0234"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent")
+				(object Parameter "index"
+				    quid       	"5857C8FA0245"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateUpdateReferentialIntegrity"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{72740f37-03ef-48f8-966b-f7f2f526b428}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA026A"))
+			    quid       	"5857C8FA026A"
+			    parameters 	(list Parameters
+				(object Parameter "storageInstanceRef"
+				    quid       	"5857C8FA029D"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateUpdateStorageInstanceCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{ddf6ba58-4cdc-46e3-ba45-596608963778}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA02C1"))
+			    quid       	"5857C8FA02C1"
+			    parameters 	(list Parameters
+				(object Parameter "storageInstanceRef"
+				    quid       	"5857C8FA02E3"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "Execute"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{06fa8799-689c-4bb6-baf5-9c10f8a162db}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA030E"))
+			    quid       	"5857C8FA030E"
+			    parameters 	(list Parameters
+				(object Parameter "OQLStatement"
+				    quid       	"5857C8FA032E"
+				    type       	"string"))
+			    result     	"OOAdvantech.Collections.StructureSet"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetObject"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{cec201f9-5077-410c-8423-414fdef41926}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA0351"))
+			    quid       	"5857C8FA0351"
+			    parameters 	(list Parameters
+				(object Parameter "persistentObjectUri"
+				    quid       	"5857C8FA0371"
+				    type       	"string"))
+			    result     	"object"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetPersistentObjectUri"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{096141be-50b4-486a-b8d4-eeb98eb28108}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FA0394"))
+			    quid       	"5857C8FA0394"
+			    parameters 	(list Parameters
+				(object Parameter "obj"
+				    quid       	"5857C8FA03B8"
+				    type       	"object"))
+			    result     	"string"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetTemporaryObjectID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c502ddbf-75aa-4122-8d1c-c3a9beddb193}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB0000"))
+			    quid       	"5857C8FB0000"
+			    result     	"OOAdvantech.PersistenceLayer.ObjectID"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "MakeChangesDurable"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{89ebcce7-fc6a-485b-9173-f889b43c842d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB0040"))
+			    quid       	"5857C8FB0040"
+			    parameters 	(list Parameters
+				(object Parameter "theTransaction"
+				    quid       	"5857C8FB005F"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "PrepareForChanges"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{57256822-3c6e-496f-8bfd-02a743181bc4}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB0080"))
+			    quid       	"5857C8FB0080"
+			    parameters 	(list Parameters
+				(object Parameter "theTransaction"
+				    quid       	"5857C8FB00A0"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.TransactionContext"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateStorageInstanceRef"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{8466c18a-4bbd-4f76-aa3a-47f0cdab015f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB00C8"))
+			    quid       	"5857C8FB00C8"
+			    parameters 	(list Parameters
+				(object Parameter "memoryInstance"
+				    quid       	"5857C8FB00E9"
+				    type       	"object")
+				(object Parameter "objectID"
+				    quid       	"5857C8FB0100"
+				    type       	"OOAdvantech.PersistenceLayer.ObjectID"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetStorageCell"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{33559478-0cf7-4776-9662-96eff4354def}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB0134"))
+			    quid       	"5857C8FB0134"
+			    parameters 	(list Parameters
+				(object Parameter "storageInstanceAgent"
+				    quid       	"5857C8FB0157"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent"))
+			    result     	"OOAdvantech.MetaDataRepository.StorageCell"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateUnlinkAllObjectCommand"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{8d191d9e-8ee9-493b-b715-89f8c54ec9af}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB018F"))
+			    quid       	"5857C8FB018F"
+			    parameters 	(list Parameters
+				(object Parameter "deletedOutStorageInstanceRef"
+				    quid       	"5857C8FB01B9"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent")
+				(object Parameter "AssociationEnd"
+				    quid       	"5857C8FB01D6"
+				    type       	"OOAdvantech.MetaDataRepository.AssociationEnd")
+				(object Parameter "LinkedObjectsStorageCell"
+				    quid       	"5857C8FB01E9"
+				    type       	"OOAdvantech.MetaDataRepository.StorageCell"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateStorageInstanceRef"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{24b5ba53-8bde-4132-b6b5-628df047722c}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB0214"))
+			    quid       	"5857C8FB0214"
+			    parameters 	(list Parameters
+				(object Parameter "memoryInstance"
+				    quid       	"5857C8FB023C"
+				    type       	"object")
+				(object Parameter "objectID"
+				    quid       	"5857C8FB024D"
+				    type       	"OOAdvantech.PersistenceLayer.ObjectID")
+				(object Parameter "storageCell"
+				    quid       	"5857C8FB025D"
+				    type       	"OOAdvantech.MetaDataRepository.StorageCell"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetStorageCellReference"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c8428f95-1b6f-4e6a-a7a8-04e084265593}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB02AD"))
+			    quid       	"5857C8FB02AD"
+			    parameters 	(list Parameters
+				(object Parameter "storageCell"
+				    quid       	"5857C8FB02CE"
+				    type       	"OOAdvantech.MetaDataRepository.StorageCell"))
+			    result     	"OOAdvantech.MetaDataRepository.StorageCellReference"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetStorageCells"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{0950f5e9-fce9-4c91-8d0d-23ca85808001}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FB0383"))
+			    quid       	"5857C8FB0383"
+			    parameters 	(list Parameters
+				(object Parameter "classifier"
+				    quid       	"5857C8FB03BB"
+				    type       	"OOAdvantech.MetaDataRepository.Classifier")
+				(object Parameter "timePeriodStartDate"
+				    quid       	"5857C8FB03CD"
+				    type       	"System.DateTime")
+				(object Parameter "timePeriodEndDate"
+				    quid       	"5857C8FB03E0"
+				    type       	"System.DateTime"))
+			    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetLinkedStorageCells"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c8edb2a4-1f61-4b14-90e8-0a81e3833e85}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC0033"))
+			    quid       	"5857C8FC0033"
+			    parameters 	(list Parameters
+				(object Parameter "associationEnd"
+				    quid       	"5857C8FC0055"
+				    type       	"OOAdvantech.MetaDataRepository.AssociationEnd")
+				(object Parameter "valueTypePath"
+				    quid       	"5857C8FC0068"
+				    type       	"OOAdvantech.MetaDataRepository.ValueTypePath")
+				(object Parameter "relatedStorageCell"
+				    quid       	"5857C8FC007B"
+				    type       	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"))
+			    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.RelatedStorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetStorageCells"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{2f3242bb-a92b-4a5a-93c1-a953eb1a5f3f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC00C9"))
+			    quid       	"5857C8FC00C9"
+			    parameters 	(list Parameters
+				(object Parameter "classifier"
+				    quid       	"5857C8FC00EB"
+				    type       	"OOAdvantech.MetaDataRepository.Classifier"))
+			    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetRelationObjectsStorageCells"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{3bcc5beb-59d8-4c1c-bfff-bf805cf7012e}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC0128"))
+			    quid       	"5857C8FC0128"
+			    parameters 	(list Parameters
+				(object Parameter "association"
+				    quid       	"5857C8FC015C"
+				    type       	"OOAdvantech.MetaDataRepository.Association")
+				(object Parameter "relatedStorageCells"
+				    quid       	"5857C8FC016F"
+				    type       	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]")
+				(object Parameter "storageCellsRole"
+				    quid       	"5857C8FC0182"
+				    type       	"OOAdvantech.MetaDataRepository.Roles"))
+			    result     	"OOAdvantech.Collections.Generic.Set`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetStorageCell"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5ed051db-f882-4c6e-bd97-5b9758272eac}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC01B3"))
+			    quid       	"5857C8FC01B3"
+			    parameters 	(list Parameters
+				(object Parameter "storageCellSerialNumber"
+				    quid       	"5857C8FC01D5"
+				    type       	"int"))
+			    result     	"OOAdvantech.MetaDataRepository.StorageCell"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetStorageCell"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c3dbb657-b75f-49ef-828e-5d80ff8b86e0}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC0203"))
+			    quid       	"5857C8FC0203"
+			    parameters 	(list Parameters
+				(object Parameter "ObjectID"
+				    quid       	"5857C8FC0226"
+				    type       	"object"))
+			    result     	"OOAdvantech.MetaDataRepository.StorageCell"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "StorageMetaData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6d440757-0146-4f76-80b6-861c056eeb7f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC024C"))
+			    quid       	"5857C8FC024C"
+			    type       	"OOAdvantech.PersistenceLayer.Storage"
+			    exportControl 	"Public")
+			(object ClassAttribute "Account"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9e9fe403-9cf3-4455-a6a2-89d782c3c3b9}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FC0359")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8FC0359"
+			    type       	"Microsoft.WindowsAzure.Storage.CloudStorageAccount")
+			(object ClassAttribute "StorageObjects"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{51f19b4e-9c7d-4fd6-bfa5-b2f8a9756f50}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FD00A8")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8FD00A8"
+			    type       	"OOAdvantech.Collections.Generic.Dictionary<OOAdvantech.PersistenceLayer.ObjectID,OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageInstanceRef>"
+			    exportControl 	"Implementation")
+			(object ClassAttribute "_StorageMetaData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6daf1980-29ee-4c4e-ba40-68df3049126d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FD0199")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8FD0199"
+			    type       	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.Storage"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "RelResolver"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{47f6cbea-89a0-49c2-8f19-42f0a9a1091e}"))
+		    quid       	"5857C8FD01F6"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C8FD032C"
+			    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::RelResolver"
+			    quidu      	"3EC692A00284"))
+		    operations 	(list Operations
+			(object Operation "Contains"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{8f08831a-f4c0-4a55-8f7b-2f08eaa84130}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FE0226"))
+			    quid       	"5857C8FE0226"
+			    parameters 	(list Parameters
+				(object Parameter "value"
+				    quid       	"5857C8FE024C"
+				    type       	"object"))
+			    result     	"bool"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetRelationStream"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a4bbeb75-f441-4ecc-b516-7f7b7f423c4f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FE0277"))
+			    quid       	"5857C8FE0277"
+			    result     	"System.Byte[]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetLinkedObjects"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6DA556CA-B8DF-475C-8CC3-3F577595E4FD}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FE02DD"))
+			    quid       	"5857C8FE02DD"
+			    parameters 	(list Parameters
+				(object Parameter "criterion"
+				    quid       	"5857C8FE02FF"
+				    type       	"string"))
+			    result     	"System.Collections.Generic.List`1[[System.Object,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RelResolver"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{75CED836-C236-4CC6-A2E3-653B5FC9B7F0}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FF0039"))
+			    quid       	"5857C8FF0039"
+			    parameters 	(list Parameters
+				(object Parameter "theOwner"
+				    quid       	"5857C8FF0061"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef")
+				(object Parameter "associationEnd"
+				    quid       	"5857C8FF0076"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.AssociationEnd")
+				(object Parameter "fastFieldAccessor"
+				    quid       	"5857C8FF008E"
+				    type       	"OOAdvantech.AccessorBuilder.FieldPropertyAccessor"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetLinkedObjectsCount"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{CBEEE524-C276-4481-8F60-01D559248C7E}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FF00B0"))
+			    quid       	"5857C8FF00B0"
+			    result     	"long"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetLinkedStorageInstanceRefs"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{7C25A119-74A8-4952-8E34-91CFFD19B1C9}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FF00F9"))
+			    quid       	"5857C8FF00F9"
+			    parameters 	(list Parameters
+				(object Parameter "OperativeObjectOnly"
+				    quid       	"5857C8FF0121"
+				    type       	"bool"))
+			    result     	"System.Collections.Generic.List`1[[System.Object,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "RelationDataSream"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{b617af12-3e63-4d99-8427-932f45c267b3}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C8FF028C")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C8FF028C"
+			    type       	"byte"
+			    exportControl 	"Implementation"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "Storage"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{a93d9a6d-8813-4c38-9f1c-2b736d1d8cfb}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Identity"
+			    value      	"{a93d9a6d-8813-4c38-9f1c-2b736d1d8cfb}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"5857C8FF02E8"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C9000040"
+			    supplier   	"Logical View::OOAdvantech::MetaDataRepository::Storage"
+			    quidu      	"3F3B27560138"))
+		    operations 	(list Operations
+			(object Operation "Storage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9e7e3f3b-7172-42c9-b8f2-a102c2954693}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90402E7"))
+			    quid       	"5857C90402E7"
+			    parameters 	(list Parameters
+				(object Parameter "storageName"
+				    quid       	"5857C904030C"
+				    type       	"string")
+				(object Parameter "storageLocation"
+				    quid       	"5857C9040321"
+				    type       	"string")
+				(object Parameter "storageType"
+				    quid       	"5857C9040335"
+				    type       	"string")
+				(object Parameter "newStorage"
+				    quid       	"5857C904034F"
+				    type       	"bool")
+				(object Parameter "account"
+				    quid       	"5857C904036C"
+				    type       	"Microsoft.WindowsAzure.Storage.CloudStorageAccount"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{85362768-1a9b-4b7d-a168-3c635efb36c0}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9040390"))
+			    quid       	"5857C9040390"
+			    parameters 	(list Parameters
+				(object Parameter "assembliesFullNames"
+				    quid       	"5857C90403B7"
+				    type       	"System.String[]"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{75aac540-7624-4a9d-9860-822a2c1b8e32}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90403DF"))
+			    quid       	"5857C90403DF"
+			    parameters 	(list Parameters
+				(object Parameter "assemblyFullName"
+				    quid       	"5857C905001C"
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetReferenceToComponents"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{2cc93afb-06dd-4499-962f-4aa90806a4ef}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90501CD"))
+			    quid       	"5857C90501CD"
+			    parameters 	(list Parameters
+				(object Parameter "Component"
+				    quid       	"5857C90501F3"
+				    type       	"OOAdvantech.MetaDataRepository.Component")
+				(object Parameter "components"
+				    quid       	"5857C905021D"
+				    type       	"System.Collections.Generic.List<OOAdvantech.MetaDataRepository.Component>"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Private"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{afe64c88-69e4-4666-a20f-33a317daaa1b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9050279"))
+			    quid       	"5857C9050279"
+			    parameters 	(list Parameters
+				(object Parameter "Component"
+				    quid       	"5857C905029E"
+				    type       	"OOAdvantech.MetaDataRepository.Component"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterClass"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d1e28d46-818c-4260-a30e-888cd7d8e85e}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90503BA"))
+			    quid       	"5857C90503BA"
+			    parameters 	(list Parameters
+				(object Parameter "insertedClassBlobs"
+				    quid       	"5857C9060006"
+				    type       	"System.Collections.Generic.Dictionary<string,OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ClassBLOB>")
+				(object Parameter "_class"
+				    quid       	"5857C9060030"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.Class"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Protected"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a71c036b-39eb-4baf-97e3-28453cae9154}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9060066"))
+			    quid       	"5857C9060066"
+			    parameters 	(list Parameters
+				(object Parameter "assemblyFullName"
+				    quid       	"5857C906008F"
+				    type       	"string")
+				(object Parameter "mappingDataResourceName"
+				    quid       	"5857C90600A3"
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1d03306c-3d6c-443c-8a17-443550fa5af2}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90600CC"))
+			    quid       	"5857C90600CC"
+			    parameters 	(list Parameters
+				(object Parameter "assemblyFullName"
+				    quid       	"5857C90600F7"
+				    type       	"string")
+				(object Parameter "mappingData"
+				    quid       	"5857C9060118"
+				    type       	"System.Xml.Linq.XDocument"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "LoadClassBlobs"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{63988f37-da7e-48a0-8919-42a21e8f3add}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90601C6"))
+			    quid       	"5857C90601C6"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Private"
+			    uid        	0)
+			(object Operation "Storage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{99824da2-b713-4583-bb14-945c586fac26}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C906021C"))
+			    quid       	"5857C906021C"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Private"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "newStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{cd739d4f-90a0-4dce-827c-6881cc3b1d73}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9070067")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9070067"
+			    type       	"bool")
+			(object ClassAttribute "StorageType"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{99fa3257-50f1-4183-a276-fca284309cf6}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9070198")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9070198"
+			    type       	"string")
+			(object ClassAttribute "ClassBLOBDataTable"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{cb961e4c-5bbc-4c81-a497-95ebc2d1be45}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9070305")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9070305"
+			    type       	"Microsoft.WindowsAzure.Storage.Table.CloudTable")
+			(object ClassAttribute "ObjectBLOBDataTable"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{3345967a-891f-4096-9822-90cf0b78d61f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C908006A")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C908006A"
+			    type       	"Microsoft.WindowsAzure.Storage.Table.CloudTable")
+			(object ClassAttribute "Account"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{65a1dbc5-fd0c-4e00-99e3-b67a5be6f106}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90801A8")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C90801A8"
+			    type       	"Microsoft.WindowsAzure.Storage.CloudStorageAccount")
+			(object ClassAttribute "StorageMetadata"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c23223b4-7b23-42af-b02e-56f3d813eb80}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9080246")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9080246"
+			    type       	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata")
+			(object ClassAttribute "ClassBLOBDataTableName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{30b03425-58ad-4ab0-9a0d-7db915cd613e}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9080364")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9080364"
+			    type       	"string"
+			    exportControl 	"Public")
+			(object ClassAttribute "ObjectBLOBDataTableName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{91ed94bd-e646-4803-b8b8-0f55de5c5826}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90900A4")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C90900A4"
+			    type       	"string"
+			    exportControl 	"Public")
+			(object ClassAttribute "ClassBLOBs"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6e1d93bc-2481-4ad0-9964-62b6f4a28b7b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9090226")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9090226"
+			    type       	"OOAdvantech.Collections.Generic.Dictionary<System.Guid,OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ClassBLOB>"
+			    exportControl 	"Public")
+			(object ClassAttribute "BackwardCompatibilities"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9200c161-65c8-4ff0-bd3c-023e07e7268c}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90A0050")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C90A0050"
+			    type       	"System.Collections.Generic.Dictionary<string,string>"
+			    exportControl 	"Implementation"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#"
+		    persistence 	"Persistent")
+		(object Class "StorageCell"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{64a04d2d-958b-48aa-a981-84fbdeb3081f}"))
+		    quid       	"5857C90A00B9"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C90A022F"
+			    supplier   	"Logical View::OOAdvantech::MetaDataRepository::StorageCell"
+			    quidu      	"43A043F300D8"))
+		    operations 	(list Operations
+			(object Operation "ActivateAllObjects"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d4a6f4e2-5a23-4f49-84b4-ea7bb511969e}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90C008B"))
+			    quid       	"5857C90C008B"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetLinkedStorageCells"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{64cdb9bc-0779-4d2f-9cf2-20f405bb571a}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90C00DE"))
+			    quid       	"5857C90C00DE"
+			    parameters 	(list Parameters
+				(object Parameter "associationIdentity"
+				    quid       	"5857C90C0118"
+				    type       	"OOAdvantech.MetaDataRepository.MetaObjectID")
+				(object Parameter "linkedStorageCellsRole"
+				    quid       	"5857C90C012E"
+				    type       	"OOAdvantech.MetaDataRepository.Roles"))
+			    result     	"OOAdvantech.Collections.Generic.List`1[[OOAdvantech.MetaDataRepository.StorageCell,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "StorageCell"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{35213782-6fc5-4843-95ef-7aa2d8e648f7}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90C0161"))
+			    quid       	"5857C90C0161"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Protected"
+			    uid        	0)
+			(object Operation "StorageCell"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{026a4b4e-8f63-4531-b86c-7379d7a8141f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90C02CE"))
+			    quid       	"5857C90C02CE"
+			    parameters 	(list Parameters
+				(object Parameter "storageIntentity"
+				    quid       	"5857C90C0302"
+				    type       	"string")
+				(object Parameter "_class"
+				    quid       	"5857C90C0320"
+				    type       	"OOAdvantech.MetaDataRepository.Class")
+				(object Parameter "_namespace"
+				    quid       	"5857C90C033D"
+				    type       	"OOAdvantech.MetaDataRepository.Namespace")
+				(object Parameter "objects"
+				    quid       	"5857C90C035C"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetExtensionMetaObjects"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d4b564b8-d62c-4782-b775-fbe54f2b5a63}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90C03A1"))
+			    quid       	"5857C90C03A1"
+			    result     	"System.Collections.Generic.List`1[[System.Object,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "ObjectIdentityType"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9f05c410-75b1-4875-9531-3bf244231fe8}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90D0009"))
+			    quid       	"5857C90D0009"
+			    type       	"OOAdvantech.MetaDataRepository.ObjectIdentityType"
+			    exportControl 	"Public")
+			(object ClassAttribute "SerialNumber"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{e384c491-9880-44ed-8343-30ea7a5cc995}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90D004B"))
+			    quid       	"5857C90D004B"
+			    type       	"int"
+			    exportControl 	"Public")
+			(object ClassAttribute "AllObjectsInActiveMode"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{b4b6fde8-1140-4660-8295-c238e7246145}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90D0094"))
+			    quid       	"5857C90D0094"
+			    type       	"bool"
+			    exportControl 	"Public")
+			(object ClassAttribute "StorageIdentity"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{3b032dd0-65b1-4f6f-a5c7-ce75bb84040e}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90D00F4"))
+			    quid       	"5857C90D00F4"
+			    type       	"string"
+			    exportControl 	"Public")
+			(object ClassAttribute "Objects"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{b3451f20-4b12-44b6-a551-a193b5068ec5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90D01E0")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C90D01E0"
+			    type       	"OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection"
+			    exportControl 	"Implementation")
+			(object ClassAttribute "_StorageIntentity"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1187a27d-d19a-40f9-9994-c06c035df12d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C90D02EE")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C90D02EE"
+			    type       	"string"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "StorageInstanceRef"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b97c278d-9909-4c76-8b2a-40f59973fcf0}"))
+		    quid       	"5857C90D034E"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C90E00AA"
+			    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::StorageInstanceRef"
+			    quidu      	"3EA2AB6203CA"))
+		    operations 	(list Operations
+			(object Operation "StorageInstanceRef"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{43A985E6-225F-4C25-A0B8-C93701547847}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C911004A"))
+			    quid       	"5857C911004A"
+			    parameters 	(list Parameters
+				(object Parameter "memoryInstance"
+				    quid       	"5857C9110087"
+				    type       	"object")
+				(object Parameter "activeStorageSession"
+				    quid       	"5857C911009E"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.ObjectStorage")
+				(object Parameter "objectID"
+				    quid       	"5857C91100B4"
+				    type       	"OOAdvantech.PersistenceLayer.ObjectID"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateRelationResolver"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{70DC887E-37DC-4C7C-8AAE-359E64544CD5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91100E1"))
+			    quid       	"5857C91100E1"
+			    parameters 	(list Parameters
+				(object Parameter "thePersistentAssociationEnd"
+				    quid       	"5857C9110106"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.AssociationEnd")
+				(object Parameter "fastFieldAccessor"
+				    quid       	"5857C911011B"
+				    type       	"OOAdvantech.AccessorBuilder.FieldPropertyAccessor"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.RelResolver"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateRelationResolver"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{fb199bd1-53ed-47d9-8ffc-535fc9d6024d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9110147"))
+			    quid       	"5857C9110147"
+			    parameters 	(list Parameters
+				(object Parameter "thePersistentAssociationEnd"
+				    quid       	"5857C911016C"
+				    type       	"OOAdvantech.DotNetMetaDataRepository.AssociationEnd")
+				(object Parameter "fastFieldAccessor"
+				    quid       	"5857C9110182"
+				    type       	"OOAdvantech.AccessorBuilder.FieldPropertyAccessor")
+				(object Parameter "owner"
+				    quid       	"5857C91101A7"
+				    type       	"OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.RelResolver"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "LoadObjectState"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{A523B5AF-7480-4275-98F4-B5592364E61A}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91101EE"))
+			    quid       	"5857C91101EE"
+			    parameters 	(list Parameters
+				(object Parameter "byteStream"
+				    quid       	"5857C9110221"
+				    type       	"System.Byte[]")
+				(object Parameter "offset"
+				    quid       	"5857C911023C"
+				    type       	"int")
+				(object Parameter "nextAvailablePos"
+				    quid       	"5857C9110256"
+				    type       	"int"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "ResolveRelationships"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{0585dba6-9f1e-4adf-9a5a-acd227767174}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9110286"))
+			    quid       	"5857C9110286"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "SaveObjectState"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{0840127A-0D5D-46CD-B2D3-B4D13D3E037B}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91102ED"))
+			    quid       	"5857C91102ED"
+			    parameters 	(list Parameters
+				(object Parameter "memoryStream"
+				    quid       	"5857C9110315"
+				    type       	"System.IO.MemoryStream"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "StorageInstanceSet"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{21f8088e-428e-43f4-9224-5182f6b49122}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9110334"))
+			    quid       	"5857C9110334"
+			    type       	"OOAdvantech.MetaDataRepository.StorageCell"
+			    exportControl 	"Public")
+			(object ClassAttribute "PersistentObjectID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a6504ede-a7e4-4fb8-990a-7a6c84475089}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9110373"))
+			    quid       	"5857C9110373"
+			    type       	"OOAdvantech.PersistenceLayer.ObjectID"
+			    exportControl 	"Public")
+			(object ClassAttribute "_StorageInstanceSet"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{ad86f68e-b35b-44ba-8b23-151a22bdaffb}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9120053")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9120053"
+			    type       	"OOAdvantech.MetaDataRepository.StorageCell")
+			(object ClassAttribute "SerializationMetada"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{7933B97E-428C-47E6-BBA1-A8EADFC47285}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9120126")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9120126"
+			    type       	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ClassBLOB"
+			    exportControl 	"Public")
+			(object ClassAttribute "LinkClassRoleAOID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{f680e109-e0e5-4b56-b975-be6e84a71d17}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9120214")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9120214"
+			    type       	"System.Guid"
+			    exportControl 	"Implementation")
+			(object ClassAttribute "LinkClassRoleBOID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{12476577-a9df-4934-8ae7-703cf5203c34}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9120323")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"5857C9120323"
+			    type       	"System.Guid"
+			    exportControl 	"Implementation"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "StorageProvider"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3dc902aa-cda5-4694-8f5e-ad91a896bb47}"))
+		    quid       	"5857C91203AB"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C91300F7"
+			    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::StorageProvider"
+			    quidu      	"3EA2DFB50078"))
+		    operations 	(list Operations
+			(object Operation "StorageProvider"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5dbf7d44-f9d6-456d-9364-7f01d2703ba5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C914004C"))
+			    quid       	"5857C914004C"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "AllowEmbeddedStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{701dddf1-0a79-464a-a018-31cc88887df3}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9140093"))
+			    quid       	"5857C9140093"
+			    result     	"bool"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "AttachStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a522ddc5-d679-4569-82a8-ee24c242871d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91400CB"))
+			    quid       	"5857C91400CB"
+			    parameters 	(list Parameters
+				(object Parameter "storageName"
+				    quid       	"5857C91400F1"
+				    type       	"string")
+				(object Parameter "storageLocation"
+				    quid       	"5857C9140105"
+				    type       	"string")
+				(object Parameter "nativeStorageConnectionString"
+				    quid       	"5857C9140118"
+				    type       	"string"))
+			    result     	"OOAdvantech.PersistenceLayer.Storage"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "CreateNewLogicalStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{eb225c35-2734-4152-aa93-6910093b8ea4}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9140154"))
+			    quid       	"5857C9140154"
+			    parameters 	(list Parameters
+				(object Parameter "hostingObjectStorage"
+				    quid       	"5857C914017A"
+				    type       	"OOAdvantech.PersistenceLayer.ObjectStorage")
+				(object Parameter "storageName"
+				    quid       	"5857C914018C"
+				    type       	"string"))
+			    result     	"OOAdvantech.PersistenceLayer.ObjectStorage"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "DeleteStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{86d28256-f366-4497-8eb0-bdd72bfc0fbb}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91401AC"))
+			    quid       	"5857C91401AC"
+			    parameters 	(list Parameters
+				(object Parameter "storageName"
+				    quid       	"5857C91401E0"
+				    type       	"string")
+				(object Parameter "storageLocation"
+				    quid       	"5857C91401F2"
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetHostComuterName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5b063015-c166-4523-b9f1-17da66a8efb2}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9140216"))
+			    quid       	"5857C9140216"
+			    parameters 	(list Parameters
+				(object Parameter "StorageName"
+				    quid       	"5857C914023A"
+				    type       	"string")
+				(object Parameter "StorageLocation"
+				    quid       	"5857C914024D"
+				    type       	"string"))
+			    result     	"string"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetInstanceName"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{2915029c-6eaa-4dcc-a3f8-5168fe76300f}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C914026D"))
+			    quid       	"5857C914026D"
+			    parameters 	(list Parameters
+				(object Parameter "StorageName"
+				    quid       	"5857C9140291"
+				    type       	"string")
+				(object Parameter "StorageLocation"
+				    quid       	"5857C91402A4"
+				    type       	"string"))
+			    result     	"string"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "GetNativeStorageID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{eba3ccde-2d1e-434b-a386-4315fd9047f3}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91402C3"))
+			    quid       	"5857C91402C3"
+			    parameters 	(list Parameters
+				(object Parameter "storageDataLocation"
+				    quid       	"5857C91402F7"
+				    type       	"string"))
+			    result     	"string"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "IsEmbeddedStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{10baea32-a6df-4aa0-a464-848b8a8b3d5a}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C914031C"))
+			    quid       	"5857C914031C"
+			    parameters 	(list Parameters
+				(object Parameter "StorageName"
+				    quid       	"5857C9140340"
+				    type       	"string")
+				(object Parameter "StorageLocation"
+				    quid       	"5857C9140353"
+				    type       	"string"))
+			    result     	"bool"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "NewStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{3e2a5c54-cab8-46f6-873f-f6672e353ed5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C914037B"))
+			    quid       	"5857C914037B"
+			    parameters 	(list Parameters
+				(object Parameter "OriginalStorage"
+				    quid       	"5857C91403C4"
+				    type       	"OOAdvantech.PersistenceLayer.Storage")
+				(object Parameter "StorageName"
+				    quid       	"5857C91403D7"
+				    type       	"string")
+				(object Parameter "rawStorageData"
+				    quid       	"5857C9150007"
+				    type       	"object"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.ObjectStorage"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "NewStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{e35ca566-6809-441e-a7aa-c3834a4f700b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C915002E"))
+			    quid       	"5857C915002E"
+			    parameters 	(list Parameters
+				(object Parameter "OriginalStorage"
+				    quid       	"5857C9150064"
+				    type       	"OOAdvantech.PersistenceLayer.Storage")
+				(object Parameter "storageName"
+				    quid       	"5857C9150076"
+				    type       	"string")
+				(object Parameter "storageLocation"
+				    quid       	"5857C9150088"
+				    type       	"string")
+				(object Parameter "userName"
+				    quid       	"5857C915009A"
+				    type       	"string")
+				(object Parameter "password"
+				    quid       	"5857C91500AD"
+				    type       	"string"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.ObjectStorage"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "OpenStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{cae7c13e-65e1-4bf0-88ff-7c599591530b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91500D8"))
+			    quid       	"5857C91500D8"
+			    parameters 	(list Parameters
+				(object Parameter "StorageName"
+				    quid       	"5857C91500FF"
+				    type       	"string")
+				(object Parameter "rawStorageData"
+				    quid       	"5857C9150116"
+				    type       	"object"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.ObjectStorage"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "OpenStorage"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d12ddd26-dbf7-43df-868e-020d53f29b53}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C915014A"))
+			    quid       	"5857C915014A"
+			    parameters 	(list Parameters
+				(object Parameter "storageName"
+				    quid       	"5857C9150176"
+				    type       	"string")
+				(object Parameter "storageLocation"
+				    quid       	"5857C915019D"
+				    type       	"string")
+				(object Parameter "userName"
+				    quid       	"5857C91501B3"
+				    type       	"string")
+				(object Parameter "password"
+				    quid       	"5857C91501C8"
+				    type       	"string"))
+			    result     	"OOAdvantech.PersistenceLayerRunTime.ObjectStorage"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "ProviderID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{da4edc90-7354-40e9-939a-7efd6b041ba8}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C91501EA"))
+			    quid       	"5857C91501EA"
+			    type       	"System.Guid"
+			    exportControl 	"Public"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "ClassBLOBData"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ecdb7768-48a2-43e3-b21b-636f2b1ea537}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"5BC49E1503D2"
+		    operations 	(list Operations
+			(object Operation "ClassBLOBData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1b785e20-b377-4286-8e76-9f3f593c5993}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC49E8400FB"))
+			    quid       	"5BC49E8400FB"
+			    documentation 	
+|
+|Initializes a new instance of the  class.
+|Your entity type must expose a parameter-less constructor
+|
+			    
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "ClassBLOBData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d76811bf-b312-48fc-8966-9b8f4cae2918}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC49E8401E2"))
+			    quid       	"5BC49E8401E2"
+			    documentation 	
+|
+|Initializes a new instance of the  class.
+|Defines the PK and RK.
+|
+			    
+			    parameters 	(list Parameters
+				(object Parameter "partitionKey"
+				    quid       	"5BC49E84022B"
+				    documentation 	"The last name."
+				    type       	"string")
+				(object Parameter "rowKey"
+				    quid       	"5BC49E84029D"
+				    documentation 	"The first name."
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "ClassData"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{167e91eb-852f-4a8b-86c8-5aef201baafa}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC49E8501ED")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5BC49E8501ED"
+			    type       	"byte"
+			    exportControl 	"Public")
+			(object ClassAttribute "MetaObjectIdentity"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{f3b3e37e-e7f1-4dff-87bb-ad84f711eee2}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC49E870155")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5BC49E870155"
+			    type       	"string"
+			    exportControl 	"Public"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "MetadataIdentities"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{34f61f48-a15e-48ec-ab2a-68ee2409c94c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"5BC49F8300BC"
+		    operations 	(list Operations
+			(object Operation "MetadataIdentities"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{404bfd82-36a9-4265-9cff-89d98f80d8e5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC4A43600EB"))
+			    quid       	"5BC4A43600EB"
+			    parameters 	(list Parameters
+				(object Parameter "partitionKey"
+				    quid       	"5BC4A4360111"
+				    type       	"string")
+				(object Parameter "rowKey"
+				    quid       	"5BC4A436012B"
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "MetadataIdentities"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{ddc52708-cfe0-44e2-a0d2-d3879bdcb0e5}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC4A4360153"))
+			    quid       	"5BC4A4360153"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "NextOID"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{78d7d923-af54-4890-a23a-6611af7cd084}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5BC4A436029B")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"5BC4A436029B"
+			    type       	"int"
+			    exportControl 	"Public"))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#")
+		(object Class "ObjectID"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0750a71d-bb26-4391-9fdc-1600c9a56e08}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"5BC4AB560005"
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#"))
+	    logical_presentations 	(list unit_reference_list
+		(object ClassDiagram "Main"
+		    quid       	"5BC49DCE0302"
+		    title      	"Main"
+		    zoom       	100
+		    max_height 	28350
+		    max_width  	21600
+		    origin_x   	0
+		    origin_y   	0
+		    items      	(list diagram_item_list
+			(object ClassView "Class" "Logical View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::AzureTableMetaDataPersistenceRunTime::ClassBLOBData" @1
+			    ShowCompartmentStereotypes 	TRUE
+			    IncludeAttribute 	TRUE
+			    IncludeOperation 	TRUE
+			    location   	(556, 509)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object ItemLabel
+				Parent_View 	@1
+				location   	(190, 309)
+				fill_color 	13434879
+				nlines     	1
+				max_width  	732
+				justify    	0
+				label      	"ClassBLOBData")
+			    icon_style 	"Decoration"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"5BC49E1503D2"
+			    width      	750
+			    height     	425
+			    annotation 	8)
+			(object ClassView "Class" "Logical View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::AzureTableMetaDataPersistenceRunTime::MetadataIdentities" @2
+			    ShowCompartmentStereotypes 	TRUE
+			    IncludeAttribute 	TRUE
+			    IncludeOperation 	TRUE
+			    location   	(806, 1269)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object ItemLabel
+				Parent_View 	@2
+				location   	(390, 1125)
+				fill_color 	13434879
+				nlines     	1
+				max_width  	832
+				justify    	0
+				label      	"MetadataIdentities")
+			    icon_style 	"Decoration"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"5BC49F8300BC"
+			    width      	850
+			    height     	312
+			    annotation 	8)
+			(object ClassView "Class" "Logical View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::AzureTableMetaDataPersistenceRunTime::ObjectID" @3
+			    ShowCompartmentStereotypes 	TRUE
+			    IncludeAttribute 	TRUE
+			    IncludeOperation 	TRUE
+			    location   	(588, 1694)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object ItemLabel
+				Parent_View 	@3
+				location   	(442, 1643)
+				fill_color 	13434879
+				nlines     	1
+				max_width  	292
+				justify    	0
+				label      	"ObjectID")
+			    icon_style 	"Decoration"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"5BC4AB560005"
+			    width      	310
+			    height     	126
+			    annotation 	8)))))
+	(object Class_Category "MetadataRepository"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.MetadataRepository")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.WindowsAzureTablesPersistenceRunTime.MetadataRepository"))
+	    quid       	"5857C921039B"
+	    exportControl 	"Public"
+	    logical_models 	(list unit_reference_list
+		(object Class "Storage"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5263e16d-290b-456c-b85f-dd26356b168c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Identity"
+			    value      	"{5263e16d-290b-456c-b85f-dd26356b168c}"))
+		    quid       	"5857C921039D"
+		    superclasses 	(list inheritance_relationship_list
+			(object Inheritance_Relationship
+			    quid       	"5857C92200AC"
+			    supplier   	"Logical View::OOAdvantech::MetaDataRepository::Storage"
+			    quidu      	"3F3B27560138"))
+		    operations 	(list Operations
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{7b25bc4d-c94d-43f8-987b-d9d9d904beef}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9220151"))
+			    quid       	"5857C9220151"
+			    parameters 	(list Parameters
+				(object Parameter "assembliesFullNames"
+				    quid       	"5857C9220195"
+				    type       	"System.String[]"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{ed157954-bff6-4a4d-a28c-934c00fec41b}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C92201C4"))
+			    quid       	"5857C92201C4"
+			    parameters 	(list Parameters
+				(object Parameter "assemblyFullName"
+				    quid       	"5857C9220203"
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{71544717-9d54-4a6d-b5e3-54cb030a096d}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C9220232"))
+			    quid       	"5857C9220232"
+			    parameters 	(list Parameters
+				(object Parameter "assemblyFullName"
+				    quid       	"5857C9220276"
+				    type       	"string")
+				(object Parameter "mappingDataResourceName"
+				    quid       	"5857C92202A1"
+				    type       	"string"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0)
+			(object Operation "RegisterComponent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1ac18616-b3cc-4325-8f9f-eaec9f9d153c}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"5857C92202CF"))
+			    quid       	"5857C92202CF"
+			    parameters 	(list Parameters
+				(object Parameter "assemblyFullName"
+				    quid       	"5857C922030D"
+				    type       	"string")
+				(object Parameter "mappingData"
+				    quid       	"5857C9220337"
+				    type       	"System.Xml.Linq.XDocument"))
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Public"
+			    uid        	0))
+		    module     	"Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::WindowsAzureTablesPersistenceRunTime"
+		    quidu      	"5857C8090174"
+		    language   	"C#"
+		    persistence 	"Persistent"))
+	    logical_presentations 	(list unit_reference_list
+		(object ClassDiagram "Main"
+		    quid       	"5857CE7A0248"
+		    title      	"Main"
+		    zoom       	100
+		    max_height 	28350
+		    max_width  	21600
+		    origin_x   	0
+		    origin_y   	0
+		    items      	(list diagram_item_list
+			(object ClassView "Class" "Logical View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::MetadataRepository::Storage" @4
+			    ShowCompartmentStereotypes 	TRUE
+			    location   	(491, 853)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object ItemLabel
+				Parent_View 	@4
+				location   	(203, 700)
+				fill_color 	13434879
+				nlines     	1
+				max_width  	576
+				justify    	0
+				label      	"Storage")
+			    icon_style 	"Decoration"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"5857C921039D"
+			    width      	594
+			    height     	331
+			    annotation 	8)
+			(object ClassView "Class" "Logical View::OOAdvantech::MetaDataRepository::Storage" @5
+			    ShowCompartmentStereotypes 	TRUE
+			    location   	(468, 223)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	TRUE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object ItemLabel
+				Parent_View 	@5
+				location   	(236, 149)
+				fill_color 	13434879
+				nlines     	1
+				max_width  	464
+				justify    	0
+				label      	"Storage")
+			    icon_style 	"Decoration"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3F3B27560138"
+			    width      	482
+			    height     	172
+			    annotation 	8)
+			(object InheritView "" @6
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"5857C92200AC"
+			    client     	@4
+			    supplier   	@5
+			    line_style 	3
+			    origin_attachment 	(491, 688)
+			    terminal_attachment 	(491, 308)))))))
+    logical_presentations 	(list unit_reference_list
+	(object ClassDiagram "Main"
+	    quid       	"5857CE4300DB"
+	    title      	"Main"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	959
+	    items      	(list diagram_item_list
+		(object CategoryView "Logical View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::MetadataRepository" @7
+		    location   	(578, 690)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@7
+			location   	(309, 581)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	538
+			justify    	0
+			label      	"MetadataRepository")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"5857C921039B"
+		    width      	550
+		    height     	231)
+		(object ClassView "Class" "Logical View::OOAdvantech::WindowsAzureTablesPersistenceRunTime::CloudBlockBlobArchive" @8
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(1534, 1509)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@8
+			location   	(1275, 1406)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	519
+			justify    	0
+			label      	"CloudBlockBlobArchive")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"5D942BBE005A"
+		    width      	537
+		    height     	231
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::PersistenceLayer::IBackupArchive" @9
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(1534, 997)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@9
+			location   	(1265, 966)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	538
+			justify    	0
+			label      	"IBackupArchive")
+		    icon       	"Interface"
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	8421376
+		    quidu      	"5D93AB7C0050"
+		    width      	556
+		    height     	262
+		    annotation 	8)
+		(object RealizeView "" @10
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"5D942C8C0246"
+		    client     	@8
+		    supplier   	@9
+		    line_style 	0)))))

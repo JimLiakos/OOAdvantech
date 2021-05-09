@@ -1,0 +1,1912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="668ed33e-a624-430a-a6a9-d84dc0e0b4ef" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>TODO: Move introduction text here</para>
+    </introduction>
+
+
+
+
+<table>
+ <row>
+  <entry>
+  <para><legacyBold>Object Persistency the New Way.<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>For a
+  new application there are two ways to start. The first one is to start the
+  construction of the tables that keeps the data of application, after that you
+  write the code that insert the data or make changes to the data and in the
+  end you build the user interface. The second is the designing classes after
+  that you have to map the classes at tables, finally you have to create the
+  business object, that is stateless object where correspond to business
+  procedure and makes the necessary changes to the data base.<o:p></o:p></para>
+  <para>What is
+  the new way? The new way is to find the objects that participate in the
+  business logic. After that you try to classify that and create the classes,
+  declare the persistent classes, in0. the end you build the user interface.
+  The main deference is that on old ways you must create user interface,
+  tables, and write code in data base with SQL language or on application
+  server for the business logic. The conflict of object oriented world with the
+  structural world. The result of the old ways is a hybrid application with
+  unclean building roles. In the new way there is not structural world. We will
+  try to find out the new way with the construction of application about the
+  family where the parents work in company. <o:p></o:p></para>
+  <para><legacyBold>Project candidate to include persistent class.<o:p></o:p></legacyBold></para>
+  <para>We
+  create a c# class library project with name Family like <legacyBold><link xlink:href="#Figure1">Figure   1.</link></legacyBold><legacyBold> <o:p></o:p></legacyBold></para>
+  <para><!-- TODO: Unknown topic link:  --><legacyBold>Figure 1.</legacyBold><legacyBold> <o:p></o:p></legacyBold></para>
+  <para>&#160; <!--[if gte vml 1]><v:shapetype
+   id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+   path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_i1026" type="#_x0000_t75" style='width:318pt;
+   height:219pt'>
+   <v:imagedata src="Persistent%20Objetcs_files/image001.png" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image002.jpg --><mediaLink><image xlink:href="image002" /></mediaLink><![endif]>&#160;&#160;&#160;&#160;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>The
+  class Class1 is inutile and you must delete this. Open solution explore and
+  delete <o:p></o:p></para>
+  <para><!--[if gte vml 1]><v:shape
+   id="_x0000_i1027" type="#_x0000_t75" style='width:156pt;height:309pt'>
+   <v:imagedata src="Persistent%20Objetcs_files/image003.png" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image004.jpg --><mediaLink><image xlink:href="image004" /></mediaLink><![endif]><o:p></o:p></para>
+  <para>&#160; <o:p></o:p></para>
+  <para>Add the
+  assemblies of OOAdvanceTech System <legacyBold>Remoting.dll</legacyBold>,<legacyBold> Transactions.dll</legacyBold>,<legacyBold> MetaDataRepository.dll </legacyBold>and <legacyBold>PersistenceLayer.dll</legacyBold> in assembly
+  references. You can find them <legacyBold>in
+  Program Files\Hydrogen\OOAdvanceTech\v1.0.0.0\bin</legacyBold>.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><!--[if gte vml 1]><v:shape
+   id="_x0000_i1028" type="#_x0000_t75" style='width:318.75pt;height:247.5pt'>
+   <v:imagedata src="Persistent%20Objetcs_files/image005.png" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image006.jpg --><mediaLink><image xlink:href="image006" /></mediaLink><![endif]><o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>All
+  persistent objects has two modes operative and passive, when an object used
+  from a functional area of application it is in operative mode otherwise it is
+  in passive mode. All persistent objects created in object storage. To create
+  an object in storage, the assembly of class of object must be able to produce
+  extra metadata for persistency, also must be register in assembly cache. For these reasons open the AssemblyInfo.cs file and add using directive &#8220;<legacyBold>using
+  OOAdvantech.MetaDataRepository;&#8221;</legacyBold>, add
+  attribute &#8220;<legacyBold>[assembly: BuildAssemblyMetadata]&#8221;,</legacyBold> change the &#8220;<legacyBold>[assembly: AssemblyKeyFile(&quot;&quot;)]&#8221;</legacyBold> to &#8220;<legacyBold>[assembly:
+  AssemblyKeyFile (&quot;..\\..\\StrongName.snk&quot;)]&#8221;</legacyBold>the StrongName.snkyou
+  can be created with <externalLink>
+  <linkText>sn.exe</linkText>
+  <linkUri>ms-help://MS.VSCC.2003/MS.MSDNQTR.2003FEB.1033/cptools/html/cpgrfstrongnameutilitysnexe.htm</linkUri>
+</externalLink> tool in project directory and optional change
+  the [<legacyBold>assembly:
+  AssemblyVersion (&quot;1.0.*&quot;)]</legacyBold> to<legacyBold>[assembly: AssemblyVersion(&quot;1.0.0.0&quot;)]. </legacyBold>The manual control of version is
+  useful because the identity of assembly has the version number. When build
+  the assembly and you have not change in persistent portion of assembly you
+  must register the assembly again for update if you don&#8217;t register, when
+  you ask from storage something the persistency system will load the old
+  assembly from assembly cash with out the changes of code that you just made.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>using System.Reflection;<o:p></o:p></para>
+  <para>using
+  System.Runtime.CompilerServices;<o:p></o:p></para>
+  <para><legacyBold>using</legacyBold><legacyBold> OOAdvantech.MetaDataRepository </legacyBold>; <o:p></o:p></para>
+  <para>.<o:p></o:p></para>
+  <para>.<o:p></o:p></para>
+  <para>.<o:p></o:p></para>
+  <para><legacyBold>[assembly:
+  AssemblyVersion(&quot;1.0.0.0&quot;)] <o:p></o:p></legacyBold></para>
+  <para>.<o:p></o:p></para>
+  <para>.<o:p></o:p></para>
+  <para>.<o:p></o:p></para>
+  <para>.<o:p></o:p></para>
+  <para>[assembly: AssemblyDelaySign(false)]<o:p></o:p></para>
+  <para><legacyBold>[assembly:
+  AssemblyKeyFile(&quot;..\\..\\StrongName.snk&quot;)]<o:p></o:p></legacyBold></para>
+  <para>[assembly: AssemblyKeyName(&quot;&quot;)]<o:p></o:p></para>
+  <para><legacyBold>[assembly:
+  BuildAssemblyMetadata] <o:p></o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Persistent class.<o:p></o:p></legacyBold></para>
+  <para>Now you are ready to add first persistent class. Add Person class. <o:p></o:p></para>
+  <para>namespace Family<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// Summary description
+  for Person. <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;/summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; public class Person<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public
+  Person()<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  TODO: Add constructor logic here <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>} <o:p></o:p></para>
+  <para>To make a class persistent you must add using
+  directives &#8220;<legacyBold>using OOAdvantech;&#8221;,</legacyBold> &#8220;<legacyBold>using
+  OOAdvantech.MetaDataRepository;&#8221; </legacyBold>and &#8220;<legacyBold>using OOAdvantech.PersistenceLayer;&#8221; </legacyBold>All persistent objects run in
+  persistency server. The persistency server is a process like sqlservr.exe.
+  The user interface run in user interface process. For these reasons you have
+  to add the opportunity of remote access to Person class with code &#8220;<legacyBold>using
+  system;&#8221;,&#8221;using OOAdvantech.Remoting;&#8221; </legacyBold>and &#8220;<legacyBold>public class Person: MarshalByRefObject,
+  IExtMarshalByRefObject&#8221;</legacyBold>. Now the objects of class can run in persistency server but class
+  isn&#8217;t persistent yet. You must add two class attribute and one class
+  field. The attribute for persistency and the attribute for the identity of
+  class. The identity of class it is optional and useful. When you register the
+  assembly in storage the persistency system builds the places to store the
+  objects of class. When you change the person class with additional persisted
+  fields and register again the assembly, the persistency find the place that
+  correspond to the class using the identity of class and make the
+  changes.&#160; If you don&#8217;t
+  define the identity of class the persistency system uses the full name of
+  class as identity for example &#8220;Family.Person&#8221;. There is problem
+  when you change the name of class or namespace for example
+  &#8220;Town.Family.Person&#8221; the persistency system can&#8217;t find the
+  storage place for class Person when you try to update the storage. The
+  persistency system creates a new place and the old place data now are
+  garbage. If you define a Global unique id as identity you eliminate the
+  problem. With Persistent attribute you declare the class persistent. Finally
+  you have to declare a public field &#8220;<legacyBold>public OOAdvantech.ExtensionProperties
+  Properties;&#8221;, </legacyBold>the ExtensionProperties field is a bridge of object with the
+  OOAdvnceTech functional area, keeps information about the object and
+  transaction for transaction system, object and storage instance (operative
+  and passive mode) for persistency system etc. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>namespace Family<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; using
+  System;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; using
+  OOAdvantech;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; using
+  OOAdvantech.MetaDataRepository;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; using
+  OOAdvantech.PersistenceLayer;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; using
+  OOAdvantech.Remoting;<o:p></o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// Summary description
+  for Person. <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;/summary&gt;
+  <o:p></o:p></para>
+  <para><legacyBold>&#160; [BackwardCompatibilityID(&quot;{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [Persistent]<o:p></o:p></legacyBold></para>
+  <para>&#160; public class Person<legacyBold>
+  :MarshalByRefObject,IExtMarshalByRefObject</legacyBold> <legacyBold><o:p></o:p></legacyBold></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; <legacyBold>public ExtensionProperties Properties; <o:p></o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; public
+  Person()<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  TODO: Add constructor logic here <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; &#160;}<o:p></o:p></para>
+  <para>} <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Persistent and transient fields.<o:p></o:p></legacyBold></para>
+  <para>Now you can add a persistent field.
+  For instance, add the field &#8220;<legacyBold>public string Name;&#8221; </legacyBold>optionally declare the identity of
+  field, for the same reasons as in class, the final identity of <legacyBold>Name</legacyBold> is &#8220;<legacyBold>{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}.1</legacyBold>&#8221;. The plus sing <legacyBold>BackwardCompatibilityID
+  (&quot;+1&quot;) </legacyBold>means that you want to extend the identity of class.&#160; Declare field persistent as well you
+  have to declare the length of memory in characters that allocated in storage
+  for the field Name, it is necessary for none fix length fields &#8220;<legacyBold>[PersistentMember(255)]&#8221;.
+  </legacyBold>The finally code
+  of class is like this.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>namespace Family<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; </legacyBold>using System;<o:p></o:p></para>
+  <para>&#160; using OOAdvantech;<o:p></o:p></para>
+  <para>&#160; using
+  OOAdvantech.MetaDataRepository;<o:p></o:p></para>
+  <para>&#160; using OOAdvantech.PersistenceLayer;<o:p></o:p></para>
+  <para>&#160; using OOAdvantech.Remoting;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// Summary description
+  for Person. <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;/summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; [<legacyBold>BackwardCompatibilityID</legacyBold>(&quot;{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}&quot;)]<o:p></o:p></para>
+  <para>&#160; [Persistent]<o:p></o:p></para>
+  <para>&#160; &#160;public class Person:MarshalByRefObject,IExtMarshalByRefObject
+  <o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public
+  ExtensionProperties Properties;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; &#160; <legacyBold>[BackwardCompatibilityID
+  (&quot;+1&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; &#160; [PersistentMember(255)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; public string Name;<o:p></o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; public
+  Person()<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  TODO: Add constructor logic here <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160; //
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>} <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Client user interface for test.<o:p></o:p></legacyBold></para>
+  <para>The next step is to create a form with to buttons. With first button
+  we will create a storage and we will register the assembly Family.dll<o:p></o:p></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><!--[if gte vml 1]><v:shape
+   id="_x0000_i1029" type="#_x0000_t75" style='width:318.75pt;height:216.75pt'>
+   <v:imagedata src="Persistent%20Objetcs_files/image007.png" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image008.jpg --><mediaLink><image xlink:href="image008" /></mediaLink><![endif]></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>Add the assemblies of OOAdvanceTech System <legacyBold>Remoting.dll</legacyBold>, <legacyBold>Transactions.dll</legacyBold>,<legacyBold> MetaDataRepository.dll </legacyBold>and <legacyBold>PersistenceLayer.dll</legacyBold> in assembly
+  references. You can find them <legacyBold>in
+  Program Files\Hydrogen\OOAdvanceTech\v1.0.0.0\bin</legacyBold>. As well add Family
+  project into assembly&#8217;s reference.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><!--[if gte vml 1]><v:shape
+   id="_x0000_i1030" type="#_x0000_t75" style='width:155.25pt;height:309pt'>
+   <v:imagedata src="Persistent%20Objetcs_files/image009.png" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image010.jpg --><mediaLink><image xlink:href="image010" /></mediaLink><![endif]></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Create object storage.<o:p></o:p></legacyBold></para>
+  <para>Add two buttons in form one for storage creation and one for object
+  creation. Double click on storage creation and write the <link xlink:href="#CreateStorageCode">code</link> in function also add using directive <legacyBold>&#8220;</legacyBold><legacyBold>using </legacyBold><legacyBold>OOAdvantech.PersistenceLayer;&#8221;</legacyBold>.This code tries
+  to open a session with Family storage at local machine. The type of storage
+  is Microsoft SQL server. But what is storage type? Persistency system it
+  isn&#8217;t data base. It is a middleware between application and storage
+  subsystem like RDBMS(MSSQL for now and Oracle, MySQL and other RDBMS for the
+  future), XML files or file system. Its work is to save and retrieve object,
+  it can work distributed and you can ask information with a more human
+  friendly object query language. This feature is the advantage of persistency
+  system it can be use reliable data base system and add to them extremely
+  useful features. In our case we use the Microsoft SQL server 2000 as storage
+  subsystem. We can go back to the code. The result of openStorage function
+  call is &#8220;storage doesn&#8217;t exist&#8221; exception. If the result is
+  exception other than &#8220;storage doesn&#8217;t exist&#8221; check <legacyBold>Error.InnerException. </legacyBold>The function call NewStorage creates
+  storage with name &#8220;Family&#8221; in local machine. If you open SQL
+  Server Enterprise Manager you find a new data base with name Family. The next
+  step is the registration of Family Assembly in storage metadata, we can
+  register and others assembly&#8217;s before build. Finally we call function
+  build to create or update storage places. This means the creation of tables, store
+  procedures, views, foreign keys for class relationships. All these happen
+  because the type of storage subsystem is RDBMS.&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><!-- TODO: Unknown topic link:  -->private void
+  CreateStorage_Click(object sender,
+  System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; <legacyBold>StorageSession</legacyBold> <legacyBold>storageSession=null;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; try
+  <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; &#160;&#160; storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; catch(OOAdvantech.PersistenceLayer.StorageException
+  Error)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(Error.Reason==StorageException.ExceptionReason.StorageDoesnotExist)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; storageSession=StorageSession.NewStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &#160;else <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; throw Error;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; storageSession.StorageMetaData.RegisterComponent(
+  typeof (Family.Person).Assembly.FullName);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; storageSession.StorageMetaData.Build();<o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>Create object in
+  storage.<o:p></o:p></legacyBold></para>
+  <para>Now it&#8217;s the time to create an object person in storage
+  &#8220;Family&#8221;. First of all we open a session with storage
+  &#8220;Family&#8221; then we open a system state transition. In the system
+  state transition we call the NewObject function which returns a new object of
+  type Person, after that we open object state transition and set the Name with
+  value &#8220;Jack&#8221; and close the system state transition and the object
+  state transition with SetConplete function. Now the object person with name
+  &#8220;Jack&#8221; is persistent. But what are SystemStateTransition, and
+  ObjectStateTransition? Some words about Transaction System. Transition System
+  is a feature of OOAdvanceTech library. When we initiate a state transition
+  automatically the system begin a transaction, all changes run under
+  transaction the SetComplete function commit the transaction. If something
+  goes wrong and exception raised the system return to the previous state. For
+  more information you can read the <link xlink:href="e02a60ed-3402-4321-ac34-d8e5f76ccea5">transactions</link>
+  topic. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void NewObject_Click(object sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; using(SystemStateTransition
+  sysStateTransition=new
+  SystemStateTransition())<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  person=storageSession.NewObject(typeof(Family.Person))
+  as Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(person))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; person.Name=&quot;Jack&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; person.Name=&quot;Jack&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; sysStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; &#160;}<o:p></o:p></legacyBold></para>
+  <para>} <o:p></o:p></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>Retrieve object from
+  storage.<o:p></o:p></legacyBold></para>
+  <para>The next step is the object retrieve step. We add a button with name
+  GetObject and in function <legacyBold>GetObject_Click </legacyBold>we write the following code. The only way to retrieve object from
+  object storage is to execute query the result of execution is a StructureSet.
+  The StructureSet is a set of structure
+  instances. The type of structure defined dynamically from SELECT list of
+  query. In our case the structure has only one member the person. We can
+  retrieve instances with foreach statement, look at the following code. For
+  more information about the query look at <link xlink:href="a6b3dfbb-86ae-4232-aa77-657dfc503428">Object   Query Language</link>. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void
+  GetObject_Click(object sender,
+  System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; string objectQuery=&quot;SELECT person FROM &quot;+typeof(Family.Person).FullName+&quot; person WHERE
+  person.Name='Jack'&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; //SELECT
+  person FROM Family.Person person WHERE person.Name='Jack'</legacyBold><legacyBold><o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; StructureSet
+  objectSet=storageSession.Execute(objectQuery);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; foreach(StructureSet objectSetInstance in objectSet)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  person = objectSetInstance[&quot;person&quot;] as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name:&quot;+person.Name); <o:p></o:p></legacyBold></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Persistent property.<o:p></o:p></legacyBold></para>
+  <para>Persistent properties. Some times
+  declaration of property it is useful, for example you want to add synchronization
+  code. The property is the public member and the real data stand in private
+  field. For example we can convert Name field to property. We have to change
+  the code of Person class as following. The first thing that changes is
+  persistency declaration. Now we have&#160;
+  <legacyBold>PersistentMember(255,&quot;_Name&quot;)
+  </legacyBold>rather than <legacyBold>PersistentMember(255). </legacyBold>Now the persistent attribute has an additional parameter
+  the name o field that contains the actual data.<o:p></o:p></para>
+  <para>&#160;&#160; <o:p></o:p></para>
+  <para>namespace Family<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; </legacyBold>using System;<o:p></o:p></para>
+  <para>&#160; using OOAdvantech;<o:p></o:p></para>
+  <para>&#160; using OOAdvantech.MetaDataRepository;<o:p></o:p></para>
+  <para>&#160; using
+  OOAdvantech.PersistenceLayer;<o:p></o:p></para>
+  <para>&#160; using OOAdvantech.Remoting;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// Summary description
+  for Person. <o:p></o:p></para>
+  <para>&#160; &#160;&#160; /// &lt;/summary&gt;
+  <o:p></o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}&quot;)]<o:p></o:p></para>
+  <para>&#160; [Persistent]<o:p></o:p></para>
+  <para>&#160; public class
+  Person:MarshalByRefObject,IExtMarshalByRefObject <o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public
+  ExtensionProperties Properties;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; <legacyBold>&#160;&#160; private
+  string _Name;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; [BackwardCompatibilityID(&quot;+1&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; [PersistentMember(255,&quot;_Name&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; public string Name<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; get<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return _Name;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; set<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Name=value;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para>&#160;&#160;&#160;&#160; public
+  Person()<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160; // <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160; // TODO: Add
+  constructor logic here <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; &#160; // <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>} <o:p></o:p></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>Retrieve object from storage and change its state.<o:p></o:p></legacyBold></para>
+  <para>Add in client form a button with name
+  and text &#8220;<legacyBold>ChangeObjectState</legacyBold>&#8221; double click on it. In function write
+  the following code. To make a change in object we have to use object state
+  transition. The following code work well but something is wrong. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void
+  ChangeObjectState_Click(object sender, System.EventArgs
+  e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; Family.Person
+  person=null;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; string objectQuery=&quot;SELECT person FROM &quot;+typeof(Family.Person).FullName+&quot; person WHERE
+  person.Name='Jack'&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; //SELECT person FROM Family.Person person WHERE
+  person.Name='Jack'<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; StructureSet
+  objectSet=storageSession.Execute(objectQuery);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; foreach(StructureSet objectSetInstance in objectSet)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; person
+  = objectSetInstance[&quot;person&quot;] as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name:&quot;+person.Name); <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; if(person!=null)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(person))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; person.Name=&quot;George&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>It is better choice the object control its
+  persistency and not the code that ask from it something. For this reason we
+  change the code remove the object state transition code from the client code
+  and add it in set of Name property of class Person. I remind you that we can
+  make this change because we change the Name from field to property.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void
+  ChangeObjectState_Click(object sender,
+  System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; .<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; .<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; .&#160; <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; if(person!=null)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; person.Name=&quot;George&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>[BackwardCompatibilityID(&quot;+1&quot;)]<o:p></o:p></para>
+  <para>[PersistentMember(255,&quot;_Name&quot;)]<o:p></o:p></para>
+  <para>public string
+  Name<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; get<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; return _Name;<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>&#160; set<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; <legacyBold>if(_Name!=value)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Name=value;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Object constructor with one
+  or more parameters.<o:p></o:p></legacyBold></para>
+  <para>We change the object constructor and add parameter
+  name, the name of object. But when we try to create an object in storage we
+  take the exception <legacyBold>{&#8220;Persistency
+  System can't instadiate the Family.Person case: ModulePublisher can't create
+  instance of 'Family.Person' because: No parameterless constructor defined for
+  this object..&quot;}</legacyBold>. We have to remember that always we must define
+  default constructor at persistent class. We add a default constructor.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>public Person(string
+  name)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; _Name=name;<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>public Person()<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>But how can we call other than default constructor, when create an
+  object in storage. We can use the extra parameters of <legacyBold>NewObject </legacyBold>function. We give the constructor
+  parameters after the type of new object parameter. The last parameter must be
+  a type array with the types of constructor parameters for type check.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void
+  NewObject_Click(object sender,
+  System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></para>
+  <para>&#160; using(SystemStateTransition
+  sysStateTransition=new
+  SystemStateTransition())<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Type[]
+  parametersTypes=new System.Type[1]{typeof(string)};<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  person=storageSession.NewObject(typeof(Family.Person),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Jack&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; parametersTypes)
+  as Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; sysStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Persistent
+  relationship between persistent classes.<o:p></o:p></legacyBold></para>
+  <para>We add a new class with name address. The address
+  has three properties <st1:place w:st="on"><st1:PlaceName st="on"
+   w:st="on"><legacyBold>Area</legacyBold></st1:PlaceName><legacyBold> <st1:PlaceName st="on"
+   w:st="on">Street</st1:PlaceName> <st1:PlaceType st="on" w:st="on">City</st1:PlaceType></legacyBold></st1:place><legacyBold>.</legacyBold> The class and properties are
+  persistent.<o:p></o:p></para>
+  <para>namespace Family<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; using
+  System;<o:p></o:p></para>
+  <para>&#160; using
+  OOAdvantech.PersistenceLayer;<o:p></o:p></para>
+  <para>&#160; using
+  OOAdvantech.MetaDataRepository;<o:p></o:p></para>
+  <para>&#160; using
+  OOAdvantech.Transactions;<o:p></o:p></para>
+  <para>&#160; using
+  OOAdvantech.Remoting;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;{D9DE9C59-9CA5-4C89-8AC0-E0328CC64324}&quot;)]<o:p></o:p></para>
+  <para>&#160; [Persistent]<o:p></o:p></para>
+  <para>&#160; public
+  class
+  Address:MarshalByRefObject,IExtMarshalByRefObject<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public OOAdvantech.ExtensionProperties Properties;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; private string
+  _Area;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; [BackwardCompatibilityID(&quot;+3&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; [PersistentMember(255,&quot;_Area&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public string Area<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return _Area;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; set<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; if(_City!=value)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Area=value;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; private string
+  _Street;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; [BackwardCompatibilityID(&quot;+2&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; [PersistentMember(255,&quot;_Street&quot;)]<o:p></o:p></para>
+  <para>&#160; &#160;&#160; public string Street<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return _Street;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; set<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; if(_City!=value)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Street=value;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></para>
+  <para>&#160; &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; private string
+  _City;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; &#160;&#160; [BackwardCompatibilityID(&quot;+1&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; [PersistentMember(255,&quot;_City&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public string City<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return _City;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; set<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; if(_City!=value)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _City=value;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>} <o:p></o:p></para>
+  <para>Now we
+  can add persistent relationship between class Person and Address. The name of
+  relationship is &#8220;LiveAt&#8221;. The relationship has the characteristic
+  of one way or two way access. The to ways access means that we have the
+  ability to access the address of person from person and the person that live
+  in a specific address from address object. For two we must define property or
+  field for relationship at both classes. In our case the relationship is one
+  way access or with UML terminology navigable to address. We define a property
+  with name Address at Person class. And we add <legacyBold>Association</legacyBold> attribute. Some words about <legacyBold>Association </legacyBold>attribute. The first parameter of <legacyBold>Association </legacyBold>is the name of relationship the next
+  is the type of other and class, the next is the Role of AssociationEnd (the
+  property is AssociationEnd in UML terminology). After that we add <legacyBold>PersistentMember</legacyBold> attribute with first parameter the
+  persistence flag in this case tells to persistency that relationship has <legacyBold>ReferentialIntegrity.</legacyBold> This means if at least one person
+  lives at address then this address can&#8217;t be deleted from object
+  storage. To delete we must remove all relationships between the address and
+  persons that live at this address. For more information look at <legacyBold>PersistencyFlag </legacyBold>reference manual. The last
+  parameter is the implementation
+  field name. With <legacyBold>RoleAMultiplicityRange </legacyBold>we define the multiplicity of address this means that persons has to
+  has one address. With <legacyBold>RoleAMultiplicityRange </legacyBold>we define the multiplicity of person this means in one address can
+  live many persons.<o:p></o:p></para>
+  <para>&#160;<o:p></o:p></para>
+  <para>public class
+  Person:MarshalByRefObject,IExtMarshalByRefObject <o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>&#160; private</legacyBold><legacyBold> Address _Address;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; [BackwardCompatibilityID(&quot;+4&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [Association(&quot;LiveAt&quot;,typeof(Family.Address),Roles.RoleA)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [PersistentMember(PersistencyFlag.ReferentialIntegrity,&quot;_Address&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [RoleAMultiplicityRange(1,1)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [RoleBMultiplicityRange(0)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; public Address Address<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; get<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; return
+  _Address;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; set<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; if(_Address!=value)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; using( ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Address=value;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>Now we write some code in client form, to create
+  three persons, one address and set the address to all persons. After that we
+  construct a query and ask from the object storage the persons that lives at <st1:place
+  w:st="on"><st1:City st="on" w:st="on">London</st1:City></st1:place>. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void LiveAtRelationTest_Click(object sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></para>
+  <para>&#160; <o:p></o:p></para>
+  <para>&#160; using(SystemStateTransition
+  sysStateTransition=new SystemStateTransition())<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Family.Person
+  Jack=storageSession.NewObject(typeof(Family.Person),&quot;Jack&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Type[1]{typeof(string)}) as Family.Person;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Family.Person
+  John=storageSession.NewObject(typeof(Family.Person),&quot;John&quot;,
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Type[1]{typeof(string)}) as Family.Person;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Family.Person
+  George=storageSession.NewObject(typeof(Family.Person),&quot;George&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &#160;System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; parametersTypes=new System.Type[3]{typeof(string),typeof(string),typeof(string)};<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Family.Address
+  address=storageSession.NewObject(typeof(Family.Address),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;<st1:place
+  w:st="on"><st1:City st="on" w:st="on">LONDON</st1:City></st1:place>&quot;,&quot;PADDINGTON&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;<st1:place
+  w:st="on"><st1:PlaceName st="on" w:st="on">SUSSEX</st1:PlaceName> <st1:PlaceType
+   st="on" w:st="on">GARDENS</st1:PlaceType></st1:place> 35&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[3]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {typeof(string),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string)})as Family.Address;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Jack.Address=address;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; John.Address=address;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; George.Address=address;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; sysStateTransition.SetComplete();<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void GetPersonsAtAddress_Click(object sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; StorageSession storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; string
+  objectQuery=&quot;SELECT person FROM &quot;+typeof(Family.Person).FullName+<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;
+  person WHERE person.Address.City='<st1:place w:st="on"><st1:City st="on"
+   w:st="on">LONDON</st1:City></st1:place>' &quot;;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; //&quot;SELECT
+  person FROM &quot;+Family.Person person WHERE persona.Address.City='<st1:place
+  w:st="on"><st1:City st="on" w:st="on">LONDON</st1:City></st1:place>'&quot;;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; StructureSet
+  objectSet=storageSession.Execute(objectQuery);<o:p></o:p></para>
+  <para>&#160; foreach(StructureSet
+  objectSetInstance in objectSet)<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Family.Person
+  person = objectSetInstance[&quot;person&quot;] as
+  Family.Person;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name:&quot;+person.Name); <o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>ManytoMany
+  relationships.<o:p></o:p></legacyBold></para>
+  <para>The &#8220;<legacyBold>LiveAt</legacyBold>&#8221;
+  is ManytoOne relationship; we will add a new ManytoMany relationship between
+  Person and itself. The name of relationship is &#8220;<legacyBold>PersonChildren</legacyBold>&#8221;. The PersonChildren relationship is tow
+  way access this means that we can ask from person the parents or
+  children&#8217;s. &#160;<o:p></o:p></para>
+  <para><!--[if mso & !supportInlineShapes & supportFields]>&#160;SHAPE &#160;\* MERGEFORMAT <![endif]--><!--[if gte vml 1]><v:group
+   id="_x0000_s1034" editas="canvas" style='width:294.35pt;height:157.1pt;
+   mso-position-horizontal-relative:char;mso-position-vertical-relative:line'
+   coordorigin="299,-236" coordsize="5887,3142">
+   <o:lock v:ext="edit" aspectratio="t"/>
+   <v:shape id="_x0000_s1033" type="#_x0000_t75" style='position:absolute;
+    left:299;top:-236;width:5887;height:3142;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:preferrelative="f" o:allowoverlap="f">
+    <v:fill o:detectmouseclick="t"/>
+    <v:path o:extrusionok="t" o:connecttype="none"/>
+   </v:shape><v:rect id="_x0000_s1035" style='position:absolute;left:1585;
+    top:1170;width:1420;height:1374;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" fillcolor="#ffc" strokecolor="#903" strokeweight=".15pt"/>
+   <v:rect id="_x0000_s1036" style='position:absolute;left:2063;top:1221;
+    width:495;height:225;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>Person</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1037" style='position:absolute;left:1585;top:1454;
+    width:1420;height:1090;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" strokecolor="#903" strokeweight=".15pt"/>
+   <v:rect id="_x0000_s1038" style='position:absolute;left:1585;top:1563;
+    width:1420;height:981;mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' o:allowoverlap="f" filled="f"
+    strokecolor="#903" strokeweight=".15pt"/>
+   <v:shape id="_x0000_s1039" style='position:absolute;left:522;top:798;
+    width:1063;height:1141;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line' coordsize="291,313"
+    o:allowoverlap="f" path="m,l,313r291,e" filled="f" strokecolor="#903"
+    strokeweight=".15pt">
+    <v:path arrowok="t"/>
+   </v:shape><v:rect id="_x0000_s1040" style='position:absolute;left:1125;
+    top:2015;width:216;height:180;mso-wrap-style:none;
+    mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' o:allowoverlap="f" filled="f"
+    stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>0..n</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:shape id="_x0000_s1041" style='position:absolute;left:522;top:579;
+    width:1724;height:591;mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' coordsize="472,162" o:allowoverlap="f"
+    path="m,60l,,472,r,162e" filled="f" strokecolor="#903" strokeweight=".15pt">
+    <v:path arrowok="t"/>
+   </v:shape><v:rect id="_x0000_s1043" style='position:absolute;left:657;top:1542;
+    width:795;height:225;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>+Childrens</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1044" style='position:absolute;left:1125;top:2015;
+    width:216;height:180;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>0..n</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1045" style='position:absolute;left:299;top:714;
+    width:1140;height:225;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para><legacyItalic>PersonChildren</legacyItalic></para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1046" style='position:absolute;left:1928;top:124;
+    width:645;height:225;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>+Parents</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1047" style='position:absolute;left:1927;top:835;
+    width:319;height:179;flip:x;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>0..2<o:p></o:p></para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1048" style='position:absolute;left:4608;top:1319;
+    width:1216;height:944;mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' o:allowoverlap="f" fillcolor="#ffc"
+    strokecolor="#903" strokeweight=".15pt"/>
+   <v:rect id="_x0000_s1049" style='position:absolute;left:4947;top:1363;
+    width:510;height:180;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>Address</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1050" style='position:absolute;left:4608;top:1563;
+    width:1216;height:700;mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' o:allowoverlap="f" filled="f"
+    strokecolor="#903" strokeweight=".15pt"/>
+   <v:rect id="_x0000_s1051" style='position:absolute;left:4608;top:1655;
+    width:1216;height:608;mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' o:allowoverlap="f" filled="f"
+    strokecolor="#903" strokeweight=".15pt"/>
+   <v:line id="_x0000_s1052" style='position:absolute;flip:x;
+    mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' from="3016,1647" to="3812,1648"
+    o:allowoverlap="f" strokecolor="#903" strokeweight=".15pt"/>
+   <v:line id="_x0000_s1053" style='position:absolute;
+    mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' from="3812,1647" to="4608,1648"
+    o:allowoverlap="f" strokecolor="#903" strokeweight=".15pt"/>
+   <v:rect id="_x0000_s1054" style='position:absolute;left:4484;top:1753;
+    width:75;height:180;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>1</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:line id="_x0000_s1055" style='position:absolute;flip:x;
+    mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' from="4476,1647" to="4608,1702"
+    o:allowoverlap="f" strokecolor="#903" strokeweight=".15pt"/>
+   <v:line id="_x0000_s1056" style='position:absolute;flip:x y;
+    mso-position-horizontal:left;mso-position-vertical:top;
+    mso-position-vertical-relative:line' from="4476,1593" to="4608,1647"
+    o:allowoverlap="f" strokecolor="#903" strokeweight=".15pt"/>
+   <v:rect id="_x0000_s1057" style='position:absolute;left:4009;top:1367;
+    width:585;height:180;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>+Address</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1058" style='position:absolute;left:4484;top:1753;
+    width:75;height:180;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para>1</para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><v:rect id="_x0000_s1059" style='position:absolute;left:3440;top:1345;
+    width:390;height:180;mso-wrap-style:none;mso-position-horizontal:left;
+    mso-position-vertical:top;mso-position-vertical-relative:line'
+    o:allowoverlap="f" filled="f" stroked="f">
+    <v:textbox style='mso-fit-shape-to-text:t' inset="0,0,0,0">
+     <![if !mso]>
+     <table>
+      <row>
+       <entry><![endif]>
+       
+       <para><legacyItalic>LiveAt</legacyItalic></para>
+       
+       <![if !mso]></entry>
+      </row>
+     </table>
+     <![endif]></v:textbox>
+   </v:rect><w:wrap type="none"/>
+   <w:anchorlock/>
+  </v:group><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image013.gif --><mediaLink><image xlink:href="image013" /></mediaLink><![endif]><!--[if mso & !supportInlineShapes & supportFields]><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:294.35pt;
+   height:157.1pt'>
+   <v:imagedata croptop="-65520f" cropbottom="65520f"/>
+  </v:shape><![endif]--><o:p></o:p></para>
+  <para>For the implementation of this relationship add tow
+  properties with names Parents,Childrens.<o:p></o:p></para>
+  <para>[BackwardCompatibilityID(&quot;{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}&quot;)]<o:p></o:p></para>
+  <para>[Persistent]<o:p></o:p></para>
+  <para>public class
+  Person: MarshalByRefObject, IExtMarshalByRefObject<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; private
+  Set _Childrens=new Set();<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>&#160; [BackwardCompatibilityID(&quot;+6&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [Association(&quot;PersonChildren&quot;,typeof(Family.Person),Roles.RoleA)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [PersistentMember(&quot;_Childrens&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [RoleAMultiplicityRange(0)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; public Set Childrens<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; get<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; return
+  new Set(_Childrens);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; private Set _Parents=new Set();<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; [BackwardCompatibilityID(&quot;+5&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [Association(&quot;PersonChildren&quot;,typeof(Family.Person),Roles.RoleB)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [PersistentMember(&quot;_Parents&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [RoleBMultiplicityRange(0,2)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; public Set Parents<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; get<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; return
+  new Set(_Parents);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para>&#160; <o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>The tow properties define the tow association ends
+  of association <legacyBold>PersonChildren </legacyBold>the attributes of property are the same as the attributes of Address
+  member. The deference is at multiplicity because the Association is tow way
+  relationship each property defines its multiplicity. For children is zero to
+  n, for parents zero to 2. The definition for parent&#8217;s multiplicity
+  tells low limit 0 and high limit 2. Because we want the person object
+  controls the parents and children itself we have not declare property setter
+  methods and getter methods return a copy collection. The client code can add
+  or delete parent and children through add and remove methods. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>[BackwardCompatibilityID(&quot;{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}&quot;)]<o:p></o:p></para>
+  <para>[Persistent()]<o:p></o:p></para>
+  <para>public class
+  Person: MarshalByRefObject, IExtMarshalByRefObject<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; private
+  Set _Childrens=new Set();<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;+6&quot;)]<o:p></o:p></para>
+  <para>&#160; [Association(&quot;PersonChildren&quot;,typeof(Family.Person),Roles.RoleA)]<o:p></o:p></para>
+  <para>&#160; [PersistentMember(&quot;_Childrens&quot;)]<o:p></o:p></para>
+  <para>&#160; [RoleAMultiplicityRange(0)]<o:p></o:p></para>
+  <para>&#160; public
+  Set Childrens<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; return new
+  Set(_Childrens);<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>&#160; public void AddChild(Person child)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(child==null)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; return;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(!_Childrens.Contains(child))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; using(
+  ObjectStateTransition objStateTransition=new
+  ObjectStateTransition(this))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Childrens.Add(child);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; public void RemoveChild(Person child)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(child==null)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &#160; return;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(_Childrens.Contains(child))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; using(
+  ObjectStateTransition objStateTransition=new
+  ObjectStateTransition(this))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Childrens.Remove(child);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; private
+  Set _Parents=new Set();<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;+5&quot;)]<o:p></o:p></para>
+  <para>&#160; [Association(&quot;PersonChildren&quot;,typeof(Family.Person),Roles.RoleB)]<o:p></o:p></para>
+  <para>&#160; [PersistentMember(&quot;_Parents&quot;)]<o:p></o:p></para>
+  <para>&#160; [RoleBMultiplicityRange(0,2)]<o:p></o:p></para>
+  <para>&#160; public
+  Set Parents<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; return new
+  Set(_Parents);<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; <legacyBold>public void
+  AddParent(Person parent)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(parent==null)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; return;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(!_Parents.Contains(parent))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; using(
+  ObjectStateTransition objStateTransition=new
+  ObjectStateTransition(this))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Parents.Add(parent);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; ///
+  &lt;MetaDataID&gt;{C74B80F7-D319-46E8-BD43-FED951CF7559}&lt;/MetaDataID&gt;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; public void RemoveParent(Person parent)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(parent==null)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; return;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; if(_Parents.Contains(parent))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; using(
+  ObjectStateTransition objStateTransition=new
+  ObjectStateTransition(this))<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Parents.Remove(parent);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; .<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; .<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; .<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; .<o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>The code before the object state transition in add
+  remove methods is useful because there isn&#8217;t reason to activate
+  transaction system unnecessarily. We will write some code in client form that
+  add two families, one with two parents and three child&#8217;s&#160; and another with two parents and two
+  child&#8217;s in first family two child&#8217;s live at family home and in
+  second family only one child live at family home. After that we write a query
+  which asks from object storage the child&#8217;s that leave in family home.
+  The code is the following. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  </entry>
+ </row>
+ <row>
+  <entry>
+  <para>private void AddFamilies_Click(object
+  sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160; <legacyBold>using(SystemStateTransition
+  sysStateTransition=new
+  SystemStateTransition())<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  father=storageSession.NewObject(typeof(Family.Person),&quot;Jack&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new</legacyBold><legacyBold> System.Type[1]{typeof(string)}) as Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  mother=storageSession.NewObject(typeof(Family.Person),&quot;Mary&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new</legacyBold><legacyBold> System.Type[1]{typeof(string)}) as Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person firstChild=storageSession.NewObject(typeof(Family.Person),&quot;George&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new</legacyBold><legacyBold> System.Type[1]{typeof(string)}) as Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; firstChild.AddParent(father);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; firstChild.AddParent(mother);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  secondChild=storageSession.NewObject(typeof(Family.Person),&quot;Nick&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild.AddParent(father);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild.AddParent(mother);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person
+  thirdChild=storageSession.NewObject(typeof(Family.Person),&quot;Loosy&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; thirdChild.AddParent(father);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; thirdChild.AddParent(mother);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Address
+  familyAddress=storageSession.NewObject(typeof(Family.Address),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;<st1:City
+  st="on" w:st="on">LONDON</st1:City>&quot;,&quot;PADDINGTON&quot;,&quot;<st1:place
+  st="on" w:st="on"><st1:PlaceName st="on" w:st="on">SUSSEX</st1:PlaceName> <st1:PlaceType
+   st="on" w:st="on">GARDENS</st1:PlaceType></st1:place> 35&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[3]{<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string)})as Family.Address;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Address
+  secondChildAddress=storageSession.NewObject(typeof(Family.Address),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;<st1:City
+  st="on" w:st="on">LONDON</st1:City>&quot;,&quot;PADDINGTON&quot;,&quot;<st1:place
+  st="on" w:st="on"><st1:PlaceName st="on" w:st="on">SUSSEX</st1:PlaceName> <st1:PlaceType
+   st="on" w:st="on">GARDENS</st1:PlaceType></st1:place> 5&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[3]{<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string)})as Family.Address;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; father.Address=mother.Address=firstChild.Address=thirdChild.Address=familyAddress;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild.Address=secondChildAddress;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; father=storageSession.NewObject(typeof(Family.Person),&quot;John&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; mother=storageSession.NewObject(typeof(Family.Person),&quot;sara&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; firstChild=storageSession.NewObject(typeof(Family.Person),&quot;Lora&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; firstChild.AddParent(father);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; firstChild.AddParent(mother);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild=storageSession.NewObject(typeof(Family.Person),&quot;Paul&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[1]{typeof(string)}) as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild.AddParent(father);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild.AddParent(mother);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; familyAddress=storageSession.NewObject(typeof(Family.Address),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;<st1:City
+  st="on" w:st="on">LONDON</st1:City>&quot;,&quot;PADDINGTON&quot;,&quot;<st1:place
+  st="on" w:st="on"><st1:PlaceName st="on" w:st="on">SUSSEX</st1:PlaceName> <st1:PlaceType
+   st="on" w:st="on">GARDENS</st1:PlaceType></st1:place> 110&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[3]{<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string)})as Family.Address;<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChildAddress=storageSession.NewObject(typeof(Family.Address),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;<st1:City
+  st="on" w:st="on"><st1:place st="on" w:st="on">LONDON</st1:place></st1:City>&quot;,&quot;PADDINGTON&quot;,&quot;SUSSEX
+  GARDENS 98&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; new System.Type[3]{<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof(string)})as Family.Address;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; father.Address=mother.Address=firstChild.Address=familyAddress;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; secondChild.Address=secondChildAddress;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; sysStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void LiveAtFamilyHome_Click(object sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; string
+  objectQuery=&quot;SELECT person,person.Name name &quot;+<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &quot;FROM &quot;+typeof(Family.Person).FullName
+  +&quot; person &quot;+<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &quot;WHERE person.Address =
+  person.Parents.Address&quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; //SELECT person&#160; <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; //FROM Family.Person person <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; //WHERE person.Address =
+  person.Parents.Address<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; StructureSet objectSet=storageSession.Execute(objectQuery);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; foreach(StructureSet
+  objectSetInstance in objectSet)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Person person =
+  objectSetInstance[&quot;person&quot;] as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name:&quot;+ person.Name); <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>Firstly run add family code. After that run the
+  query code. The query code runs extremely slow, in case you have a lot of
+  child that live in family home. There is a reason. The reason is that you
+  have a lot of remote call. The code <legacyBold>person.Name </legacyBold>asks<legacyBold> </legacyBold>from person the name with<legacyBold> </legacyBold>remote call. It
+  is better technique to load the name in structure set and take that as result
+  of query. Look at the next code. <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void LiveAtFamilyHome_Click(object sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; string
+  objectQuery=&quot;SELECT person<legacyBold>,person.Name
+  name</legacyBold> &quot;+<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; &quot;FROM
+  &quot;+typeof(Family.Person).FullName +&quot;
+  person &quot;+<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; &quot;WHERE
+  person.Address = person.Parents.Address&quot;;<o:p></o:p></para>
+  <para>&#160; //SELECT
+  person<legacyBold>,person.Name name</legacyBold> <o:p></o:p></para>
+  <para>&#160; //FROM
+  Family.Person person <o:p></o:p></para>
+  <para>&#160; //WHERE
+  person.Address = person.Parents.Address<o:p></o:p></para>
+  <para>&#160; StructureSet
+  objectSet=storageSession.Execute(objectQuery);<o:p></o:p></para>
+  <para>&#160; foreach(StructureSet
+  objectSetInstance in objectSet)<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; Family.Person
+  person = objectSetInstance[&quot;person&quot;] as
+  Family.Person;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name<legacyBold>:&quot;+objectSetInstance[&quot;name&quot;]
+  as string</legacyBold>);
+  <o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Inheritance.<o:p></o:p></legacyBold></para>
+  <para>Inheritance relationship is something new in
+  persistency systems but very popular in programming languages. An example is
+  the Person and Employee. The employee has Salary.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>using
+  OOAdvantech.MetaDataRepository;<o:p></o:p></para>
+  <para>using OOAdvantech.Transactions;<o:p></o:p></para>
+  <para>namespace Family<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;{E9D67233-E834-45FE-8246-A772E0698E2D}&quot;)]<o:p></o:p></para>
+  <para>&#160; [Persistent(&quot;&lt;ExtMetaData&gt;&lt;RDBMSInheritanceMapping&gt;OneTablePerConcreteClass&lt;/RDBMSInheritanceMapping&gt;&lt;/ExtMetaData&gt;&quot;)]<o:p></o:p></para>
+  <para>&#160; public
+  class Employee:Person<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; private double
+  _Salary;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; [BackwardCompatibilityID(&quot;+1&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; [PersistentMember(&quot;_Salary&quot;)]<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public double
+  Salary<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return _Salary;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; set<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; if(_Salary!=value)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; using( ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Salary=value;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.SetComplete();<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160; public Employee()<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; public Employee(string
+  name, double salary): base( name)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160; _Salary=salary;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>There is something deferent from other
+  persistent class declaration. We additional declare extension meta data for
+  inheritance. In RDBMS subsystem the classes mapped to tables and persistent
+  members to columns relationships to foreign keys etc. All that implicitly.
+  Some times like inheritance we have more than one mapping choice. If we not
+  declare extension meta data for inheritance the persistency system choose the
+  default option. In our case we declare <legacyBold>OneTablePerConcreteClass</legacyBold>. This choice it is not the default. The RDBMS
+  mapping model is out of scoop of this article. We add button to client form
+  which create an Employee in object storage. If we create an employee to the
+  object storage with <legacyBold>NewEmployee</legacyBold> button and then we click the <legacyBold>GetPersons</legacyBold> button we take all the persons and the
+  employee that we just create &#8220;polymorphism phenomenon&#8221;.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void
+  NewEmployee_Click(object sender,
+  System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; using(SystemStateTransition sysStateTransition=new SystemStateTransition())<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; System.Type[]
+  parametersTypes=new System.Type[2]{typeof(string),typeof(double)};<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Family.Employee
+  wmployee=storageSession.NewObject(typeof(Family.Employee),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Michael&quot;,1500,new System.Type[2]{<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; typeof</legacyBold><legacyBold>(string),typeof(double)}) <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; as Family.Employee;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; sysStateTransition.SetComplete();<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void
+  GetPersons_Click(object sender, System.EventArgs
+  e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para><legacyBold>&#160; try<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Cursor=Cursors.WaitCursor;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; string objectQuery=&quot;SELECT person FROM &quot;+typeof(Family.Person).FullName+&quot; person
+  &quot;;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; //SELECT person FROM Family.Person person <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; StructureSet
+  objectSet=storageSession.Execute(objectQuery);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; foreach(StructureSet objectSetInstance in objectSet)<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; Family.Person
+  person = objectSetInstance[&quot;person&quot;] as
+  Family.Person;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name:&quot;+person.Name); <o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; finally<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160; Cursor=Cursors.Default;<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; }<o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Association
+  Class.<o:p></o:p></legacyBold></para>
+  <para>The association class used when we
+  want information for class relationship. For example we have the employee
+  which works in company. The employee has relationship with the company that
+  work. But it isn&#8217;t enough. We want to know the job of employee in
+  company. The job is association class and keeps information about the job of employee.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><!--[if gte vml 1]><v:shape
+   id="_x0000_i1031" type="#_x0000_t75" style='width:354.75pt;height:161.25pt'>
+   <v:imagedata src="Persistent%20Objetcs_files/image012.png" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><!-- TODO: Missing source image: Persistent%20Objetcs_files\image015.jpg --><mediaLink><image xlink:href="image015" /></mediaLink><![endif]><o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>The Name property keeps the name of
+  job, the start date etc. We have to add
+  code for two classes. Firstly we add code for class company and then code for
+  relationship between company and employee.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>[BackwardCompatibilityID(&quot;{0DAA518F-51BE-4AF6-A3FE-520BDCB798D1}&quot;)]<o:p></o:p></para>
+  <para>[Persistent]<o:p></o:p></para>
+  <para>public class
+  Company:MarshalByRefObject,IExtMarshalByRefObject<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; public
+  OOAdvantech.ExtensionProperties Properties;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; private
+  Set _Employees=new Set();<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;+1&quot;)]<o:p></o:p></para>
+  <para>&#160; [Association(&quot;Job&quot;,typeof(Family.Employee),Roles.RoleB)]<o:p></o:p></para>
+  <para>&#160; [PersistentMember(&quot;_Employees&quot;)]<o:p></o:p></para>
+  <para>&#160; [RoleBMultiplicityRange(0)]<o:p></o:p></para>
+  <para>&#160; [AssociationClass(typeof(Family.Job))]<o:p></o:p></para>
+  <para>&#160; public
+  Set Employees<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; return new
+  Set(_Employees);<o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>&#160; public void AddEmployee(Job job)<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; if(job==null)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; return;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160; if(job.Employee==null)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; throw new
+  System.Exception(&quot;the member Employee of job isn't set&quot;);<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160; using(ObjectStateTransition stateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; _Employees.Add(job);
+  <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; stateTransition.Consistent=true;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>&#160; public
+  void RemoveEmployee(Job job)<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; if(job==null)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; return;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160; using(ObjectStateTransition stateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; _Employees.Remove(job);<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; stateTransition.Consistent=true;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>&#160; private
+  string _Name;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160; [BackwardCompatibilityID(&quot;+2&quot;)]<o:p></o:p></para>
+  <para>&#160; [PersistentMember(&quot;_Name&quot;)]<o:p></o:p></para>
+  <para>&#160; public
+  string Name<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; get<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; return _Name;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160; set<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; if(_Name!=value)<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; using(ObjectStateTransition objStateTransition=new ObjectStateTransition(this))<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; _Name=value;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; objStateTransition.Consistent=true;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>} <o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>The code is the same as the person
+  class code the attribute of relationship property Employees is approximately
+  the same with the attribute of Childrens but Employees has one attribute
+  more, the <legacyBold>[AssociationClass(typeof(Family.Job))].</legacyBold><legacyBold> </legacyBold>This attribute
+  declare that the relationship has association class. Another new in this
+  relationship is that the collection doesn&#8217;t contain employee objects
+  but contains job objects. With other words we can tell that contains
+  association class object. The association class is the Job. The Job class has
+  one more attribute, the &#8220;<legacyBold>[AssociationClass(typeof(Family.Company),typeof(Family.Employee),&quot;Job&quot;)]&#8221;. </legacyBold>The <legacyBold>AssociationClass</legacyBold> attribute constructor takes three parameter, the
+  first is the role A class type the second the role B class type and third the
+  name of relationship. Also has two members for the related object in this
+  case the Employee and Employer, to declare a member of association class as
+  related object member you must define on them <legacyBold>AssociationClassRole</legacyBold> attribute with parameter the type of role (RoleA or
+  RoleB) and optional the implementation field if the member is property. If we
+  create a job object set the Employee member with employee object, and adds it
+  to company object with the AddEmployee method then at the end of state
+  transition we will have in Employees collection the job object and two
+  association role member of job with correct values employee and company
+  objects. We must mention that we have added the Employers collection in
+  employee class with the same characteristics with Employees collection of
+  Company class.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>[BackwardCompatibilityID(&quot;{E9D67233-E834-45FE-8246-A772E0698E2D}&quot;)]<o:p></o:p></para>
+  <para>[Persistent]<o:p></o:p></para>
+  <para>public class
+  Employee:Person<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; .<o:p></o:p></para>
+  <para>&#160; <legacyBold>private Set _Employers=new Set();<o:p></o:p></legacyBold></para>
+  <para><legacyBold><o:p>&#160;</o:p></legacyBold></para>
+  <para><legacyBold>&#160; [BackwardCompatibilityID(&quot;+4&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [Association(&quot;Job&quot;,typeof(Family.Company),Roles.RoleA)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [PersistentMember(&quot;_Employers&quot;)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [RoleAMultiplicityRange(0)]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; [AssociationClass(typeof(Family.Job))]<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; public Set Employers<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160; get<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160; {<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160;&#160;&#160; return
+  new Set(_Employers);<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160;&#160;&#160; }<o:p></o:p></legacyBold></para>
+  <para><legacyBold>&#160; } <o:p></o:p></legacyBold></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>Now we can test how this code work
+  with two buttons at ClientForm, the first creates one Company object , three
+  Employee objects and three Job objects and add Job object in Company. The
+  second button executes a query that asks from the object storage the
+  employees which their job started before a specific date and work at specific
+  company.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>private void AddCompanyEmployee_Click(object sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; Cursor=Cursors.WaitCursor;<o:p></o:p></para>
+  <para>&#160; try<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; Family.Company
+  company=null;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></para>
+  <para>&#160;&#160;&#160; using(SystemStateTransition sysStateTransition=new SystemStateTransition())<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; System.Type[]
+  employeeParameterTypes=new System.Type[2]{typeof(string),typeof(double)};<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Employee
+  jack=storageSession.NewObject(typeof(Family.Employee),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Jack&quot;,1500,employeeParameterTypes)
+  as Family.Employee;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Employee
+  lorka=storageSession.NewObject(typeof(Family.Employee),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Lorka&quot;,1200,employeeParameterTypes)
+  as Family.Employee;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Employee
+  looberk=storageSession.NewObject(typeof(Family.Employee),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Looberk&quot;,1600,employeeParameterTypes)
+  as Family.Employee;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; System.Type[]
+  jobParameterTypes=new System.Type[2]{typeof(string),typeof(DateTime)};<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Job
+  electrician=storageSession.NewObject(typeof(Family.Job),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Electrician&quot;,DateTime.Parse(&quot;10/11/2004&quot;),jobParameterTypes)
+  as Family.Job;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; electrician.Employee=jack;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Job
+  electronic=storageSession.NewObject(typeof(Family.Job),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Electronic&quot;,DateTime.Parse(&quot;4/3/2003&quot;),jobParameterTypes)
+  as Family.Job;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; electronic.Employee=lorka;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Job
+  manager=storageSession.NewObject(typeof(Family.Job),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Manager&quot;,DateTime.Parse(&quot;1/1/2003&quot;),jobParameterTypes)
+  as Family.Job;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; manager.Employee=looberk;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; System.Type[]
+  companyParameterTypes=new System.Type[1]{typeof(string)};<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Company
+  genecom=storageSession.NewObject(typeof(Family.Company),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160;&#160;&#160; &quot;Genecom&quot;,companyParameterTypes)
+  as Family.Company;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; genecom.AddEmployee(electrician);<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; genecom.AddEmployee(electronic);<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; genecom.AddEmployee(manager);<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; sysStateTransition.Consistent=true;<o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>&#160; finally<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; Cursor=Cursors.Default;<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para>private void GetEmployees_Click(object
+  sender, System.EventArgs e)<o:p></o:p></para>
+  <para>{<o:p></o:p></para>
+  <para>&#160; Cursor=Cursors.WaitCursor;<o:p></o:p></para>
+  <para>&#160; try<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; StorageSession
+  storageSession=StorageSession.OpenStorage(&quot;Family&quot;,<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; System.Net.Dns.GetHostName(),<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; &quot;OOAdvantech.MSSQLPersistenceRunTime.StorageProvider&quot;);<o:p></o:p></para>
+  <para>&#160; <o:p></o:p></para>
+  <para>&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160; objectQuery=&quot;SELECT
+  employee &quot;+<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; &quot;FROM
+  &quot;+typeof(Family.Employee).FullName+&quot;
+  employee&#160; &quot;+<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; &quot;WHERE
+  employee.Job.StartingDate&lt;1/1/2004 AND employee.Job.Employer.Name =
+  'Genecom'&quot;;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160; //SELECT employee <o:p></o:p></para>
+  <para>&#160;&#160;&#160; //FROM Family.Employee employee&#160; <o:p></o:p></para>
+  <para>&#160;&#160;&#160; //WHERE employee.Job.StartingDate&lt;1/1/2004 AND
+  employee.Job.Employer.Name = 'Genecom'&quot;<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para>&#160;&#160;&#160; StructureSet
+  objectSet=storageSession.Execute(objectQuery);<o:p></o:p></para>
+  <para>&#160;&#160;&#160; foreach(StructureSet objectSetInstance in objectSet)<o:p></o:p></para>
+  <para>&#160;&#160;&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; Family.Employee
+  employee = objectSetInstance[&quot;employee&quot;] as
+  Family.Employee;<o:p></o:p></para>
+  <para>&#160;&#160;&#160;&#160;&#160; System.Diagnostics.Debug.WriteLine(&quot;Person
+  name:&quot;+employee.Name); <o:p></o:p></para>
+  <para>&#160;&#160;&#160; }<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>&#160; finally<o:p></o:p></para>
+  <para>&#160; {<o:p></o:p></para>
+  <para>&#160;&#160;&#160; Cursor=Cursors.Default;<o:p></o:p></para>
+  <para>&#160; }<o:p></o:p></para>
+  <para>}<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><legacyBold>Conclusion.<o:p></o:p></legacyBold></para>
+  <para>With OOAdvanceTech persistency system you
+  don&#8217;t need write code for data base like create tables, store procedure
+  mapping the object oriented world to tables. The persistency system takes
+  care for that. The only that you needed to do is to write classes and declare
+  that persistent. Also persistency gives you a powerful and friendly query
+  language to retrieve object or data or both from object storage. Finally the
+  persistency system takes care to store the objects in deferent data base like
+  Microsoft SQL Server, Oracle or deferent technology storage media like XML
+  files with no impact on your code.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  </entry>
+ </row>
+ <row>
+  <entry>
+  <para>&#160; <o:p></o:p></para>
+  </entry>
+ </row>
+</table>
+
+<para><o:p>&#160;</o:p></para>
+
+
+
+
+    <relatedTopics>
+    </relatedTopics>
+
+  </developerConceptualDocument>
+</topic>

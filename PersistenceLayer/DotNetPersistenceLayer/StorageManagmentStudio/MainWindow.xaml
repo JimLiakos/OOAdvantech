@@ -1,0 +1,51 @@
+﻿<Window x:Class="StorageManagmentStudio.MainWindow"
+       xmlns:ConnectableCtrl="clr-namespace:WPFUIElementObjectBind;assembly=ConnectableControls"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:self="clr-namespace:StorageManagmentStudio" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        
+    Title="Window" Height="500" Width="300" DataContext="{Binding ElementName=Connection, Path=Source.Value}"  Loaded="Window_Loaded">
+    <Window.Resources>
+        <ConnectableCtrl:PresentationObjectConvertor x:Key="StorageServerLinkPresentationObjectConvertor" AssignPresentationObjectType="{x:Type self:StorageMetadataNodePresentation}">
+        </ConnectableCtrl:PresentationObjectConvertor>
+
+    </Window.Resources>
+    <Grid>
+        <ConnectableCtrl:ViewControlObject  ViewControlObjectType="{x:Type self:StorageServersManager}" Name="Connection" TransactionOption="Required" RollbackOnExitWithoutAnswer="True"></ConnectableCtrl:ViewControlObject>
+        <DockPanel  VerticalAlignment="Stretch">
+            <ToolBar VerticalAlignment="Top"  DockPanel.Dock="Top">
+                <Button x:Name="ToolStripButtonOpen" CommandTarget="{Binding}">
+                    <Image Height="20"  Source="/StorageManagmentStudio;component/Resources/ConnectDatabase.png" />
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click" >
+                            <ConnectableCtrl:CallMethodAction  MethodName="AddConnection" TransactionOption="RequiresNew" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </ToolBar>
+
+
+
+            <Grid >
+
+                <TreeView   ItemsSource="{Binding Path=Connections, Converter= {StaticResource StorageServerLinkPresentationObjectConvertor}}" VerticalAlignment="Stretch">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type self:StorageMetadataNodePresentation}" ItemsSource="{Binding Path=RealObject.SubNodes,Converter={StaticResource StorageServerLinkPresentationObjectConvertor}}">
+                            <StackPanel Orientation="Horizontal" ContextMenu="{Binding Path=ContextMenu}">
+                                <Image Height="18" Margin="0,0,4,0"  Source="{Binding Path=RealObject.NodeIco}"></Image>
+                                <TextBlock VerticalAlignment="Bottom" Text="{Binding Path=RealObject.Name}"></TextBlock>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+        </DockPanel>
+
+
+
+
+
+    </Grid>
+</Window>

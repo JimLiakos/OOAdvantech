@@ -1,0 +1,3 @@
+"SELECT order.Name,order.OrderDetails.Price" +" price FROM AbstractionsAndPersistency.Ord"+
+"er  order"
+ 

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="a6b3dfbb-86ae-4232-aa77-657dfc503428" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>TODO: Move introduction text here</para>
+    </introduction>
+
+
+
+
+<table>
+ <row>
+  <entry>
+  <para><legacyBold>Object Query Language<o:p></o:p></legacyBold></para>
+  <para>Coming
+  soon.<o:p></o:p></para>
+  <para><o:p>&#160;</o:p></para>
+  </entry>
+ </row>
+</table>
+
+<para><o:p>&#160;</o:p></para>
+
+<para><o:p>&#160;</o:p></para>
+
+
+
+
+    <relatedTopics>
+    </relatedTopics>
+
+  </developerConceptualDocument>
+</topic>

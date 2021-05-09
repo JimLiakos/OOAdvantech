@@ -1,0 +1,70 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object SubSystem "ParsistenceLayer"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"3EA2EA63026E"
+    physical_models 	(list unit_reference_list
+	(object module "PersistenceLayer" "NotAModuleType" "NotAModulePart"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Solution File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework.sln")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Project File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\PersistenceLayer.csproj")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Location"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{44A6638A-F9E0-4AD8-A9B9-B7E895EE7508}")
+		(object Attribute
+		    tool       	"DotNet"
+		    name       	"Solution"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework - VS10.sln")
+		(object Attribute
+		    tool       	"DotNet"
+		    name       	"Project"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\OOAdvantech\\OOAdvantech - VS10.csproj"))
+	    quid       	"3E809B9801B9"
+	    stereotype 	""
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"40935EA903B0"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::Storage"
+		    quidu      	"3E8928EC0234")
+		(object Realize_Relationship
+		    quid       	"41B9489E0081"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::IPersistencyService"
+		    quidu      	"41B8C73C0070")
+		(object Realize_Relationship
+		    quid       	"43C3625D03AA"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::ObjectCollection"
+		    quidu      	"3ED1A66E0304")
+		(object Realize_Relationship
+		    quid       	"43C3625D03A9"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::IStorageServerInstanceLocator"
+		    quidu      	"43C362080119")
+		(object Realize_Relationship
+		    quid       	"53F48AD101C3"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::IObjectStateEventsConsumer"
+		    quidu      	"53F489FD0166")
+		(object Realize_Relationship
+		    quid       	"5B04E5A301DD"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::IRawStorageData"
+		    quidu      	"5B04E511012F")
+		(object Realize_Relationship
+		    quid       	"5D93ACDA01D0"
+		    supplier   	"Logical View::OOAdvantech::PersistenceLayer::IBackupArchive"
+		    quidu      	"5D93AB7C0050"))
+	    language   	"C#"))
+    physical_presentations 	(list unit_reference_list))

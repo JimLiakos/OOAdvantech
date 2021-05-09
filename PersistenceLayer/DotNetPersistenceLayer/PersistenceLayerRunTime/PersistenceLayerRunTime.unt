@@ -1,0 +1,7 @@
+<Root>
+  <CodeModule Identity="19736120-5a49-4dd9-8841-9c5da7ef7b32" Name="PersistenceLayerRunTime" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistenceLayerRunTime" VSnetProject="PersistenceLayerRunTime.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0">
+    <Reference Name="DotNetMetaDataRepository" FileSystemPath="..\DotNetMetaDataRepository\DotNetMetaDataRepository.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/DotNetMetaDataRepository" Version="1.0.1.0" />
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+    <Reference Name="OOAdvantech" FileSystemPath="..\OOAdvantech\OOAdvantech.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/OOAdvantech" Version="1.0.1.0" />
+  </CodeModule>
+</Root>

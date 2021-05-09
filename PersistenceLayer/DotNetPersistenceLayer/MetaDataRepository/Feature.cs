@@ -9,6 +9,13 @@ namespace OOAdvantech.MetaDataRepository
 	[Persistent()]
     public abstract class Feature : MetaObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="member"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         /// <MetaDataID>{4be650c5-fccd-44d5-b9af-904d73e4e6d5}</MetaDataID>
         public override ObjectMemberGetSet SetMemberValue(object token, System.Reflection.MemberInfo member, object value)
         {

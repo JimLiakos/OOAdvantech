@@ -1,0 +1,1002 @@
+﻿<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+  <head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
+    <META NAME="save" CONTENT="history" />
+    <title>OOAdvantech.MetaDataRepository Namespace</title>
+    <link rel="stylesheet" type="text/css" href="../styles/presentation.css" />
+    <link rel="stylesheet" type="text/css" href="ms-help://Hx/HxRuntime/HxLink.css" />
+    <script type="text/javascript" src="../scripts/EventUtilities.js"> </script>
+    <script type="text/javascript" src="../scripts/SplitScreen.js"> </script>
+    <script type="text/javascript" src="../scripts/Dropdown.js"> </script>
+    <script type="text/javascript" src="../scripts/script_manifold.js"> </script>
+    <script type="text/javascript" src="../scripts/script_feedBack.js"> </script>
+    <script type="text/javascript" src="../scripts/CheckboxMenu.js"> </script>
+    <script type="text/javascript" src="../scripts/CommonUtilities.js"> </script>
+    <meta name="container" content="OOAdvantech.MetaDataRepository" />
+    <meta name="file" content="f01a2929-fcb4-6e5e-6cc4-d4a6398e02a4" />
+    <meta name="guid" content="f01a2929-fcb4-6e5e-6cc4-d4a6398e02a4" />
+    <xml>
+      <MSHelp:Attr Name="AssetID" Value="N:OOAdvantech.MetaDataRepository" />
+      <MSHelp:TOCTitle Title="OOAdvantech.MetaDataRepository Namespace" />
+      <MSHelp:RLTitle Title="OOAdvantech.MetaDataRepository Namespace ()" />
+      <MSHelp:Keyword Index="A" Term="N:OOAdvantech.MetaDataRepository" />
+      <MSHelp:Keyword Index="A" Term="frlrfOOAdvantechMetaDataRepository" />
+      <MSHelp:Keyword Index="K" Term="OOAdvantech.MetaDataRepository namespace" />
+      <MSHelp:Keyword Index="F" Term="OOAdvantech.MetaDataRepository" />
+      <MSHelp:Attr Name="HelpPriority" Value="1" />
+      <MSHelp:Attr Name="DevLang" Value="VB" />
+      <MSHelp:Attr Name="DevLang" Value="CSharp" />
+      <MSHelp:Attr Name="DevLang" Value="C++" />
+      <MSHelp:Attr Name="Locale" Value="en-us" />
+      <MSHelp:Attr Name="TopicType" Value="kbSyntax" />
+      <MSHelp:Attr Name="TopicType" Value="apiref" />
+    </xml>
+  </head>
+  <body>
+    <input type="hidden" id="userDataCache" class="userDataStyle" />
+    <input type="hidden" id="hiddenScrollOffset" />
+    <img id="collapseImage" style="display:none; height:0; width:0;" src="../icons/collapse_all.gif" title="Collapse image" />
+    <img id="expandImage" style="display:none; height:0; width:0;" src="../icons/expand_all.gif" title="Expand Image" />
+    <img id="collapseAllImage" style="display:none; height:0; width:0;" src="../icons/collapse_all.gif" />
+    <img id="expandAllImage" style="display:none; height:0; width:0;" src="../icons/expand_all.gif" />
+    <img id="dropDownImage" style="display:none; height:0; width:0;" src="../icons/dropdown.gif" />
+    <img id="dropDownHoverImage" style="display:none; height:0; width:0;" src="../icons/dropdownHover.gif" />
+    <img id="copyImage" style="display:none; height:0; width:0;" src="../icons/copycode.gif" title="Copy image" />
+    <img id="copyHoverImage" style="display:none; height:0; width:0;" src="../icons/copycodeHighlight.gif" title="CopyHover image" />
+    <div id="header">
+      <table id="topTable" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+            <span onclick="ExpandCollapseAll(toggleAllImage)" style="cursor:default;" onkeypress="ExpandCollapseAll_CheckKey(toggleAllImage, event)" tabindex="0">
+              <img ID="toggleAllImage" class="toggleAll" src="../icons/collapse_all.gif" /> <label id="collapseAllLabel" for="toggleAllImage" style="display: none;">Collapse All</label><label id="expandAllLabel" for="toggleAllImage" style="display: none;">Expand All</label> </span>
+            <span>    </span>
+            <span id="devlangsDropdown" class="filter" tabindex="0">
+              <img id="devlangsDropdownImage" src="../icons/dropdown.gif" /> <label id="devlangsMenuAllLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: All </nobr></label><label id="devlangsMenuMultipleLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: Multiple </nobr></label><label id="devlangsMenuVisualBasicLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: Visual Basic </nobr></label><label id="devlangsMenuCSharpLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: C# </nobr></label><label id="devlangsMenuManagedCPlusPlusLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: Visual C++ </nobr></label><label id="devlangsMenuJavaScriptLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: JavaScript </nobr></label></span>
+          </td>
+        </tr>
+      </table>
+      <div id="devlangsMenu">
+        <input id="VisualBasicCheckbox" type="checkbox" data="VisualBasic,vb,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="VisualBasicCheckbox">Visual Basic</label>
+        <br />
+        <input id="CSharpCheckbox" type="checkbox" data="CSharp,cs,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="CSharpCheckbox">C#</label>
+        <br />
+        <input id="ManagedCPlusPlusCheckbox" type="checkbox" data="ManagedCPlusPlus,cpp,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="ManagedCPlusPlusCheckbox">Visual C++</label>
+        <br />
+        <input id="JavaScriptCheckbox" type="checkbox" data="JavaScript,cs,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="JavaScriptCheckbox">JavaScript</label>
+        <br />
+      </div>
+      <table id="bottomTable" cellpadding="0" cellspacing="0">
+        <tr id="headerTableRow1">
+          <td align="left">
+            <span id="runningHeaderText">.NET Framework Class Library</span>
+          </td>
+        </tr>
+        <tr id="headerTableRow2">
+          <td align="left">
+            <span id="nsrTitle">OOAdvantech.MetaDataRepository Namespace</span>
+          </td>
+        </tr>
+        <tr id="headerTableRow3">
+          <td align="left">
+  <span id="headfeedbackarea" class="feedbackhead">
+      <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','','%0\dThank%20you%20for%20your%20feedback.%20The%20developer%20writing%20teams%20use%20your%20feedback%20to%20improve%20documentation.%20While%20we%20are%20reviewing%20your%20feedback,%20we%20may%20send%20you%20e-mail%20to%20ask%20for%20clarification%20or%20feedback%20on%20a%20solution.%20We%20do%20not%20use%20your%20e-mail%20address%20for%20any%20other%20purpose%20and%20we%20delete%20it%20after%20we%20finish%20our%20review.%0\AFor%20further%20information%20about%20the%20privacy%20policies%20of%20Microsoft,%20please%20see%20http://privacy.microsoft.com/en-us/default.aspx.%0\A%0\d','Customer%20Feedback');">
+        
+        Send Feedback
+      </a>
+	</span>
+</td>
+        </tr>
+      </table>
+      <table id="gradientTable">
+        <tr>
+          <td class="nsrBottom" background="../icons/gradient.gif" />
+        </tr>
+      </table>
+    </div>
+    <div id="mainSection">
+      <div id="mainBody">
+        <div id="allHistory" class="saveHistory" onsave="saveAll()" onload="loadAll()" />
+        <div class="header">
+          <font color="darkgray">
+            <p />
+          </font>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(classToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(classToggle, event)" tabindex="0">
+            <img id="classToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Classes</span>
+        </h1>
+        <div id="classSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Class</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AddCommand" tabindex="0">AddCommand</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AllowEventCallAsynchronousAttribute" tabindex="0">AllowEventCallAsynchronousAttribute</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Association" tabindex="0">Association</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">An association defines a semantic relationship between classifiers. 
+            The instances of an association are a set of tuples relating instances of the classifiers. 
+            Each tuple value may appear at most once.
+            In the metamodel, an Association is a declaration of a semantic relationship between Classifiers, such as Classes. 
+            An Association has  two AssociationEnds. Each end is connected to a Classifier. 
+            The Association represents a set of connections among instances of the Classifiers.
+            An instance of an Association is a Link, which is a tuple of Instances drawn from the corresponding Classifiers. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationAttribute" tabindex="0">AssociationAttribute</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationClass" tabindex="0">AssociationClass</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationClassRole" tabindex="0">AssociationClassRole</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationEnd" tabindex="0">AssociationEnd</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">An association end is an endpoint of an association, which connects the association to a classifier. Each association end is part of one association.
+            In the metamodel, an AssociationEnd is part of an Association and specifies the connection of an Association to a Classifier. It has a name and defines a set of properties of the connection (e.g., which Classifier the Instances must conform to, their multiplicity, and if they may be reached from another Instance via this connection). </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationEndBehavior" tabindex="0">AssociationEndBehavior</mshelp:link>
+              </td>
+              <td>
+                <div class="summary" />
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationEndRealization" tabindex="0">AssociationEndRealization</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Asynchronous" tabindex="0">Asynchronous</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Attribute" tabindex="0">Attribute</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">Attributes define the characteristics of instances of a class. Each instances of a class has the same attributes, but the values of the attributes may be different. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AttributeRealization" tabindex="0">AttributeRealization</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.BackwardCompatibilityID" tabindex="0">BackwardCompatibilityID</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">With this attribute class you can define your identity for
+            a Meta object. For example the default identity of class is
+            "assembly strong name" "dot" "class full name". Is it useful?
+            In case where the class is persistent and there are objects 
+            at object storage place, if you change the name of class or 
+            namespace you have lose the link between the class and 
+            persistent objects. If you define identity of class for example 
+            a GUID string then there isn't problem. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.BehavioralFeature" tabindex="0">BehavioralFeature</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.BuildAssemblyMetadata" tabindex="0">BuildAssemblyMetadata</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Class" tabindex="0">Class</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A class is a description of a set of objects that share the same attributes, operations, methods, relationships, and semantics. A class may use a set of interfaces to specify collections of operations it provides to its environment. In the metamodel, a Class describes a set of Objects sharing a collection of Features, including Operations, Attributes, and Methods that are common to the set of Objects. Furthermore, a Class may realize zero or more Interfaces; this means that its full descriptor (see "Inheritance" on page 2-69 for the definition) must contain Method for every Operation from every realized Interface (it may contain additional operations as well). </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Classifier" tabindex="0">Classifier</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A classifier is an element that describes behavioral and structural features; it comes in several specific forms, including class, data type, interface, component, artifact, and others that are defined in other metamodel packages.
+            In the metamodel, a Classifier declares a collection of Features, such as Attributes, Methods, and Operations. It has a name, which is unique in the Namespace enclosing
+            the Classifier. Classifier is an abstract metaclass.
+            Classifier is a child of Namespace.
+            As a Namespace, a Classifier may declare other Classifiers nested in its scope. Nested Classifiers may be accessed by other Classifiers only if the nested Classifiers have
+            adequate visibility. There are no data value or state consequences of nested Classifiers
+            (i.e., it is not an aggregation or composition). </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Component" tabindex="0">Component</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.ContainedItemsSynchronizer" tabindex="0">ContainedItemsSynchronizer</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.DataType" tabindex="0">DataType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.DeleteCommand" tabindex="0">DeleteCommand</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Dependency" tabindex="0">Dependency</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A term of convenience for a Relationship other than Association, Generalization, Realization or metarelationship (such as the relationship between a Classifier and one of its
+            Instances).
+            A dependency states that the implementation or functioning of one or more elements requires the presence of one or more other elements.
+            In the metamodel, a Dependency is a directed relationship from a client (or clients) to a supplier (or suppliers) stating that the client is dependent on the supplier (i.e., the client element requires the presence and knowledge of the supplier element). The kinds of Dependency are Abstraction, Binding, Permission, and Usage. Various stereotypes of those elements are predefined. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Enumeration" tabindex="0">Enumeration</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Feature" tabindex="0">Feature</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A feature is a property, like operation or attribute, which is encapsulated within a
+            Classifier.
+            In the metamodel, a Feature declares a behavioral or structural characteristic of an
+            Instance of a Classifier or of the Classifier itself. Feature is an abstract metaclass. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Generalization" tabindex="0">Generalization</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A generalization is a taxonomic relationship between a more general element and a more specific element. The more specific element is fully consistent with the more general element (it has all of its properties, members, and relationships) and may contain additional information.
+            In the metamodel, a Generalization is a directed inheritance relationship, uniting a GeneralizableElement with a more general GeneralizableElement in a hierarchy.
+            Generalization is a subtyping relationship (i.e., an Instance of the more general GeneralizableElement may be substituted by an Instance of the more specific GeneralizableElement). See Inheritance for the consequences of Generalization relationships. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.IdentityPart" tabindex="0">IdentityPart</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.IgnoreErrorCheckAttribute" tabindex="0">IgnoreErrorCheckAttribute</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Interface" tabindex="0">Interface</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">An interface is a named set of operations that characterize the behavior of an element.
+            In the metamodel, an Interface contains a set of Operations that together define a service offered by a Classifier realizing the Interface. A Classifier may offer several services, which means that it may realize several Interfaces, and several Classifiers may realize the same Interface.
+            An Interface may participate in an Association. Interface can access the other end of Association through Getter Setter Operations.  Interface may have pseudo Attribute  which can be accessed through Getter Setter Operations. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaDataException" tabindex="0">MetaDataException</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObject" tabindex="0">MetaObject</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObjectCollectionA" tabindex="0">MetaObjectCollectionA</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObjectCollectionA.MetaObjectEnumerator" tabindex="0">MetaObjectCollectionA<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span></span>MetaObjectEnumerator</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObjectID" tabindex="0">MetaObjectID</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObjectsStack" tabindex="0">MetaObjectsStack</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Method" tabindex="0">Method</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A method is the implementation of an operation. It specifies the algorithm or procedure that effects the results of an operation.
+            In the metamodel, a Method is a declaration of a named piece of behavior in a Class and realizes one (directly) or a set (indirectly) of Operations of the Classifier. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Model" tabindex="0">Model</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MultiplicityRange" tabindex="0">MultiplicityRange</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">When placed on a target end, specifies the number of target instances that may be associated with a single source instance across the given Association.</div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Namespace" tabindex="0">Namespace</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A namespace is a part of a model that contains a set of Meta objects each of whose names designates a unique element within the namespace.
+            In the metamodel, a Namespace is a Meta object that can own other Meta object, like Associations and Classifiers. The name of each owned Meta object must be unique within the Namespace. Moreover, each contained
+            Meta object is owned by at most one Namespace. The concrete subclasses of Namespace have additional constraints on which kind of elements may be contained.
+            Namespace is an abstract metaclass.
+            Note that explicit parts of a model element, such as the features of a Classifier, are not modeled as owned elements in a namespace. A namespace is used for unstructured
+            contents such as the contents of a package or a class declared inside the scope of another class. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.ObjectActivationCall" tabindex="0">ObjectActivationCall</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Operation" tabindex="0">Operation</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">An operation is a service that can be requested from an object to effect behavior. An
+            operation has a signature, which describes the actual parameters that are possible
+            (including possible return values).
+            In the metamodel, an Operation is a BehavioralFeature that can be applied to the
+            Instances of the Classifier that contains the Operation. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Package" tabindex="0">Package</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A package is a grouping of model elements. Packages themselves may be nested
+            within other packages. A package may contain subordinate packages as well as other
+            kinds of model elements. All kinds MetaObject can be organized into
+            packages. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Parameter" tabindex="0">Parameter</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A parameter is an unbound variable that can be changed, passed, or returned. A parameter may include a name, type, and direction of communication. Parameters are used in the specification of operations, messages and events, templates. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Persistent" tabindex="0">Persistent</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.PersistentMember" tabindex="0">PersistentMember</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Primitive" tabindex="0">Primitive</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Realization" tabindex="0">Realization</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A realization is a relationship between classes, interfaces that connects a client element with a supplier element.  A realization relationship between classes and interfaces and between components and interfaces shows that the class realizes the operations offered by the interface. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Relationship" tabindex="0">Relationship</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A relationship is a connection among model elements.
+            In the metamodel, Relationship is a term of convenience without any specific semantics. It is abstract.
+            Children of Relationship are Association, Dependency, Realization and Generalization. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.RoleAMultiplicityRangeAttribute" tabindex="0">RoleAMultiplicityRangeAttribute</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.RoleBMultiplicityRangeAttribute" tabindex="0">RoleBMultiplicityRangeAttribute</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Storage" tabindex="0">Storage</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.StorageCell" tabindex="0">StorageCell</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">StorageCell defines a stack of objects. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.StorageCellsLink" tabindex="0">StorageCellsLink</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.StructuralFeature" tabindex="0">StructuralFeature</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Structure" tabindex="0">Structure</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.SynchronizerSession" tabindex="0">SynchronizerSession</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.TemplateBinding" tabindex="0">TemplateBinding</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A template binding represents a relationship between a templateable element and a template. A template binding specifies
+            the substitutions of actual parameters for the formal parameters of the template. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.TemplateParameter" tabindex="0">TemplateParameter</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">TemplateParameter references a ParameterableElement that is exposed as a formal template parameter in the containing
+            template. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.TemplateParameterSubstitution" tabindex="0">TemplateParameterSubstitution</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A template parameter substitution relates the actual parameter(s) to a formal template parameter as part of a template
+            binding. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.TemplateSignature" tabindex="0">TemplateSignature</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A TemplateSignature specifies the set of formal template parameters for the associated templated element. The formal
+            template parameters specify the elements that may be substituted in a binding of the template. </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.ValueTypePath" tabindex="0">ValueTypePath</mshelp:link>
+              </td>
+              <td />
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(structureToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(structureToggle, event)" tabindex="0">
+            <img id="structureToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Structures</span>
+        </h1>
+        <div id="structureSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Structure</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="structure; public">
+              <td>
+                <img src="../icons/pubstructure.gif" title="Public structure" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObject.MetaDataError" tabindex="0">MetaObject<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span></span>MetaDataError</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="structure; public">
+              <td>
+                <img src="../icons/pubstructure.gif" title="Public structure" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.ObjectIdentityType" tabindex="0">ObjectIdentityType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="structure; public">
+              <td>
+                <img src="../icons/pubstructure.gif" title="Public structure" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.RelatedStorageCell" tabindex="0">RelatedStorageCell</mshelp:link>
+              </td>
+              <td />
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(interfaceToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(interfaceToggle, event)" tabindex="0">
+            <img id="interfaceToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Interfaces</span>
+        </h1>
+        <div id="interfaceSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Interface</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.IErrorLog" tabindex="0">IErrorLog</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.IIdentityPart" tabindex="0">IIdentityPart</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.InterfaceImplementor" tabindex="0">InterfaceImplementor</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.IParameterableElement" tabindex="0">IParameterableElement</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.ITemplateable" tabindex="0">ITemplateable</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">A TemplateableElement that has a template signature is a specification of a template. A template is a parameterized
+            element that can be used to generate other model elements using TemplateBinding relationships. The template parameters
+            for the template signature specify the formal parameters that will be substituted by actual parameters (or the default) in a
+            binding. </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(delegateToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(delegateToggle, event)" tabindex="0">
+            <img id="delegateToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Delegates</span>
+        </h1>
+        <div id="delegateSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Delegate</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="delegate; public">
+              <td>
+                <img src="../icons/pubdelegate.gif" title="Public delegate" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObjectChangedEventHandler" tabindex="0">MetaObjectChangedEventHandler</mshelp:link>
+              </td>
+              <td />
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(enumerationToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(enumerationToggle, event)" tabindex="0">
+            <img id="enumerationToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Enumerations</span>
+        </h1>
+        <div id="enumerationSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Enumeration</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.AssociationType" tabindex="0">AssociationType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.MetaObjectCollectionA.AccessType" tabindex="0">MetaObjectCollectionA<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span></span>AccessType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Parameter.DirectionType" tabindex="0">Parameter<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span></span>DirectionType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.PersistencyFlag" tabindex="0">PersistencyFlag</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.PersistencyType" tabindex="0">PersistencyType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.Roles" tabindex="0">Roles</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.MetaDataRepository.VisibilityKind" tabindex="0">VisibilityKind</mshelp:link>
+              </td>
+              <td />
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="footerLine">
+          <img width="100%" height="3px" src="../icons/footer.gif" title="Footer image" />
+        </div>
+<span id="feedbackarea">
+			Send
+		<a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','','%0\dThank%20you%20for%20your%20feedback.%20The%20developer%20writing%20teams%20use%20your%20feedback%20to%20improve%20documentation.%20While%20we%20are%20reviewing%20your%20feedback,%20we%20may%20send%20you%20e-mail%20to%20ask%20for%20clarification%20or%20feedback%20on%20a%20solution.%20We%20do%20not%20use%20your%20e-mail%20address%20for%20any%20other%20purpose%20and%20we%20delete%20it%20after%20we%20finish%20our%20review.%0\AFor%20further%20information%20about%20the%20privacy%20policies%20of%20Microsoft,%20please%20see%20http://privacy.microsoft.com/en-us/default.aspx.%0\A%0\d','Customer%20Feedback');">
+			
+      feedback
+		</a>
+			on this topic to Microsoft.
+		</span>
+</div>
+    </div>
+  </body>
+</html>

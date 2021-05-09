@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>DotNetMetaDataRepository</AssemblyName>
+    <RootNamespace>OOAdvantech.DotNetMetaDataRepository</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\Assembly.cs" Link="Assembly.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\ComparisonTerm.cs" Link="ComparisonTerm.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DataPath.cs" Link="DataPath.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetAssociation.cs" Link="DotNetAssociation.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetAssociationEnd.cs" Link="DotNetAssociationEnd.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetAssociationEndRealization.cs" Link="DotNetAssociationEndRealization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetAttribute.cs" Link="DotNetAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetAttributeRealization.cs" Link="DotNetAttributeRealization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetClass.cs" Link="DotNetClass.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetEnumeration.cs" Link="DotNetEnumeration.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetInterface.cs" Link="DotNetInterface.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetMethod.cs" Link="DotNetMethod.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetNamespace.cs" Link="DotNetNamespace.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetOperation.cs" Link="DotNetOperation.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetPrimitive.cs" Link="DotNetPrimitive.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetStructure.cs" Link="DotNetStructure.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetTemplateParameter.cs" Link="DotNetTemplateParameter.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\InterfaceMapping.cs" Link="InterfaceMapping.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\MetaObjectCollection.cs" Link="MetaObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\MetaObjectMapper.cs" Link="MetaObjectMapper.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\AggregateExpressionDataNode.cs" Link="OQL\AggregateExpressionDataNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ArithmeticExpression.cs" Link="OQL\ArithmeticExpression.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ClientStructureSet.cs" Link="OQL\ClientStructureSet.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ComparisonTerm.cs" Link="OQL\ComparisonTerm.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\CompositeArithmeticExpression.cs" Link="OQL\CompositeArithmeticExpression.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\CompositePart.cs" Link="OQL\CompositePart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\Criterion.cs" Link="OQL\Criterion.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataDimension.cs" Link="OQL\DataDimension.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataGrouping.cs" Link="OQL\DataGrouping.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataLoader.cs" Link="OQL\DataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataLoaderMetadata.cs" Link="OQL\DataLoaderMetadata.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataNodeAgent.cs" Link="OQL\DataNodeAgent.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataNodesRows.cs" Link="OQL\DataNodesRows.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjectsInstantiator.cs" Link="OQL\DataObjectsInstantiator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataColumn.cs" Link="OQL\DataObjects\DataColumn.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataColumnCollection.cs" Link="OQL\DataObjects\DataColumnCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataIndex.cs" Link="OQL\DataObjects\DataIndex.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataReader.cs" Link="OQL\DataObjects\DataReader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataRelation.cs" Link="OQL\DataObjects\DataRelation.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataRelationCollection.cs" Link="OQL\DataObjects\DataRelationCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataRow.cs" Link="OQL\DataObjects\DataRow.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataRowCollection.cs" Link="OQL\DataObjects\DataRowCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataSet.cs" Link="OQL\DataObjects\DataSet.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataTable.cs" Link="OQL\DataObjects\DataTable.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataObjects\DataTableCollection.cs" Link="OQL\DataObjects\DataTableCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataOrderBy.cs" Link="OQL\DataOrderBy.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataRetrieveNode.cs" Link="OQL\DataRetrieveNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataSource.cs" Link="OQL\DataSource.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DistributedObjectQuery.cs" Link="OQL\DistributedObjectQuery.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\EnumerablePart.cs" Link="OQL\EnumerablePart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\GroupDataNode.cs" Link="OQL\GroupDataNode.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\GroupingKey.cs" Link="OQL\GroupingKey.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\LiteralComparisonItem.cs" Link="OQL\LiteralComparisonItem.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\Member.cs" Link="OQL\Member.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\MemberCollection.cs" Link="OQL\MemberCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\MemberList.cs" Link="OQL\MemberList.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\MemberObject.cs" Link="OQL\MemberObject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\MemoryCell.cs" Link="OQL\MemoryCell.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\MemoryObjectsContext.cs" Link="OQL\MemoryObjectsContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\MemroryObjectsDataLoader.cs" Link="OQL\MemroryObjectsDataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ObjectComparisonItem.cs" Link="OQL\ObjectComparisonItem.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ObjectIDComparisonItem.cs" Link="OQL\ObjectIDComparisonItem.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ObjectQuery.cs" Link="OQL\ObjectQuery.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ObjectsDataRetriever.cs" Link="OQL\ObjectsDataRetriever.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\OjectAttributeComparisonItem.cs" Link="OQL\OjectAttributeComparisonItem.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\OQLStatements.cs" Link="OQL\OQLStatements.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ParameterComparisonItem.cs" Link="OQL\ParameterComparisonItem.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\Path.cs" Link="OQL\Path.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\PathMember.cs" Link="OQL\PathMember.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\QueryOnRootObject.cs" Link="OQL\QueryOnRootObject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\QueryResultDataLoader.cs" Link="OQL\QueryResultDataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\QueryResultPart.cs" Link="OQL\QueryResultPart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\QueryResultType.cs" Link="OQL\QueryResultType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\RecursiveMember.cs" Link="OQL\RecursiveMember.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\RelationData.cs" Link="OQL\RelationData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\RelationshipData.cs" Link="OQL\RelationshipData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\RootObjectDataLoader.cs" Link="OQL\RootObjectDataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\RootObjectDataSource.cs" Link="OQL\RootObjectDataSource.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\Scalar.cs" Link="OQL\Scalar.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ScalarFromData.cs" Link="OQL\ScalarFromData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\ScalarFromLiteral.cs" Link="OQL\ScalarFromLiteral.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\SearchFactor.cs" Link="OQL\SearchFactor.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\SearchIterm.cs" Link="OQL\SearchIterm.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\SerchCondition.cs" Link="OQL\SerchCondition.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\SinglePart.cs" Link="OQL\SinglePart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\StorageDataLoader.cs" Link="OQL\StorageDataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\StorageDataSource.cs" Link="OQL\StorageDataSource.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\StructureSet.cs" Link="OQL\StructureSet.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\Parameter.cs" Link="Parameter.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\TemplateSignature.cs" Link="TemplateSignature.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\Type.cs" Link="Type.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\DotNetPersistenceLayer\OQLParserGrammar\OQL.cgt" Link="OQL\OQL.cgt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OQL\DataObjects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\DotNetPersistenceLayer\DotNetMetaDataRepository\OQL\DataSetHelper.cs" Link="OQL\DataSetHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
+    <ProjectReference Include="..\Parser.NetStandard\Parser.NetStandard.csproj" />
+  </ItemGroup>
+</Project>

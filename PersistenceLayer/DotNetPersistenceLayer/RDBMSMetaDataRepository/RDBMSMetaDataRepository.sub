@@ -1,0 +1,50 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object SubSystem "RDBMSMetaDataRepository"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"3F2A302E001C"
+    physical_models 	(list unit_reference_list
+	(object module "RDBMSMetaDataRepository" "NotAModuleType" "NotAModulePart"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Solution File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework.sln")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Project File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\RDBMSMetaDataRepository\\RDBMSMetaDataRepository.csproj")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Location"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{332C008B-4EEB-422B-A694-04C915F6769D}")
+		(object Attribute
+		    tool       	"XML_DTD"
+		    name       	"ComponentPath"
+		    value      	"X:\\DiscC\\RDBMSMetaDataRepository")
+		(object Attribute
+		    tool       	"DotNet"
+		    name       	"Solution"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework - VS10.sln")
+		(object Attribute
+		    tool       	"DotNet"
+		    name       	"Project"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\RDBMSMetaDataRepository\\RDBMSMetaDataRepository - VS10.csproj"))
+	    quid       	"3F2A2FDA02F6"
+	    stereotype 	""
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"428977E80157"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::RDBMSMetaDataRepository::MappedClassifier"
+		    quidu      	"42897761009C"))
+	    language   	"C#"))
+    physical_presentations 	(list unit_reference_list))

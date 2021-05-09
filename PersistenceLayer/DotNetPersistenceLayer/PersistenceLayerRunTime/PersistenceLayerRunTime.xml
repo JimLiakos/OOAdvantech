@@ -1,0 +1,2578 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PersistenceLayerRunTime</name>
+    </assembly>
+    <members>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.AccountNumber">
+            <MetaDataID>{2e06e2c9-3ea0-47bc-ae22-3a3e11ad4c31}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.#ctor(System.Decimal)">
+            <MetaDataID>{edce654a-2c86-4546-b326-613b33c3332d}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.AccountNumber.Amount">
+            <MetaDataID>{19031618-1179-458e-93d2-01111976f05d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Implicit(System.Decimal)~OOAdvantech.PersistenceLayerRunTime.AccountNumber">
+            <MetaDataID>{96ece64c-eeca-4fa2-aefe-f1897bc4d43e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Addition(OOAdvantech.PersistenceLayerRunTime.AccountNumber,OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{56c1d33c-ed30-474d-8174-2f3cdf91c245}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Subtraction(OOAdvantech.PersistenceLayerRunTime.AccountNumber,OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{611850e7-3e2e-4aae-bf42-16e433b1f69c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Decrement(OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{de62b44d-9646-433d-9a7b-08264836cb59}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Increment(OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{418e6b80-636a-4fdf-be76-d0fd9052ff84}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Subtraction(OOAdvantech.PersistenceLayerRunTime.AccountNumber,System.Decimal)">
+            <MetaDataID>{ab7c9a28-e799-4af7-9bbc-b9b179557a35}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Addition(OOAdvantech.PersistenceLayerRunTime.AccountNumber,System.Decimal)">
+            <MetaDataID>{bac33bbd-d51f-45f4-9b72-b69f39d60316}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Equality(OOAdvantech.PersistenceLayerRunTime.AccountNumber,OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{f239c13f-d24e-4775-8750-b661dd5ef1ef}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.op_Inequality(OOAdvantech.PersistenceLayerRunTime.AccountNumber,OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{6d178ad2-2d4b-46b9-8edb-2f60ac53d08e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.OOAdvantech#IAccount{OOAdvantech#PersistenceLayerRunTime#AccountNumber}#GetTransaction(OOAdvantech.PersistenceLayerRunTime.AccountNumber)">
+            <MetaDataID>{81dcd519-1d7f-4fe8-b141-8bbb7a50d3b6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.OOAdvantech#IAccount{OOAdvantech#PersistenceLayerRunTime#AccountNumber}#MakeTransaction(System.Object)">
+            <MetaDataID>{9a520745-06d7-4faa-9cb9-059e30f95fcd}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AccountNumber.GetQuantity(System.Decimal)">
+            <MetaDataID>{f0c2a47e-89c9-4898-8655-56215350f4c8}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent">
+            <MetaDataID>{C5E0C140-C95F-4A3C-A412-8060E8F65695}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent._RealAssociationEnd">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{7120D78F-A86D-444C-8B57-4ECBF903BD71}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent.RealAssociationEnd">
+            <MetaDataID>{BCBFC689-04AD-4788-BFFA-38845F225AF5}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent.Identity">
+            <MetaDataID>{993BD94D-697F-4F11-98C7-15611A3EA9CC}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent.#ctor(OOAdvantech.DotNetMetaDataRepository.AssociationEnd)">
+            <MetaDataID>{CFA22779-FC3D-45B1-906D-CC9300AA8BF4}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies">
+            <MetaDataID>{2ceca593-2d80-45d7-8d6d-2e47398f3f96}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies.Collection">
+            <MetaDataID>{471fd5ef-2160-4c43-8710-839c6f865bed}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies.#ctor(OOAdvantech.PersistenceLayerRunTime.IndexedCollection)">
+            <MetaDataID>{47535a39-c689-468f-9dc0-28b2774f0399}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies.GetSubCommands(System.Int32)">
+            <MetaDataID>{6c920464-5e00-44b8-83b7-529253c24bc5}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies.ExecutionOrder">
+            <MetaDataID>{8b6dcfea-d48d-4aa7-8f16-83edd15d60ab}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies.GetIdentity(OOAdvantech.PersistenceLayerRunTime.IndexedCollection)">
+            <MetaDataID>{e432160b-4ff5-47af-aa02-f08b9285bf09}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.BuildContainedObjectIndicies.Identity">
+            <MetaDataID>{7e5a8365-5b18-493d-b2c5-39466460e240}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand">
+            <MetaDataID>{9314A1D6-323F-423F-BAE1-104866FDA334}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.Identity">
+            <MetaDataID>{90684F56-5E32-462B-AAAF-701488D39F60}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.Execute">
+            <MetaDataID>{930649F5-29A4-471A-B548-B741E00EB77A}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.DeleteOption">
+            <MetaDataID>{3AE7C4F6-3885-4811-954B-A6F960F786C3}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.SubTransactionCmdsProduced">
+            <MetaDataID>{5C125866-A718-48B1-96CF-16314FDA7FD3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayer.DeleteOptions)">
+            <MetaDataID>{35FB5621-2DC9-4A70-B311-FC3F340245F8}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.StorageInstanceForDeletion">
+            <MetaDataID>{E59E87A2-4C3B-48DD-ADD0-167F5224A14E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{6D4FF38E-EBB3-4976-A828-9777DA3ED726}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.ProduceLinkClassCommands(OOAdvantech.DotNetMetaDataRepository.Class)">
+            <MetaDataID>{B7A6062E-CAF6-4F49-AF7C-CD912F93592E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.GetRolesObject(OOAdvantech.DotNetMetaDataRepository.Class,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent@,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent@)">
+            <MetaDataID>{66AF8CA5-E0A2-4748-9CDD-7A600B179670}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand.ExecutionOrder">
+            <MetaDataID>{5092C1E3-DBB0-4B26-8F96-3A9FFD4F1876}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand">
+            <MetaDataID>{46DF6E02-E45C-4E2D-96A2-81D4F4E7F376}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.LinkInitiatorAssociationEnd">
+            <MetaDataID>{133856C2-5460-4762-81D4-FB4978F22BA5}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.LinkInitiatorAssociationEndAgent">
+            <MetaDataID>{CF27C280-BC38-4A27-9299-99543B8EF396}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.ObjectStorage">
+            <MetaDataID>{8c01658b-67cb-4b69-9938-5e840a861510}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent)">
+            <MetaDataID>{A45ABD16-FE67-4D6A-B65D-40E83496ED3C}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.RelationObject">
+            <MetaDataID>{17F49A0F-E93A-4F41-ADF5-A4E05C0251CA}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.RoleB">
+            <MetaDataID>{FFBE9DEA-6BD6-41A9-A28D-AC3D771B85A2}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkCommand.RoleA">
+            <MetaDataID>{037C5269-0050-43DE-9C04-8D770AF52D69}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand">
+            <MetaDataID>{6022A415-B043-493C-B091-9F4D8675338D}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Int32)">
+            multiplicity 0,1 από την άλλη πλευρά να έχει και εκεί κατα λάθος 0,1 αλλά ουσιαστικά να είναι many
+            θα πρέπει το σύστημα να κάνει multiplicity check και να το ποιάνει αλλιος  δημιουργούνται 
+            δευτερογενοί προβλήματα που δίσκολα ανιχνεύει ο χρήστης την προέλευση του προβλήματος.
+            <MetaDataID>{8891573F-7019-41DA-BF44-98177938E19A}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.RoleAIndex">
+            <MetaDataID>{858569ba-8020-492b-8ab6-c7bf473768fb}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.RoleBIndex">
+            <MetaDataID>{16e253a9-a180-44c4-95dd-2364c0c2e818}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand._Identity">
+            <MetaDataID>{3e446f55-8911-43d6-87b4-d429c31b640c}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.Identity">
+            <MetaDataID>{CE82F8D5-05D1-40FA-B37F-4C4CEB085CD3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.GetIdentity(OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.DotNetMetaDataRepository.Association)">
+            <MetaDataID>{D612B4B4-FC98-49A4-986B-7391E1A438D5}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.SubTransactionCmdsProduced">
+            <MetaDataID>{CE3BDFCA-6854-4CA3-9735-9645842B45F1}</MetaDataID>
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.Execute">
+            <MetaDataID>{CE2ED177-8EF1-4251-9F2B-CEA4CE79BAD4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{8F9BAC27-A64E-40C6-9556-DB3AFA4E169F}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.AssociationName">
+            <MetaDataID>{A8CB0C44-030E-453C-A5F9-C0203E3A2EC4}</MetaDataID>
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.ExecutionOrder">
+            <MetaDataID>{EB30C51B-300D-46BD-83CE-056D276A1CCB}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand">
+            <MetaDataID>{81E1577F-F61A-4130-9256-B3215E703188}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.Identity">
+            <MetaDataID>{8F966923-C66B-4C6C-A904-7FB16DCCC3A9}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.GetIdentity(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{6E94CC21-FF74-412F-B1F4-4DFF7FD7D137}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.RelationCommandsProduced">
+            <MetaDataID>{3076248A-2CDF-4B44-904C-2219A0005678}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.LinkClassCommandsProduced">
+            <MetaDataID>{DF595828-4614-4F37-8789-EB9DF0943D47}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{CF7B1092-C49D-4251-90C6-DEAD15A237DB}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{97339A95-63E9-407F-93AD-246381651223}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.ProduceLinkClassCommands(OOAdvantech.DotNetMetaDataRepository.Class)">
+            <MetaDataID>{E229E277-D6D6-419D-9D42-0D7FE4E80F90}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.GetRolesObject(OOAdvantech.DotNetMetaDataRepository.Class,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent@,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent@)">
+            <MetaDataID>{B3F346FE-6299-41C1-9573-85C0C44AE441}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.ExecutionOrder">
+            <MetaDataID>{44AEF350-702E-4F43-A433-63C3431D0BE8}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand.OnFlyStorageInstance">
+            <summary></summary>
+            <MetaDataID>{89AE50E6-33DB-49C8-81D5-84B79133A91A}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand">
+            <MetaDataID>{65EF8648-2591-46B1-AE73-6287CDB0F71D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent)">
+            <MetaDataID>{56f95ad5-7dd5-4084-9f5a-6c0b9b99b55e}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.theResolver">
+            <MetaDataID>{3085FDDA-561C-490F-9A21-20A1E02E832D}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.ExecutionOrder">
+            <MetaDataID>{C58BB877-2111-489B-B56E-1E7DC012FEBB}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.LinkedObjects">
+            <MetaDataID>{AAEA5636-C048-4C02-AC08-AD1FC27632B3}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.SubTransactionCmdsProduced">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{6B7C3318-CAD8-4E42-9352-0B428187CB09}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{A427F5E5-5A6F-4B25-84D4-3B7DAE8F8C0B}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.OnMemoryUnlinkAllObjectCommand.Execute">
+            <MetaDataID>{A327C703-5F73-4D42-964A-65E1DE683BE9}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand">
+            <summary>
+            This class defines a command to storage. 
+            The job of objects of this class is to remove the links with the target objects. 
+            The type of relations defined from the association object relation.  
+            </summary>
+             <MetaDataID>{6C2CDAC3-2CD0-4F9D-8065-00436B41340D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent)">
+            <MetaDataID>{ded4c63c-82df-4263-9c0d-d9f78c972431}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand.theAssociationEnd">
+            <summary>
+            This member defines the type of links which will be removed. 
+            </summary>
+             <MetaDataID>{6F277547-6781-4862-91E4-FF522FF7FE66}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand.DeletedStorageInstance">
+            <summary>
+            This member defines the source object of links. 
+            The links which will be removed must be type of association 
+            of association end and one from role object must be the source object  
+            </summary>
+             <MetaDataID>{851B5A35-EFC6-4139-B0F2-815C06C41C68}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand.Identity">
+            <MetaDataID>{7D147397-8597-4CC4-81A3-B4746C3DE610}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{253D0C92-5CE6-43E8-BC20-F08B4506A19C}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand">
+            <MetaDataID>{E0A3C621-FA72-42B1-B242-8BF52EC08754}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.Identity">
+            <MetaDataID>{5E4659DD-0083-4616-BA6B-4BEFE593CCFE}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.GetIdentity(OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.DotNetMetaDataRepository.Association)">
+            <MetaDataID>{846A486B-CBCA-47A5-A8E9-97D6ED6CA0A0}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.SubTransactionCmdsProduced">
+            <MetaDataID>{2BA6604E-B843-49AC-82E3-5410CEA71A40}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Int32)">
+            <MetaDataID>{E98B31C9-057A-4081-A62A-1EE4A87E3B2A}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.RoleAIndex">
+            <MetaDataID>{2d009324-8b1b-4aa4-af4b-df9a948ea5db}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.RoleBIndex">
+            <MetaDataID>{f9a354cd-5bc7-4b37-bb20-3af3af99a3f3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.Execute">
+            <MetaDataID>{90258763-09E7-45C8-B999-24C11669DABA}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{5CC14AB1-703B-4406-8A7B-D5BAA7E0D83A}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand.ExecutionOrder">
+            <MetaDataID>{6DF60187-11A5-4789-B95B-DC8DCF78AF55}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateLinkIndexCommand">
+            <MetaDataID>{885be7db-f75c-4291-bc39-08b740c4fafa}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateLinkIndexCommand._Identity">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateLinkIndexCommand.Identity">
+            <MetaDataID>{CE82F8D5-05D1-40FA-B37F-4C4CEB085CD3}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateLinkIndexCommand.RoleB">
+            <MetaDataID>{FFBE9DEA-6BD6-41A9-A28D-AC3D771B85A2}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateLinkIndexCommand.RoleA">
+            <MetaDataID>{037C5269-0050-43DE-9C04-8D770AF52D69}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity">
+            <MetaDataID>{8AA3F245-A1C9-4668-A9B9-FCE60477EA8F}</MetaDataID>
+            <summary>The main work of UpdateReferentialIntegrity is to update storage instance for the referential integrity count. 
+            It is deferent  from the UpdateStorageInstanceCommand because use ShortTimeTransaction of storage instance reference.
+            Some words for the ShortTimeTransaction. The user can use BeginObjectStateTransition for object state transition in transaction. 
+            From this time the object is locked for other transactions. The transaction of this type maybe is long time because controlled from the end user. 
+            The UpdateStorageInstanceCommand use this transaction mechanism. 
+            But the referential integrity is something related to persistency layer and change at the time of commit of transaction. 
+            The persistency layer only this time wants lock the object from other transaction to change referential integrity count. 
+            For this reasons used the ShortTimeTransaction.    
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity.UpdatedStorageInstanceRef">
+            <MetaDataID>{4C2A750C-DC3C-4FF5-875A-01E76D3C4E6A}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity.ExecutionOrder">
+            <summary>Priority defines the order in which will be executed the command. </summary>
+            <MetaDataID>{A2E8A717-4198-4353-AC09-1ACA3CC1CB87}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity.GetSubCommands(System.Int32)">
+            <MetaDataID>{879BBF14-F021-478E-8881-853871A03B51}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity.Identity">
+            <MetaDataID>{26A54A7D-C2D5-4836-BE25-15DE62B50A09}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity.GetIdentity(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{6C4EABD7-2496-4147-AB59-F38F93DBF492}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand">
+            <MetaDataID>{4D861763-A7D5-4649-9A26-8C15AE817618}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.Identity">
+            <MetaDataID>{A72BB7E6-E45D-48BE-A201-30DDD4608F77}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.GetIdentity(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{603707D9-824F-4A38-9C87-D04E359C97EA}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.SubTransactionCmdsProduced">
+            <MetaDataID>{93F3AA1A-E814-4F10-AFBB-B05953488044}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{0DA842FE-BFE2-4DBD-999D-9954B2697E5B}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand._UpdatedStorageInstanceRef">
+            <MetaDataID>{585BB08B-CD83-4221-9A0C-D9F2ABEDB52F}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.UpdatedStorageInstanceRef">
+            <MetaDataID>{D0729F5E-09EF-4E71-8B20-FE09D168D5F4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.GetSubCommands(System.Int32)">
+            <MetaDataID>{AB96A972-1EAB-47C4-A872-CD0F394CCBB2}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand.ExecutionOrder">
+            <MetaDataID>{B1BA5C3F-147A-4A8C-9F6D-BC55038A80FE}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent">
+            <MetaDataID>{9A79D728-204A-453A-A013-75F20210DE3A}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.GetRelationObjectsStorageCells(OOAdvantech.MetaDataRepository.Association,OOAdvantech.Collections.Generic.Set{OOAdvantech.MetaDataRepository.StorageCell},OOAdvantech.MetaDataRepository.Roles,System.String)">
+            <MetaDataID>{c382ffdb-8af4-4179-b935-bdaed246f5c0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.GetObjectID(System.Object)">
+            <MetaDataID>{71e2fa1f-7dfb-4caa-b28d-2c6c267df171}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.GetStorageCells(OOAdvantech.MetaDataRepository.Classifier,System.DateTime,System.DateTime)">
+            <MetaDataID>{3d609410-31bc-45bd-a426-506f10fba729}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.GetLinkedStorageCells(OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ValueTypePath,OOAdvantech.Collections.Generic.Set{OOAdvantech.MetaDataRepository.StorageCell},System.String)">
+            <MetaDataID>{d102e09a-e4a4-44ee-9467-2a22ee45637b}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.GetStorageCells(OOAdvantech.MetaDataRepository.Classifier)">
+            <MetaDataID>{3263388d-5337-48da-935f-17055177580c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.GetStorageCell(System.Object)">
+            <MetaDataID>{3586c662-0d4f-4bf9-b041-d5f51038cf5d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.#ctor(OOAdvantech.PersistenceLayer.ObjectStorage)">
+            <MetaDataID>{1CC51E27-C3D3-4764-B4CB-6B710467C182}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.ServerSideObjectStorage">
+            <MetaDataID>{438B323A-7FA8-47B8-9DD9-BD460E9F26A0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.Execute(System.String)">
+            <summary>Executes the specified query in OQLStatement parameter. Return a StructureSet object that contain the result of object query statement.</summary>
+            <param name="OQLStatement">A String value that contains the OQL statement</param>
+            <MetaDataID>{DBDD957C-A19F-439F-9A65-47398D5AD91B}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.Execute(System.String,OOAdvantech.Collections.Generic.Dictionary{System.String,System.Object})">
+            <MetaDataID>{811C0358-2ED4-450A-BE42-E67F1BE3AE45}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.StorageMetaData">
+            <MetaDataID>{A3ADB7B8-9CAE-4209-8332-DF81FD9E78A1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.Delete(System.Object,OOAdvantech.PersistenceLayer.DeleteOptions)">
+            <MetaDataID>{DEA9C37B-8D6C-4371-8D81-5ACE9F5B71EF}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.NewObject(System.Type,System.Type[],System.Object[])">
+            <MetaDataID>{1C9775F5-268C-4B47-8E48-7E1D6019DE75}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.NewTransientObject(System.Type,System.Type[],System.Object[])">
+            <MetaDataID>{3B180D0B-F1EB-4060-9EB0-E6C48ED7E7F0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.NewTransientObject(System.Type)">
+            <MetaDataID>{b4d9fab5-099d-4cf3-873c-5be5850ed814}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.NewObject(System.Type)">
+            <MetaDataID>{878ae76d-c85f-44ad-870c-d93fdda2e855}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClientSide.ObjectStorageAgent.CommitTransientObjectState(System.Object)">
+            <MetaDataID>{89AF587C-197A-412E-95BB-AA20CE06F387}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader">
+            <summary>
+            StorageDataLoader at this layer of abstraction implement the operation of objects link initialization. 
+            An object link represents an object reference stored as value of member in object or as entry in a collection.
+            </summary>
+            <MetaDataID>{fbcf0b91-5d2b-4e5b-b622-a9a646f9297f}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.QueryStorageIdentities">
+            <MetaDataID>{d7d6d5d9-2b09-4874-a1cd-5412a7f341e7}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.#ctor(OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode,OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoaderMetadata)">
+            <MetaDataID>{43c38d7f-95bf-4681-b1c4-2293c087c5c4}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.ObjectUnderTransaction">
+            <summary>
+            Defines all storage objects under the transaction
+            </summary>
+             <MetaDataID>{329846f1-65d4-48e4-b232-b05f5ed5dd0b}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.GetObjectUnderTransaction(OOAdvantech.PersistenceLayer.ObjectID)">
+            <MetaDataID>{dec758bf-bd4c-43bc-9c1e-3e093c5a148c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader._StorageCellOfObjectUnderTransaction">
+            <MetaDataID>{96fbfc8a-59ba-41c1-9970-2b99df47e317}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.StorageCellOfObjectUnderTransaction">
+            <MetaDataID>{2e4b56c6-35a9-47a1-9727-d89395d0e881}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader._NewObjects">
+            <MetaDataID>{553533c3-679f-4de3-89cf-b3f4f475a396}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.NewObjects">
+            <MetaDataID>{1736b081-504b-4faa-8bde-3e0b38fee441}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadNewObjectsCollection">
+            <MetaDataID>{8a3f6eb4-12e3-4a95-aff7-554a972a9150}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader._UpdatedObjects">
+            <MetaDataID>{fda6eedc-d8d3-4364-b0b6-5f4313a6a474}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.UpdatedObjects">
+            <MetaDataID>{603f0cff-1e96-46e0-be56-d81f7951a702}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadUpdatedObjects">
+            <MetaDataID>{3ed5555c-7c79-4e94-adac-a519b4208a6c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader._CandidateForDeleteObjects">
+            <MetaDataID>{31279941-cf96-433d-9ebe-b60822bce7bb}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.CandidateForDeleteObjects">
+            <MetaDataID>{2271536f-64cb-497f-9d6f-1c989970e6bb}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadCandidateForDeleteObjects">
+            <MetaDataID>{c1bbbb25-c646-4d7d-b9e6-ff914f1b49aa}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.GetRelationChanges">
+            <MetaDataID>{59cbfb40-cee6-4cd7-8b90-905ff4560163}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.RelationsChanges">
+            <MetaDataID>{b0ea8779-8df6-4ce6-a810-930b9c72c0e8}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.HasOutStorageRelationOnCurrentTrasaction(OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode)">
+            <MetaDataID>{f01cc326-4c63-4b1d-bc45-3dafe63f4fdd}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.ThereIsSubDataNodeRelationWithTransactionNewObject">
+            <MetaDataID>{c17b2d4e-ffe8-4fbc-bdd4-5726211904a0}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.ThereIsRelationWithTransactionNewObject">
+            <MetaDataID>{200ec4cf-d9f0-4cea-a5b4-a00175b68ab7}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.OutStorageTransientObjectIdentityTypes">
+            <MetaDataID>{0904fa0a-26aa-4577-9383-1e7ffac2d86c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.GetRelationChanges(OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode)">
+            <MetaDataID>{c47e4abb-df5a-4c8b-95f4-9143040aab71}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadObjectsLink(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ValueTypePath,System.Object,System.Object)">
+            <summary></summary>
+            <param name="associationEnd"></param>
+            <param name="valueTypePath"></param>
+            <param name="ownerObject"></param>
+            <param name="relatedObject"></param>
+            <MetaDataID>{849f5111-c1fa-4b07-9cb7-8b59f56176ce}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadObjectsLinks(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ValueTypePath,System.Object,System.Collections.Generic.List{System.Object})">
+            <MetaDataID>{7906aa5d-7b77-4698-8e8e-3868ec8afc59}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadObjectsLink(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,System.Object,System.Object)">
+            <MetaDataID>{fbc99416-58d0-49ac-abb0-e2e4ee18a300}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.LoadObjectsLinks(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,System.Object,System.Collections.Generic.List{System.Object})">
+            <MetaDataID>{2754a8bf-987f-4f7a-9a02-c5acf725cbc5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageDataLoader.GetRelationPartsObjectIdentityTypes(OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode)">
+            <MetaDataID>{75604d4c-2a02-476f-b182-b4ac598cb32f}</MetaDataID>
+            <summary>
+            Retrieves relation parts and ObjectIdentityTypes which used 
+            for the relation of dataloader with related DataNode DataLoader
+            </summary>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.Exceptiona">
+            <MetaDataID>{BCA073E8-BFE0-45F9-80D3-0C7CA6E371CE}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Exceptiona.#ctor(System.String,System.Int64)">
+            <MetaDataID>{F34865AF-792C-446E-8C32-8AB21A27C4A9}</MetaDataID>
+            <summary>dfg</summary>
+            <MetaDataID>{78D407E7-7657-427C-86E7-AB42262C09F0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.Exceptiona.#ctor(System.String,System.Int64,System.Exception)">
+            <MetaDataID>{6FD4ADBD-F082-40B0-B890-70B2CCAEA441}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.Exceptiona.ErrorID">
+            <MetaDataID>{F218E7DF-E354-4EED-AF8C-D53C52140C1A}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.ObjectsLink">
+            <MetaDataID>{d75defb0-b90e-4871-ad97-966a7a883260}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.GetHashCode">
+            <MetaDataID>{67f8b062-8b24-476d-bffc-5093bbdd8889}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.GetHashCode(System.Object)">
+            <MetaDataID>{90f57d42-a9c4-4018-afe2-e0f9fe9ddf05}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.op_Equality(OOAdvantech.PersistenceLayerRunTime.ObjectsLink,OOAdvantech.PersistenceLayerRunTime.ObjectsLink)">
+            <MetaDataID>{883f0a3a-6189-4165-b2b0-c3e344bae8fb}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.op_Inequality(OOAdvantech.PersistenceLayerRunTime.ObjectsLink,OOAdvantech.PersistenceLayerRunTime.ObjectsLink)">
+            <MetaDataID>{7cf4a8ca-1d9c-4fde-a04b-cabbccb698a0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.Equals(System.Object)">
+            <MetaDataID>{c28b0eb7-abf1-4173-9130-c45fb86a0526}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.#ctor(OOAdvantech.MetaDataRepository.Association,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.ObjectsLink.TypeOfChange)">
+            <MetaDataID>{841066c3-5c47-495e-91e9-6b17f2e828c3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.#ctor(OOAdvantech.MetaDataRepository.Association,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.ObjectsLink.TypeOfChange)">
+            <MetaDataID>{d26c27b6-720d-4de5-97ab-964546e454f9}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.RoleA">
+            <MetaDataID>{0909e815-9f52-44d7-879e-e428e339ee10}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.RoleB">
+            <MetaDataID>{728dc956-7a95-4cf4-8471-4ee4e0d4d04e}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.RelationObject">
+            <MetaDataID>{217a7fb2-72e1-4421-87f2-771f8cb3c94f}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.Change">
+            <MetaDataID>{ccb9749a-76e6-447a-abf5-9d71fea59621}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ObjectsLink.Association">
+            <MetaDataID>{536cf555-4706-48b5-bfa9-99ae559919ae}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.ObjectValuesCollectorService">
+            <MetaDataID>{1E241738-B463-41fa-A3A1-C085F607BA50}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectValuesCollectorService.OOAdvantech#Remoting#IObjectValuesCollectorService#GetValues(System.Object,OOAdvantech.Collections.Generic.List{System.String})">
+            <MetaDataID>{53a4d532-43ba-46dd-944d-7767de2326a9}</MetaDataID>
+            <summary>teste</summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectValuesCollectorService.GetValues(OOAdvantech.Collections.Generic.List{System.Object},System.Type,OOAdvantech.Collections.Generic.List{System.String})">
+            <MetaDataID>{80a6090d-0b9a-4970-8717-ae7f52b4bb59}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection">
+            <MetaDataID>{0D089B4A-C4B0-44DC-A7C7-57952E122DC0}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.QueryableCollection">
+            <MetaDataID>{d079516e-c880-4a47-9284-9e5485d48a4c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.CanDeletePermanently(System.Object)">
+            <MetaDataID>{b7d6364f-ebac-4189-8c6b-cd7e79cea1a3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.#ctor(System.Boolean)">
+            <MetaDataID>{3e19971b-cd95-4bec-a92d-4e5fcdb2c22f}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.ObjectCollectionType">
+            <MetaDataID>{016217cf-77ba-4e70-911c-46000b00c698}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.#ctor(OOAdvantech.PersistenceLayerRunTime.RelResolver,System.Boolean)">
+            <MetaDataID>{54b19c72-18e2-4c26-9eb0-ddd481384eb8}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.#ctor(System.Collections.ICollection,System.Boolean)">
+            <MetaDataID>{de5a7b0f-60c1-4e9b-a86e-7315cb85f6ed}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetRelationChanges">
+            <MetaDataID>{85264b95-f8bb-4e1d-9a63-f2a6bfcbbc67}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.InternalMakeChangesCommands">
+            <MetaDataID>{ff9e52c5-a1f2-465b-931d-be0866914a0a}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.IndirectIndexRebuild(System.Collections.Generic.List{OOAdvantech.PersistenceLayerRunTime.CollectionChange})">
+            <summary>
+            This rebuild the index when the related objects doesn't complete loaded
+            </summary>
+            <param name="collectionChanges">
+            Defines the changes of collection under current transaction
+            </param>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.MakePersistentTransaction">
+            <MetaDataID>{b1fb001c-4e51-4235-a8fa-2325d053ba49}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._RelResolver">
+            <MetaDataID>{79885866-0f38-407f-a2bf-9e530d5c370b}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RelResolver">
+            <MetaDataID>{8949e955-03bf-431e-adf3-3457e7986d0d}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._ReaderWriterLock">
+            <MetaDataID>{096dc1ad-7c7e-4637-b497-9848b002b280}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.ReaderWriterLock">
+            <MetaDataID>{daf31fc7-4fae-4f1a-8665-e9089471415a}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.IndexOf(System.Object)">
+            <MetaDataID>{2a73b292-7430-483c-a93a-cea1d9ed1821}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.IndexOf(System.Object,System.Int32)">
+            <MetaDataID>{0cbe491e-819d-4420-83e1-c3d725122224}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.IndexOf(System.Object,System.Int32,System.Int32)">
+            <MetaDataID>{a04950df-2ed3-4bb8-80ad-f7b30a2a440f}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetObjects(System.String)">
+            <MetaDataID>{AF5A521C-A8BD-4463-A2D7-3038131D8F80}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.MarkChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{EFA438D1-5372-46ED-8971-058A172A711A}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.MarkChanges(OOAdvantech.Transactions.Transaction,System.Reflection.FieldInfo[])">
+            <MetaDataID>{bbc872b3-74c9-45f5-a95a-65f44d934ed5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.MergeChanges(OOAdvantech.Transactions.Transaction,OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{d8fc7f43-9e24-4f67-8c6d-4e7298954795}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.CommitChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{42A863A7-2B32-466B-A7E4-1F20D3D78AA2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.ClearCollectionChangements(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{9cb33003-b271-402d-84f6-c33f7a24dafa}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Count">
+            <MetaDataID>{624C5104-632B-4D66-AE2B-217535C1A495}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RemoveObjects(OOAdvantech.PersistenceLayer.ObjectCollection)">
+            <MetaDataID>{26E578F7-7C7F-4404-BBDA-A24EFDC32662}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.AddObjects(OOAdvantech.PersistenceLayer.ObjectCollection)">
+            <MetaDataID>{7911E9D0-5412-41FE-BD70-ABFB015106A2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RemoveAll">
+            <MetaDataID>{AC2006AD-EC68-465A-80E2-8E308B268AAE}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RemoveAt(System.Int32)">
+            <MetaDataID>{38b29c2b-5cd4-43d7-8b90-77db4ede296c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Insert(System.Int32,System.Object)">
+            <MetaDataID>{31a602c9-2f72-409a-8f1e-1f0dd7c2d370}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._AddObjectsLinkFastInvoke">
+            <MetaDataID>{eaf3ae61-2023-4aba-86db-642efb59020e}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.AddObjectsLinkFastInvoke">
+            <MetaDataID>{4556f049-7369-4e7d-939c-1850ab2e17b2}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._RemoveObjectsLinkFastInvoke">
+            <MetaDataID>{b546b7f8-4f7a-46fc-99a4-889d69f91ee3}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RemoveObjectsLinkFastInvoke">
+            <MetaDataID>{f285cd35-ecc4-44e5-ba86-92b3476e8a1a}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Add(System.Object)">
+            <MetaDataID>{a231bb63-e699-4056-9b2b-31710f3fa323}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Add(System.Object,System.Boolean)">
+            <MetaDataID>{179E418D-8D84-43FE-AC9A-A5FBBF4D3736}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Remove(System.Object)">
+            <MetaDataID>{c8daa7a4-646b-41f8-be0e-f792ca537c73}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Remove(System.Object,System.Boolean)">
+            <MetaDataID>{3757DC50-EC70-4998-9E60-BAA8AD419A91}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.UpdateTheEndObjectsForRelationChange(System.Object,OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <param name="implicitly"></param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetCollectionChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{79fda625-e202-4708-b6c9-4337a958960e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.AddCollectionChange(OOAdvantech.PersistenceLayerRunTime.CollectionChange,OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{ac2a6bc1-c3d0-4ceb-889d-2d82d6bed023}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RemoveCollectionChange(OOAdvantech.PersistenceLayerRunTime.CollectionChange)">
+            <MetaDataID>{a7c33e50-5ad0-4b44-906c-4f655959995f}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.UndoChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{bb368544-7d3a-445e-b13a-be0f087a8906}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Contains(System.Object,System.Int32@)">
+            <MetaDataID>{4ee93aac-3895-4d02-9660-23f891229c3e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Contains(System.Object)">
+            <MetaDataID>{A4987067-D9C4-4D34-A5D1-0CDEED874594}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OwnerIsPersistent">
+            <MetaDataID>{a015fbde-7923-48ef-95be-b85e82e1bfe5}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._TransientObjects">
+            <MetaDataID>{0BA5F4AF-D93F-45E2-A8AB-4565E891AAC7}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.ContainObjects">
+            <MetaDataID>{9f0d52b0-8c83-42c3-8955-562ac6332a29}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.RelatedObjects">
+            <MetaDataID>{0721f38c-f7ca-4a44-9b83-743b8369deb6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetEnumerator">
+            <MetaDataID>{1761192F-01A5-4C02-A065-FC02EFE68A67}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.ObjectsUnderCurrentTransaction">
+            <MetaDataID>{9fed1636-8608-4833-96af-15f34b8e510d}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.HasChanges">
+            <MetaDataID>{f34854d5-c3bd-45e9-a212-a9eef7915dbc}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetFinalCollectionChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{60eb1cf6-c1f2-439c-a657-b6405d5a36ae}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Item(System.Int32)">
+            <MetaDataID>{36899123-44ae-4372-ba6b-a46848b16d79}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.MultilingualCollectionChanges">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._CollectionChanges">
+            <exclude>Excluded</exclude>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.CollectionChanges" -->
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetCollectionChange(System.Object,OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{dab8d7c1-a3a9-4662-8625-dccca7c3ed75}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#ICollectionMember#AddImplicitly(System.Object)">
+            <MetaDataID>{1a25600a-5d11-4344-a524-56d19ad1fcd6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#ICollectionMember#RemoveImplicitly(System.Object)">
+            <MetaDataID>{ecd2f1a5-2986-4751-8617-aaa88efda3e8}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#ICollectionMember#GetEnumeretor">
+            <MetaDataID>{df95e6ba-a8e1-47db-8125-9cad5c33cf62}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection._Owner">
+            <MetaDataID>{9e845e32-f42f-470f-be5a-8341c1cc0a8d}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.Owner">
+            <MetaDataID>{8ef1ddf7-6301-484e-85b9-5fb1e4e889ee}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.MetaObject">
+            <MetaDataID>{e98a7273-07cf-4d9f-a268-065f94a14bb8}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#IMemberInitialization#SetOwner(System.Object)">
+            <MetaDataID>{507f314c-1ed5-4113-93b6-ee7ce401e7c0}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.IsTwoWayNavigableAssociationEnd">
+            <MetaDataID>{6e62cb98-022b-4f22-b3d6-4b95281b265e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#IMemberInitialization#SetMetadata(OOAdvantech.MetaDataRepository.MetaObject)">
+            <MetaDataID>{fdc2d890-4365-45a4-beb0-df7e321ce92e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#IMemberInitialization#SetMetadata(OOAdvantech.MetaDataRepository.MetaObject,System.Object)">
+            <MetaDataID>{9b4f9993-5ef5-46a7-a62b-21f19697d32a}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.OOAdvantech#IMemberInitialization#Initialized">
+            <MetaDataID>{2ed7deca-e9a8-4579-a5ba-467c15d90c48}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.OnMemoryObjectCollection.GetIndexChanges(System.String)">
+            <MetaDataID>{4de053d2-3860-484e-92f2-901c03340f3b}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.CollectionChange">
+            <MetaDataID>{16B8EACA-C5EF-4C79-8AFF-25D6F2E805F0}</MetaDataID>
+            <summary>
+            The Object of this type keeps information about the change in related objects collection
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeApplied">
+            <MetaDataID>{b23da86f-1e81-4a6f-8a14-454bbf579707}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.CollectionChange.Index">
+            <summary>
+            The zero-based index at which item should be inserted.
+            Used only when change type is Added
+            if the index is -1 and the change type is Added then the object added at the end of collection
+            </summary>
+            <MetaDataID>{b4e36b67-c94c-4f0b-8a9d-f99c1a7af5ab}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.CollectionChange.TypeOfChange">
+            <MetaDataID>{E4E250DA-BDC1-4849-834C-1F5E0B20C885}</MetaDataID>
+            <summary>
+            This field defines the type of change.
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.CollectionChange.Implicitly">
+            <MetaDataID>{88f229a3-4e5c-4cde-ac19-d52155763904}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType">
+            <summary>
+            ChangeType defines the type of change, Added or Deleted.
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType.Added">
+            <summary>
+            The object added to related objects.
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType.Deleteded">
+            <summary>
+            The object deleted from related objects.
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.CollectionChange.Object">
+             <MetaDataID>{5C589AB6-1527-4754-A8DF-E37BCFB304D9}</MetaDataID>
+            <summary>
+            This field defines the object which added or deleted from related objects collection.
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.CollectionChange.#ctor(System.Object,OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType)">
+            <summary>
+            Create an instance of RelationChangement.
+            </summary>
+            <param name="_object">
+            This parameter defines the object which added or deleted from related objects collection.
+            </param>
+            <param name="typeOfChange">
+            This parameter defines the type of change.
+            ChangeType.Added for addition to related objects collection,
+            ChangeType.Deleteded for deletion from related objects collection.
+            </param>
+            <MetaDataID>{E4D40EAB-1B91-478F-B288-42F581A7E2BF}</MetaDataID>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:OOAdvantech.PersistenceLayerRunTime.CollectionChange.#ctor(System.Object,OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType,System.Boolean)" -->
+        <!-- Badly formed XML comment ignored for member "M:OOAdvantech.PersistenceLayerRunTime.CollectionChange.#ctor(System.Object,OOAdvantech.PersistenceLayerRunTime.CollectionChange.ChangeType,System.Int32,System.Boolean)" -->
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.IndexedCollection">
+            <MetaDataID>{147fb4d2-d6d3-426a-a70a-c8c17f27046b}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.IndexedCollection.GetIndexChanges(System.String)">
+            <MetaDataID>{3e5f0193-0746-4955-b29e-b0b1ec3ba5f3}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.IndexedCollection.RelResolver">
+            <MetaDataID>{98115ff8-6d3f-48d3-b3f6-eef4dc9bcb2e}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.IndexChange">
+            <MetaDataID>{6a022835-6ad2-4324-a6f4-2c954dd1c5c2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.IndexChange.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,System.Int32,System.Int32)">
+            <MetaDataID>{c477793c-625f-4a32-b569-e66a044ae89a}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.IndexChange.Compare(OOAdvantech.PersistenceLayerRunTime.IndexChange,OOAdvantech.PersistenceLayerRunTime.IndexChange)">
+            <MetaDataID>{61ccbb02-64d6-4067-b7bb-084d64965890}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.IndexChange.OldIndex">
+            <MetaDataID>{9bf563c5-fab7-49ce-91a9-9476e20a9cec}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.IndexChange.NewIndex">
+            <MetaDataID>{f6508b8c-5ef7-478a-99ca-1a2abb948bb8}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.IndexChange.CollectionItem">
+            <MetaDataID>{14cca152-167f-4e85-8c88-d963be5e00a1}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.GroupIndexChange">
+            <MetaDataID>{40b71965-0ebf-4a8f-8657-6423dc6f7b5d}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection">
+            <MetaDataID>{3EFDE02C-C423-4C66-8315-D1C62F789E8A}</MetaDataID>
+            <summary>Define a collection of StorageInstanceRefs that are logical connections between the operative objects and storage instances of class which defines the member "Class".
+            Ensure the uniqueness of storage instances in memory. For each storage instance there is on corresponding memory instance (operative object) or nothing. Control the life time of operative objects this means that can define "load all in memory" attribute in persistent class and all storage instance loaded in memory also you can define "delay garbage collection" this means that when load an storage instance stay in memory at least time the time you have defined. </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.Type">
+            <MetaDataID>{8C9C101B-138A-407D-A290-B14AC371CD7F}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.Class">
+            <MetaDataID>{FDC3137A-FDBD-4095-AE9D-C0E84077EAB6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.#ctor(System.Type,OOAdvantech.PersistenceLayerRunTime.ObjectStorage)">
+            <MetaDataID>{F5719453-6858-4F8D-A8D2-C9893F94B415}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.StorageInstanceRefs">
+            <metadataid>{A9D6771A-6374-435B-B888-F83E96FFC037}</metadataid>
+            <summary>ClassObjectDi  vsds sg sgfg ionary </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.AddOperativeObject(System.Object,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <summary>lIAKOS </summary>
+            <MetaDataID>{7046eb45-02f4-493e-87a6-96fdfc3798f2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.GetOperativeObject(System.Object)">
+            <MetaDataID>{8BE7D7E0-C04F-4281-889D-1B0461D756D8}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.Item(System.Object)">
+            <metadataid>{677ceb00-91ee-4149-9d31-0c37a76ecc0d}</metadataid>
+            <summary></summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ClassMemoryInstanceCollection.ObjectDestroyed(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <summary>Mistsos </summary>
+            <MetaDataID>{fca6602c-0f18-42c5-b66a-dc36aa26193f}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection">
+            <MetaDataID>{BD31F4C8-F06C-46CF-8000-D8724CE86C42}</MetaDataID>
+            <summary>It is a collection of objects it is one per storage and contains sub collections with objects, 
+            one per class. You can access a class collection if you give the System.Type object. </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.#ctor(OOAdvantech.PersistenceLayerRunTime.ObjectStorage)">
+            <MetaDataID>{4FC8A14C-9D6A-4BB4-AF18-C999B334CA99}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.GetEnumerator">
+            <summary></summary>
+            <MetaDataID>{96A92DEC-2D34-4B18-8D56-8C43DDFF9CA4}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.OwnerStorageSession">
+            <MetaDataID>{8E559980-9B3A-41CC-9456-17995556C9D4}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollections">
+            <summary></summary>
+            <MetaDataID>{6B23DF85-2452-4038-B69C-52E4759D16AA}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollectionEnumerator">
+            <MetaDataID>{641AF101-754C-4CAE-8BFE-DB1A5B9C6EB8}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollectionEnumerator.RealEnumerator">
+            <summary></summary>
+            <MetaDataID>{0E522D40-5036-4D3D-B789-49946157C6BD}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollectionEnumerator.MoveNext">
+            <summary></summary>
+            <MetaDataID>{71D31F48-9EBD-4B49-802F-52358EA3AD3D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollectionEnumerator.#ctor(System.Collections.IDictionaryEnumerator)">
+            <summary></summary>
+            <MetaDataID>{ADCD02BF-EEE5-498E-A1CF-EE4BABC48E1D}</MetaDataID>
+            <param name="theRealEnumerator"></param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollectionEnumerator.Reset">
+            <MetaDataID>{CCA43060-474A-4F05-9B19-7337E9200F09}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.ClassMemoryInstanceCollectionEnumerator.System#Collections#IEnumerator#Current">
+            <summary></summary>
+            <MetaDataID>{71BD3AAF-8AC1-4875-9FA4-032B332B2B47}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.CreateClassMemoryInstanceCollection(System.Type)">
+            <MetaDataID>{39289809-F303-44CE-9AA3-16FD2954F87B}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.MemoryInstanceCollection.Item(System.Type)">
+            <MetaDataID>{BFBC805D-4457-40B7-AB97-62C32D965456}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.TransactionContext">
+            <summary>
+            This class defines a transaction context extension. 
+            When enlist an object in the transaction, the state of object in memory, 
+            manipulated from the transaction context of transaction system. 
+            This extension of transaction context manipulates the persistent state of objects. 
+            </summary>
+            <MetaDataID>{1C7EDB61-B6A2-411F-84EB-B9C70AFC606B}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.State">
+            <MetaDataID>{FBB2641D-1035-47E0-84EE-EFE5064CEECF}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext._Slaves">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{7C4466CD-6918-4951-B603-F29A9DD6FFC8}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Slaves">
+            <summary>
+            This Property defines a collection with slave transaction contexts. 
+            Client code can enlist one or more objects in transaction,
+            this objects can live in one or more processes 
+            also in one or more machines.
+            In preparation state transaction context execute commands. 
+            The commands have execution order. 
+            For this reason there is a master context which controls the execution order. 
+            The slave contexts execute commands through ProcessCommands method.      
+            </summary>
+             <MetaDataID>{DCC4F145-B55C-420F-AC2B-DC0B1CA21BB5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.GetTransactionContext(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{ab1482c6-003e-47ab-bc13-ed0551017ac6}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext">
+            <summary>
+            This property has the transaction context where run the client code.
+            </summary>
+             <MetaDataID>{330224EB-A6B5-4B01-BB10-68B2846923A6}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext._Master">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{7EA2398B-52F1-492E-B89C-19FCFB37ADEE}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Master">
+            <summary>
+            This Property defines  the master transaction contexts. 
+            Client code can enlist one or more objects in transaction,
+            this objects can live in one or more processes 
+            also in one or more machines.
+            In preparation state transaction context execute commands. 
+            The commands have execution order. 
+            For this reason must be a master context which control the execution order. 
+            The slave contexts execute commands through ProcessCommands method.      
+            </summary>
+             <MetaDataID>{F1A16279-82C4-40CB-9CD4-E5AF9593D6AA}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.AddSlaveTransactionContext(OOAdvantech.PersistenceLayerRunTime.ITransactionContext)">
+            <summary>
+            Add transaction context as slave. 
+            </summary>
+             <MetaDataID>{D8FC74AD-3E70-4E68-A97F-21A4E7227F0E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.RemoveSlaveTransactionContext(OOAdvantech.PersistenceLayerRunTime.TransactionContext)">
+            <summary>
+            Remove a transaction context from slave collection. 
+            </summary>
+            <param name="transactionContext">
+            This parameter define the slave transaction context
+            </param>
+             <MetaDataID>{1722D790-7607-4EC5-B174-5C3F33B3581F}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.NumberOfCommands">
+            <summary>
+            This field define the number of commands which will be executed.
+            </summary>
+            <MetaDataID>{6EE951A3-0E1E-4969-8DC4-1CDC811DEC48}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext._EnlistObjects">
+            <MetaDataID>{18B6A91A-B115-489C-85F4-3959602A3979}</MetaDataID>
+            <summary>
+            This collection defines the enlisted objects in transaction, where the classes 
+            of objects is persistent.
+            </summary>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.TransactionContext.EnlistObjects">
+            <MetaDataID>{4aa24efd-e090-4eff-ab1e-ebc05e7ff8b2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.EnlistObject(System.Object,System.Reflection.FieldInfo)">
+            <summary>
+            This method realize the OOAdvantech.Transactions.ITransactionContextExtender.EnlistObject
+            operation.
+            </summary>
+             <MetaDataID>{A0BB6ADC-792F-4B16-8B26-5DF91C36BC65}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Prepare">
+            <summary>
+            This method realize the OOAdvantech.Transactions.ITransactionContextExtender.Prepare
+            operation. Produce end execute all commands to update the storage instances which
+            correspond to th enlisted object.
+            </summary>
+             <MetaDataID>{E6C5CB07-ABAB-4FA1-ACE3-6BC1D551E5EC}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Commit">
+            <summary>
+            This method realize the OOAdvantech.Transactions.ITransactionContextExtender.Commit
+            operation. Snapshot storage instance state. and inform object stoarages of transaction commit; 
+            </summary>
+             <MetaDataID>{CD95CE57-79ED-436D-90B2-FEEF416A9AF3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Abort">
+            <summary>
+            This method realize the OOAdvantech.Transactions.ITransactionContextExtender.Abort
+            operation. Snapshot storage instance state. and inform object stoarages of transaction commit; 
+            </summary>
+             <MetaDataID>{841F08DF-C6D3-4CAA-8189-B83587889B11}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.TransientToPersistent(System.Object)">
+            <MetaDataID>{70F7B6F0-6C91-440C-B60E-AB4911530C4D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.PrepareEnlistedObject(System.Object)">
+            <MetaDataID>{A673C134-957A-460E-AF2C-74A959078CCD}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.PreparationStart">
+            <summary>
+            Produce the initial command for the storage update.
+            </summary>
+             <MetaDataID>{9982B9DC-5834-4BA8-B99B-0CC90B557296}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.ExecuteNextOrderCommands">
+            <MetaDataID>{324EEED7-340F-4E06-B597-D981CBCCE7BE}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.AddParticipatedStorageInstance(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{F8F1F8B4-E851-4D4B-B09B-91812906761A}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.ParticipatedStorageInstances">
+            <MetaDataID>{5A65898D-7E21-4AEE-9A84-D0C470FEC147}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.PrioritizeEnlistedCommands">
+            <MetaDataID>{952BFDC6-ADF7-4E7C-B4A2-2FBEB1838305}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.ObjectStoragesUnderTransaction">
+            <MetaDataID>{E564736D-8C9C-4C32-8A7A-AE1F8765864E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Finalize">
+            <MetaDataID>{BA499B28-8A93-4BAF-A94F-CE9EA6B621A4}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.MainTransactionContext">
+            <MetaDataID>{b34d168d-7f7d-4c03-9e32-41f4d9f6b4af}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.Transaction">
+            <MetaDataID>{ca0a5343-6860-4f41-bf31-765e1771a132}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.#ctor(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{A20B38E7-A1DB-42E0-9E47-1BCB5A1F17F4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.OnTransactionDistributed(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{84d82981-6654-43f6-880c-c257cef84c57}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.ContainCommand(System.String)">
+            <MetaDataID>{C3CF6E4E-F415-4757-B015-73FAB8A12AB7}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.TransactionContext.EnlistedCommands">
+            <MetaDataID>{4696E12A-60C1-492C-9656-1A5893CE027A}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext._EnlistedCommands">
+            <MetaDataID>{7e6d4739-cbed-422e-af3f-2c6713ebf82d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.EnlistCommand(OOAdvantech.PersistenceLayerRunTime.Commands.Command)">
+            <summary>All the change of the system in the frame of transaction produces transaction commands and enlists them in transaction through EnlistCommand method. </summary>
+            <MetaDataID>{215EAEF2-21F0-4C3F-B863-7068BD146B98}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.TransactionContext.LastCommandOrder">
+            <MetaDataID>{7A083FC0-FCE1-46F2-A51E-3374F7B6D812}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.GetSubCommands(System.Int32)">
+            <MetaDataID>{6F90F6F4-9D20-4F1C-8C35-2563666DF281}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.TransactionContext.NextCommandOrder">
+            <MetaDataID>{A00BCE52-DD2C-47C4-A7FC-0F60972DF438}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactionContext.ProcessCommands(System.Int32)">
+            <MetaDataID>{D23C3008-3713-4FB0-8C6D-CEA1FD563787}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext">
+            <MetaDataID>{dc530f7f-5869-47c6-8d16-ed73af825f9b}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.Transaction">
+            <MetaDataID>{93b82dc9-e8c5-4391-b2d1-365ba4bcebdd}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.#ctor(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{70a2d6ec-d363-41d3-a2aa-e52b85252a28}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext._EnlistObjects">
+            <MetaDataID>{cc262e0e-f253-448d-83bd-8195356d5c53}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.EnlistObjectsf">
+            <MetaDataID>{77b34481-29ff-4acb-a9b8-b8d2974e88dd}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.EnlistObject(System.Object,System.Reflection.FieldInfo)">
+            <MetaDataID>{7b09face-2cca-40e5-9cbd-fb418d9fe535}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.Abort">
+            <MetaDataID>{3f0ac25a-4cdc-4fdb-87e1-702cc79543c9}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.Commit">
+            <MetaDataID>{82b6889d-6987-4c6d-932c-dd3fdcb82928}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.Prepare">
+            <MetaDataID>{eb8e8a88-22ad-412a-b083-41cf30bbe3b9}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.EnlistedCommands">
+            <MetaDataID>{47967f6e-7975-43e5-85dc-87afdf16f004}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext._EnlistedCommands">
+            <MetaDataID>{11b6cc98-f9a8-4a06-8e5b-75cd0c27277d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.EnlistCommand(OOAdvantech.PersistenceLayerRunTime.Commands.Command)">
+            <MetaDataID>{20387acb-5260-4650-833b-88d155491c5d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.NestedTransactionContext.ContainCommand(System.String)">
+            <MetaDataID>{e5782f18-481c-438c-9e8e-209adc7dc80d}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory">
+            <MetaDataID>{27E9A89B-AF20-4671-B02C-806CC1BC7413}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateRelationResolver(OOAdvantech.MetaDataRepository.AssociationEnd)">
+            <MetaDataID>{E058F9E5-BF27-40D4-9F57-1585F04FE058}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateUpdateReferentialIntegrity(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{F90B81D9-E95D-4F03-8540-B79D3326B997}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateDeleteStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,System.Boolean)">
+            <MetaDataID>{0C9F898F-2A50-46B3-A7F7-535020827318}</MetaDataID>
+            <summary>UpdateStorageInstanceCommand </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateLinkCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{EC0C9C8A-6383-4EBB-A17C-159AC9A83F92}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateUpdateStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{4AF26477-EC3B-44F3-BD17-7340125AC722}</MetaDataID>
+            <summary>UpdateStorageInstanceCommand </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateUnlinkAllObjectCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.MetaDataRepository.AssociationEnd)">
+            <MetaDataID>{8FDEB673-E0D5-4409-AA91-5677BCC15850}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateStorageInstanceRef(System.Object)">
+            <MetaDataID>{3729EE55-48B8-4349-B457-846CB17124C4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateUnLinkCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{E306363A-964A-4F3F-BB56-C50A4FBB9281}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistenceRuntimeFactory.CreateNewStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{38650A1B-D459-45F7-8594-A149DB0F0FBB}</MetaDataID>
+            <summary>Creates and return a new storage instance command for the storage instance reference. At this time the storage instance reference connect only with the storage in which will be created the storage instance. </summary>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.PersistencyService">
+            <summary>
+            </summary>
+            <MetaDataID>{C5D008A5-2E9B-4A4C-86B0-54955B46FF90}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetPersistencyService(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{1f59303f-85d8-4987-88f9-054ed2f027e3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetMasterTransactionContext(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{cd5811cb-8049-4b98-a8da-85dc0de53419}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetMasterTransactionContext(System.String)">
+            <MetaDataID>{cd5811cb-8049-4b98-a8da-85dc0de53419}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetStorageInstancePersistentObjectID(System.Object,OOAdvantech.PersistenceLayer.ObjectID@,System.String@)">
+            <MetaDataID>{a9952863-47fa-4adc-99a9-7d1849072e89}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetStorageInstanceObjectID(System.Object,OOAdvantech.PersistenceLayer.ObjectID@,System.String@)">
+            <MetaDataID>{2675d26c-b9fe-4e27-865f-98953e83c479}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetStorageInsatnceAgent(System.Object)">
+            <MetaDataID>{51DFFF68-F74D-47EF-A707-F8335B8A4216}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetStorageOfObject(System.Object)">
+            <MetaDataID>{4FAF655B-159E-4C97-A30A-2CEE4F5ECDA1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.IsPersistent(System.Object)">
+            <MetaDataID>{ac2a4da2-e42e-4902-ae1f-8fafa4dc0800}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.ClassOfObjectIsPersistent(System.Object)">
+            <MetaDataID>{178E0B2B-5427-4E7A-A589-584D68CE76E5}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.PersistencyService.IsInServerInstance">
+            <MetaDataID>{D44270B1-A429-442E-996F-7A2C0CBF626E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.#ctor">
+            <MetaDataID>{97D159C1-C1DE-406D-A9A4-E97ECCFEFAFE}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.InitOodtc">
+            <MetaDataID>{bd396910-00ea-4721-b057-3070d0025e5e}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.PersistencyService.ServerInstanceName">
+            <MetaDataID>{f852947f-d358-4360-bb57-31857c251826}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.InitPersistencyService(System.String)">
+            <MetaDataID>{2c1b1766-c730-4e88-9982-489f6ff9dce4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.#ctor(System.String)">
+            <MetaDataID>{83099592-F600-4A18-984D-8DD16DF81D8E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.IsTheLocalMachine(System.String)">
+            <MetaDataID>{b75003d6-de13-49e8-b226-12427a9238ee}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetPersistencyServiceOnMachine(System.String,System.String)">
+            <MetaDataID>{4473C20E-1661-422B-8F6F-F9B500EF465A}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.NewStorage(OOAdvantech.PersistenceLayer.Storage,System.String,System.String,System.String,System.Boolean,System.String,System.String)">
+            <MetaDataID>{E5ED2860-59D1-4406-A36E-86B16D902151}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.PersistencyService.OpenStorages">
+            <MetaDataID>{8E2833E3-9956-407E-9052-5B398501253D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetStorageServer(System.String)">
+            <MetaDataID>{31518FEF-9480-4C61-8040-3FB09F19E68F}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetInstanceName(System.String)">
+            <MetaDataID>{0f8926a8-3380-4693-b743-5c9b45caa53d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetHostComuterName(System.String)">
+            <MetaDataID>{6275df8b-4487-47a4-b64a-71cd02de7a5b}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.OpenStorage(System.String,System.String,System.String,System.String,System.String)">
+            <MetaDataID>{31518FEF-9480-4C61-8040-3FB09F19E68F}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.PersistencyService._HostName">
+            <MetaDataID>{b90deb74-79e1-4b0c-a4d1-78826f73fcbb}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.PersistencyService.HostName">
+            <MetaDataID>{b02f8609-7d5a-465b-b824-2f1828555afb}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetObject(System.String)">
+            <MetaDataID>{F4B32E85-B6B8-40FA-AF43-A80874857663}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.GetPersistentObjectUri(System.Object)">
+            <MetaDataID>{FFBEC954-1D5B-4A23-92BE-E5E01FB2DFE2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.DeleteStorage(System.String,System.String,System.String)">
+            <MetaDataID>{9baa4bd9-8dd5-4b5e-8efd-4ddf592c67a3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.NewStorage(OOAdvantech.PersistenceLayer.Storage,System.String,System.Object,System.String)">
+            <MetaDataID>{d7a317e1-091a-4214-b5cc-252e72f16f34}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.OpenStorage(System.String,System.Object,System.String)">
+            <MetaDataID>{9a336dd9-6a4d-42d1-b5a7-e5bea7c8deed}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.PersistencyService.StorageServer">
+            <MetaDataID>{0fedc386-3bad-41a2-bd5e-3b577688bae2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.NewLogicalStorage(OOAdvantech.PersistenceLayer.ObjectStorage,System.String)">
+            <MetaDataID>{f41b8e4e-d9b2-40d0-9c0e-599be61e3fb7}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.NewLogicalStorage(System.String,System.String,System.String,System.String,System.Boolean)">
+            <MetaDataID>{bfeeef75-8489-4fd9-aa77-88b744d615f5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.PersistencyService.CreateNewLogicalStorage(OOAdvantech.PersistenceLayer.ObjectStorage,System.String)">
+            <MetaDataID>{fde94566-a6ec-4ddd-aa73-a21728966279}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.ObjectCollectionFactory">
+            <summary>
+            </summary>
+            <MetaDataID>{6AC7D87E-6B9D-4D47-B7DB-6EE1CA132770}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectCollectionFactory.#ctor">
+            <MetaDataID>{D632273F-99E3-4211-80BC-D72107A48D44}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectCollectionFactory.CreateOnMemoryCollection">
+            <MetaDataID>{BA364D26-263F-4434-99B4-5506F88943EB}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectCollectionFactory.CreateOnMemoryCollection(System.Collections.ICollection)">
+            <MetaDataID>{0ea67645-b302-4824-85b5-1d969b407024}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.RelResolver">
+            <MetaDataID>{FF859848-2F74-4A35-AAF7-F085B1BC26CE}</MetaDataID>
+            <summary>Relation resolver is a class which manipulated the related objects of 
+            owner object for a specific association. 
+            It can load all or part of related objects, create a link with a candidate related object or 
+            removes a link, with the production of corresponding commands. 
+            It also reacts with different way in case where multiplicity is greater than one 
+            and with different way when the multiplicity is less or equal to one. </summary>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.InternalLoadedRelatedObjects">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.LoadedRelatedObjects">
+            <summary>This collection keeps the relate objects which have already loaded. 
+            There are cases where the collection contains part of related objects not all. </summary>
+            <exception cref="T:System.NotSupportedException">
+            If the <see cref="P:OOAdvantech.MetaDataRepository.AssociationEnd.Multiplicity">
+            multiplicity of association end </see>
+             isn't many. </exception>
+            <MetaDataID>{C83B9160-660D-4B8B-A7BB-7274DF66D3B8}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.InternalRelatedObject">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{2C73C009-FD19-4E83-B8AD-230BD5608356}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.RelatedObject">
+            <summary>This property defines the related object in case 
+            where the association end multiplicity is zero or one. 
+            In other cases raise no support exception. </summary>
+            <exception cref="T:System.NotSupportedException">
+            If the <see cref="P:OOAdvantech.MetaDataRepository.AssociationEnd.Multiplicity">
+            multiplicity of association end 
+            </see> 
+            is many. 
+            </exception>
+            <MetaDataID>{3FC0996E-8FCE-4ED6-A5F7-C6FD69B6C276}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver._ValueTypePath">
+            <MetaDataID>{ec022811-cc8b-41c5-8a94-fc462f2d87fd}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.ValueTypePath">
+            <MetaDataID>{319d4079-9eac-4b04-9df6-8cb2630bd22c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver._FieldInfo">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{2BCDFB4C-971A-4364-8A58-EDF89E54C324}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.FieldInfo">
+            <MetaDataID>{5614FE19-B90C-4598-9B83-EB83FE079757}</MetaDataID>
+            <summary>This property define the field of class which implement the AssocionEnd. </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver._FastFieldAccessor">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.FastFieldAccessor">
+            <MetaDataID>{b8695728-4ad8-4e60-9fd1-d3d094babdf7}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.IsCompleteLoaded">
+            <summary>It is a flag which tell us when all related objects are loaded. 
+            If the value of flag is false then a part or none from relate objects, 
+            are loaded. </summary>
+            <MetaDataID>{8B3FFEB4-741B-4ECC-8CFE-151C37F200E0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.CompleteLoad">
+            <MetaDataID>{0385A04E-40C2-40B5-8654-B1C87C913550}</MetaDataID>
+            <summary>This method loads all related objects if there aren't loaded yet. </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.OnObjectDeleted(System.Object)">
+            <MetaDataID>{7DBCEEFA-55EE-4AF4-95AD-DDBEEBF440CA}</MetaDataID>
+            <summary>This method consume the event ObjectDeleted StorageInstanceRef
+            and clear the reference of MemoryInstance to the deleted object </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.AccessorBuilder.FieldPropertyAccessor)">
+            <MetaDataID>{2393A9BA-5012-48ED-82D1-7F4C0F97D87A}</MetaDataID>
+            <summary>The RelResolver constructor initiates the object during the object construction. </summary>
+            <param name="owner">Defines the owner object. For this object and the association end the relation resolver
+            load related objects. </param>
+            <param name="associationEnd">This parameter defines the type of relationship with related object. </param>
+            <exception cref="T:System.ArgumentException">If any of two parameters is null.
+            </exception>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver.AssociationEnd">
+            <MetaDataID>{42299D6A-6AF3-4644-ACFB-361E56F09A8D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.GetLinkedStorageInstanceRefs(System.Boolean)">
+            <MetaDataID>{8524B2FF-D9B4-43FD-9EF1-A77A8059B038}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.GetLinkedObjects(System.String)">
+            <MetaDataID>{50C04C86-F330-488B-BB91-16889B13B47D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.Load(System.String)">
+            <MetaDataID>{ABF9F91B-6644-4672-B26C-D134194301D1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.Contains(System.Object)">
+            <summary>This method check if the object of parameter is one of related objects </summary>
+            <param name="obj">The object of parameter obj 
+            is the object which checks for the existence 
+            among the related objects. </param>
+            <MetaDataID>{E9BFEF90-AC5A-48B1-BDAC-297A1EF19F62}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver.OwnerStorageInstanceAgent">
+            <MetaDataID>{1a8d5a7c-f718-4f75-9b6f-f22e81c4ad65}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.LinkObject(System.Object,System.Int32,System.Boolean@)">
+            <summary>This method link the owner object with 
+            the object of parameter if there isn�t link. 
+            Also add the object to the related objects. </summary>
+            <param name="relatedObject">This parameter defines the related object 
+            which will be linked. </param>
+            <param name="changeApplied">At the end of method call this parameter indicate 
+            if the system produce command to save the link 
+            or the link between the owner and related object already exist. </param>
+            <param name="index">
+            The index of related object, has value only in associations where are defined as indexer
+            </param>
+            <MetaDataID>{D23EBA63-9363-49B9-8AE1-E3BD18BA39DC}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.RefreshLinkedObjectIndex(System.Object,System.Int32)">
+            <summary>
+            Creates command to save new index
+            </summary>
+            <param name="relatedObject">
+            Defines the related object who has change index
+            </param>
+            <param name="index">
+            Defines the new index
+            </param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.Current_TransactionCompleted(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{cb6833ce-3e3d-4fcd-885e-6d3092256e96}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.OriginalRelatedObject">
+            <MetaDataID>{7ccfa5bf-3073-4a51-b964-16d696104e0c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver.TransactionsOriginalRelatedObject">
+            <MetaDataID>{916bcdfd-4a03-4cc5-895a-3760d01386cd}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.UnLinkObject(System.Object,System.Int32,System.Boolean@)">
+            <summary>This method removes link between the owner object and 
+            the object of parameter if there is link. 
+            Also remove the object from loaded related objects. </summary>
+            <param name="relatedObject">This parameter defines the related object 
+            which will be removed. </param>
+            <param name="changeApplied">At the end of method call this parameter indicate 
+            the production of command from system to save the remove of link 
+            or the absence of link with the related object. </param>
+            <MetaDataID>{F7C03837-246E-4A83-9BE7-264EB7EAD1D5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.GetLinkedObjectsCount">
+            <MetaDataID>{303FF305-8CA7-428F-BC68-4CE5B33CE282}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver.Owner">
+            <summary></summary>
+            <MetaDataID>{5634290F-B6C6-4BB4-B589-76AE7FDC26A2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.InitializeRelatedObject(System.Object)">
+            <MetaDataID>{c5e928a8-0058-4917-aaff-c77daa952a34}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.CompleteLoad(System.Collections.Generic.List{System.Object})">
+            <MetaDataID>{53ab9545-00eb-4fab-b730-2f685c3b9243}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#Add(System.Object)">
+            <MetaDataID>{70851362-5bf9-42ce-9ef9-be42db4aadfb}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#Clear">
+            <MetaDataID>{c0adfe0b-c538-4b72-86b3-5524574ae1b5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#Contains(System.Object)">
+            <MetaDataID>{d7afb8bf-780e-4e30-a0d6-d8001a040168}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#IndexOf(System.Object)">
+            <MetaDataID>{5255c0a2-9fe9-4bd4-bff7-5fb1725d3527}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#Insert(System.Int32,System.Object)">
+            <MetaDataID>{33ea71f4-1e51-483a-8da9-af73962b097c}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#IsFixedSize">
+            <MetaDataID>{57dc86a3-b83e-42d0-8235-8b5048a5e668}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#IsReadOnly">
+            <MetaDataID>{a924d4d2-c479-4f25-9f0d-29f829a42fe2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#Remove(System.Object)">
+            <MetaDataID>{0132dbad-2e8d-49b6-9270-e96545d7f6c2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#RemoveAt(System.Int32)">
+            <MetaDataID>{02841216-ada6-4a7c-8295-c2964e4bb05c}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IList#Item(System.Int32)">
+            <MetaDataID>{d71a461f-b53d-49b1-a8cd-f6ba77a89468}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <MetaDataID>{133aef03-df06-4fda-8604-733ac991ae80}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver._Count">
+            <MetaDataID>{bfcdca0d-06d9-4884-b1f0-a07702e925db}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#ICollection#Count">
+            <MetaDataID>{1462a667-a0aa-4800-87c3-8e53ebb121ad}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#ICollection#IsSynchronized">
+            <MetaDataID>{9eb3c460-4c42-4130-bb6c-3667244997eb}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.RelResolver._syncRoot">
+            <MetaDataID>{5e6adb9f-4e48-4097-b736-02691d50a0f9}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#ICollection#SyncRoot">
+            <MetaDataID>{aca9afde-9a18-4cbf-9640-7bbc37fa0aed}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.System#Collections#IEnumerable#GetEnumerator">
+            <MetaDataID>{c644a13d-2cf8-4496-8759-3e1d77b792d2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.CanDeletePermanently(System.Object)">
+            <MetaDataID>{313b0549-fa53-4056-9e6d-6e391a83f308}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.UpgrateReferencialIntegrity(System.Object,System.Boolean)">
+            <MetaDataID>{d28abc39-617e-4323-9ab4-41bb7a13d6d1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.RemoveRelatedObject(System.Object)">
+            <MetaDataID>{2adf4f90-638c-4662-94ef-171d68e74598}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.AddRelatedObject(System.Object)">
+            <MetaDataID>{2706a844-ccfc-4a94-8bdc-70e5805f050c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.RelResolver.InsertRelatedObject(System.Int32,System.Object)">
+            <MetaDataID>{cd991f1f-a7cf-43ed-b455-99361fbabe7e}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.MultilingualObjectLink">
+            <MetaDataID>{7e26c83e-c459-46cd-9308-35dfa4df48a2}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent">
+            <MetaDataID>{E672197D-DC72-4789-99A3-AC61F698AD11}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent._ValueTypePath">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ValueTypePath">
+            <MetaDataID>{2daa1a1c-9fc5-43b3-9429-2cc07c69294c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent._Class">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{F112F4CE-EFA3-4590-A138-815A5A4196F5}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.Class">
+            <MetaDataID>{A89D58E0-736C-490C-851C-38C8A72A873C}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ClassMetaObjectID">
+            <MetaDataID>{C63141A3-5821-43D1-8886-775683620FD1}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ClassFullName">
+            <MetaDataID>{C63141A3-5821-43D1-8886-775683620FD1}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.Version">
+            <MetaDataID>{d51b1c59-38a0-4b0b-8b68-8b6c1bbbd207}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent._MemoryInstance">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{B6A1DCF7-971A-4062-91BE-2E839F8A3F2B}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.MemoryInstance">
+            <MetaDataID>{37644C00-EB01-4D91-A1E6-516B217F92F9}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent._PersistentObjectID">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{3BB7186E-358A-4337-B267-AC5745D4EEB2}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.PersistentObjectID">
+            <MetaDataID>{0832D64B-2F29-4EE8-8EE0-C034506E5907}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent._ObjectID">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{3BB7186E-358A-4337-B267-AC5745D4EEB2}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ObjectID">
+            <MetaDataID>{0832D64B-2F29-4EE8-8EE0-C034506E5907}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ObjectStorage">
+            <MetaDataID>{496E216E-00F1-42D0-9576-0FC0CCD10DDA}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent._ObjectStorageURI">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{E7E5C638-40F8-44F0-8E2D-4E18EBFD076D}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ObjectStorageURI">
+            <MetaDataID>{42794881-DFA5-44B6-8993-D37A787009DD}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.op_Equality(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent)">
+            <MetaDataID>{C4A9E93D-B266-4715-A990-09700DED6007}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.op_Inequality(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent)">
+            <MetaDataID>{F7C3F8FE-8801-487C-801D-A98E44BCE65D}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.MemoryID">
+            <MetaDataID>{46964f7e-6599-4c5f-8ad8-5005022e0d05}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ReferentialIntegrityCount">
+            <MetaDataID>{d19b6fe1-987c-406f-a218-308dc0262cce}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.Url">
+            <MetaDataID>{19BCD8CB-B511-4184-90E5-409BF22F51CE}</MetaDataID>
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.IsPersistent">
+            <MetaDataID>{0302bd5a-d577-4933-b1e7-38ad6165b19f}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.StorageLocation">
+            <MetaDataID>{becf390f-57e6-41e5-b011-1ebb61060473}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.StorageIdentity">
+            <MetaDataID>{f18d11fb-84ed-4660-bcae-55e7779dffaa}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.StorageName">
+            <MetaDataID>{bd19a9f8-cc54-464b-b65d-ab6698b7aeba}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.StorageCellName">
+            <MetaDataID>{146915fd-ee2f-4d5c-98ba-6a2780516ba6}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.StorageType">
+            <MetaDataID>{d2fc120e-5bae-4b8b-9b1d-36347bdd13d7}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.StorageCellSerialNumber">
+            <MetaDataID>{14eb42f5-e775-4e93-b347-716898af5093}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.ObjectIdentityType">
+            <MetaDataID>{094b566d-29ca-47ef-b6a5-f4c43c49d83e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{66E47FC2-6D42-4A88-976C-538DC2EAE54B}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.GetStorageInstanceSet(OOAdvantech.PersistenceLayerRunTime.ObjectStorage)">
+            <MetaDataID>{d55861bf-0c0d-4d80-b2c1-2eb156266cf2}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent.RealStorageInstanceRef">
+            <MetaDataID>{4EB3C68D-D1CB-4DED-9933-0EC574C5C77C}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef">
+            <MetaDataID>{56A446A4-A5D0-4E19-80F9-BCF25FC0AE80}</MetaDataID>
+            <summary>VT(8)RestoreLastSnapshot </summary>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute">
+            <summary>
+            Structure defines the value and metadata of object member.
+            Metadata are necessary to set or get value from object   
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.Attribute">
+            <summary>
+            Defines the Attribute
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.FieldInfo">
+            <summary>
+            Defines the field which contains the value of attribute. 
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.FastFieldAccessor">
+            <summary>
+            Defines the accessor to set or get value.
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.Value">
+            <summary>
+            Defines the value of attribute
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.PathIdentity">
+            <summary>
+            Defines the identity of path to set or get value of attribute
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.ValueTypePath">
+            <summary>
+            Defines the metadata to access the value of attribute in case where the attribute is member of value tyoe
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute.Path">
+            <summary>
+            Defines the path description to set or get attribute value;
+            </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.Lock">
+            <MetaDataID>{4b054f2a-7df9-4056-abef-b52a1687d338}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._NextMemoryID">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.NextMemoryID">
+            <MetaDataID>{62665fc1-dce2-4a9b-a984-fcc0fce62011}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MemoryID">
+            <MetaDataID>{e8a599a0-ee80-45cb-bb0b-318a3618cd79}</MetaDataID>
+        </member>
+        <member name="E:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ChangeState">
+            <MetaDataID>{2BD73C1E-00C9-43AB-880C-1C60BFC8A177}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetStorageInstanceAgent(System.Object)">
+            <summary>
+            This method returns the storage instance ref agent of persistentObject.
+            
+            </summary>
+             <MetaDataID>{58B0175C-298C-418A-901F-3730138118E3}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.RelResolvers">
+            <summary>
+            Defines the collection with relation resolvers  
+            </summary>
+             <MetaDataID>{3CD0F639-D1C2-4F28-AE81-D01069901314}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ObjectStateManagerLink">
+            <MetaDataID>{D29F974D-CE3C-44F1-BB6C-017E49B2A8A5}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.IsRelationLoaded(OOAdvantech.MetaDataRepository.AssociationEnd)">
+            <MetaDataID>{0f284bf6-b0a0-4f02-8ecd-2be0e098bfdc}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.CommitChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{A266D609-E8F3-4E07-95D5-FE4B61FEAD79}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.StorageInstanceValuesSnapshot">
+            <MetaDataID>{dd462746-e9eb-4c98-a775-783c603083b4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MarkChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{40F1333C-B5D2-4835-852B-FEBF17790FD1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MarkChanges(OOAdvantech.Transactions.Transaction,System.Reflection.FieldInfo[])">
+            <MetaDataID>{dd158683-2c4a-490c-a52b-6498d843fb4f}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MergeChanges(OOAdvantech.Transactions.Transaction,OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{8250c872-5910-44e3-b9c6-3c44b9ade251}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.UndoChanges(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{004C4FEF-09B1-486B-83D2-56D90BBB04D6}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.IsPersistent">
+            <MetaDataID>{ea3ff4a1-1518-48d4-b9b9-81ba1dc17329}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.LazyFetching(System.String,System.Type)">
+            <MetaDataID>{CADA62B4-DD8C-41B9-A6B9-02105971B93C}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.LazyFetching(System.Object,System.Type)">
+            <MetaDataID>{dee2fb3d-0fd6-4daa-bdd5-955c45cbd699}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.LazyFetching(OOAdvantech.PersistenceLayerRunTime.RelResolver,System.Type)">
+            <MetaDataID>{6E20CCF9-CCB5-44EE-9C57-AABE17AB88C2}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._PersistentObjectID">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.PersistentObjectID">
+            <summary></summary>
+            <MetaDataID>{B5E70A51-984B-4B34-88D6-7F3B910844B7}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._TransientObjectID">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ObjectID">
+            <MetaDataID>{a0cafccf-bad4-419b-8b96-cf3a66a26832}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._MemoryInstance">
+            <exclude>Excluded</exclude>
+            <MetaDataID>{C37569E3-2378-49C2-A4E9-E1CE2A0C8C25}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MemoryInstance">
+            <MetaDataID>{01112B86-8C8B-4364-986F-00E9BAC54EDC}</MetaDataID>
+        </member>
+        <member name="E:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ObjectDeleted">
+            <MetaDataID>{705037EC-205B-43D6-A5EF-F6FD4AC5D389}</MetaDataID>
+            <summary>This event informs subscribers for the object deletion. 
+            This event is useful for relation resolvers to clear reference to the memory instance. </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.OnObjectDeleted">
+            <MetaDataID>{016ADF45-B134-40D1-8B61-C810D9772043}</MetaDataID>
+            <summary>With this method persistency system 
+            informs the storage instance ref object that the storage instance removed from storage. </summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._Class">
+            <MetaDataID>{F9FB9B27-1D03-4444-92A8-C158A1BCDC9A}</MetaDataID>
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.Class">
+            <summary>This property defines the metadata for the memory instance.</summary>
+            <MetaDataID>{073509B7-BF95-4F7A-A926-DE273514BC6C}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValidateRelatedObjects">
+            <summary>This method checks the role fields values of relation object
+            There is a main rule for relation object. 
+            The relation object defines a relationship between two objects. 
+            If you want to remove this relationship and create a new 
+            then you must delete the relation object and create new. 
+            You can’t change the values of roles fields of relation object. </summary>
+            <MetaDataID>{E7D9DE31-78EE-420E-9EBF-23E7FF6D610E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.HasChangeState">
+            <summary>
+            This method checks if the memory instance has deferent 
+            state from storage instance. 
+            If it has then get method return true else return false.
+            </summary>
+            <MetaDataID>{A78AC9FB-F06A-48B7-87E4-4FF0AA5F8969}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._RuntimeReferentialIntegrityCount">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.RuntimeReferentialIntegrityCount">
+            <summary>
+            This property defines a temporary referential integrity count.
+            Its value updated in transaction context when relation added or removed.
+            When transaction commited takes 
+            
+            </summary>
+            <MetaDataID>{0d0dd132-eda2-464e-b09e-cba061990c71}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.AdvanceRuntimeReferentialIntegrity">
+            <MetaDataID>{533460f0-bc73-4fd7-bb98-5610628176a3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ReduceRuntimeReferentialIntegrity">
+            <MetaDataID>{e1d4648f-d183-4c39-b666-0e1becc6c898}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._ReferentialIntegrityCount">
+            <MetaDataID>{25ECEEA9-78FD-42D0-988D-030C5849F8A8}</MetaDataID>
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ReferentialIntegrityCount">
+            <summary>
+            Objects use a reference counting mechanism to ensure 
+            that the lifetime of the object includes the lifetime of references to it.
+            The referential integrity count used 
+            from persistent reference which implement association end 
+            with referential integrity flag set.
+            </summary>
+             <MetaDataID>{BDFA357A-0239-4038-91C2-C1F3D8CE48CD}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ReferentialIntegrityLinkAdded">
+            <summary>
+            The ReferentialIntegrityLinkAdded method increments the referential integrity count 
+            for a reference on an object. It should be called for every link to the object, 
+            which the type is an <see cref="T:OOAdvantech.MetaDataRepository.Association"> association</see> where the 
+            <see cref="T:OOAdvantech.MetaDataRepository.AssociationEnd">association end</see> has 
+            <see cref="F:OOAdvantech.MetaDataRepository.PersistencyFlag.ReferentialIntegrity">referential flag integrity</see>
+            set. 
+            </summary>
+             <MetaDataID>{B36200A3-382E-485D-BF15-A3C0567B32E8}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ReferentialIntegrityLinkRemoved">
+            <MetaDataID>{3BB1228B-5D69-4B19-9F56-E4907CA0DEC8}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.StorageInstanceValues">
+            <MetaDataID>{79354597-96ef-4c10-83bc-a18af85e4295}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.StorageInstanceRefSnapshot">
+            <MetaDataID>{1109F469-4AD7-4FC8-8711-2765A296C3E6}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ReferentialIntegrityCountHasChanged">
+            <MetaDataID>{87C2E546-E13E-4FF9-B01E-D3A014C7192B}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.IsObjectActive">
+            <MetaDataID>{3f2d3149-1d92-4136-90d9-8eb9c14a2cef}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ObjectActived">
+            <MetaDataID>{e49ebda2-836c-4a3b-9af5-5d9bd553fc59}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ObjectStateCommit">
+            <MetaDataID>{2ba1823d-841b-46fe-9a16-daf640e05ab4}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.PersistentAttributeMetaData">
+            <MetaDataID>{8c353d2b-4ad8-4dc8-93fc-d10875ec1683}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetPersistentAttributeValues">
+            <summary>
+            This method returns the values of persistent attributes.
+            The values are valid for current transaction 
+            </summary>
+             <MetaDataID>{5d366054-d4d5-40d8-91ac-dadf1656f780}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetPersistentAttributeMetaData">
+            <MetaDataID>{bac41287-c46a-44fc-a2c8-265969459345}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetPersistentAttributeMetaData(OOAdvantech.DotNetMetaDataRepository.Class)">
+            <MetaDataID>{8870448d-d240-43b8-ba93-97811465ae75}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetPersistentAttributeMetaData(OOAdvantech.DotNetMetaDataRepository.Structure,OOAdvantech.MetaDataRepository.ValueTypePath,System.String)">
+            <MetaDataID>{1e9f1384-2420-4591-aab8-ddd4f2ee2166}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetPersistentAttributeValues(System.Object,OOAdvantech.DotNetMetaDataRepository.Class)">
+            <summary>
+            This method provides a collection with ValueOfAttribute for the memoryInstance.
+            In case where the memoryInstance participate partially in current transaction 
+            method returns only ValueOfAttributes only for attribute wich are locked from transaction.  
+            The memoryInstance must be instance of class which defined from parameter _class.
+            </summary>
+            <param name="memoryInstance">
+            Defines the memoryInstance for which you want attribute values.
+            If the value is null returns ValueOfAttribute object for all attribute of class with null in member value   
+            </param>
+            <param name="_class">
+            Defines the class for ValueOfAttribute collection
+            </param>
+            <MetaDataID>{3a6c1ad7-731b-4f0a-aedf-8a76db8fdc7d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetPersistentAttributeValues(System.Object,OOAdvantech.DotNetMetaDataRepository.Structure,OOAdvantech.MetaDataRepository.ValueTypePath,System.String,System.Boolean,System.Globalization.CultureInfo)">
+            <summary>
+            This method provides a collection with ValueOfAttribute for the persistent members of memoryInstance.
+            The memoryInstance must be instance of Structure which defined from parameter structure.
+            </summary>
+            <param name="memoryInstance">
+            Defines the memoryInstance for which you want attribute values.
+            If the value is null returns ValueOfAttribute object for all persistent attribute of structure with null in member value   
+            </param>
+            <param name="structure">
+            Defines the structure for ValueOfAttribute collection
+            </param>
+            <MetaDataID>{9e73ee8a-60d1-4a1c-bcaf-a29bf782c4ef}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetAttributeValue(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute)">
+            <MetaDataID>{d7050a78-246c-4a7f-8975-00777c6448d1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetAttributeValue(System.Object@,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute,OOAdvantech.DotNetMetaDataRepository.Structure,System.Int32,System.Boolean@)">
+            <MetaDataID>{9c964e68-415f-4865-b08e-136463ff76c3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SnapshotStorageInstanceValue(System.String,System.Reflection.FieldInfo,System.Object)">
+            <MetaDataID>{31f5c6da-6bd5-416b-9dfb-50911d352d71}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.StorageInstanceReferentialIntegrityCount">
+            <MetaDataID>{BFE47095-FB46-4B25-9F4A-7C9D32794B6E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SnapshotStorageInstance">
+            <MetaDataID>{2BA6F2BE-A24E-4BC0-8B2B-A2B5514BE450}</MetaDataID>
+            <summary>
+            This method takes a snapshot of object state. 
+            This state is the state which is saved in storage instance 
+            it is useful because the persistency system can knows if the state 
+            of memory instance is deferent from the storage instance state. 
+            If the two states differ then the persistency system execute 
+            update command to update storage instance state.  
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ClearObjectsLink(OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Object,System.Boolean)">
+            <MetaDataID>{5BBDB579-3A14-4E7B-84FA-B5141AE7192C}</MetaDataID>
+            <summary>
+            This method informs the memory instance that the link 
+            between the memory instance and related object has been removed from storage.
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetLinkedObject(OOAdvantech.MetaDataRepository.AssociationEnd)">
+            <MetaDataID>{46a315a3-76ae-41a7-8802-41fd901790df}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetObjectsLink(OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Object,System.Boolean)">
+            <MetaDataID>{4C5928D0-A148-4A60-940F-61F72FEFA885}</MetaDataID>
+            <summary>
+            This method informs the memory instance that 
+            a new link between the memory instance and related 
+            object has been created in storage.
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetRelationChanges(OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ValueTypePath)">
+            <MetaDataID>{1000ab97-06ce-487c-812c-07452725e3bb}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MakeRelationChangesCommands">
+            <MetaDataID>{62A7B045-4172-413F-B9F3-4380CA570280}</MetaDataID>
+            <summary>
+            This method produces the corresponding commands 
+            for all changes of object relationships. 
+            The executions of these commands remove or add relationships in storage.
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MakeRelationChangesCommands(OOAdvantech.PersistenceLayerRunTime.RelResolver,OOAdvantech.PersistenceLayer.ObjectCollection)">
+            <summary>
+            Compare relation resolver collection and memory instance collection and produce link and unlink commands
+            </summary>
+            <param name="relResolver">
+            Relation resolver has the storage instance related objects
+            </param>
+            <param name="objectCollection">
+            The objectCollection contains memory instance related objects
+            </param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MakeMultilingualRelationChangesCommands(OOAdvantech.PersistenceLayerRunTime.RelResolver)">
+            <summary>
+            Produce commands for multilingual association end with multiplicity zero or one
+            </summary>
+            <param name="relResolver">
+            Defines the relation resolver for multilingual  association end with multiplicity zero or one.
+            </param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.MakeRelationChangesCommands(OOAdvantech.PersistenceLayerRunTime.RelResolver)">
+            <summary>
+            Produce commands for association end with multiplicity zero or one
+            </summary>
+            <param name="relResolver">
+            Defines the relation resolver for  association end with multiplicity zero or one.
+            </param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.CreateRelationResolver(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.AccessorBuilder.FieldPropertyAccessor)">
+            <MetaDataID>{2B276948-6DE9-42E8-B76A-F951668938F6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.CreateRelationResolver(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.AccessorBuilder.FieldPropertyAccessor,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{1a2e3e59-42f9-4ae9-ba8a-4d63b359f19c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetObjectCollection(OOAdvantech.PersistenceLayer.ObjectContainer)">
+            <summary>
+            This method retrieves the value of _theObjects field.
+            Persistence system use this method to break the access level of field _theObjects 
+            of ObjectContainer class
+            </summary>
+            <MetaDataID>{B4B1452F-813A-4563-90DE-50501FA1164D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetObjectCollection(OOAdvantech.PersistenceLayer.ObjectContainer,OOAdvantech.PersistenceLayer.ObjectCollection)">
+            <summary>
+             This method sets the value of _theObjects field.
+             Persistence system use this method to break the access level of field _theObjects 
+             of ObjectContainer class
+             </summary>
+             <MetaDataID>{A7CA511E-FCFA-43A4-A8CD-8F8BA21E9301}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetRelResolvers">
+            <MetaDataID>{11dc7c68-3890-468c-bcce-b53c229bd650}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetRelResolvers(OOAdvantech.DotNetMetaDataRepository.Structure,OOAdvantech.MetaDataRepository.ValueTypePath)">
+            <MetaDataID>{7146d714-abf7-4e3f-b91f-361e3d167c20}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetMemoryInstanceMemberValue(OOAdvantech.PersistenceLayerRunTime.RelResolver)">
+            <MetaDataID>{6c9e1f77-2215-4f25-9d10-7eecd3716bfb}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetRelResolverValue(System.Object,OOAdvantech.PersistenceLayerRunTime.RelResolver,OOAdvantech.DotNetMetaDataRepository.Structure,OOAdvantech.MetaDataRepository.ValueTypePath,System.Object@,System.Boolean@)">
+            <MetaDataID>{2f1170bb-5b46-40c1-bff4-9d621f7e5285}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetMultilingualMemberValue(OOAdvantech.PersistenceLayerRunTime.RelResolver,System.Collections.Generic.List{OOAdvantech.PersistenceLayerRunTime.MultilingualObjectLink})">
+            <summary>
+            Set member multilingual value for resolver
+            </summary>
+            <param name="relResolver">
+            Define the relation resolver which controls the related object.
+            the related object loaded on instance member 
+            </param>
+            <param name="multilingualObjectLinks">
+            In multilingual context may exist multiple related objects one for each culture
+            </param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetMultilingualMemberValue(System.Object@,OOAdvantech.PersistenceLayerRunTime.RelResolver,OOAdvantech.DotNetMetaDataRepository.Structure,System.Collections.Generic.List{OOAdvantech.PersistenceLayerRunTime.MultilingualObjectLink},System.Int32,System.Boolean@)">
+            <summary>
+            Set value of member which is part of  value type attribute 
+            </summary>
+            <param name="memoryInstance">
+            Defines the value type memory instance 
+            </param>
+            <param name="relResolver">
+            Define the relation resolver which controls the related object.
+            the related object loaded on instance member 
+            </param>
+            <param name="structure">
+            Defines the value type meta data
+            </param>
+            <param name="multilingualObjectLinks">
+            In multilingual context may exist multiple related objects one for each culture
+            </param>
+            <param name="pathIndex">
+            Defines the index of value type path (value type nested in value type 
+            </param>
+            <param name="valueSetted">
+            Defines output parameter.
+            When valueSetted is true the value type attribute must be updated with the updated memory instance
+            </param>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetMemberValue(OOAdvantech.PersistenceLayerRunTime.RelResolver,System.Object)">
+            <MetaDataID>{8cc29332-0bdb-423d-b6e1-13ad345ee949}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.SetMemberValue(System.Object@,OOAdvantech.PersistenceLayerRunTime.RelResolver,OOAdvantech.DotNetMetaDataRepository.Structure,System.Object,System.Int32,System.Boolean@)">
+            <MetaDataID>{bf3019bf-2f95-4e57-aaf0-40a2db2c6b6f}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.InitRelResolverMember(OOAdvantech.PersistenceLayerRunTime.RelResolver)">
+            <MetaDataID>{70042624-9354-49b1-b314-59ca73c09c80}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.InitRelResolverMember(System.Object,OOAdvantech.PersistenceLayerRunTime.RelResolver,OOAdvantech.DotNetMetaDataRepository.Structure,System.Boolean@)">
+            <MetaDataID>{12cde471-e415-43d3-a258-8324d8d0a755}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.InitAttributeMember(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute)">
+            <MetaDataID>{0e6695e5-c3c6-4595-bf58-eb3d44dfb4cf}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.InitAttributeMember(System.Object,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ValueOfAttribute,OOAdvantech.DotNetMetaDataRepository.Structure,System.Boolean@)">
+            <MetaDataID>{74ae3fc2-cda8-4ac4-a7e1-0e3802d0b60a}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.InitializeRelationshipResolvers">
+            <MetaDataID>{F79535D1-A7B0-4E24-997C-2F75B96D9820}</MetaDataID>
+            <summary>
+            For each persistent association end create relation resolver
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.#ctor">
+            <MetaDataID>{c7cbbad8-0871-4a6c-80a8-c8c7bc8ce0ac}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.rng">
+            <MetaDataID>{1006f3a8-6cfa-4ebe-9b5a-fc8b6bd89cf4}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._Remoting_Identity_IDSeqNum">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.Remoting_Identity_GetNextSeqNum">
+            <MetaDataID>{bb91f487-e2df-4d30-8ea1-7a8869b1a099}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.#ctor(System.Object,OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayer.ObjectID,System.Boolean)">
+            <MetaDataID>{2EF1044F-CD39-47FB-9C09-232C66860A57}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.Finalize">
+            <summary></summary>
+            <MetaDataID>{8fbe6aff-bf50-4de9-8c24-199a5f4bd8f9}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._LifeTimeController">
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.LifeTimeController">
+            <MetaDataID>{91BBB565-B7D0-4F4A-AB79-1C069B4CED14}</MetaDataID>
+            <summary></summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.InitializeRelatedObject(OOAdvantech.PersistenceLayerRunTime.RelResolver,System.Object)">
+            <MetaDataID>{c253a52b-77dc-4e2b-9fc4-842bdb5a875e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.GetNewObjectsUnderTransaction(OOAdvantech.MetaDataRepository.Classifier)">
+            <MetaDataID>{8488102b-0212-4b19-8b73-000dd7f590a7}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef">
+            <MetaDataID>{ac59ab9b-0c80-4ff1-8489-af2325eefe0c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.OriginalStorageInstanceRef">
+            <MetaDataID>{e4fd9056-52d4-4681-8d7b-ef88de8fc7f1}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.ValueTypePath">
+            <MetaDataID>{f964ca67-e2f9-41f4-8692-a9136d042b94}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.#ctor(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.MetaDataRepository.ValueTypePath)">
+            <MetaDataID>{4b2d789f-ac12-4d82-86be-2aff289cc8ba}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.StorageInstanceSet">
+            <MetaDataID>{8241e678-76db-45a9-9639-0fb3a48e910b}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.PersistentObjectID">
+            <MetaDataID>{52d94b56-e83c-4297-bb0b-85ed408dda4d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.CreateRelationResolver(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.AccessorBuilder.FieldPropertyAccessor)">
+            <MetaDataID>{d2bdbaaf-d30b-41fe-82db-aeded8f6a581}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceValuePathRef.CreateRelationResolver(OOAdvantech.DotNetMetaDataRepository.AssociationEnd,OOAdvantech.AccessorBuilder.FieldPropertyAccessor,OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <MetaDataID>{35691b30-f534-4c80-ad60-4492e8b9fcd3}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageProvider">
+            <metadataid>{FAE6A6C7-595F-43F8-9DD7-EDCB10680AC2}</metadataid>
+            <summary>Storage provider is a communication channel with the runtime that specialize the Persistence Layer Framework for corresponding type of storage.</summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.GetInstanceName(System.String,System.String)">
+            <MetaDataID>{b98ab0c2-c4dc-453b-91dc-85177240e06f}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.GetHostComuterName(System.String,System.String)">
+            <MetaDataID>{ED3627D3-C3E4-41EE-BE80-A6737F3302E8}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageProvider.ProviderID">
+            <metadataid>{1F881E78-5378-4777-AA99-BF60BA6525FB}</metadataid>
+            <summary>The Provider identity. Globally unique.</summary>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageProvider.Name">
+            <metadataid>{c2cda9b0-ff9d-4b8e-8b75-29992ff4366b}</metadataid>
+            <summary>The Provider Name</summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.NewStorage(OOAdvantech.PersistenceLayer.Storage,System.String,System.String,System.String,System.String)">
+            <summary>Create a new Object Storage with schema like original storage and open a storage session with it.</summary>
+            <param name="OriginalStorage">Cloned Metada (scema)</param>
+            <param name="StorageName">The name of new Object Storage</param>
+            <param name="StorageLocation">This parameter contains the location of object storage.
+            If it is null then the provider will look at Persistence Layer repository.</param>
+            <MetaDataID>{30f429c3-f188-4601-9e98-feea9e4519ac}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.NewStorage(OOAdvantech.PersistenceLayer.Storage,System.String,System.Object)">
+            <summary>Create a new Object Storage with schema like original storage and open a storage session with it.</summary>
+            <param name="OriginalStorage">Cloned Metada (scema)</param>
+            <param name="StorageName">The name of new Object Storage</param>
+            <param name="rawStorageData">This parameter defines an object which contains the raw data for stored object.
+            It can be an xml document a file or memory stream etc. the storage loaded in process by default. 
+            </param>
+            <MetaDataID>{10626489-2361-49ff-b2d8-d512479f84ba}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.OpenStorage(System.String,System.String,System.String,System.String)">
+            <summary>Create a storage access session.</summary>
+            <param name="storageName">The name of Object Storage</param>
+            <param name="storageLocation">This parameter contains the location of object storage.
+            If it is null then the provider will look at Persistence Layer repository.</param>
+            <MetaDataID>{5b4a57c1-3433-4187-acde-1c2593544664}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.OpenStorage(System.String,System.Object)">
+            <summary>Create a storage access session.</summary>
+            <param name="StorageName">The name of Object Storage</param>
+            <param name="rawStorageData">This parameter defines an object which contains the raw data for stored object.
+            It can be an xml document a file or memory stream etc. the storage loaded in process by default. 
+            </param>
+            <MetaDataID>{69b0cf16-33ce-4b79-a0f9-1d8100b7f966}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.IsEmbeddedStorage(System.String,System.String)">
+            <MetaDataID>{6F567FFB-30C2-41D4-83F1-77C15F1D01DF}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.AllowEmbeddedStorage">
+            <MetaDataID>{734C03D6-8BC5-480A-ACB6-388A938D1C0D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.DeleteStorage(System.String,System.String)">
+            <MetaDataID>{bfd973b6-9da9-468d-9e06-40d657947cac}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.AttachStorage(System.String,System.String,System.String)">
+            <MetaDataID>{9036fcc0-51cd-4f91-8b60-921d7d2d99d6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageProvider.GetNativeStorageID(System.String)">
+            <MetaDataID>{164435ae-5529-4a36-ac98-5480a9b5fd48}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.StorageServer">
+            <MetaDataID>{7fa3c90e-aca6-490c-ae10-0509b0963786}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageServer.AttachStorage(System.String,System.String,System.String)">
+            <MetaDataID>{311a8aac-b30d-4a0d-b071-20459821f430}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.ObjectStorage">
+            <summary>
+            Object storage provide the basic functionality to create a persistent object,
+            make a transient object persistent,retrieve objects.
+            This class realized from run times for instance MSSQL run time,XML run time.      
+            </summary>
+            <MetaDataID>{F2ED599E-455E-4A46-9BA3-85467CC9D1EA}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetStorageProvider(System.String)">
+            <MetaDataID>{38ad40f0-1fd2-4bb9-a674-3bb7debc42cd}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.StorageIdentity">
+            <MetaDataID>{8207b65e-f46b-4e15-ba5e-e635fef2ba24}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetTemporaryObjectID">
+            <MetaDataID>{8ef75c33-97da-417d-8636-df45c658b2e6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateDataLoader(OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode,OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoaderMetadata)">
+            <MetaDataID>{88aed1f5-b3b9-49d2-938e-5e99a3a4e52f}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetStorageCell(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent)">
+            <MetaDataID>{b5f8c4e1-e162-4be6-b15d-59b4bff1d5f6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetObjectID(System.Object)">
+            <MetaDataID>{a37899a1-b947-4109-a5f3-d8d043b8bf1d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.DistributeObjectQuery(System.Guid,OOAdvantech.Collections.Generic.List{OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode},OOAdvantech.MetaDataRepository.ObjectQueryLanguage.QueryResultType,OOAdvantech.Collections.Generic.List{OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataNode},OOAdvantech.Collections.Generic.Dictionary{System.Guid,OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataLoaderMetadata},OOAdvantech.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <MetaDataID>{f7c55734-134b-4dd7-b22f-ff9e9fd629f3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.UnprotectedDelete(System.Object,OOAdvantech.PersistenceLayer.DeleteOptions)">
+            <MetaDataID>{0960E9AC-7893-4133-B90B-4AD0AC975264}</MetaDataID>
+            <summary>
+            It is a trick to solve the protection problem from facade class. 
+            This means that we want to protect the operation in the abstract layer from 
+            client but we want to access the operation from implementation code.
+            </summary>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.Delete(System.Object,OOAdvantech.PersistenceLayer.DeleteOptions)">
+            <summary>Delete the object from storage.</summary>
+            <param name="thePersistentObject">The persistent object, which will be deleted. Remember that the object has implicitly connection with storage instance.</param>
+            <param name="deleteOption">
+            The deleteOption argument defines what persistency system do 
+            when the object delete failed. 
+            If deleteOption is TryToDelete then there is nothing to do simply try.
+            If deleteOption is EnsureObjectDeletion then abort transaction.</param>
+            <MetaDataID>{BC3A0F5C-1AEE-44F9-8813-4A65C16549E2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.MoveObject(System.Object)">
+            <MetaDataID>{eea4a467-5703-4013-8a5e-5f85fb16d00e}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateMoveStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent)">
+            <MetaDataID>{b8ed6a83-6355-4686-acd0-e56aaabf00bd}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.NewObject(System.Type,System.Type[],System.Object[])">
+            <summary>
+            This method creates a new object with type that defined from parameter type. 
+            </summary>
+            <param name="type">Define the type of object that will be create. </param>
+            <param name="ctorParams">With ctorParams you can call other than default object constructor.
+            If you use the ctorParams the last parameter must be a type array with the types of 
+            parameters of constructor, which you want to call. It is useful for type check. 
+            You can avoid wrong constructor call. </param>
+            <MetaDataID>{4F6177A5-06A8-4D95-842F-F4F22B4BCE43}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.NewTransientObject(System.Type,System.Type[],System.Object[])">
+            <MetaDataID>{8A2226C4-979A-485F-96D8-AD4EFE7FA01D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.NewObject(System.Type)">
+            <summary>
+            This method creates a new object with type that defined from parameter type. 
+            </summary>
+            <param name="type">Define the type of object that will be create. </param>
+            <param name="ctorParams">With ctorParams you can call other than default object constructor.
+            If you use the ctorParams the last parameter must be a type array with the types of 
+            parameters of constructor, which you want to call. It is useful for type check. 
+            You can avoid wrong constructor call. </param>
+            <MetaDataID>{4F6177A5-06A8-4D95-842F-F4F22B4BCE43}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.NewTransientObject(System.Type)">
+            <MetaDataID>{8A2226C4-979A-485F-96D8-AD4EFE7FA01D}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CommitTransientObjectState(System.Object)">
+            <summary>This method can be used in the case where you want to create a transient 
+            object and later decide to store in storage. 
+            The process of transient object must be the as with the process that 
+            runs the others object of storage.</summary>
+            <param name="Object">Define the object which will be persistent.</param>
+            <MetaDataID>{356CD92F-5062-4E99-A3BA-9818C450C805}</MetaDataID>
+        </member>
+        <member name="E:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.ObjectStorageChanged">
+            <MetaDataID>{F4B109B7-D4CB-4936-AEE8-7D97BE28E446}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateLinkCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Int32)">
+             <summary>
+            This method creates and register to the transaction context a
+             <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand">LinkObjectsCommand</see> command. 
+             After the execution of link command the link between two objects has saved in storage. 
+             The code for the link command execution depends on the type of storage.
+             Every type of storage creates a specialized link command object.
+             </summary>
+             <param name="roleA">
+             This parameter defines the roleA object.The value must be not null
+             </param> 
+             <param name="roleB">
+             This parameter defines the roleB object.The value must be not null
+             </param>
+             <param name="relationObject">
+             This parameter defines the relation object.Some times associations have association classes.
+             </param>
+             <param name="linkInitiatorAssociationEnd">
+             This parameter defines the meta data of object relationship, also
+             defines indirectly the role object which initial create the link.
+             The value must be not null.
+             </param>
+             <MetaDataID>{FC5C6CF5-C220-4296-B7F1-5FF398772F65}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateUpdateLinkIndexCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Int32)">
+            <MetaDataID>{0d8f827a-3d37-4f60-9242-5d091ff25a51}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateUnLinkCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Int32)">
+             <summary>
+            This method creates and register to the transaction context a
+             <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.UnLinkObjectsCommand">UnLinkObjectsCommand</see> command. 
+             After the execution of unlink command the link between two objects has removed from storage. 
+             The code for the unlink command execution depends on the type of storage.
+             Every type of storage creates a specialized unlink command object.
+             </summary>
+             <param name="roleA">
+             This parameter defines the roleA object.The value must be not null
+             </param> 
+             <param name="roleB">
+             This parameter defines the roleB object.The value must be not null
+             </param>
+             <param name="relationObject">
+             This parameter defines the relation object.Some times associations have association classes.
+             </param>
+             <param name="linkInitiatorAssociationEnd">
+             This parameter defines the meta data of object relationship, also
+             defines indirectly the role object which initial removes the link.
+             The value must be not null.
+             </param>
+             <MetaDataID>{E43F570B-D6F6-4893-AD20-31AD192F55D3}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateUpdateReferentialIntegrity(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+            <summary>
+            This method creates and register to the transaction context a
+            <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateReferentialIntegrity">referecnial integrity count uptade command</see>
+             The code for the referecnial integrity count uptade command execution depends on the type of storage.
+             Every type of storage creates a specialized referecnial integrity count uptade command object.
+            </summary>
+            <param name="storageInstanceRef">
+            this parameter define the storage instance which system want to update referecnial integrity count value
+            </param>
+             <MetaDataID>{C30AFC06-6BBF-4AA5-BD89-1B939A954937}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateUnlinkAllObjectCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.DotNetMetaDataRepository.AssociationEnd)">
+            <summary>
+            This method creates and register to the transaction context a
+             <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.UnlinkAllObjectCommand">UnlinkAllObjectCommand</see> command. 
+             After the execution of unlink all command the links between source and other objects, with link type corresponding
+             to the association of association end has been removed. 
+             The code for the unlink all command execution depends on the type of storage.
+             Every type of storage creates a specialized unlink all command object.
+            </summary>
+            <param name="sourceStorageInstance">
+            This parameter defines the source object. 
+            All links of this object which type correspond to AssociationEnd type, will be deleted.  
+            </param>
+            <param name="associationEnd">
+            This parameter define the type of links which will be removed.
+            </param>
+             <MetaDataID>{ABA8C6AD-573A-4A9A-934D-6E833CA7953E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateDeleteStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef,OOAdvantech.PersistenceLayer.DeleteOptions)">
+             <summary>
+            This method creates and register to the transaction context a
+            <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.DeleteStorageInstanceCommand">delete storage instance command</see>
+             The code for the delete storasge instance command execution depends on the type of storage.
+             Every type of storage creates a specialized delete storasge instance command object.
+             </summary>
+             <param name="storageInstance">
+             This parameter defines the object which we want to delete.
+             </param>
+             <param name="deleteOption">
+             This parameter defines the type of deletion.
+             For more information look at <see cref="T:OOAdvantech.PersistenceLayer.DeleteOptions">DeleteOptions</see> 
+             </param>
+             <MetaDataID>{AE6121FA-AEDE-4796-A273-4DACB522A1CA}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateUpdateStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+             <summary>
+            This method creates and register to the transaction context a
+            <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.UpdateStorageInstanceCommand">update storage instance command</see>
+             The code for the update storasge instance command execution depends on the type of storage.
+             Every type of storage creates a specialized delete storasge instance command object.
+             </summary>
+             <param name="storageInstanceRef">
+             This parameter defines the reference to storage instance which will be updated.
+             The parameter must be not null. 
+             </param>
+             <MetaDataID>{DF681609-A1A5-4160-8CF8-AE49BCD81916}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateNewStorageInstanceCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef)">
+             <summary>
+            This method creates and register to the transaction context a
+            <see cref="T:OOAdvantech.PersistenceLayerRunTime.Commands.NewStorageInstanceCommand">new storage instance command</see>
+             The code for the new storasge instance command execution depends on the type of storage.
+             Every type of storage creates a specialized new storasge instance command object.
+             At this time the storage instance reference connect only with the storage in which will be created the storage instance. 
+             </summary>
+             <param name="storageInstance">
+             This parameter defenis a temporary storage instance ref object;
+             The parameter must be not null. The ObjectID of storage instance ref object must be null.
+             </param>
+             <MetaDataID>{7F1939C0-3E14-484E-A5D4-9362ED82186E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateUnlinkAllObjectCommand(OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.StorageCell)">
+            <MetaDataID>{95c5ebf9-c734-4096-b424-5eb21381e1b0}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateStorageInstanceRef(System.Object,OOAdvantech.PersistenceLayer.ObjectID)">
+            <summary>
+            This method creates and return a StorageInstanceRef.
+            If the objectID is null the the storage instance reference is temporary object
+            If the objectID parameter is not null the storage instance reference object 
+            will be created for storage instance which goes from passive mode to operative mode.
+            </summary>
+            <param name="memoryInstance">
+            This parameter define the memory instance which correspond to the storage instance and
+            express the operative mode of object.
+            The parameter must be not null. 
+            </param>
+            <param name="objectID">
+            This parameter defines the identity of object in data base.
+            If the value of parameter is null the the storage instance will be
+            created from new storage instance command.
+            </param>
+            <MetaDataID>{ADF2E449-7927-4134-93B6-233056B07E5C}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateStorageInstanceRef(System.Object,OOAdvantech.PersistenceLayer.ObjectID,OOAdvantech.MetaDataRepository.StorageCell)">
+            <MetaDataID>{65acd1ed-fab9-4587-8f86-0ab5c8c9099b}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.AbortChanges(OOAdvantech.PersistenceLayerRunTime.TransactionContext)">
+            <MetaDataID>{062A00CC-2629-4ABD-B0E5-746BDA34EC9E}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CommitChanges(OOAdvantech.PersistenceLayerRunTime.TransactionContext)">
+            <MetaDataID>{9EE22A52-93E4-4481-96C7-B5EA560709C9}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.PrepareForChanges(OOAdvantech.PersistenceLayerRunTime.TransactionContext)">
+            <MetaDataID>{c860c7bf-d34f-4e51-b01f-af88028d8387}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.BeginChanges(OOAdvantech.PersistenceLayerRunTime.TransactionContext)">
+            <MetaDataID>{01891C34-AEA2-4610-A3D1-9D7A089DD6B1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.MakeChangesDurable(OOAdvantech.PersistenceLayerRunTime.TransactionContext)">
+            <MetaDataID>{5549A370-A8F9-486F-9289-359F5F128727}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.ObjectStorage._OperativeObjectCollections">
+            <MetaDataID>{41A615CB-4774-4887-A613-DC843C7BFD52}</MetaDataID>
+            <exclude>Excluded</exclude>
+        </member>
+        <member name="P:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.OperativeObjectCollections">
+            <summary>
+            This property defines an object collection with all operative objects of storage. 
+            </summary>
+             <MetaDataID>{079CBCE6-8101-4734-9DD6-D25510E904D1}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.#ctor">
+            <summary></summary>
+            <MetaDataID>{5CFE0FE5-90A4-412A-A393-D859D3256318}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.OnObjectStorageChanged">
+            <MetaDataID>{DD7E84C7-1126-4DAE-9BBE-DFE643CFAA60}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetObjectFromStorageCell(OOAdvantech.MetaDataRepository.StorageCell,OOAdvantech.PersistenceLayer.ObjectID)">
+            <MetaDataID>{E1237AAE-2BC1-4A80-8C28-3161DD1A8AB2}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.CreateBuildContainedObjectIndiciesCommand(OOAdvantech.PersistenceLayerRunTime.IndexedCollection)">
+            <MetaDataID>{d201a826-e693-4b75-9ee3-60b6a0a1d922}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetLinkedStorageCellsFromObjectsUnderTransaction(OOAdvantech.MetaDataRepository.AssociationEnd,OOAdvantech.MetaDataRepository.ValueTypePath,OOAdvantech.Collections.Generic.Set{OOAdvantech.MetaDataRepository.StorageCell})">
+            <MetaDataID>{92939cc4-ca3e-44ea-a7c9-c714b14c023c}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.ObjectStorage.GetStorageCellReference(OOAdvantech.MetaDataRepository.StorageCell)">
+            <MetaDataID>{58845493-8ff9-440d-b716-bee430465f3d}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.PersistenceLayerRunTime.TransactioContextProvider">
+            <summary>
+            TransactionContextProvider class is a Factory Class
+            Provides to the transaction system a transaction contentext extension
+            </summary>
+             <MetaDataID>{46D14DB9-059D-424B-8239-51C5D56AFBEB}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.TransactioContextProvider.CreateTransactionContext(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{EC2DCE07-AB97-4B46-9ACD-0AAF616C4114}</MetaDataID>
+        </member>
+    </members>
+</doc>

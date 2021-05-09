@@ -1,0 +1,3 @@
+<Root>
+  <CodeModule Name="PersistencyManager" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/PersistencyManager" VSnetProject="PersistencyManager.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0" Identity="a0e5fb08-331a-4747-8321-d4c513c4053b" />
+</Root>

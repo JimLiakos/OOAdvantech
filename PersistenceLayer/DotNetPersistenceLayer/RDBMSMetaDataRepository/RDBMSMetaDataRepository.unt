@@ -1,0 +1,6 @@
+<Root>
+  <CodeModule Name="RDBMSMetaDataRepository" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/RDBMSMetaDataRepository" VSnetProject="RDBMSMetaDataRepository.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.1.0" Identity="d864028d-a9d5-48cb-8ede-53a668681d8b">
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="1.0.0.0" />
+    <Reference Name="OOAdvantech" FileSystemPath="..\OOAdvantech\OOAdvantech.unt" SourceControlPath="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/OOAdvantech" Version="1.0.1.0" />
+  </CodeModule>
+</Root>

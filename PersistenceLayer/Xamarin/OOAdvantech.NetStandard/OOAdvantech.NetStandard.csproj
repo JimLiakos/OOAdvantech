@@ -1,0 +1,223 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ProjectGUID="dbb9d838-fc4e-435f-a0ee-f566d9f44080">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>OOAdvantech.MetaDataLoadingSystem.Commands</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;OOAdvantech; DeviceDotNet; NetStandard</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>OOAdvantech</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Authentication\Services\vssver.scc" />
+    <None Remove="Authentication\vssver.scc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ClassRepository.cs" Link="ClassRepository.cs" />
+    <Compile Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ITypeLoader.cs" Link="ITypeLoader.cs" />
+    <Compile Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\AssemblyReference.cs" Link="AssemblyReference.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\DeviceOOAdvantech\FastAccessorImplementor.cs" Link="FastAccessorImplementor.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\ActiveObjectsContext.cs" Link="MetaDataRepository\ActiveObjectsContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AddCommand.cs" Link="MetaDataRepository\AddCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Association.cs" Link="MetaDataRepository\Association.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AssociationAttribute.cs" Link="MetaDataRepository\AssociationAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AssociationClass.cs" Link="MetaDataRepository\AssociationClass.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AssociationClassRole.cs" Link="MetaDataRepository\AssociationClassRole.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AssociationEnd.cs" Link="MetaDataRepository\AssociationEnd.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AssociationEndBehavior.cs" Link="MetaDataRepository\AssociationEndBehavior.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AssociationEndRealization.cs" Link="MetaDataRepository\AssociationEndRealization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Attribute.cs" Link="MetaDataRepository\Attribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\AttributeRealization.cs" Link="MetaDataRepository\AttributeRealization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\BackwardCompatibilityID.cs" Link="MetaDataRepository\BackwardCompatibilityID.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\BehavioralFeature.cs" Link="MetaDataRepository\BehavioralFeature.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\BuildAssemblyMetadataAttribute.cs" Link="MetaDataRepository\BuildAssemblyMetadataAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Class.cs" Link="MetaDataRepository\Class.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Classifier.cs" Link="MetaDataRepository\Classifier.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Component.cs" Link="MetaDataRepository\Component.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\ContainedItemsSynchronizer.cs" Link="MetaDataRepository\ContainedItemsSynchronizer.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\DataType.cs" Link="MetaDataRepository\DataType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\DeleteCommand.cs" Link="MetaDataRepository\DeleteCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Dependency.cs" Link="MetaDataRepository\Dependency.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\EndPoint.cs" Link="MetaDataRepository\EndPoint.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Enumeration.cs" Link="MetaDataRepository\Enumeration.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Feature.cs" Link="MetaDataRepository\Feature.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Generalization.cs" Link="MetaDataRepository\Generalization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\GenerateFacadeProxy.cs" Link="MetaDataRepository\GenerateFacadeProxy.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Interface.cs" Link="MetaDataRepository\Interface.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\InterfaceImplementor.cs" Link="MetaDataRepository\InterfaceImplementor.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\IObjectIdentityType.cs" Link="MetaDataRepository\IObjectIdentityType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\MetaDataException.cs" Link="MetaDataRepository\MetaDataException.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\MetaObject.cs" Link="MetaDataRepository\MetaObject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\MetaObjectCollection.cs" Link="MetaDataRepository\MetaObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\MetaObjectCreator.cs" Link="MetaDataRepository\MetaObjectCreator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\MetaObjectID.cs" Link="MetaDataRepository\MetaObjectID.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Method.cs" Link="MetaDataRepository\Method.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Model.cs" Link="MetaDataRepository\Model.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\MultiplicityRange.cs" Link="MetaDataRepository\MultiplicityRange.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Namespace.cs" Link="MetaDataRepository\Namespace.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\ObjectActivationCall.cs" Link="MetaDataRepository\ObjectActivationCall.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\ObjectIdentityType.cs" Link="MetaDataRepository\ObjectIdentityType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Operation.cs" Link="MetaDataRepository\Operation.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Package.cs" Link="MetaDataRepository\Package.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Parameter.cs" Link="MetaDataRepository\Parameter.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\ParameterableElement.cs" Link="MetaDataRepository\ParameterableElement.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Persistent.cs" Link="MetaDataRepository\Persistent.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\PersistentMemberAttribute.cs" Link="MetaDataRepository\PersistentMemberAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Primitive.cs" Link="MetaDataRepository\Primitive.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Realization.cs" Link="MetaDataRepository\Realization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Relationship.cs" Link="MetaDataRepository\Relationship.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\RemoteCallBackClient.cs" Link="MetaDataRepository\RemoteCallBackClient.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\SorageMetaData.cs" Link="MetaDataRepository\SorageMetaData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Storage.cs" Link="MetaDataRepository\Storage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\StorageCell.cs" Link="MetaDataRepository\StorageCell.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\StorageCellReference.cs" Link="MetaDataRepository\StorageCellReference.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\StorageCellsLink.cs" Link="MetaDataRepository\StorageCellsLink.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\StorageReference.cs" Link="MetaDataRepository\StorageReference.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\StructuralFeature.cs" Link="MetaDataRepository\StructuralFeature.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Structure.cs" Link="MetaDataRepository\Structure.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\SynchronizerSession.cs" Link="MetaDataRepository\SynchronizerSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\Templateable.cs" Link="MetaDataRepository\Templateable.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\TemplateBinding.cs" Link="MetaDataRepository\TemplateBinding.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\TemplateParameter.cs" Link="MetaDataRepository\TemplateParameter.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\TemplateParameterSubstitution.cs" Link="MetaDataRepository\TemplateParameterSubstitution.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\TemplateSignature.cs" Link="MetaDataRepository\TemplateSignature.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataRepository\ValueTypePath.cs" Link="MetaDataRepository\ValueTypePath.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\IEnlistmentsController.cs" Link="Transactions\IEnlistmentsController.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\IObjectsStateManager.cs" Link="Transactions\IObjectsStateManager.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\ITransactionCoordinator.cs" Link="Transactions\ITransactionCoordinator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\ITransactionEnlistment.cs" Link="Transactions\ITransactionEnlistment.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\ITransactionStatusNotification.cs" Link="Transactions\ITransactionStatusNotification.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\PersistenceLayer\DeleteOptions.cs" Link="PersistenceLayer\DeleteOptions.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\Remoting\IRemoteEventHandler.cs" Link="Remoting\IRemoteEventHandler.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantechFacade\Remoting\IServerSessionPart.cs" Link="Remoting\IServerSessionPart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\AccessorsBuilder.cs" Link="AccessorsBuilder.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\BinaryFormatter.cs" Link="BinaryFormatter.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\CultureContext.cs" Link="CultureContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\EventUnderProtection.cs" Link="EventUnderProtection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\MemberValue.cs" Link="MemberValue.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\Multilingual.cs" Link="Multilingual.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\MultilingualMember.cs" Link="MultilingualMember.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\ObjectsContext.cs" Link="ObjectsContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech\TypeHelper.cs" Link="TypeHelper.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\IBackupArchive.cs" Link="PersistenceLayer\IBackupArchive.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\IObjectStateEventsConsumer.cs" Link="PersistenceLayer\IObjectStateEventsConsumer.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\IPersistencyService.cs" Link="PersistenceLayer\IPersistencyService.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\IRawStorageData.cs" Link="PersistenceLayer\IRawStorageData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\IStorageServerInstanceLocator.cs" Link="PersistenceLayer\IStorageServerInstanceLocator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\Locator.cs" Link="PersistenceLayer\Locator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\Member.cs" Link="PersistenceLayer\Member.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\MemberList.cs" Link="PersistenceLayer\MemberList.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\MultilingualSet.cs" Link="PersistenceLayer\MultilingualSet.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\ObjectCollection.cs" Link="PersistenceLayer\ObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\ObjectCollectionFactory.cs" Link="PersistenceLayer\ObjectCollectionFactory.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\ObjectContainer.cs" Link="PersistenceLayer\ObjectContainer.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\ObjectID.cs" Link="PersistenceLayer\ObjectID.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\ObjectStorage.cs" Link="PersistenceLayer\ObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\ObjectStorageInstanceConnection.cs" Link="PersistenceLayer\ObjectStorageInstanceConnection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\Set.cs" Link="PersistenceLayer\Set.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\StorageException.cs" Link="PersistenceLayer\StorageException.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\StorageSession.cs" Link="PersistenceLayer\StorageSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayer\StructureSet.cs" Link="PersistenceLayer\StructureSet.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\ClientSessionPart.cs" Link="Remoting\ClientSessionPart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\Dictionary.cs" Link="GenericCollections\Dictionary.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\EventConsumerProxy.cs" Link="Remoting\EventConsumerProxy.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\HttpAttributes.cs" Link="Remoting\HttpAttributes.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\List.cs" Link="GenericCollections\List.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\MarshalByRefObject.cs" Link="Remoting\MarshalByRefObject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\MonoStateClass.cs" Link="Remoting\MonoStateClass.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemoteActivetor.cs" Link="Remoting\RemoteActivetor.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemoteEventHandler.cs" Link="Remoting\RemoteEventHandler.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemoteEventPublishAttribute.cs" Link="Remoting\RemoteEventPublishAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RenewalManger.cs" Link="Remoting\RenewalManger.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\ServerSessionPart.cs" Link="Remoting\ServerSessionPart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\Tracker.cs" Link="Remoting\Tracker.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\AuthUser.cs" Link="Remoting\RestApiRemoting\AuthUser.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Binding.cs" Link="Remoting\RestApiRemoting\Binding.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\DeviceAuthentication.cs" Link="Remoting\RestApiRemoting\DeviceAuthentication.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\EventCallbackMessage.cs" Link="Remoting\RestApiRemoting\EventCallbackMessage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\HttpMetaData.cs" Link="Remoting\RestApiRemoting\HttpMetaData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\IBoundObject.cs" Link="Remoting\RestApiRemoting\IBoundObject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\IChannel.cs" Link="Remoting\RestApiRemoting\IChannel.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\IDefaultCommunicationTimeouts.cs" Link="Remoting\RestApiRemoting\IDefaultCommunicationTimeouts.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\IRomotingServer.cs" Link="Remoting\RestApiRemoting\IRomotingServer.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\IWebSocketEndPoint.cs" Link="Remoting\RestApiRemoting\IWebSocketEndPoint.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\LogicalConnection.cs" Link="Remoting\RestApiRemoting\LogicalConnection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\MessageDispatcher.cs" Link="Remoting\RestApiRemoting\MessageDispatcher.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\MethodCallMessage.cs" Link="Remoting\RestApiRemoting\MethodCallMessage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\PhysicalConnection.cs" Link="Remoting\RestApiRemoting\PhysicalConnection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Proxy.cs" Link="Remoting\RestApiRemoting\Proxy.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\RemotingServices.cs" Link="Remoting\RestApiRemoting\RemotingServices.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\RemotingServicesServer.cs" Link="Remoting\RestApiRemoting\RemotingServicesServer.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\RestApiExceptionData.cs" Link="Remoting\RestApiRemoting\RestApiExceptionData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\ReturnMessage.cs" Link="Remoting\RestApiRemoting\ReturnMessage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JSCallData.cs" Link="Remoting\RestApiRemoting\Serialization\JSCallData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonContractResolver.cs" Link="Remoting\RestApiRemoting\Serialization\JsonContractResolver.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonConverterTypeScript.cs" Link="Remoting\RestApiRemoting\Serialization\JsonConverterTypeScript.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonSerializerEx.cs" Link="Remoting\RestApiRemoting\Serialization\JsonSerializerEx.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonSerializerSettings.cs" Link="Remoting\RestApiRemoting\Serialization\JsonSerializerSettings.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonType.cs" Link="Remoting\RestApiRemoting\Serialization\JsonType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\ReferenceResolver.cs" Link="Remoting\RestApiRemoting\Serialization\ReferenceResolver.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\SerializationBinder.cs" Link="Remoting\RestApiRemoting\Serialization\SerializationBinder.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\SerializeSession.cs" Link="Remoting\RestApiRemoting\Serialization\SerializeSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\ServerSessionPart.cs" Link="Remoting\RestApiRemoting\ServerSessionPart.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\TransportData.cs" Link="Remoting\RestApiRemoting\TransportData.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\WebSocketChannel.cs" Link="Remoting\RestApiRemoting\WebSocketChannel.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\WebSockets.cs" Link="Remoting\RestApiRemoting\WebSockets.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Security\DotNetPrincipals.cs" Link="Security\DotNetPrincipals.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Security\IOutOfStorageAccountInfo.cs" Link="Security\IOutOfStorageAccountInfo.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Security\Role.cs" Link="Security\Role.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Security\SecurityService.cs" Link="Security\SecurityService.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Security\Subject.cs" Link="Security\Subject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Security\User.cs" Link="Security\User.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\CommittableTransaction.cs" Link="Transactions\CommittableTransaction.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\EnlistmentsController.cs" Link="Transactions\EnlistmentsController.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\Exception.cs" Link="Transactions\Exception.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ExtensionProperties.cs" Link="Transactions\ExtensionProperties.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ITransactioContextProvider.cs" Link="Transactions\ITransactioContextProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ITransactionContext.cs" Link="Transactions\ITransactionContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ITransactionContextExtender.cs" Link="Transactions\ITransactionContextExtender.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\LogicalThread.cs" Link="Transactions\LogicalThread.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\NestedTransactionController.cs" Link="Transactions\NestedTransactionController.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ObjectStateSnapshot.cs" Link="Transactions\ObjectStateSnapshot.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ObjectStateTransition.cs" Link="Transactions\ObjectStateTransition.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\ServerLockControlSession.cs" Link="Transactions\ServerLockControlSession.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\SystemStateTransition.cs" Link="Transactions\SystemStateTransition.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\Transaction.cs" Link="Transactions\Transaction.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionalObject.cs" Link="Transactions\TransactionalObject.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionAttribute.cs" Link="Transactions\TransactionAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionContext.cs" Link="Transactions\TransactionContext.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionEnlistment.cs" Link="Transactions\TransactionEnlistment.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionInterop.cs" Link="Transactions\TransactionInterop.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionManagment.cs" Link="Transactions\TransactionManagment.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionManagmentRunTime.cs" Link="Transactions\TransactionManagmentRunTime.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Transactions\TransactionRunTime.cs" Link="Transactions\TransactionRunTime.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\DotNetPersistenceLayer\RestApiRemoting\FirebaseJWTAuth.cs" Link="Remoting\RestApiRemoting\FirebaseJWTAuth.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GenericCollections\" />
+    <Folder Include="MetaDataRepository\" />
+    <Folder Include="PersistenceLayer\" />
+    <Folder Include="Remoting\CommonEventHandler\" />
+    <Folder Include="Remoting\RestApiRemoting\Serialization\" />
+    <Folder Include="Security\" />
+    <Folder Include="Transactions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WebSocket4Net" Version="0.15.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
+    <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

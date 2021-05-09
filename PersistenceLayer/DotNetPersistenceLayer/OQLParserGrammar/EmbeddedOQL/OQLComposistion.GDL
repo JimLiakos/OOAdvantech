@@ -1,0 +1,17 @@
+grammar OQLComposition <SPACE = space_symbol
+		,HIDELITERALS
+		,HIDEREPEATERS> 
+{
+start ::=composite_expression;
+
+composite_expression::= 
+	{quotedstring, additive_operator};
+additive_operator ::=
+	("+" ) ^"=";
+	
+space_symbol  <TERMINAL,HIDDEN>::= 
+		{ ("\32" |"\r" |"\n"|"\t")
+		  | "//" *("\n")	
+		  | "--" *("\n")
+  		  |  "/*" *("*/") "*/",0 };	
+};

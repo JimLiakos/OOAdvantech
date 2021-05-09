@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{535EF442-4F9B-4B5B-B2E2-3939CFF13C58}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>PersistenceLayerRunTime</AssemblyName>
+    <AssemblyOriginatorKeyFile>StrongNameNet4.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>PersistenceLayerRunTime</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\Net4\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;PersistenceLayerRunTime</DefineConstants>
+    <DocumentationFile>PersistenceLayerRunTime.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net4Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Net4Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PersistenceLayerRunTime;Net4</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>PersistenceLayerRunTime.xml</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Net4\PersistenceLayerRunTime.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net4Release|AnyCPU'">
+    <OutputPath>bin\Net4Release\</OutputPath>
+    <DefineConstants>TRACE;PersistenceLayerRunTime;Net4</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher - VS10.csproj">
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Name>ModulePublisher - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetMetaDataRepository\DotNetMetaDataRepository - VS10.csproj">
+      <Project>{CFEA0A11-F583-4751-BE83-2EA0363B868B}</Project>
+      <Name>DotNetMetaDataRepository - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade -VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parser\Parser - VS10.csproj">
+      <Project>{7bbff192-81b1-474c-856c-391d9012d0e7}</Project>
+      <Name>Parser - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTimeFacade\PersistenceLayerRunTimeFacade - VS10.csproj">
+      <Project>{F3823B06-8FB8-4B69-828F-18D2BE232DF8}</Project>
+      <Name>PersistenceLayerRunTimeFacade - VS10</Name>
+    </ProjectReference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Management">
+      <Name>System.Management</Name>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\Linq\Linq - VS10.csproj">
+      <Project>{B5802B17-B3A0-4E40-A393-D1C57A53EDCB}</Project>
+      <Name>Linq - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech - VS10.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech - VS10</Name>
+    </ProjectReference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountNumber.cs" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssociationEndAgent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="ClientMember.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="ClientMemberList.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="BuildContainedObjectIndicies.cs" />
+    <Compile Include="ClientStorageSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="ClientStructureSet.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="DataLoader.cs" />
+    <None Include="DataSetSurrogate.cs" />
+    <Compile Include="DeleteStorageInstanceCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exception.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="InterSorageLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="InterSorageUnLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="LinkCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="MemberCollectionAgent.cs" />
+    <Compile Include="NewStorageInstanceCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ObjectsLink.cs" />
+    <Compile Include="ObjectValuesCollectorService.cs" />
+    <Compile Include="OnMemoryObjectCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OnMemoryUnlinkAllObjectCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PersClassObjects.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PersClassObjectsCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PersistenceLayerTransactionContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PersistenceRuntimeFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PersistencyService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PRTObjectCollectionFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RelResolver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StorageInstanceAgent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StorageInstanceRef.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StorageInstanceValuePathRef.cs" />
+    <Compile Include="StorageProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StorageServer.cs" />
+    <None Include="PersistenceLayerRunTime.cat" />
+    <None Include="PersistenceLayerRunTime.sub" />
+    <None Include="StorageServerInstanceLocator.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="StorageSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="StrongNameNet4.snk" />
+    <None Include="StructureSet.cs">
+      <SubType>Code</SubType>
+    </None>
+    <Compile Include="TransactionContextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnlinkAllObjectLinksCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnLinkObjectsCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UpdateLinkIndexCommand.cs" />
+    <Compile Include="UpdateReferentialIntegrity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UpdateStorageInstanceCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

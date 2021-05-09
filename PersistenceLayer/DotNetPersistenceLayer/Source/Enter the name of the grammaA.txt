@@ -1,0 +1,5 @@
+SELECT order.Name Asan , order.Orde*Details.Price price  orderA.Name gg ass.ree  asa.Lior 
+FROM AbstractClassPersistency.Order order , AbstractClassPersistency.Person person
+WHERE order.OrderDetails.Price.Name ='Lola' 
+          OR order.OrderDetails.Price.Name ='ALola'
+         OR order.OrderDetails.Price.Name =22.4

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9FE42933-6E5D-47C7-BE8D-D81EC0AD682F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OOAdvantech.MSSQLCompactPersistenceRunTime</RootNamespace>
+    <AssemblyName>MSSQLCompactPersistenceRunTime</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Commands\BuildContainedObjectIndicies.cs" />
+    <None Include="Commands\DeleteStorageInstanceCommand.cs" />
+    <None Include="Commands\LinkObjectsCommand.cs" />
+    <None Include="Commands\UnlinkAllObjectCommand.cs" />
+    <None Include="Commands\NewStorageInstanceCommand.cs" />
+    <None Include="Commands\UnlinkAllObjectOfStorageCellLinkCmd.cs" />
+    <None Include="Commands\UnLinkObjectsCommand.cs" />
+    <None Include="Commands\UpdateDatabaseMassivelly.cs" />
+    <None Include="Commands\UpdateReferentialIntegrity.cs" />
+    <None Include="Commands\UpdateStorageInstanceCommand.cs" />
+    <Compile Include="DataBase.cs" />
+    <Compile Include="MSSQLCompactMetaDataPersistenceRunTime\ObjectID.cs" />
+    <Compile Include="MSSQLCompactMetaDataPersistenceRunTime\ObjectStorage.cs" />
+    <Compile Include="MSSQLCompactMetaDataPersistenceRunTime\Storage.cs" />
+    <Compile Include="MSSQLCompactMetaDataPersistenceRunTime\StorageProvider.cs" />
+    <Compile Include="MSSQLCompactMetaDataPersistenceRunTime\TypeDictionary.cs" />
+    <Compile Include="MSSQLCompactRDBMSSchema.cs" />
+    <Compile Include="ObjectStorage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="RelResolver.cs" />
+    <None Include="StorageInstanceRef.cs" />
+    <Compile Include="StorageProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Schema.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.csproj">
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Name>ModulePublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\Linq.csproj">
+      <Project>{B5802B17-B3A0-4E40-A393-D1C57A53EDCB}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTime\PersistenceLayerRunTime.csproj">
+      <Project>{535EF442-4F9B-4B5B-B2E2-3939CFF13C58}</Project>
+      <Name>PersistenceLayerRunTime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataPersistenceRunTime\RDBMSMetaDataPersistenceRunTime.csproj">
+      <Project>{F2E7B104-78EF-4947-AB53-02356F588AB1}</Project>
+      <Name>RDBMSMetaDataPersistenceRunTime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataRepository\RDBMSMetaDataRepository.csproj">
+      <Project>{332C008B-4EEB-422B-A694-04C915F6769D}</Project>
+      <Name>RDBMSMetaDataRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSPersistenceRunTime\RDBMSPersistenceRunTime.csproj">
+      <Project>{1ECBFE6E-069F-4561-9F5E-78BBFAD71A4E}</Project>
+      <Name>RDBMSPersistenceRunTime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

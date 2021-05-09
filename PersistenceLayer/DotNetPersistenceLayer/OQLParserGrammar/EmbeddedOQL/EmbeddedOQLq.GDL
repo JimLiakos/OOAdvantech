@@ -1,0 +1,17 @@
+grammar EmbeddedOQL <SPACE = space_symbol
+		,HIDELITERALS
+		,HIDEREPEATERS> 
+{
+start ::={compilation_unit};
+//OQL string extraction
+compilation_unit::= {OtherLanguage|"\" "#" OQLString "#\""};
+OtherLanguage<TERMINAL,HIDDEN>::={'[\15-\33\35-\255]+'  ^("\" "#" {"\""}| '[\15-\33\35-\255]+'};
+OQLString::={'[\15-\34\36-\255]+'  ^"#\"" {"#"}| '[\15-\34\36-\255]+'};   
+
+space_symbol  <TERMINAL,HIDDEN>::= 
+		{ ("\32" |"\r" |"\n"|"\t")
+		  | "//" *("\n")	
+		  | "--" *("\n")
+  		  |  "/*" *("*/") "*/",0 };
+
+};

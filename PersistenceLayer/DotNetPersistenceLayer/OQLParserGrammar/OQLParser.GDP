@@ -1,0 +1,40 @@
+[Grammars]
+	OQLParser.GDL, OQL
+
+[Output]
+	OQLParser.GMR, OQLParser
+
+[Samples]
+	OQLParseSample.TXT, NULL
+	Test.txt, NULL
+	\, start
+
+[Breakpoints]
+	Position=Test.txt,326
+	Position=Test.txt,2430
+	Position=Test.txt,1155
+	Position=Test.txt,461
+	Position=Test.txt,457
+	Position=Test.txt,2708
+	Position=Test.txt,45228
+	Position=Test.txt,45227
+	Position=Test.txt,325
+
+[Project Info]
+Version = 2
+
+
+[Project Settings]
+	ParseEntireInput = Y
+	InsertErrorNodes = Y
+	ReportParseTimes = N
+	StepIntoTerminals = Y
+	StepIntoSpaces = N
+	StepIntoTokens = N
+	StackShowBacktrackSymbols = N
+	BuildDebugTree = Y
+	ExpandNodesOption = 0
+	DataSourceOption = 0
+	SaveCache = Y
+	SaveTree = Y
+	SaveErrors = Y

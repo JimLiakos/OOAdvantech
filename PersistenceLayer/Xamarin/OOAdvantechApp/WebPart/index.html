@@ -1,0 +1,68 @@
+
+<html>
+<head>
+ 
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- Include jQuery Mobile stylesheets -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!-- Include the jQuery library -->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Include the jQuery Mobile library -->
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+</head>
+<body>
+    <div>
+        <h1>HybridWebView Test</h1>
+        <br />
+        Enter name yP: <input type="text" id="name">
+        <br />
+        <br />
+        <button type="button" onclick="javascript:invokeCSCode($('#name').val());">Invoke C# Code</button>
+        <br />
+        <p id="result">Result:</p>
+
+    </div>
+
+
+
+    <div align="center">
+        <object type="text/html" data="http://192.168.2.10/DemoNPMTypeScript/RestaurantMenu.html?location=local_azure_storage&flv_id=1231212" width="95%" height="500px" style="overflow:auto;border:5px ridge blue"></object>
+    </div>
+
+    <!--<div>
+        <object type="text/html" data="http://validator.w3.org/" width="800px" height="600px" style="overflow:auto;border:5px ridge blue"></object>
+    </div>-->
+
+    <script type="text/javascript">
+        function log(str) {
+            $('#result').text($('#result').text() + " " + str);
+        }
+
+        function logA(str) {
+            $('#result').text($('#result').text() + " " + str);
+
+            return $('#result').text() + $('#name').val();
+        }
+
+        function showJavascriptHelloWorld() {
+            alert("Hello world");
+        }
+
+        function invokeCSCode(data) {
+            try {
+
+                //log("Sending Data:" + data);
+                invokeCSharpAction(data);
+            }
+            catch (err) {
+                log(err);
+            }
+        }
+
+
+    </script>
+</body>
+</html>

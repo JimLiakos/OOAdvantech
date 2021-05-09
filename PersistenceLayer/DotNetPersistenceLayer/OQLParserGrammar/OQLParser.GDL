@@ -1,0 +1,238 @@
+
+grammar OQL <SPACE = space_symbol,
+	      HIDEREPEATERS,
+	      HIDELITERALS>
+{
+start ::={OQLStatament};
+
+//OQL string extraction
+MixedOQL::= {OtherLanguage|"\"#" OQLString "#\""};
+OtherLanguage<TERMINAL,HIDDEN>::={'[\15-\33\35-\255]+'  ^"\"#" {"\""}| '[\15-\33\35-\255]+'};
+OQLString::={'[\15-\34\36-\255]+'  ^"#\"" {"#"}| '[\15-\34\36-\255]+'};
+
+//OQL string Composition
+
+composite_expression::= 
+	{quotedstring, additive_operator};
+additive_operator ::=
+	("+" ) ^"=";
+	
+	
+
+
+
+OQLStatament::=query_expression ;
+
+order_by_exp::="ORDER" "BY" { order_by_expression, ","};
+						
+
+order_by_expression::=Path  [ascending_or_descending];
+
+ascending_or_descending ::= asc_tag | desc_tag ;
+
+
+
+
+asc_tag<TERMINAL> ::= "ASC";
+
+desc_tag<TERMINAL> ::= "DESC" ;
+
+query_expression ::=Select_expression;
+Select_claue::="SELECT" select_list;
+Select_expression::=  Select_claue	objectcollection_exp [Critiria_exp][order_by_exp] ;
+Lasy_Fetching::= "(" "Lasy" "Fetching" ")";
+select_list ::={select_item, comma} ;
+ 
+comma::={","};
+	
+select_item::=/*Lasy_Fetching*/  ^Path Data_Selection_Syntax_Error  | Path ^"." ^name ^Keyword Data_Selection_Syntax_Error |PathAlias ^Keyword Data_Selection_Syntax_Error|PathAlias |Path ;
+
+
+
+parameter::="@"name;
+objectcollection_exp::= "FROM" {objectcollection_source, ","};
+ 
+Data_Selection_Syntax_Error <ERROR = "tag has unrecognizable content 12"> ::='[\20-\40\42-\43\45-\127]+';//		 
+Data_Path_Syntax_Error<ERROR = "tag has unrecognizable content 12"> ::='[\20-\40\42-\43\45-\127]+';//		 
+
+
+
+				
+Critiria_exp::="WHERE" search_condition; 
+
+Path::=ClassOrAlias [MemberIdentifier PathMember]|ClassOrAlias;
+
+//PathAlias::={EOL | Path name|"(" OQLStatament ")" name| OQLStatament  name (EOL | #EOF) | error_line} ;
+
+
+
+PathAlias::=Path name |"(" OQLStatament ")" name | OQLStatament  name;
+TimePeriodPathAlias ::=PathAlias time_period;
+
+
+objectcollection_source::=  	^Path Data_Path_Syntax_Error
+					|PathAlias ^Keyword Data_Path_Syntax_Error
+					|Path ^"." ^name ^Keyword Data_Path_Syntax_Error
+					|TimePeriodPathAlias 
+					|PathAlias 
+					|Error_Path_In_FROM_Clause;
+	
+Error_Path_In_FROM_Clause<ERROR = "tag has unrecognizable content 12"> ::=Path;
+//{EOL | PathAlias  (EOL | #EOF) | error_line} ;
+
+//{EOL | query_expression  (EOL | #EOF) | error_line} ;
+				
+PathMember::=Name [MemberIdentifier PathMember]|Name;
+
+Contain::="Contain" "(" all_expresion ")"
+	|"Contain" "(" any_expresion ")"
+	|"Contain" "(" all_expresion Contain_operator any_expresion ")"
+	|"Contain" "(" any_expresion Contain_operator all_expresion ")";
+all_expresion::="ALL""(" Critiria_exp ")"|"ALL""(" path ")";
+any_expresion::="ANY""(" Critiria_exp ")"|"ANY""(" path ")";
+
+
+
+Contain_operator::="OR"|"AND";
+
+
+Member::=name;
+
+ClassOrAlias::=name;
+
+ClassMember::=name;
+
+search_condition ::=
+	{ search_term, "OR" };
+
+search_term ::=
+	{ search_factor, "AND" };
+search_factor::=		
+	 Criterion	
+	| "(" search_condition ")" Critiria_Exp_Syntax_Error|"(" search_condition ")";
+	
+	
+	
+
+MemberIdentifier<TERMINAL,HIDDEN>::=".";
+
+space_symbol  <TERMINAL,HIDDEN>::= 
+		{ ("\32" |"\r" |"\n"|"\t")
+		  | "//" *("\n")	
+		  | "--" *("\n")
+  		  |  "/*" *("*/") "*/",0 };
+
+
+//space_symbol  ::= 
+//		{ ("\32" |"\r" |"\n"|"\t")
+//		  | "//" *("\n")	
+//		  | "--" *("\n")
+//		  |"\"" "+" *("\"")
+  // 		  |  "/*" *("*/") "*/",0 };
+
+
+
+
+oql_identifier<TERMINAL> ::= 
+	ident (? #value !::= keyword; ) ;
+ident ::=
+	'[a-zA-Z_$#][a-zA-Z0-9_$#]*' ;
+
+
+
+//Error_ident <ERROR = "Syntax Error ">::=unknown_select_item;//{name,space_symbol};
+
+String::="\"" ident "\"";
+
+Criterion ::=comparison_item comparison_operator comparison_item|path MemberIdentifier Contain| comparison_item ^"." Critiria_Exp_Syntax_Error comparison_operator comparison_item;
+
+comparison_item::= 
+			^Path ^ObjectID ^literal ^Parameter Critiria_Exp_Syntax_Error  |
+			^ObjectID ^literal ^Parameter Path ^"." Critiria_Exp_Syntax_Error | 
+			^date_literal  literal Critiria_Exp_Syntax_Error|
+			ObjectID|
+			Path|
+			literal|
+			Parameter;
+			//^Path ^ObjectID ^literal ^Pameter Error_Code |
+					
+Critiria_Exp_Syntax_Error <ERROR = "tag has unrecognizable content 12">::= {^"AND" ^"OR" ^comparison_operator '[\20-\31\33-\39\42-\59\63-\127]+'} ;//		 
+		
+comparison_operator ::= 
+	"=" | ">" | "<" | ">=" | "<=" | "<>" 
+	| "*="
+	;
+	
+	
+	
+ObjectID::= "ObjectID" "(" ObjectIDFieldList ")";
+
+ObjectIDFieldList::= {ObjectIDField, ","};
+ObjectIDField::=name "=" literal;
+
+numeric_literal ::=
+	  ["-"] (numeric ^decimal_separator ) ;
+			
+float_numeric_literal::= ["-"] (decimal_separator numeric
+			| numeric decimal_separator numeric ) ;
+	
+
+
+			
+decimal_separator::=".";
+
+function_name ::=
+	  "avg"
+	| "min"
+	| "max"
+	| "sum"
+	| "count"
+	;
+
+
+keyword ::= "OR"
+		|"AND"
+		|"WHERE"
+		|"FROM"
+		|"SELECT"
+		|"ORDER"
+		|"BY"
+		|"ASC"
+		|"DESC"
+		|"TIMEPERIOD"
+		|"Contain";
+
+name<TERMINAL,SPACE=""> ::= 
+	  oql_identifier
+	| "[" *("]"|"\r") "]" 
+	;
+literal ::= 
+	 date_literal
+	|float_numeric_literal
+	| numeric_literal
+	| __money_literal	
+	| single_quotedstring
+	| quotedstring
+	| "NULL"
+	;
+
+single_quotedstring<TERMINAL,SPACE=""> ::= 
+	["N"]			
+	{"\'" *("\'") "\'"};
+
+__money_literal ::=
+	"$" numeric_literal ;
+	
+time_period ::= "TIMEPERIOD" "(" date_literal "-" date_literal")";
+date_literal::= date_literal_WL locale|date_literal_WL;
+locale::="LCID" "(" numeric_literal ")";
+date_literal_WL ::=  numeric_literal "/" numeric_literal "/" numeric_literal numeric_literal ":" numeric_literal ":" numeric_literal			
+			|numeric_literal "/" numeric_literal "/" numeric_literal numeric_literal ":" numeric_literal 
+			|numeric_literal "/" numeric_literal "/" numeric_literal;
+
+			
+
+	
+
+		
+};

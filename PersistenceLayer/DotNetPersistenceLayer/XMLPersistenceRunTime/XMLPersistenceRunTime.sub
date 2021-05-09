@@ -1,0 +1,37 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object SubSystem " XMLPersistenceRunTime"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"3EA2EA59018D"
+    physical_models 	(list unit_reference_list
+	(object module "XMLPersistenceRunTime" "NotAModuleType" "NotAModulePart"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Solution File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework.sln")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Project File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\XMLPersistenceRunTime\\XMLPersistenceRunTime.csproj")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Location"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{18062D42-964C-42FB-AF81-2676ABD77BDF}")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Subsidiary Add-in"
+		    value      	"ANSI C++"))
+	    quid       	"3EA2E8F10366"
+	    stereotype 	""
+	    language   	"C#"))
+    physical_presentations 	(list unit_reference_list))

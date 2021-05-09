@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{959C46C6-7919-4CC3-9A8A-6324EAFDF429}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SQLitePersistenceRunTime</RootNamespace>
+    <AssemblyName>SQLitePersistenceRunTime</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Net4Release|AnyCPU'">
+    <OutputPath>bin\Net4Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataBase.cs" />
+    <Compile Include="IDeviceSQLiteConnection.cs" />
+    <Compile Include="ObjectStorage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteDataBaseConnection.cs" />
+    <Compile Include="SQLiteMetaDataPersistenceRunTime\ObjectStorage.cs" />
+    <Compile Include="SQLiteMetaDataPersistenceRunTime\Storage.cs" />
+    <Compile Include="SQLiteMetaDataPersistenceRunTime\StorageProvider.cs" />
+    <Compile Include="SQLiteMetaDataPersistenceRunTime\TypeDictionary.cs" />
+    <Compile Include="SQLiteRDBMSSchema.cs" />
+    <EmbeddedResource Include="SQLite.cgt" />
+    <None Include="SQLiteWrapper.cs" />
+    <Compile Include="StorageInstanceRef.cs" />
+    <Compile Include="StorageProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher - VS10.csproj">
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Name>ModulePublisher - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetMetaDataRepository\DotNetMetaDataRepository - VS10.csproj">
+      <Project>{CFEA0A11-F583-4751-BE83-2EA0363B868B}</Project>
+      <Name>DotNetMetaDataRepository - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade -VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech\OOAdvantech - VS10.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parser\Parser - VS10.csproj">
+      <Project>{7BBFF192-81B1-474C-856C-391D9012D0E7}</Project>
+      <Name>Parser - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTimeFacade\PersistenceLayerRunTimeFacade - VS10.csproj">
+      <Project>{F3823B06-8FB8-4B69-828F-18D2BE232DF8}</Project>
+      <Name>PersistenceLayerRunTimeFacade - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistenceLayerRunTime\PersistenceLayerRunTime - VS10.csproj">
+      <Project>{535EF442-4F9B-4B5B-B2E2-3939CFF13C58}</Project>
+      <Name>PersistenceLayerRunTime - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataPersistenceRunTime\RDBMSMetaDataPersistenceRunTime - VS10.csproj">
+      <Project>{F2E7B104-78EF-4947-AB53-02356F588AB1}</Project>
+      <Name>RDBMSMetaDataPersistenceRunTime - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSMetaDataRepository\RDBMSMetaDataRepository - VS10.csproj">
+      <Project>{332C008B-4EEB-422B-A694-04C915F6769D}</Project>
+      <Name>RDBMSMetaDataRepository - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RDBMSPersistenceRunTime\RDBMSPersistenceRunTime - VS10.csproj">
+      <Project>{1ECBFE6E-069F-4561-9F5E-78BBFAD71A4E}</Project>
+      <Name>RDBMSPersistenceRunTime - VS10</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

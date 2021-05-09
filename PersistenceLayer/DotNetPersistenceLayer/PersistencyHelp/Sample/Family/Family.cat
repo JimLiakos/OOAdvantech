@@ -1,0 +1,4443 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object Class_Category "Family"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"3C7AAFC901D1"
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "Person"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"2")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{29C40073-C52B-4A43-A462-C6D487C15E27}")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"New Persistence Layer"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Interface GUID"
+		    value      	"{7BFF4A37-398B-4AEC-AF53-09C6FB26FD51}")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Default CoClass Interface"
+		    value      	"IPerson")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"HeaderFile"
+		    value      	"PersistenceLayer\\OQLTest\\Person.h")
+		(object Attribute
+		    tool       	"VC++"
+		    name       	"AfxSupportMacro"
+		    value      	"")
+		(object Attribute
+		    tool       	"VC++"
+		    name       	"LastAppliedTemplate"
+		    value      	"C:\\Program Files\\Rational\\Rose\\vc\\templates")
+		(object Attribute
+		    tool       	"VC++"
+		    name       	"Generate"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Synchronize"
+		    value      	"True")
+		(object Attribute
+		    tool       	"Cplusplus"
+		    name       	"HeaderSourceFile"
+		    value      	"Person.h")
+		(object Attribute
+		    tool       	"Cplusplus"
+		    name       	"Synchronize"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"3BE171510271")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"41EBECCD02CE")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\PersistencyHelp\\Sample\\Family\\Person.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ForDelete"
+		    value      	"False")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"Family.Person")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"Family.Person")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"22")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"History Class"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	(value Text "Family"))
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullNameAttributes"
+		    value      	FALSE))
+	    quid       	"3BE171510271"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{C98C30C2-050F-4B05-86F0-FB9357CF5412}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4202605300EA"))
+		    quid       	"4202605300EA"
+		    supplier   	"Logical View::.Net::mscorlib.dll::MarshalByRefObject"
+		    quidu      	"3ECF3D7A03D0"))
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D1225586-5DA0-455D-94A5-08DBF60E6238}"))
+		    quid       	"421837F000DA"
+		    supplier   	"Logical View::OOAdvantech::Remoting::IExtMarshalByRefObject"
+		    quidu      	"416244F90271"))
+	    operations 	(list Operations
+		(object Operation "Person"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"VC++"
+			    name       	"DefaultBody"
+			    value      	(value Text "// ToDo: Add your specialized code here and/or call the base class"))
+			(object Attribute
+			    tool       	"VC++"
+			    name       	"ClassMethod"
+			    value      	"$NAME()")
+			(object Attribute
+			    tool       	"VC++"
+			    name       	"Inline"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"VC++"
+			    name       	"ClassName"
+			    value      	"Person")
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"True")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"ModelItem"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3D1ECA1902B5")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{E42B0B04-372C-4B62-8FB6-86DE7820B6B7}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"7"))
+		    quid       	"3D1ECA1902B5"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "AddAdrress"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3ED6F91502AA")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{F93573B4-CB56-4C3E-9D75-A188CBC40F16}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"8")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"3ED6F91502AA"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "AdvanceAge"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5F979B54-EF99-4C27-98F2-D26F65C3A17D}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"10")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41BE070B0094"))
+		    quid       	"41BE070B0094"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Person"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3B161158-FA0F-4C0E-9931-1EA026B9F32C}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41D8FEB00013")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"13"))
+		    quid       	"41D8FEB00013"
+		    parameters 	(list Parameters
+			(object Parameter "name"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{4DAA443B-9051-4328-9AC5-F422C587FDAB}"))
+			    quid       	"41D8FEB00031"
+			    type       	"string"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "AddChild"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{559704E2-D2EE-447B-8302-CB4375B6F34B}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"16")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"420328CD03B8"))
+		    quid       	"420328CD03B8"
+		    parameters 	(list Parameters
+			(object Parameter "child"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{1065FBAB-51C0-48C5-8DD4-753FE08C53B3}"))
+			    quid       	"420328CD03CC"
+			    type       	"Person"
+			    quidu      	"3BE171510271"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "RemoveChild"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8D29C240-43BB-4228-8F03-D21391FFB1D2}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"17")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"420328CE0016"))
+		    quid       	"420328CE0016"
+		    parameters 	(list Parameters
+			(object Parameter "child"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{5AD4BF78-C925-44C5-A730-28A34D143B24}"))
+			    quid       	"420328CE0034"
+			    type       	"Person"
+			    quidu      	"3BE171510271"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "AddParent"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{995859B0-5C24-4A53-A34F-CA69E0CD20EC}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"18")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"420328CE0066"))
+		    quid       	"420328CE0066"
+		    parameters 	(list Parameters
+			(object Parameter "parent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{2F989F97-7F3D-41FF-8EE5-DB423BC4CB23}"))
+			    quid       	"420328CE0084"
+			    type       	"Person"
+			    quidu      	"3BE171510271"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "RemoveParent"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{C74B80F7-D319-46E8-BD43-FED951CF7559}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"19")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"420328CE00AC"))
+		    quid       	"420328CE00AC"
+		    parameters 	(list Parameters
+			(object Parameter "parent"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{BE696890-78D1-49AC-AA2F-DD0B33C0BA08}"))
+			    quid       	"420328CE00CA"
+			    type       	"Person"
+			    quidu      	"3BE171510271"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "AddDog"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{EC6594FD-608A-4A20-A0DC-70831C4F1CFA}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"21")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE39AC032B"))
+		    quid       	"42FE39AC032B"
+		    parameters 	(list Parameters
+			(object Parameter "dog"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{87FCAFE1-1DF2-4F6A-BF12-3E37481F5BF9}"))
+			    quid       	"42FE39AC032C"
+			    type       	"Dog"
+			    quidu      	"42FE37EC00E8"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "RemoveDog"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{E6C8E5A1-68D3-4D6E-A7C5-0E3AFEFD160F}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"22")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE39AC033A"))
+		    quid       	"42FE39AC033A"
+		    parameters 	(list Parameters
+			(object Parameter "dog"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{9416F86B-F24E-4CF1-9609-57CA53E94A33}"))
+			    quid       	"42FE39D60156"
+			    type       	"Dog"
+			    quidu      	"42FE37EC00E8"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Age"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{174A5EF1-81A2-441A-8FFA-3233E7211E99}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EB09E84010A")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1"))
+		    quid       	"3EB09E84010A"
+		    type       	"long"
+		    exportControl 	"Public")
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3B4A7FC1-B0BB-4E10-A8C3-40E30CBA552A}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EB09E840128")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Length"
+			    value      	255)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Name"))
+		    quid       	"3EB09E840128"
+		    type       	"string"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Family::Family"
+	    quidu      	"41EBECCD02CE"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "Address"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{8E6D1FBA-D6BC-4BE5-9F38-E82EA48CE40D}")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"New Persistence Layer"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Interface GUID"
+		    value      	"{73791015-7C80-4C25-BA11-587EDCB02D30}")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Default CoClass Interface"
+		    value      	"IAddress")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"HeaderFile"
+		    value      	"PersistenceLayer\\OQLTest\\Address.h")
+		(object Attribute
+		    tool       	"VC++"
+		    name       	"AfxSupportMacro"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Synchronize"
+		    value      	"True")
+		(object Attribute
+		    tool       	"Cplusplus"
+		    name       	"HeaderSourceFile"
+		    value      	"Address.h")
+		(object Attribute
+		    tool       	"Cplusplus"
+		    name       	"Synchronize"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"3BE1717D037A")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{D9DE9C59-9CA5-4C89-8AC0-E0328CC64324}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"41EBECCD02CE")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ForDelete"
+		    value      	"False")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\PersistenceLayer\\DotNetPersistenceLayer\\PersistencyHelp\\Sample\\Family\\Address.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"Family.Address")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"Family.Address")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"5")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"Family")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullNameAttributes"
+		    value      	FALSE))
+	    quid       	"3BE1717D037A"
+	    documentation 	"asden"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "City"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"DB Type"
+			    value      	("DBTypeSet" 40))
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Length"
+			    value      	255)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Attribute ID"
+			    value      	9)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"New Persistence Layer"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"True")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"ModelItem"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE1719100FA")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5A7D3A5A-7348-43C0-898D-40285A51D98A}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_City"))
+		    quid       	"3BE1719100FA"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Street"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"DB Type"
+			    value      	("DBTypeSet" 40))
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Length"
+			    value      	255)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Attribute ID"
+			    value      	10)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"New Persistence Layer"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"True")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"ModelItem"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE171D10167")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D5CB8AEF-7906-43E6-8182-D301F208A86E}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Street"))
+		    quid       	"3BE171D10167"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Area"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"DB Type"
+			    value      	("DBTypeSet" 40))
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Length"
+			    value      	255)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Attribute ID"
+			    value      	11)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"True")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"ModelItem"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE171E202FD")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7DCC5EF6-ADB9-4C66-9168-15958354D2CF}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Area"))
+		    quid       	"3BE171E202FD"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Properties"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EAF608A0399")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{EC14AA32-F410-424F-B162-436C8454B7F7}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"4")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"3EAF608A0399"
+		    type       	"OOAdvantech.ExtensionProperties"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Family::Family"
+	    quidu      	"41EBECCD02CE"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "Employee"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{DB2CA0DB-9C09-4494-A75F-5FCB1B570540}")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"New Persistence Layer"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Interface GUID"
+		    value      	"{FB5CFE77-3025-4E10-875F-7DDA8CC1F695}")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Default CoClass Interface"
+		    value      	"IEmployee")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"HeaderFile"
+		    value      	"PersistenceLayer\\OQLTest\\Employee.h")
+		(object Attribute
+		    tool       	"VC++"
+		    name       	"AfxSupportMacro"
+		    value      	"")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"Synchronize"
+		    value      	"True")
+		(object Attribute
+		    tool       	"Cplusplus"
+		    name       	"HeaderSourceFile"
+		    value      	"Employee.h")
+		(object Attribute
+		    tool       	"Cplusplus"
+		    name       	"Synchronize"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"3C8FD2BA01BD")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{E9D67233-E834-45FE-8246-A772E0698E2D}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"41EBECCD02CE")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ForDelete"
+		    value      	"False")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\PersistencyHelp\\Sample\\Family\\Employee.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"Family.Employee")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"Family.Employee")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"6")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"Family")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullNameAttributes"
+		    value      	FALSE))
+	    quid       	"3C8FD2BA01BD"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{066FD7B2-6637-4EAD-85E1-D4272350C825}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41EC7708005A"))
+		    quid       	"41EC7708005A"
+		    supplier   	"Logical View::OOAdvantech::Family::Person"
+		    quidu      	"3BE171510271"))
+	    operations 	(list Operations
+		(object Operation "Employee"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3EB586570252")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{17D38ED8-E950-41C2-8BF8-B658305D0EBA}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"3EB586570252"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Employee"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8CBD0998-1922-42FF-A7D7-26304021AC11}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"5")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42064F7C0017"))
+		    quid       	"42064F7C0017"
+		    parameters 	(list Parameters
+			(object Parameter "name"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6B8C0C6A-1CFF-446E-93E6-E8F028C46314}"))
+			    quid       	"42064F7C003F"
+			    type       	"string")
+			(object Parameter "salary"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{C89AC7E5-1206-4DEB-8728-9CC982546EEB}"))
+			    quid       	"42064F7C0085"
+			    type       	"double"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Salary"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"DB Type"
+			    value      	("DBTypeSet" 14))
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Attribute ID"
+			    value      	17)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"New Persistence Layer"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"True")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"ModelItem"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3C8FD30A02B2")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{A66E6156-BF8F-42CC-992E-7A9D974E33A2}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Salary"))
+		    quid       	"3C8FD30A02B2"
+		    type       	"double"
+		    exportControl 	"Public")
+		(object ClassAttribute "Address"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"433797F0001F")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"6")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1CAF51C7-86BB-42A7-9AD0-6CBE1E73D056}"))
+		    quid       	"433797F0001F"
+		    type       	"Address"
+		    quidu      	"3BE1717D037A"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Family::Family"
+	    quidu      	"41EBECCD02CE"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "Company"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"40A9AB6F0380")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{0DAA518F-51BE-4AF6-A3FE-520BDCB798D1}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"Family.Company")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"Family.Company")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{43A32E7A-CB5E-4542-9A79-D15693B30F07}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"41EBECCD02CE")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\PersistencyHelp\\Sample\\Family\\Company.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"Family")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullNameAttributes"
+		    value      	FALSE))
+	    quid       	"40A9AB6F0380"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{BEE93CB0-D356-4665-AA6B-943C27938400}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4216F7CB0290"))
+		    quid       	"4216F7CB0290"
+		    supplier   	"Logical View::.Net::mscorlib.dll::MarshalByRefObject"
+		    quidu      	"3ECF3D7A03D0"))
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{251F42BB-EEE5-4B7C-872C-12FD6956A9E9}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4218B96F00CB"))
+		    quid       	"4218B96F00CB"
+		    supplier   	"Logical View::OOAdvantech::Remoting::IExtMarshalByRefObject"
+		    quidu      	"416244F90271"))
+	    operations 	(list Operations
+		(object Operation "AddEmployee"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{BC9DC660-4F5C-4B0F-87E9-972830BA765E}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4218B96F008C"))
+		    quid       	"4218B96F008C"
+		    parameters 	(list Parameters
+			(object Parameter "job"
+			    quid       	"4218B96F00AB"
+			    type       	"Job"
+			    quidu      	"40A9ABA70069"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "RemoveEmployee"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{9F87B1EA-6DA4-4EE6-8845-B3A5C0C384AF}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4218B96F00AC"))
+		    quid       	"4218B96F00AC"
+		    parameters 	(list Parameters
+			(object Parameter "job"
+			    quid       	"4218B96F00BB"
+			    type       	"Job"
+			    quidu      	"40A9ABA70069"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Company"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3E9441AD-AFF0-44ED-8F1A-E5D6E9468976}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"421911E30196"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Company"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{56877E32-A9C3-4AD8-86C4-0DE01794356C}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"421911E301D4"
+		    parameters 	(list Parameters
+			(object Parameter "name"
+			    quid       	"421911E301E4"
+			    type       	"string"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5A6398A5-F27A-4B22-BEE3-B46FA8000AFA}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40A9AB9C0104")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Name")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"40A9AB9C0104"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Properties"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40ADA2AB01FE")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{6DF734BC-4E51-43B2-9E8B-703C4784E7F4}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"40ADA2AB01FE"
+		    type       	"OOAdvantech.ExtensionProperties"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Family::Family"
+	    quidu      	"41EBECCD02CE"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "Job"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"40A9ABA70069")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{21FAA608-30F0-4A82-84E7-E4AB59A063E3}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"Family.Job")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"Family.Job")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"3")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{FD6840EB-68C9-43C7-90F8-8556C0AB0B61}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"41EBECCD02CE")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\PersistencyHelp\\Sample\\Family\\Job.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Namespace"
+		    value      	"Family")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ForDelete"
+		    value      	"False")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullNameAttributes"
+		    value      	FALSE))
+	    quid       	"40A9ABA70069"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2A582942-8459-4E6C-88DB-44BE81B4E028}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4219AAE9037A"))
+		    quid       	"4219AAE9037A"
+		    supplier   	"Logical View::.Net::mscorlib.dll::MarshalByRefObject"
+		    quidu      	"3ECF3D7A03D0"))
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1B868680-8EC1-4616-A21A-646E3A76B0EA}"))
+		    quid       	"4219B181003E"
+		    supplier   	"Logical View::OOAdvantech::Remoting::IExtMarshalByRefObject"
+		    quidu      	"416244F90271"))
+	    operations 	(list Operations
+		(object Operation "Job"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{21ED7DB8-A2DB-4A9D-96EC-8FA15411458F}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"421913D1002E"))
+		    quid       	"421913D1002E"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Job"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7E81455A-A29C-4B44-8BCA-B9357091BB13}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"421913D1002F"))
+		    quid       	"421913D1002F"
+		    parameters 	(list Parameters
+			(object Parameter "name"
+			    quid       	"421913D1003E"
+			    type       	"string")
+			(object Parameter "startingDate"
+			    quid       	"421913D1003F"
+			    type       	"DateTime"
+			    quidu      	"3ECF3D7A025E"))
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{16BE0A6E-D9C9-42F5-9657-54AE8CB8BF8E}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40A9AD17011D")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Loading Type"
+			    value      	("LoadingTypeSet" 2))
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Name")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"40A9AD17011D"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Employer"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40AD9D24020E")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{A542640B-FE38-4977-995E-322BC4089155}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Employer")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Association Class Role"
+			    value      	("AssociationClassRoleSet" 2)))
+		    quid       	"40AD9D24020E"
+		    type       	"Company"
+		    quidu      	"40A9AB6F0380"
+		    exportControl 	"Public")
+		(object ClassAttribute "Employee"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40AD9D86013D")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{43BE7DC4-A8B2-4C1C-90B6-F7A0064DA70F}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Employee")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Association Class Role"
+			    value      	("AssociationClassRoleSet" 3)))
+		    quid       	"40AD9D86013D"
+		    type       	"Employee"
+		    quidu      	"3C8FD2BA01BD"
+		    exportControl 	"Public")
+		(object ClassAttribute "Properties"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40ADA2A7020C")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1F15D6F4-D36A-4AFD-9947-BA841926D708}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"40ADA2A7020C"
+		    type       	"OOAdvantech.ExtensionProperties"
+		    exportControl 	"Public")
+		(object ClassAttribute "StartingDate"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"4214CBFF0109")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{6DA47A21-6753-47EB-82DD-BFB736FF190D}")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"4214CBFF0109"
+		    type       	"System.DateTime"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Family::Family"
+	    quidu      	"41EBECCD02CE"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "Dog"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"VMObjectID"
+		    value      	"42FE37EC00E8")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{5F1BAA68-E984-4F7C-9E80-06EAAE7E2FC0}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"HierarchyNum"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"Family.Dog")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationName"
+		    value      	"Family.Dog")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"ClassInstaditationVersion"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"4")
+		(object Attribute
+		    tool       	"COM C++"
+		    name       	"ComClass GUID"
+		    value      	"{77E00DA6-2CF9-4226-8F10-EAFA29BC2A31}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"AssignedModuleVMObjectID"
+		    value      	"41EBECCD02CE")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"ClassFileName"
+		    value      	"X:\\source\\OpenVersions\\PersistenceLayer\\DotNetPersistenceLayer\\PersistencyHelp\\Sample\\Family\\Dog.cs")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullNameAttributes"
+		    value      	FALSE))
+	    quid       	"42FE37EC00E8"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2FACA6F4-37C2-46F4-90C8-3AFE436957B2}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE383001C3")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Length"
+			    value      	255)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Name"))
+		    quid       	"42FE383001C3"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Race"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5E27D6C4-B26F-49D3-94A6-0EAD6F1FD144}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE388500AA")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Persistent"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"2")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Length"
+			    value      	255)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Race"))
+		    quid       	"42FE388500AA"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Properties"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE52C0002D")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D9F42761-CCFF-4082-B3C5-C150B512484D}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"4")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Abstract"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE))
+		    quid       	"42FE52C0002D"
+		    type       	"OOAdvantech.ExtensionProperties"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::Family::Family"
+	    quidu      	"41EBECCD02CE"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Association "LiveAt"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"RelationshipAbrv"
+		    value      	"LiveA")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{474415E2-DAE4-4B02-A69C-FDA1308F7FB1}")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Persistent"
+		    value      	TRUE))
+	    quid       	"3BE172720222"
+	    roles      	(list role_list
+		(object Role "Address"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Association ID"
+			    value      	13)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Referential Integrity"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Cascade Delete"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"False")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8F592F50-3A70-4EEF-862E-089B60EF4E92}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE172730280")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Loading Type"
+			    value      	("LoadingTypeSet" 1))
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"4")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Address"))
+		    quid       	"3BE172730280"
+		    label      	"Address"
+		    supplier   	"Logical View::OOAdvantech::Family::Address"
+		    quidu      	"3BE1717D037A"
+		    client_cardinality 	(value cardinality "1")
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$0"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Referential Integrity"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"False")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE172730282")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0C7CCB12-A18E-4AC0-A0AC-762A8E5FBBEF}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"5"))
+		    quid       	"3BE172730282"
+		    supplier   	"Logical View::OOAdvantech::Family::Person"
+		    quidu      	"3BE171510271")))
+	(object Association "PersonChildren"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"RelationshipAbrv"
+		    value      	"Perso")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{46042FF4-BBAB-4D83-BC73-2A6C87B8479E}")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Persistent"
+		    value      	TRUE))
+	    quid       	"3BE172A500EA"
+	    roles      	(list role_list
+		(object Role "Childrens"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Association ID"
+			    value      	15)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE172A6031C")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3BFC1193-A355-4923-AAC2-06B2B1F44215}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "OOAdvantech.PersistenceLayer.Set"))
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"6")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Childrens")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Referential Integrity"
+			    value      	TRUE))
+		    quid       	"3BE172A6031C"
+		    label      	"Childrens"
+		    supplier   	"Logical View::OOAdvantech::Family::Person"
+		    quidu      	"3BE171510271"
+		    client_cardinality 	(value cardinality "0..n")
+		    is_navigable 	TRUE)
+		(object Role "Parents"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Association ID"
+			    value      	14)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"COM C++"
+			    name       	"Synchronize"
+			    value      	"True")
+			(object Attribute
+			    tool       	"Cplusplus"
+			    name       	"Synchronize"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"3BE172A6031E")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{D33B1B60-C1B6-47E7-8C1E-564EB06D0749}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "OOAdvantech.PersistenceLayer.Set"))
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"5")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Parents")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Referential Integrity"
+			    value      	TRUE))
+		    quid       	"3BE172A6031E"
+		    label      	"Parents"
+		    supplier   	"Logical View::OOAdvantech::Family::Person"
+		    quidu      	"3BE171510271"
+		    client_cardinality 	(value cardinality "0..2")
+		    is_navigable 	TRUE)))
+	(object Association "Job"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Persistent"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{DF23C5C4-6784-4E35-9D65-EE704D7EADD7}"))
+	    quid       	"40A9ABD600B7"
+	    roles      	(list role_list
+		(object Role "Employers"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40A9ABD701F9")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{EBD1C578-A676-4C89-861A-C8B6978A8279}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "OOAdvantech.PersistenceLayer.Set"))
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"4")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Employers")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Member that implement"
+			    value      	"Auto Generate"))
+		    quid       	"40A9ABD701F9"
+		    label      	"Employers"
+		    supplier   	"Logical View::OOAdvantech::Family::Company"
+		    quidu      	"40A9AB6F0380"
+		    client_cardinality 	(value cardinality "0..*")
+		    is_navigable 	TRUE)
+		(object Role "Employees"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "OOAdvantech.PersistenceLayer.Set"))
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"1")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{340017EE-8FCC-459A-AA27-FE9F269234C7}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"40A9ABD701FB")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Employees")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"40A9ABD701FB"
+		    label      	"Employees"
+		    supplier   	"Logical View::OOAdvantech::Family::Employee"
+		    quidu      	"3C8FD2BA01BD"
+		    client_cardinality 	(value cardinality "0..*")
+		    is_navigable 	TRUE))
+	    AssociationClass 	"Logical View::OOAdvantech::Family::Job")
+	(object Association "$UNNAMED$1"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{AF6FDE51-8392-4F3C-9537-24A1FA424B1B}")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Association Attributes"
+		    value      	FALSE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"41F20E31038A")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"3b5e747b-3ed5-4a42-9952-7471a5f4eff4"))
+	    quid       	"41F20E31038A"
+	    roles      	(list role_list
+		(object Role "Properties"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Auto Generate Property Data"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"mMetaObjectID"
+			    value      	"{CDF47ABA-BEC6-472D-8475-E96ECBE18B5D}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{EBE8C846-EBF2-4B6D-8A12-712715C6B587}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41F20E31038B")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"15")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"41F20E31038B"))
+		    quid       	"41F20E31038B"
+		    label      	"Properties"
+		    supplier   	"Logical View::OOAdvantech::ExtensionProperties"
+		    quidu      	"419E50E001EE"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$2"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{917EFE7F-7E94-4D5B-A551-7CE88D141DAB}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"virtual"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"override"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"static"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"41F20E310395"))
+		    quid       	"41F20E310395"
+		    supplier   	"Logical View::OOAdvantech::Family::Person"
+		    quidu      	"3BE171510271")))
+	(object Association "PersonDog"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Persistent"
+		    value      	TRUE)
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{595A88EE-1562-4FD7-8DD5-90949CE60511}"))
+	    quid       	"42FE38A4031B"
+	    roles      	(list role_list
+		(object Role "Dogs"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	(value Text "OOAdvantech.PersistenceLayer.Set"))
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"20")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{CF25598F-B71C-4F97-81B7-F56FCA80FD07}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Dogs")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE38A502FC")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Referential Integrity"
+			    value      	TRUE))
+		    quid       	"42FE38A502FC"
+		    label      	"Dogs"
+		    supplier   	"Logical View::OOAdvantech::Family::Dog"
+		    quidu      	"42FE37EC00E8"
+		    client_cardinality 	(value cardinality "0..*")
+		    is_navigable 	TRUE)
+		(object Role "Owner"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"VMObjectID"
+			    value      	"42FE38A502FE")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{16CE3E24-953C-4C71-91C0-7811E6B711DB}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MemberID"
+			    value      	"3")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Property Data"
+			    value      	"_Owner")
+			(object Attribute
+			    tool       	"Persistent"
+			    name       	"Referential Integrity"
+			    value      	TRUE))
+		    quid       	"42FE38A502FE"
+		    label      	"Owner"
+		    supplier   	"Logical View::OOAdvantech::Family::Person"
+		    quidu      	"3BE171510271"
+		    client_cardinality 	(value cardinality "1")
+		    is_navigable 	TRUE))))
+    logical_presentations 	(list unit_reference_list
+	(object ClassDiagram "Main"
+	    quid       	"3C7AAFD20043"
+	    title      	"Main"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	150
+	    origin_y   	294
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Job" @1
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1693, 1425)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@1
+			location   	(1452, 1234)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	482
+			justify    	0
+			label      	"Job")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"40A9ABA70069"
+		    compartment 	(object Compartment
+			Parent_View 	@1
+			location   	(1452, 1295)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Icon"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	5
+			max_width  	646
+			compartmentItems 	(list Compartment
+			    "+ Employee : Employee"
+			    "+ Employer : Company"
+			    "+ Name : string"
+			    "+ StartingDate : System.DateTime"))
+		    width      	500
+		    height     	407
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Company" @2
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(2381, 1965)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@2
+			location   	(2159, 1840)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	444
+			justify    	0
+			label      	"Company")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"40A9AB6F0380"
+		    compartment 	(object Compartment
+			Parent_View 	@2
+			location   	(2159, 1901)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Icon"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	2
+			max_width  	409
+			compartmentItems 	(list Compartment
+			    "+ Name : string"))
+		    width      	462
+		    height     	275
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Employee" @3
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    location   	(1078, 2001)
+		    font       	(object Font
+			size       	12
+			face       	"Times New Roman"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@3
+			location   	(875, 1877)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	406
+			justify    	0
+			label      	"Employee")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3C8FD2BA01BD"
+		    width      	424
+		    height     	276
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "Job" @4
+		    location   	(1720, 1981)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @5
+			Parent_View 	@4
+			location   	(1720, 1922)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"Job"
+			pctDist    	0.500000
+			height     	60
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"40A9ABD600B7"
+		    roleview_list 	(list RoleViews
+			(object RoleView "Employers" @6
+			    Parent_View 	@4
+			    location   	(711, -52)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @7
+				Parent_View 	@6
+				location   	(2004, 1917)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	234
+				justify    	0
+				label      	"+Employers"
+				pctDist    	0.660256
+				height     	65
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"40A9ABD701F9"
+			    client     	@4
+			    supplier   	@2
+			    line_style 	3
+			    origin_attachment 	(1720, 1981)
+			    terminal_attachment 	(2150, 1981)
+			    label      	(object SegLabel @8
+				Parent_View 	@6
+				location   	(2106, 2035)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))
+			(object RoleView "Employees" @9
+			    Parent_View 	@4
+			    location   	(711, -52)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @10
+				Parent_View 	@9
+				location   	(1418, 1897)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	228
+				justify    	0
+				label      	"+Employees"
+				pctDist    	0.702970
+				height     	85
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"40A9ABD701FB"
+			    client     	@4
+			    supplier   	@3
+			    line_style 	3
+			    origin_attachment 	(1720, 1981)
+			    terminal_attachment 	(1290, 1981)
+			    label      	(object SegLabel @11
+				Parent_View 	@9
+				location   	(1334, 2035)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	0))))
+		(object AssocAttachView "" @12
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    client     	@4
+		    supplier   	@1
+		    line_style 	0)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Address" @13
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(2395, 1105)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@13
+			location   	(2303, 1053)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	184
+			justify    	0
+			label      	"Address")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3BE1717D037A"
+		    width      	202
+		    height     	128
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Dog" @14
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    location   	(2236, 847)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@14
+			location   	(2017, 709)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	438
+			justify    	0
+			label      	"Dog")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"42FE37EC00E8"
+		    width      	456
+		    height     	300
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Person" @15
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1099, 1046)
+		    font       	(object Font
+			size       	12
+			face       	"Times New Roman"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@15
+			location   	(918, 686)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	362
+			justify    	0
+			label      	"Person")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3BE171510271"
+		    width      	380
+		    height     	748
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "PersonChildren" @16
+		    location   	(612, 1318)
+		    font       	(object Font
+			size       	12
+			face       	"Times New Roman"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @17
+			Parent_View 	@16
+			location   	(544, 1203)
+			font       	(object Font
+			    size       	12
+			    face       	"Times New Roman"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	321
+			justify    	0
+			label      	"PersonChildren"
+			pctDist    	-0.650000
+			height     	116
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"3BE172A500EA"
+		    roleview_list 	(list RoleViews
+			(object RoleView "Childrens" @18
+			    Parent_View 	@16
+			    location   	(132, 870)
+			    font       	(object Font
+				size       	12
+				face       	"Times New Roman"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @19
+				Parent_View 	@18
+				location   	(744, 1521)
+				font       	(object Font
+				    size       	12
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	218
+				justify    	0
+				label      	"+Childrens"
+				pctDist    	0.480337
+				height     	42
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172A6031C"
+			    client     	@16
+			    supplier   	@15
+			    vertices   	(list Points
+				(612, 1318)
+				(612, 1479)
+				(1001, 1479)
+				(1001, 1420))
+			    line_style 	3
+			    origin_attachment 	(612, 1318)
+			    terminal_attachment 	(1001, 1420)
+			    label      	(object SegLabel @20
+				Parent_View 	@18
+				location   	(961, 1523)
+				font       	(object Font
+				    size       	10
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..n"
+				pctDist    	0.839888
+				height     	44
+				orientation 	1))
+			(object RoleView "Parents" @21
+			    Parent_View 	@16
+			    location   	(132, 870)
+			    font       	(object Font
+				size       	12
+				face       	"Times New Roman"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @22
+				Parent_View 	@21
+				location   	(764, 911)
+				font       	(object Font
+				    size       	12
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	185
+				justify    	0
+				label      	"+Parents"
+				pctDist    	0.763636
+				height     	96
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172A6031E"
+			    client     	@16
+			    supplier   	@15
+			    vertices   	(list Points
+				(612, 1318)
+				(612, 1006)
+				(909, 1006))
+			    line_style 	3
+			    origin_attachment 	(612, 1318)
+			    terminal_attachment 	(909, 1006)
+			    label      	(object SegLabel @23
+				Parent_View 	@21
+				location   	(847, 1060)
+				font       	(object Font
+				    size       	10
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..2"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))))
+		(object AssociationViewNew "LiveAt" @24
+		    location   	(1791, 1123)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @25
+			Parent_View 	@24
+			location   	(1791, 1075)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"LiveAt"
+			pctDist    	0.500000
+			height     	49
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"3BE172720222"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$0" @26
+			    Parent_View 	@24
+			    location   	(-6, -109)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @27
+				Parent_View 	@26
+				location   	(1392, 1083)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				hidden     	TRUE
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	227
+				justify    	0
+				label      	""
+				pctDist    	0.795802
+				height     	41
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172730282"
+			    client     	@24
+			    supplier   	@15
+			    line_style 	3
+			    origin_attachment 	(1791, 1123)
+			    terminal_attachment 	(1289, 1123))
+			(object RoleView "Address" @28
+			    Parent_View 	@24
+			    location   	(-6, -109)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @29
+				Parent_View 	@28
+				location   	(2192, 1082)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	182
+				justify    	0
+				label      	"+Address"
+				pctDist    	0.800000
+				height     	42
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172730280"
+			    client     	@24
+			    supplier   	@13
+			    line_style 	3
+			    origin_attachment 	(1791, 1123)
+			    terminal_attachment 	(2294, 1123)
+			    label      	(object SegLabel @30
+				Parent_View 	@28
+				location   	(2244, 1177)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"1"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))))
+		(object InheritView "" @31
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"41EC7708005A"
+		    client     	@3
+		    supplier   	@15
+		    line_style 	3
+		    origin_attachment 	(1091, 1862)
+		    terminal_attachment 	(1091, 1420))
+		(object AssociationViewNew "PersonDog" @32
+		    location   	(1648, 844)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @33
+			Parent_View 	@32
+			location   	(1648, 785)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"PersonDog"
+			pctDist    	0.500000
+			height     	60
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"42FE38A4031B"
+		    roleview_list 	(list RoleViews
+			(object RoleView "Dogs" @34
+			    Parent_View 	@32
+			    location   	(548, -203)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @35
+				Parent_View 	@34
+				location   	(1936, 803)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	119
+				justify    	0
+				label      	"+Dogs"
+				pctDist    	0.800000
+				height     	42
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"42FE38A502FC"
+			    client     	@32
+			    supplier   	@14
+			    line_style 	3
+			    origin_attachment 	(1648, 844)
+			    terminal_attachment 	(2008, 844)
+			    label      	(object SegLabel @36
+				Parent_View 	@34
+				location   	(1947, 898)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.832869
+				height     	54
+				orientation 	1))
+			(object RoleView "Owner" @37
+			    Parent_View 	@32
+			    location   	(548, -203)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @38
+				Parent_View 	@37
+				location   	(1416, 804)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	148
+				justify    	0
+				label      	"+Owner"
+				pctDist    	0.646240
+				height     	41
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"42FE38A502FE"
+			    client     	@32
+			    supplier   	@15
+			    line_style 	3
+			    origin_attachment 	(1648, 844)
+			    terminal_attachment 	(1289, 844)
+			    label      	(object SegLabel @39
+				Parent_View 	@37
+				location   	(1326, 898)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"1"
+				pctDist    	0.900000
+				height     	54
+				orientation 	0))))))
+	(object ClassDiagram "NewDiagram"
+	    quid       	"41F7AB39034B"
+	    title      	"NewDiagram"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	250
+	    origin_y   	590
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Person" @40
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(622, 1197)
+		    font       	(object Font
+			size       	12
+			face       	"Times New Roman"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@40
+			location   	(463, 1105)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	319
+			justify    	0
+			label      	"Person")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3BE171510271"
+		    width      	337
+		    height     	212
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "PersonChildren" @41
+		    location   	(195, 845)
+		    font       	(object Font
+			size       	12
+			face       	"Times New Roman"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @42
+			Parent_View 	@41
+			location   	(291, 796)
+			font       	(object Font
+			    size       	12
+			    face       	"Times New Roman"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	321
+			justify    	0
+			label      	"PersonChildren"
+			pctDist    	2.116667
+			height     	50
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"3BE172A500EA"
+		    roleview_list 	(list RoleViews
+			(object RoleView "Childrens" @43
+			    Parent_View 	@41
+			    location   	(-285, 397)
+			    font       	(object Font
+				size       	12
+				face       	"Times New Roman"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @44
+				Parent_View 	@43
+				location   	(267, 1139)
+				font       	(object Font
+				    size       	12
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	218
+				justify    	0
+				label      	"+Childrens"
+				pctDist    	0.751613
+				height     	80
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172A6031C"
+			    client     	@41
+			    supplier   	@40
+			    vertices   	(list Points
+				(195, 845)
+				(135, 845)
+				(135, 1218)
+				(454, 1218))
+			    line_style 	3
+			    origin_attachment 	(195, 845)
+			    terminal_attachment 	(454, 1218)
+			    label      	(object SegLabel @45
+				Parent_View 	@43
+				location   	(334, 1262)
+				font       	(object Font
+				    size       	10
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..n"
+				pctDist    	0.839888
+				height     	44
+				orientation 	1))
+			(object RoleView "Parents" @46
+			    Parent_View 	@41
+			    location   	(-285, 397)
+			    font       	(object Font
+				size       	12
+				face       	"Times New Roman"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @47
+				Parent_View 	@46
+				location   	(703, 935)
+				font       	(object Font
+				    size       	12
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	185
+				justify    	0
+				label      	"+Parents"
+				pctDist    	0.763636
+				height     	96
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172A6031E"
+			    client     	@41
+			    supplier   	@40
+			    vertices   	(list Points
+				(195, 845)
+				(607, 845)
+				(607, 1091))
+			    line_style 	3
+			    origin_attachment 	(195, 845)
+			    terminal_attachment 	(607, 1091)
+			    label      	(object SegLabel @48
+				Parent_View 	@46
+				location   	(554, 1025)
+				font       	(object Font
+				    size       	10
+				    face       	"Times New Roman"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..2"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))))
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Address" @49
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1354, 1198)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@49
+			location   	(1195, 1079)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	319
+			justify    	0
+			label      	"Address")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3BE1717D037A"
+		    width      	337
+		    height     	263
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "LiveAt" @50
+		    location   	(988, 1178)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @51
+			Parent_View 	@50
+			location   	(942, 1120)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"LiveAt"
+			pctDist    	-0.266667
+			height     	59
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"3BE172720222"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$0" @52
+			    Parent_View 	@50
+			    location   	(-809, -54)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @53
+				Parent_View 	@52
+				location   	(831, 1138)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				hidden     	TRUE
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	227
+				justify    	0
+				label      	""
+				pctDist    	0.795802
+				height     	41
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172730282"
+			    client     	@50
+			    supplier   	@40
+			    line_style 	3
+			    origin_attachment 	(988, 1178)
+			    terminal_attachment 	(790, 1178))
+			(object RoleView "Address" @54
+			    Parent_View 	@50
+			    location   	(-809, -54)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @55
+				Parent_View 	@54
+				location   	(1115, 1126)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	202
+				justify    	0
+				label      	"+Address"
+				pctDist    	0.647929
+				height     	53
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3BE172730280"
+			    client     	@50
+			    supplier   	@49
+			    line_style 	3
+			    origin_attachment 	(988, 1178)
+			    terminal_attachment 	(1186, 1178)
+			    label      	(object SegLabel @56
+				Parent_View 	@54
+				location   	(1166, 1232)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"1"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))))
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Job" @57
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(819, 1759)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@57
+			location   	(575, 1587)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	488
+			justify    	0
+			label      	"Job")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"40A9ABA70069"
+		    width      	506
+		    height     	369
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Company" @58
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1490, 2220)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@58
+			location   	(1278, 2117)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	425
+			justify    	0
+			label      	"Company")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"40A9AB6F0380"
+		    width      	443
+		    height     	231
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::Family::Employee" @59
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    location   	(176, 2242)
+		    font       	(object Font
+			size       	12
+			face       	"Times New Roman"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@59
+			location   	(9, 2147)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	334
+			justify    	0
+			label      	"Employee")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3C8FD2BA01BD"
+		    width      	352
+		    height     	218
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "Job" @60
+		    location   	(810, 2221)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @61
+			Parent_View 	@60
+			location   	(900, 2106)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"Job"
+			pctDist    	2.000000
+			height     	116
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"40A9ABD600B7"
+		    roleview_list 	(list RoleViews
+			(object RoleView "Employers" @62
+			    Parent_View 	@60
+			    location   	(-199, 188)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @63
+				Parent_View 	@62
+				location   	(1113, 2157)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	252
+				justify    	0
+				label      	"+Employers"
+				pctDist    	0.660256
+				height     	65
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"40A9ABD701F9"
+			    client     	@60
+			    supplier   	@58
+			    line_style 	3
+			    origin_attachment 	(810, 2221)
+			    terminal_attachment 	(1269, 2221)
+			    label      	(object SegLabel @64
+				Parent_View 	@62
+				location   	(1222, 2275)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))
+			(object RoleView "Employees" @65
+			    Parent_View 	@60
+			    location   	(-199, 188)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @66
+				Parent_View 	@65
+				location   	(489, 2137)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	228
+				justify    	0
+				label      	"+Employees"
+				pctDist    	0.702970
+				height     	85
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"40A9ABD701FB"
+			    client     	@60
+			    supplier   	@59
+			    line_style 	3
+			    origin_attachment 	(810, 2221)
+			    terminal_attachment 	(352, 2221)
+			    label      	(object SegLabel @67
+				Parent_View 	@65
+				location   	(399, 2275)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	0))))
+		(object AssocAttachView "" @68
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    client     	@60
+		    supplier   	@57
+		    line_style 	0)))))

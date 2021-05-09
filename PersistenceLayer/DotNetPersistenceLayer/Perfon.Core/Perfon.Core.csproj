@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{15EA05E4-0BCF-4A35-B177-59B932869414}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Perfon.Core</RootNamespace>
+    <AssemblyName>Perfon.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LiteDB, Version=3.1.0.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\Azure FlavourBusiness\packages\LiteDB.3.1.0\lib\net35\LiteDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\PerfonErrorEventArgs.cs" />
+    <Compile Include="Common\Tools.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Interfaces\Common\IPerfonErrorEventArgs.cs" />
+    <Compile Include="Interfaces\Notifications\IThresholdNotification.cs" />
+    <Compile Include="Interfaces\Notifications\IThreshouldNotificationEventArg.cs" />
+    <Compile Include="Interfaces\PerfCounterStorage\IPerfCounterInputData.cs" />
+    <Compile Include="Interfaces\PerfCounterStorage\IPerfCounterValue.cs" />
+    <Compile Include="Interfaces\PerfCounterStorage\IPerfomanceCountersStorage.cs" />
+    <Compile Include="Interfaces\PerfCounters\IPerformanceCounter.cs" />
+    <Compile Include="Notifications\ThresholdMaxNotification.cs" />
+    <Compile Include="Notifications\ThresholdBaseNotification.cs" />
+    <Compile Include="Notifications\ThreshouldNotificationEventArg.cs" />
+    <Compile Include="PerfCounterStorages\LiteDbStorage\PerfCounterLiteDbStorage.cs" />
+    <Compile Include="PerfCounterStorages\LiteDbStorage\PerfCountersDoc.cs" />
+    <Compile Include="PerfCounterStorages\LiteDbStorage\PerfCounterLiteDbDataBlock.cs" />
+    <Compile Include="PerfCounterStorages\InMemoryCacheStorage\PerfCounterInMemoryCacheStorage.cs" />
+    <Compile Include="Common\PerfonConfiguration.cs" />
+    <Compile Include="PerfCounters\PerfCounterInputData.cs" />
+    <Compile Include="PerfCounters\PerformanceSumAbsoluteCounter.cs" />
+    <Compile Include="PerfCounters\PerformanceDifferenceCounter.cs" />
+    <Compile Include="PerfCounters\PerformanceMaxCounter.cs" />
+    <Compile Include="PerfCounters\PerformanceCounterBase.cs" />
+    <Compile Include="PerfCounterStorages\CSVFileStorage\PerfCounterCSVFileStorage.cs" />
+    <Compile Include="PerfCounterStorages\PerfCounterValue.cs" />
+    <Compile Include="PerfCounters\PerformanceAverageCounter.cs" />
+    <Compile Include="PerfMonitor.cs" />
+    <Compile Include="PerfCounters\PerformanceSumCounter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\PerfCountersUI.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\PerfCountersUIPanel.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

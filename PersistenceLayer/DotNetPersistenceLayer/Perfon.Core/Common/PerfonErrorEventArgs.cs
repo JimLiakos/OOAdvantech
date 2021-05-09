@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Perfon.Interfaces.Common;
+
+namespace Perfon.Core.Common
+{
+    /// <summary>
+    /// Used for reporting errors occured inside Perfon to clients
+    /// </summary>
+    /// <MetaDataID>{087cb63e-9d6c-4f64-9988-24d88eca20dd}</MetaDataID>
+    public class PerfonErrorEventArgs : EventArgs, IPerfonErrorEventArgs
+    {
+        /// <summary>
+        /// Description of the error
+        /// </summary>
+        public string Message { get; set; }
+
+        public PerfonErrorEventArgs(string message)
+        {
+            Message = message;
+        }
+    }
+
+}

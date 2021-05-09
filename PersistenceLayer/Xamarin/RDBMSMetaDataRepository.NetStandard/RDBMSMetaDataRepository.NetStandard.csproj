@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>RDBMSMetaDataRepository</AssemblyName>
+    <RootNamespace>OOAdvantech.RDBMSMetaDataRepository</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\DataBaseConnection.cs" Link="DataBaseConnection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\HighLowIdentityColumnsGenerator.cs" Link="HighLowIdentityColumnsGenerator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\IdentityColumnGenerator.cs" Link="IdentityColumnGenerator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\MappedClassifier.cs" Link="MappedClassifier.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\ObjectIdentityType.cs" Link="ObjectIdentityType.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\OutStorageObjectCollection.cs" Link="OutStorageObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSColumn.cs" Link="RDBMSColumn.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSComponent.cs" Link="RDBMSComponent.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSIdentityColumn.cs" Link="RDBMSIdentityColumn.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSInterface.cs" Link="RDBMSInterface.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSKey.cs" Link="RDBMSKey.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingAssociation.cs" Link="RDBMSMappingAssociation.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingAssociationEnd.cs" Link="RDBMSMappingAssociationEnd.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingAttribute.cs" Link="RDBMSMappingAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingClass.cs" Link="RDBMSMappingClass.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingGeneralization.cs" Link="RDBMSMappingGeneralization.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingPrimitive.cs" Link="RDBMSMappingPrimitive.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMappingStructure.cs" Link="RDBMSMappingStructure.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSMetaObjectCreator.cs" Link="RDBMSMetaObjectCreator.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSObjectCollection.cs" Link="RDBMSObjectCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSObjectCollectionLink.cs" Link="RDBMSObjectCollectionLink.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSObjectStorage.cs" Link="RDBMSObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSStoreProcedure.cs" Link="RDBMSStoreProcedure.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSTable.cs" Link="RDBMSTable.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\RDBMSView.cs" Link="RDBMSView.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataRepository\UUIDIdentityColumnsGenerator.cs" Link="UUIDIdentityColumnsGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
+  </ItemGroup>
+</Project>

@@ -11,6 +11,7 @@ namespace AssemblyNativeCode
     [ComVisible(true)]
     public interface INativeCodeBridge
     {
+
         /// <MetaDataID>{b22151a6-04e5-4fbf-8d69-735578f79ebd}</MetaDataID>
         System._AppDomain CurrentDomain
         {

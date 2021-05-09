@@ -1,0 +1,3 @@
+SELECT [order].OrderDate.Month,[order].OrderDetails.Price.Product,COUNT([order].OrderDetails) ,SUM([order].OrderDetails.UnitPrice*[order].OrderDetails.Quantity.Amount)
+                          FROM AbstractionsAndPersistency.IOrder [order] 
+                          GROUP BY [order].OrderDate.Month,[order].OrderDetails.Price.Product

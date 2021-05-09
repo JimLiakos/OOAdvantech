@@ -1,0 +1,12 @@
+
+Microsoft (R) .NET Framework Strong Name Utility  Version 4.0.30319.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Public key (hash algorithm: sha1):
+002400000480000094000000060200000024000052534131000400000100010081edd368b9bc74
+9e4a282dc36b96796dbdb9323194c0a43a5bb44e127e4738403b06f9e94de5f9499c3d4643ff25
+1333bcdca64aeef550ab980245fbb05c9e34c32c4d47b3ac731b3add9a8b4442571f027168edf7
+b3b4be61c0d2d4c5b7d539439b7f903b64f9587dc932f55e1efcd7e4a6c56eb26a7336ef9a6b8d
+3ee448f1
+
+Public key token is 483eb08c93287fcd

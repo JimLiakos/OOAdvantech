@@ -1,0 +1,1391 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object Class_Category "StorageManagmentStudio"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    attributes 	(list Attribute_Set
+	(object Attribute
+	    tool       	"MetaData"
+	    name       	"MetaObjectID"
+	    value      	"StorageManagmentStudio")
+	(object Attribute
+	    tool       	"C#"
+	    name       	"FullName"
+	    value      	"StorageManagmentStudio"))
+    quid       	"53DF4F48001F"
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "App"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{dcd84091-a2eb-429b-ad31-9e6bbe22d79a}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"53DF4F48004E"
+	    documentation 	
+|
+|Interaction logic for App.xaml
+|
+	    
+	    operations 	(list Operations
+		(object Operation "OnStartup"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{67463595-ce46-4750-ad36-6171c7554f45}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DDF7000C"))
+		    quid       	"53F2DDF7000C"
+		    parameters 	(list Parameters
+			(object Parameter "e"
+			    quid       	"53F2DDF7003E"
+			    type       	"System.Windows.StartupEventArgs"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "InitializeComponent"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1d8fa6c1-d978-48f7-9991-2b6c37f89e41}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DDF70074"))
+		    quid       	"53F2DDF70074"
+		    documentation 	
+|
+|InitializeComponent
+|
+		    
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Main"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b04c36cb-7182-4847-bf58-c8b6d73b9e40}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DDF700B1"))
+		    quid       	"53F2DDF700B1"
+		    documentation 	
+|
+|Application Entry Point.
+|
+		    
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "MainWindow"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{2cbe09d3-8fcf-4c45-bd82-7a75700c1a66}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"53DF4F510203"
+	    documentation 	
+|
+|Interaction logic for Window1.xaml
+|
+	    
+	    operations 	(list Operations
+		(object Operation "MainWindow"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7f0ae043-499f-4229-af3d-ab9de70df8de}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53DF4F53033C"))
+		    quid       	"53DF4F53033C"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Window_Loaded"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ba8736be-2d1e-47b4-8284-c5274faeee52}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE1601C1"))
+		    quid       	"53F2DE1601C1"
+		    parameters 	(list Parameters
+			(object Parameter "sender"
+			    quid       	"53F2DE1601E0"
+			    type       	"object")
+			(object Parameter "e"
+			    quid       	"53F2DE1601F4"
+			    type       	"System.Windows.RoutedEventArgs"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "Image_MouseUp"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5301d2c6-dfba-4546-bd59-bd0195031fcc}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE16023D"))
+		    quid       	"53F2DE16023D"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "InitializeComponent"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7d7a99e0-e29f-455a-885d-35c6dde416b5}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE16026D"))
+		    quid       	"53F2DE16026D"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "System.Windows.Markup.IComponentConnector.Connect"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{9e53016b-a39c-4943-883e-d9f916d021e2}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE180325"))
+		    quid       	"53F2DE180325"
+		    parameters 	(list Parameters
+			(object Parameter "connectionId"
+			    quid       	"53F2DE180346"
+			    type       	"int")
+			(object Parameter "target"
+			    quid       	"53F2DE18035C"
+			    type       	"object"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Connection"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{367c3ee9-f2ca-4149-bda5-1474e3ddb764}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE1B010D")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE1B010D"
+		    type       	"WPFUIElementObjectBind.ViewControlObject"
+		    exportControl 	"Implementation")
+		(object ClassAttribute "ToolStripButtonOpen"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{604ac966-8b1e-4a85-b472-ff4b85fec651}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE1E0070")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE1E0070"
+		    type       	"System.Windows.Controls.Button"
+		    exportControl 	"Implementation")
+		(object ClassAttribute "_contentLoaded"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5cd88ca2-98cb-4019-be37-b61996c93c2d}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE1E022B")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE1E022B"
+		    type       	"bool"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "StorageServersManager"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{ef206368-9f79-4652-bfb3-ee23ee8b1f0e}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{ef206368-9f79-4652-bfb3-ee23ee8b1f0e}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"53DF4F6302FD"
+	    operations 	(list Operations
+		(object Operation "StorageServersManager"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{3e2fca84-e635-44fa-9605-9b1010217546}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE4400D6"))
+		    quid       	"53F2DE4400D6"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "AddConnection"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b9eb6d5a-3589-4e2e-90f6-0c5a86d469d8}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE440103"))
+		    quid       	"53F2DE440103"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "ObjectStorage"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{e6e71f35-7c31-4053-a15a-cc8d0605b808}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE4401A8")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE4401A8"
+		    type       	"OOAdvantech.PersistenceLayer.ObjectStorage"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "StorageServerLink"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{5ff6dfdb-34ba-4c0a-bbe3-9bee2284eab0}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"{5ff6dfdb-34ba-4c0a-bbe3-9bee2284eab0}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"53DF52A50290"
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"53F2DE2C03C6"
+		    supplier   	"Logical View::OOAdvantech::StorageManagmentStudio::IStorageMetadataNode"
+		    quidu      	"53F2DE02036D"))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "StorageServerInstanceName"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{dedfb1a0-1ba4-4045-a1b3-682f9e418928}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53DF5F04032C")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"53DF5F04032C"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "StorageServerUrl"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2c85f3c0-8788-412f-bab6-6410194f7608}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53DF5F0D0109")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"53DF5F0D0109"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{645f5dc9-54a0-4895-a07b-06d11180294e}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE360094"))
+		    quid       	"53F2DE360094"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "StorageServer"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{8b21a2c6-374b-4e9b-ab15-0da4d6fdc044}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE360182")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"53F2DE360182"
+		    type       	"OOAdvantech.MetaDataRepository.StorageServer"
+		    exportControl 	"Public")
+		(object ClassAttribute "SubNodes"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4187b41d-01e1-4bb9-9e4f-8ef6d59a9f5f}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE3601FC"))
+		    quid       	"53F2DE3601FC"
+		    type       	"System.Collections.Generic.IList`1[[StorageManagmentStudio.IStorageMetadataNode,{4A66F503-B55E-43D3-B76A-1432C7815577}]]"
+		    exportControl 	"Public")
+		(object ClassAttribute "OSMLink"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0d0cb1e4-b14f-49a0-a6e5-2eafb8c5b116}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE360259")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE360259"
+		    type       	"OOAdvantech.ObjectStateManagerLink")
+		(object ClassAttribute "_StorageServer"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{bd68c6b8-3d04-4f6d-a181-c84cf4cd73cd}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE360376")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE360376"
+		    type       	"OOAdvantech.MetaDataRepository.StorageServer"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#"
+	    persistence 	"Persistent")
+	(object Class "Person"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{e024756f-4d37-48fc-9fc3-2c5b83cb3f0f}"))
+	    quid       	"53F2DDFB002E"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1bfe8f8b-4c7a-44c3-81ba-57415d8a4fe0}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DDFE024E"))
+		    quid       	"53F2DDFE024E"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "_Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ee042bb9-eac3-4e57-8cd8-cd7319a49c65}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DDFE0303")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DDFE0303"
+		    type       	"string"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "IStorageMetadataNode"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{9cf35025-6b73-4933-8eca-dfc27f864d16}"))
+	    quid       	"53F2DE02036D"
+	    stereotype 	"Interface"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{d91eb456-9902-44e8-866b-c220c019aac6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE0500D4")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateSetOperation"
+			    value      	TRUE))
+		    quid       	"53F2DE0500D4"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "SubNodes"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7169ba31-668d-45b2-a0a1-474b74bf8c47}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE050289")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"53F2DE050289"
+		    type       	"System.Collections.Generic.IList<StorageManagmentStudio.IStorageMetadataNode>"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "StorageServerConnectionWindow"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{2e4bc2a4-3e45-4a87-bcbf-8902e7cef7f5}"))
+	    quid       	"53F2DE1F02FF"
+	    documentation 	
+|
+|Interaction logic for StorageServerConnectionWindow.xaml
+|
+	    
+	    operations 	(list Operations
+		(object Operation "InitializeComponent"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{63d2b9a0-8bfd-4bec-85b3-eac4ce48de4a}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE280352"))
+		    quid       	"53F2DE280352"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "System.Windows.Markup.IComponentConnector.Connect"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{c72ffb60-7998-4b8d-bceb-0e4831a147fa}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE2803B0"))
+		    quid       	"53F2DE2803B0"
+		    parameters 	(list Parameters
+			(object Parameter "connectionId"
+			    quid       	"53F2DE2803D0"
+			    type       	"int")
+			(object Parameter "target"
+			    quid       	"53F2DE290008"
+			    type       	"object"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "StorageServerConnectionWindow"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{98f8f6e8-3ce6-4235-b419-20a74ccb9007}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE29004A"))
+		    quid       	"53F2DE29004A"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Connection"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{a07df3b8-5072-4cd0-b3e4-65dca4fcfb3b}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE290109")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE290109"
+		    documentation 	
+|
+|Connection Name Field
+|
+		    
+		    type       	"WPFUIElementObjectBind.ViewControlObject"
+		    exportControl 	"Public")
+		(object ClassAttribute "ServerTypeLB"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{dfc721e8-3f62-4733-8057-3b9c5c35abb8}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE2902EE")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE2902EE"
+		    type       	"System.Windows.Controls.TextBlock"
+		    exportControl 	"Implementation")
+		(object ClassAttribute "comboBox1"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{07a428f2-a01d-4c91-8dcb-79220a03a414}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE2A00F1")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE2A00F1"
+		    type       	"System.Windows.Controls.ComboBox"
+		    exportControl 	"Implementation")
+		(object ClassAttribute "_contentLoaded"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{47e6cfaa-3253-44d0-b081-4a123a61cab3}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE2A0280")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"53F2DE2A0280"
+		    type       	"bool"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "StorageServerLinkPresentationObject"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{7a2ad925-5320-4c76-a07c-3e3bab6cedcc}"))
+	    quid       	"53F2DE3A006D"
+	    operations 	(list Operations
+		(object Operation "StorageServerLinkPresentationObject"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{639fad91-8cbe-42cb-b454-647ba1dd5990}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE3D02EC"))
+		    quid       	"53F2DE3D02EC"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "StorageServerLinkPresentationObject"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{ca1cbeed-648a-48b9-8907-43741a640ab6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE3E0366"))
+		    quid       	"53F2DE3E0366"
+		    parameters 	(list Parameters
+			(object Parameter "connection"
+			    quid       	"53F2DE3E0387"
+			    type       	"StorageManagmentStudio.StorageServerLink"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "StorageServers"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5d26a210-393a-41d2-8f78-956adddf8308}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE3F00F8")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"53F2DE3F00F8"
+		    type       	"System.Collections.Generic.List<string>"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "StoragesFolder"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{34b65763-4962-4569-a4c3-b17e9850a358}"))
+	    quid       	"53F2DE480352"
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"53F2DE4A0052"
+		    supplier   	"Logical View::OOAdvantech::StorageManagmentStudio::IStorageMetadataNode"
+		    quidu      	"53F2DE02036D"))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "Name"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{40d443cf-d772-478a-95a5-a11d6c420533}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE4C0168"))
+		    quid       	"53F2DE4C0168"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "SubNodes"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{d71a4cc3-89c9-43ee-b2eb-194ae9ddf3ee}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53F2DE4C01A0"))
+		    quid       	"53F2DE4C01A0"
+		    type       	"System.Collections.Generic.IList`1[[StorageManagmentStudio.IStorageMetadataNode,{4A66F503-B55E-43D3-B76A-1432C7815577}]]"
+		    exportControl 	"Public"))
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Class "StorageMetadataNodePresentation"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{87b31064-4e54-484b-adf2-29fa05dc93d8}")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityIDTransfered"
+		    value      	"True")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"BackwardCompatibilityID"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"LastMemberID"
+		    value      	"1"))
+	    quid       	"53F2E28903A4"
+	    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+	    quidu      	"53DF493F0222"
+	    language   	"C#")
+	(object Association "StorageServerConections"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"UniqueID"
+		    value      	"53DF5FC702AF")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Identity"
+		    value      	"3fcf764d-7978-43e9-b950-6311e525e9b8"))
+	    quid       	"53DF5FC702AF"
+	    roles      	(list role_list
+		(object Role "Connections"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53DF5FC8031C")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{5a6d3c88-ca4c-49f6-a029-c9b73b7768fd}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"System.Collections.Generic.IList<StorageManagmentStudio.StorageServerLink>")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Indexer"
+			    value      	FALSE))
+		    quid       	"53DF5FC8031C"
+		    label      	"Connections"
+		    supplier   	"Logical View::OOAdvantech::StorageManagmentStudio::StorageServerLink"
+		    quidu      	"53DF52A50290"
+		    client_cardinality 	(value cardinality "0..*")
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$0"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"53DF5FC9002E")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{f864ecdd-2526-4880-a5b2-3c5469114621}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Indexer"
+			    value      	FALSE))
+		    quid       	"53DF5FC9002E"
+		    supplier   	"Logical View::OOAdvantech::StorageManagmentStudio::StorageServersManager"
+		    quidu      	"53DF4F6302FD")))
+	(object Class_Category "Properties"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"StorageManagmentStudio.Properties")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"StorageManagmentStudio.Properties"))
+	    quid       	"53DF4F5400DA"
+	    exportControl 	"Public"
+	    logical_models 	(list unit_reference_list
+		(object Class "Resources"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2383c1c1-356b-4b6b-bd30-affdef9a8a35}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"53DF4F540109"
+		    documentation 	
+|
+|  A strongly-typed resource class, for looking up localized strings, etc.
+|
+		    
+		    operations 	(list Operations
+			(object Operation "Resources"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{a8ee8082-1529-4f69-98cb-982ec160c805}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F5C0157"))
+			    quid       	"53DF4F5C0157"
+			    result     	"void"
+			    concurrency 	"Sequential"
+			    opExportControl 	"Implementation"
+			    uid        	0))
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "ResourceManager"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6aebfd82-2de2-413a-8daf-4ba0e9b83725}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F5D0271")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE))
+			    quid       	"53DF4F5D0271"
+			    documentation 	
+|
+|  Returns the cached ResourceManager instance used by this class.
+|
+			    
+			    type       	"System.Resources.ResourceManager"
+			    exportControl 	"Implementation")
+			(object ClassAttribute "Culture"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{40700770-1f03-433d-a7cf-0a2bd7852d46}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F5F031C")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateSetOperation"
+				    value      	TRUE))
+			    quid       	"53DF4F5F031C"
+			    documentation 	
+|
+|  Overrides the current thread's CurrentUICulture property for all
+|  resource lookups using this strongly typed resource class.
+|
+			    
+			    type       	"System.Globalization.CultureInfo"
+			    exportControl 	"Implementation")
+			(object ClassAttribute "resourceMan"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6ff1f444-301f-4c34-a820-ab789a40a9f2}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F6001D4")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"53DF4F6001D4"
+			    type       	"System.Resources.ResourceManager")
+			(object ClassAttribute "resourceCulture"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{d51c99a5-c9c5-4623-8529-f79889e81a7e}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F61000F")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"53DF4F61000F"
+			    type       	"System.Globalization.CultureInfo"))
+		    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+		    quidu      	"53DF493F0222"
+		    language   	"C#")
+		(object Class "Settings"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{2c6b9725-e100-417a-88f6-692a388a3a6c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityIDTransfered"
+			    value      	"True")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"BackwardCompatibilityID"
+			    value      	"")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"LastMemberID"
+			    value      	"1"))
+		    quid       	"53DF4F610109"
+		    class_attributes 	(list class_attribute_list
+			(object ClassAttribute "Default"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{6beee391-888f-4411-9518-48221a07422a}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F63000F")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	TRUE)
+				(object Attribute
+				    tool       	"C#"
+				    name       	"GenerateGetOperation"
+				    value      	TRUE))
+			    quid       	"53DF4F63000F"
+			    type       	"StorageManagmentStudio.Properties.Settings"
+			    exportControl 	"Public")
+			(object ClassAttribute "defaultInstance"
+			    attributes 	(list Attribute_Set
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"MetaObjectID"
+				    value      	"{c8080ca5-199a-40da-b7bf-2b21c346274c}")
+				(object Attribute
+				    tool       	"MetaData"
+				    name       	"UniqueID"
+				    value      	"53DF4F630232")
+				(object Attribute
+				    tool       	"C#"
+				    name       	"As Property"
+				    value      	FALSE))
+			    quid       	"53DF4F630232"
+			    type       	"StorageManagmentStudio.Properties.Settings"))
+		    module     	"Component View::OOAdvantech::StorageManagmentStudio::StorageManagmentStudio"
+		    quidu      	"53DF493F0222"
+		    language   	"C#"))
+	    logical_presentations 	(list unit_reference_list)))
+    logical_presentations 	(list unit_reference_list
+	(object ClassDiagram "Main"
+	    quid       	"53DF519B0157"
+	    title      	"Main"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	0
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::OOAdvantech::StorageManagmentStudio::MainWindow" @1
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(474, 319)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@1
+			location   	(299, 250)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	351
+			justify    	0
+			label      	"MainWindow")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"53DF4F510203"
+		    width      	369
+		    height     	162
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::StorageManagmentStudio::StorageServerLink" @2
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(1706, 925)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@2
+			location   	(1434, 825)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	544
+			justify    	0
+			label      	"StorageServerLink")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"53DF52A50290"
+		    width      	562
+		    height     	225
+		    annotation 	8)
+		(object ClassView "Class" "Logical View::OOAdvantech::StorageManagmentStudio::StorageServersManager" @3
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(493, 915)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@3
+			location   	(243, 837)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	500
+			justify    	0
+			label      	"StorageServersManager")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"53DF4F6302FD"
+		    width      	518
+		    height     	181
+		    annotation 	8)
+		(object AssociationViewNew "StorageServerConections" @4
+		    location   	(1088, 915)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object SegLabel @5
+			Parent_View 	@4
+			location   	(1107, 800)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	TRUE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	470
+			justify    	0
+			label      	"StorageServerConections"
+			pctDist    	0.816667
+			height     	115
+			orientation 	0)
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"53DF5FC702AF"
+		    roleview_list 	(list RoleViews
+			(object RoleView "Connections" @6
+			    Parent_View 	@4
+			    location   	(482, -25)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object SegLabel @7
+				Parent_View 	@6
+				location   	(1269, 867)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	1
+				anchor_loc 	1
+				nlines     	1
+				max_width  	266
+				justify    	0
+				label      	"+Connections"
+				pctDist    	0.537092
+				height     	48
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"53DF5FC8031C"
+			    client     	@4
+			    supplier   	@2
+			    line_style 	3
+			    origin_attachment 	(1088, 915)
+			    terminal_attachment 	(1425, 915)
+			    label      	(object SegLabel @8
+				Parent_View 	@6
+				location   	(1390, 969)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1))
+			(object RoleView "$UNNAMED$0" @9
+			    Parent_View 	@4
+			    location   	(482, -25)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"53DF5FC9002E"
+			    client     	@4
+			    supplier   	@3
+			    line_style 	3
+			    origin_attachment 	(1088, 915)
+			    terminal_attachment 	(752, 915))))
+		(object ClassView "Class" "Logical View::OOAdvantech::StorageManagmentStudio::StorageMetadataNodePresentation" @10
+		    ShowCompartmentStereotypes 	TRUE
+		    location   	(652, 1519)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@10
+			location   	(296, 1434)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	713
+			justify    	0
+			label      	"StorageMetadataNodePresentation")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"53F2E28903A4"
+		    width      	731
+		    height     	194
+		    annotation 	8)))))

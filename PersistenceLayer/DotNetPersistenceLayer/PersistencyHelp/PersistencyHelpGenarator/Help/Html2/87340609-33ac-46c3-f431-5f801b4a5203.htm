@@ -1,0 +1,461 @@
+﻿<html xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+  <head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
+    <META NAME="save" CONTENT="history" />
+    <title>OOAdvantech.Transactions Namespace</title>
+    <link rel="stylesheet" type="text/css" href="../styles/presentation.css" />
+    <link rel="stylesheet" type="text/css" href="ms-help://Hx/HxRuntime/HxLink.css" />
+    <script type="text/javascript" src="../scripts/EventUtilities.js"> </script>
+    <script type="text/javascript" src="../scripts/SplitScreen.js"> </script>
+    <script type="text/javascript" src="../scripts/Dropdown.js"> </script>
+    <script type="text/javascript" src="../scripts/script_manifold.js"> </script>
+    <script type="text/javascript" src="../scripts/script_feedBack.js"> </script>
+    <script type="text/javascript" src="../scripts/CheckboxMenu.js"> </script>
+    <script type="text/javascript" src="../scripts/CommonUtilities.js"> </script>
+    <meta name="container" content="OOAdvantech.Transactions" />
+    <meta name="file" content="87340609-33ac-46c3-f431-5f801b4a5203" />
+    <meta name="guid" content="87340609-33ac-46c3-f431-5f801b4a5203" />
+    <xml>
+      <MSHelp:Attr Name="AssetID" Value="N:OOAdvantech.Transactions" />
+      <MSHelp:TOCTitle Title="OOAdvantech.Transactions Namespace" />
+      <MSHelp:RLTitle Title="OOAdvantech.Transactions Namespace ()" />
+      <MSHelp:Keyword Index="A" Term="N:OOAdvantech.Transactions" />
+      <MSHelp:Keyword Index="A" Term="frlrfOOAdvantechTransactions" />
+      <MSHelp:Keyword Index="K" Term="OOAdvantech.Transactions namespace" />
+      <MSHelp:Keyword Index="F" Term="OOAdvantech.Transactions" />
+      <MSHelp:Attr Name="HelpPriority" Value="1" />
+      <MSHelp:Attr Name="DevLang" Value="VB" />
+      <MSHelp:Attr Name="DevLang" Value="CSharp" />
+      <MSHelp:Attr Name="DevLang" Value="C++" />
+      <MSHelp:Attr Name="Locale" Value="en-us" />
+      <MSHelp:Attr Name="TopicType" Value="kbSyntax" />
+      <MSHelp:Attr Name="TopicType" Value="apiref" />
+    </xml>
+  </head>
+  <body>
+    <input type="hidden" id="userDataCache" class="userDataStyle" />
+    <input type="hidden" id="hiddenScrollOffset" />
+    <img id="collapseImage" style="display:none; height:0; width:0;" src="../icons/collapse_all.gif" title="Collapse image" />
+    <img id="expandImage" style="display:none; height:0; width:0;" src="../icons/expand_all.gif" title="Expand Image" />
+    <img id="collapseAllImage" style="display:none; height:0; width:0;" src="../icons/collapse_all.gif" />
+    <img id="expandAllImage" style="display:none; height:0; width:0;" src="../icons/expand_all.gif" />
+    <img id="dropDownImage" style="display:none; height:0; width:0;" src="../icons/dropdown.gif" />
+    <img id="dropDownHoverImage" style="display:none; height:0; width:0;" src="../icons/dropdownHover.gif" />
+    <img id="copyImage" style="display:none; height:0; width:0;" src="../icons/copycode.gif" title="Copy image" />
+    <img id="copyHoverImage" style="display:none; height:0; width:0;" src="../icons/copycodeHighlight.gif" title="CopyHover image" />
+    <div id="header">
+      <table id="topTable" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+            <span onclick="ExpandCollapseAll(toggleAllImage)" style="cursor:default;" onkeypress="ExpandCollapseAll_CheckKey(toggleAllImage, event)" tabindex="0">
+              <img ID="toggleAllImage" class="toggleAll" src="../icons/collapse_all.gif" /> <label id="collapseAllLabel" for="toggleAllImage" style="display: none;">Collapse All</label><label id="expandAllLabel" for="toggleAllImage" style="display: none;">Expand All</label> </span>
+            <span>    </span>
+            <span id="devlangsDropdown" class="filter" tabindex="0">
+              <img id="devlangsDropdownImage" src="../icons/dropdown.gif" /> <label id="devlangsMenuAllLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: All </nobr></label><label id="devlangsMenuMultipleLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: Multiple </nobr></label><label id="devlangsMenuVisualBasicLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: Visual Basic </nobr></label><label id="devlangsMenuCSharpLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: C# </nobr></label><label id="devlangsMenuManagedCPlusPlusLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: Visual C++ </nobr></label><label id="devlangsMenuJavaScriptLabel" for="devlangsDropdownImage" style="display: none;"><nobr>Code: JavaScript </nobr></label></span>
+          </td>
+        </tr>
+      </table>
+      <div id="devlangsMenu">
+        <input id="VisualBasicCheckbox" type="checkbox" data="VisualBasic,vb,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="VisualBasicCheckbox">Visual Basic</label>
+        <br />
+        <input id="CSharpCheckbox" type="checkbox" data="CSharp,cs,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="CSharpCheckbox">C#</label>
+        <br />
+        <input id="ManagedCPlusPlusCheckbox" type="checkbox" data="ManagedCPlusPlus,cpp,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="ManagedCPlusPlusCheckbox">Visual C++</label>
+        <br />
+        <input id="JavaScriptCheckbox" type="checkbox" data="JavaScript,cs,'persist'" value="on" onClick="SetLanguage(this)" />
+        <label class="checkboxLabel" for="JavaScriptCheckbox">JavaScript</label>
+        <br />
+      </div>
+      <table id="bottomTable" cellpadding="0" cellspacing="0">
+        <tr id="headerTableRow1">
+          <td align="left">
+            <span id="runningHeaderText">.NET Framework Class Library</span>
+          </td>
+        </tr>
+        <tr id="headerTableRow2">
+          <td align="left">
+            <span id="nsrTitle">OOAdvantech.Transactions Namespace</span>
+          </td>
+        </tr>
+        <tr id="headerTableRow3">
+          <td align="left">
+  <span id="headfeedbackarea" class="feedbackhead">
+      <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','','%0\dThank%20you%20for%20your%20feedback.%20The%20developer%20writing%20teams%20use%20your%20feedback%20to%20improve%20documentation.%20While%20we%20are%20reviewing%20your%20feedback,%20we%20may%20send%20you%20e-mail%20to%20ask%20for%20clarification%20or%20feedback%20on%20a%20solution.%20We%20do%20not%20use%20your%20e-mail%20address%20for%20any%20other%20purpose%20and%20we%20delete%20it%20after%20we%20finish%20our%20review.%0\AFor%20further%20information%20about%20the%20privacy%20policies%20of%20Microsoft,%20please%20see%20http://privacy.microsoft.com/en-us/default.aspx.%0\A%0\d','Customer%20Feedback');">
+        
+        Send Feedback
+      </a>
+	</span>
+</td>
+        </tr>
+      </table>
+      <table id="gradientTable">
+        <tr>
+          <td class="nsrBottom" background="../icons/gradient.gif" />
+        </tr>
+      </table>
+    </div>
+    <div id="mainSection">
+      <div id="mainBody">
+        <div id="allHistory" class="saveHistory" onsave="saveAll()" onload="loadAll()" />
+        <div class="header">
+          <font color="darkgray">
+            <p />
+          </font>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(classToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(classToggle, event)" tabindex="0">
+            <img id="classToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Classes</span>
+        </h1>
+        <div id="classSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Class</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.CommittableTransaction" tabindex="0">CommittableTransaction</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ContainByValue" tabindex="0">ContainByValue</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+             Sometimes we want from the transaction system to act on reference field like a value type field (contain by value). 
+             The system has to control the state of object of field automatically. 
+             In case where the ContainByValue attribute used from field, the field behaves as type value field. 
+             In case where the ContainByValue attribute used from interface or class, 
+             all fields where the fields types is a (class or interface) with ContainByValue attribute behave as type value fields.  
+             In both cases the type of object of field must be implement the System.ICloneable or  OOAdvantech.Transactions.TransactionalObject interface.
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.Exception" tabindex="0">Exception</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ObjectStateTransition" tabindex="0">ObjectStateTransition</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            
+            Enlist an object in transaction context and makes a code block transactional
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ServerLockControlSession" tabindex="0">ServerLockControlSession</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            This class defines the server part of ObjectLockSession. 
+            The work of session is to update session users 
+            for the lock state of objects which assigned to the session. 
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.SystemStateTransition" tabindex="0">SystemStateTransition</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            Makes a code block transactional
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.Transaction" tabindex="0">Transaction</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            Represents a transaction.
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionalAttribute" tabindex="0">TransactionalAttribute</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">Indicates that a class can be participating in transaction context.</div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionalMemberAttribute" tabindex="0">TransactionalMemberAttribute</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            Indicate that the class member participate with a special way.
+            </div>
+              </td>
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionInterop" tabindex="0">TransactionInterop</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="class; public">
+              <td>
+                <img src="../icons/pubclass.gif" title="Public class" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionManager" tabindex="0">TransactionManager</mshelp:link>
+              </td>
+              <td />
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(interfaceToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(interfaceToggle, event)" tabindex="0">
+            <img id="interfaceToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Interfaces</span>
+        </h1>
+        <div id="interfaceSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Interface</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ITransactionalObject" tabindex="0">ITransactionalObject</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+             The implemation of this intarface from a class means that 
+             the instances of class manipulates their state in a transaction context.
+            </div>
+              </td>
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ITransactionContext" tabindex="0">ITransactionContext</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ITransactionContextExtender" tabindex="0">ITransactionContextExtender</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">T
+            hrough this interface the transaction system propagate the two phase commit mechanism.   
+            The transaction context extender classes must implement this interface.
+            An example of transaction context extender is the extender for persistent object. 
+            This context extender ensures that the state of persistent object is durable after 
+            the transaction commit. </div>
+              </td>
+            </tr>
+            <tr data="interface; public">
+              <td>
+                <img src="../icons/pubinterface.gif" title="Public interface" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ITransactionContextProvider" tabindex="0">ITransactionContextProvider</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            Through this interface implementation subsystems can provide class factory 
+            which instantiate the transaction context extender for a specific transaction.
+            The transaction context extender providers register to the transaction system 
+            through the RegisterTransactionContextProvider of transaction manager class. 
+            </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(delegateToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(delegateToggle, event)" tabindex="0">
+            <img id="delegateToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Delegates</span>
+        </h1>
+        <div id="delegateSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Delegate</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="delegate; public">
+              <td>
+                <img src="../icons/pubdelegate.gif" title="Public delegate" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ServerLockControlSession.ObjectLockEventHandler" tabindex="0">ServerLockControlSession<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span></span>ObjectLockEventHandler</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="delegate; public">
+              <td>
+                <img src="../icons/pubdelegate.gif" title="Public delegate" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionCompletedEventHandler" tabindex="0">TransactionCompletedEventHandler</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="delegate; public">
+              <td>
+                <img src="../icons/pubdelegate.gif" title="Public delegate" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionDistributedEventHandler" tabindex="0">TransactionDistributedEventHandler</mshelp:link>
+              </td>
+              <td />
+            </tr>
+          </table>
+        </div>
+        <h1 class="heading">
+          <span onclick="ExpandCollapse(enumerationToggle)" style="cursor:default;" onkeypress="ExpandCollapse_CheckKey(enumerationToggle, event)" tabindex="0">
+            <img id="enumerationToggle" class="toggle" name="toggleSwitch" src="../icons/collapse_all.gif" />Enumerations</span>
+        </h1>
+        <div id="enumerationSection" class="section" name="collapseableSection" style="">
+          <table id="typeList" class="members" frame="lhs" cellpadding="2">
+            <col width="10%" />
+            <tr>
+              <th class="iconColumn">
+           
+       </th>
+              <th class="nameColumn">Enumeration</th>
+              <th class="descriptionColumn">Description</th>
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.LockOptions" tabindex="0">LockOptions</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            Defines the way where system lock an object.
+            </div>
+              </td>
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.LockType" tabindex="0">LockType</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.ObjectsStateManagerStatus" tabindex="0">ObjectsStateManagerStatus</mshelp:link>
+              </td>
+              <td />
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionOption" tabindex="0">TransactionOption</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">Specifies the automatic transaction type requested by the component.</div>
+              </td>
+            </tr>
+            <tr data="enumeration; public">
+              <td>
+                <img src="../icons/pubenumeration.gif" title="Public enumeration" />
+              </td>
+              <td>
+                <mshelp:link keywords="T:OOAdvantech.Transactions.TransactionStatus" tabindex="0">TransactionStatus</mshelp:link>
+              </td>
+              <td>
+                <div class="summary">
+            Describes the current status of a distributed transaction.
+            </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="footerLine">
+          <img width="100%" height="3px" src="../icons/footer.gif" title="Footer image" />
+        </div>
+<span id="feedbackarea">
+			Send
+		<a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','','%0\dThank%20you%20for%20your%20feedback.%20The%20developer%20writing%20teams%20use%20your%20feedback%20to%20improve%20documentation.%20While%20we%20are%20reviewing%20your%20feedback,%20we%20may%20send%20you%20e-mail%20to%20ask%20for%20clarification%20or%20feedback%20on%20a%20solution.%20We%20do%20not%20use%20your%20e-mail%20address%20for%20any%20other%20purpose%20and%20we%20delete%20it%20after%20we%20finish%20our%20review.%0\AFor%20further%20information%20about%20the%20privacy%20policies%20of%20Microsoft,%20please%20see%20http://privacy.microsoft.com/en-us/default.aspx.%0\A%0\d','Customer%20Feedback');">
+			
+      feedback
+		</a>
+			on this topic to Microsoft.
+		</span>
+</div>
+    </div>
+  </body>
+</html>

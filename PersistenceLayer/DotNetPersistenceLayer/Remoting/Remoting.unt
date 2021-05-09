@@ -1,0 +1,5 @@
+<Root>
+  <CodeModule Identity="109df1e4-acac-44e6-9038-6826f487c64c" Name="Remoting" VersionControlItem="$/OpenVersion/PersistenceLayer/DotNetPersistenceLayer/Remoting" VSnetProject="Remoting.csproj" VSnetSolution="..\PersistenceLayer\PersistenceLayer.sln" VSSDatabase="C:\Program Files\Microsoft Visual Studio\Common\VSS\srcsafe.ini" Version="1.0.0.0">
+    <Reference Name="ModulePublisher" FileSystemPath="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher.unt" SourceControlPath="$/OpenVersion/Visual Studio.NET Projects/ModulePublisher" Version="" />
+  </CodeModule>
+</Root>

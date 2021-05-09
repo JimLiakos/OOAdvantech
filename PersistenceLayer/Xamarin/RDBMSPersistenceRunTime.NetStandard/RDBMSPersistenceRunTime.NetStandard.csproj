@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>RDBMSPersistenceRunTime</AssemblyName>
+    <RootNamespace>OOAdvantech.RDBMSPersistenceRunTime</RootNamespace>
+    <UserSecretsId>6f288382-8d68-419e-8b43-d04ce7c5a519</UserSecretsId>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\ADONetObjectStorage.cs" Link="RDBMSMetaDataPersistenceRunTime\ADONetObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\DeleteStorageInstanceCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\DeleteStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\LinkObjectsCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\LinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\MSSQLFastUnlinkAllObjectCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\MSSQLFastUnlinkAllObjectCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\NewStorageInstanceCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\NewStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\UnLinkObjectsCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\UnLinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\UpdateStorageInstanceCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\UpdateStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\DataBaseConnection.cs" Link="RDBMSMetaDataPersistenceRunTime\DataBaseConnection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\DataLoader.cs" Link="RDBMSMetaDataPersistenceRunTime\DataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\DataObjects\ClassBLOB.cs" Link="RDBMSMetaDataPersistenceRunTime\DataObjects\ClassBLOB.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\DataObjects\Member.cs" Link="RDBMSMetaDataPersistenceRunTime\DataObjects\Member.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\ObjectID.cs" Link="RDBMSMetaDataPersistenceRunTime\ObjectID.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\RelResolver.cs" Link="RDBMSMetaDataPersistenceRunTime\RelResolver.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Storage.cs" Link="RDBMSMetaDataPersistenceRunTime\Storage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\StorageCell.cs" Link="RDBMSMetaDataPersistenceRunTime\StorageCell.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\StorageInstanceRef.cs" Link="RDBMSMetaDataPersistenceRunTime\StorageInstanceRef.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\TypeDictionary.cs" Link="RDBMSMetaDataPersistenceRunTime\TypeDictionary.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\ClassMemoryInstanceCollection.cs" Link="ClassMemoryInstanceCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\BuildContainedObjectIndicies.cs" Link="Commands\BuildContainedObjectIndicies.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\DeleteStorageInstanceCommand.cs" Link="Commands\DeleteStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\LinkObjectsCommand.cs" Link="Commands\LinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\NewStorageInstanceCommand.cs" Link="Commands\NewStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\TransferNewInstancesMassivelly.cs" Link="Commands\TransferNewInstancesMassivelly.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UnlinkAllObjectCommand.cs" Link="Commands\UnlinkAllObjectCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UnlinkAllObjectOfStorageCellLinkCmd.cs" Link="Commands\UnlinkAllObjectOfStorageCellLinkCmd.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UnLinkObjectsCommand.cs" Link="Commands\UnLinkObjectsCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UpdateDatabaseMassivelly.cs" Link="Commands\UpdateDatabaseMassivelly.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UpdateLinkIndexCommand.cs" Link="Commands\UpdateLinkIndexCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UpdateReferentialIntegrity.cs" Link="Commands\UpdateReferentialIntegrity.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UpdateStorageInstanceCommand.cs" Link="Commands\UpdateStorageInstanceCommand.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Commands\UpdateStorageSchema.cs" Link="Commands\UpdateStorageSchema.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\DataLoader.cs" Link="DataLoader.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\DistributedObjectQuery.cs" Link="DistributedObjectQuery.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\MemoryInstanceCollection.cs" Link="MemoryInstanceCollection.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\MetaObjectsStack.cs" Link="MetaObjectsStack.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\ObjectID.cs" Link="ObjectID.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\ObjectStorage.cs" Link="ObjectStorage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\ObjectUnderTransactionDataManager.cs" Link="ObjectUnderTransactionDataManager.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\Column.cs" Link="RDBMSDataObjects\Column.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\DataBase.cs" Link="RDBMSDataObjects\DataBase.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\IRDBMSSchema.cs" Link="RDBMSDataObjects\IRDBMSSchema.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\Key.cs" Link="RDBMSDataObjects\Key.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\StoreProcedure.cs" Link="RDBMSDataObjects\StoreProcedure.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\Table.cs" Link="RDBMSDataObjects\Table.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RDBMSDataObjects\View.cs" Link="RDBMSDataObjects\View.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\RelResolver.cs" Link="RelResolver.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\SQLFilterScriptBulder.cs" Link="SQLFilterScriptBulder.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\SqlScriptsBuilder.cs" Link="SqlScriptsBuilder.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\Storage.cs" Link="Storage.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\StorageInstanceRef.cs" Link="StorageInstanceRef.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\StorageProvider.cs" Link="StorageProvider.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\TypeDictionary.cs" Link="TypeDictionary.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
+    <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
+    <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj" />
+    <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="RDBMSDataObjects\" />
+    <Folder Include="RDBMSMetaDataPersistenceRunTime\Commands\" />
+    <Folder Include="RDBMSMetaDataPersistenceRunTime\DataObjects\" />
+  </ItemGroup>
+  
+</Project>

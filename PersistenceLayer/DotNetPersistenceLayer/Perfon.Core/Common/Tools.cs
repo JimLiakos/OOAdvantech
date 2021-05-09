@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Perfon.Core.Common
+{
+    /// <MetaDataID>{b78170d9-3f3b-4270-97ed-59244c70a983}</MetaDataID>
+    class Tools
+    {
+        /// <summary>
+        /// Knuth hash
+        /// Do not rely on standard GetHashCode because it could have diff implementations
+        /// </summary>
+        /// <param name="read"></param>
+        /// <returns></returns>
+        public static UInt64 CalculateHash(string read)
+        {
+            UInt64 hashedValue = 3074457345618258791ul;
+            for (int i = 0; i < read.Length; i++)
+            {
+                hashedValue += read[i];
+                hashedValue *= 3074457345618258799ul;
+            }
+            return hashedValue;
+        }
+    }
+}
