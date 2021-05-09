@@ -8,7 +8,8 @@ namespace OOAdvantech.Linq
     /// <MetaDataID>{1f9cd4ba-1126-41f5-ba3b-7438e1b1cd00}</MetaDataID>
     public class Grouping<TKey, TElement>:IGrouping<TKey,TElement> 
     {    
-         
+        //er wew we 
+        
         /// <MetaDataID>{333f0edd-4a30-4dea-a8a7-4a8392bf7d8c}</MetaDataID>
         TKey Key;
         /// <MetaDataID>{c102692d-79dc-44a8-9446-02ee9c560368}</MetaDataID>

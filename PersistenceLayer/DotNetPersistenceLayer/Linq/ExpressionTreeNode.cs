@@ -19,6 +19,7 @@ namespace OOAdvantech.Linq
                 return GetTypeDescription(Expression.Type);
             }
         }
+        /// matrakas sdf sdf  cd 
 
         /// <MetaDataID>{4f88bebe-56bd-434c-8b50-9be0e80e8065}</MetaDataID>
         public string GetTypeDescription(Type type)
