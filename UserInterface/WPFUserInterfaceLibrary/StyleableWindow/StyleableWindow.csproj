@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6368D7F0-70F8-4B7A-8B36-EF31D07C11C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StyleableWindow</RootNamespace>
+    <AssemblyName>StyleableWindow</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComboBoxEx.cs" />
+    <Compile Include="ControlDoubleClickBehavior.cs" />
+    <Compile Include="DialogContentControl.cs" />
+    <Compile Include="FontDialog.xaml.cs">
+      <DependentUpon>FontDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageDialogFrame.xaml.cs">
+      <DependentUpon>PageDialogFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageDialogViewEmulator.cs" />
+    <Compile Include="PathTrimmingTextBlock.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowSystemMenuBehavior.cs" />
+    <Compile Include="StyleableWindow.cs" />
+    <Compile Include="SystemMenuManager.cs" />
+    <Compile Include="WindowDragBehavior.cs" />
+    <Compile Include="WindowResizeBehavior.cs" />
+    <Compile Include="WPFMessafeBox.xaml.cs">
+      <DependentUpon>WPFMessafeBox.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CustomWindowStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FontDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageDialogFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFMessafeBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\CloseWindow.png" />
+    <Resource Include="Resources\Images\RestoreWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\MinimizeWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
+      <Project>{09083b37-96ef-4867-aa51-4d698ad34344}</Project>
+      <Name>OOAdvantechFacade -VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantech\OOAdvantech - VS10.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserInterface\UserInterface - VS10.csproj">
+      <Project>{E0E5873E-E5E4-46F6-94F1-731C172CC1C6}</Project>
+      <Name>UserInterface - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsBaseEx\WindowsBaseEx.csproj">
+      <Project>{d83eae0a-82cd-4496-8524-c734c6236b78}</Project>
+      <Name>WindowsBaseEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFUIElementObjectBind\WPFUIElementObjectBind-VS10.csproj">
+      <Project>{8dfec0f3-c2ec-4d16-9e1d-09d33199e73f}</Project>
+      <Name>WPFUIElementObjectBind-VS10</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\LeftArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\font32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\uk32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\uk16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\mono-flags\AE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AM.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AM24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AW.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\AW24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BD.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BD24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BF.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BF24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BH.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BH24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BI.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BI24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BJ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BJ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BR.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BR24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BS.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BS24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BW.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\BW24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CH.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CH24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CK.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CK24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CL.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CL24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CM.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CM24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CN.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CN24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CO.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CO24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CZ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\CZ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DJ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DJ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DK.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DK24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DZ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\DZ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ES.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ES24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\EU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\EU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\FI.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\FI24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\FR.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\FR24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GB.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GB24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GH.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GH24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GL.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GL24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GR.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GR24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GW.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GW24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GY.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\GY24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\HN.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\HN24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\HU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\HU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ID.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ID24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IL.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IL24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IN.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IN24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IS.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IS24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IT.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\IT24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\JM.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\JM24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\JO.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\JO24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\JP.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\JP24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KM.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KM24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KP.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KP24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KR.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KR24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KW.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\KW24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\LA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\LA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\LT.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\LT24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\LU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\LU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MK.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MK24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MT.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MT24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MV.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MV24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MZ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\MZ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NO.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NO24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NZ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\NZ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PH.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PH24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PK.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PK24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PL.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PL24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PS.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PS24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PW.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\PW24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\QA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\QA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\RO.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\RO24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\RU.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\RU24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SD.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SD24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\sk.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SL24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SN24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SO24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SR24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ST24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SY24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TG24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TH24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TL24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TR24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TT24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TZ24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\UA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\US24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\VN24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\YE24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ZA24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SK24.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SL.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SN.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SO.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SR.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ST.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\SY.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TG.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TH.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TL.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TR.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TT.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\TZ.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\UA.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\US.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\VN.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\YE.png" />
+    <EmbeddedResource Include="Resources\Images\mono-flags\ZA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\mono-flags\Blank24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\Metro\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\error24.png" />
+    <Resource Include="Resources\Images\help24.png" />
+    <Resource Include="Resources\Images\information24.png" />
+    <Content Include="Resources\Images\MaximizeWindow.png" />
+    <Resource Include="Resources\Images\warning24.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

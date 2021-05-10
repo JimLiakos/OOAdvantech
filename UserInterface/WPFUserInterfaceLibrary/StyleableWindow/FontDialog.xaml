@@ -1,0 +1,304 @@
+﻿<sw:Window x:Class="StyleableWindow.FontDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StyleableWindow"
+        xmlns:sw="clr-namespace:StyleableWindow"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+           xmlns:ContrοlsEx="clr-namespace:WPFUIElementObjectBind;assembly=WPFConnectableControls" 
+        xmlns:wpftoolkitex="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+           xmlns:ConnectableCtrl="clr-namespace:WPFUIElementObjectBind;assembly=WPFConnectableControls"
+        Title="{Binding Value.TitlebarText}" Height="446.779" Width="850.302"
+        ShowInTaskbar="False" MinimizeBox="False" MaximizeBox="False" SubTitle="Change font, font style, size or color"
+           WindowStartupLocation="CenterOwner"
+           Icon="/StyleableWindow;component/Resources/Images/font32.png">
+    <sw:Window.DataContext>
+        <ConnectableCtrl:ObjectContext ViewControlObjectType="{x:Type local:FontPresantation}" TransactionOption="Supported"   Name="Connection"   RollbackOnExitWithoutAnswer="False" RollbackOnNegativeAnswer="False"></ConnectableCtrl:ObjectContext>
+    </sw:Window.DataContext>
+   
+    <Grid>
+        <sw:DialogContentControl  DataContext="{Binding Value, Mode=OneWay}" >
+
+            <Grid x:Name="MainGrid">
+                <Grid.Resources>
+                    <DataTemplate x:Key="fontFamilyData">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type FamilyTypeface}">
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Style}"/>
+                            <TextBlock Text="-"/>
+                            <TextBlock Text="{Binding Weight}" />
+                            <TextBlock Text="-"/>
+                            <TextBlock Text="{Binding Stretch}" />
+                        </WrapPanel>
+                    </DataTemplate>
+
+                </Grid.Resources>
+                <!--<Grid.RowDefinitions>
+            <RowDefinition Height="341*"/>
+            -->
+                <!--<RowDefinition Height="52"/>-->
+                <!--
+        </Grid.RowDefinitions>-->
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="125"/>
+                        <RowDefinition Height="74"/>
+                        <RowDefinition Height="153"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="255*"/>
+                        <ColumnDefinition Width="318*"/>
+                        <ColumnDefinition Width="95*"/>
+                        <ColumnDefinition Width="156*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Height="181" Width="220" Margin="5,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label  HorizontalAlignment="Left"   Content="Font Family" VerticalAlignment="Top" Grid.Row="0" />
+                        <ListBox Grid.Row="1" x:Name="FontFamiliesListBox" HorizontalAlignment="Stretch" Height="151" VerticalAlignment="Top" 
+                 ContrοlsEx:ListBoxBehavior.ScrollSelectedIntoView="True"
+                 ItemsSource="{Binding SystemFontFamilies}"  SelectedValue="{Binding SelectdFontFamily ,Mode=TwoWay}"  ItemTemplate="{StaticResource fontFamilyData}" Grid.RowSpan="2">
+                        </ListBox>
+
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,0,0,0" Grid.Column="1" Height="140" Width="304" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label  HorizontalAlignment="Left"  Content="Font Style" VerticalAlignment="Top" Grid.Row="0" />
+                        <ListBox x:Name="lstTypefaces"   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                         ItemsSource="{Binding Path = SelectdFontFamily.FamilyTypefaces}" Grid.Row="1" 
+                          SelectedItem="{Binding SelectedFontFamilyTypeface}">
+                            <ListBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}">LightBlue</SolidColorBrush>
+                            </ListBox.Resources>
+                        </ListBox>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="30" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"  >
+                        <Label>Font Color</Label>
+                        <wpftoolkitex:ColorPicker SelectedColor="{Binding SelectedColor}"  HorizontalAlignment="Left" VerticalAlignment="Top"  Width="70" Height="30" Grid.Row="1" ></wpftoolkitex:ColorPicker>
+                        <Label Margin="4,0,0,0"  Visibility="{Binding StrokeVisibility}">Stroke Color</Label>
+                        <wpftoolkitex:ColorPicker SelectedColor="{Binding SelectedStrokeColor}"  HorizontalAlignment="Left" VerticalAlignment="Top"  Width="70" Height="30" Grid.Row="1"  Visibility="{Binding StrokeVisibility}"></wpftoolkitex:ColorPicker>
+
+                    </StackPanel>
+
+
+                    <Grid Grid.Column="2" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Margin="1,0,0,0" Height="60" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label  Content="Size (pts)"  Grid.Column="2"/>
+                        <ComboBox  Grid.Row="1"  
+                      HorizontalAlignment="Stretch" 
+                      
+                      VerticalAlignment="Top" 
+
+                        
+                      ItemsSource="{Binding FontSizes}" 
+                      SelectedItem="{Binding SelectedFontSize}"
+                      Text="{Binding NewItem, UpdateSourceTrigger=PropertyChanged}"
+                      IsEditable="True" Height="10" Grid.Column="2">
+
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Margin="1,60,0,0" Height="60" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Spacing"  Grid.Column="2"/>
+                        <ComboBox  Grid.Row="1"  
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top" 
+                    
+                        
+                      ItemsSource="{Binding FontSpacing}" 
+                      SelectedItem="{Binding SelectedFontSpacing}"
+                      
+                      IsEditable="True" Height="10" Grid.Column="2">
+
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2" HorizontalAlignment="Stretch" Visibility="{Binding StrokeVisibility}"  VerticalAlignment="Bottom" Height="80" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="2">
+                            <Label.Content>
+                                <AccessText TextWrapping="Wrap" Text="Stroke Thickness" />
+                            </Label.Content>
+                        </Label>
+                        <ComboBox  Grid.Row="1"   
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top" 
+                      
+                        
+                      ItemsSource="{Binding StrokeThickness}" 
+                      SelectedItem="{Binding SelectedStrokeThickness}"
+                      
+                      IsEditable="True" Height="10" Grid.Column="2">
+
+                        </ComboBox>
+                    </Grid>
+
+
+
+
+                    <Grid Grid.Column="3" Grid.RowSpan="2" Margin="15,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0">Effects</Label>
+                        <StackPanel Grid.Row="1">
+                            <CheckBox  IsChecked="{Binding Underline}">Underline</CheckBox>
+                            <CheckBox IsChecked="{Binding Overline}">Overline</CheckBox>
+                            <CheckBox IsChecked="{Binding AllCaps}">All Caps</CheckBox>
+                            <CheckBox IsChecked="{Binding IsStrokeEnabled}">Stroke</CheckBox>
+                            <CheckBox IsChecked="{Binding Shadow}">Shadow</CheckBox>
+
+                        </StackPanel>
+
+                    </Grid>
+                    <Border BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" BorderBrush="DarkGray"    Height="120"  Margin="0,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2">
+                        <Grid>
+
+                            <ContrοlsEx:OutlineTextBlock x:Name="textBox" 
+                           Fill="{Binding SelectedForeground}" 
+                           FontStretch="{Binding SelectedFontStretch}" 
+                           FontStyle="{Binding SelectedFontStyle}" 
+                           FontWeight="{Binding SelectedFontWeight}" 
+                           FontFamily="{Binding Path=SelectdFontFamily.ActualFontFamily}" 
+                           FontSize="{Binding SelectedFontSizeInpx}"
+                           FontSpacing="{Binding SelectedFontSpacing}"
+                           AllCaps="{Binding AllCaps}"
+                           StrokeThickness="{Binding SelectedStrokeThickness}"
+                           Stroke="{Binding SelectedStrokeFill}" 
+                           Underline="{Binding Underline}"
+                           OverLine="{Binding Overline}"
+                                                 
+                                                
+                           HorizontalAlignment="Center" VerticalAlignment="Center"    Text="Cafe 57" Effect="{Binding DropShadowEffect}">
+                                <!--<TextBlock.Effect>
+                            <DropShadowEffect Direction="325" ShadowDepth="4" Opacity="0.7" BlurRadius="2.5" Color="LightGray" />
+                        </TextBlock.Effect>-->
+                            </ContrοlsEx:OutlineTextBlock>
+
+                            <Border HorizontalAlignment="Left"  VerticalAlignment="Top" Background="#FFF5F5F5"  CornerRadius="0,0,4,0" Width="75">
+                                <Label Content="Sample"  Foreground="#FFA4A7AB" FontSize="12" HorizontalAlignment="Center" ></Label>
+                            </Border>
+
+                            <!--<TextBlock x:Name="MytextBox" HorizontalAlignment="Center" VerticalAlignment="Center"    Text="Pizza" ></TextBlock>-->
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0" Width="205" Height="80" >
+                        <StackPanel>
+                            <Border BorderBrush="DarkGray"  BorderThickness="1" Height="40" >
+                                <Grid Margin="4" Background="#FFF5F5F5">
+                                    <Label Content="No Custom Font"   Foreground="#FFA4A7AB" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" ></Label>
+                                </Grid>
+                            </Border>
+                            <Button Height="30"  Margin="90,10,5,0" Foreground="Gray">
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock FontSize="16" FontWeight="Bold" >A</TextBlock>
+                                    <TextBlock Margin="4,0,0,0" VerticalAlignment="Center">Upload Font ..</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <Grid Visibility="{Binding ShadowPropertiesVisibility}" Grid.Column="3" Grid.Row="1" Margin="10,54,5,0" Grid.RowSpan="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="71*"/>
+                            <ColumnDefinition Width="71*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="60"/>
+
+                        </Grid.RowDefinitions>
+
+
+                        <Label Width="65" HorizontalAlignment="Left" >
+                            <Label.Content>
+                                <AccessText TextWrapping="Wrap" Text="Shadow Color" />
+                            </Label.Content>
+                        </Label>
+
+                        <wpftoolkitex:ColorPicker SelectedColor="{Binding SelectedShadowColor}"  HorizontalAlignment="Left" VerticalAlignment="Top"  Width="60" Height="30" Grid.Row="1" ></wpftoolkitex:ColorPicker>
+                        <Label Width="65" HorizontalAlignment="Left" Grid.Column="1" >
+                            <Label.Content>
+                                <AccessText TextWrapping="Wrap" Text="Shadow Blur" />
+                            </Label.Content>
+                        </Label>
+                        <ComboBox  Grid.Row="1"  Margin="0,0,4,0"
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top" 
+                      ItemsSource="{Binding ShadowBlur}" 
+                      SelectedItem="{Binding SelectedShadowBlur}"
+                      Text="{Binding SelectedShadowBlur, UpdateSourceTrigger=PropertyChanged}"
+                      IsEditable="True" Height="10" Grid.Column="1">
+                        </ComboBox>
+
+
+                        <Grid Grid.Row="2"  Width="70"  Height="55"  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Shadow X"  Grid.Column="2"/>
+                            <ComboBox  Grid.Row="1" Margin="0,0,4,0" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top" 
+                      ItemsSource="{Binding ShadowOffset}" 
+                      SelectedItem="{Binding SelectedShadowX}"
+                      Text="{Binding SelectedShadowX, UpdateSourceTrigger=PropertyChanged}"
+                      IsEditable="True" Height="10" Grid.Column="2">
+                            </ComboBox>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="1"   Height="55"  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Shadow Y"   Grid.Column="2"/>
+                            <ComboBox  Grid.Row="1"  Margin="0,0,4,0"
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Top" 
+                      ItemsSource="{Binding ShadowOffset}" 
+                      SelectedItem="{Binding SelectedShadowY}"
+                     Text="{Binding SelectedShadowY, UpdateSourceTrigger=PropertyChanged}"                               
+                      IsEditable="True" Height="10" Grid.Column="2">
+                            </ComboBox>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+                <!--<Grid Background="WhiteSmoke" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="389*"/>
+                <ColumnDefinition Width="87*"/>
+                <ColumnDefinition Width="94*"/>
+            </Grid.ColumnDefinitions>
+            <Button  Grid.Column="1" Style="{StaticResource DefaultButtonStyle}" Content="OK" Width="50" Margin="34,6,0,6"  />
+            <Button Grid.Column="2"  Content="Cancel" Margin="6,6,10,6" />
+        </Grid>-->
+            </Grid>
+        </sw:DialogContentControl>
+    </Grid>
+</sw:Window>
