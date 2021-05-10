@@ -5,7 +5,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
 {
 	/// <MetaDataID>{1B6A6274-09FB-4353-A9E7-C33E30E02C50}</MetaDataID>
 	public class Association : MetaDataRepository.Association
-    {
+    { 
         public override ObjectMemberGetSet SetMemberValue(object token, System.Reflection.MemberInfo member, object value)
         {
             if (member.Name == nameof(ExtensionMetaObjects))
