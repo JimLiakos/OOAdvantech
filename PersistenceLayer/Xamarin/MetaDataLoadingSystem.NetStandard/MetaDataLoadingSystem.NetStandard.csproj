@@ -11,6 +11,7 @@
     <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\BuildContainedObjectIndicies.cs" Link="BuildContainedObjectIndicies.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\DataLoader.cs" Link="DataLoader.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataDeleteStorageInstanceCommand.cs" Link="MetaDataDeleteStorageInstanceCommand.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\MetaDataLinkObjectsCommand.cs" Link="MetaDataLinkObjectsCommand.cs" />

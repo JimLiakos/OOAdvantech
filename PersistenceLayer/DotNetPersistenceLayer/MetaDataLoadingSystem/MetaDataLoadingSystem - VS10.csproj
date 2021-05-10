@@ -253,9 +253,7 @@
     <None Include="MetaDataLoadingSystem.sub" />
     <None Include="StrongNameNet4.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OOAdvantech\MetaDataLoadingSystem\Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
