@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8DFEC0F3-C2EC-4D16-9E1D-09D33199E73F}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPFUIElementObjectBind</RootNamespace>
+    <AssemblyName>WPFConnectableControls</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StrongName.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions">
+      <HintPath>..\packages\Blend.Interactivity.Wpf.1.0.1340.0\lib\net\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\Extended.Wpf.Toolkit.3.7.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behaviors\ButtonClosePopupBehavior.cs" />
+    <Compile Include="Behaviors\ListBoxBehavior.cs" />
+    <Compile Include="Behaviors\TextBoxInputBehavior.cs" />
+    <Compile Include="BindingMarkupExtension.cs" />
+    <Compile Include="CallMethodAction.cs" />
+    <Compile Include="IPage.cs" />
+    <Compile Include="MultiligualWatermarkTextBox.xaml.cs">
+      <DependentUpon>MultiligualWatermarkTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuComamnd.cs" />
+    <Compile Include="NullVisibilityConverter.cs" />
+    <Compile Include="OutlineTextBlock.cs" />
+    <Compile Include="SelectAllFocusBehavior.cs" />
+    <Compile Include="TextBoxNumberWithUnit.cs" />
+    <Compile Include="ViewModelWrappers.cs" />
+    <Compile Include="WindowCloseCommand.cs" />
+    <Compile Include="WindowMaximizeCommand.cs" />
+    <Compile Include="WindowMinimizeCommand.cs" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="DataGridExtender.cs" />
+    <Compile Include="CommandBinding.cs" />
+    <Compile Include="EditableTextBlock.xaml.cs">
+      <DependentUpon>EditableTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IUIElementExtender.cs" />
+    <Compile Include="ObjectContext.cs" />
+    <Compile Include="PushBinding\FreezableBinding.cs" />
+    <Compile Include="PushBinding\PushBinding.cs" />
+    <Compile Include="PushBinding\PushBindingCollection.cs" />
+    <Compile Include="PushBinding\PushBindingManager.cs" />
+    <Compile Include="SaveAction.cs" />
+    <Compile Include="SaveEndExitAction.cs" />
+    <Compile Include="UIElementManager.cs" />
+    <Compile Include="UIElementInitializationBehavior.cs" />
+    <Compile Include="ViewControlObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="StrongName.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantech\OOAdvantech - VS10.csproj">
+      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Name>OOAdvantech - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher - VS10.csproj">
+      <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
+      <Name>ModulePublisher - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserInterface\UserInterface - VS10.csproj">
+      <Project>{E0E5873E-E5E4-46F6-94F1-731C172CC1C6}</Project>
+      <Name>UserInterface - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsBaseEx\WindowsBaseEx.csproj">
+      <Project>{d83eae0a-82cd-4496-8524-c734c6236b78}</Project>
+      <Name>WindowsBaseEx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MultiligualWatermarkTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditableTextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewControlObject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSFolder_closed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Association.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Association_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Association_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Association_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Association_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Class.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Class_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Class_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Class_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Class_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Class_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Enum.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Enum_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Enum_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Enum_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Enum_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumItem.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumItem_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumItem_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumItem_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumItem_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumItem_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_EnumPrivate.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Event.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Event_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Event_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Event_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Event_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Event_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Field.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Field_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Field_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Field_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Field_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Field_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Interface.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Interface_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Interface_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Interface_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Interface_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Interface_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Method.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Method_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Method_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Method_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Method_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Method_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_MethodOverload.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_MethodOverload_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_MethodOverload_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_MethodOverload_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_MethodOverload_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_MethodOverload_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Namespace.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Namespace_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Namespace_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Namespace_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_NamespacePrivate.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_NamespaceProtected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operation_Parametrs.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operator.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operator_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operator_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operator_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operator_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Operator_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Parameter.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Properties.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Properties_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Properties_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Properties_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Properties_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Properties_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Association.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Association_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Association_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Association_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Field.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Field_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Field_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Realized_Field_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Return_Type.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Solution.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Structure.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Structure_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Structure_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Structure_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Structure_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Structure_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Template.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Template_Friend.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Template_Private.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Template_Protected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Template_Sealed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSObject_Template_Shortcut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSProject_css.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSProject_genericproject.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VSProject_reference.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Translate24.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

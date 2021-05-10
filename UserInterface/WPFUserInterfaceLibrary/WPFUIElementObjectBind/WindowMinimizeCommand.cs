@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+namespace WPFUIElementObjectBind
+{
+    /// <MetaDataID>{5cb9db5a-a798-4ba4-8dad-eb347259396f}</MetaDataID>
+    public class WindowMinimizeCommand : ICommand
+    {
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            var window = parameter as Window;
+
+            if (window != null)
+            {
+                window.WindowState = WindowState.Minimized;
+            }
+        }
+    }
+}
