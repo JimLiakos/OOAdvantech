@@ -1647,6 +1647,13 @@
             Instance of a Classifier or of the Classifier itself. Feature is an abstract metaclass. </summary>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.Feature.SetMemberValue(System.Object,System.Reflection.MemberInfo,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="token"></param>
+            <param name="member"></param>
+            <param name="value"></param>
+            <returns></returns>
             <MetaDataID>{4be650c5-fccd-44d5-b9af-904d73e4e6d5}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.Feature.GetMemberValue(System.Object,System.Reflection.MemberInfo)">
