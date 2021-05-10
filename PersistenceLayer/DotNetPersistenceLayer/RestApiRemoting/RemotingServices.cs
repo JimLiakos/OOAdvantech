@@ -92,7 +92,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
         }
 
-     
+
 
         /// <MetaDataID>{2f16f479-84ac-4d39-ac10-7a403ccdad68}</MetaDataID>
         public static T CastTransparentProxy<T>(object obj) where T : class
@@ -192,11 +192,11 @@ namespace OOAdvantech.Remoting.RestApi
                 var remotingServices = GetRemotingServices(serverUrl);
                 return remotingServices.GetPersistentObject(persistentUri);
 
-//#if DeviceDotNet
-//                return RemotingServices.CastTransparentProxy <OOAdvantech.Remoting.MarshalByRefObject>( remotingServices.GetPersistentObject(persistentUri));
-//#else
-//                return remotingServices.GetPersistentObject(persistentUri);
-//#endif
+                //#if DeviceDotNet
+                //                return RemotingServices.CastTransparentProxy <OOAdvantech.Remoting.MarshalByRefObject>( remotingServices.GetPersistentObject(persistentUri));
+                //#else
+                //                return remotingServices.GetPersistentObject(persistentUri);
+                //#endif
             }
             catch (System.Exception error)
             {
@@ -473,7 +473,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             if (requestUri.Trim().IndexOf("ws://") == 0 || requestUri.Trim().IndexOf("wss://") == 0)
             {
-#region Uses web socket request channel
+                #region Uses web socket request channel
                 WebSocketClient webSocket = WebSocketClient.EnsureConnection(requestUri + "WebSocketMessages", binding);
                 if (webSocket.State != WebSocketState.Open)
                 {
@@ -508,13 +508,13 @@ namespace OOAdvantech.Remoting.RestApi
                 }
 
                 return task.Result;
-#endregion
+                #endregion
             }
 
 
             if (requestUri.Trim().IndexOf("http://") == 0)
             {
-#region Uses HTTP request channel
+                #region Uses HTTP request channel
 
                 var methodCallMessage = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
                 var content = new StringContent(methodCallMessage, Encoding.UTF8, "application/json");
@@ -534,12 +534,12 @@ namespace OOAdvantech.Remoting.RestApi
                     return responseData;
                 }
 
-#endregion
+                #endregion
             }
 
 #if !DeviceDotNet
 
-#region Uses tcp channel
+            #region Uses tcp channel
             if (requestUri.Trim().IndexOf("net.tcp://") == 0)
             {
                 try
@@ -551,7 +551,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                 }
             }
-#endregion
+            #endregion
 #endif
             return null;
         }
@@ -690,16 +690,20 @@ namespace OOAdvantech.Remoting.RestApi
             if (!LeaseTimeIsSet)
             {
                 LeaseTimeIsSet = true;
+#if !DeviceDotNet
                 System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseTime = TimeSpan.FromSeconds(200);
                 System.Runtime.Remoting.Lifetime.LifetimeServices.RenewOnCallTime = TimeSpan.FromSeconds(100);
                 System.Runtime.Remoting.Lifetime.LifetimeServices.SponsorshipTimeout = TimeSpan.FromSeconds(100);/**/
+#endif
             }
         }
         public static void SetProductionLeaseTime()
         {
+#if !DeviceDotNet
             System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseTime = TimeSpan.FromMinutes(20);
             System.Runtime.Remoting.Lifetime.LifetimeServices.RenewOnCallTime = TimeSpan.FromMinutes(10);
             System.Runtime.Remoting.Lifetime.LifetimeServices.SponsorshipTimeout = TimeSpan.FromMinutes(10);/**/
+#endif
 
         }
 

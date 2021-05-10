@@ -241,7 +241,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ObjectID.cs" />
-    <Compile Include="OOAdvantech\MetaDataLoadingSystem\Commands\BuildContainedObjectIndicies.cs" />
+    <Compile Include="BuildContainedObjectIndicies.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="StorageCell.cs" />
     <Compile Include="StorageCellReference.cs" />
@@ -252,6 +252,9 @@
     <None Include="MetaDataLoadingSystem.cat" />
     <None Include="MetaDataLoadingSystem.sub" />
     <None Include="StrongNameNet4.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OOAdvantech\MetaDataLoadingSystem\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

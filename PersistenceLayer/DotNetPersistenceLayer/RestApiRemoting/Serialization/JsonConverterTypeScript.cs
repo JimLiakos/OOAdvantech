@@ -952,6 +952,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             string internalChannelUri = null;
             if (ServerSessionPart == null)
             {
+#if !DeviceDotNet
                 if (ContextMessageDispatcher.Current != null)
                 {
                     serverChannelUri = RemotingServices.ServerPublicUrl + string.Format("({0})", ContextMessageDispatcher.Current.ContextID);
@@ -959,6 +960,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 else
                     serverChannelUri = RemotingServices.ServerPublicUrl;
+#else
+                serverChannelUri = RemotingServices.ServerPublicUrl;
+#endif
             }
             else
             {
@@ -1167,7 +1171,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 WriteJsonType(writer, serializer, jsonType);
 
-                #region Write values in array
+#region Write values in array
                 JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
                 valueProperty.WritePropertyName(writer);
                 writer.WriteStartArray();
@@ -1177,7 +1181,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     serializer.Serialize(writer, itemValue);
                 }
                 writer.WriteEndArray();
-                #endregion
+#endregion
 
                 writer.WriteEndObject();
             }
@@ -1196,7 +1200,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 WriteJsonType(writer, serializer, jsonType);
 
-                #region Write key value pair in array
+#region Write key value pair in array
                 JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
                 valueProperty.WritePropertyName(writer);
 
@@ -1215,7 +1219,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArray();
-                #endregion
+#endregion
 
                 writer.WriteEndObject();
 
