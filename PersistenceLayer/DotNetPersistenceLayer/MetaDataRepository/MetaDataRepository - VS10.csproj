@@ -104,6 +104,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveObjectsContext.cs" />
     <Compile Include="AddCommand.cs">
       <SubType>Code</SubType>
     </Compile>
