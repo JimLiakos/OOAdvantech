@@ -14,7 +14,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
         public BuildContainedObjectIndicies(PersistenceLayerRunTime.IndexedCollection collection)
             : base(collection)
         {
-
+            //saa
 
         }
         /// <MetaDataID>{6533e648-d04b-4293-8ea8-3f3c78594277}</MetaDataID>
