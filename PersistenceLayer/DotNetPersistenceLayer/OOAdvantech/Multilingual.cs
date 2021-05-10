@@ -16,6 +16,7 @@ namespace OOAdvantech
             Values = new Dictionary<string, object>();
         }
 
+
         /// <MetaDataID>{2dd74378-f0ef-4561-b44e-d4c3e626ace9}</MetaDataID>
         public Multilingual(IMultilingual multilingual)
         {
