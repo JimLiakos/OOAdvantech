@@ -146,10 +146,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Perfon.Core\Perfon.Core.csproj">
-      <Project>{15ea05e4-0bcf-4a35-b177-59b932869414}</Project>
-      <Name>Perfon.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher - VS10.csproj">
       <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>
       <Name>ModulePublisher - VS10</Name>
@@ -165,6 +161,10 @@
     <ProjectReference Include="..\OOAdvantech\OOAdvantech - VS10.csproj">
       <Project>{83492998-8e8b-44a9-bcc8-9a6e979e3eb6}</Project>
       <Name>OOAdvantech - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Perfon.Core\Perfon.Core.csproj">
+      <Project>{15ea05e4-0bcf-4a35-b177-59b932869414}</Project>
+      <Name>Perfon.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
