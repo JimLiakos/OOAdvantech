@@ -829,6 +829,14 @@
     <None Include="Resources\TypeBool.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\check.bmp" />
+    <Content Include="Resources\editdelete.ico" />
+    <Content Include="Resources\editdelete.png" />
+    <Content Include="Resources\Folder.bmp" />
+    <Content Include="Resources\FolderClosed.bmp" />
+    <Content Include="Resources\Leaf.bmp" />
+    <Content Include="Resources\minus.bmp" />
+    <Content Include="Resources\plus.bmp" />
     <Content Include="SchedulerControl\ProjectManagement.SchedulerControl.csproj" />
     <EmbeddedResource Include="SchedulerControl\zoom_in.gif" />
     <EmbeddedResource Include="SchedulerControl\zoom_out.gif" />
