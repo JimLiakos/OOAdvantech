@@ -146,7 +146,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OpenVersions-old\PersistenceLayer\DotNetPersistenceLayer\Perfon.Core\Perfon.Core.csproj">
+    <ProjectReference Include="..\Perfon.Core\Perfon.Core.csproj">
       <Project>{15ea05e4-0bcf-4a35-b177-59b932869414}</Project>
       <Name>Perfon.Core</Name>
     </ProjectReference>
