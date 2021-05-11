@@ -12,4 +12,5 @@ namespace OOAdvantech.Speech
         /// <MetaDataID>{860cf0fc-dcf8-4393-a5dc-6e56099af559}</MetaDataID>
         void Speak(string text);
     }
+
 }
