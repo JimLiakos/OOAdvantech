@@ -31,7 +31,7 @@ namespace ModulePublisherHostProcess
 
                  
             //} 
-           System.Windows.Forms.MessageBox.Show(System.Environment.UserName);
+           //System.Windows.Forms.MessageBox.Show(System.Environment.UserName);
              
             bool remove = false;
             bool encrypted = false;
@@ -91,7 +91,7 @@ namespace ModulePublisherHostProcess
 
                 }
             }
-            System.Windows.Forms.MessageBox.Show(assemblyFileName);
+            //System.Windows.Forms.MessageBox.Show(assemblyFileName);
 
             List<string> refrences = new List<string>();
             if(System.IO.File.Exists(errorFile))
