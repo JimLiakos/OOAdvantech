@@ -837,6 +837,8 @@
     <Content Include="Resources\Leaf.bmp" />
     <Content Include="Resources\minus.bmp" />
     <Content Include="Resources\plus.bmp" />
+    <Content Include="Resources\uncheck.bmp" />
+    <Content Include="Resources\unknown.bmp" />
     <Content Include="SchedulerControl\ProjectManagement.SchedulerControl.csproj" />
     <EmbeddedResource Include="SchedulerControl\zoom_in.gif" />
     <EmbeddedResource Include="SchedulerControl\zoom_out.gif" />
