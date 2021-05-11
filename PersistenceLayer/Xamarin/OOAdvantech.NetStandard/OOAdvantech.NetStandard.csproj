@@ -198,13 +198,8 @@
     <Content Include="..\..\DotNetPersistenceLayer\RestApiRemoting\FirebaseJWTAuth.cs" Link="Remoting\RestApiRemoting\FirebaseJWTAuth.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GenericCollections\" />
-    <Folder Include="MetaDataRepository\" />
-    <Folder Include="PersistenceLayer\" />
     <Folder Include="Remoting\CommonEventHandler\" />
     <Folder Include="Remoting\RestApiRemoting\Serialization\" />
-    <Folder Include="Security\" />
-    <Folder Include="Transactions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WebSocket4Net" Version="0.15.2" />
