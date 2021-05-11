@@ -2388,10 +2388,15 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         relatedObjects.Remove(collectionChangement.Object);
                 }
                 collectionChanges.Sort(new CollectionChangesSort());
-                foreach (CollectionChange collectionChangement in collectionChanges)
+                foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x=>x.Index))
                 {
                     if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && !relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
-                        relatedObjects.Insert(collectionChangement.Index, collectionChangement.Object);
+                    {
+                        if (collectionChangement.Index >= relatedObjects.Count)
+                            relatedObjects.Add(collectionChangement.Object);
+                        else
+                            relatedObjects.Insert(collectionChangement.Index, collectionChangement.Object);
+                    }
                 }
                 foreach (CollectionChange collectionChangement in collectionChanges)
                 {
