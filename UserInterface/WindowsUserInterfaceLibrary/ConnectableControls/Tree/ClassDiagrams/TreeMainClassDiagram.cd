@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="ConnectableControls.Tree.InputState" Collapsed="true">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\InputState.cs</FileName>
+      <HashCode>AAAAAAAAACCAgEAAAAAAAAAAAAAAEAAAAAAAAACAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.InputWithControl" Collapsed="true">
+    <Position X="0.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\InputWithControl.cs</FileName>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.InputWithShift" Collapsed="true">
+    <Position X="2.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\InputWithShift.cs</FileName>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAgAAAIAAAAAAAAAAAAAAAABA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.Node" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\Node.cs</FileName>
+      <HashCode>AAAgABAAgCAAAAAAAgAEVAAQAAAQAAAIAAsgCAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NormalInputState" Collapsed="true">
+    <Position X="1.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NormalInputState.cs</FileName>
+      <HashCode>AAAAAAAAAAAQgEAAAAAAgAAAIABAEEAAAAAAAAAhAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.ResizeColumnState" Collapsed="true">
+    <Position X="5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\ResizeColumnState.cs</FileName>
+      <HashCode>AAAAAAEAAAAEgMABAAAAAAAAAAAAEAAAAAAAAACAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TextHelper" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TextHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeColumn" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeColumn.cs</FileName>
+      <HashCode>BAAgAAAAACAAEkAEAAAgAEAEABABAAAQAAEAAAIAAAI=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeColumnCollection" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeColumnCollection.cs</FileName>
+      <HashCode>AAAgAABAAAAABAAAAAAAAAAAQAAAAAAEAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeColumnEventArgs" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeColumnEventArgs.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeModel.cs</FileName>
+      <HashCode>AAAkgAAAAAAQAGQAAAAAEAAAEAACQAAAUAAAAAAAAQE=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeModelEventArgs" Collapsed="true">
+    <Position X="8.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeModelEventArgs.cs</FileName>
+      <HashCode>AAAQAAAAAEAAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeNode" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeNode.cs</FileName>
+      <HashCode>EAAwATFAACDgEAIEAAAEUAiQQAAAAgABAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeNodeAdvMouseEventArgs" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeNodeAdvMouseEventArgs.cs</FileName>
+      <HashCode>AAAAABCEIAAQAAEAAAAAEAQAEAAAABEAAAAAAQFAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreePath" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreePath.cs</FileName>
+      <HashCode>GABAAAAAAAACAAAAAAIAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreePathEventArgs" Collapsed="true">
+    <Position X="8.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreePathEventArgs.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeViewAdv" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeViewAdv.cs</FileName>
+      <HashCode>a6eH2wqAKqafDi2Ksm+UHBZ2UHIuAFrr99v9xGk7238=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeViewAdvCancelEventArgs" Collapsed="true">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeViewAdvCancelEventArgs.cs</FileName>
+      <HashCode>AAACAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.TreeViewAdvEventArgs" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\TreeViewAdvEventArgs.cs</FileName>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.BaseTextControl" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\BaseTextControl.cs</FileName>
+      <HashCode>AAAAIABQACAAAgAAAEAAAQA8AACBAAAQAAAAAAACAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.BindableControl" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\BindableControl.cs</FileName>
+      <HashCode>EAAAAAAAIAAACgAEAQAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.EditableControl" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\EditableControl.cs</FileName>
+      <HashCode>QQAgBAAACCAkAEAAAAEEAADAEAAUEAAAAAGoAAIAAYA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeCheckBox" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeCheckBox.cs</FileName>
+      <HashCode>AAEABAAAAAACgkQCAAAAAEigAgAAEGABAAAIAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeComboBox" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeComboBox.cs</FileName>
+      <HashCode>wQAAAAAAAAAMAIBAAAAAAABAAQQAAAABAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeControl" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeControl.cs</FileName>
+      <HashCode>AAAAAAAAgAAAgsIAAAhAQAAwAAAAEAAAAEAIAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeControlsCollection" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeControlsCollection.cs</FileName>
+      <HashCode>AAAAAABAACAABAAAAAAAAAAAQAAAAAAEAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeControlCollectionEditor" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeControlsCollection.cs</FileName>
+      <HashCode>AAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeIcon" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeIcon.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodePlusMinus" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodePlusMinus.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAEAgAAAAMCAAAAAIACAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeStateIcon" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeStateIcon.cs</FileName>
+      <HashCode>ABAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAQIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectableControls.Tree.NodeControls.NodeTextBox" Collapsed="true">
+    <Position X="5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\NodeControls\NodeTextBox.cs</FileName>
+      <HashCode>QQQBhAAAADAMgAAAABQAAAAAAkEAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ConnectableControls.Tree.DrawContext" Collapsed="true">
+    <Position X="12" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\DrawContext.cs</FileName>
+      <HashCode>AIAAAAAAgAAAAIAAAAAACAAACACAAAASAAAAAQBCAwA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ConnectableControls.Tree.DropPosition" Collapsed="true">
+    <Position X="13.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\DropPosition.cs</FileName>
+      <HashCode>AAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAgAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ConnectableControls.Tree.EditorContext" Collapsed="true">
+    <Position X="15.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\EditorContext.cs</FileName>
+      <HashCode>CAAAgACAAAgAAIAAQAAAAAAAAAAAAAAAAAAAAEAAAgA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="ConnectableControls.Tree.IToolTipProvider" Collapsed="true">
+    <Position X="12" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\IToolTipProvider.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConnectableControls.Tree.ITreeModel" Collapsed="true">
+    <Position X="13.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\ITreeModel.cs</FileName>
+      <HashCode>AAAEAAAAAAAAAEQAAAAAEAAAEAAAQAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ConnectableControls.Tree.DrawSelectionMode" Collapsed="true">
+    <Position X="12" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\enums.cs</FileName>
+      <HashCode>AAAACAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConnectableControls.Tree.TreeSelectionMode" Collapsed="true">
+    <Position X="15.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\enums.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAIAgAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConnectableControls.Tree.NodePosition" Collapsed="true">
+    <Position X="13.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Tree\enums.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAQAQAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

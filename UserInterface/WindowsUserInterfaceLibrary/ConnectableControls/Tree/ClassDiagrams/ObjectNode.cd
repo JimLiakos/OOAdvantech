@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="ConnectableControls.Tree.Node">
+    <Position X="2.75" Y="1" Width="2" />
+    <TypeIdentifier>
+      <FileName>Tree\Node.cs</FileName>
+      <HashCode>AAAgABAAgCAAAAAAAgAEVAAQAAAQAAAIAAsgCAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="ConnectableControls.Tree.Node.NodeCollection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Tree\Node.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+  </Class>
+  <Class Name="ConnectableControls.ObjectNode">
+    <Position X="9.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ObjectNode.cs</FileName>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

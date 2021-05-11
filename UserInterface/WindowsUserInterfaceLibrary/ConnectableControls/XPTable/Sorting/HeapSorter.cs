@@ -1,0 +1,124 @@
+/*
+ * Copyright © 2005, Mathew Hall
+ * All rights reserved.
+ * 
+ * Sort algorithm modified from the C# implementation written by Jonathan de Halleux, 
+ * Marc Clifton, and Robert Rohde (see http://www.codeproject.com/csharp/cssorters.asp) 
+ * based on Java implementations by James Gosling, Jason Harrison, Jack Snoeyink, Jim Boritz, 
+ * Denis Ahrens, Alvin Raj (see http://www.cs.ubc.ca/spider/harrison/Java/sorting-demo.html).
+ *
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ *
+ *    - Redistributions of source code must retain the above copyright notice, 
+ *      this list of conditions and the following disclaimer.
+ * 
+ *    - Redistributions in binary form must reproduce the above copyright notice, 
+ *      this list of conditions and the following disclaimer in the documentation 
+ *      and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+ * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+ * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+ * OF SUCH DAMAGE.
+ */
+
+
+using System;
+using System.Collections;
+using System.Windows.Forms;
+
+using ConnectableControls.List.Models;
+
+
+namespace ConnectableControls.List.Sorting
+{
+    /// <summary>
+    /// A HeapSort implementation for sorting the Cells contained in a TableModel
+    /// </summary>
+    /// <MetaDataID>{B4B13ECB-425F-4649-BBC8-E93606453304}</MetaDataID>
+	public class HeapSorter : SorterBase
+	{
+        /// <summary>
+        /// Initializes a new instance of the HeapSorter class with the specified 
+        /// TableModel, Column index, IComparer and SortOrder
+        /// </summary>
+        /// <param name="tableModel">The TableModel that contains the data to be sorted</param>
+        /// <param name="column">The index of the Column to be sorted</param>
+        /// <param name="comparer">The IComparer used to sort the Column's Cells</param>
+        /// <param name="sortOrder">Specifies how the Column is to be sorted</param>
+        /// <MetaDataID>{4F2585DA-40BC-42F4-ADA0-B0C9BE4B65CA}</MetaDataID>
+		public HeapSorter(TableModel tableModel, int column, IComparer comparer, SortOrder sortOrder) : base(tableModel, column, comparer, sortOrder)
+		{
+			
+		}
+
+
+        /// <summary>
+        /// Starts sorting the Cells in the TableModel
+        /// </summary>
+        /// <MetaDataID>{F8A5DDDC-F42E-47FD-A4FD-FB9D4EC09B51}</MetaDataID>
+		public override void Sort()
+		{
+			int n;
+			int i;
+
+			n = this.TableModel.Rows.Count;
+
+			for (i=n/2; i>0; i--) 
+			{
+				this.DownHeap(i, n);
+			}
+			do 
+			{
+				this.Swap(0, n-1);
+
+				n = n - 1;
+
+				this.DownHeap(1, n);
+			} while (n>1);
+		}
+
+
+        /// <summary>
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="n"></param>
+        /// <MetaDataID>{E17E65A0-5B9D-4AC8-BBD3-BF56C655562E}</MetaDataID>
+		private void DownHeap(int k, int n)
+		{
+			int j;
+			bool loop = true;
+
+			while ((k <= n / 2) && loop) 
+			{
+				j = k + k;
+
+				if (j < n) 
+				{
+					if (this.Compare(this.TableModel[j-1, this.SortColumn], this.TableModel[j, this.SortColumn]) < 0) 
+					{					
+						j++;
+					}
+				}	
+
+				if (this.Compare(this.TableModel[k-1, this.SortColumn], this.TableModel[j-1, this.SortColumn]) >= 0) 
+				{
+					loop = false;
+				} 
+				else 
+				{
+					this.Swap(k-1, j-1);
+					
+					k = j;
+				}
+			}
+		}
+	}
+}
