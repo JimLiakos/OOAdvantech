@@ -14,6 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="OOAdvantech.Json.NetStandard.7z" />
+    <None Remove="OOAdvantech.Json.NetStandardold.7z" />
+    <None Remove="OOAdvantech.Json.NetStandardr.7z" />
+    <None Remove="vssver.scc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\..\..\OAdvantech.Json\ObjectRefProperyValue.cs" Link="ObjectRefProperyValue.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech.Json\Bson\BsonBinaryType.cs" Link="Bson\BsonBinaryType.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\OOAdvantech.Json\Bson\BsonBinaryWriter.cs" Link="Bson\BsonBinaryWriter.cs" />
