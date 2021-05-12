@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="ScanPage.xaml" />
+    <None Remove="vssver.scc" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
