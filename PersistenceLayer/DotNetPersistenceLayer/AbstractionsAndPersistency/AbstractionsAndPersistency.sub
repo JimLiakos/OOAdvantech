@@ -1,0 +1,420 @@
+
+(object Petal
+    version    	47
+    _written   	"Rose 8.0.0303.1400"
+    charSet    	161)
+
+(object SubSystem "AbstractionsAndPersistency"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"4265FE58002E"
+    physical_models 	(list unit_reference_list
+	(object module "AbstractionsAndPersistency" "NotAModuleType" "NotAModulePart"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Solution File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework.sln")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"Project File"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\AbstractionsAndPersistency\\AbstractionsAndPersistency.csproj")
+		(object Attribute
+		    tool       	"Persistent"
+		    name       	"Location"
+		    value      	"")
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"{CC669A8E-0854-4468-93D5-FD46873B5322}")
+		(object Attribute
+		    tool       	"DotNet"
+		    name       	"Solution"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework - VS10.sln")
+		(object Attribute
+		    tool       	"DotNet"
+		    name       	"Project"
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\AbstractionsAndPersistency\\AbstractionsAndPersistency - VS10.csproj"))
+	    quid       	"4265FE710213"
+	    stereotype 	""
+	    realized_interfaces 	(list realize_rel_list
+		(object Realize_Relationship
+		    quid       	"4265FEF0038A"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IOrder"
+		    quidu      	"4265FBFE038A")
+		(object Realize_Relationship
+		    quid       	"4265FEFB00FA"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IOrderDetail"
+		    quidu      	"4265FC600222")
+		(object Realize_Relationship
+		    quid       	"432E85020028"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IPriceList"
+		    quidu      	"432E84AD002E")
+		(object Realize_Relationship
+		    quid       	"432E85030316"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IProductPrice"
+		    quidu      	"432E84AF000F")
+		(object Realize_Relationship
+		    quid       	"432E8507026A"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IProduct"
+		    quidu      	"432E84B100AB")
+		(object Realize_Relationship
+		    quid       	"435735C7002E"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IUnitMeasure"
+		    quidu      	"435734A60261")
+		(object Realize_Relationship
+		    quid       	"438964EE01D4"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IClient"
+		    quidu      	"438963B900DF")
+		(object Realize_Relationship
+		    quid       	"43BC29AC013E"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IStorePlace"
+		    quidu      	"43BC2899000C")
+		(object Realize_Relationship
+		    quid       	"529C798D020A"
+		    supplier   	"Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IInspection"
+		    quidu      	"529C70EF0107"))
+	    language   	"C#"))
+    physical_presentations 	(list unit_reference_list
+	(object Module_Diagram "Main"
+	    quid       	"4265FE6A02AF"
+	    title      	"Main"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	0
+	    items      	(list diagram_item_list
+		(object ModView "Component View::OOAdvantech::AbstractionsAndPersistency::AbstractionsAndPersistency" "NotAModuleType" "NotAModulePart" @1
+		    location   	(837, 675)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@1
+			location   	(763, 650)
+			fill_color 	13434879
+			anchor_loc 	3
+			nlines     	2
+			max_width  	278
+			label      	"AbstractionsAndPersistency")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"4265FE710213"
+		    width      	502
+		    width      	502
+		    height     	162)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IOrder" @2
+		    location   	(839, 303)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@2
+			location   	(837, 412)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IOrder")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"4265FBFE038A"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @3
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"4265FEF0038A"
+		    client     	@1
+		    supplier   	@2
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IOrderDetail" @4
+		    location   	(299, 753)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@4
+			location   	(297, 862)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IOrderDetail")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"4265FC600222"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @5
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"4265FEFB00FA"
+		    client     	@1
+		    supplier   	@4
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IPriceList" @6
+		    location   	(839, 1023)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@6
+			location   	(837, 1132)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IPriceList")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"432E84AD002E"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @7
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"432E85020028"
+		    client     	@1
+		    supplier   	@6
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IProductPrice" @8
+		    location   	(1289, 1023)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@8
+			location   	(1287, 1132)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IProductPrice")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"432E84AF000F"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @9
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"432E85030316"
+		    client     	@1
+		    supplier   	@8
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IProduct" @10
+		    location   	(479, 393)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@10
+			location   	(477, 502)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IProduct")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"432E84B100AB"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @11
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"432E8507026A"
+		    client     	@1
+		    supplier   	@10
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IUnitMeasure" @12
+		    location   	(479, 1113)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@12
+			location   	(477, 1222)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IUnitMeasure")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"435734A60261"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @13
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"435735C7002E"
+		    client     	@1
+		    supplier   	@12
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IClient" @14
+		    location   	(1289, 393)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@14
+			location   	(1287, 502)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IClient")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"438963B900DF"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @15
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"438964EE01D4"
+		    client     	@1
+		    supplier   	@14
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IStorePlace" @16
+		    location   	(929, 1383)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@16
+			location   	(927, 1492)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IStorePlace")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"43BC2899000C"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @17
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"43BC29AC013E"
+		    client     	@1
+		    supplier   	@16
+		    line_style 	0)
+		(object InterfaceView "Logical View::FlavourBusinessFacade::OOAdvantech::AbstractionsAndPersistency::IInspection" @18
+		    location   	(479, 123)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@18
+			location   	(478, 231)
+			anchor_loc 	1
+			nlines     	2
+			max_width  	225
+			justify    	0
+			label      	"IInspection")
+		    icon       	"Interface"
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"529C70EF0107"
+		    width      	58
+		    height     	58)
+		(object RealizeView "" @19
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"529C798D020A"
+		    client     	@1
+		    supplier   	@18
+		    line_style 	0)))))
