@@ -13,5 +13,7 @@ namespace WPFUIElementObjectBind
         List<IPage> NavigationServicePages { get; }
 
         void Close();
+
+        void ObjectContextTransactionAborted();
     }
 }

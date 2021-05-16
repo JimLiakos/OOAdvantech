@@ -365,7 +365,7 @@
                                 </Grid>
                                 <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="left">
                                     <Grid>
-                                        <Button HorizontalAlignment="Right" Margin="0,0,5,0" 
+                                        <Button Name="x_backButton"  HorizontalAlignment="Right" Margin="0,0,5,0" 
                                                 Command="{Binding Path=BackClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type  sw:DialogContentControl}}}" 
                                                 Visibility="{Binding Path=BackButtonVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type  sw:DialogContentControl}}}" 
                                                 Width="70"  >
@@ -374,7 +374,7 @@
                                                 <TextBlock Margin="6,0,6,0" VerticalAlignment="Center"  Text="Back" ></TextBlock>
                                             </StackPanel>
                                         </Button>
-                                        <Button HorizontalAlignment="Right" Margin="0,0,5,0" 
+                                        <Button Name="x_closeButton" HorizontalAlignment="Right" Margin="0,0,5,0" 
                                                 Command="{Binding Path=CloseClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type  sw:DialogContentControl}}}" 
                                                 Visibility="{Binding Path=CloseButtonVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type  sw:DialogContentControl}}}" 
                                                 Width="70"  >
@@ -408,7 +408,7 @@
                                             </Border>
                                         </Popup>
                                     </Grid>
-                                    <Button  Style="{DynamicResource DefaultButtonStyle}"     Content="Save" Margin="5,0,5,0" 
+                                    <Button Name="x_saveButton"  Style="{DynamicResource DefaultButtonStyle}"     Content="Save" Margin="5,0,5,0" 
                                              Command="{Binding Path=SaveClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type  sw:DialogContentControl}}}" Width="90"   
                                              Visibility="{Binding Path=SaveButtonVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type  sw:DialogContentControl}}}" />
                                 </StackPanel>

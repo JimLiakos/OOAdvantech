@@ -6550,6 +6550,9 @@
         <member name="F:OOAdvantech.MultilingualMember`1._DefaultLanguage">
             <exclude>Excluded</exclude>
         </member>
+        <member name="T:OOAdvantech.MultilingualRelationsType">
+            <MetaDataID>{854c53ac-f4fe-49c5-9e5a-0c5f4ba5b9e8}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.ProxyClassCodeBuilder">
             <MetaDataID>{ac95bcf5-ed98-460b-8488-32004744991d}</MetaDataID>
         </member>

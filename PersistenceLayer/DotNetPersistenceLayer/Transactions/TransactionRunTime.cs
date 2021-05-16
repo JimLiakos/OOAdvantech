@@ -891,9 +891,7 @@ namespace OOAdvantech.Transactions
 
                 if (Status == TransactionStatus.Aborted)
                 {
-                    if (_NativeTransaction != null)
-                        (_NativeTransaction as System.Transactions.CommittableTransaction).Commit();
-                    throw new OOAdvantech.Transactions.TransactionException("Transaction Aborted");
+                    return false;
                 }
                 return EnlistmentsController.HasChangesOnElistedObjects(checkOnlyPersistentClassInstances);
 

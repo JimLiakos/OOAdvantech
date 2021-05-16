@@ -225,7 +225,7 @@ namespace RoseMetaDataRepository
                 OOAdvantech.MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator = metaObjectsStack;
                 metaObjectsStack.StartSynchronize();
                 OOAdvantech.MetaDataRepository.SynchronizerSession.StartSynchronize();
-                using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
+                //using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
                 {
 
                     RationalRose.RoseOperation roseOperetion = classifierMember.RoseItem as RationalRose.RoseOperation;
@@ -304,7 +304,7 @@ namespace RoseMetaDataRepository
                     //project.IDEManager.RefreshProject(project.Identity.ToString(), codeClassifier.Identity.ToString());
 
 
-                    stateTransition.Consistent = true;
+                    //stateTransition.Consistent = true;
                 }
             }
             finally

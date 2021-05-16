@@ -153,7 +153,7 @@ namespace StyleableWindow
         }
 
 
-        private void RunPropertyChanged(object sender, PropertyChangedEventArgs e)
+        internal void RunPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(sender, e);
         }

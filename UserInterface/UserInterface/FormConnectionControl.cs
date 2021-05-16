@@ -203,6 +203,18 @@ namespace OOAdvantech.UserInterface.Runtime
                     {
                     }
                 }
+                if (Instance is IPresentationObject)
+                {
+                    try
+                    {
+
+                        (Instance as IPresentationObject).Initialize();
+                    }
+                    catch (Exception error)
+                    {
+                    }
+                }
+
                 mstateTransition.Consistent = true;
             }
             State = ViewControlObjectState.UserInteraction;

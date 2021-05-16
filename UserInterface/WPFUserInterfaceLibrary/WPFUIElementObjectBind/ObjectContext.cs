@@ -156,27 +156,34 @@ namespace WPFUIElementObjectBind
         /// <MetaDataID>{86025192-9362-4357-8eb6-4070013fd7d2}</MetaDataID>
         public void DisableAllControls()
         {
-            Window mainWindow = Window.GetWindow(HosttingElement);
-            foreach (var uiElement in FindVisualChildren<UIElement>(Window.GetWindow(HosttingElement)))
+            if (HosttingElement is IPage)
             {
-                uiElement.IsEnabled = false;
-                if (uiElement is System.Windows.Controls.Button)
+                (HosttingElement as IPage).ObjectContextTransactionAborted();
+            }
+            else
+            {
+                foreach (var uiElement in FindVisualChildren<UIElement>(Window.GetWindow(HosttingElement)))
                 {
-                    var button = uiElement as System.Windows.Controls.Button;
-                    if (button.Command == OnCancelCommand || button.Command is WindowCloseCommand || button.Command is WindowMinimizeCommand || button.Command is WindowMaximizeCommand)
+                    uiElement.IsEnabled = false;
+                    if (uiElement is System.Windows.Controls.Button)
                     {
-                        button.IsEnabled = true;
-                        UIElement parent = VisualTreeHelper.GetParent(button) as UIElement;
-                        while (parent != null)
+                        var button = uiElement as System.Windows.Controls.Button;
+                        if (button.Command == OnCancelCommand || button.Command is WindowCloseCommand || button.Command is WindowMinimizeCommand || button.Command is WindowMaximizeCommand)
                         {
-                            parent.IsEnabled = true;
-                            parent = VisualTreeHelper.GetParent(parent) as UIElement;
+                            button.IsEnabled = true;
+                            UIElement parent = VisualTreeHelper.GetParent(button) as UIElement;
+                            while (parent != null)
+                            {
+                                parent.IsEnabled = true;
+                                parent = VisualTreeHelper.GetParent(parent) as UIElement;
+                            }
                         }
                     }
                 }
+
+                if (Window.GetWindow(HosttingElement) != null)
+                    Window.GetWindow(HosttingElement).Title = Window.GetWindow(HosttingElement).Title + "    ( Transaction Aborted )";
             }
-            if (Window.GetWindow(HosttingElement) != null)
-                Window.GetWindow(HosttingElement).Title = Window.GetWindow(HosttingElement).Title + "    ( Transaction Aborted )";
         }
         /// <MetaDataID>{fd0e01b2-df94-4a8d-9271-b22651aa15c8}</MetaDataID>
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -270,7 +277,7 @@ namespace WPFUIElementObjectBind
 
         public bool HasChanges(bool checkOnlyPersistentClassInstances)
         {
-            
+
             {
                 if (FormObjectConnection != null && FormObjectConnection.Transaction != null && FormObjectConnection.Transaction.HasChangesOnElistedObjects(checkOnlyPersistentClassInstances))
                     return true;
@@ -284,7 +291,7 @@ namespace WPFUIElementObjectBind
             FormObjectConnection.Save();
         }
 
-     
+
         /// <MetaDataID>{b285de5c-5b6f-420f-8b49-5a802a5963ca}</MetaDataID>
         public ObjectContext()
         {
@@ -392,7 +399,7 @@ namespace WPFUIElementObjectBind
             }
         }
 
-        
+
 
         /// <MetaDataID>{80ed8425-cf45-49a8-ad4d-f7aa49d4c0d7}</MetaDataID>
         public void SetContextInstance(object instance)
@@ -781,7 +788,7 @@ namespace System.Windows
 
                     return ((dependencyObject as FrameworkElement).DataContext as WPFUIElementObjectBind.ObjectContext).FormObjectConnection;
                 }
-                
+
                 var parent = Media.VisualTreeHelper.GetParent(dependencyObject);
                 if (parent == null && dependencyObject is FrameworkElement && (dependencyObject as FrameworkElement).Parent != null)
                     parent = (dependencyObject as FrameworkElement).Parent;

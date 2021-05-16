@@ -121,7 +121,7 @@ namespace RoseMetaDataRepository
 
                 if (roseApplication.CurrentModel.GetSelectedClasses().Count > 0)
                 {
-                    using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
+                    //using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
                     {
                         MetaObjectMapper.Clear();
                         metaObjectsStack = new OOAdvantech.CodeMetaDataRepository.MetaObjectsStack(true);
@@ -163,7 +163,7 @@ namespace RoseMetaDataRepository
                             classifier.Synchronize(codeClassifier);
 
                         }
-                        stateTransition.Consistent = true;
+                       // stateTransition.Consistent = true;
                     }
                 }
                 System.TimeSpan timeSpan = System.DateTime.Now - startTime;
@@ -214,7 +214,7 @@ namespace RoseMetaDataRepository
                     metaObjectsStack.StartSynchronize();
                     OOAdvantech.MetaDataRepository.SynchronizerSession.StartSynchronize();
 
-                    using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
+                    //using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
                     {
 
                         for (int i = 0; i < roseApplication.CurrentModel.GetSelectedItems().Count; i++)
@@ -394,7 +394,7 @@ namespace RoseMetaDataRepository
                            // project.IDEManager.RefreshProject(project.Identity.ToString(), codeClassifier.Identity.ToString());
 
                         }
-                        stateTransition.Consistent = true;
+                        //stateTransition.Consistent = true;
                     }
                 }
 
@@ -1252,7 +1252,7 @@ namespace RoseMetaDataRepository
 
                 if (roseApplication.CurrentModel.GetSelectedModules().Count > 0)
                 {
-                    using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
+                    //using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
                     {
                         MetaObjectMapper.Clear();
                         metaObjectsStack = new OOAdvantech.CodeMetaDataRepository.MetaObjectsStack(true);
@@ -1280,7 +1280,7 @@ namespace RoseMetaDataRepository
                             MetaObjectMapper.AddTypeMap(roseComponent, component);
                             component.Synchronize(project);
                         }
-                        stateTransition.Consistent = true;
+                        //stateTransition.Consistent = true;
                     }
                 }
                 System.TimeSpan timeSpan = System.DateTime.Now - startTime;

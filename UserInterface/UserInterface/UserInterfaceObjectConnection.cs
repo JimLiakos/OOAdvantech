@@ -686,7 +686,26 @@ namespace OOAdvantech.UserInterface.Runtime
             if (FormClosed != null)
                 FormClosed(dialogResult);
             foreach (IPresentationObject presentationObject in PresentationObjects.Values)
-                presentationObject.FormClosed();
+            {
+                try
+                {
+                    presentationObject.FormClosed();
+                }
+                catch (Exception error)
+                {
+                }
+            }
+            if (Instance is IPresentationObject)
+            {
+                try
+                {
+                    (Instance as IPresentationObject).FormClosed();
+                }
+                catch (Exception error)
+                {
+                }
+            }
+             
 
         }
         /// <MetaDataID>{95a1acc2-ee5f-4227-a41c-0e793c000f37}</MetaDataID>

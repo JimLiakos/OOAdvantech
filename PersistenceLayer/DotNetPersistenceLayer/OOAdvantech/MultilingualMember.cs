@@ -382,6 +382,7 @@ namespace OOAdvantech
 
     }
 
+    /// <MetaDataID>{854c53ac-f4fe-49c5-9e5a-0c5f4ba5b9e8}</MetaDataID>
     public enum MultilingualRelationsType
     {
         IgnoreDefaultLanguageValues = 0,

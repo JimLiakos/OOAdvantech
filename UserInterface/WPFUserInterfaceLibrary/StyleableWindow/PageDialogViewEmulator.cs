@@ -26,6 +26,7 @@ namespace StyleableWindow
 
         }
 
+        
 
         public static readonly DependencyProperty LanguageButtonProperty = DependencyProperty.Register(
                                                            "LanguageButton",
@@ -329,7 +330,10 @@ namespace StyleableWindow
                         pagesPath += " / ";
                     pagesPath += page.Title;
                 }
-                return pagesPath;
+                if (_ObjectContextTransactionAborted)
+                    return pagesPath + "  ( Transaction Aborted )";
+                else
+                    return pagesPath;
             }
         }
 
@@ -371,6 +375,9 @@ namespace StyleableWindow
                 if (LanguageButton)
                     languagePopup.DataContext = this;
             }
+
+            if(_ObjectContextTransactionAborted)
+                ObjectContextTransactionAborted();
         }
 
         private void LanguageButton_Click(object sender, RoutedEventArgs e)
@@ -643,7 +650,63 @@ namespace StyleableWindow
                 ClosePage();
 
         }
+        bool _ObjectContextTransactionAborted;
+        public void ObjectContextTransactionAborted()
+        {
+            _ObjectContextTransactionAborted = true;
+            if (DialogContentControl != null)
+            {
+                Grid ContentArea = DialogContentControl.Template.FindName("ContentArea", DialogContentControl) as Grid;
+                if (ContentArea != null)
+                {
+                    ContentArea.IsEnabled = false;
+                    //foreach (var uiElement in ObjectContext.FindVisualChildren<UIElement>(Window.GetWindow(ContentArea)))
+                    //{
+                    //    uiElement.IsEnabled = false;
+                    //    //if (uiElement is System.Windows.Controls.Button)
+                    //    //{
+                    //    //    var button = uiElement as System.Windows.Controls.Button;
+                    //    //    if (button.Command == OnCancelCommand || button.Command is WindowCloseCommand || button.Command is WindowMinimizeCommand || button.Command is WindowMaximizeCommand)
+                    //    //    {
+                    //    //        button.IsEnabled = true;
+                    //    //        UIElement parent = VisualTreeHelper.GetParent(button) as UIElement;
+                    //    //        while (parent != null)
+                    //    //        {
+                    //    //            parent.IsEnabled = true;
+                    //    //            parent = VisualTreeHelper.GetParent(parent) as UIElement;
+                    //    //        }
+                    //    //    }
+                    //    //}
+                    //}
+                }
 
+
+                var closeButton = DialogContentControl.Template.FindName("x_closeButton", DialogContentControl) as Button;
+                if(closeButton!=null)
+                    closeButton.IsEnabled = true;
+                var backButton = DialogContentControl.Template.FindName("x_backButton", DialogContentControl) as Button;
+                if (backButton != null)
+                    backButton.IsEnabled = true;
+                var saveButton = DialogContentControl.Template.FindName("x_saveButton", DialogContentControl) as Button;
+                if (saveButton != null)
+                    saveButton.IsEnabled = false;
+                
+                
+
+                DialogContentControl.RunPropertyChanged(DialogContentControl, new PropertyChangedEventArgs(nameof(DialogContentControl.PagesPath)));
+
+                
+
+
+
+
+
+            }
+            else
+            {
+                _ObjectContextTransactionAborted = true;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
