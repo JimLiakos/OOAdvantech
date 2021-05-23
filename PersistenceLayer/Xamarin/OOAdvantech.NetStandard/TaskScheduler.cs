@@ -21,9 +21,15 @@ namespace OOAdvantech
                 {
                     if (Tasks.Count > 0)
                     {
-                        Func<Task<bool>> function = Tasks.Dequeue();
-                        var task = Task<bool>.Run(function);
-                        task.Wait();
+                        try
+                        {
+                            Func<Task<bool>> function = Tasks.Dequeue();
+                            var task = Task<bool>.Run(function);
+                            task.Wait();
+                        }
+                        catch (Exception error)
+                        {
+                        }
                     }
                     else
                     {

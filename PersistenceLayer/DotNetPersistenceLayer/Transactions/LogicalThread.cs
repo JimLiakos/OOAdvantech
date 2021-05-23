@@ -646,6 +646,18 @@ namespace OOAdvantech.Transactions
                         break;
 
                     }
+
+                //case TransactionOption.ScoopSuppress:
+                //    {
+                //        transaction = new TransactionRunTime() { ScoopSuppress = true };
+                        
+                //        systemStateTransition.IsTransactionInitiator = true;
+                //        logicalThread.CreateStateTransitionEntryAndPushInStack(transaction, systemStateTransition);
+
+
+                //        break;
+                //    }
+
                 default:
                     throw new OOAdvantech.Transactions.TransactionException("The " + ObjectStateTransitionType.ToString() + " doesn't supported.");
             }

@@ -2510,7 +2510,7 @@ namespace OOAdvantech.RDBMSPersistenceRunTime
                     if (RDBMSSQLScriptGenarator.SupportBatchSQL && dataReader != null)
                         dataReader.Close();
 
-                    ActivateObjects();
+                   // ActivateObjects();
 
 
 

@@ -419,6 +419,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
 
+        public override void ObjectActived()
+        {
+            base.ObjectActived();
+        }
 
 
     }

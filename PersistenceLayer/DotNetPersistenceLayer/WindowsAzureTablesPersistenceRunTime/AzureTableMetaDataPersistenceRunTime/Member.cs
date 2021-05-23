@@ -774,7 +774,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
 
         /// <MetaDataID>{933A071B-CA12-478C-B30F-F2A20EFAABBE}</MetaDataID>
-        static byte[] Buffer = new byte[32768];
+        static byte[] Buffer = new byte[65536];
         ///// <MetaDataID>{B050E1FD-332F-4E26-BD95-636E7B490858}</MetaDataID>
         //static System.Threading.ReaderWriterLock ReaderWriterLock = new System.Threading.ReaderWriterLock();
         /// <MetaDataID>{D9BE173D-FE9D-4C0B-9A05-E55122066740}</MetaDataID>

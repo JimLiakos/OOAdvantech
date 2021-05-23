@@ -312,7 +312,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         }
                         else
                         {
-                            
+
                             System.Collections.IList objectsUnderCurrentTransaction = ObjectsUnderCurrentTransaction;
                             if (!TransactionContext.CurrentTransactionContext.ContainCommand(Commands.BuildContainedObjectIndicies.GetIdentity(this)))
                                 (RelResolver.Owner.ObjectStorage as ObjectStorage).CreateBuildContainedObjectIndiciesCommand(this);
@@ -858,7 +858,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         private void InternalCommitChanges(Transaction transaction)
         {
-        
+
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try
             {
@@ -925,7 +925,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                             {
                                 if (!RelResolver.LoadedRelatedObjects.Contains(collectionChangement.Object))
                                 {
-                                    if (collectionChangement.Index != -1)
+
+                                    if (collectionChangement.Index != -1 && collectionChangement.Index >= (RelResolver as ICollection).Count)
                                         RelResolver.InsertRelatedObject(collectionChangement.Index, collectionChangement.Object);
                                     else
                                         RelResolver.AddRelatedObject(collectionChangement.Object);
@@ -2388,7 +2389,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         relatedObjects.Remove(collectionChangement.Object);
                 }
                 collectionChanges.Sort(new CollectionChangesSort());
-                foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x=>x.Index))
+                foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x => x.Index))
                 {
                     if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && !relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
                     {

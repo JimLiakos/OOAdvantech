@@ -730,6 +730,8 @@ namespace OOAdvantech.Transactions
         }
 
 
+      //internal  bool ScoopSuppress = false;
+
         /// <MetaDataID>{DFFFD19A-D92F-491A-BA1C-46A3E05318E9}</MetaDataID>
         ///<summary>
         ///Enlist object in transaction. If transactioned object is out of process then propagate the enlistment 
@@ -744,6 +746,9 @@ namespace OOAdvantech.Transactions
         ///</param>
         public void EnlistObject(object transactionedObject, System.Reflection.MemberInfo memberInfo)
         {
+            
+            //if (ScoopSuppress)
+            //    return;
             if (InternalTransaction != null)
             {
                 (InternalTransaction as TransactionRunTime).EnlistObject(transactionedObject, memberInfo);
@@ -1164,7 +1169,7 @@ namespace OOAdvantech.Transactions
         //            return IsNestedTransaction(transaction.OriginTransaction as TransactionRunTime);
 
         //}
-        #region Excluded for .Net CompactFramework
+#region Excluded for .Net CompactFramework
 #if !DeviceDotNet
         /// <MetaDataID>{fa8e6338-16e0-4a0a-be6e-0a0f6cde33b0}</MetaDataID>
         public TransactionRunTime(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctxt)
@@ -1178,7 +1183,7 @@ namespace OOAdvantech.Transactions
 
 #endif
 #if !PORTABLE
-        #region ISerializable Members
+#region ISerializable Members
 
         /// <MetaDataID>{a8d13994-4ff2-46d4-a334-f8a14a25f0de}</MetaDataID>
         public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
@@ -1187,9 +1192,9 @@ namespace OOAdvantech.Transactions
 
         }
 
-        #endregion
+#endregion
 #endif
-        #endregion
+#endregion
 
 
     }

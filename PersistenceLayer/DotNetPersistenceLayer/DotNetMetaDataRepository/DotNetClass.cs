@@ -1564,6 +1564,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             try
             {
+                
                 //if (theType.WrType.FullName == "OOAdvantech.Remoting.RestApi.ServerSessionPart")
                 //{
                 //}
@@ -1761,6 +1762,8 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 MetaObjectMapper.AddTypeMap(theType.WrType, this);
 
             }
+
+            System.Diagnostics.Debug.WriteLine(Name);
 
         }
 

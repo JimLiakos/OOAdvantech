@@ -585,7 +585,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 string typeFullName = serializer.ReferenceResolver.ResolveReference(serializer, type_id) as string;
                 if (typeFullName == null)
                 {
-
+                    throw new TypeMismatchException("Check the types of JSON in client and servers side. must be exactly the same.");
                 }
                 return typeFullName;
             }
@@ -1307,6 +1307,17 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     //    public string DefaultLanguage;
     //}
 
+    
+    class TypeMismatchException :Exception
+    {
+        public TypeMismatchException(string message) : base(message)
+        {
 
+        }
+        public TypeMismatchException(string message, Exception innerException):base(message,innerException)
+        {
+
+        }
+    }
 
 }

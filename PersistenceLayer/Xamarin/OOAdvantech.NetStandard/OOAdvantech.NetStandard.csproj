@@ -10,6 +10,9 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>OOAdvantech</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;OOAdvantech; DeviceDotNet; NetStandard</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Authentication\Services\vssver.scc" />
     <None Remove="Authentication\vssver.scc" />

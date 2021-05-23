@@ -681,7 +681,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             storageInstanceRef.InstantiateObjectQueryIdentity = DataNode.ObjectQuery.QueryIdentity;
                             storageInstanceRef.DbDataRecord = StorageInstance;
                             storageInstanceRef.LoadObjectState(columnPrefix);
-                            storageInstanceRef.ObjectActived();
+                            //storageInstanceRef.ObjectActived();
                             #endregion
                             _object = storageInstanceRef.MemoryInstance;
                             loadObjectLinks = true;
@@ -2185,7 +2185,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                 }
                 LoadDataLoaderTable(TemporaryDataTable.CreateDataReader(), new Dictionary<string, string>(), false);
-                ActivateObjects();
+               // ActivateObjects();
                 LoadManyToManyRelationData(tableClient);
                 EntitiesDictionary.Clear();
 

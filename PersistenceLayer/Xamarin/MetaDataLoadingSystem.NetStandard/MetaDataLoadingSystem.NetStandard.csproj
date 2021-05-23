@@ -10,6 +10,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\BuildContainedObjectIndicies.cs" Link="BuildContainedObjectIndicies.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\MetaDataLoadingSystem\DataLoader.cs" Link="DataLoader.cs" />

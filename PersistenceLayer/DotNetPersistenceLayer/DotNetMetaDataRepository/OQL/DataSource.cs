@@ -2176,8 +2176,12 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         {
                             DataNodesRelationshipData dataNodesRelationshipData = RelationshipsData[subDataNodeRelationDataIdentity];
 
-#region Builds relation where reference columns is in member DataTable
+                            #region Builds relation where reference columns is in member DataTable
 
+                            if(DataSourceRelationsColumnsWithSubDataNodes.Count==0)
+                            {
+
+                            }
                             foreach (var relationPartIdentity in DataSourceRelationsColumnsWithSubDataNodes[subDataNode.Identity].Keys)
                             {
                                 foreach (System.Collections.Generic.KeyValuePair<ObjectIdentityType, RelationColumns> entry in DataSourceRelationsColumnsWithSubDataNodes[subDataNode.Identity][relationPartIdentity])

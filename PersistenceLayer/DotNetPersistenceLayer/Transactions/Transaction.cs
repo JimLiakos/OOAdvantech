@@ -29,6 +29,7 @@ namespace OOAdvantech.Transactions
         /// if the parent aborted then aborted and nested transaction automatically, 
         /// if nested aborted doesn't means that the parent also must be aborted.</summary>
         RequiredNested
+
     };
 
 

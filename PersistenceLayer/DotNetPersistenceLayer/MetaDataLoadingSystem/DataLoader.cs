@@ -550,7 +550,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.ObjectQueryLanguage
                         ((MetaDataStorageInstanceRef)storageInstanceRef).TheStorageIstance = objectElement;
                         ((MetaDataStorageInstanceRef)storageInstanceRef).LoadObjectState();
                         //StorageInstanceRef.SnapshotStorageInstance();
-                        storageInstanceRef.ObjectActived();
+                        //storageInstanceRef.ObjectActived();
                         loadObjectLinks = true;
                         LoadedObjects[storageInstanceRef.PersistentObjectID] = storageInstanceRef.MemoryInstance;
                         return storageInstanceRef.MemoryInstance;
@@ -1947,9 +1947,8 @@ namespace OOAdvantech.MetaDataLoadingSystem.ObjectQueryLanguage
 
             //if (DataNode.ParticipateInSelectClause || DataNode.ParticipateInAggregateFanction || DataNode.ObjectQuery.SelectListItems.Contains(DataNode))
             LoadDataLoaderTable(temporaryDataTable.CreateDataReader(), new Dictionary<string, string>(), false);
-            ActivateObjects();
-            //else
-            //_Data=TemporaryDataTable
+
+            //ActivateObjects();
 
 
 
