@@ -6,6 +6,9 @@ namespace OOAdvantech.PersistenceLayerRunTime
     using OOAdvantech.MetaDataRepository;
     using System;
     using System.Linq;
+
+    //Sos gg
+
 #if PORTABLE
     using System.PCL.Reflection;
     using Remoting;
