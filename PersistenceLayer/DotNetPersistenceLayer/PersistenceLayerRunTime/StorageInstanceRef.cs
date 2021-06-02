@@ -2504,6 +2504,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             object newValue = GetMemoryInstanceMemberValue(relResolver);
 
 
+
             object storageInstanceRelatedObject = null;
 
             bool relResolverCompleteLoaded = relResolver.IsCompleteLoaded;
