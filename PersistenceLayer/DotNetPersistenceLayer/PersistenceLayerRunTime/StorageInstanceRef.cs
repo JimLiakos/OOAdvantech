@@ -2445,20 +2445,28 @@ namespace OOAdvantech.PersistenceLayerRunTime
             List<MultilingualObjectLink> memoryRelatedObjectAsMultilingualObjectLinks = (GetMemoryInstanceMemberValue(relResolver) as System.Collections.IDictionary).OfType<System.Collections.DictionaryEntry>().Where(x => x.Value != null).Select(x => new MultilingualObjectLink() { Culture = x.Key as System.Globalization.CultureInfo, LinkedObject = x.Value }).ToList();
 
             List<MultilingualObjectLink> storageRelatedObjectAsMultilingualObjectLinks = null;
-
             using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
                 storageRelatedObjectAsMultilingualObjectLinks = relResolver.RelatedObjectAsMultilingualObjectLinks;
                 stateTransition.Consistent = true;
             }
+
             if (!relResolver.IsCompleteLoaded && memoryRelatedObjectAsMultilingualObjectLinks.Count == 0)
             {
                 //memoryRelatedObjectAsMultilingualObjectLinks.Count == 0 In all language the value is null
                 if (memoryRelatedObjectAsMultilingualObjectLinks != storageRelatedObjectAsMultilingualObjectLinks)
+                {
                     LazyFetching(relResolver, relResolver.Owner.Class.GetExtensionMetaObject<System.Type>()); //Load in all languages
+                    using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                    {
+                        storageRelatedObjectAsMultilingualObjectLinks = relResolver.RelatedObjectAsMultilingualObjectLinks;
+                        stateTransition.Consistent = true;
+                    }
+                }
 
                 memoryRelatedObjectAsMultilingualObjectLinks = (GetMemoryInstanceMemberValue(relResolver) as System.Collections.IDictionary).OfType<System.Collections.DictionaryEntry>().Where(x => x.Value != null).Select(x => new MultilingualObjectLink() { Culture = x.Key as System.Globalization.CultureInfo, LinkedObject = x.Value }).ToList();
             }
+          
 
             var changes = GetMultilingualChanges(storageRelatedObjectAsMultilingualObjectLinks, memoryRelatedObjectAsMultilingualObjectLinks);
 
@@ -2509,7 +2517,14 @@ namespace OOAdvantech.PersistenceLayerRunTime
             if (!relResolverCompleteLoaded && newValue == null)
             {
                 if (newValue != storageInstanceRelatedObject)
+                {
                     LazyFetching(relResolver, relResolver.Owner.Class.GetExtensionMetaObject<System.Type>());
+                    using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                    {
+                        storageInstanceRelatedObject = relResolver.RelatedObject;
+                        stateTransition.Consistent = true;
+                    }
+                }
 
                 if (newValue == null)
                     newValue = GetMemoryInstanceMemberValue(relResolver);
