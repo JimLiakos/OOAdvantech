@@ -6,6 +6,9 @@ namespace OOAdvantech.PersistenceLayerRunTime
     using OOAdvantech.MetaDataRepository;
     using System;
     using System.Linq;
+
+    //Sos
+
 #if PORTABLE
     using System.PCL.Reflection;
     using Remoting;
@@ -2502,6 +2505,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             #region Produce commands for association end with multiplicity zero or one
             object newValue = GetMemoryInstanceMemberValue(relResolver);
+
 
 
             object storageInstanceRelatedObject = null;
