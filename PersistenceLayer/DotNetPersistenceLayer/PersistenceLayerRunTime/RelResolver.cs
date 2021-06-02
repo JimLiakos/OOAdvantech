@@ -32,9 +32,12 @@
             {
                 if (Multilingual)
                 {
+               
                     OOAdvantech.Collections.Generic.List<object> loadedRelatedObjects = null;
                     if (MultilingualLoadedRelatedObjects.TryGetValue(OOAdvantech.CultureContext.CurrentNeutralCultureInfo, out loadedRelatedObjects))
+                    {
                         return loadedRelatedObjects;
+                    }
                     else
                         return null;
                 }
@@ -49,6 +52,7 @@
 
                 if (Multilingual)
                 {
+                    
                     MultilingualLoadedRelatedObjects[OOAdvantech.CultureContext.CurrentNeutralCultureInfo] = value;
                 }
                 else
@@ -753,6 +757,7 @@
                 //    LoadedRelatedObjects.Add(relatedObject);
                 //else
                 //    LoadedRelatedObjects.Insert(index,relatedObject);
+
 
             }
             else

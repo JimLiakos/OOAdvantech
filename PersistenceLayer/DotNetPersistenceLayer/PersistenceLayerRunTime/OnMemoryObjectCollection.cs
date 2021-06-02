@@ -313,6 +313,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         else
                         {
 
+
                             System.Collections.IList objectsUnderCurrentTransaction = ObjectsUnderCurrentTransaction;
                             if (!TransactionContext.CurrentTransactionContext.ContainCommand(Commands.BuildContainedObjectIndicies.GetIdentity(this)))
                                 (RelResolver.Owner.ObjectStorage as ObjectStorage).CreateBuildContainedObjectIndiciesCommand(this);
@@ -926,7 +927,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                                 if (!RelResolver.LoadedRelatedObjects.Contains(collectionChangement.Object))
                                 {
 
-                                    if (collectionChangement.Index != -1 && collectionChangement.Index >= (RelResolver as ICollection).Count)
+                                    if (collectionChangement.Index != -1 && collectionChangement.Index <= (RelResolver as ICollection).Count)
                                         RelResolver.InsertRelatedObject(collectionChangement.Index, collectionChangement.Object);
                                     else
                                         RelResolver.AddRelatedObject(collectionChangement.Object);
