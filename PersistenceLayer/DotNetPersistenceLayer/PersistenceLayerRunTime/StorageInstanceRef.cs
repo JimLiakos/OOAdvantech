@@ -1694,7 +1694,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             foreach (RelResolver relResolver in RelResolvers)
             {
 
-
+               
                 DotNetMetaDataRepository.AssociationEnd associationEnd = relResolver.AssociationEnd as DotNetMetaDataRepository.AssociationEnd;
                 if (!relResolver.IsCompleteLoaded || associationEnd.CollectionClassifier != null)
                     continue;
@@ -1705,7 +1705,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     fieldValues = new Dictionary<System.Reflection.FieldInfo, object>();
                     StorageInstanceValues[relResolver.ValueTypePath.ToString()] = fieldValues;
                 }
-                fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+
+                if (relResolver.Multilingual)
+                    fieldValues[relResolver.FieldInfo] = relResolver.RelatedObjectAsMultilingualObjectLinks;
+                else
+                    fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+               //fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
             }
         }
 
@@ -1876,6 +1881,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             if (!associationEnd.RealAssociationEnd.Multiplicity.IsMany)
             {
+              
                 RelResolver relResolver = null;
                 foreach (RelResolver tmpRelResolver in RelResolvers)
                 {
@@ -1887,6 +1893,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 }
                 if (relResolver != null && relResolver.RelatedObject != relatedObject)
                 {
+                 
                     Dictionary<FieldInfo, object> fieldsValues = null;
                     if (StorageInstanceValuesSnapshot != null)
                     {
@@ -2519,7 +2526,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     fieldsValues = new Dictionary<FieldInfo, object>();
                     StorageInstanceValuesSnapshot.Add(relResolver.ValueTypePath.ToString(), fieldsValues);
                 }
-                fieldsValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+                if (relResolver.Multilingual)
+                    fieldsValues[relResolver.FieldInfo] = relResolver.RelatedObjectAsMultilingualObjectLinks;
+                else
+                    fieldsValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+
+
                 if (relResolver.RelatedObject != null)
                     relResolver.UnLinkObject(relResolver.RelatedObject, -1, out bool changeApplied);
 
@@ -3810,7 +3822,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 fieldValues = new Dictionary<System.Reflection.FieldInfo, object>();
                 StorageInstanceValues[relResolver.ValueTypePath.ToString()] = fieldValues;
             }
-            fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+            if (relResolver.Multilingual)
+                fieldValues[relResolver.FieldInfo] = relResolver.RelatedObjectAsMultilingualObjectLinks;
+            else
+                fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+            //  fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
 
         }
 
