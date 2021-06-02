@@ -2505,6 +2505,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             object newValue = GetMemoryInstanceMemberValue(relResolver);
 
 
+
             object storageInstanceRelatedObject = null;
 
             bool relResolverCompleteLoaded = relResolver.IsCompleteLoaded;
@@ -2525,6 +2526,14 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         stateTransition.Consistent = true;
                     }
                 }
+
+                    using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                    {
+                        storageInstanceRelatedObject = relResolver.RelatedObject;
+                        stateTransition.Consistent = true;
+                    }
+                }
+                
 
                 if (newValue == null)
                     newValue = GetMemoryInstanceMemberValue(relResolver);

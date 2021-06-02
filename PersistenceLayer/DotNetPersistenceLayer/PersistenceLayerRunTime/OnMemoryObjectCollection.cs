@@ -899,6 +899,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 else
                 {
 
+
                     var collection = GetCollectionChanges(transaction);
                     if (collection != null)
                     {
