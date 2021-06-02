@@ -7,7 +7,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
     using System;
     using System.Linq;
 
-    //Sos
+    //Sos gg gggt
 
 #if PORTABLE
     using System.PCL.Reflection;
@@ -2448,12 +2448,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
             List<MultilingualObjectLink> memoryRelatedObjectAsMultilingualObjectLinks = (GetMemoryInstanceMemberValue(relResolver) as System.Collections.IDictionary).OfType<System.Collections.DictionaryEntry>().Where(x => x.Value != null).Select(x => new MultilingualObjectLink() { Culture = x.Key as System.Globalization.CultureInfo, LinkedObject = x.Value }).ToList();
 
             List<MultilingualObjectLink> storageRelatedObjectAsMultilingualObjectLinks = null;
-
             using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
                 storageRelatedObjectAsMultilingualObjectLinks = relResolver.RelatedObjectAsMultilingualObjectLinks;
                 stateTransition.Consistent = true;
             }
+
             if (!relResolver.IsCompleteLoaded && memoryRelatedObjectAsMultilingualObjectLinks.Count == 0)
             {
                 //memoryRelatedObjectAsMultilingualObjectLinks.Count == 0 In all language the value is null
@@ -2469,6 +2469,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
                 memoryRelatedObjectAsMultilingualObjectLinks = (GetMemoryInstanceMemberValue(relResolver) as System.Collections.IDictionary).OfType<System.Collections.DictionaryEntry>().Where(x => x.Value != null).Select(x => new MultilingualObjectLink() { Culture = x.Key as System.Globalization.CultureInfo, LinkedObject = x.Value }).ToList();
             }
+          
 
             var changes = GetMultilingualChanges(storageRelatedObjectAsMultilingualObjectLinks, memoryRelatedObjectAsMultilingualObjectLinks);
 
@@ -2522,6 +2523,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 if (newValue != storageInstanceRelatedObject)
                 {
                     LazyFetching(relResolver, relResolver.Owner.Class.GetExtensionMetaObject<System.Type>());
+                    using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                    {
+                        storageInstanceRelatedObject = relResolver.RelatedObject;
+                        stateTransition.Consistent = true;
+                    }
+                }
 
                     using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {

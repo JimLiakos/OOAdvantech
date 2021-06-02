@@ -199,7 +199,7 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <ProjectReference Include="..\AbstractionsAndPersistency\AbstractionsAndPersistency.csproj">
+    <ProjectReference Include="..\AbstractionsAndPersistency\AbstractionsAndPersistency - VS10.csproj">
       <Project>{CC669A8E-0854-4468-93D5-FD46873B5322}</Project>
       <Name>AbstractionsAndPersistency</Name>
     </ProjectReference>

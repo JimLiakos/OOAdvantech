@@ -306,7 +306,10 @@ namespace OOAdvantech
 
         public override void SetValueImplicitly(object value)
         {
+            if (MetaObject is MetaDataRepository.AssociationEnd && (MetaObject as MetaDataRepository.AssociationEnd).Name == "Column")
+            {
 
+            }
             if (value != null && !(value is T))
                 throw new System.Exception("The value isn't type of " + typeof(T).FullName);
             var cultureInfo = OOAdvantech.CultureContext.CurrentNeutralCultureInfo;
