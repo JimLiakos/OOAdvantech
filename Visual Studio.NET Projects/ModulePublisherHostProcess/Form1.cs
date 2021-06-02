@@ -31,7 +31,7 @@ namespace ModulePublisherHostProcess
 
                  
             //} 
-           //System.Windows.Forms.MessageBox.Show(System.Environment.UserName);
+         //  System.Windows.Forms.MessageBox.Show(System.Environment.UserName);
              
             bool remove = false;
             bool encrypted = false;

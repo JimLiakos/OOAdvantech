@@ -428,7 +428,12 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         {
                             int i = DataGroupingDataNode.DataSource.DataTable.Columns.IndexOf(DataSource.GetDataTreeUniqueColumnName(groupKeyDataNode, identityPart));
                             groupDataIndecies[i, 0] = RetrieveDataPath.First.Value.DataNodeRowIndices[groupKeyDataNode];
-                            groupDataIndecies[i, 1] = groupKeyDataNode.DataSource.DataTable.Columns.IndexOf(DataSource.GetColumnName(groupKeyDataNode, identityPart));
+                            if(groupKeyDataNode.DataSource.DataTable != null)
+                                groupDataIndecies[i, 1] = groupKeyDataNode.DataSource.DataTable.Columns.IndexOf(DataSource.GetColumnName(groupKeyDataNode, identityPart));
+                            else
+                            {
+
+                            }
                         }
                     }
                 }
