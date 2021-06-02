@@ -7,7 +7,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
     using System;
     using System.Linq;
 
-    //Sos
+    //Sos gg
 
 #if PORTABLE
     using System.PCL.Reflection;
