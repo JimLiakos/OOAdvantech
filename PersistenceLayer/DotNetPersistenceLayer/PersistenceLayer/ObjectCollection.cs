@@ -13,7 +13,11 @@ namespace OOAdvantech.PersistenceLayer
         {
             get;
         }
-        #endif
+#endif
+
+#if DEBUG
+		void CheckIndexes();
+#endif
 
 		/// <MetaDataID>{E9C3FC71-0909-47C0-B940-1DAE14D46C24}</MetaDataID>
 		int Count
@@ -77,5 +81,6 @@ namespace OOAdvantech.PersistenceLayer
         List<object> ToThreadSafeList();
 
 		System.Collections.ICollection ToThreadSafeSet(Type setType);
-	}
+        
+    }
 }

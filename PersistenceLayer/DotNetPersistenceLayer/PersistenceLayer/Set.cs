@@ -643,11 +643,17 @@ namespace OOAdvantech.Collections.Generic
             }
         }
 
+        public void CheckIndexes()
+        {
+            if (theObjects != null)
+                theObjects.CheckIndexes();
+        }
+
         #endregion
 
 
 
-  
-       
+
+
     }
 }

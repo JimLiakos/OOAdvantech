@@ -76,6 +76,55 @@ namespace OOAdvantech.PersistenceLayerRunTime
         }
 
 
+        public void CheckIndexes()
+        {
+            if (!HasChanges)
+                return;
+
+            System.Collections.IList relatedObjects = null;
+            string localTransactionUri = "null_transaction";
+            if (Transactions.Transaction.Current != null)
+                localTransactionUri = Transactions.Transaction.Current.LocalTransactionUri;
+
+            relatedObjects = new Collections.Generic.List<object>(ContainObjects.OfType<object>());
+            System.Collections.Generic.List<CollectionChange> collectionChanges = GetFinalCollectionChanges(Transactions.Transaction.Current);
+
+            if (collectionChanges == null && collectionChanges.Count == 0)
+                return;
+            foreach (CollectionChange collectionChangement in collectionChanges)
+            {
+                //Object removed
+                if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Deleteded && relatedObjects.Contains(collectionChangement.Object))
+                    relatedObjects.Remove(collectionChangement.Object);
+                //object in new position
+                if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
+                    relatedObjects.Remove(collectionChangement.Object);
+            }
+            collectionChanges.Sort(new CollectionChangesSort());
+            foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x => x.Index))
+            {
+                if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && !relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
+                {
+                    if (collectionChangement.Index >= relatedObjects.Count)
+                        relatedObjects.Add(collectionChangement.Object);
+                    else
+                        relatedObjects.Insert(collectionChangement.Index, collectionChangement.Object);
+                }
+            }
+            foreach (CollectionChange collectionChangement in collectionChanges)
+            {
+                if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && !relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index == -1)
+                    relatedObjects.Add(collectionChangement.Object);
+            }
+            foreach (CollectionChange collectionChangement in collectionChanges)
+            {
+                if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && collectionChangement.Index != -1 && relatedObjects.IndexOf(collectionChangement.Object) != collectionChangement.Index)
+                {
+
+                }
+            }
+        }
+
         /// <MetaDataID>{b7d6364f-ebac-4189-8c6b-cd7e79cea1a3}</MetaDataID>
         public bool CanDeletePermanently(object theObject)
         {
@@ -1058,7 +1107,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-            CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1132,7 +1181,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-            CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1203,7 +1252,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-            CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1416,7 +1465,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-            CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1562,7 +1611,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 int rer = 0;
             }
-            CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
             #region Get indexChange transactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
             ReaderWriterLock.AcquireReaderLock(10000);

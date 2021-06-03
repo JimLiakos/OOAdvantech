@@ -73,7 +73,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -480,6 +479,9 @@
   <ItemGroup>
     <PackageReference Include="Blend.Interactivity.Wpf">
       <Version>1.0.1340</Version>
+    </PackageReference>
+    <PackageReference Include="Expression.Blend.Sdk">
+      <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Extended.Wpf.Toolkit">
       <Version>3.7.0</Version>

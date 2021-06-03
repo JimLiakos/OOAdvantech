@@ -54,8 +54,20 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 {
                     var index = GetIndex(inElement);
                     var indexChange = groupIndexChanges.Where(x => index >= x.StartIndex && index <= x.EndIndex).FirstOrDefault();
-                    if(indexChange!=null)
+                    if (indexChange != null)
                         inElement.SetAttribute("Sort", (index + indexChange.Change).ToString());
+                }
+
+                
+                if(objRefCollection.Elements().Select(x => GetIndex(x)).Distinct().Count()!= objRefCollection.Elements().Count())
+                {
+                    int i = 0;
+                    foreach (XElement inElement in objRefCollection.Elements().OrderBy(x => GetIndex(x)))
+                        inElement.SetAttributeValue("Sort", i++);
+                    if (objRefCollection.Elements().Select(x => GetIndex(x)).Distinct().Count() != objRefCollection.Elements().Count())
+                    {
+
+                    }
                 }
             }
 

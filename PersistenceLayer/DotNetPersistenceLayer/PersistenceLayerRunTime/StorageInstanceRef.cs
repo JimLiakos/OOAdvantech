@@ -1697,7 +1697,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             foreach (RelResolver relResolver in RelResolvers)
             {
 
-               
+
                 DotNetMetaDataRepository.AssociationEnd associationEnd = relResolver.AssociationEnd as DotNetMetaDataRepository.AssociationEnd;
                 if (!relResolver.IsCompleteLoaded || associationEnd.CollectionClassifier != null)
                     continue;
@@ -1713,7 +1713,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     fieldValues[relResolver.FieldInfo] = relResolver.RelatedObjectAsMultilingualObjectLinks;
                 else
                     fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
-               //fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
+                //fieldValues[relResolver.FieldInfo] = relResolver.RelatedObject;
             }
         }
 
@@ -1884,7 +1884,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             if (!associationEnd.RealAssociationEnd.Multiplicity.IsMany)
             {
-              
+
                 RelResolver relResolver = null;
                 foreach (RelResolver tmpRelResolver in RelResolvers)
                 {
@@ -1896,7 +1896,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 }
                 if (relResolver != null && relResolver.RelatedObject != relatedObject)
                 {
-                 
+
                     Dictionary<FieldInfo, object> fieldsValues = null;
                     if (StorageInstanceValuesSnapshot != null)
                     {
@@ -2469,7 +2469,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
                 memoryRelatedObjectAsMultilingualObjectLinks = (GetMemoryInstanceMemberValue(relResolver) as System.Collections.IDictionary).OfType<System.Collections.DictionaryEntry>().Where(x => x.Value != null).Select(x => new MultilingualObjectLink() { Culture = x.Key as System.Globalization.CultureInfo, LinkedObject = x.Value }).ToList();
             }
-          
+
 
             var changes = GetMultilingualChanges(storageRelatedObjectAsMultilingualObjectLinks, memoryRelatedObjectAsMultilingualObjectLinks);
 
@@ -2530,13 +2530,6 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     }
                 }
 
-                    using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
-                    {
-                        storageInstanceRelatedObject = relResolver.RelatedObject;
-                        stateTransition.Consistent = true;
-                    }
-                }
-                
 
                 if (newValue == null)
                     newValue = GetMemoryInstanceMemberValue(relResolver);
