@@ -2925,7 +2925,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 {
                     if (indexChange.OldIndex == -1)
                         continue;
-                    if (groupIndexChange == null || change != indexChange.NewIndex - indexChange.OldIndex)
+                    if (groupIndexChange == null || change != indexChange.NewIndex - indexChange.OldIndex || groupIndexChange.EndIndex + 1 != indexChange.OldIndex)
                     {
                         if (groupIndexChange != null)
                             groupIndexChanges.Add(groupIndexChange);
