@@ -23,6 +23,11 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
             }
 
+            if (RoleA.RealStorageInstanceRef.PersistentObjectID != null && RoleB.RealStorageInstanceRef.PersistentObjectID != null && (RoleB.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022" || RoleA.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022"))
+            {
+
+            }
+
             #region Preconditions Chechk
             if (RoleA == null || RoleB == null)
                 throw (new System.Exception("You must set the objects that will be linked before the execution of command."));//Message
@@ -117,23 +122,23 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                             }
 
                         }
-                        if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
-                        {
-                            if (index != -1)
-                            {
-                                foreach (XElement inCurrNode in RoleBCollection.Elements())
-                                {
-                                    int sort = 0;
-                                    XElement inElement = (XElement)inCurrNode;
-                                    if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                                    {
-                                        int.TryParse(inElement.GetAttribute("Sort"), out sort);
-                                        if (sort > index)
-                                            inElement.SetAttribute(("Sort"), ((int)sort - 1).ToString());
-                                    }
-                                }
-                            }
-                        }
+                        //if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
+                        //{
+                        //    if (index != -1)
+                        //    {
+                        //        foreach (XElement inCurrNode in RoleBCollection.Elements())
+                        //        {
+                        //            int sort = 0;
+                        //            XElement inElement = (XElement)inCurrNode;
+                        //            if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
+                        //            {
+                        //                int.TryParse(inElement.GetAttribute("Sort"), out sort);
+                        //                if (sort > index)
+                        //                    inElement.SetAttribute(("Sort"), ((int)sort - 1).ToString());
+                        //            }
+                        //        }
+                        //    }
+                        //}
 
                         break;
                     }
@@ -190,23 +195,23 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                                 break;
                             }
                         }
-                        if (LinkInitiatorAssociationEnd.Association.RoleA.Indexer)
-                        {
-                            if (index != -1)
-                            {
-                                foreach (XElement inCurrNode in RoleACollection.Elements())
-                                {
-                                    int sort = 0;
-                                    XElement inElement = (XElement)inCurrNode;
-                                    if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                                    {
-                                        int.TryParse(inElement.GetAttribute("Sort"), out sort);
-                                        if (sort > index)
-                                            inElement.SetAttribute(("Sort"), ((int)sort - 1).ToString());
-                                    }
-                                }
-                            }
-                        }
+                        //if (LinkInitiatorAssociationEnd.Association.RoleA.Indexer)
+                        //{
+                        //    if (index != -1)
+                        //    {
+                        //        foreach (XElement inCurrNode in RoleACollection.Elements())
+                        //        {
+                        //            int sort = 0;
+                        //            XElement inElement = (XElement)inCurrNode;
+                        //            if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
+                        //            {
+                        //                int.TryParse(inElement.GetAttribute("Sort"), out sort);
+                        //                if (sort > index)
+                        //                    inElement.SetAttribute(("Sort"), ((int)sort - 1).ToString());
+                        //            }
+                        //        }
+                        //    }
+                        //}
                         break;
                     }
                 }

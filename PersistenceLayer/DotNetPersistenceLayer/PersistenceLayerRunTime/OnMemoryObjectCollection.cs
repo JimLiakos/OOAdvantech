@@ -333,6 +333,13 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{ff9e52c5-a1f2-465b-931d-be0866914a0a}</MetaDataID>
         void InternalMakeChangesCommands()
         {
+
+            if (RelResolver != null)
+            {
+                if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2022")
+                {
+                }
+            }
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try
             {
@@ -414,6 +421,14 @@ namespace OOAdvantech.PersistenceLayerRunTime
             finally
             {
                 ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+
+                if (RelResolver != null)
+                {
+                    if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2022")
+                    {
+
+                    }
+                }
             }
 
         }
@@ -1429,6 +1444,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{179E418D-8D84-43FE-AC9A-A5FBBF4D3736}</MetaDataID>
         public void Add(object theObject, bool implicitly)
         {
+
+
             if (RelResolver != null && theObject is OOAdvantech.MetaDataRepository.MetaObject && (theObject as OOAdvantech.MetaDataRepository.MetaObject).Name == "List`1")
             {
 
@@ -1587,6 +1604,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
             finally
             {
                 ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+
+
             }
 
 
@@ -2848,26 +2867,37 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{4de053d2-3860-484e-92f2-901c03340f3b}</MetaDataID>
         public System.Collections.Generic.List<GroupIndexChange> GetIndexChanges(string transactionUri)
         {
+
+            if (RelResolver != null)
+            {
+                if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2022")
+                {
+                }
+            }
+
             System.Collections.Generic.List<GroupIndexChange> groupIndexChanges = new System.Collections.Generic.List<GroupIndexChange>();
             bool getIndexChangesIndirect = true;
             System.Collections.Generic.List<CollectionChange> collectionChanges = null;
 
             #region Determine the way where use to produce index changes
 
+
+            var collection = GetCollectionChanges(Transactions.Transaction.Current);
+            if (collection == null)
+                collectionChanges = new System.Collections.Generic.List<CollectionChange>();
+            else
+                collectionChanges = new System.Collections.Generic.List<CollectionChange>(collection);
+
+            collectionChanges = (from collectionChange in collectionChanges
+                                 where collectionChange.TypeOfChange == CollectionChange.ChangeType.Deleteded && !collectionChange.RelatedObjectsIndexesRebuilded
+                                 orderby collectionChange.Index ascending
+                                 select collectionChange).ToList();
+
+
             if (RelResolver.IsCompleteLoaded)
                 getIndexChangesIndirect = false;
             else
             {
-                var collection = GetCollectionChanges(Transactions.Transaction.Current);
-                if (collection == null)
-                    collectionChanges = new System.Collections.Generic.List<CollectionChange>();
-                else
-                    collectionChanges = new System.Collections.Generic.List<CollectionChange>(collection);
-
-                collectionChanges = (from collectionChange in collectionChanges
-                                     where collectionChange.TypeOfChange == CollectionChange.ChangeType.Deleteded
-                                     orderby collectionChange.Index ascending
-                                     select collectionChange).ToList();
 
                 foreach (var collectionChange in collectionChanges)
                 {
@@ -2908,47 +2938,62 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 #region Get index changes directly from loaded collection
 
-                System.Collections.Generic.List<IndexChange> indexChanges = new System.Collections.Generic.List<IndexChange>();
-                int index = 0;
-
-                foreach (object _object in this)
+                if (!RelatedObjectsIndexesRebuilded)
                 {
-                    int oldIndex = -1;
-                    if (RelResolver.LoadedRelatedObjects.Contains(_object))
-                        oldIndex = RelResolver.LoadedRelatedObjects.IndexOf(_object);
+                    System.Collections.Generic.List<IndexChange> indexChanges = new System.Collections.Generic.List<IndexChange>();
+                    int index = 0;
 
-                    if (index != oldIndex)
-                        indexChanges.Add(new IndexChange(StorageInstanceRef.GetStorageInstanceRef(_object) as StorageInstanceRef, oldIndex, index));
-                    index++;
-                }
-                foreach (PersistenceLayerRunTime.IndexChange indexChange in indexChanges)
-                {
-                    if (indexChange.OldIndex == -1)
-                        continue;
-                    if (groupIndexChange == null || change != indexChange.NewIndex - indexChange.OldIndex || groupIndexChange.EndIndex + 1 != indexChange.OldIndex)
+                    foreach (object _object in this)
                     {
+                        int oldIndex = -1;
+                        if (RelResolver.LoadedRelatedObjects.Contains(_object))
+                            oldIndex = RelResolver.LoadedRelatedObjects.IndexOf(_object);
+
+                        if (index != oldIndex)
+                            indexChanges.Add(new IndexChange(StorageInstanceRef.GetStorageInstanceRef(_object) as StorageInstanceRef, oldIndex, index));
+                        index++;
+                    }
+                    foreach (PersistenceLayerRunTime.IndexChange indexChange in indexChanges)
+                    {
+                        if (indexChange.OldIndex == -1)
+                            continue;
+                        if (groupIndexChange == null || change != indexChange.NewIndex - indexChange.OldIndex || groupIndexChange.EndIndex + 1 != indexChange.OldIndex)
+                        {
+                            if (groupIndexChange != null)
+                                groupIndexChanges.Add(groupIndexChange);
+                            groupIndexChange = new GroupIndexChange();
+                            groupIndexChange.StartIndex = indexChange.OldIndex;
+                            groupIndexChange.EndIndex = indexChange.OldIndex;
+                            change = indexChange.NewIndex - indexChange.OldIndex;
+                            groupIndexChange.Change = change;
+                        }
                         if (groupIndexChange != null)
-                            groupIndexChanges.Add(groupIndexChange);
-                        groupIndexChange = new GroupIndexChange();
-                        groupIndexChange.StartIndex = indexChange.OldIndex;
-                        groupIndexChange.EndIndex = indexChange.OldIndex;
-                        change = indexChange.NewIndex - indexChange.OldIndex;
-                        groupIndexChange.Change = change;
+                            groupIndexChange.EndIndex = indexChange.OldIndex;
+
                     }
                     if (groupIndexChange != null)
-                        groupIndexChange.EndIndex = indexChange.OldIndex;
+                        groupIndexChanges.Add(groupIndexChange);
 
+                    groupIndexChanges.Sort(new Comparison<GroupIndexChange>(Ascend));
                 }
-                if (groupIndexChange != null)
-                    groupIndexChanges.Add(groupIndexChange);
 
-                groupIndexChanges.Sort(new Comparison<GroupIndexChange>(Ascend));
+
+
                 return groupIndexChanges;
 
                 #endregion
             }
 
 
+        }
+
+        bool RelatedObjectsIndexesRebuilded;
+
+        public void IndexRebuilded(string localTransactionUri)
+        {
+            foreach (var collectionChange in GetCollectionChanges(Transactions.Transaction.Current))
+                collectionChange.RelatedObjectsIndexesRebuilded = true;
+            RelatedObjectsIndexesRebuilded = true;
         }
 
         static int Descend(GroupIndexChange x, GroupIndexChange y)
@@ -2975,6 +3020,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{b23da86f-1e81-4a6f-8a14-454bbf579707}</MetaDataID>
         public bool ChangeApplied;
 
+        public bool RelatedObjectsIndexesRebuilded;
 
         int _Index;
 
@@ -3107,6 +3153,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
     {
         /// <MetaDataID>{3e5f0193-0746-4955-b29e-b0b1ec3ba5f3}</MetaDataID>
         System.Collections.Generic.List<GroupIndexChange> GetIndexChanges(string transactionUri);
+        void IndexRebuilded(string localTransactionUri);
+
         /// <MetaDataID>{98115ff8-6d3f-48d3-b3f6-eef4dc9bcb2e}</MetaDataID>
         RelResolver RelResolver
         {

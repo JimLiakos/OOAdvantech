@@ -13,6 +13,10 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
         public MetaDataLinkObjectsCommand(PersistenceLayerRunTime.ObjectStorage objectStorage, PersistenceLayerRunTime.StorageInstanceAgent roleA, PersistenceLayerRunTime.StorageInstanceAgent roleB, PersistenceLayerRunTime.StorageInstanceAgent relationObject, PersistenceLayerRunTime.AssociationEndAgent linkInitiatorAssociationEnd, int index) :
            base(objectStorage, roleA, roleB, relationObject, linkInitiatorAssociationEnd, index)
         {
+            if (RoleA.RealStorageInstanceRef.PersistentObjectID != null && RoleB.RealStorageInstanceRef.PersistentObjectID!=null&& (RoleB.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022" || RoleA.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022"))
+            {
+
+            }
             Multilingual = IsMultilingualLink(RoleA, RoleB, LinkInitiatorAssociationEnd.Association as DotNetMetaDataRepository.Association);
             if (Multilingual)
                 Culture = CultureContext.CurrentNeutralCultureInfo;
@@ -21,6 +25,11 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
         /// <MetaDataID>{B715C36B-9783-444B-BE2A-4E97406E1E19}</MetaDataID>
         public override void Execute()
         {
+
+            if (RoleA.RealStorageInstanceRef.PersistentObjectID != null && RoleB.RealStorageInstanceRef.PersistentObjectID != null && (RoleB.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022" || RoleA.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022"))
+            {
+
+            }
             #region Preconditions Chechk
             if (RoleA == null || RoleB == null)
                 throw (new System.Exception("You must set the objects that will be linked before the execution of command."));//Message
@@ -285,7 +294,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
         private static bool UpdateExistingRoleData(XElement storageInstance, ref XElement roleObjectReferencesData, CultureInfo culture, string roleName, string roleObjectIDAsStr, bool indexer, int index)
         {
-            indexer = false;
+           // indexer = false;
             bool alreadyExist = false;
 
             roleObjectReferencesData = storageInstance.Element(roleName);
@@ -302,15 +311,15 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
             if (objRefCollection != null)
             {
 
-                if (indexer)
-                {
-                    int i = 0;
-                    foreach (XElement inElement in objRefCollection.Elements().OrderBy(x => GetIndex(x)))
-                    {
-                        inElement.SetAttribute("Sort", i.ToString());
-                        i++;
-                    }
-                }
+                //if (indexer)
+                //{
+                //    int i = 0;
+                //    foreach (XElement inElement in objRefCollection.Elements().OrderBy(x => GetIndex(x)))
+                //    {
+                //        inElement.SetAttribute("Sort", i.ToString());
+                //        i++;
+                //    }
+                //}
 
 
                 foreach (XElement inElement in objRefCollection.Elements().OrderBy(x => GetIndex(x)))
@@ -327,7 +336,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 }
                 if (indexer)
                 {
-                    RebuildCollectionSortIndex(objRefCollection, index, prevRoleIndex);
+                    //RebuildCollectionSortIndex(objRefCollection, index, prevRoleIndex);
                     if (indexElement != null)
                         indexElement.SetAttribute("Sort", index.ToString());
                 }
@@ -348,81 +357,81 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
         }
 
-        /// <summary>
-        /// Rebuilds the indexes of collection with object reference 
-        /// </summary>
-        /// <param name="roleElements">
-        /// collection of elements with object reference data
-        /// </param>
-        /// <param name="newPosIndex">
-        /// Defines the new position index
-        /// </param>
-        /// <param name="prevPosIndex">
-        /// Defines the current  position index
-        /// </param>
-        private static void RebuildCollectionSortIndex(XElement roleElements, int newPosIndex, int prevPosIndex)
-        {
-            int sortIndex = 0;
-            if (prevPosIndex == -1)
-            {
-                /// Advance all sort index which is greater or equal newPosIndex if (sort >= newPosIndex && newPosIndex != -1)
-                foreach (XElement inCurrNode in roleElements.Elements())
-                {
-                    XElement inElement = inCurrNode;
-                    string sortString = inElement.GetAttribute("Sort");
-                    int sort = 0;
-                    if (sortIndex == newPosIndex)
-                        sortIndex++;
-                    if (!int.TryParse(sortString, out sort))
-                        inElement.SetAttribute("Sort", sortIndex.ToString());
-                    else
-                    {
-                        if (sort >= newPosIndex && newPosIndex != -1)
-                            inElement.SetAttribute("Sort", ((int)sort + 1).ToString());
-                    }
-                    sortIndex++;
-                }
-            }
+        ///// <summary>
+        ///// Rebuilds the indexes of collection with object reference 
+        ///// </summary>
+        ///// <param name="roleElements">
+        ///// collection of elements with object reference data
+        ///// </param>
+        ///// <param name="newPosIndex">
+        ///// Defines the new position index
+        ///// </param>
+        ///// <param name="prevPosIndex">
+        ///// Defines the current  position index
+        ///// </param>
+        //private static void RebuildCollectionSortIndex(XElement roleElements, int newPosIndex, int prevPosIndex)
+        //{
+        //    int sortIndex = 0;
+        //    if (prevPosIndex == -1)
+        //    {
+        //        /// Advance all sort index which is greater or equal newPosIndex if (sort >= newPosIndex && newPosIndex != -1)
+        //        foreach (XElement inCurrNode in roleElements.Elements())
+        //        {
+        //            XElement inElement = inCurrNode;
+        //            string sortString = inElement.GetAttribute("Sort");
+        //            int sort = 0;
+        //            if (sortIndex == newPosIndex)
+        //                sortIndex++;
+        //            if (!int.TryParse(sortString, out sort))
+        //                inElement.SetAttribute("Sort", sortIndex.ToString());
+        //            else
+        //            {
+        //                if (sort >= newPosIndex && newPosIndex != -1)
+        //                    inElement.SetAttribute("Sort", ((int)sort + 1).ToString());
+        //            }
+        //            sortIndex++;
+        //        }
+        //    }
 
-            if (prevPosIndex != -1 && prevPosIndex > newPosIndex)
-            {
-                /// Advance all sort index which is greater or equal newPosIndex and less than  prevPosIndex" if (sort >= newPosIndex && sort < prevPosIndex)"
-                foreach (XElement inElement in roleElements.Elements())
-                {
-                    string sortString = inElement.GetAttribute("Sort");
-                    int sort = 0;
-                    if (sortIndex == newPosIndex)
-                        sortIndex++;
-                    if (!int.TryParse(sortString, out sort))
-                        inElement.SetAttribute("Sort", sortIndex.ToString());
-                    else
-                    {
-                        if (sort >= newPosIndex && newPosIndex != -1 && sort < prevPosIndex)
-                            inElement.SetAttribute("Sort", ((int)sort + 1).ToString());
-                    }
-                    sortIndex++;
-                }
-            }
-            if (prevPosIndex != -1 && prevPosIndex < newPosIndex)
-            {
-                /// Reduce all sort index which is greater than prevPosIndex and less or equal newPosIndex "if (sort > prevPosIndex && sort <= newPosIndex)"
-                foreach (XElement inElement in roleElements.Elements())
-                {
-                    string sortString = inElement.GetAttribute("Sort");
-                    int sort = 0;
-                    if (sortIndex == newPosIndex)
-                        sortIndex++;
-                    if (!int.TryParse(sortString, out sort))
-                        inElement.SetAttribute("Sort", sortIndex.ToString());
-                    else
-                    {
-                        if (sort > prevPosIndex && sort <= newPosIndex)
-                            inElement.SetAttribute("Sort", (sort - 1).ToString());
-                    }
-                    sortIndex++;
-                }
-            }
-        }
+        //    if (prevPosIndex != -1 && prevPosIndex > newPosIndex)
+        //    {
+        //        /// Advance all sort index which is greater or equal newPosIndex and less than  prevPosIndex" if (sort >= newPosIndex && sort < prevPosIndex)"
+        //        foreach (XElement inElement in roleElements.Elements())
+        //        {
+        //            string sortString = inElement.GetAttribute("Sort");
+        //            int sort = 0;
+        //            if (sortIndex == newPosIndex)
+        //                sortIndex++;
+        //            if (!int.TryParse(sortString, out sort))
+        //                inElement.SetAttribute("Sort", sortIndex.ToString());
+        //            else
+        //            {
+        //                if (sort >= newPosIndex && newPosIndex != -1 && sort < prevPosIndex)
+        //                    inElement.SetAttribute("Sort", ((int)sort + 1).ToString());
+        //            }
+        //            sortIndex++;
+        //        }
+        //    }
+        //    if (prevPosIndex != -1 && prevPosIndex < newPosIndex)
+        //    {
+        //        /// Reduce all sort index which is greater than prevPosIndex and less or equal newPosIndex "if (sort > prevPosIndex && sort <= newPosIndex)"
+        //        foreach (XElement inElement in roleElements.Elements())
+        //        {
+        //            string sortString = inElement.GetAttribute("Sort");
+        //            int sort = 0;
+        //            if (sortIndex == newPosIndex)
+        //                sortIndex++;
+        //            if (!int.TryParse(sortString, out sort))
+        //                inElement.SetAttribute("Sort", sortIndex.ToString());
+        //            else
+        //            {
+        //                if (sort > prevPosIndex && sort <= newPosIndex)
+        //                    inElement.SetAttribute("Sort", (sort - 1).ToString());
+        //            }
+        //            sortIndex++;
+        //        }
+        //    }
+        //}
 
         private ulong UpdateExternalStorageData(MetaDataStorageSession objectStorage, OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent storageInstanceAgent)
         {

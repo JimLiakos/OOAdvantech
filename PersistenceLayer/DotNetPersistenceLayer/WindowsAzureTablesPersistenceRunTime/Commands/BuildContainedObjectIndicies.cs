@@ -169,6 +169,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
                 }
             }
+            Collection.IndexRebuilded(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
 
         }
 

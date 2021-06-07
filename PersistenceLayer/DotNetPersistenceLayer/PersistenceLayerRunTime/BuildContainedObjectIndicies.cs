@@ -33,7 +33,7 @@ namespace OOAdvantech.PersistenceLayerRunTime.Commands
         {
             get
             {
-                return 60;
+                return 35;
             }
         }
 

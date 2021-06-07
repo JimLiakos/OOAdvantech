@@ -62,12 +62,17 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 if(objRefCollection.Elements().Select(x => GetIndex(x)).Distinct().Count()!= objRefCollection.Elements().Count())
                 {
                     int i = 0;
-                    foreach (XElement inElement in objRefCollection.Elements().OrderBy(x => GetIndex(x)))
-                        inElement.SetAttributeValue("Sort", i++);
-                    if (objRefCollection.Elements().Select(x => GetIndex(x)).Distinct().Count() != objRefCollection.Elements().Count())
-                    {
+                    //foreach (XElement inElement in objRefCollection.Elements().OrderBy(x => GetIndex(x)))
+                    //    inElement.SetAttributeValue("Sort", i++);
+                    //if (objRefCollection.Elements().Select(x => GetIndex(x)).Distinct().Count() != objRefCollection.Elements().Count())
+                    //{
 
-                    }
+                    //}
+                }
+
+                using (CultureContext cultureContext = new CultureContext(Culture, false))
+                {
+                     Collection.IndexRebuilded(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
                 }
             }
 

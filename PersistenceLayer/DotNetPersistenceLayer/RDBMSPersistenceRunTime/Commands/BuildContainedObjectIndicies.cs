@@ -95,6 +95,9 @@ namespace OOAdvantech.RDBMSPersistenceRunTime.Commands
                 }
             }
 
+
+            Collection.IndexRebuilded(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
+
         }
 
     }

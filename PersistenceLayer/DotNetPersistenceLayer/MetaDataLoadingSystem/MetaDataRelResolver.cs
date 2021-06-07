@@ -401,7 +401,13 @@ namespace OOAdvantech.MetaDataLoadingSystem
         /// <param name="roleElement"></param>
         private void GetRoleRelatedObjects(string criterion, ref bool thereAreUnknownRelatedObjects, System.Collections.Generic.List<SortedObject> ObjectCollection, MetaDataStorageSession OwnerStorageSession, XElement roleElement)
         {
-            foreach (var refElement in roleElement.Elements("oid"))
+
+            if (roleElement.Elements().Select(x => GetIndex(x)).Distinct().Count() != roleElement.Elements().Count())
+            {
+
+            }
+
+                foreach (var refElement in roleElement.Elements("oid"))
             {
                 if (refElement.Name != "oid")
                 {
@@ -440,6 +446,16 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 }
             }
 
+        }
+
+        private static int GetIndexf(XElement indexElement)
+        {
+            string indexStr = indexElement.GetAttribute("Sort");
+            int index = 0;
+            if (int.TryParse(indexStr, out index))
+                return index;
+            else
+                return 0;
         }
 
         /// <MetaDataID>{E3A06187-30C9-44D7-982F-6FF8DCBE46B3}</MetaDataID>
