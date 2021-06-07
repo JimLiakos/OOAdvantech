@@ -122,23 +122,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                             }
 
                         }
-                        //if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
-                        //{
-                        //    if (index != -1)
-                        //    {
-                        //        foreach (XElement inCurrNode in RoleBCollection.Elements())
-                        //        {
-                        //            int sort = 0;
-                        //            XElement inElement = (XElement)inCurrNode;
-                        //            if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                        //            {
-                        //                int.TryParse(inElement.GetAttribute("Sort"), out sort);
-                        //                if (sort > index)
-                        //                    inElement.SetAttribute(("Sort"), ((int)sort - 1).ToString());
-                        //            }
-                        //        }
-                        //    }
-                        //}
+
 
                         break;
                     }
@@ -195,23 +179,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                                 break;
                             }
                         }
-                        //if (LinkInitiatorAssociationEnd.Association.RoleA.Indexer)
-                        //{
-                        //    if (index != -1)
-                        //    {
-                        //        foreach (XElement inCurrNode in RoleACollection.Elements())
-                        //        {
-                        //            int sort = 0;
-                        //            XElement inElement = (XElement)inCurrNode;
-                        //            if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                        //            {
-                        //                int.TryParse(inElement.GetAttribute("Sort"), out sort);
-                        //                if (sort > index)
-                        //                    inElement.SetAttribute(("Sort"), ((int)sort - 1).ToString());
-                        //            }
-                        //        }
-                        //    }
-                        //}
+             
                         break;
                     }
                 }
