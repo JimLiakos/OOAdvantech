@@ -32,7 +32,7 @@
             {
                 if (Multilingual)
                 {
-               
+
                     OOAdvantech.Collections.Generic.List<object> loadedRelatedObjects = null;
                     if (MultilingualLoadedRelatedObjects.TryGetValue(OOAdvantech.CultureContext.CurrentNeutralCultureInfo, out loadedRelatedObjects))
                     {
@@ -52,7 +52,7 @@
 
                 if (Multilingual)
                 {
-                    
+
                     MultilingualLoadedRelatedObjects[OOAdvantech.CultureContext.CurrentNeutralCultureInfo] = value;
                 }
                 else
@@ -648,10 +648,18 @@
 
             if (AssociationEnd.Multiplicity.IsMany)
             {
+
                 if (!AssociationEnd.Indexer && Contains(relatedObject))
                     return;
                 else if (AssociationEnd.Indexer && index != -1 && LoadedRelatedObjects.IndexOf(relatedObject) == index)
                     return;
+
+                if (AssociationEnd.Indexer && Contains(relatedObject) && index != -1)
+                {
+                    RefreshLinkedObjectIndex(relatedObject, index);
+                    return;
+                }
+
             }
             else
             {
@@ -1931,7 +1939,7 @@
                     //Distribute();
                     LoadData();
 
-                    if(this.RelResolver.AssociationEnd.Indexer)
+                    if (this.RelResolver.AssociationEnd.Indexer)
                     {
 
                     }

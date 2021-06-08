@@ -448,7 +448,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
         }
 
-        private static int GetIndexf(XElement indexElement)
+        private static int GetIndex(XElement indexElement)
         {
             string indexStr = indexElement.GetAttribute("Sort");
             int index = 0;

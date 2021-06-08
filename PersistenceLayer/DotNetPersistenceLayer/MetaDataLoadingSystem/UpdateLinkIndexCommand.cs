@@ -27,19 +27,29 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
         public override void Execute()
         {
+
+            if (LinkInitiatorAssociationEnd.Indexer)
+                UpdateRoleIndex(LinkInitiatorAssociationEnd);
+            if (LinkInitiatorAssociationEnd.GetOtherEnd().Indexer)
+                UpdateRoleIndex(LinkInitiatorAssociationEnd.GetOtherEnd());
+
+        }
+
+        private void UpdateRoleIndex(MetaDataRepository.AssociationEnd associationEnd)
+        {
             MetaDataStorageInstanceRef owner = null;
             MetaDataStorageInstanceRef reletedObject = null;
             int index = 0;
-            if (LinkInitiatorAssociationEnd.IsRoleA)
+            if (associationEnd.IsRoleA)
             {
-                owner = RoleA.RealStorageInstanceRef as MetaDataStorageInstanceRef;
-                reletedObject = RoleB.RealStorageInstanceRef as MetaDataStorageInstanceRef;
+                owner = RoleB.RealStorageInstanceRef as MetaDataStorageInstanceRef;
+                reletedObject = RoleA.RealStorageInstanceRef as MetaDataStorageInstanceRef;
                 index = RoleAIndex;
             }
             else
             {
-                owner = RoleB.RealStorageInstanceRef as MetaDataStorageInstanceRef;
-                reletedObject = RoleA.RealStorageInstanceRef as MetaDataStorageInstanceRef;
+                owner = RoleA.RealStorageInstanceRef as MetaDataStorageInstanceRef;
+                reletedObject = RoleB.RealStorageInstanceRef as MetaDataStorageInstanceRef;
                 index = RoleBIndex;
             }
 
@@ -48,16 +58,16 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
             #region gets role name 
 
 
-            var _roleName = (owner.ObjectStorage as MetaDataStorageSession).GetMappedTagName(LinkInitiatorAssociationEnd.GetOtherEnd().Identity.ToString().ToLower());
+            var _roleName = (owner.ObjectStorage as MetaDataStorageSession).GetMappedTagName(associationEnd.Identity.ToString().ToLower());
             if (string.IsNullOrWhiteSpace(_roleName))
             {
-                _roleName = LinkInitiatorAssociationEnd.GetOtherEnd().Name;
+                _roleName = associationEnd.GetOtherEnd().Name;
                 if (string.IsNullOrWhiteSpace(_roleName))
                 {
-                    if (LinkInitiatorAssociationEnd.GetOtherEnd().IsRoleA)
-                        _roleName = LinkInitiatorAssociationEnd.Association.Name + "RoleAName";
+                    if (associationEnd.GetOtherEnd().IsRoleA)
+                        _roleName = associationEnd.Association.Name + "RoleAName";
                     else
-                        _roleName = LinkInitiatorAssociationEnd.Association.Name + "RoleBName";
+                        _roleName = associationEnd.Association.Name + "RoleBName";
                 }
 
             }
@@ -69,10 +79,6 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
             var reletedObjectRefElement = objRefCollection.Elements().Where(x => x.Value == reletedObject.PersistentObjectID.ToString()).FirstOrDefault();
             reletedObjectRefElement.SetAttribute("Sort", index.ToString());
-
-          
-
-          
         }
     }
 }
