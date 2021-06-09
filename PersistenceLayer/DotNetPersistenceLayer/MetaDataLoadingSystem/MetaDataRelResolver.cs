@@ -401,13 +401,15 @@ namespace OOAdvantech.MetaDataLoadingSystem
         /// <param name="roleElement"></param>
         private void GetRoleRelatedObjects(string criterion, ref bool thereAreUnknownRelatedObjects, System.Collections.Generic.List<SortedObject> ObjectCollection, MetaDataStorageSession OwnerStorageSession, XElement roleElement)
         {
-
-            if (roleElement.Elements().Select(x => GetIndex(x)).Distinct().Count() != roleElement.Elements().Count())
+            if (AssociationEnd.Indexer)
             {
+                if (roleElement.Elements("oid").Select(x => GetIndex(x)).Distinct().Count() != roleElement.Elements("oid").Count())
+                {
 
+                }
             }
 
-                foreach (var refElement in roleElement.Elements("oid"))
+            foreach (var refElement in roleElement.Elements("oid"))
             {
                 if (refElement.Name != "oid")
                 {
