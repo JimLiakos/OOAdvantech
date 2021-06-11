@@ -1307,14 +1307,15 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     //    public string DefaultLanguage;
     //}
 
-    
-    class TypeMismatchException :Exception
+
+    /// <MetaDataID>{b6994935-c6aa-47d4-a796-6b94c309ceed}</MetaDataID>
+    class TypeMismatchException : Exception
     {
         public TypeMismatchException(string message) : base(message)
         {
 
         }
-        public TypeMismatchException(string message, Exception innerException):base(message,innerException)
+        public TypeMismatchException(string message, Exception innerException) : base(message, innerException)
         {
 
         }
