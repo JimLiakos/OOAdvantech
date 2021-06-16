@@ -587,6 +587,16 @@ namespace OOAdvantech.Remoting.RestApi
                 else
                     clientSessionPart.X_Access_Token = null;
                 var message = UnMarshal((msg as IMethodCallMessage), returnMessage);
+                if(responseData.UpdateCaching)
+                {
+                    try
+                    {
+                        RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
+                    }
+                    catch (Exception error)
+                    {
+                    }
+                }
                 return message;
             }
             else

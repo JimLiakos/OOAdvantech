@@ -345,15 +345,23 @@ namespace OOAdvantech.MetaDataRepository
 
             _CachingClientSidePropertiesNames = (from attribute in CachingClientSideAttributeProperties select attribute.Name).ToList();
 
+            if (_CachingClientSidePropertiesNames.Count > 0)
+                HasCachingClientSideProperties = true;
 
             if (type.BaseType != null && type.BaseType != typeof(object) && type.BaseType != typeof(MarshalByRefObject))
                 this.BaseProxyType = new ProxyType(type.BaseType);
+            if (BaseProxyType != null && BaseProxyType.HasCachingClientSideProperties)
+                HasCachingClientSideProperties = true;
+
 
             if (classifier is Class)
                 _Interfaces = (from _interface in (classifier as Class).GetAllInterfaces()
                                select new ProxyType(_interface.GetExtensionMetaObject<System.Type>())).ToList();
             else
                 _Interfaces = new List<ProxyType>();
+
+            if(_Interfaces.Where(x=>x.HasCachingClientSideProperties).FirstOrDefault()!=null)
+                HasCachingClientSideProperties = true;
 
         }
 
@@ -457,6 +465,8 @@ namespace OOAdvantech.MetaDataRepository
                 _AssemblyQualifiedName = value;
             }
         }
+
+        public bool HasCachingClientSideProperties { get; internal set; }
 
         /// <MetaDataID>{3214f3f7-779a-4d2c-ba54-c1578ff71e1a}</MetaDataID>
         internal bool CanCastTo(Type fromType)

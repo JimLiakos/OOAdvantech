@@ -183,7 +183,20 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 
+        public static MarshalByRefObject RefreshCacheData(MarshalByRefObject obj)
+        {
 
+            System.Runtime.Remoting.Proxies.RealProxy RealProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(obj);
+            if (RealProxy == null)
+                return null;
+            if (RealProxy is IProxy)
+            {
+                var remotingServices = GetRemotingServices((RealProxy as IProxy).ChannelUri);
+                return remotingServices.RefreshCacheData(obj);
+            }
+
+            return obj;
+        }
 
         public static object GetPersistentObject(string serverUrl, string persistentUri)
         {

@@ -251,7 +251,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                         #region propagate message
                         string roleInstanceServerUrl = RemotingServices.InternalEndPointResolver.GetRoleInstanceServerUrl(responseData);
-                        ResponseData forwordResponse = new ResponseData(request.ChannelUri) { IsSucceeded = responseData.IsSucceeded, CallContextID = request.CallContextID, SessionIdentity = responseData.SessionIdentity, ChannelUri = responseData.ChannelUri, details = responseData.details };
+                        ResponseData forwordResponse = new ResponseData(request.ChannelUri) { IsSucceeded = responseData.IsSucceeded, CallContextID = request.CallContextID, SessionIdentity = responseData.SessionIdentity, ChannelUri = responseData.ChannelUri, details = responseData.details,UpdateCaching= responseData.UpdateCaching };
                         SendResponce(forwordResponse);
                         #endregion
 

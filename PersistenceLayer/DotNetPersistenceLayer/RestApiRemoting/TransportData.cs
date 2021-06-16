@@ -331,7 +331,8 @@ namespace OOAdvantech.Remoting.RestApi
         [JsonIgnore]
         public bool InitCommunicationSession { get; internal set; }
 
-
+        [DataMember]
+        public bool UpdateCaching { get; set; }
     }
 
     /// <MetaDataID>{8df98a8d-4aed-4e73-b987-34941905fd9d}</MetaDataID>

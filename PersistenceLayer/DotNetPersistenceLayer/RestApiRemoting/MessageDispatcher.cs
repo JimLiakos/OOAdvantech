@@ -26,7 +26,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{30d646b7-5886-4ec2-8e1e-49026c836b6f}</MetaDataID>
     public class MessageDispatcher
     {
-        internal static string ProcessName= System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+        internal static string ProcessName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
         /// <MetaDataID>{a5db401d-2be2-44eb-9391-adc1b4ac6cb8}</MetaDataID>
         static MessageDispatcher()
         {
@@ -182,22 +182,22 @@ namespace OOAdvantech.Remoting.RestApi
                         methodCallMessage.UnMarshal();
 
                         var methodInfo = methodCallMessage.MethodInfo;
-                        object[] args = methodCallMessage.Args.ToArray(); 
+                        object[] args = methodCallMessage.Args.ToArray();
                         var _params = methodInfo.GetParameters();
-                        
+
                         if (request.CallContextDictionaryData != null)
                         {
                             foreach (var data in request.CallContextDictionaryData)
                                 System.Runtime.Remoting.Messaging.CallContext.SetData(data.Key, data.Value);
                         }
-                        
+
                         if (args.Length < _params.Length)
                         {
                             object[] m_args = new object[_params.Length];
                             args.CopyTo(m_args, 0);
-                            for (int i= args.Length;i< _params.Length;i++)
+                            for (int i = args.Length; i < _params.Length; i++)
                             {
-                                if(_params[i].DefaultValue!=System.DBNull.Value)
+                                if (_params[i].DefaultValue != System.DBNull.Value)
                                     m_args[i] = _params[i].DefaultValue;
                             }
                             args = m_args;
@@ -208,7 +208,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                             using (SystemStateTransition stateTransition = new SystemStateTransition(request.GetCallContextData("Transaction") as Transaction))
                             {
-                                retVal = methodInfo.Invoke(methodCallMessage.Object, args); 
+                                retVal = methodInfo.Invoke(methodCallMessage.Object, args);
                                 stateTransition.Consistent = true;
                             }
 
@@ -259,14 +259,16 @@ namespace OOAdvantech.Remoting.RestApi
                     catch (System.Reflection.TargetInvocationException error)
                     {
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error.InnerException);
-                        return Task<ResponseData>.Run(() => {
+                        return Task<ResponseData>.Run(() =>
+                        {
                             return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-                            });
+                        });
                     }
                     catch (Exception error)
                     {
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error);
-                        return Task<ResponseData>.Run(() =>{
+                        return Task<ResponseData>.Run(() =>
+                        {
                             return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                         });
                     }
@@ -296,7 +298,7 @@ namespace OOAdvantech.Remoting.RestApi
         public static ResponseData MessageDispatch(RequestData request)
         {
 
-            if(request.RequestProcess!= "WaWorkerHost")
+            if (request.RequestProcess != "WaWorkerHost")
             {
 
             }
@@ -387,7 +389,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                         methodCallMessage.UnMarshal();
 
-                     
+
                         var methodInfo = methodCallMessage.MethodInfo;
                         object[] args = methodCallMessage.Args.ToArray();
                         if (request.CallContextDictionaryData != null)
@@ -395,8 +397,39 @@ namespace OOAdvantech.Remoting.RestApi
                             foreach (var data in request.CallContextDictionaryData)
                                 System.Runtime.Remoting.Messaging.CallContext.SetData(data.Key, data.Value);
                         }
+                        ProxyType proxyType = null;
+                        Dictionary<string, object> membersValues = null;
+                        if (methodCallMessage.Object != null && !serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                        {
+                            if (proxyType!=null&& proxyType.HasCachingClientSideProperties)
+                            {
+                                membersValues = new Dictionary<string, object>();
+                                proxyType.CachingObjectMembersValue(methodCallMessage.Object, membersValues);
+                            }
+                        }
 
                         object retVal = methodInfo.Invoke(methodCallMessage.Object, args);
+                        bool updateCachingClientSideProperties = false;
+                        if (proxyType != null&&proxyType.HasCachingClientSideProperties)
+                        {
+                            Dictionary<string, object> newMembersValues = new Dictionary<string, object>();
+                            proxyType.CachingObjectMembersValue(methodCallMessage.Object, newMembersValues);
+
+
+                            if (membersValues == null || newMembersValues.Count != membersValues.Count)
+                                updateCachingClientSideProperties = true;
+                            else
+                            {
+                                foreach (var memberValueKey in membersValues.Keys)
+                                {
+                                    if (membersValues[memberValueKey] != newMembersValues[memberValueKey])
+                                    {
+                                        updateCachingClientSideProperties = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                         if (request.CallContextDictionaryData != null)
                         {
                             foreach (var data in request.CallContextDictionaryData)
@@ -411,7 +444,12 @@ namespace OOAdvantech.Remoting.RestApi
                         responseMessage.Marshal();
 
                         string json = JsonConvert.SerializeObject(responseMessage);
-                        return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json };
+                        var response= new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties };
+                        if(response.UpdateCaching)
+                        {
+
+                        }
+                        return response;
                     }
                     catch (System.Reflection.TargetInvocationException error)
                     {
@@ -676,7 +714,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
                     var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);
 #else
-                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
+                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
 #endif
 
                     //if (methodCallMessage.Web)
@@ -720,7 +758,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
                     var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);
 #else
-                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
+                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
 
                     //if (methodCallMessage.Web)
                     //{
