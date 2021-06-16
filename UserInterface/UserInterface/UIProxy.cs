@@ -72,7 +72,7 @@ namespace OOAdvantech.UserInterface.Runtime
                 throw new NotSupportedException();
             }
         }
-        public static  T GetRealObject<T>(object _obj) where T: class
+        public static T GetRealObject<T>(object _obj) where T : class
         {
             object realObject = null;
             UIProxy uiProxy = UIProxy.GetUIProxy(_obj);
@@ -356,7 +356,7 @@ namespace OOAdvantech.UserInterface.Runtime
                     {
                         System.Reflection.PropertyInfo property = null;
                         bool propertySet = false;
-                       
+
                         if (MethodMessage.MethodName.IndexOf("get_") == 0)
                         {
                             string propertyName = MethodMessage.MethodName.Substring("get_".Length);
@@ -401,6 +401,8 @@ namespace OOAdvantech.UserInterface.Runtime
                                         ret = MethodMessage.MethodBase.Invoke(_RealTransparentProxy, MethodMessage.Args);
                                     else
                                         ret = OOAdvantech.AccessorBuilder.GetDefaultValue((MethodMessage.MethodBase as System.Reflection.MethodInfo).ReturnType);
+
+                                    ret = GetWPFCompatibleValue(MethodMessage.MethodBase, DisplayedValue.UserInterfaceSession.GetDisplayedValue(ret));
                                 }
                             }
                             else
@@ -674,7 +676,7 @@ namespace OOAdvantech.UserInterface.Runtime
                                 proxyItem = item.Value;
                             else
                             {
-                               
+
 
                                 UIProxy uiProxy = null;
                                 if (item.CrossSessionValue != null)
@@ -708,7 +710,17 @@ namespace OOAdvantech.UserInterface.Runtime
 
 
             Type memperType = null;
-            memperType = (memberInfo as System.Reflection.PropertyInfo).PropertyType;
+            
+            if(memberInfo is System.Reflection.PropertyInfo)
+                memperType = (memberInfo as System.Reflection.PropertyInfo).PropertyType;
+
+            if (memberInfo is System.Reflection.FieldInfo)
+                memperType = (memberInfo as System.Reflection.FieldInfo).FieldType;
+
+            if (memberInfo is System.Reflection.MethodInfo)
+                memperType = (memberInfo as System.Reflection.MethodInfo).ReturnType;
+
+
             object retValue = displayedValue;
             if (!DynamicUIProxy.TypeExcluded(memperType))
             {
@@ -716,7 +728,7 @@ namespace OOAdvantech.UserInterface.Runtime
                     retValue = displayedValue.CrossSessionValue;
                 else
                 {
-                  
+
                     retValue = displayedValue.GetUIProxy(_UserInterfaceObjectConnection);
                     if ((retValue is UIProxy))
                         (retValue as UIProxy).CrossSessionValue = CrossSessionValue;
