@@ -293,6 +293,7 @@ namespace OOAdvantech.MetaDataRepository
 
             AssemblyQualifiedName = type.AssemblyQualifiedName;
 
+        
             _Name = type.Name;
             int i = 0;
             if(_Name== "IServicesContextPresentation")
@@ -319,6 +320,8 @@ namespace OOAdvantech.MetaDataRepository
                                                where classifier.IsHttpVisible(_event) && _event.EventHandlerType == typeof(OOAdvantech.ObjectChangeStateHandle)
                                                select _event.Name).FirstOrDefault();
 
+            ObjectChangeState= (from _event in classifier.GetExtensionMetaObject<Type>().GetMetaData().GetEvents()
+             where _event.EventHandlerType == typeof(OOAdvantech.ObjectChangeStateHandle) select _event).FirstOrDefault();
 
             CachingClientSideAttributeProperties = (from attribute in classifier.GetFeatures(false).OfType<Attribute>()
                                                     where attribute.Visibility == VisibilityKind.AccessPublic &&
@@ -363,6 +366,28 @@ namespace OOAdvantech.MetaDataRepository
             if(_Interfaces.Where(x=>x.HasCachingClientSideProperties).FirstOrDefault()!=null)
                 HasCachingClientSideProperties = true;
 
+        }
+
+
+
+        System.Reflection.EventInfo ObjectChangeState;
+        internal System.Reflection.EventInfo GetObjectChangeState()
+        {
+            if (ObjectChangeState != null)
+                return ObjectChangeState;
+            System.Reflection.EventInfo objectChangeState = null;
+
+
+            if (BaseProxyType != null)
+                objectChangeState = BaseProxyType.GetObjectChangeState();
+            
+            if (objectChangeState != null)
+                return objectChangeState;
+
+            if (Interfaces != null)
+                objectChangeState = Interfaces.Where(x => x.GetObjectChangeState() != null).Select(x => x.GetObjectChangeState()).FirstOrDefault();
+
+            return objectChangeState;
         }
 
         /// <MetaDataID>{a90cd051-6e30-4dc8-81ce-c84543f71ba6}</MetaDataID>

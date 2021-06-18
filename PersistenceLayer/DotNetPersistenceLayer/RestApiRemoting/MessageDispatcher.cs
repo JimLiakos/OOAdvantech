@@ -399,37 +399,45 @@ namespace OOAdvantech.Remoting.RestApi
                         }
                         ProxyType proxyType = null;
                         Dictionary<string, object> membersValues = null;
-                        if (methodCallMessage.Object != null && !serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                        System.Reflection.EventInfo objectChangeState = null;
+                        if (methodCallMessage.Object != null && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
                             if (proxyType!=null&& proxyType.HasCachingClientSideProperties)
-                            {
-                                membersValues = new Dictionary<string, object>();
-                                proxyType.CachingObjectMembersValue(methodCallMessage.Object, membersValues);
-                            }
+                                objectChangeState=proxyType.GetObjectChangeState();
                         }
+                        bool updateCachingClientSideProperties = false;
+                        ObjectChangeStateHandle handler = (object _object, string member) =>
+                         {
+                             updateCachingClientSideProperties = true;
+                         };
+                        if (objectChangeState != null && methodCallMessage.Object != null)
+                            objectChangeState.AddEventHandler(methodCallMessage.Object, handler);
 
                         object retVal = methodInfo.Invoke(methodCallMessage.Object, args);
-                        bool updateCachingClientSideProperties = false;
-                        if (proxyType != null&&proxyType.HasCachingClientSideProperties)
-                        {
-                            Dictionary<string, object> newMembersValues = new Dictionary<string, object>();
-                            proxyType.CachingObjectMembersValue(methodCallMessage.Object, newMembersValues);
+                        if (objectChangeState != null && methodCallMessage.Object != null)
+                            objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+
+                        
+                        //if (proxyType != null&&proxyType.HasCachingClientSideProperties)
+                        //{
+                        //    Dictionary<string, object> newMembersValues = new Dictionary<string, object>();
+                        //    proxyType.CachingObjectMembersValue(methodCallMessage.Object, newMembersValues);
 
 
-                            if (membersValues == null || newMembersValues.Count != membersValues.Count)
-                                updateCachingClientSideProperties = true;
-                            else
-                            {
-                                foreach (var memberValueKey in membersValues.Keys)
-                                {
-                                    if (membersValues[memberValueKey] != newMembersValues[memberValueKey])
-                                    {
-                                        updateCachingClientSideProperties = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
+                        //    //if (membersValues == null || newMembersValues.Count != membersValues.Count)
+                        //    //    updateCachingClientSideProperties = true;
+                        //    //else
+                        //    //{
+                        //    //    foreach (var memberValueKey in membersValues.Keys)
+                        //    //    {
+                        //    //        if (membersValues[memberValueKey] != newMembersValues[memberValueKey])
+                        //    //        {
+                        //    //            updateCachingClientSideProperties = true;
+                        //    //            break;
+                        //    //        }
+                        //    //    }
+                        //    //}
+                        //}
                         if (request.CallContextDictionaryData != null)
                         {
                             foreach (var data in request.CallContextDictionaryData)
