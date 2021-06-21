@@ -42,7 +42,7 @@
 
             <wpftoolkitex:WatermarkTextBox x:Name="WatermarkTextBox"  Watermark ="{Binding ElementName=mainControl, Path=Watermark}"  
                                            SpellCheck.IsEnabled="{Binding ElementName=mainControl, Path=SpellCheckEnable}" 
-                                           Text="{Binding ElementName=mainControl, Path=Text, UpdateSourceTrigger=PropertyChanged}"   
+                                           Text="{Binding ElementName=mainControl, Path=Text, UpdateSourceTrigger=LostFocus}"   
                                            AcceptsReturn ="{Binding ElementName=mainControl, Path=AcceptsReturn}" 
                                            AcceptsTab ="{Binding ElementName=mainControl, Path=AcceptsTab}" 
                                            TextWrapping ="{Binding ElementName=mainControl, Path=TextWrapping}" 

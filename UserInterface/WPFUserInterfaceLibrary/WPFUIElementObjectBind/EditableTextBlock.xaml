@@ -32,7 +32,7 @@
                     </Grid.ColumnDefinitions>
 
                     <wpftoolkitex:WatermarkTextBox x:Name="WatermarkTextBox" VerticalContentAlignment="Center" SpellCheck.IsEnabled="{Binding ElementName=mainControl, Path=SpellCheckEnable}"  Watermark ="{Binding ElementName=mainControl, Path=Watermark}" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown"   
-                     Text="{Binding ElementName=mainControl, Path=Text, UpdateSourceTrigger=PropertyChanged}" TextAlignment="{Binding ElementName=mainControl, Path=TextAlignment}"  Margin="0" BorderThickness="1" />
+                     Text="{Binding ElementName=mainControl, Path=Text, UpdateSourceTrigger=LostFocus}" TextAlignment="{Binding ElementName=mainControl, Path=TextAlignment}"  Margin="0" BorderThickness="1" />
                     <Button Name="TranslateBtn" LostFocus="TranslateBtn_LostFocus"  Click="TranslateBtn_Click" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="2000" ToolTipService.BetweenShowDelay="10000"  ToolTip="Translate"  Grid.Column="1" Margin="4,2,0,2"  Visibility="{Binding ElementName=mainControl, Path=UnTranslated, Converter={StaticResource BooleanToVisibilityConverter}}"  Style="{DynamicResource ListViewBarButtonStyle}" Width="25" Height="25"  HorizontalAlignment="Right" >
 
                         <Image  Width="16" Height="16" Source="Resources/Translate24.png" ></Image>

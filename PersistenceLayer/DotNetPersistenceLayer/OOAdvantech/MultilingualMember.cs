@@ -44,10 +44,14 @@ namespace OOAdvantech
 
             foreach (System.Collections.DictionaryEntry entry in values)
             {
-                if (entry.Value != null)
-                    MultilingualValue.Add(entry.Key as System.Globalization.CultureInfo, (T)entry.Value);
+                CultureInfo culture = entry.Key as System.Globalization.CultureInfo;
+                if (culture == null && entry.Key is string)
+                    culture = CultureInfo.GetCultureInfo(entry.Key as string);
+
+                    if (entry.Value != null)
+                    MultilingualValue.Add(culture, (T)entry.Value);
                 else
-                    MultilingualValue.Add(entry.Key as System.Globalization.CultureInfo, default(T));
+                    MultilingualValue.Add(culture, default(T));
             }
         }
         protected override bool ObjectHasGhanged(OOAdvantech.Transactions.Transaction transaction)

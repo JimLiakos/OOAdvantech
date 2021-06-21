@@ -186,19 +186,25 @@ namespace OOAdvantech.UserInterface.Runtime
 
                     Transaction.RunAsynch(new Action(() =>
                     {
-                        using (SystemStateTransition stateTransition = new SystemStateTransition(Transaction))
-                        {
-                            using (CultureContext cultureContext = new CultureContext(this.Culture, this.UseDefaultCultureWhenValueMissing))
-                            {
 
-                                foreach (var uiProxy in this.GetAllUIProxies())
+                        using (SystemStateTransition supressTransactionStateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                        {
+                            using (SystemStateTransition stateTransition = new SystemStateTransition(Transaction))
+                            {
+                                using (CultureContext cultureContext = new CultureContext(this.Culture, this.UseDefaultCultureWhenValueMissing))
                                 {
-                                    if (uiProxy.DisplayedValue != null)
-                                        this.ObjectChangeState(uiProxy.DisplayedValue.Value, null);
+
+                                    foreach (var uiProxy in this.GetAllUIProxies())
+                                    {
+                                        if (uiProxy.DisplayedValue != null)
+                                            this.ObjectChangeState(uiProxy.DisplayedValue.Value, null);
+                                    }
                                 }
-                            }
-                            stateTransition.Consistent = true;
+                                stateTransition.Consistent = true;
+                            } 
+                            
                         }
+
                     }));
 
                 }
@@ -2242,34 +2248,41 @@ namespace OOAdvantech.UserInterface.Runtime
                     if (originTransaction == transaction)
                         transaction = OOAdvantech.Transactions.Transaction.Current;
                 }
-                using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition(transaction))
+                using (SystemStateTransition supressTransactionStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
-                    using (OOAdvantech.Transactions.SystemStateTransition innerStateTransition = new OOAdvantech.Transactions.SystemStateTransition(transactionOption, TransactionObjectLockTimeOut))
+                    using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition(transaction))
                     {
-                        //System.Type type = ModulePublisher.ClassRepository.GetType(PresentationObjectType.FullName, "");
-                        try
+                        using (OOAdvantech.Transactions.SystemStateTransition innerStateTransition = new OOAdvantech.Transactions.SystemStateTransition(transactionOption, TransactionObjectLockTimeOut))
                         {
-                            retValue = methodInfo.Invoke(instance, parameters);
-                        }
-                        catch (System.Exception error)
-                        {
-                            if (OOAdvantech.Transactions.Transaction.Current.Status == OOAdvantech.Transactions.TransactionStatus.Continue)
+                            //System.Type type = ModulePublisher.ClassRepository.GetType(PresentationObjectType.FullName, "");
+                            try
                             {
-                                if (error is System.Reflection.TargetInvocationException)
-                                    innerStateTransition.StateTransitionTransaction.Abort(error.InnerException);
-                                else
-                                    innerStateTransition.StateTransitionTransaction.Abort(error);
+                                retValue = methodInfo.Invoke(instance, parameters);
                             }
+                            catch (System.Exception error)
+                            {
+                                if (OOAdvantech.Transactions.Transaction.Current.Status == OOAdvantech.Transactions.TransactionStatus.Continue)
+                                {
+                                    if (error is System.Reflection.TargetInvocationException)
+                                        innerStateTransition.StateTransitionTransaction.Abort(error.InnerException);
+                                    else
+                                        innerStateTransition.StateTransitionTransaction.Abort(error);
+                                }
 
-                            throw;
+                                throw;
+                            }
+                            if (innerStateTransition.StateTransitionTransaction.Status == TransactionStatus.Continue ||
+                                innerStateTransition.StateTransitionTransaction.Status == TransactionStatus.Committed)
+                                innerStateTransition.Consistent = true;
                         }
-                        if (innerStateTransition.StateTransitionTransaction.Status == TransactionStatus.Continue ||
-                            innerStateTransition.StateTransitionTransaction.Status == TransactionStatus.Committed)
-                            innerStateTransition.Consistent = true;
-                    }
-                    stateTransition.Consistent = true;
-                    return retValue;
+                        stateTransition.Consistent = true;
+                        return retValue;
+                    } 
+                    
                 }
+
+
+
             }
             else
             {
