@@ -778,6 +778,9 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
             MetaDataRepository.StorageCell storageCell = GetStorageCell(int.Parse(storageSerialNumber));
 
+            if (storageCell == null)
+                return null;
+
             var objectID = storageCell.ObjectIdentityType.Parse(objectIdentityAsString, storageIdentity);
 
             var operativeObjectCollection = OperativeObjectCollections[storageCell.Type.GetExtensionMetaObject<System.Type>()];
