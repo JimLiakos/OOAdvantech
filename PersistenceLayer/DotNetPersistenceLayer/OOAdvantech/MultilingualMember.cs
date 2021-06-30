@@ -7,11 +7,11 @@ using System.Globalization;
 
 namespace OOAdvantech
 {
-     /// <MetaDataID>{13d8c6b3-06de-42e3-af08-8c8995656ca3}</MetaDataID>
+    /// <MetaDataID>{13d8c6b3-06de-42e3-af08-8c8995656ca3}</MetaDataID>
     public interface IMultilingual
     {
         IDictionary Values { get; }
- 
+
         System.Globalization.CultureInfo DefaultLanguage
         {
             get;
@@ -48,7 +48,7 @@ namespace OOAdvantech
                 if (culture == null && entry.Key is string)
                     culture = CultureInfo.GetCultureInfo(entry.Key as string);
 
-                    if (entry.Value != null)
+                if (entry.Value != null)
                     MultilingualValue.Add(culture, (T)entry.Value);
                 else
                     MultilingualValue.Add(culture, default(T));

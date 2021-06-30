@@ -119,7 +119,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     dataRow[_ChangeTypeColumnName] = 2;
                     ObjectID objectID = storageInstance.ObjectID as ObjectID;
                     foreach (RDBMSMetaDataRepository.IdentityColumn column in (storageInstance.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable.ObjectIDColumns)
-                        dataRow[column.DataBaseColumnName] = TypeDictionary.Convert(objectID.GetMemberValue(column.ColumnType), dataRow.Table.Columns[column.DataBaseColumnName].DataType);
+                        dataRow[column.Name] = TypeDictionary.Convert(objectID.GetMemberValue(column.ColumnType), dataRow.Table.Columns[column.Name].DataType);
                     _TableWithStatesOfObjectsUnderTransaction.Rows.Add(dataRow);
                 }
                 #endregion
@@ -332,9 +332,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         if (dataRow.Table.Columns.Contains(dataColumn.Name))
                         {
                             //if(attributeValue.Value!=null)
-                            object value = TypeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
+                            object value = TypeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.Name].DataType);
                             if(value !=null)
-                                dataRow[column.DataBaseColumnName] = value;
+                                dataRow[column.Name] = value;
                         }
                         break;
                     }
@@ -353,9 +353,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         if (dataRow.Table.Columns.Contains(dataColumn.Name))
                         {
 
-                            object value = TypeDictionary.Convert(storageInstanceRef.RelationshipColumnsValues[column], dataRow.Table.Columns[column.DataBaseColumnName].DataType);
+                            object value = TypeDictionary.Convert(storageInstanceRef.RelationshipColumnsValues[column], dataRow.Table.Columns[column.Name].DataType);
                             if (value != null)
-                                dataRow[column.DataBaseColumnName] = value;
+                                dataRow[column.Name] = value;
                         }
                         break;
                     }

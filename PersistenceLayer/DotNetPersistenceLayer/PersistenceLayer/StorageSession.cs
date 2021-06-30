@@ -484,6 +484,20 @@ namespace OOAdvantech.PersistenceLayer
             return @object;
         }
 
+        public static T GetObjectFromUri<T>(string persistentUri) where T : class
+        {
+            object @object = null;
+            string[] persistentObjectUriParts = persistentUri.Split('\\');
+            string storageIdentity = persistentObjectUriParts[0];
+            var storageMetaData = PersistenceLayer.StorageServerInstanceLocator.Current.GetSorageMetaData(storageIdentity);
+            if (storageMetaData != null && storageMetaData.MultipleObjectContext)
+            {
+                var objectStorage = PersistenceLayer.ObjectStorage.OpenStorage(storageMetaData.StorageName, storageMetaData.StorageLocation, storageMetaData.StorageType);
+                @object = objectStorage.GetObject(persistentUri);
+            }
+            return @object as T;
+        }
+
         /// <MetaDataID>{3a304faa-ec3f-4349-ad9d-cd1694034139}</MetaDataID>
         public static MetaDataRepository.StorageMetaData GetStorageFromUri(string persistentUri)
         {
@@ -614,6 +628,8 @@ namespace OOAdvantech.PersistenceLayer
                 return _PersistencyService;
 			}
 		}
+
+     
         /// <summary>This method retrieves a storage session with storage of object if it is persistent. If the object is transient return null. </summary>
         /// <param name="_object">Define the object from which you wand retrieve the storage session. </param>
         /// <MetaDataID>{5E8CE175-8E8A-424E-801A-2BCED2AA4816}</MetaDataID>
