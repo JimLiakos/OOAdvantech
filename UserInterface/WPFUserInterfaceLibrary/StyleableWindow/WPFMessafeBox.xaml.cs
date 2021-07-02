@@ -165,6 +165,7 @@ namespace StyleableWindow
     }
 
 
+    /// <MetaDataID>{70b31e5c-53cd-466a-a0cb-61dd3e9f3aff}</MetaDataID>
     public enum MessageBoxType
     {
         ConfirmationWithYesNo = 0,
@@ -174,6 +175,7 @@ namespace StyleableWindow
         Warning
     }
 
+    /// <MetaDataID>{d22304a1-f703-4352-8fd6-4e34a07c2e11}</MetaDataID>
     public enum MessageBoxImage
     {
         Warning = 0,
