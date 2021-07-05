@@ -253,7 +253,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     }
                 }
                 dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
-           
+
                 object value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
 
                 if (value != null)
@@ -261,7 +261,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     dataRow[column.DataBaseColumnName] = value;
                     if (attributeValue.Value is DateTime)
                     {
-                     
+
                         if (((DateTime)dataRow[column.DataBaseColumnName]).ToUniversalTime() != ((DateTime)attributeValue.Value).ToUniversalTime())
                             dataRow[column.DataBaseColumnName] = ((DateTime)attributeValue.Value).ToLocalTime();
                         if (((DateTime)dataRow[column.DataBaseColumnName]).ToUniversalTime() != ((DateTime)attributeValue.Value).ToUniversalTime())
@@ -270,8 +270,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
                 }
 
-                
-                    
+
+
 
 
             }
@@ -366,7 +366,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                             break;
                         }
                     }
-                    StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table][column.DataBaseColumnName] = attributeValue.Value;
+                    if (attributeValue.Value != null)
+                        StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table][column.DataBaseColumnName] = attributeValue.Value;
+                    else
+                        StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table][column.DataBaseColumnName] = System.DBNull.Value;
+
                 }
                 if ((storageInstance.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable.GetColumn("TypeID") != null)
                     StorageInstanceRefsRows[storageInstance][(storageInstance.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable]["TypeID"] = rdbmsMetadataClass.TypeID;
@@ -450,7 +454,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     dataRow[column.DataBaseColumnName] = value;
                     if (attributeValue.Value is DateTime)
                     {
-                      
+
                         if (((DateTime)dataRow[column.DataBaseColumnName]).ToUniversalTime() != ((DateTime)attributeValue.Value).ToUniversalTime())
                             dataRow[column.DataBaseColumnName] = ((DateTime)attributeValue.Value).ToLocalTime();
                         if (((DateTime)dataRow[column.DataBaseColumnName]).ToUniversalTime() != ((DateTime)attributeValue.Value).ToUniversalTime())
