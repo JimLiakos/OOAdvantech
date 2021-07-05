@@ -1012,11 +1012,22 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                             MainTable.RemoveColumn(column);
                     }
                 }
-                foreach (Attribute attribute in attributes)
+
+
+                
+                foreach (Attribute attribute in attributes.Where(x=>((x as RDBMSMetaDataRepository.Attribute).GetColumnsFor(this).Count()!=0)))
                 {
+                    //update existing columns
                     if (Type.IsPersistent(attribute))
                         attribute.AddColumnToTableOrUpdate(MainTable);
                 }
+                foreach (Attribute attribute in attributes.Where(x => ((x as RDBMSMetaDataRepository.Attribute).GetColumnsFor(this).Count() == 0)))
+                {
+                    //add new columns
+                    if (Type.IsPersistent(attribute))
+                        attribute.AddColumnToTableOrUpdate(MainTable);
+                }
+
 
 
                 #endregion

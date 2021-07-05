@@ -324,9 +324,13 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             {
                                 if (TypeHelper.GetElementType(fieldType) != TypeHelper.GetElementType((_PropertyMember as System.Reflection.PropertyInfo).PropertyType))
                                 {
-                                    errors.Add(new MetaDataRepository.MetaObject.MetaDataError("MDR Error: " + "Type mismatch between property '" + _PropertyMember.DeclaringType + "." + _PropertyMember.Name +
+                                    if (!MetaDataRepository.Classifier.GetClassifier(fieldType).IsA(MetaDataRepository.Classifier.GetClassifier((_PropertyMember as System.Reflection.PropertyInfo).PropertyType)))
+                                    {
+
+                                        errors.Add(new MetaDataRepository.MetaObject.MetaDataError("MDR Error: " + "Type mismatch between property '" + _PropertyMember.DeclaringType + "." + _PropertyMember.Name +
                                     "' and implementation field '" + fieldInfo.DeclaringType + "." + fieldInfo.Name + "'.", FullName));
-                                    return true;
+                                        return true;
+                                    }
                                 }
                             }
 

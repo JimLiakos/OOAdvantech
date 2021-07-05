@@ -1819,6 +1819,11 @@
                     {
                         relationOwnerDataNode.DataSource = new StorageDataSource(relationOwnerDataNode, GetDataLoadersMetaData(ownerStorageCells, relationOwnerDataNode));
                         CreateDataSourcesForRelatedDataNode(relatedObjectDataNode);
+                        foreach (var relatedStorageCell in linkedStorageCells)
+                        {
+                            foreach (var dataLoaderMetadata in (relationOwnerDataNode.DataSource as StorageDataSource).DataLoadersMetadata.Values)
+                                dataLoaderMetadata.AddRelatedStorageCell(relatedObjectDataNode, relatedStorageCell);
+                        }
 
                     }
                     else

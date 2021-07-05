@@ -178,6 +178,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     foreach (Attribute attribute in attributes)
                     {
 
+
                         if ((Type as MetaDataRepository.Structure).IsPersistent(attribute))
                             columns.AddRange(attribute.AddColumnToTableOrUpdate(table, path + Name, pathIdentity));
                     }
