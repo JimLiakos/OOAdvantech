@@ -98,29 +98,44 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
                         int index = -1;
                         RoleBCollection = Element;
-                        if (Multilingual&& Culture != null)
-                            RoleBCollection = RoleBCollection.Element(Culture.Name);
-
-                        foreach (XElement inCurrNode in RoleBCollection.Elements())
+                        if (Multilingual && Culture != null)
                         {
 
-                            XElement inElement = (XElement)inCurrNode;
-
-
-                            if (inElement.Value == StrObjectID)
+                            RoleBCollection = RoleBCollection.Element(Culture.Name);
+                            if (RoleBCollection == null)
                             {
-                                if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
-                                {
-                                    if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                                        int.TryParse(inElement.GetAttribute("Sort"), out index);
-
-                                }
-                                inElement.Remove();
-
-
-                                break;
+                                var storageCulture = CultureContext.GetNeutralCultureInfo(ObjectStorage.StorageMetaData.Culture);
+                                if (storageCulture != null && Culture == storageCulture)
+                                    RoleBCollection = Element;
                             }
+                            else
+                                break;
+                        }
 
+                        //ObjectStorage.StorageMetaData.Culture.
+                        if (RoleBCollection != null)
+                        {
+                            foreach (XElement inCurrNode in RoleBCollection.Elements())
+                            {
+
+                                XElement inElement = (XElement)inCurrNode;
+
+
+                                if (inElement.Value == StrObjectID)
+                                {
+                                    if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
+                                    {
+                                        if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
+                                            int.TryParse(inElement.GetAttribute("Sort"), out index);
+
+                                    }
+                                    inElement.Remove();
+
+
+                                    break;
+                                }
+
+                            }
                         }
 
 

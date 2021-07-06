@@ -34,7 +34,11 @@ namespace OOAdvantech.MetaDataLoadingSystem
                     return InternalLoadedRelatedObjects.Contains(obj);
                 }
                 else
+                {
+                    if (InternalLoadedRelatedObjects == null)
+                        return false;
                     return InternalLoadedRelatedObjects.Contains(obj);
+                }
             }
             else
             {

@@ -51,7 +51,7 @@ namespace OOAdvantech
             }
         }
 
-        internal static CultureInfo GetNeutralCultureInfo(string culture)
+        public static CultureInfo GetNeutralCultureInfo(string culture)
         {
             var currentCultureInfo =  System.Globalization.CultureInfo.GetCultureInfo(culture);
             if (NeutralCultures.ContainsKey(currentCultureInfo.Name))
@@ -64,6 +64,7 @@ namespace OOAdvantech
 
         }
 
+    
         static Dictionary<string, System.Globalization.CultureInfo> NeutralCultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.NeutralCultures).ToDictionary(x => x.Name);
         public static System.Globalization.CultureInfo CurrentNeutralCultureInfo
         {

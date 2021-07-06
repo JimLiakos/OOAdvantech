@@ -375,7 +375,10 @@ namespace System.Windows.Controls
         void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
 
-
+          
+            
+            if (!string.IsNullOrWhiteSpace(TextBoxText))
+                this.Text = TextBoxText;
 
             var scope = FocusManager.GetFocusScope(this);
             Button focusedButton = null;
@@ -425,6 +428,11 @@ namespace System.Windows.Controls
                 Text = oldText;
                 e.Handled = true;
             }
+        }
+        string TextBoxText;
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBoxText = (sender as Xceed.Wpf.Toolkit.WatermarkTextBox).Text;
         }
 
         /// <MetaDataID>{3b4a0388-1f6e-4f9d-a363-8976736c3a00}</MetaDataID>
@@ -510,10 +518,8 @@ namespace System.Windows.Controls
 
         }
 
-        private void DisplayMode_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
 
-        }
+     
     }
 
     public delegate void DragObjectEventHandler(object sender);
