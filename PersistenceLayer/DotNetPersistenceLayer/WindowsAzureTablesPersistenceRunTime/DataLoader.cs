@@ -12,7 +12,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
     using MetaDataRepository.ObjectQueryLanguage;
     using Microsoft.Azure.Cosmos.Table;
-    
+
     using OOAdvantech.MetaDataRepository;
     using OOAdvantech.RDBMSMetaDataRepository;
 
@@ -1155,12 +1155,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
         }
 
-  
+
         /// <MetaDataID>{d1ece65f-b819-4536-afe5-48846dd01867}</MetaDataID>
         private void SetRelationshipColumnsWithSubDataNodes()
         {
             _DataSourceRelationsColumnsWithSubDataNodes = new Dictionary<Guid, Dictionary<string, Dictionary<OOAdvantech.MetaDataRepository.ObjectIdentityType, RelationColumns>>>();
-            
+
             if (!DataNode.DataSource.HasInObjectContextData && DataNode.MembersFetchingObjectActivation)
                 return;
 
@@ -1224,7 +1224,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         {
                             //DataLoader has relation reference Identity columns or there is assocition table
                             RDBMSMetaDataRepository.AssociationEnd associationEnd = (Storage as RDBMSMetaDataRepository.Storage).GetEquivalentMetaObject(assignedMetaObject) as RDBMSMetaDataRepository.AssociationEnd;
-                            
+
                             objectIdentityTypes = (GetDataLoader(dataNode) as DataLoader).GetRelationPartsObjectIdentityTypes(DataNode);
                             foreach (string relationPartIdentity in new List<string>(objectIdentityTypes.Keys))
                             {
@@ -1522,11 +1522,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         //ThrougthRelationTable;
                         return true;
                     }
-                    if(associationEnd.IsRoleA)
+                    if (associationEnd.IsRoleA)
                     {
-                        var roleBstorageCells=(from dataLoader in subDataNode.DataSource.DataLoaders.Values.OfType<StorageDataLoader>()
-                         from roleBstorageCell in dataLoader.DataLoaderMetadata.StorageCells
-                         select roleBstorageCell).ToList();
+                        var roleBstorageCells = (from dataLoader in subDataNode.DataSource.DataLoaders.Values.OfType<StorageDataLoader>()
+                                                 from roleBstorageCell in dataLoader.DataLoaderMetadata.StorageCells
+                                                 select roleBstorageCell).ToList();
 
                         bool througthRelationTable = associationEnd.Association.StorageCellsLinks.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.RoleAStorageCell == storageCell && x.ObjectLinksTable != null && roleBstorageCells.Contains(x.RoleBStorageCell)).Count() > 0;
                         if (througthRelationTable)
@@ -2208,7 +2208,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                 }
                 LoadDataLoaderTable(TemporaryDataTable.CreateDataReader(), new Dictionary<string, string>(), false);
-               // ActivateObjects();
+                // ActivateObjects();
                 LoadManyToManyRelationData(tableClient);
                 EntitiesDictionary.Clear();
 
@@ -2228,7 +2228,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 mappedColumns.Add((storageCell as RDBMSMetaDataRepository.StorageCell).MainTable.ReferentialIntegrityColumn);
             else
             {
-                if(storageCell.Type.HasReferentialIntegrityRelations())
+                if (storageCell.Type.HasReferentialIntegrityRelations())
                 {
 
                 }
@@ -2315,7 +2315,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             }
                         }
                     }
-                    
+
                 }
 
             }
@@ -2397,11 +2397,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     {
                         foreach (MetaDataRepository.IIdentityPart part in objectIdentityType.Parts)
                             manyToManyRelationData.Columns.Add(part.Name, part.Type);
+
                     }
                 }
+                if ((associationEnd.Association.RoleA as RDBMSMetaDataRepository.AssociationEnd).Indexer)
+                    manyToManyRelationData.Columns.Add((associationEnd.Association.RoleA as RDBMSMetaDataRepository.AssociationEnd).IndexerColumn.Name, (associationEnd.Association.RoleA as RDBMSMetaDataRepository.AssociationEnd).IndexerColumn.Type.GetExtensionMetaObject<Type>());
+
+                if ((associationEnd.Association.RoleB as RDBMSMetaDataRepository.AssociationEnd).Indexer)
+                    manyToManyRelationData.Columns.Add((associationEnd.Association.RoleB as RDBMSMetaDataRepository.AssociationEnd).IndexerColumn.Name, (associationEnd.Association.RoleB as RDBMSMetaDataRepository.AssociationEnd).IndexerColumn.Type.GetExtensionMetaObject<Type>());
 
 
-                manyToManyRelationData.Columns.Add("RoleAStorageIdentity", typeof(int));
+
+        manyToManyRelationData.Columns.Add("RoleAStorageIdentity", typeof(int));
                 manyToManyRelationData.Columns.Add("RoleBStorageIdentity", typeof(int));
 
                 var query = new TableQuery<ElasticTableEntity>();
