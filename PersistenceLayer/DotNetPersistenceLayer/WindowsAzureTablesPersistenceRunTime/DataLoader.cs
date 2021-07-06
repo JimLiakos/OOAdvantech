@@ -1519,8 +1519,31 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         (associationEnd.GetReferenceColumnsFor(storageCell, subDataNode.ParentDataNode.ValueTypePath.ToString()).Count == 0 && !byDefaulthasRelationIdentityColumns)))
                     {
                         // subDataNode.ThrougthRelationTable = true;
+                        //ThrougthRelationTable;
                         return true;
                     }
+                    if(associationEnd.IsRoleA)
+                    {
+                        var roleBstorageCells=(from dataLoader in subDataNode.DataSource.DataLoaders.Values.OfType<StorageDataLoader>()
+                         from roleBstorageCell in dataLoader.DataLoaderMetadata.StorageCells
+                         select roleBstorageCell).ToList();
+
+                        bool througthRelationTable = associationEnd.Association.StorageCellsLinks.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.RoleAStorageCell == storageCell && x.ObjectLinksTable != null && roleBstorageCells.Contains(x.RoleBStorageCell)).Count() > 0;
+                        if (througthRelationTable)
+                            return true;
+                    }
+
+                    if (!associationEnd.IsRoleA)
+                    {
+                        var roleAstorageCells = (from dataLoader in subDataNode.DataSource.DataLoaders.Values.OfType<StorageDataLoader>()
+                                                 from roleAstorageCell in dataLoader.DataLoaderMetadata.StorageCells
+                                                 select roleAstorageCell).ToList();
+
+                        bool througthRelationTable = associationEnd.Association.StorageCellsLinks.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.RoleBStorageCell == storageCell && x.ObjectLinksTable != null && roleAstorageCells.Contains(x.RoleAStorageCell)).Count() > 0;
+                        if (througthRelationTable)
+                            return true;
+                    }
+
                 }
             }
             return byDefaulthasRelationIdentityColumns;
