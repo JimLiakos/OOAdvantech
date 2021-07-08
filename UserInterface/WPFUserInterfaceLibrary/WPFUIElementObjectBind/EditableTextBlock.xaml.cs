@@ -370,6 +370,13 @@ namespace System.Windows.Controls
             txt.SelectAll();
         }
 
+        private void TextBox_PreviewLostFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(TextBoxText))
+                this.Text = TextBoxText;
+
+        }
+
         // Invoked when we exit edit mode.
         /// <MetaDataID>{705d3528-3d0c-4b0a-8252-e3e86ac58bfe}</MetaDataID>
         void TextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -377,9 +384,7 @@ namespace System.Windows.Controls
 
           
             
-            if (!string.IsNullOrWhiteSpace(TextBoxText))
-                this.Text = TextBoxText;
-
+            
             var scope = FocusManager.GetFocusScope(this);
             Button focusedButton = null;
             Button translateBtn = null;
@@ -396,7 +401,7 @@ namespace System.Windows.Controls
 
 
 
-
+    
         private void TranslateBtn_LostFocus(object sender, RoutedEventArgs e)
         {
 
@@ -518,8 +523,7 @@ namespace System.Windows.Controls
 
         }
 
-
-     
+       
     }
 
     public delegate void DragObjectEventHandler(object sender);

@@ -17,7 +17,6 @@ namespace Parser
         public override string ToString()
         {
             return ErrorMessage + "  Line:" + Line.ToString() + "  LinePosition:" + LinePosition.ToString();
-            
         }
           
     }
