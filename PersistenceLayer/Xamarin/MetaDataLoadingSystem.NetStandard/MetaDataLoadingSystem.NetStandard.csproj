@@ -37,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
     <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj" />
   </ItemGroup>
   
