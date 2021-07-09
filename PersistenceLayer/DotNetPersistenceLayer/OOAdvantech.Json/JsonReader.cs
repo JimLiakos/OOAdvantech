@@ -38,7 +38,7 @@ namespace OOAdvantech.Json
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to serialized JSON data.
     /// </summary>
-    /// <MetaDataID>{75cd6349-37f0-410f-bc8e-b4677411ca2a}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.JsonReader</MetaDataID>
     public abstract partial class JsonReader : IDisposable
     {
         /// <summary>

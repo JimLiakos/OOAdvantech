@@ -41,7 +41,7 @@ namespace OOAdvantech.Json.Linq
     /// <summary>
     /// Represents a value in JSON (string, integer, date, etc).
     /// </summary>
-    /// <MetaDataID>{c83f26f3-b07b-4751-89d5-8585f954e572}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.Linq.JValue</MetaDataID>
     public partial class JValue : JToken, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue>
 #if HAVE_ICONVERTIBLE
         , IConvertible

@@ -39,7 +39,7 @@ namespace OOAdvantech.Json
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating JSON data.
     /// </summary>
-    /// <MetaDataID>{688a4b58-6da4-4fdf-beb8-f12d2bc4457f}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.JsonTextWriter</MetaDataID>
     public partial class JsonTextWriter : JsonWriter
     {
         private const int IndentCharBufferSize = 12;

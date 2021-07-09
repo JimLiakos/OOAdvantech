@@ -32,6 +32,7 @@ using System.Threading.Tasks;
 
 namespace OOAdvantech.Json.Linq
 {
+    /// <MetaDataID>OOAdvantech.Json.Linq.JRaw</MetaDataID>
     public partial class JRaw
     {
         /// <summary>

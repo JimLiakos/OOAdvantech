@@ -50,7 +50,7 @@ namespace OOAdvantech.Json.Linq
     /// <summary>
     /// Represents an abstract JSON token.
     /// </summary>
-    /// <MetaDataID>{61a41b8e-b444-47dc-9c1c-a76d782168fb}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.Linq.JToken</MetaDataID>
     public abstract partial class JToken : IJEnumerable<JToken>, IJsonLineInfo
 #if HAVE_ICLONEABLE
         , ICloneable

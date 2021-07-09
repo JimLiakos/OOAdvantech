@@ -37,6 +37,7 @@ using OOAdvantech.Json.Utilities;
 
 namespace OOAdvantech.Json
 {
+    /// <MetaDataID>OOAdvantech.Json.JsonTextReader</MetaDataID>
     public partial class JsonTextReader
     {
         // It's not safe to perform the async methods here in a derived class as if the synchronous equivalent

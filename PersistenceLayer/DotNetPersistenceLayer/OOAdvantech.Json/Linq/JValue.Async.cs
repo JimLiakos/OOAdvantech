@@ -36,6 +36,7 @@ using OOAdvantech.Json.Utilities;
 
 namespace OOAdvantech.Json.Linq
 {
+    /// <MetaDataID>OOAdvantech.Json.Linq.JValue</MetaDataID>
     public partial class JValue
     {
         /// <summary>

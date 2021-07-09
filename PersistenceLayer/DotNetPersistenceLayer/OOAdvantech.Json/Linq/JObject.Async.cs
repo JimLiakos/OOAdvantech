@@ -33,6 +33,7 @@ using OOAdvantech.Json.Utilities;
 
 namespace OOAdvantech.Json.Linq
 {
+    /// <MetaDataID>OOAdvantech.Json.Linq.JObject</MetaDataID>
     public partial class JObject
     {
         /// <summary>

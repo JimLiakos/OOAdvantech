@@ -33,6 +33,7 @@ using OOAdvantech.Json.Utilities;
 
 namespace OOAdvantech.Json.Linq
 {
+    /// <MetaDataID>OOAdvantech.Json.Linq.JToken</MetaDataID>
     public abstract partial class JToken
     {
         /// <summary>

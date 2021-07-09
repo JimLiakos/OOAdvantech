@@ -31,7 +31,7 @@ namespace OOAdvantech.Json.Linq
     /// <summary>
     /// Represents a raw JSON string.
     /// </summary>
-    /// <MetaDataID>{3884de63-b55e-40ec-b7d7-0e35b08393dc}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.Linq.JRaw</MetaDataID>
     public partial class JRaw : JValue
     {
         /// <summary>

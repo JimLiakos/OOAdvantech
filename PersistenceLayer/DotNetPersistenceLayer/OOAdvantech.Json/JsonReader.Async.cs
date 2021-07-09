@@ -33,6 +33,7 @@ using OOAdvantech.Json.Utilities;
 
 namespace OOAdvantech.Json
 {
+    /// <MetaDataID>OOAdvantech.Json.JsonReader</MetaDataID>
     public abstract partial class JsonReader
     {
         /// <summary>

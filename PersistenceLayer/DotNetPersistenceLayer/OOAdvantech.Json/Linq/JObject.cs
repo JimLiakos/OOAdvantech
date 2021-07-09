@@ -51,7 +51,7 @@ namespace OOAdvantech.Json.Linq
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
     /// </example>
-    /// <MetaDataID>{6de5eabf-58fd-4361-88af-2ec48975e4d4}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.Linq.JObject</MetaDataID>
     public partial class JObject : JContainer, IDictionary<string, JToken>, INotifyPropertyChanged
 #if HAVE_COMPONENT_MODEL
         , ICustomTypeDescriptor

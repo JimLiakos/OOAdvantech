@@ -54,7 +54,7 @@ namespace OOAdvantech.Json
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to JSON text data.
     /// </summary>
-    /// <MetaDataID>{9fdd40cd-2e85-4801-a6bf-284a510e122f}</MetaDataID>
+    /// <MetaDataID>OOAdvantech.Json.JsonTextReader</MetaDataID>
     public partial class JsonTextReader : JsonReader, IJsonLineInfo
     {
         private const char UnicodeReplacementChar = '\uFFFD';

@@ -132,6 +132,10 @@ namespace DeviceUtilities.NetStandard
         bool OnScan = false;
         public Task<ZXing.Result>  Scan(string headerText,string footerText )
         {
+            if(!(Xamarin.Forms.Application.Current.MainPage is NavigationPage))
+            {
+                throw new Exception("MainPage must be NavigationPage");
+            }
             lock (this)
             {
 
