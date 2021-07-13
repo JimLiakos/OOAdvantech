@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ProjectGUID="dbb9d838-fc4e-435f-a0ee-f566d9f44080">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>OOAdvantech.MetaDataLoadingSystem.Commands</RootNamespace>
+    <RootNamespace>OOAdvantech</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;OOAdvantech; DeviceDotNet; NetStandard</DefineConstants>

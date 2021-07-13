@@ -20,7 +20,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             get
             {
-                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { ReferenceLoopHandling = OOAdvantech.Json.ReferenceLoopHandling.Serialize, TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, Binder = new OOAdvantech.Remoting.RestApi.Serialization.SerializationBinder(OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new OOAdvantech.Remoting.RestApi.Serialization.ReferenceResolver() };
+                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { ReferenceLoopHandling = OOAdvantech.Json.ReferenceLoopHandling.Serialize, TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new OOAdvantech.Remoting.RestApi.Serialization.ReferenceResolver() };
                 jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
                 jSetttings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
                 return jSetttings;
@@ -32,7 +32,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             get
             {
-                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Deserialize, null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization) };
+                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Deserialize, null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization) };
                 jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
                 jSetttings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
                 return jSetttings;
