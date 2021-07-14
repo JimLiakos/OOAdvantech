@@ -14,6 +14,7 @@ using Xamarin.Facebook.Login;
 namespace OOAdvantech.Authentication.Droid
 {
 
+    /// <MetaDataID>{cd2447fc-0c70-4343-b67d-fead1b151690}</MetaDataID>
     public class FirebaseAuthentication
     {
         static FirebaseAuthentication()
@@ -154,7 +155,7 @@ namespace OOAdvantech.Authentication.Droid
         }
         static async void OnTimer(object state)
         {
-             ValidateAuthenticationToken();
+            ValidateAuthenticationToken();
         }
 
         static object AuthenticationTokenLock = new object();
@@ -348,6 +349,7 @@ namespace OOAdvantech.Authentication.Droid
     /// https://firebase.google.com/docs/android/setup/
     /// https://evgenyzborovsky.com/2018/03/09/using-native-facebook-login-button-in-xamarin-forms/
     /// </summary>
+    /// <MetaDataID>{b8aad75d-ac7a-43e4-a669-99b653d31f90}</MetaDataID>
     class FacebookLoginService : Facebook.Services.FacebookLoginService
     {
 
@@ -391,6 +393,7 @@ namespace OOAdvantech.Authentication.Droid
         }
     }
 
+    /// <MetaDataID>{d2897910-5426-41ee-ae58-139aa29551e4}</MetaDataID>
     class MyAccessTokenTracker : AccessTokenTracker
     {
         readonly Facebook.Services.FacebookLoginService facebookLoginService;
@@ -422,6 +425,7 @@ namespace OOAdvantech.Authentication.Droid
         }
     }
 
+    /// <MetaDataID>{e851eb91-0720-4e16-9b53-b905bad258ba}</MetaDataID>
     class FirebaseAuthEvents : Java.Lang.Object, IOnSuccessListener, IOnCompleteListener, IOnFailureListener, IOnCanceledListener
     {
         public void OnCanceled()

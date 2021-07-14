@@ -65,6 +65,7 @@ namespace OOAdvantech.Droid
     }
 
 
+    /// <MetaDataID>{e8922ff2-c20e-4c81-b900-21c9ece00018}</MetaDataID>
     public static class ThreadHelper
     {
         public static int MainThreadId { get; private set; }

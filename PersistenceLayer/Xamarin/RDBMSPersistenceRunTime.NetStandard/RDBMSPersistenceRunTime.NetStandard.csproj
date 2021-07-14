@@ -1,24 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk" ProjectGUID="904d4fe5-82fe-4ed4-b5b7-72aa9b0d67d2">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>RDBMSPersistenceRunTime</AssemblyName>
     <RootNamespace>OOAdvantech.RDBMSPersistenceRunTime</RootNamespace>
     <UserSecretsId>6f288382-8d68-419e-8b43-d04ce7c5a519</UserSecretsId>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
-  
   <ItemGroup>
     <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\ADONetObjectStorage.cs" Link="RDBMSMetaDataPersistenceRunTime\ADONetObjectStorage.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RDBMSMetaDataPersistenceRunTime\Commands\DeleteStorageInstanceCommand.cs" Link="RDBMSMetaDataPersistenceRunTime\Commands\DeleteStorageInstanceCommand.cs" />
@@ -73,7 +68,6 @@
     <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\StorageProvider.cs" Link="StorageProvider.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RDBMSPersistenceRunTime\TypeDictionary.cs" Link="TypeDictionary.cs" />
   </ItemGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
@@ -81,12 +75,10 @@
     <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj" />
     <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj" />
   </ItemGroup>
-  
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="RDBMSDataObjects\" />
     <Folder Include="RDBMSMetaDataPersistenceRunTime\Commands\" />
     <Folder Include="RDBMSMetaDataPersistenceRunTime\DataObjects\" />
   </ItemGroup>
-  
 </Project>

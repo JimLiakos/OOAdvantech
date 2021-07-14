@@ -322,6 +322,7 @@ namespace OOAdvantech.Droid
 
 
 
+    /// <MetaDataID>{155ebe9a-f9fc-4605-9bab-95962a9488b3}</MetaDataID>
     public class RemoteMessage : IRemoteMessage
     {
         public IDictionary<string, string> Data { get; set; }
@@ -337,6 +338,7 @@ namespace OOAdvantech.Droid
         public string To { get; set; }
     }
 
+    /// <MetaDataID>{b36b90d9-cb65-4b0e-9299-f7fdca46872a}</MetaDataID>
     public class BatteryImplementation : IBatteryInfo
     {
         public bool CheckIsEnableBatteryOptimizations()

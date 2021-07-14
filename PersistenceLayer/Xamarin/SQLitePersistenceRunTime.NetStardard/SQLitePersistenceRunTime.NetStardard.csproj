@@ -1,23 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk" ProjectGUID="f82d63ec-627a-448b-a4a5-61e0aeb41a98">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>SQLitePersistenceRunTime</AssemblyName>
     <RootNamespace>OOAdvantech.SQLitePersistenceRunTime</RootNamespace>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;Advantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\DataBase.cs" Link="DataBase.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\ObjectStorage.cs" Link="ObjectStorage.cs" />
@@ -29,20 +24,16 @@
     <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\StorageInstanceRef.cs" Link="StorageInstanceRef.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\StorageProvider.cs" Link="StorageProvider.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLite.cgt" Link="SQLite.cgt" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="SQLiteMetaDataPersistenceRunTime\" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLite.cs" Link="SQLite.cs" />
     <None Include="..\..\DotNetPersistenceLayer\SQLitePersistenceRunTime\SQLiteDataBaseConnection.cs" Link="SQLiteDataBaseConnection.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
@@ -51,5 +42,4 @@
     <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\RDBMSPersistenceRunTime.NetStandard\RDBMSPersistenceRunTime.NetStandard.csproj" />
   </ItemGroup>
-  
 </Project>

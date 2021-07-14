@@ -13,6 +13,7 @@ using Xamarin.Forms;
 
 namespace OOAdvantech.Authentication.Droid
 {
+    /// <MetaDataID>{75344996-fce5-46fc-804e-4b1865a16b34}</MetaDataID>
     public class Auth : OOAdvantech.Remoting.MarshalByRefObject, IAuth, OOAdvantech.Remoting.IExtMarshalByRefObject
     {
 
@@ -130,6 +131,7 @@ namespace OOAdvantech.Authentication.Droid
 
     }
 
+    /// <MetaDataID>{9e88b2f2-cdfa-4206-939d-42ada36280ed}</MetaDataID>
     class AuthUser : IAuthUser
     {
         private Firebase.Auth.FirebaseUser currentUser;
@@ -173,6 +175,7 @@ namespace OOAdvantech.Authentication.Droid
     }
 
 
+    /// <MetaDataID>{de0eab48-4abb-48ae-bec6-148b0aa65158}</MetaDataID>
     class UserInfo : IUserInfo
     {
         private Firebase.Auth.IUserInfo User;

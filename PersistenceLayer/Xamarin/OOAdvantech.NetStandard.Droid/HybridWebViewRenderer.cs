@@ -258,6 +258,7 @@ namespace OOAdvantech.Droid
 
 
 
+    /// <MetaDataID>{7e4f3217-90f8-4468-ad05-0d367c54c233}</MetaDataID>
     public class JSBridge : Java.Lang.Object
     {
         readonly WeakReference<HybridWebViewRenderer> hybridWebViewRenderer;
@@ -760,6 +761,7 @@ namespace OOAdvantech.Droid
     }
 
 
+    /// <MetaDataID>{87f035d5-1b78-4c52-833c-39b2a5911a10}</MetaDataID>
     public class JavascriptWebViewClient : WebViewClient, IValueCallback
     {
         string _javascript;
@@ -783,7 +785,7 @@ namespace OOAdvantech.Droid
             view.EvaluateJavascript("csCodeCallDefined()", this);
             hybridWebViewRenderer.OnNavigated(new NavigatedEventArgs(view, url, view.CanGoBack(), view.CanGoForward()));
         }
-   
+
         public override void OnReceivedError(Android.Webkit.WebView view, IWebResourceRequest request, WebResourceError error)
         {
             base.OnReceivedError(view, request, error);
@@ -816,7 +818,8 @@ namespace OOAdvantech.Droid
             message += " Do you want to continue anyway?";
             alertDialog.SetTitle("SSL Certificate Error");
             alertDialog.SetMessage(message);
-            alertDialog.SetButton((int)DialogButtonType.Positive, "OK", new EventHandler<DialogClickEventArgs>((object sender, DialogClickEventArgs e)=> {
+            alertDialog.SetButton((int)DialogButtonType.Positive, "OK", new EventHandler<DialogClickEventArgs>((object sender, DialogClickEventArgs e) =>
+            {
 
                 handler.Proceed();
 

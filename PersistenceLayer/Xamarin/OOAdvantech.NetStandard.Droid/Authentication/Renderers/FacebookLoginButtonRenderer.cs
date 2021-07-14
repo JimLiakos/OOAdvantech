@@ -9,18 +9,19 @@ using OOAdvantech.Authentication.Facebook.Droid;
 [assembly: ExportRenderer(typeof(FacebookLoginButton), typeof(FacebookLoginButtonRenderer))]
 namespace OOAdvantech.Authentication.Facebook.Droid
 {
+    /// <MetaDataID>{b46ded91-f0db-4042-b1ef-a06f83a6410d}</MetaDataID>
     public class FacebookLoginButtonRenderer : ViewRenderer
     {
         Context ctx;
         bool disposed;
 
-        public FacebookLoginButtonRenderer(Context ctx) : base(ctx) 
+        public FacebookLoginButtonRenderer(Context ctx) : base(ctx)
         {
             this.ctx = ctx;
         }
 
-		protected override void OnElementChanged(ElementChangedEventArgs<View> e)
-		{
+        protected override void OnElementChanged(ElementChangedEventArgs<View> e)
+        {
             if (Control == null)
             {
                 var fbLoginBtnView = e.NewElement as FacebookLoginButton;
@@ -34,7 +35,7 @@ namespace OOAdvantech.Authentication.Facebook.Droid
 
                 SetNativeControl(fbLoginbBtnCtrl);
             }
-		}
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -50,7 +51,7 @@ namespace OOAdvantech.Authentication.Facebook.Droid
             base.Dispose(disposing);
         }
 
-		class MyFacebookCallback : Java.Lang.Object, IFacebookCallback
+        class MyFacebookCallback : Java.Lang.Object, IFacebookCallback
         {
             FacebookLoginButton view;
 

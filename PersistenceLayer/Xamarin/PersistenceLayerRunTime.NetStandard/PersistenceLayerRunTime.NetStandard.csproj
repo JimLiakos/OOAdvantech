@@ -1,23 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk" ProjectGUID="c5b00acd-ae88-4096-b8d1-61eef8a41132">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  
   <PropertyGroup>
-      <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-      <AssemblyName>PersistenceLayerRunTime</AssemblyName>
-      <RootNamespace>OOAdvantech.PersistenceLayerRunTime</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>PersistenceLayerRunTime</AssemblyName>
+    <RootNamespace>OOAdvantech.PersistenceLayerRunTime</RootNamespace>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
   </PropertyGroup>
-  
   <ItemGroup>
     <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTimeFacade\IObjectStorage.cs" Link="IObjectStorage.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTimeFacade\TransactionCommand.cs" Link="TransactionCommand.cs" />
@@ -56,7 +51,6 @@
     <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UpdateReferentialIntegrity.cs" Link="UpdateReferentialIntegrity.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\UpdateStorageInstanceCommand.cs" Link="UpdateStorageInstanceCommand.cs" />
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ClientMember.cs" Link="ClientMember.cs" />
     <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\ClientMemberList.cs" Link="ClientMemberList.cs" />
@@ -66,11 +60,9 @@
     <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\InterSorageUnLinkObjectsCommand.cs" Link="InterSorageUnLinkObjectsCommand.cs" />
     <None Include="..\..\DotNetPersistenceLayer\PersistenceLayerRunTime\MemberCollectionAgent.cs" Link="MemberCollectionAgent.cs" />
   </ItemGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
     <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
   </ItemGroup>
-  
 </Project>
