@@ -55,9 +55,9 @@ namespace  OOAdvantech.Droid
                     speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, Java.Util.Locale.Default);
                     speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraPartialResults, true);
                     speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 4000);
-                    speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
-                    speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
-                    speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+                    speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 4000);
+                    speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 4000);
+                    speechRecognizerIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 3);
 
                     speechRecognizer.SetRecognitionListener(this);
 
@@ -116,6 +116,9 @@ namespace  OOAdvantech.Droid
         {
             var speechTexs = results.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
             var ss = speechTexs.ToList();
+            foreach (var s in ss)
+                System.Diagnostics.Debug.WriteLine(s);
+
             SpeechRecognized?.Invoke(speechTexs.ToList());
 
         }
