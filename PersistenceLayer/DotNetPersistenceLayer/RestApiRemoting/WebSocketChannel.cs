@@ -276,6 +276,10 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
             WebSocketEndPoint = webSocketEndPoint;
+            if(OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(webSocketEndPoint as MarshalByRefObject))
+            {
+
+            }
 #if DEBUG
             this.Timer = new Timer(new System.Threading.TimerCallback(OnTimer), null, 20000, 1000);
 #endif
@@ -376,6 +380,10 @@ namespace OOAdvantech.Remoting.RestApi
                                 _WebSocketClient.AddWebSocketChannel(this);
 
                                 WebSocketEndPoint = WebSocketClient;
+                                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(WebSocketEndPoint as MarshalByRefObject))
+                                {
+
+                                }
                                 ClientSessionPart.Reconnect();
 
                             }
@@ -564,6 +572,10 @@ namespace OOAdvantech.Remoting.RestApi
             set
             {
                 WebSocketEndPoint = value;
+                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(WebSocketEndPoint as MarshalByRefObject))
+                {
+
+                }
             }
         }
 

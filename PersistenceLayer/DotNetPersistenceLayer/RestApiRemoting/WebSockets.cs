@@ -251,7 +251,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                         #region propagate message
                         string roleInstanceServerUrl = RemotingServices.InternalEndPointResolver.GetRoleInstanceServerUrl(responseData);
-                        ResponseData forwordResponse = new ResponseData(request.ChannelUri) { IsSucceeded = responseData.IsSucceeded, CallContextID = request.CallContextID, SessionIdentity = responseData.SessionIdentity, ChannelUri = responseData.ChannelUri, details = responseData.details,UpdateCaching= responseData.UpdateCaching };
+                        ResponseData forwordResponse = new ResponseData(request.ChannelUri) { IsSucceeded = responseData.IsSucceeded, CallContextID = request.CallContextID, SessionIdentity = responseData.SessionIdentity, ChannelUri = responseData.ChannelUri, details = responseData.details, UpdateCaching = responseData.UpdateCaching };
                         SendResponce(forwordResponse);
                         #endregion
 
@@ -306,7 +306,7 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                     }
 
-                 
+
                     if (!this.RequestTasks.TryGetValue(responseData.CallContextID, out requestTask))
                     {
 
@@ -548,12 +548,12 @@ namespace OOAdvantech.Remoting.RestApi
                         throw this.SocketException;
                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                     responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, SocketException);
-                     taskCompletionSource = new TaskCompletionSource<ResponseData>();
+                    taskCompletionSource = new TaskCompletionSource<ResponseData>();
                     taskCompletionSource.SetResult(new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) });
                     return taskCompletionSource.Task;
                 }
             }
-            
+
             WebSocket4Net.WebSocket nativeWebSocket;
             lock (this)
             {
@@ -1098,6 +1098,38 @@ namespace OOAdvantech.Remoting.RestApi
 
             WebSocketServerID = Guid.NewGuid().ToString("N");
         }
+
+        public override object InitializeLifetimeService()
+        {
+            var retObject = base.InitializeLifetimeService();
+
+            //new Action(() =>
+            //{
+            //    using (CultureContext cultureContext = new CultureContext(culture, useDefaultCultureValue))
+            //    {
+            //        _ObjectChangeState?.Invoke(this, nameof(Description));
+            //    }
+            //}));
+
+            Task.Run(async delegate
+            {
+
+                await Task.Delay(1000);
+                ILease lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
+                if (lease != null)
+                {
+                    lease.Renew(System.TimeSpan.FromMinutes(17));
+                    lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
+                }
+            });
+
+
+
+
+            return retObject;
+        }
+
+
 
 
 #if !DeviceDotNet
