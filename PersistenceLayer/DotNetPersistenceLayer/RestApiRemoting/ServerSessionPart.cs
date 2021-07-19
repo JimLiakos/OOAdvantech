@@ -210,6 +210,15 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     catch (Exception error)
                     {
+                        System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
+                        System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
+                        myLog.Source = "Rest Api channel";
+                        if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
+                            myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
+
+                        myLog.WriteEntry("RestApi AsyncProcessRequest failed :"+Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
+
+
                     }
                 });
             }

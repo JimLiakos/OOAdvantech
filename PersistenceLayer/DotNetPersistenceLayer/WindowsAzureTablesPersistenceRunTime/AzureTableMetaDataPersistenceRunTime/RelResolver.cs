@@ -97,7 +97,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 object Value = Member<object>.GetValue(fastFieldAccessor.GetValue, Owner.MemoryInstance);
 
                 int offset = 0;
-                if (Value != null)
+                if (Value != null&& StorageInstanceRef.GetStorageInstanceRef(Value)!=null)
                 {
                     relationDataSream = new byte[16];
                     //OOAdvantech.BinaryFormatter.BinaryFormatter.Serialize((int)1,relationDataSream,offset,ref offset);
