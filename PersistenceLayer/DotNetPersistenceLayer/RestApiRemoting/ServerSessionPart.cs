@@ -211,12 +211,15 @@ namespace OOAdvantech.Remoting.RestApi
                     catch (Exception error)
                     {
                         System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
+
+#if !DeviceDotNet
                         System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
                         myLog.Source = "Rest Api channel";
                         if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
                             myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
 
                         myLog.WriteEntry("RestApi AsyncProcessRequest failed :"+Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
+#endif
 
 
                     }
@@ -373,13 +376,13 @@ namespace OOAdvantech.Remoting.RestApi
             foreach (bool channelConnected in PhysicalConnections.Values)
                 sessionConnected |= channelConnected;
 
-            #region Communication session completed when all physical connections are disconnected for a period of time
+#region Communication session completed when all physical connections are disconnected for a period of time
             if (!sessionConnected && _Connected)
                 DisconnectTimer.Start();
 
             if (sessionConnected && !_Connected && DisconnectTimer.Enabled)
                 DisconnectTimer.Stop();
-            #endregion
+#endregion
 
             _Connected = sessionConnected;
         }

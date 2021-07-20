@@ -17,6 +17,8 @@ namespace OOAdvantech
 
         public TypeInfo(Type type)
         {
+            if (type == null)
+                throw new ArgumentNullException("type");
             this.Type = type;
         }
 

@@ -843,14 +843,16 @@ namespace OOAdvantech.Droid
                 if (ret == "false")
                 {
 
-
-                    view.EvaluateJavascript(_javascript, null);
-
-                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    if (view != null)
                     {
+                        view.EvaluateJavascript(_javascript, null);
 
-                        view.EvaluateJavascript("SendMessage('CSCodeCommunicationStart')", null);
-                    });
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        {
+
+                            view.EvaluateJavascript("SendMessage('CSCodeCommunicationStart')", null);
+                        });
+                    }
 
                 }
             }

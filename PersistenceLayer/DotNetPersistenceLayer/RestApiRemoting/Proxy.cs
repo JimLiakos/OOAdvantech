@@ -338,17 +338,20 @@ namespace OOAdvantech.Remoting.RestApi
                 if (propInfo != null && ObjectRef.MembersValues != null && ObjectRef.MembersValues.TryGetValue(propertyName, out value))
                 {
                     outArgs = new object[0];
-                    returnValue = value;
+                    
                     if (value != null && !propInfo.PropertyType.IsInstanceOfType(value))
                     {
 #if !DeviceDotNet
                         value = System.Convert.ChangeType(value, propInfo.PropertyType);
 #else
-                        value = System.Convert.ChangeType(value, propInfo.PropertyType, System.Globalization.CultureInfo.CurrentCulture.NumberFormat);
+                        if(value is  TransparentProxy)
+                            value = ((value as OOAdvantech.Remoting.RestApi.ITransparentProxy).GetProxy() as RestApi.Proxy).GetTransparentProxy(propInfo.PropertyType); 
+                        else
+                            value = System.Convert.ChangeType(value, propInfo.PropertyType, System.Globalization.CultureInfo.CurrentCulture.NumberFormat);
 #endif
                         ObjectRef.MembersValues[propertyName] = value;
                     }
-
+                    returnValue = value;
                     localCall = true;
                 }
             }

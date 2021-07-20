@@ -1099,6 +1099,8 @@ namespace OOAdvantech.Remoting.RestApi
             WebSocketServerID = Guid.NewGuid().ToString("N");
         }
 
+#if !DeviceDotNet
+
         public override object InitializeLifetimeService()
         {
             var retObject = base.InitializeLifetimeService();
@@ -1128,6 +1130,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             return retObject;
         }
+#endif
 
 
 
@@ -1530,7 +1533,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             lock (RunContexts)
             {
-                #region Add local connection with run context
+        #region Add local connection with run context
 
                 var localConnection = (from interConnection in RunContexts
                                        where interConnection.SessionIdentity == sessionIdentity
@@ -1551,7 +1554,7 @@ namespace OOAdvantech.Remoting.RestApi
                     RunContexts.Add(localConnection);
                 }
 
-                #endregion
+        #endregion
             }
         }
 
