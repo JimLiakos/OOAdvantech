@@ -88,6 +88,7 @@
     <Compile Include="Behaviors\TextBoxInputBehavior.cs" />
     <Compile Include="BindingMarkupExtension.cs" />
     <Compile Include="CallMethodAction.cs" />
+    <Compile Include="DragDropExtension.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="MultiligualWatermarkTextBox.xaml.cs">
       <DependentUpon>MultiligualWatermarkTextBox.xaml</DependentUpon>
