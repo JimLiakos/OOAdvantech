@@ -2987,13 +2987,13 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         }
 
-        bool RelatedObjectsIndexesRebuilded;
+       // bool RelatedObjectsIndexesRebuilded;
 
         public void IndexRebuilded(string localTransactionUri)
         {
             foreach (var collectionChange in GetCollectionChanges(Transactions.Transaction.Current))
                 collectionChange.RelatedObjectsIndexesRebuilded = true;
-            RelatedObjectsIndexesRebuilded = true;
+            //RelatedObjectsIndexesRebuilded = true;
         }
 
         static int Descend(GroupIndexChange x, GroupIndexChange y)
