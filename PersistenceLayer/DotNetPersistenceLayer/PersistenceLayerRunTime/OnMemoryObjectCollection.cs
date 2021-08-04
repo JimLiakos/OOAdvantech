@@ -2938,7 +2938,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 #region Get index changes directly from loaded collection
 
-                if (!RelatedObjectsIndexesRebuilded)
+                //if (!RelatedObjectsIndexesRebuilded)
                 {
                     System.Collections.Generic.List<IndexChange> indexChanges = new System.Collections.Generic.List<IndexChange>();
                     int index = 0;
