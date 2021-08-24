@@ -33,6 +33,8 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
             if (LinkInitiatorAssociationEnd.GetOtherEnd().Indexer)
                 UpdateRoleIndex(LinkInitiatorAssociationEnd.GetOtherEnd());
 
+            (ObjectStorage as MetaDataStorageSession).Dirty = true;
+
         }
 
         private void UpdateRoleIndex(MetaDataRepository.AssociationEnd associationEnd)

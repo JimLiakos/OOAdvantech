@@ -55,7 +55,10 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                     var index = GetIndex(inElement);
                     var indexChange = groupIndexChanges.Where(x => index >= x.StartIndex && index <= x.EndIndex).FirstOrDefault();
                     if (indexChange != null)
+                    {
                         inElement.SetAttribute("Sort", (index + indexChange.Change).ToString());
+                        (Collection.RelResolver.Owner.ObjectStorage as MetaDataStorageSession).Dirty = true;
+                    }
                 }
 
                 

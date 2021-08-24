@@ -2993,7 +2993,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             foreach (var collectionChange in GetCollectionChanges(Transactions.Transaction.Current))
                 collectionChange.RelatedObjectsIndexesRebuilded = true;
-            RelatedObjectsIndexesRebuilded = true;
+            //RelatedObjectsIndexesRebuilded = true;
         }
 
         static int Descend(GroupIndexChange x, GroupIndexChange y)
