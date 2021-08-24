@@ -77,6 +77,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 {
                      Collection.IndexRebuilded(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
                 }
+                (Collection.RelResolver.Owner.ObjectStorage as MetaDataStorageSession).Dirty = true;
             }
 
         }

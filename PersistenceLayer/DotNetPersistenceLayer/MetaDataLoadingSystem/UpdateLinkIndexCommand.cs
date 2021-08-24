@@ -81,6 +81,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
             var reletedObjectRefElement = objRefCollection.Elements().Where(x => x.Value == reletedObject.PersistentObjectID.ToString()).FirstOrDefault();
             reletedObjectRefElement.SetAttribute("Sort", index.ToString());
+            (owner.ObjectStorage as MetaDataStorageSession).Dirty = true;
         }
     }
 }
