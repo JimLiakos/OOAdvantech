@@ -529,7 +529,8 @@ namespace GenWebBrowser
                 //EdgeWebBrowser = new Microsoft.Toolkit.Win32.UI.Controls.WPF.WebView();
                 //BrowserHostGrid.Children.Add(IEWebBrowser);
             }
-            CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+            ChromeBrowser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+            
             if (ChromeBrowser != null)
             {
                 CefSharpSettings.WcfEnabled = true;
