@@ -202,6 +202,26 @@ namespace OOAdvantech.Remoting.RestApi
                             }
                             args = m_args;
                         }
+
+
+                        Dictionary<string, object> membersValues = null;
+                        ProxyType proxyType = null;
+                        System.Reflection.EventInfo objectChangeState = null;
+                        bool updateCachingClientSideProperties = false;
+                        if (methodCallMessage.Object != null && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                        {
+                            if (proxyType != null && proxyType.HasCachingClientSideProperties)
+                                objectChangeState = proxyType.GetObjectChangeState();
+                        }
+
+                        ObjectChangeStateHandle handler = (object _object, string member) =>
+                        {
+                            updateCachingClientSideProperties = true;
+                        };
+
+                        if (objectChangeState != null && methodCallMessage.Object != null)
+                            objectChangeState.AddEventHandler(methodCallMessage.Object, handler);
+
                         object retVal = null;
                         if (request.GetCallContextData("Transaction") != null)
                         {
@@ -211,11 +231,14 @@ namespace OOAdvantech.Remoting.RestApi
                                 retVal = methodInfo.Invoke(methodCallMessage.Object, args);
                                 stateTransition.Consistent = true;
                             }
+                            if (objectChangeState != null && methodCallMessage.Object != null)
+                                objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
 
                         }
                         else
                         {
                             retVal = methodInfo.Invoke(methodCallMessage.Object, args);
+                         
                         }
                         if (request.CallContextDictionaryData != null)
                         {
@@ -240,7 +263,10 @@ namespace OOAdvantech.Remoting.RestApi
 
                                 string json = JsonConvert.SerializeObject(responseMessage);
 
-                                return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json };
+                                if (objectChangeState != null && methodCallMessage.Object != null)
+                                    objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+
+                                return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties };
                             });
                         }
                         else
@@ -250,9 +276,12 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.RetVal = retVal;
                             responseMessage.ServerSession = serverSession;
                             responseMessage.Marshal();
-
                             string json = JsonConvert.SerializeObject(responseMessage);
-                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json }; });
+                            
+                            if (objectChangeState != null && methodCallMessage.Object != null)
+                                objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+
+                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties }; });
                         }
 
                     }
