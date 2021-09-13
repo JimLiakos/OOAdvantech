@@ -55,7 +55,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 lock (TablesEntities)
                 {
                     Dictionary<string, StorageInstanceRef> tableStorageInstanceRefs = null;
-                    if (TablesEntities.TryGetValue((StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable, out tableStorageInstanceRefs))
+                    if (StorageInstanceSet!=null&&TablesEntities.TryGetValue((StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable, out tableStorageInstanceRefs))
                         if (tableStorageInstanceRefs.ContainsKey(TableEntity.PartitionKey + TableEntity.RowKey))
                             tableStorageInstanceRefs.Remove(TableEntity.PartitionKey + TableEntity.RowKey);
                 }

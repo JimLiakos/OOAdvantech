@@ -136,6 +136,10 @@ namespace OOAdvantech
             }
             set
             {
+                if(value==null)
+                {
+
+                }
                 var cultureInfo = OOAdvantech.CultureContext.CurrentNeutralCultureInfo;
                 T oldValue;
                 MultilingualValue.TryGetValue(cultureInfo, out oldValue);
