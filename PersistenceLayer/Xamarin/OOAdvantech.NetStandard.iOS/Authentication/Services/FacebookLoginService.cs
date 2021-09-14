@@ -212,6 +212,16 @@ namespace OOAdvantech.Authentication.iOS
 
 
         }
+
+        internal static void EmailSignUp(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void EmailSignIn(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
         //public static bool OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
         //{
         //    if (requestCode == 1)

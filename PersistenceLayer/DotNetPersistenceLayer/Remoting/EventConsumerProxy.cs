@@ -58,7 +58,7 @@ namespace OOAdvantech.Remoting
             Type transparentProxyType = eventInfo.DeclaringType.GetMetaData().Assembly.GetType(evenProxyTypeFullName);
 
             var declaringType = eventInfo.DeclaringType.BaseType;
-            while (transparentProxyType == null)
+            while (transparentProxyType == null && declaringType!=null)
             {
 
 

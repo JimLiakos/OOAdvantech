@@ -38,6 +38,14 @@ namespace OOAdvantech.iOS
             // Authentication.Droid.FirebaseAuthentication.GoogleSignIn();
         }
 
+        public void EmailSignUp(string email, string password)
+        {
+            Authentication.iOS.FirebaseAuthentication.EmailSignUp(email, password);
+        }
+        public void EmailSignIn(string email, string password)
+        {
+            Authentication.iOS.FirebaseAuthentication.EmailSignIn(email, password);
+        }
         public void SignOut()
         {
             //Authentication.Droid.FirebaseAuthentication.SignOut();

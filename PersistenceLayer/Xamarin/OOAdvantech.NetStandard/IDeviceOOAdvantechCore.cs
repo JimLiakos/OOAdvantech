@@ -45,8 +45,9 @@ namespace OOAdvantech
 
 
         void PlaySound();
-
-        
+        void EmailSignUp(string email, string password);
+        void EmailSignIn(string email, string password);
+        void SendPasswordResetEmail(string email);
     }
 
     /// <MetaDataID>{a0246554-4359-4a5a-a501-b3a7824c6b12}</MetaDataID>

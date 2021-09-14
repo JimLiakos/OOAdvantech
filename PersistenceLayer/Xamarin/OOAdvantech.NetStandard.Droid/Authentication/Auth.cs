@@ -68,9 +68,36 @@ namespace OOAdvantech.Authentication.Droid
 #endif
         }
 
+
+        public string EmailSignIn(string email, string password)
+        {
+            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            device.EmailSignIn(email, password);
+            return null;
+        }
+
+        public string EmailSignUp(string email, string password)
+        {
+            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            
+            device.EmailSignUp( email, password);
+
+
+            return null;
+        }
+        public void SendPasswordResetEmail(string email)
+        {
+            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            device.SendPasswordResetEmail(email);
+        }
+
+
         public void SignOut()
         {
             OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            device.Signin(OOAdvantech.AuthProvider.Google);
+
+
             device.SignOut();
         }
 
@@ -88,7 +115,7 @@ namespace OOAdvantech.Authentication.Droid
                         IsAnonymous = firebaseUser.IsAnonymous,
                         IsEmailVerified = firebaseUser.IsEmailVerified,
                         PhoneNumber = firebaseUser.PhoneNumber,
-                        PhotoUrl = firebaseUser.PhotoUrl.ToString(),
+                        PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
                         ProviderId = firebaseUser.ProviderId,
                         Uid = firebaseUser.Uid,
                         Providers = firebaseUser.Providers.ToList()
@@ -102,7 +129,7 @@ namespace OOAdvantech.Authentication.Droid
                         Email = x.Email,
                         IsEmailVerified = x.IsEmailVerified,
                         PhoneNumber = x.PhoneNumber,
-                        PhotoUrl = x.PhotoUrl.ToString(),
+                        PhotoUrl = x.PhotoUrl?.ToString(),
                         ProviderId = x.ProviderId,
                         Uid = x.Uid
                     } as IUserInfo).ToList();
@@ -147,7 +174,7 @@ namespace OOAdvantech.Authentication.Droid
 
         public string Email => currentUser.Email;
 
-        public string PhotoUrl => currentUser.PhotoUrl.ToString();
+        public string PhotoUrl => currentUser.PhotoUrl?.ToString();
 
         List<IUserInfo> _ProviderData;
         public IList<IUserInfo> ProviderData
@@ -193,7 +220,7 @@ namespace OOAdvantech.Authentication.Droid
 
         public string PhoneNumber => this.User.PhoneNumber;
 
-        public string PhotoUrl => this.User.PhotoUrl.ToString();
+        public string PhotoUrl => this.User.PhotoUrl?.ToString();
 
         public string ProviderId => this.User.ProviderId;
 

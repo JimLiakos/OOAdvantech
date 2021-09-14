@@ -79,6 +79,29 @@ namespace OOAdvantech.Authentication.Droid
 
         static FirebaseUser CurrentUser;
 
+        internal static  System.Threading.Tasks.Task EmailSignUp(string email, string password)
+        {
+            return System.Threading.Tasks.Task.Run(async () =>
+            {
+                await FirebaseAuth.CreateUserWithEmailAndPasswordAsync(email, password);
+            });
+            
+        }
+
+        internal static System.Threading.Tasks.Task EmailSignIn(string email, string password)
+        {
+            return System.Threading.Tasks.Task.Run(async () =>
+            {
+                await FirebaseAuth.SignInWithEmailAndPasswordAsync(email, password);
+            });
+            
+
+        }
+        internal static void SendPasswordResetEmail(string email)
+        {
+            FirebaseAuth.SendPasswordResetEmail(email);
+        }
+
         static GetTokenResult CurrenTokenResult;
 
 
@@ -136,7 +159,7 @@ namespace OOAdvantech.Authentication.Droid
                     IsAnonymous = firebaseUser.IsAnonymous,
                     IsEmailVerified = firebaseUser.IsEmailVerified,
                     PhoneNumber = firebaseUser.PhoneNumber,
-                    PhotoUrl = firebaseUser.PhotoUrl.ToString(),
+                    PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
                     ProviderId = firebaseUser.ProviderId,
                     Uid = firebaseUser.Uid,
                     Providers = firebaseUser.Providers.ToList()
@@ -249,7 +272,7 @@ namespace OOAdvantech.Authentication.Droid
                 Name = FirebaseAuth.CurrentUser.DisplayName,
                 Firebase_Sign_in_Provider = FirebaseAuth.CurrentUser.Providers[FirebaseAuth.CurrentUser.Providers.Count - 1],
                 User_ID = FirebaseAuth.CurrentUser.Uid,
-                Picture = FirebaseAuth.CurrentUser.PhotoUrl.ToString()
+                Picture = FirebaseAuth.CurrentUser.PhotoUrl?.ToString()
             };
             Remoting.RestApi.DeviceAuthentication.SignedIn(authUser);
         }

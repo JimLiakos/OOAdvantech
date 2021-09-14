@@ -35,6 +35,14 @@ namespace OOAdvantech.Authentication
 
         bool SignInWith(SignInProvider provider);
 
+        string EmailSignIn(string email, string password);
+
+        string EmailSignUp(string email, string password);
+
+        void SendPasswordResetEmail(string email);
+
+
+
         void SignOut();
 
     }
