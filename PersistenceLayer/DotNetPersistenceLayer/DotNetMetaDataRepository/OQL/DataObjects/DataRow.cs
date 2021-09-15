@@ -33,6 +33,17 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage.DataObjects
 
         }
 
+        int SortIndex = 0;
+
+        public void SetSortIndexValue(int sortIndex)
+        {
+            SortIndex = sortIndex;
+        }
+        public int GetSortIndexValue()
+        {
+            return SortIndex;
+        }
+
         public DataRow(object[] values, DataTable dataTable)
             :this(dataTable)
         {

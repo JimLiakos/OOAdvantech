@@ -115,6 +115,8 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
     /// <MetaDataID>{570e4418-5b19-4654-b59d-04dc15c82c3d}</MetaDataID>
     public interface IDataRow
     {
+        void SetSortIndexValue(int sortIndex);
+        int GetSortIndexValue();
         object this[int columnIndex] { get; set; }
         object this[string columnName] { get; set; }
         object[] ItemArray { get; set; }

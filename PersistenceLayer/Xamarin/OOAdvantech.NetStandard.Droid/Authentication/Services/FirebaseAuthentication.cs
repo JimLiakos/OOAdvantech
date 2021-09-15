@@ -88,11 +88,22 @@ namespace OOAdvantech.Authentication.Droid
             
         }
 
-        internal static System.Threading.Tasks.Task EmailSignIn(string email, string password)
+        public static System.Threading.Tasks.Task EmailSignIn(string email, string password)
         {
             return System.Threading.Tasks.Task.Run(async () =>
             {
-                await FirebaseAuth.SignInWithEmailAndPasswordAsync(email, password);
+                try
+                {
+                    await FirebaseAuth.SignInWithEmailAndPasswordAsync(email, password);
+
+                    System.Diagnostics.Debug.WriteLine("asa");
+
+                }
+                catch (Exception err)
+                {
+
+                    throw;
+                }
             });
             
 

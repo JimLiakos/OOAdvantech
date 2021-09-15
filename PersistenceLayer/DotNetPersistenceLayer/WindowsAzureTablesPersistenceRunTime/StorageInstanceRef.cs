@@ -181,7 +181,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         //        RelationshipColumnsValues[indexerColumn] = null;
                         //}
                     }
-                    if (column.IndexerAssociationEnd != null)
+                    if (column.IndexerAssociationEnd != null&& column.IndexerAssociationEnd.Indexer)
                         RelationshipColumnsValues[column] = null;
                 }
             }
@@ -232,7 +232,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     value = DbDataRecord[metaObjectsColumnsIndices.AssociationEndIndices[column.CreatorIdentity][column.MappedAssociationEnd.Identity][(column as RDBMSMetaDataRepository.IdentityColumn).ObjectIdentityType][(column as MetaDataRepository.IIdentityPart).PartTypeName]];
                     RelationshipColumnsValues[column] = value;
                 }
-                if (column.IndexerAssociationEnd != null)
+                if (column.IndexerAssociationEnd != null&& column.IndexerAssociationEnd.Indexer)
                 {
                     value = DbDataRecord[metaObjectsColumnsIndices.AssociationEndIndexerColumnIndices[column.CreatorIdentity][column.IndexerAssociationEnd.Identity]];
                     RelationshipColumnsValues[column] = value;

@@ -16,6 +16,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     public class TableEntity : DynamicObject, ITableEntity,
             ICustomMemberProvider, MetaDataRepository.ObjectQueryLanguage.IDataRow // For LinqPad's Dump
     {
+        int SortIndex = 0;
+
+        public void SetSortIndexValue(int sortIndex)
+        {
+            SortIndex = sortIndex;
+        }
+        public int GetSortIndexValue()
+        {
+            return SortIndex;
+        }
+
+
         /// <MetaDataID>{fad9a1c2-c27d-4702-96f9-e3e6f08eafab}</MetaDataID>
         public TableEntity()
         {

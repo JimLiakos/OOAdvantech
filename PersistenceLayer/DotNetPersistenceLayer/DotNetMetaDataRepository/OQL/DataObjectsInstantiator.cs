@@ -622,7 +622,16 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
         {
 
         }
+        int SortIndex = 0;
 
+        public void SetSortIndexValue(int sortIndex)
+        {
+            SortIndex = sortIndex;
+        }
+        public int GetSortIndexValue()
+        {
+            return SortIndex;
+        }
 
 
         object IDataRow.this[int columnIndex]
