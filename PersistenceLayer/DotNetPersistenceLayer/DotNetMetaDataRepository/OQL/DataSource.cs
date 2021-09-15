@@ -2565,6 +2565,11 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                                         if (partialRelationData.RelationPartIdentity == associationpartialRelationData.RelationPartIdentity)
                                         {
                                             IDataRow theSubNodeRow = subNodeRow.GetParentRow(associationpartialRelationData.RelationName);
+                                            if (indexerAssociationEnd)
+                                            {
+                                                if (theSubNodeRow != null && subNodeRow[indexerColumn] is int)
+                                                    theSubNodeRow.SetSortIndexValue((int)subNodeRow[indexerColumn]);
+                                            }
                                             if (theSubNodeRow != null)
                                                 relatedRows.Add(theSubNodeRow);
                                         }
