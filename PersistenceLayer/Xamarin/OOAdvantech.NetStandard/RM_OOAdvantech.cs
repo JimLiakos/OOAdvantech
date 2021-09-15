@@ -334,7 +334,7 @@ public event OOAdvantech.Authentication.IdTokenChangeHandler IdTokenChange
             return this.Proxy.GetValue<bool>(retValue);
         }
         
-        public string EmailSignIn(string email, string password)
+        public System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
         {
             object[] args = new object[2];
             System.Type[] argsTypes = new System.Type[2];
@@ -343,10 +343,10 @@ public event OOAdvantech.Authentication.IdTokenChangeHandler IdTokenChange
             args[1] = password;
             argsTypes[1] = typeof(string);
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Authentication.IAuth), "EmailSignIn", args, argsTypes);
-            return this.Proxy.GetValue<string>(retValue);
+            return this.Proxy.GetValue<System.Threading.Tasks.Task<string>>(retValue);
         }
         
-        public string EmailSignUp(string email, string password)
+        public System.Threading.Tasks.Task<string> EmailSignUp(string email, string password)
         {
             object[] args = new object[2];
             System.Type[] argsTypes = new System.Type[2];
@@ -355,7 +355,7 @@ public event OOAdvantech.Authentication.IdTokenChangeHandler IdTokenChange
             args[1] = password;
             argsTypes[1] = typeof(string);
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Authentication.IAuth), "EmailSignUp", args, argsTypes);
-            return this.Proxy.GetValue<string>(retValue);
+            return this.Proxy.GetValue<System.Threading.Tasks.Task<string>>(retValue);
         }
         
         public void SendPasswordResetEmail(string email)

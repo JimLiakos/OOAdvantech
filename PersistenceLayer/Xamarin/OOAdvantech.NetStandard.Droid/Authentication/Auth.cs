@@ -69,18 +69,18 @@ namespace OOAdvantech.Authentication.Droid
         }
 
 
-        public string EmailSignIn(string email, string password)
+        public Task<string>  EmailSignIn(string email, string password)
         {
             OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            device.EmailSignIn(email, password);
-            return null;
+            return device.EmailSignIn(email, password);
+            
         }
 
-        public string EmailSignUp(string email, string password)
+        public Task<string> EmailSignUp(string email, string password)
         {
             OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
             
-            device.EmailSignUp( email, password);
+            return device.EmailSignUp( email, password);
 
 
             return null;
@@ -95,9 +95,7 @@ namespace OOAdvantech.Authentication.Droid
         public void SignOut()
         {
             OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            device.Signin(OOAdvantech.AuthProvider.Google);
-
-
+            
             device.SignOut();
         }
 

@@ -88,30 +88,20 @@ namespace OOAdvantech.Droid
                 Authentication.Droid.FirebaseAuthentication.FacebookSignIn();
 
         }
-        public async void EmailSignUp(string email, string password)
+        public System.Threading.Tasks.Task<string> EmailSignUp(string email, string password)
         {
-            Authentication.Droid.FirebaseAuthentication.EmailSignUp(email, password);
+            return Authentication.Droid.FirebaseAuthentication.EmailSignUp(email, password);
         }
         public void SendPasswordResetEmail(string email)
         {
             Authentication.Droid.FirebaseAuthentication.SendPasswordResetEmail(email);
         }
 
-        public  void EmailSignIn(string email, string password)
+        public  System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
         {
 
 
-            try
-            {
-                Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password).Wait();
-            }
-            catch (Exception error)
-            {
-
-                
-            }
-            
-
+              return Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password);
             
         }
         public void SignOut()

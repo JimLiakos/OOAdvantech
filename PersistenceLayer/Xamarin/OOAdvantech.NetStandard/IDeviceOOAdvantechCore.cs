@@ -45,8 +45,8 @@ namespace OOAdvantech
 
 
         void PlaySound();
-        void EmailSignUp(string email, string password);
-        void EmailSignIn(string email, string password);
+        Task<string> EmailSignUp(string email, string password);
+        Task<string> EmailSignIn(string email, string password);
         void SendPasswordResetEmail(string email);
     }
 

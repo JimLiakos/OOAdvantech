@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpeechActivity.cs" />
     <Compile Include="SpeechToTextImplementation.cs" />
+    <Compile Include="Tasks.cs" />
     <Compile Include="TextToSpeech.cs" />
     <None Include="SQLiteDBConnaction.cs" />
   </ItemGroup>

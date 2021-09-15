@@ -10,6 +10,7 @@ using Firebase.Auth;
 using Java.Interop;
 using Xamarin.Facebook;
 using Xamarin.Facebook.Login;
+using OOAdvantech.Droid;
 
 namespace OOAdvantech.Authentication.Droid
 {
@@ -79,30 +80,37 @@ namespace OOAdvantech.Authentication.Droid
 
         static FirebaseUser CurrentUser;
 
-        internal static  System.Threading.Tasks.Task EmailSignUp(string email, string password)
+        internal static System.Threading.Tasks.Task<string> EmailSignUp(string email, string password)
         {
-            return System.Threading.Tasks.Task.Run(async () =>
-            {
-                await FirebaseAuth.CreateUserWithEmailAndPasswordAsync(email, password);
-            });
-            
-        }
 
-        public static System.Threading.Tasks.Task EmailSignIn(string email, string password)
-        {
+
             return System.Threading.Tasks.Task.Run(async () =>
             {
                 try
                 {
-                    await FirebaseAuth.SignInWithEmailAndPasswordAsync(email, password);
-
-                    System.Diagnostics.Debug.WriteLine("asa");
-
+                    await FirebaseAuth.CreateUserWithEmailAndPassword(email, password).AsAsync();
+                    return null;
                 }
                 catch (Exception err)
                 {
+                    return err.Message;
+                }
+            });
+            
+        }
 
-                    throw;
+        public static System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
+        {
+            return System.Threading.Tasks.Task<string>.Run(async () =>
+            {
+                try
+                {
+                    await FirebaseAuth.SignInWithEmailAndPassword(email, password).AsAsync();
+                    return null;
+                }
+                catch (Exception err)
+                {
+                    return err.Message;
                 }
             });
             
@@ -308,15 +316,12 @@ namespace OOAdvantech.Authentication.Droid
             {
                 if (OOAdvantech.Remoting.RestApi.DeviceAuthentication.AuthUser.Firebase_Sign_in_Provider.ToLower() == "google.com")
                     GoogleSignOut();
+                else
 
                 if (OOAdvantech.Remoting.RestApi.DeviceAuthentication.AuthUser.Firebase_Sign_in_Provider.ToLower() == "facebook.com")
-                {
                     FacebookLoginService.CurrentFacebookLoginService.SignOut();
-
-                }
-
-
-                //FirebaseAuth.SignOut();
+                else
+                    FirebaseAuth.SignOut();
             }
         }
 
