@@ -43,15 +43,40 @@ namespace OOAdvantech.Droid
             }
         }
 
+        public static void MessageReceived(IRemoteMessage message)
+        {
+            internalMessageReceived?.Invoke(message);
+        }
+
+        static event KeyboardChangeStateHandle internalKeyboordChangeState;
+
+        event KeyboardChangeStateHandle IDeviceOOAdvantechCore.KeyboordChangeState
+        {
+            add
+            {
+                internalKeyboordChangeState += value;
+
+            }
+
+            remove
+            {
+                internalKeyboordChangeState -= value;
+
+            }
+        }
+       
+        public static void KeyboordChangeState(KeybordStatus keybordStatus)
+        {
+            internalKeyboordChangeState?.Invoke(keybordStatus);
+        }
         public static void SetFirebaseToken(string firebaseToken)
         {
             _FirebaseToken = firebaseToken;
         }
 
-        public static void MessageReceived(IRemoteMessage message)
-        {
-            internalMessageReceived?.Invoke(message);
-        }
+
+
+
 
         static string _FirebaseToken;
 
@@ -97,12 +122,12 @@ namespace OOAdvantech.Droid
             Authentication.Droid.FirebaseAuthentication.SendPasswordResetEmail(email);
         }
 
-        public  System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
+        public System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
         {
 
 
-              return Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password);
-            
+            return Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password);
+
         }
         public void SignOut()
         {

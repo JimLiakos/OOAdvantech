@@ -7,6 +7,8 @@ using OOAdvantech.MetaDataRepository;
 
 namespace OOAdvantech
 {
+
+
     /// <MetaDataID>{cfa63701-40aa-4507-824c-30b1d5bc0383}</MetaDataID>
     public interface IDeviceOOAdvantechCore
     {
@@ -23,6 +25,8 @@ namespace OOAdvantech
         void StopForegroundService();
 
         event MessageReceivedHandle MessageReceived;
+
+        event KeyboardChangeStateHandle KeyboordChangeState;
 
         /// <MetaDataID>{d03f1e4b-d600-4ac2-b65a-5b2cda8343e0}</MetaDataID>
         double ScreeHeight { get; }
@@ -69,6 +73,8 @@ namespace OOAdvantech
 
     }
     public delegate void MessageReceivedHandle(IRemoteMessage message);
+
+    
 
 
     /// <MetaDataID>{65201611-2f61-4ab2-9aa3-ab811be6ea62}</MetaDataID>
@@ -214,5 +220,11 @@ namespace OOAdvantech
         SerializeTaskScheduler SerializeTaskScheduler { get; }
     }
 
+    public enum KeybordStatus
+    {
+        KeyboardHiden,
+        KeyboardVisible
+    }
 
+    public delegate void KeyboardChangeStateHandle(KeybordStatus keybordStatus);
 }

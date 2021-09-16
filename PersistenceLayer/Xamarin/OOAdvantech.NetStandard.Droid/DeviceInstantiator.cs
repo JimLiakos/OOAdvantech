@@ -45,8 +45,17 @@ namespace OOAdvantech.Droid
             return null;
         }
 
+        static KeyboardService.GlobalLayoutListener GlobalLayoutListener;
         public static void Init()
         {
+
+            if (GlobalLayoutListener == null)
+            {
+                GlobalLayoutListener = new KeyboardService.GlobalLayoutListener();
+                Xamarin.Essentials.Platform.CurrentActivity.Window.DecorView.ViewTreeObserver.AddOnGlobalLayoutListener(GlobalLayoutListener);
+            }
+
+
             ThreadHelper.Initialize( System.Environment.CurrentManagedThreadId);
             OOAdvantech.SQLitePersistenceRunTime.StorageProvider.init();
 

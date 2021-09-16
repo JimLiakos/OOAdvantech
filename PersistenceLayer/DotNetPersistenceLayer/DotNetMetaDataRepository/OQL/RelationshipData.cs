@@ -335,7 +335,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
         /// DataNodesRelationshipData object constructor with one parameter  
         /// initialize the object.
         /// </summary>
-        /// <param name="subDataNode">
+        /// <param name="relatedDataNode">
         /// Defines the sub data node from parent data node sub data node relation
         /// </param>
         public DataNodesRelationshipData(DataNode relatedDataNode)

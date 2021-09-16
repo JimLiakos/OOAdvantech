@@ -571,18 +571,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     while (parentDataNode.DataSource.DataLoadedInParentDataSource)
                         parentDataNode = parentDataNode.ParentDataNode;
 
-                    //foreach (var dataNodeIdentity in parentDataNode.DataSource.RelationshipsData.Keys)
-                    //{
-                    //    bool relationshipDataAdded = false;
-                    //    foreach (DataNode dataNode in DataNode.SubDataNodes)
-                    //    {
-                    //        if (dataNode.ThroughRelationTable && dataNode.Identity == dataNodeIdentity)
-                    //        {
-                    //            relationshipsData.Add(dataNodeIdentity, parentDataNode.DataSource.RelationshipsData[dataNodeIdentity]);
-                    //            relationshipDataAdded = true;
-                    //            break;
-                    //        }
-                    //    }
+              
 
                     foreach (var dataNodeIdentity in parentDataNode.DataSource.RelationshipsData.Keys)
                     {
@@ -2527,18 +2516,20 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             relatedDataNode = DerivedDataNode.GetOrgDataNode(relatedDataNode);
             if (relatedDataNode.RealParentDataNode == DataNode)
             {
+
+                #region Indexer 
+
                 //sorting Column
                 string indexerColumn = null;
                 if (relatedDataNode.AssignedMetaObject is AssociationEnd && (relatedDataNode.AssignedMetaObject as AssociationEnd).Indexer)
                 {
+                    //
                     indexerColumn = relatedDataNode.DataSource.DataSourceRelationsIndexerColumnName;
                     indexerAssociationEnd = true;
-                }
-                Guid subDataNodeRelateionDataIdentity;// relatedDataNode.ParentDataNode.ValueTypePath.ToString() + relatedDataNode.AssignedMetaObject.Identity.ToString();
-                if (relatedDataNode.Type == DataNode.DataNodeType.Group)
-                    subDataNodeRelateionDataIdentity = relatedDataNode.Identity; //relatedDataNode.ParentDataNode.ValueTypePath.ToString() + relatedDataNode.Identity.ToString();
-                else
-                    subDataNodeRelateionDataIdentity = relatedDataNode.Identity;//relatedDataNode.ParentDataNode.ValueTypePath.ToString() + relatedDataNode.AssignedMetaObject.Identity.ToString(); 
+                } 
+                #endregion
+
+                Guid subDataNodeRelationDataIdentity= relatedDataNode.Identity; 
 
                 if (relatedDataNode.DataSource == null)
                     return new List<IDataRow>();
@@ -2582,7 +2573,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                 {
                     if (relatedDataNode.DataSource.DataLoadedInParentDataSource)
                         return masterRows;
-                    if (!RelationshipsData.ContainsKey(subDataNodeRelateionDataIdentity) && (relatedDataNode.DataSource.DataTable == null || relatedDataNode.DataSource.DataTable.Rows.Count == 0))
+                    if (!RelationshipsData.ContainsKey(subDataNodeRelationDataIdentity) && (relatedDataNode.DataSource.DataTable == null || relatedDataNode.DataSource.DataTable.Rows.Count == 0))
                         return new List<IDataRow>();
 
                     DataNodesRelationshipData dataNodesRelationshipData = null;
@@ -2608,7 +2599,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         }
                         if (relatedDataNode.DataSource.RetrieveRowsThroughParentChildRelation.Value)
                         {
-                            if (RelationshipsData[subDataNodeRelateionDataIdentity].RelationsData.Count == 1)
+                            if (RelationshipsData[subDataNodeRelationDataIdentity].RelationsData.Count == 1)
                             {
                                 var rows = row.GetChildRows(relatedDataNode.Alias);
                                 if (rows != null && indexerColumn != null)
@@ -2624,7 +2615,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                             {
                                 if (relatedRows == null)
                                     relatedRows = new List<IDataRow>();
-                                foreach (var partialRelationData in RelationshipsData[subDataNodeRelateionDataIdentity].RelationsData)
+                                foreach (var partialRelationData in RelationshipsData[subDataNodeRelationDataIdentity].RelationsData)
                                     relatedRows.AddRange(row.GetChildRows(partialRelationData.RelationName));
 
                                 if (relatedRows != null && indexerColumn != null)
@@ -2637,7 +2628,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         }
                         else
                         {
-                            if (RelationshipsData[subDataNodeRelateionDataIdentity].RelationsData.Count == 1)
+                            if (RelationshipsData[subDataNodeRelationDataIdentity].RelationsData.Count == 1)
                             {
                                 var rows = row.GetParentRows(relatedDataNode.Alias);
                                 if (rows != null && indexerColumn != null)
@@ -2653,8 +2644,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                                     relatedRows = new List<IDataRow>();
 
 
-
-                                foreach (var partialRelationData in RelationshipsData[subDataNodeRelateionDataIdentity].RelationsData)
+                                foreach (var partialRelationData in RelationshipsData[subDataNodeRelationDataIdentity].RelationsData)
                                     relatedRows.AddRange(row.GetParentRows(partialRelationData.RelationName));
 
                                 if (relatedRows != null && indexerColumn != null)
@@ -2791,8 +2781,6 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     return relatedRowsColection.OrderBy(x => x.GetSortIndexValue()).ToList();
                 else
                     return relatedRowsColection;
-
-                
             }
         }
 
