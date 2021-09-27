@@ -98,7 +98,7 @@
     <Compile Include="OutlineTextBlock.cs" />
     <Compile Include="SelectAllFocusBehavior.cs" />
     <Compile Include="TextBoxNumberWithUnit.cs" />
-    <Compile Include="ViewModelWrappers.cs" />
+    <None Include="ViewModelWrappers.cs" />
     <Compile Include="WindowCloseCommand.cs" />
     <Compile Include="WindowMaximizeCommand.cs" />
     <Compile Include="WindowMinimizeCommand.cs" />
