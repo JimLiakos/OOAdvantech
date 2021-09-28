@@ -86,9 +86,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             foreach (RDBMSMetaDataRepository.IdentityColumn column in linkColumns)
             {
                 Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(RecordOwnerObject, column.Name, DBNull.Value);
-                if(RecordOwnerObject.RelationshipColumnsValues[column] != ((OOAdvantech.PersistenceLayer.ObjectID)AssignedObject.PersistentObjectID).GetMemberValue(column.ColumnType))
+                if (RecordOwnerObject.RelationshipColumnsValues.ContainsKey(column))
                 {
-                    return;
+                    if (RecordOwnerObject.RelationshipColumnsValues[column] != ((OOAdvantech.PersistenceLayer.ObjectID)AssignedObject.PersistentObjectID).GetMemberValue(column.ColumnType))
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+
                 }
             }
 
@@ -179,19 +186,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
             RDBMSMetaDataRepository.Association association = (RDBMSMetaDataRepository.Association)mAssociationEnd.Association;
 
-            bool setRoleAIndex = false;
-            bool setRoleBIndex = false;
-            if (association.RoleA.Indexer)
-            {
-                setRoleAIndex = true;
-                throw new NotImplementedException();
-            }
+            //bool setRoleAIndex = false;
+            //bool setRoleBIndex = false;
+            //if (association.RoleA.Indexer)
+            //{
+            //    setRoleAIndex = true;
+            //    throw new NotImplementedException();
+            //}
 
-            if (association.RoleB.Indexer)
-            {
-                setRoleBIndex = true;
-                throw new NotImplementedException();
-            }
+            //if (association.RoleB.Indexer)
+            //{
+            //    setRoleBIndex = true;
+            //    throw new NotImplementedException();
+            //}
 
 
             #region Gets meta data informations
@@ -377,12 +384,24 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             #endregion
 
             base.Execute();
-            if (MetaDataRepository.AssociationType.ManyToMany != OwnerAssociationEnd.Association.MultiplicityType && OwnerAssociationEnd.Association.LinkClass == null)
-                UnlinkOnetoManyOneToOne(OwnerAssociationEnd);
+            string vaueTypePath = "";
+            if (RoleA.ValueTypePath.Count > 0)
+                vaueTypePath = RoleA.ValueTypePath.ToString();
             else
+                vaueTypePath = RoleB.ValueTypePath.ToString();
+
+            RDBMSMetaDataRepository.StorageCellsLink objectCollectionsLink = (OwnerAssociationEnd.Association as RDBMSMetaDataRepository.Association).GetStorageCellsLink(((RDBMSMetaDataRepository.StorageCell)RoleA.RealStorageInstanceRef.StorageInstanceSet), ((RDBMSMetaDataRepository.StorageCell)RoleB.RealStorageInstanceRef.StorageInstanceSet), vaueTypePath);
+
+
+            if (ObjectStorage.GetStorageCell(RoleA).ObjectIdentityType != ObjectStorage.GetStorageCell(RoleB).ObjectIdentityType)
                 UnlinkManyToMany(OwnerAssociationEnd);
-
-
+            else if (MetaDataRepository.AssociationType.ManyToMany == LinkInitiatorAssociationEnd.Association.MultiplicityType ||
+                LinkInitiatorAssociationEnd.Association.LinkClass != null ||
+                RoleA.ObjectStorage != RoleB.ObjectStorage ||
+                objectCollectionsLink.ObjectLinksTable != null)
+                UnlinkManyToMany(OwnerAssociationEnd); 
+            else
+                UnlinkOnetoManyOneToOne(OwnerAssociationEnd);
 
 
         }
