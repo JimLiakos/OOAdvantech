@@ -31,7 +31,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <wpftoolkitex:WatermarkTextBox x:Name="WatermarkTextBox" VerticalContentAlignment="Center" SpellCheck.IsEnabled="{Binding ElementName=mainControl, Path=SpellCheckEnable}"  Watermark ="{Binding ElementName=mainControl, Path=Watermark}" PreviewLostKeyboardFocus="TextBox_PreviewLostFocus" LostFocus="TextBox_LostFocus"  KeyDown="TextBox_KeyDown"    KeyUp="TextBox_KeyUp"
+                    <wpftoolkitex:WatermarkTextBox x:Name="WatermarkTextBox" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" SpellCheck.IsEnabled="{Binding ElementName=mainControl, Path=SpellCheckEnable}"  Watermark ="{Binding ElementName=mainControl, Path=Watermark}" PreviewLostKeyboardFocus="TextBox_PreviewLostFocus" LostFocus="TextBox_LostFocus"  KeyDown="TextBox_KeyDown"    KeyUp="TextBox_KeyUp"
                      Text="{Binding ElementName=mainControl, Path=Text, UpdateSourceTrigger=LostFocus}" TextAlignment="{Binding ElementName=mainControl, Path=TextAlignment}"  Margin="0" BorderThickness="1" />
                     <Button Name="TranslateBtn" LostFocus="TranslateBtn_LostFocus"  Click="TranslateBtn_Click" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="2000" ToolTipService.BetweenShowDelay="10000"  ToolTip="Translate"  Grid.Column="1" Margin="4,2,0,2"  Visibility="{Binding ElementName=mainControl, Path=UnTranslated, Converter={StaticResource BooleanToVisibilityConverter}}"  Style="{DynamicResource ListViewBarButtonStyle}" Width="25" Height="25"  HorizontalAlignment="Right" >
 
@@ -46,8 +46,8 @@
         </DataTemplate>
 
         <DataTemplate x:Key="DisplayModeTemplate">
-            <Grid  PreviewMouseMove="DisplayMode_PreviewMouseMove"   MouseDown="TextBlock_MouseDown" HorizontalAlignment="{Binding ElementName=mainControl, Path=LabelHorizontalAlignment, Mode=OneWay}" Background="Transparent" >
-                <Grid  >
+            <Grid  PreviewMouseMove="DisplayMode_PreviewMouseMove"    MouseDown="TextBlock_MouseDown" HorizontalAlignment="Stretch" Background="Transparent" >
+                <Grid  HorizontalAlignment="{Binding ElementName=mainControl, Path=LabelHorizontalAlignment, Mode=OneWay}" >
                     <TextBlock VerticalAlignment="Center" x:Name="TextBlock"    TextAlignment="{Binding ElementName=mainControl, Path=TextAlignment}"   TextDecorations="{Binding ElementName=mainControl, Path=TextDecorations}" Text="{Binding ElementName=mainControl, Path=FormattedText}" 
                            MouseDown="TextBlock_MouseDown" />
                     <Rectangle Margin="0,0,0,-6"  Visibility="{Binding ElementName=mainControl, Path=UnTranslated, Converter={StaticResource BooleanToVisibilityConverter}}"  VerticalAlignment="Bottom" Height="9"  HorizontalAlignment="Stretch" StrokeThickness="17" >

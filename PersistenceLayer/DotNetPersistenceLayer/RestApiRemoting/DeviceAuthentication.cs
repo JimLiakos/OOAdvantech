@@ -131,6 +131,19 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{34df0860-c61e-41c6-80cc-8c5a3b1d9d65}</MetaDataID>
         public static string IDToken;
 
+
+        [OOAdvantech.MetaDataRepository.HttpVisible]
+        public DateTime IdTokenExpirationTime
+        {
+            get
+            {
+                if (_AuthUser != null)
+                    return _AuthUser.ExpirationTime.ToUniversalTime();
+                else
+                    return DateTime.Now;
+            }
+        }
+
         /// <MetaDataID>{4d9077fe-5041-4ef2-9bcc-fd1d5008970e}</MetaDataID>
         [OOAdvantech.MetaDataRepository.HttpVisible]
         public bool AuthIDTokenChanged(string idToken, OOAdvantech.Authentication.AuthUser authUserData)
@@ -151,6 +164,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
                 else
                 {
+                    
                     _AuthUser = GetAuthData(idToken);
                     if (_AuthUser == null && authUserData != null)
                     {

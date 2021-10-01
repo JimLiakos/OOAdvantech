@@ -2590,6 +2590,9 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         else
                             dataNodesRelationshipData = relatedDataNode.DataSource.ParentRelationshipData;
 
+                    if (!string.IsNullOrWhiteSpace(indexerColumn)&& relatedDataNode.DataSource.DataTable != null&& !relatedDataNode.DataSource.DataTable.Columns.Contains(indexerColumn))
+                        indexerColumn = null;
+
                     relatedRowsColection = new RelatedRowsCollection(rowsCount);
                     int i = 0;
                     foreach (IDataRow row in masterRows)

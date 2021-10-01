@@ -256,16 +256,22 @@ namespace OOAdvantech
                         try
                         {
                             PersistenceLayer.StorageInstanceRef storageInstanceRef = PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Owner);
-                            using (Transactions.SystemStateTransition stateTransition = new Transactions.SystemStateTransition(Transactions.TransactionOption.Suppress))
+                            if (storageInstanceRef != null)
                             {
-                                storageInstanceRef.LazyFetching(RelResolver, Owner.GetType());
-                                if (_Snapshots != null && _Snapshots.Count > 0)
+                                _Initialized = true;
+                                using (Transactions.SystemStateTransition stateTransition = new Transactions.SystemStateTransition(Transactions.TransactionOption.Suppress))
                                 {
-                                    foreach (Transactions.Transaction transaction in new List<Transactions.Transaction>(_Snapshots.Keys))
-                                        _Snapshots[transaction] = _Value;
+                                    storageInstanceRef.LazyFetching(RelResolver, Owner.GetType());
+                                    if (_Snapshots != null && _Snapshots.Count > 0)
+                                    {
+                                        foreach (Transactions.Transaction transaction in new List<Transactions.Transaction>(_Snapshots.Keys))
+                                            _Snapshots[transaction] = _Value;
+                                    }
+                                    stateTransition.Consistent = true;
                                 }
-                                stateTransition.Consistent = true;
                             }
+                            else
+                                return default(T);
 
                         }
                         catch (Exception error)

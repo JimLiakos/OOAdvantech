@@ -435,14 +435,16 @@ namespace GenWebBrowser
                 var settings = new CefSettings()
                 {
                     //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
-                    CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microneme\\CefSharp\\Cache"),
+                    //CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microneme\\CefSharp\\Cache"),
+                    CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format("Microneme\\{0}\\CefSharp\\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""))),
                     RemoteDebuggingPort = 9222,
                     IgnoreCertificateErrors = true
                     
                 };
+                //CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format("Microneme\\{0}\\CefSharp\\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""))),
 
 #if DEBUG
-                settings.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";
+                //settings.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";
 
                 settings.CefCommandLineArgs.Add("-ignore-urlfetcher-cert-requests", "1"); // Solve the certificate problem
                 settings.CefCommandLineArgs.Add("-ignore-certificate-errors", "1"); // Solve the certificate problem

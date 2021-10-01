@@ -158,11 +158,36 @@ namespace OOAdvantech.Remoting.RestApi
                 return (RealProxy as IProxy).ObjectUri.TransientUri;
             else
                 ObjRef = System.Runtime.Remoting.RemotingServices.GetObjRefForProxy(marshalByRefObject);
+            
             return ObjRef.URI;
 
 #endif
         }
 
+
+        public static string GetObjectPersistentUri(object marshalByRefObject)
+        {
+            if (marshalByRefObject == null)
+                return null;
+            System.Runtime.Remoting.Proxies.RealProxy RealProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(marshalByRefObject);
+            if (RealProxy == null)
+                return null;
+#if DeviceDotNet
+            if (RealProxy is IProxy)
+                return (RealProxy as IProxy).ObjectUri.PersistentUri;
+            else
+                return null;
+#else
+            
+            if (RealProxy is Remoting.Proxy)
+                return (RealProxy as Remoting.Proxy).URI.PersistentUri;
+            else if (RealProxy is IProxy)
+                return (RealProxy as IProxy).ObjectUri.PersistentUri;
+
+            return null;
+
+#endif
+        }
         public static ExtObjectUri GetObjRefForProxy(object @object)
         {
             MarshalByRefObject marshalByRefObject = @object as MarshalByRefObject;

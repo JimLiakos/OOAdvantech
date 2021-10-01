@@ -55,6 +55,7 @@
     <Compile Include="Margin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SizeUtil.cs" />
+    <Compile Include="ViewModelWrappers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantech\OOAdvantech - VS10.csproj">
