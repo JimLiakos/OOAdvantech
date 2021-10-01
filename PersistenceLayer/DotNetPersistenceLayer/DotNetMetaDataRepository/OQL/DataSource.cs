@@ -571,7 +571,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     while (parentDataNode.DataSource.DataLoadedInParentDataSource)
                         parentDataNode = parentDataNode.ParentDataNode;
 
-              
+
 
                     foreach (var dataNodeIdentity in parentDataNode.DataSource.RelationshipsData.Keys)
                     {
@@ -2525,11 +2525,12 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                 {
                     //
                     indexerColumn = relatedDataNode.DataSource.DataSourceRelationsIndexerColumnName;
+
                     indexerAssociationEnd = true;
-                } 
+                }
                 #endregion
 
-                Guid subDataNodeRelationDataIdentity= relatedDataNode.Identity; 
+                Guid subDataNodeRelationDataIdentity = relatedDataNode.Identity;
 
                 if (relatedDataNode.DataSource == null)
                     return new List<IDataRow>();
@@ -2575,6 +2576,12 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         return masterRows;
                     if (!RelationshipsData.ContainsKey(subDataNodeRelationDataIdentity) && (relatedDataNode.DataSource.DataTable == null || relatedDataNode.DataSource.DataTable.Rows.Count == 0))
                         return new List<IDataRow>();
+
+                    if (indexerAssociationEnd && (relatedDataNode.DataSource.DataTable == null || !relatedDataNode.DataSource.DataTable.Columns.Contains(indexerColumn)))
+                    {
+                        indexerAssociationEnd = false;
+                        indexerColumn = null;
+                    }
 
                     DataNodesRelationshipData dataNodesRelationshipData = null;
                     if ((relatedDataNode.AssignedMetaObject is MetaDataRepository.AssociationEnd))
