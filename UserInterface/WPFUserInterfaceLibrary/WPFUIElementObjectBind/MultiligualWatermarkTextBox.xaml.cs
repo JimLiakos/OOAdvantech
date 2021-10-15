@@ -25,11 +25,12 @@ namespace System.Windows.Controls
         public MultiligualWatermarkTextBox()
         {
 
-            InitializeComponent();
-            this.SizeChanged += MultiligualWatermarkTextBox_SizeChanged;
-
             try
             {
+
+                InitializeComponent();
+                this.SizeChanged += MultiligualWatermarkTextBox_SizeChanged;
+
                 var buttonStyle = FindResource("ListViewBarButtonStyle") as Style;
                 if (buttonStyle != null)
                     TranslateBtn.Style = buttonStyle;
@@ -157,7 +158,7 @@ namespace System.Windows.Controls
 
 
             }
-            
+
         }
         private void UnTranslatedPropertyChanged()
         {
@@ -376,7 +377,7 @@ namespace System.Windows.Controls
                    "Translator",
                    typeof(WPFUIElementObjectBind.ITranslator),
                    typeof(MultiligualWatermarkTextBox),
-                   new PropertyMetadata(null,  new PropertyChangedCallback(TranslatorPropertyChangedCallback)));
+                   new PropertyMetadata(null, new PropertyChangedCallback(TranslatorPropertyChangedCallback)));
 
         private static void TranslatorPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
