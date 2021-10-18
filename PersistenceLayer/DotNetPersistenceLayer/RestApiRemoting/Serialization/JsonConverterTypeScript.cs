@@ -585,7 +585,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 string typeFullName = serializer.ReferenceResolver.ResolveReference(serializer, type_id) as string;
                 if (typeFullName == null)
                 {
-                    throw new TypeMismatchException("Check the types of JSON in client and servers side. must be exactly the same.");
+                    throw new TypeMismatchException(string.Format("Invalid type_ref '{0}'  Check the types of JSON in client and servers side. must be exactly the same.", type_id));
                 }
                 return typeFullName;
             }
