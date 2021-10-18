@@ -33,6 +33,40 @@ namespace System.Windows.Controls
             base.Focusable = true;
             base.FocusVisualStyle = null;
             ContentTemplate = FindResource("DisplayModeTemplate") as DataTemplate;
+
+            Loaded += EditableTextBlock_Loaded;
+        }
+        public Xceed.Wpf.Toolkit.WatermarkTextBox WatermarkTextBox
+        {
+            get
+            {
+                if (this.ContentTemplate != null)
+                    return this.ContentTemplate.FindName("WatermarkTextBox", this) as Xceed.Wpf.Toolkit.WatermarkTextBox;
+                else
+                    return null;
+            }
+
+        }
+
+        protected override void OnTemplateChanged(ControlTemplate oldTemplate, ControlTemplate newTemplate)
+        {
+            base.OnTemplateChanged(oldTemplate, newTemplate);
+            if (WatermarkTextBox != null)
+            {
+
+            }
+        }
+   
+        private void EditableTextBlock_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var bind = BindingOperations.GetBinding(this, EditableTextBlock.TextProperty);
+            //if(bind!=null)
+            //{
+            //    Xceed.Wpf.Toolkit.WatermarkTextBox watermarkTextBox = this.FindName("WatermarkTextBox") as Xceed.Wpf.Toolkit.WatermarkTextBox;
+            //    var waterMarkBindin = BindingOperations.GetBinding(watermarkTextBox, Xceed.Wpf.Toolkit.WatermarkTextBox.TextProperty);
+            //    if(waterMarkBindin!=null)
+            //        waterMarkBindin.UpdateSourceTrigger = bind.UpdateSourceTrigger;
+            //}
         }
 
         #endregion Constructor
@@ -522,6 +556,8 @@ namespace System.Windows.Controls
             }
 
         }
+
+        
 
        
     }

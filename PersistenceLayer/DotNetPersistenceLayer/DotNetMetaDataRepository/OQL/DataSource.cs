@@ -2525,6 +2525,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                 {
                     //
                     indexerColumn = relatedDataNode.DataSource.DataSourceRelationsIndexerColumnName;
+
                     indexerAssociationEnd = true;
                 }
                 #endregion
@@ -2575,6 +2576,12 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         return masterRows;
                     if (!RelationshipsData.ContainsKey(subDataNodeRelationDataIdentity) && (relatedDataNode.DataSource.DataTable == null || relatedDataNode.DataSource.DataTable.Rows.Count == 0))
                         return new List<IDataRow>();
+
+                    if (indexerAssociationEnd && (relatedDataNode.DataSource.DataTable == null || !relatedDataNode.DataSource.DataTable.Columns.Contains(indexerColumn)))
+                    {
+                        indexerAssociationEnd = false;
+                        indexerColumn = null;
+                    }
 
                     DataNodesRelationshipData dataNodesRelationshipData = null;
                     if ((relatedDataNode.AssignedMetaObject is MetaDataRepository.AssociationEnd))

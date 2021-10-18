@@ -25,21 +25,34 @@ namespace System.Windows.Controls
         public MultiligualWatermarkTextBox()
         {
 
-            InitializeComponent();
-            this.SizeChanged += MultiligualWatermarkTextBox_SizeChanged;
-
             try
             {
+
+                InitializeComponent();
+                this.SizeChanged += MultiligualWatermarkTextBox_SizeChanged;
+
                 var buttonStyle = FindResource("ListViewBarButtonStyle") as Style;
                 if (buttonStyle != null)
                     TranslateBtn.Style = buttonStyle;
             }
             catch (Exception error)
             {
-
-
             }
 
+            Loaded += OnLoaded;
+
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var bind = BindingOperations.GetBinding(this, MultiligualWatermarkTextBox.TextProperty);
+            if (bind != null)
+            {
+                Binding myBinding = new Binding("Text");
+                myBinding.ElementName = "mainControl";
+                myBinding.UpdateSourceTrigger = bind.UpdateSourceTrigger;
+                WatermarkTextBox.SetBinding(Xceed.Wpf.Toolkit.WatermarkTextBox.TextProperty, myBinding);
+            }
         }
 
         private void MultiligualWatermarkTextBox_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -157,7 +170,7 @@ namespace System.Windows.Controls
 
 
             }
-            
+
         }
         private void UnTranslatedPropertyChanged()
         {
@@ -376,7 +389,7 @@ namespace System.Windows.Controls
                    "Translator",
                    typeof(WPFUIElementObjectBind.ITranslator),
                    typeof(MultiligualWatermarkTextBox),
-                   new PropertyMetadata(null,  new PropertyChangedCallback(TranslatorPropertyChangedCallback)));
+                   new PropertyMetadata(null, new PropertyChangedCallback(TranslatorPropertyChangedCallback)));
 
         private static void TranslatorPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -433,6 +446,27 @@ namespace System.Windows.Controls
         }
 
 
+
+        //public Xceed.Wpf.Toolkit.WatermarkTextBox WatermarkTextBox
+        //{
+        //    get
+        //    {
+        //        if (this.ContentTemplate != null)
+        //            return this.ContentTemplate.FindName("WatermarkTextBox", this) as Xceed.Wpf.Toolkit.WatermarkTextBox;
+        //        else
+        //            return null;
+        //    }
+
+        //}
+
+        //protected override void OnTemplateChanged(ControlTemplate oldTemplate, ControlTemplate newTemplate)
+        //{
+        //    base.OnTemplateChanged(oldTemplate, newTemplate);
+        //    if (WatermarkTextBox != null)
+        //    {
+
+        //    }
+        //}
 
 
     }

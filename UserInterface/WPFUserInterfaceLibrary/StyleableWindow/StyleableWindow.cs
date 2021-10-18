@@ -27,19 +27,24 @@ namespace StyleableWindow
     public class Window : System.Windows.Window, INotifyPropertyChanged
     {
 
+        /// <MetaDataID>{a51a242d-da6d-4505-8a12-9ea076d881ad}</MetaDataID>
         public virtual void OnBack()
         {
 
 
         }
+        /// <MetaDataID>{6e5930c3-c0f2-487d-9eef-e1ab59fd293d}</MetaDataID>
         static Window()
         {
-            
+
             LoadApplicationResources();
         }
 
+        /// <MetaDataID>{abc22560-8979-47d5-92b9-e1f381a1f30a}</MetaDataID>
         static private bool ApplicationResourcesLoaded = false;
+        /// <MetaDataID>{8c65fb33-eb96-48d7-8550-59270520fc1a}</MetaDataID>
         static object ApplicationResourcesLock = new object();
+        /// <MetaDataID>{f2a86050-21bf-4756-9ef7-16d4dce0ac15}</MetaDataID>
         public static void LoadApplicationResources()
         {
             lock (ApplicationResourcesLock)
@@ -53,6 +58,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{8e694c8a-ec5b-437c-ba75-0108acfa2a9c}</MetaDataID>
         public Window()
         {
             Style = Application.Current.Resources["CustomWindowStyle"] as Style;
@@ -65,6 +71,7 @@ namespace StyleableWindow
             UseDefaultCultureWhenValueMissing = CultureContext.UseDefaultCultureValue;
         }
 
+        /// <MetaDataID>{de0e998c-0dac-4335-a8f2-5f74ab32bba8}</MetaDataID>
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 
@@ -88,7 +95,8 @@ namespace StyleableWindow
             this.Focus();
         }
 
-      
+
+        /// <MetaDataID>{bf6eacdb-ef1a-4562-baf3-cb55bb53df64}</MetaDataID>
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -96,6 +104,7 @@ namespace StyleableWindow
                 (DataContext as WPFUIElementObjectBind.ObjectContext).Initialize(this);
         }
 
+        /// <MetaDataID>{3abf0809-1f38-46dd-bda6-d118f3a8c5e9}</MetaDataID>
         private void Window_StateChanged(object sender, EventArgs e)
         {
             switch (this.WindowState)
@@ -134,7 +143,9 @@ namespace StyleableWindow
 
         }
 
+        /// <MetaDataID>{9770f2b3-36d4-43e9-881f-b09a3350f6ea}</MetaDataID>
         double OrgHeight;
+        /// <MetaDataID>{2a450c41-1bb9-4784-ad34-b7270b507e60}</MetaDataID>
         private void StyleableWindow_Loaded(object sender, RoutedEventArgs e)
         {
             if (Template != null)
@@ -174,7 +185,7 @@ namespace StyleableWindow
                 Grid languageGrid = Template.FindName("LanguageLabel", this) as Grid;
                 if (languageGrid != null)
                 {
-                    if (LanguageButton&& languageGrid!=null)
+                    if (LanguageButton && languageGrid != null)
                         languageGrid.DataContext = this;
 
                 }
@@ -238,6 +249,7 @@ namespace StyleableWindow
 
         }
 
+        /// <MetaDataID>{ccf1c21c-8ec5-48f7-a433-87d738662aae}</MetaDataID>
         public string LanguageLabel
         {
             get
@@ -246,6 +258,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{55fb122d-5f98-4cb2-abe8-70d231de9bd4}</MetaDataID>
         public string DefaultLanguageLabel
         {
             get
@@ -257,6 +270,7 @@ namespace StyleableWindow
 
 
 
+        /// <MetaDataID>{3f3a6a72-29d7-4ddc-a2a3-19b31fb8d512}</MetaDataID>
         private void LanguageButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -277,9 +291,11 @@ namespace StyleableWindow
 
         }
 
+        /// <MetaDataID>{8ff54bde-3276-4b7a-b6f5-674ac6441bc5}</MetaDataID>
         public static readonly DependencyProperty LanguagePopupProperty =
-         DependencyProperty.Register("LanguagePopup", typeof(System.Windows.Controls.ContentControl), typeof(StyleableWindow.Window), new UIPropertyMetadata(null));
+                 DependencyProperty.Register("LanguagePopup", typeof(System.Windows.Controls.ContentControl), typeof(StyleableWindow.Window), new UIPropertyMetadata(null));
 
+        /// <MetaDataID>{c897642f-09c3-487e-bddd-02fd7fec201a}</MetaDataID>
         public System.Windows.Controls.ContentControl LanguagePopup
         {
             get { return (System.Windows.Controls.ContentControl)GetValue(LanguagePopupProperty); }
@@ -289,7 +305,9 @@ namespace StyleableWindow
 
 
 
+        /// <MetaDataID>{98b1cfb5-8d0d-4c97-8642-0d66fef67fec}</MetaDataID>
         static List<CulturePresentation> _Cultures;
+        /// <MetaDataID>{07f4330b-273c-4d7a-b85c-f516c59796fa}</MetaDataID>
         public List<CulturePresentation> Cultures
         {
             get
@@ -301,6 +319,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{d1cc55d5-ac51-4e0d-9a84-070a763296b5}</MetaDataID>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -313,11 +332,13 @@ namespace StyleableWindow
 
         }
 
+        /// <MetaDataID>{1468dd6a-5267-4f70-9d1f-bffc766c8201}</MetaDataID>
         public static readonly DependencyProperty MinimizeBoxProperty = DependencyProperty.Register(
-                                                           "MinimizeBox",
-                                                           typeof(bool),
-                                                           typeof(Window),
-                                                           new UIPropertyMetadata(true, new PropertyChangedCallback(OnMinimizeBoxChanged)));
+                                                                   "MinimizeBox",
+                                                                   typeof(bool),
+                                                                   typeof(Window),
+                                                                   new UIPropertyMetadata(true, new PropertyChangedCallback(OnMinimizeBoxChanged)));
+        /// <MetaDataID>{8267fcd9-57d5-4950-958b-9df0e289e61c}</MetaDataID>
         private static void OnMinimizeBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             System.Windows.Window window = d as System.Windows.Window;
@@ -341,6 +362,7 @@ namespace StyleableWindow
 
             }
         }
+        /// <MetaDataID>{10718029-855a-4c94-b886-af6683b1c775}</MetaDataID>
         [Description("Minimize button is visible"), Category("Common")]
         public bool MinimizeBox
         {
@@ -349,11 +371,13 @@ namespace StyleableWindow
         }
 
 
+        /// <MetaDataID>{ab3e86b4-fbe6-4328-bb16-9e44361e6185}</MetaDataID>
         public static readonly DependencyProperty MaximizeBoxProperty = DependencyProperty.Register(
-                                                           "MaximizeBox",
-                                                           typeof(bool),
-                                                           typeof(Window),
-                                                           new UIPropertyMetadata(true, new PropertyChangedCallback(OnMaximizeBoxChanged)));
+                                                                   "MaximizeBox",
+                                                                   typeof(bool),
+                                                                   typeof(Window),
+                                                                   new UIPropertyMetadata(true, new PropertyChangedCallback(OnMaximizeBoxChanged)));
+        /// <MetaDataID>{04cf1cd5-ceb8-47f4-9bff-55c1192232b4}</MetaDataID>
         private static void OnMaximizeBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             System.Windows.Window window = d as System.Windows.Window;
@@ -376,6 +400,7 @@ namespace StyleableWindow
                 }
             }
         }
+        /// <MetaDataID>{47fbbbde-2527-4a26-9b45-2426b9fe6f98}</MetaDataID>
         [Description("Maximize button is visible"), Category("Common")]
         public bool MaximizeBox
         {
@@ -386,11 +411,13 @@ namespace StyleableWindow
 
 
 
+        /// <MetaDataID>{b2fabaa6-4c1a-4fca-9907-80e8b444b770}</MetaDataID>
         public static readonly DependencyProperty SubTitleProperty = DependencyProperty.Register(
-                                                           "SubTitle",
-                                                           typeof(string),
-                                                           typeof(Window),
-                                                           new UIPropertyMetadata("", new PropertyChangedCallback(OnSubTitleChanged)));
+                                                                   "SubTitle",
+                                                                   typeof(string),
+                                                                   typeof(Window),
+                                                                   new UIPropertyMetadata("", new PropertyChangedCallback(OnSubTitleChanged)));
+        /// <MetaDataID>{15550bc4-d149-47cc-baa0-4d1a7569f566}</MetaDataID>
         private static void OnSubTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             StyleableWindow.Window window = d as StyleableWindow.Window;
@@ -425,6 +452,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{660dd7b7-843f-4963-9f0f-037e941d734e}</MetaDataID>
         [Description("Title bar sub title"), Category("Common")]
         public String SubTitle
         {
@@ -435,11 +463,13 @@ namespace StyleableWindow
 
 
 
+        /// <MetaDataID>{a87b0723-a9ca-4b2b-8203-4f97434bbb34}</MetaDataID>
         public static readonly DependencyProperty LanguageButtonProperty = DependencyProperty.Register(
-                                                           "LanguageButton",
-                                                           typeof(bool),
-                                                           typeof(Window),
-                                                           new UIPropertyMetadata(false, new PropertyChangedCallback(OnLanguageButtonChanged)));
+                                                                   "LanguageButton",
+                                                                   typeof(bool),
+                                                                   typeof(Window),
+                                                                   new UIPropertyMetadata(false, new PropertyChangedCallback(OnLanguageButtonChanged)));
+        /// <MetaDataID>{d164080c-e943-431e-b097-e616c1382cb5}</MetaDataID>
         private static void OnLanguageButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
@@ -467,6 +497,7 @@ namespace StyleableWindow
         }
 
 
+        /// <MetaDataID>{9dcd61bc-85b3-49ff-a6fb-2c6b64c526bf}</MetaDataID>
         [Description("Language button visibility"), Category("Common")]
         public bool LanguageButton
         {
@@ -478,16 +509,18 @@ namespace StyleableWindow
 
         #region SelectedCultureProperty
 
+        /// <MetaDataID>{230478c0-0833-4b3e-9702-df274058c4ae}</MetaDataID>
         public static readonly DependencyProperty SelectedCultureProperty = DependencyProperty.Register(
-                                                           "SelectedCulture",
-                                                           typeof(CultureInfo),
-                                                           typeof(Window),
-                                                           new UIPropertyMetadata(CultureInfo.InvariantCulture, new PropertyChangedCallback(OnSelectedCultureChanged)));
+                                                                   "SelectedCulture",
+                                                                   typeof(CultureInfo),
+                                                                   typeof(Window),
+                                                                   new UIPropertyMetadata(CultureInfo.InvariantCulture, new PropertyChangedCallback(OnSelectedCultureChanged)));
+        /// <MetaDataID>{041052fe-2995-4760-9b48-6c14cb501873}</MetaDataID>
         private static void OnSelectedCultureChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
             Window window = d as Window;
-            if(e.NewValue==null|| e.NewValue == CultureInfo.InvariantCulture)
+            if (e.NewValue == null || e.NewValue == CultureInfo.InvariantCulture)
                 window.SelectedCulture = CultureContext.CurrentCultureInfo;
             else
                 window.SelectedCulture = e.NewValue as CultureInfo;
@@ -505,6 +538,7 @@ namespace StyleableWindow
         }
 
 
+        /// <MetaDataID>{16c9734e-552d-47a0-82dc-be48537b0450}</MetaDataID>
         [Description("Selected Culture"), Category("Common")]
         public CultureInfo SelectedCulture
         {
@@ -517,7 +551,9 @@ namespace StyleableWindow
 
         #endregion
 
+        /// <MetaDataID>{432e70c0-cf01-43b1-acd6-0029145904e3}</MetaDataID>
         CulturePresentation _SelectedCulturePresentation;
+        /// <MetaDataID>{9ba3efa3-da51-414e-9c83-075232342920}</MetaDataID>
         public CulturePresentation SelectedCulturePresentation
         {
             get
@@ -567,6 +603,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{bd52b37f-52ea-4cfc-a79a-7ea3c419d633}</MetaDataID>
         private void RefreshUIElements()
         {
             if (this.GetObjectContextConnection() != null)
@@ -576,7 +613,7 @@ namespace StyleableWindow
 
                     foreach (var uiProxy in this.GetObjectContextConnection().GetAllUIProxies())
                     {
-                        if(uiProxy.DisplayedValue!=null)
+                        if (uiProxy.DisplayedValue != null)
                         {
                             this.GetObjectContextConnection().ObjectChangeState(uiProxy.DisplayedValue.Value, null);
                         }
@@ -594,8 +631,10 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{3f237142-1712-4fd4-b00e-bb6cca477333}</MetaDataID>
         bool _UseDefaultCultureWhenValueMissing;
 
+        /// <MetaDataID>{26e58560-84de-42c3-892b-bc59fc55d5b2}</MetaDataID>
         public bool UseDefaultCultureWhenValueMissing
         {
             get
@@ -643,19 +682,22 @@ namespace StyleableWindow
 
 
 
+        /// <MetaDataID>{77c7ff9b-edbe-4282-bf08-366acfd63e60}</MetaDataID>
         public static readonly DependencyProperty BackButtonVisibilityProperty = DependencyProperty.Register(
-                                                        "BackButtonVisibility",
-                                                        typeof(Visibility),
-                                                        typeof(Window),
-                                                        new UIPropertyMetadata(Visibility.Collapsed, new PropertyChangedCallback(OnBackButtonVisibilityChanged)));
+                                                                "BackButtonVisibility",
+                                                                typeof(Visibility),
+                                                                typeof(Window),
+                                                                new UIPropertyMetadata(Visibility.Collapsed, new PropertyChangedCallback(OnBackButtonVisibilityChanged)));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
+        /// <MetaDataID>{6c682d55-3a9b-4bb0-b9ae-311128942f1a}</MetaDataID>
         protected void RunPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(sender, e);
         }
+        /// <MetaDataID>{bc09ccf4-281b-40e7-9722-9c08c11445ba}</MetaDataID>
         private static void OnBackButtonVisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             StyleableWindow.Window window = d as StyleableWindow.Window;
@@ -670,6 +712,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{94ed4a2e-e089-4062-9618-1d1ed1c10555}</MetaDataID>
         [Description("Back button visibility"), Category("Common")]
         public Visibility BackButtonVisibility
         {
@@ -678,6 +721,7 @@ namespace StyleableWindow
         }
 
 
+        /// <MetaDataID>{7880cbd7-6771-49c6-8346-5a98ecb0baca}</MetaDataID>
         void win_SourceInitialized(object sender, EventArgs e)
         {
             System.IntPtr handle = (new WinInterop.WindowInteropHelper(this)).Handle;
@@ -693,12 +737,13 @@ namespace StyleableWindow
         //    WinInterop.HwndSource.FromHwnd(handle).AddHook(new WinInterop.HwndSourceHook(WindowProc));
         //}
 
+        /// <MetaDataID>{cd74119a-c373-44c4-a193-0c4b237bb70b}</MetaDataID>
         private static System.IntPtr WindowProc(
-              System.IntPtr hwnd,
-              int msg,
-              System.IntPtr wParam,
-              System.IntPtr lParam,
-              ref bool handled)
+                      System.IntPtr hwnd,
+                      int msg,
+                      System.IntPtr wParam,
+                      System.IntPtr lParam,
+                      ref bool handled)
         {
             switch (msg)
             {
@@ -711,6 +756,7 @@ namespace StyleableWindow
             return (System.IntPtr)0;
         }
 
+        /// <MetaDataID>{7abe5e77-c312-4e66-a75a-43cc7b16bea3}</MetaDataID>
         private static void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
         {
 
@@ -889,12 +935,12 @@ namespace StyleableWindow
 
         }
 
+        /// <MetaDataID>{960af2e6-2f41-4af6-8779-87664bd02002}</MetaDataID>
         [DllImport("user32")]
         internal static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary></summary>
+        /// <MetaDataID>{eba560fa-d378-4873-8329-e3dfd41cd570}</MetaDataID>
         [DllImport("User32")]
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
     }
@@ -902,9 +948,12 @@ namespace StyleableWindow
     /// <MetaDataID>{6129a16d-a2be-422a-b7d3-f3eb33b775dc}</MetaDataID>
     public class CulturePresentation
     {
+        /// <MetaDataID>{4b155aed-8054-4fd8-be73-faa13244cf81}</MetaDataID>
         public CultureInfo CultureInfo { get; set; }
 
+        /// <MetaDataID>{53b54e6e-0652-48c8-a29c-63157d4f2ba5}</MetaDataID>
         static List<CulturePresentation> _Cultures;
+        /// <MetaDataID>{2fac67ed-595e-41ac-b1c3-5bc776eca70d}</MetaDataID>
         public static List<CulturePresentation> Cultures
         {
             get
@@ -988,9 +1037,12 @@ namespace StyleableWindow
 
 
 
+        /// <MetaDataID>{76e0c3f9-bd0a-40a9-a2e5-9d3f9e484c28}</MetaDataID>
         static List<string> ResourceNames = typeof(CulturePresentation).Assembly.GetManifestResourceNames().ToList();
 
+        /// <MetaDataID>{ac8bd457-9003-4fa3-945e-4639af5118bd}</MetaDataID>
         static Dictionary<string, BitmapImage> FlagsImages = new Dictionary<string, BitmapImage>();
+        /// <MetaDataID>{97676d22-dda7-4bda-8532-047785739d97}</MetaDataID>
         public CulturePresentation(CultureInfo cultureInfo)
         {
 
@@ -1025,9 +1077,11 @@ namespace StyleableWindow
 
         }
 
+        /// <MetaDataID>{e3f44a92-7759-4ac5-bc58-d514b897a290}</MetaDataID>
         public string uri = "StyleableWindow.Resources.Images.mono_flags.Blank24.png";
 
 
+        /// <MetaDataID>{a674d5c8-ee06-4553-88ac-679f0ab56e27}</MetaDataID>
         public static string LanguageLabel
         {
             get
@@ -1036,6 +1090,7 @@ namespace StyleableWindow
             }
         }
 
+        /// <MetaDataID>{5e434c36-f54a-4844-87c2-dd88fc68b8c1}</MetaDataID>
         public static string DefaultLanguageLabel
         {
             get
@@ -1044,6 +1099,7 @@ namespace StyleableWindow
                 return Properties.Resources.DefaultLanguageLabel;
             }
         }
+        /// <MetaDataID>{1bfab2f4-aa00-4ea0-873f-ef3264844db1}</MetaDataID>
         private static BitmapImage GetResourceImage(string resourceName)
         {
             BitmapImage image;
@@ -1061,10 +1117,14 @@ namespace StyleableWindow
             return image;
         }
 
+        /// <MetaDataID>{02bc1b82-a4cf-4507-83e9-12e0d8aaa0ba}</MetaDataID>
         public static BitmapImage Blank = GetResourceImage("StyleableWindow.Resources.Images.mono_flags.Blank24.png");
 
+        /// <MetaDataID>{b53397ea-dca9-4f06-978a-49e4eae145eb}</MetaDataID>
         public static BitmapImage flag;//= new BitmapImage(typeof(CulturePresentation).Assembly.GetManifestResourceStream("StyleableWindow.Resources.Images.mono_flags.SK24.png"))
+        /// <MetaDataID>{d2c9c210-2699-4f2c-bf39-8ef2d937ef7c}</MetaDataID>
         BitmapImage _FlagImage;
+        /// <MetaDataID>{55b1c947-ab42-4c98-9532-814435a0acd0}</MetaDataID>
         public ImageSource FlagImageUri
         {
             get
