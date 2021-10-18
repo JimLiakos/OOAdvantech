@@ -37,10 +37,22 @@ namespace System.Windows.Controls
             }
             catch (Exception error)
             {
-
-
             }
 
+            Loaded += OnLoaded;
+
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var bind = BindingOperations.GetBinding(this, MultiligualWatermarkTextBox.TextProperty);
+            if (bind != null)
+            {
+                Binding myBinding = new Binding("Text");
+                myBinding.ElementName = "mainControl";
+                myBinding.UpdateSourceTrigger = bind.UpdateSourceTrigger;
+                WatermarkTextBox.SetBinding(Xceed.Wpf.Toolkit.WatermarkTextBox.TextProperty, myBinding);
+            }
         }
 
         private void MultiligualWatermarkTextBox_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -434,6 +446,27 @@ namespace System.Windows.Controls
         }
 
 
+
+        //public Xceed.Wpf.Toolkit.WatermarkTextBox WatermarkTextBox
+        //{
+        //    get
+        //    {
+        //        if (this.ContentTemplate != null)
+        //            return this.ContentTemplate.FindName("WatermarkTextBox", this) as Xceed.Wpf.Toolkit.WatermarkTextBox;
+        //        else
+        //            return null;
+        //    }
+
+        //}
+
+        //protected override void OnTemplateChanged(ControlTemplate oldTemplate, ControlTemplate newTemplate)
+        //{
+        //    base.OnTemplateChanged(oldTemplate, newTemplate);
+        //    if (WatermarkTextBox != null)
+        //    {
+
+        //    }
+        //}
 
 
     }
