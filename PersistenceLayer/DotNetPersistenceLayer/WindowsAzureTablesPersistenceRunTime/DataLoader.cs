@@ -26,18 +26,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
             get
             {
-                if (base.ParticipateInGlobalResolvedCriterion)
+                
+                if (DataNode.BranchSearchCriterions.Count > 0)
                     return true;
-                bool allDataNodeCriterionsApplied = true;
-                foreach (var criterion in DataNode.BranchSearchCriterions)
-                {
-                        if (!criterion.Applied)
-                            allDataNodeCriterionsApplied = false;
-                }
+                else
+                    return false;
 
-                if (!allDataNodeCriterionsApplied)
-                    return true;
-                return base.ParticipateInGlobalResolvedCriterion;
             }
         }
 
