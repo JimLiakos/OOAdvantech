@@ -21,6 +21,27 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     public class DataLoader : PersistenceLayerRunTime.StorageDataLoader
     {
 
+
+        public override bool ParticipateInGlobalResolvedCriterion
+        {
+            get
+            {
+                if (base.ParticipateInGlobalResolvedCriterion)
+                    return true;
+                bool allDataNodeCriterionsApplied = true;
+                foreach (var criterion in DataNode.BranchSearchCriterions)
+                {
+                        if (!criterion.Applied)
+                            allDataNodeCriterionsApplied = false;
+                }
+
+                if (!allDataNodeCriterionsApplied)
+                    return true;
+                return base.ParticipateInGlobalResolvedCriterion;
+            }
+        }
+
+
         ///// <MetaDataID>{3f566d9a-a67d-4df7-aa63-a397c6d341ef}</MetaDataID>
         //protected override bool CanAggregateFanctionsResolvedLocally(DataNode aggregateFunctionDataNode)
         //{

@@ -360,21 +360,15 @@ namespace OOAdvantech.Remoting.RestApi
             if (physicalConnectionID == null)
                 physicalConnectionID = "";//web view
 
-            //var datetime = DateTime.UtcNow;
-            //string timestamp = datetime.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
-
-            if (!PhysicalConnections.ContainsKey(physicalConnectionID) || PhysicalConnections[physicalConnectionID] != connected)
-            {
-                PhysicalConnections[physicalConnectionID] = connected;
-                //if (!value)
-                //    System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel Disconnect {1} : {0} -- {2}", this.SessionIdentity, timestamp, physicalConnectionID));
-                //else
-                //    System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel Connect {1} : {0} -- {2}", this.SessionIdentity, timestamp, physicalConnectionID));
-            }
-
             bool sessionConnected = false;
-            foreach (bool channelConnected in PhysicalConnections.Values)
-                sessionConnected |= channelConnected;
+            lock (PhysicalConnections)
+            {
+                if (!PhysicalConnections.ContainsKey(physicalConnectionID) || PhysicalConnections[physicalConnectionID] != connected)
+                    PhysicalConnections[physicalConnectionID] = connected;
+
+                foreach (bool channelConnected in PhysicalConnections.Values)
+                    sessionConnected |= channelConnected;
+            }
 
 #region Communication session completed when all physical connections are disconnected for a period of time
             if (!sessionConnected && _Connected)

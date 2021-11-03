@@ -719,6 +719,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             }
         }
 
+    
         /// <exclude>Excluded</exclude>
         protected DataNodesRelationshipData _ParentRelationshipData;
         /// <MetaDataID>{0ca29072-bf2f-49b2-bc0d-87e5406a3879}</MetaDataID>

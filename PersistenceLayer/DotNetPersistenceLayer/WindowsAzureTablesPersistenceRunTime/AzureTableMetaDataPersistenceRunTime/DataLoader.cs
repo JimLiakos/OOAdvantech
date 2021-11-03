@@ -78,6 +78,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
 
 
+
         public override bool ParticipateInGlobalResolvedCriterion
         {
             get
