@@ -2377,11 +2377,30 @@ namespace OOAdvantech.Json.Serialization
 
                                 if (property.Ignored || !ShouldDeserialize(reader, property, newObject))
                                 {
-                                    if (!reader.Read())
+                                    //#OOAdvantech#
+
+                                    //if there are type id members must be deserialized for type ref production
+
+                                    if (property.PropertyContract == null)
+                                        property.PropertyContract = GetContractSafe(property.PropertyType);
+                                    JsonConverter propertyConverter = GetConverter(property.PropertyContract, property.Converter, contract, member);
+                                    if (propertyConverter != null)
                                     {
-                                        break;
+                                        if (!reader.ReadForType(property.PropertyContract, propertyConverter != null))
+                                        {
+                                            throw JsonSerializationException.Create(reader, "Unexpected end when setting {0}'s value.".FormatWith(CultureInfo.InvariantCulture, propertyName));
+                                        }
+
+                                        DeserializeConvertable(propertyConverter, reader, property.PropertyType, null);
                                     }
-                                     
+                                    else //#OOAdvantech#
+                                    {
+                                        if (!reader.Read())
+                                            break;
+                                    }
+                                    
+
+
                                     SetPropertyPresence(reader, property, propertiesPresence);
                                     SetExtensionData(contract, member, reader, propertyName, newObject);
                                 }

@@ -24,13 +24,20 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             {
                 string localTransactionUri = Transactions.Transaction.Current.LocalTransactionUri;
                 UpdateDatabaseMassivelly updateDatabaseMassivelly = null;
-                if (!UpdateDatabaseMassivellyCommands.TryGetValue(Transactions.Transaction.Current.LocalTransactionUri, out updateDatabaseMassivelly))
+
+                bool exist = false;
+                lock (UpdateDatabaseMassivellyCommands)
+                {
+                    exist = UpdateDatabaseMassivellyCommands.TryGetValue(Transactions.Transaction.Current.LocalTransactionUri, out updateDatabaseMassivelly);
+                }
+                if(!exist)
                 {
                     updateDatabaseMassivelly = new UpdateDatabaseMassivelly();
                     PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistCommand(updateDatabaseMassivelly);
-                    UpdateDatabaseMassivellyCommands[localTransactionUri] = updateDatabaseMassivelly;
-
-                    //}
+                    lock (UpdateDatabaseMassivellyCommands)
+                    {
+                        UpdateDatabaseMassivellyCommands[localTransactionUri] = updateDatabaseMassivelly;
+                    }
                     Transactions.Transaction.Current.TransactionCompleted += new OOAdvantech.Transactions.TransactionCompletedEventHandler(OnTransactionCompleted);
                 }
                 return updateDatabaseMassivelly;
