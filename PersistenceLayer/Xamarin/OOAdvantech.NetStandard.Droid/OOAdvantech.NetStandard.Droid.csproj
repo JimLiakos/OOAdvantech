@@ -58,6 +58,7 @@
     <Compile Include="DeviceFileSystem.cs" />
     <Compile Include="DeviceInstantiator.cs" />
     <Compile Include="DeviceOOAdvantechCore.cs" />
+    <Compile Include="ForeGroundService.cs" />
     <Compile Include="HybridWebViewRenderer.cs" />
     <Compile Include="Keyboard\GlobalLayoutListener.cs" />
     <Compile Include="Localize.cs" />
