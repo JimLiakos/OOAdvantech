@@ -30,6 +30,7 @@ namespace OOAdvantech.Droid
 
             _context = context;
             OnBackPressed += HybridWebViewRenderer_OnBackPressed;
+
         }
 
         //A3piKEtGw7w6W+FL7pMNzL1rpqE=
@@ -145,7 +146,19 @@ namespace OOAdvantech.Droid
         {
 
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (Control is Android.Webkit.WebView && WebViews.Contains(Control as Android.Webkit.WebView))
+                    WebViews.Remove(Control as Android.Webkit.WebView);
+            }
+            catch (Exception error)
+            {
+            }
+            base.Dispose(disposing);
+        }
+        static List<Android.Webkit.WebView> WebViews = new List<Android.Webkit.WebView>();
         HybridWebView HybridWebView;
         static String USER_AGENT = "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19";
         protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
@@ -168,8 +181,8 @@ namespace OOAdvantech.Droid
                 //webView.SetWebViewClient(new CustomWebViewClient(this));
                 webView.Settings.JavaScriptEnabled = true;
                 //webView.ClearCache(false);
-                webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}",_context));
-
+                webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}", _context));
+                WebViews.Add(webView);
 
 
                 SetNativeControl(webView);
@@ -213,6 +226,13 @@ namespace OOAdvantech.Droid
                 // InjectJS(JavaScriptFunction);
             }
         }
+
+        internal static void OnDestroy()
+        {
+            foreach (var webView in WebViews)
+                webView.Destroy();
+        }
+
         void InjectJS(string JavascriptFunction)
         {
             if (Control != null)

@@ -15,15 +15,12 @@ namespace OOAdvantech
 
         void Signin(AuthProvider provider);
         void SignOut();
-        bool ForegroundService { get; }
+        
 
         bool IsinSleepMode { get; set; }
 
-        bool IsForegroundServiceStarted { get; }
-        void StartForegroundService();
-
-        void StopForegroundService();
-
+      
+      
         event MessageReceivedHandle MessageReceived;
 
         event KeyboardChangeStateHandle KeyboordChangeState;
@@ -52,6 +49,12 @@ namespace OOAdvantech
         Task<string> EmailSignUp(string email, string password);
         Task<string> EmailSignIn(string email, string password);
         void SendPasswordResetEmail(string email);
+
+        bool IsBackgroundServiceStarted { get; }
+
+        bool RunInBackground(Action action, BackgroundServiceState serviceState);
+
+        void StopBackgroundService();
     }
 
     /// <MetaDataID>{a0246554-4359-4a5a-a501-b3a7824c6b12}</MetaDataID>
@@ -61,15 +64,15 @@ namespace OOAdvantech
         Facebook
     }
     /// <MetaDataID>{f5676dc6-a065-4d78-a837-912cb449bed1}</MetaDataID>
-    public interface IForegroundService
+    public interface IBackgroundService
     {
 
-        bool ForegroundService { get; }
+        
 
-        bool IsForegroundServiceStarted { get; }
-        void StartForegroundService();
+        bool IsServiceStarted { get; }
+        bool Run(Action action, BackgroundServiceState serviceState);
 
-        void StopForegroundService();
+        void Stop();
 
     }
     public delegate void MessageReceivedHandle(IRemoteMessage message);
@@ -227,4 +230,12 @@ namespace OOAdvantech
     }
 
     public delegate void KeyboardChangeStateHandle(KeybordStatus keybordStatus);
+
+
+    /// <MetaDataID>{86be3bae-7dca-45e1-8e54-9b1e142b144f}</MetaDataID>
+    public class BackgroundServiceState
+    {
+        public bool Terminate;
+
+    }
 }

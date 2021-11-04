@@ -24,7 +24,7 @@ namespace OOAdvantech.Droid
     {
 
 
-        public static IForegroundService ForegroundServiceManager;
+        public static IBackgroundService ForegroundServiceManager;
 
         static event MessageReceivedHandle internalMessageReceived;
 
@@ -200,6 +200,11 @@ namespace OOAdvantech.Droid
             //}
         }
 
+        public static void OnDestroy()
+        {
+            HybridWebViewRenderer.OnDestroy();
+        }
+
         List<SIMCardData> _LinesPhoneNumbers;
         public IList<SIMCardData> LinesPhoneNumbers
         {
@@ -238,29 +243,9 @@ namespace OOAdvantech.Droid
             }
         }
 
-        public bool ForegroundService
-        {
-            get
-            {
-                if (ForegroundServiceManager == null)
-                    return false;
-                else
-                    return ForegroundServiceManager.ForegroundService;
+      
 
-            }
-        }
-
-        public bool IsForegroundServiceStarted
-        {
-            get
-            {
-                if (ForegroundServiceManager == null)
-                    return false;
-                else
-                    return ForegroundServiceManager.IsForegroundServiceStarted;
-
-            }
-        }
+      
 
 
         public SIMCardData GetLinePhoneNumber(int lineIndex)
@@ -347,16 +332,32 @@ namespace OOAdvantech.Droid
             return new Java.Util.UUID(m_szDevIDShort.GetHashCode(), serial.GetHashCode()).ToString();
         }
 
-        public void StartForegroundService()
+        public bool IsBackgroundServiceStarted
         {
-            if (ForegroundServiceManager != null)
-                ForegroundServiceManager.StartForegroundService();
+            get
+            {
+                if (ForegroundServiceManager == null)
+                    return false;
+                else
+                    return ForegroundServiceManager.IsServiceStarted;
+
+            }
         }
 
-        public void StopForegroundService()
+        public bool RunInBackground(Action action, BackgroundServiceState serviceState)
         {
             if (ForegroundServiceManager != null)
-                ForegroundServiceManager.StartForegroundService();
+            {
+                return ForegroundServiceManager.Run(action, serviceState);
+                
+            }
+            return false;
+        }
+
+        public void StopBackgroundService()
+        {
+            if (ForegroundServiceManager != null)
+                ForegroundServiceManager.Stop();
         }
     }
 

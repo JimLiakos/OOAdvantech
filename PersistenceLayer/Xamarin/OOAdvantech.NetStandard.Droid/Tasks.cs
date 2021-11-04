@@ -49,6 +49,7 @@ namespace OOAdvantech.Droid
         }
     }
 
+    /// <MetaDataID>{cc19d65d-51ff-43bf-b66e-b5ca5959385e}</MetaDataID>
     [Android.Runtime.Preserve]
     class AwaitableTaskCompleteListener<TResult> : Java.Lang.Object, IOnCompleteListener where TResult : class, IJavaObject
     {

@@ -8,6 +8,7 @@ using Object = Java.Lang.Object;
 
 namespace OOAdvantech.Droid.KeyboardService
 {
+    /// <MetaDataID>{c5f90273-2b29-465d-8229-475cb2256387}</MetaDataID>
     internal class GlobalLayoutListener : Object, ViewTreeObserver.IOnGlobalLayoutListener
     {
         private static InputMethodManager _inputManager;

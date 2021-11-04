@@ -17,7 +17,7 @@ using Java.Sql;
 using Xamarin.Essentials;
 //using Exception = System.Exception;
 
-namespace DestoPesto.Droid
+namespace OOAdvantech.Droid
 {
     /// <summary>
     /// This is a sample started service. When the service is started, it will log a string that details how long 
@@ -26,9 +26,9 @@ namespace DestoPesto.Droid
     /// </summary>
     /// <MetaDataID>{a8667a5a-c1e7-4e98-802e-27a52e6b7657}</MetaDataID>
 
-    public class ForeGroundService : Service
+    public class ForegroundService : Service
     {
-        static readonly string TAG = typeof(ForeGroundService).FullName;
+        static readonly string TAG = typeof(ForegroundService).FullName;
 
 
 
@@ -44,7 +44,7 @@ namespace DestoPesto.Droid
         {
             StartCommands.Add(action);
             ServiceStates[action] = serviceState;
-            var startServiceIntent = new Intent(packageContext, GetType());
+            var startServiceIntent = new Intent(Platform.CurrentActivity, GetType());
             startServiceIntent.SetAction(action);
             Platform.CurrentActivity.StartService(startServiceIntent);
 
@@ -122,6 +122,8 @@ namespace DestoPesto.Droid
                     StopSelf();
                     isStarted = false;
                     State.Terminate = true;
+                    if (State.BackgroundServiceState != null)
+                        State.BackgroundServiceState.Terminate = true;
 
                 }
 
@@ -177,6 +179,7 @@ namespace DestoPesto.Droid
             public int ServiceRunningNotificationID { get; set; }
             public string ActionsMainActivity { get; set; }
             public string ServiceStartedKey { get; set; }
+            public BackgroundServiceState BackgroundServiceState { get; set; }
         }
 
         void RegisterForegroundService(ServiceState notificationData)
