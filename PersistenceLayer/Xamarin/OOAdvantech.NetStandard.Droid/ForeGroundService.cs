@@ -32,7 +32,7 @@ namespace OOAdvantech.Droid
 
 
 
-        static bool isStarted;
+        public static bool isStarted;
         Handler handler;
 
 
@@ -104,6 +104,12 @@ namespace OOAdvantech.Droid
                           Task.Run(() =>
                               {
                                   State.Runnable.Invoke();
+                                  StopForeground(true);
+                                  StopSelf();
+                                  isStarted = false;
+                                  State.Terminate = true;
+                                  if (State.BackgroundServiceState != null)
+                                      State.BackgroundServiceState.Terminate = true;
 
                               });
                       });

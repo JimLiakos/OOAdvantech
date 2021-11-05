@@ -29,13 +29,24 @@ namespace OOAdvantech.Droid.KeyboardService
         KeybordStatus keybordStatus = KeybordStatus.KeyboardHiden;
         public void OnGlobalLayout()
         {
+
             if (_inputManager.Handle == IntPtr.Zero)
             {
                 ObtainInputManager();
             }
+            bool inputManagerIsAcceptingText = false;
             try
             {
-                if (_inputManager.IsAcceptingText)
+                inputManagerIsAcceptingText = _inputManager.IsAcceptingText;
+            }
+            catch (ObjectDisposedException error)
+            {
+                _inputManager = (InputMethodManager)Xamarin.Essentials.Platform.CurrentActivity.GetSystemService(Android.Content.Context.InputMethodService);
+            }
+            try
+            {
+                inputManagerIsAcceptingText = _inputManager.IsAcceptingText;
+                if (inputManagerIsAcceptingText)
                 {
                     if (keybordStatus == KeybordStatus.KeyboardHiden)
                     {
