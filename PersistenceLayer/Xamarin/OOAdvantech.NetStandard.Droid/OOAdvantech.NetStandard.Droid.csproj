@@ -64,6 +64,7 @@
     <Compile Include="Localize.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RingtoneService.cs" />
     <Compile Include="SpeechActivity.cs" />
     <Compile Include="SpeechToTextImplementation.cs" />
     <Compile Include="Tasks.cs" />

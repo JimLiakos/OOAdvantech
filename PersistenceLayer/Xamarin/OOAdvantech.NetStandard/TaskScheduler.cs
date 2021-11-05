@@ -12,11 +12,18 @@ namespace OOAdvantech
         /// <MetaDataID>{64e5f331-062a-4eb4-b473-46c5b67ccdbc}</MetaDataID>
         Queue<Func<Task<bool>>> Tasks = new Queue<Func<Task<bool>>>();
         bool Runs = true;
+
+        Task ActiveTask;
+
+        bool SerializeTaskActive;
         /// <MetaDataID>{7582855a-67f6-414d-b930-e6e5d47a3198}</MetaDataID>
         public void RunAsync()
         {
-            System.Threading.Tasks.Task.Run(() =>
+            if (SerializeTaskActive)
+                return;
+            Task.Run(() =>
             {
+                SerializeTaskActive = true;
                 while (Runs)
                 {
                     if (Tasks.Count > 0)
@@ -36,6 +43,8 @@ namespace OOAdvantech
                         System.Threading.Thread.Sleep(100);
                     }
                 }
+                SerializeTaskActive = false;
+
             });
         }
 

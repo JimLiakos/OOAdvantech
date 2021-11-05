@@ -35,6 +35,9 @@ namespace OOAdvantech.Droid
             if (type == typeof(Authentication.IAuth))
                 return new Authentication.Droid.Auth();
 
+            if(type==typeof(OOAdvantech.IRingtoneService))
+                return new OOAdvantech.Droid.RingtoneService();
+
             if (type == typeof(OOAdvantech.RDBMSMetaDataPersistenceRunTime.IDataBaseConnection))
             {
                 var connection=new OOAdvantech.SQLitePersistenceRunTime.SQLiteDataBaseConnection();

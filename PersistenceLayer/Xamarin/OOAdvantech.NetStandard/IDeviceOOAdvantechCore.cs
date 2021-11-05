@@ -12,7 +12,7 @@ namespace OOAdvantech
     /// <MetaDataID>{cfa63701-40aa-4507-824c-30b1d5bc0383}</MetaDataID>
     public interface IDeviceOOAdvantechCore
     {
-
+        
         void Signin(AuthProvider provider);
         void SignOut();
         
