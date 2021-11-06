@@ -92,14 +92,16 @@ namespace OOAdvantech.Remoting
                 }
             }
 
+            if (transparentProxyType != null)
+            {
+                var ctor = transparentProxyType.GetMetaData().GetConstructor(BindingFlags.Public | BindingFlags.Instance, new Type[0]);
 
-            var ctor = transparentProxyType.GetMetaData().GetConstructor(BindingFlags.Public | BindingFlags.Instance, new Type[0]);
 
 
-
-            EventConsumerHandler = ctor.Invoke(new object[0]) as EventConsumerHandler;
-            EventConsumerHandler.SetEventConsumerProxy(this);
-            EventConsumerHandler.AddEventHandler(eventPublisherObject, EventInfo);
+                EventConsumerHandler = ctor.Invoke(new object[0]) as EventConsumerHandler;
+                EventConsumerHandler.SetEventConsumerProxy(this);
+                EventConsumerHandler.AddEventHandler(eventPublisherObject, EventInfo);
+            }
 
 
 

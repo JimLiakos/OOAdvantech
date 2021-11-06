@@ -301,15 +301,26 @@ namespace ModulePublisherHostProcess
                 return -23;
             }
             finally
-            { 
+            {
 
-               System.Windows.Forms.MessageBox.Show(projectFullPath);
+                System.Windows.Forms.MessageBox.Show(projectFullPath);
 
                 if (!string.IsNullOrWhiteSpace(projectFullPath) &&System.IO.Directory.Exists(projectFullPath))
                 {
                     projectFullPath=projectFullPath.Trim();
                     if (projectFullPath[projectFullPath.Length - 1] == '\\')
                         projectFullPath = projectFullPath.Substring(0, projectFullPath.Length - 1);
+
+                    try
+                    {
+                        string projectName = new System.IO.FileInfo(projectFullPath).Name;
+                        string referencePath = string.Format(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\" + @"ObjectOrientedAppDevToolBox\{0}.reference.txt", projectName);
+                        refrences.AddRange(System.IO.File.ReadAllLines(referencePath));
+
+                    }
+                    catch (Exception error)
+                    {
+                    }
                     ModulePublisher.ClassRepository.ErrorLoadingRefDll.Clear();
                     ModulePublisher.ClassRepository.RefDlls = refrences;
 
