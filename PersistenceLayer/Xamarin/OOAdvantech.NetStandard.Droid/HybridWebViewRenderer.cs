@@ -146,6 +146,7 @@ namespace OOAdvantech.Droid
         {
 
         }
+        //string ClientProcessIdentity = "";
         protected override void Dispose(bool disposing)
         {
             try
@@ -157,10 +158,25 @@ namespace OOAdvantech.Droid
             {
             }
             base.Dispose(disposing);
+            string channelUri = "local-device";
+            MessageDispatcher.DesconnectAsync(channelUri, SessionIdentity, ServerSessionPart.ServerProcessIdentity.ToString());
+
         }
         static List<Android.Webkit.WebView> WebViews = new List<Android.Webkit.WebView>();
         HybridWebView HybridWebView;
         static String USER_AGENT = "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19";
+
+        string _SessionIdentity;
+        public string SessionIdentity
+        {
+            get => _SessionIdentity;
+            internal set
+            {
+                if (_SessionIdentity != value)
+                    _SessionIdentity = value;
+            }
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
         {
             base.OnElementChanged(e);
@@ -335,6 +351,7 @@ namespace OOAdvantech.Droid
 
                                 string responseDatajson = JsonConvert.SerializeObject(responseData);
                                 responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
+                                hybridRenderer.SessionIdentity = responseData.SessionIdentity;
 
                                 await hybridRenderer.InvockeJSMethod("SendMessage", new[] { responseDatajson });
 

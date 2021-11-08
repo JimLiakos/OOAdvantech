@@ -31,7 +31,7 @@ namespace OOAdvantech.Remoting
         internal IRemoteEventHandler RemoteEventHandler;
         internal ServerSessionPart ServerSessionPart;
         EventConsumerHandler EventConsumerHandler;
-        MarshalByRefObject EventPublisherObject;
+        public readonly MarshalByRefObject EventPublisherObject;
         InvokeType InvokeType;
         /// <MetaDataID>{13fa09ba-d79c-42e5-8ddf-034cd1a7334b}</MetaDataID>
         public EventConsumerProxy(ExtObjectUri eventPublisherUri, MarshalByRefObject eventPublisherObject, System.Reflection.EventInfo eventInfo, ServerSessionPart serverSessionPart, IRemoteEventHandler clientSessionPart)
@@ -58,7 +58,7 @@ namespace OOAdvantech.Remoting
             Type transparentProxyType = eventInfo.DeclaringType.GetMetaData().Assembly.GetType(evenProxyTypeFullName);
 
             var declaringType = eventInfo.DeclaringType.BaseType;
-            while (transparentProxyType == null && declaringType!=null)
+            while (transparentProxyType == null && declaringType != null)
             {
 
 
@@ -95,13 +95,14 @@ namespace OOAdvantech.Remoting
             if (transparentProxyType != null)
             {
                 var ctor = transparentProxyType.GetMetaData().GetConstructor(BindingFlags.Public | BindingFlags.Instance, new Type[0]);
-
-
-
                 EventConsumerHandler = ctor.Invoke(new object[0]) as EventConsumerHandler;
                 EventConsumerHandler.SetEventConsumerProxy(this);
                 EventConsumerHandler.AddEventHandler(eventPublisherObject, EventInfo);
             }
+#if DEBUG
+            else
+                throw new Exception(string.Format("Missing remote event consumer proxy type for '{0}'.{1} Declare [GenerateEventConsumerProxy] attribute to event {0}", eventInfo.DeclaringType.FullName + "." + eventInfo.Name, System.Environment.NewLine));
+#endif
 
 
 

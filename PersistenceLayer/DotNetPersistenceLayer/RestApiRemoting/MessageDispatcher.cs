@@ -126,7 +126,11 @@ namespace OOAdvantech.Remoting.RestApi
                     #region Get server session
                     lock (ServerSessionPart.ServerSessions)
                     {
-                        serverSession = ServerSessionPart.GetServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri);
+                        if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
+                            serverSession = ServerSessionPart.GetServerSessionPart(request.SessionIdentity);
+                        if (serverSession == null)
+                            serverSession = ServerSessionPart.GetServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri);
+
                         if (serverSession == null)
                         {
                             serverSession = new ServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri, request.InternalChannelUri, methodCallMessage.Web);
@@ -238,7 +242,7 @@ namespace OOAdvantech.Remoting.RestApi
                         else
                         {
                             retVal = methodInfo.Invoke(methodCallMessage.Object, args);
-                         
+
                         }
                         if (request.CallContextDictionaryData != null)
                         {
@@ -277,7 +281,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.ServerSession = serverSession;
                             responseMessage.Marshal();
                             string json = JsonConvert.SerializeObject(responseMessage);
-                            
+
                             if (objectChangeState != null && methodCallMessage.Object != null)
                                 objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
 
@@ -319,6 +323,20 @@ namespace OOAdvantech.Remoting.RestApi
                 //System.IO.File.AppendAllLines("/storage/emulated/0/test.txt", new string[] { "Exception :  " + error.Message });
                 throw;
             }
+
+        }
+
+        public static Task<ResponseData> DesconnectAsync(string channelUri, string sessionIdentity, string clientProcessIdentity)
+        {
+            var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.Disconnected, new object[0]);
+            RequestData requestData = new RequestData();
+            requestData.RequestType = RequestType.Disconnect;
+            requestData.SessionIdentity = sessionIdentity;
+            requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
+            var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
+            requestData.ChannelUri = channelUri;
+            return MessageDispatchAsync(requestData);
+
 
         }
 
@@ -366,8 +384,11 @@ namespace OOAdvantech.Remoting.RestApi
                     #region Get server session
                     lock (ServerSessionPart.ServerSessions)
                     {
+                        if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
+                            serverSession = ServerSessionPart.GetServerSessionPart(request.SessionIdentity);
+                        if (serverSession == null)
+                            serverSession = ServerSessionPart.GetServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri);
 
-                        serverSession = ServerSessionPart.GetServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri);
                         if (serverSession == null)
                         {
                             serverSession = new ServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri, request.InternalChannelUri, methodCallMessage.Web);
@@ -431,8 +452,8 @@ namespace OOAdvantech.Remoting.RestApi
                         System.Reflection.EventInfo objectChangeState = null;
                         if (methodCallMessage.Object != null && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
-                            if (proxyType!=null&& proxyType.HasCachingClientSideProperties)
-                                objectChangeState=proxyType.GetObjectChangeState();
+                            if (proxyType != null && proxyType.HasCachingClientSideProperties)
+                                objectChangeState = proxyType.GetObjectChangeState();
                         }
                         bool updateCachingClientSideProperties = false;
                         ObjectChangeStateHandle handler = (object _object, string member) =>
@@ -446,7 +467,7 @@ namespace OOAdvantech.Remoting.RestApi
                         if (objectChangeState != null && methodCallMessage.Object != null)
                             objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
 
-                        
+
                         //if (proxyType != null&&proxyType.HasCachingClientSideProperties)
                         //{
                         //    Dictionary<string, object> newMembersValues = new Dictionary<string, object>();
@@ -481,8 +502,8 @@ namespace OOAdvantech.Remoting.RestApi
                         responseMessage.Marshal();
 
                         string json = JsonConvert.SerializeObject(responseMessage);
-                        var response= new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties };
-                        if(response.UpdateCaching)
+                        var response = new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties };
+                        if (response.UpdateCaching)
                         {
 
                         }
@@ -628,13 +649,18 @@ namespace OOAdvantech.Remoting.RestApi
                 bool initCommunicationSession = false;
                 lock (ServerSessionPart.ServerSessions)
                 {
-                    serverSession = ServerSessionPart.GetServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri);
+                    if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
+                        serverSession = ServerSessionPart.GetServerSessionPart(request.SessionIdentity);
+                    if (serverSession == null)
+                        serverSession = ServerSessionPart.GetServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri);
+
                     if (serverSession == null)
                     {
                         serverSession = new ServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri, request.InternalChannelUri, methodCallMessage.Web);
                         responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef(); ;
                         initCommunicationSession = true;
                     }
+
                 }
                 serverSession.WebSocketEndPoint = request.EventCallBackChannel;
                 responseMessage.Web = methodCallMessage.Web;
@@ -808,6 +834,9 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
                     responseMessage.ReturnObjectJson = JsonConvert.SerializeObject(typesMetadataCommunicationSession, jSetttings);
+                    return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = serverSession.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
+                    //string json = JsonConvert.SerializeObject(responseMessage);
+                    //return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = json, InitCommunicationSession = initCommunicationSession };
 
 
                 }
@@ -859,8 +888,8 @@ namespace OOAdvantech.Remoting.RestApi
                     responseMessage.Marshal();
                 }
 
-                string json = JsonConvert.SerializeObject(responseMessage);
-                return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = json, InitCommunicationSession = initCommunicationSession };
+                string responseMessageJson = JsonConvert.SerializeObject(responseMessage);
+                return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = responseMessageJson, InitCommunicationSession = initCommunicationSession };
             }
             catch (Exception error)
             {

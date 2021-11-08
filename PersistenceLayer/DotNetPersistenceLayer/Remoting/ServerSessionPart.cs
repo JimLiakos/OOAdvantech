@@ -311,8 +311,12 @@ namespace OOAdvantech.Remoting
                     foreach (EventConsumerProxy eventConsumerProxy in eventPublisherConsumers.Values)
                     {
 #if DeviceDotNet
+                        eventConsumerProxy.RemoveSubscription(eventConsumerProxy.EventPublisherObject);
 
 #else
+
+                       // eventConsumerProxy.RemoveSubscription(eventConsumerProxy.EventPublisherObject);
+
                         System.Delegate customEventDelegate = System.Delegate.CreateDelegate(eventConsumerProxy.EventInfo.EventHandlerType, eventConsumerProxy.AutoGenEventHandler, "CustomEventHandler");
                         var _object = GetObjectFromUri(eventConsumerProxy.EventPublisherUri);
                         if(_object!=null)

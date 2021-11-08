@@ -142,6 +142,16 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        internal static ServerSessionPart GetServerSessionPart(string sessionIdentity)
+        {
+            lock (ServerSessions)
+            {
+                ServerSessionPart serverSessionPart = null;
+                ServerSessions.TryGetValue(sessionIdentity, out serverSessionPart);
+                return serverSessionPart;
+            }
+        }
+
         /// <MetaDataID>{bc4f09f3-cbaf-4025-8cce-4fac11b6186d}</MetaDataID>
         public readonly bool Web;
 

@@ -12,7 +12,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
     /// <MetaDataID>{56c89abc-dab1-4736-be6e-e31a1390b973}</MetaDataID>
-    class StandardActions
+     class StandardActions
     {
         /// <MetaDataID>{68cb2a39-2c60-4672-af3d-a44a510750ea}</MetaDataID>
         public const string CreateCommunicationSession = "40f00e031643eb943a91f14651eda2";
