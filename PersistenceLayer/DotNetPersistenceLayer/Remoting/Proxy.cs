@@ -676,6 +676,13 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{53955d65-1863-4664-bf29-c83c50382a82}</MetaDataID>
         public EventConsumingResolver EventConsumingResolver { get; set; }
 
+        string IProxy.Uri => throw new NotImplementedException();
+
+        EventConsumingResolver IProxy.EventConsumingResolver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string IProxy.ChannelUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        ExtObjectUri IProxy.ObjectUri => throw new NotImplementedException();
+
 
         /// <MetaDataID>{95401A0A-911E-42BD-B2D6-007AB6056D33}</MetaDataID>
         /// <summary>Invokes the method specified in the provided System.Runtime.Remoting.Messaging.IMessage on the remote object represented by the current instance. </summary>
@@ -885,8 +892,10 @@ namespace OOAdvantech.Remoting
 
         }
 
-
-
+        IMessage IProxy.Invoke(IMessage msg)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
@@ -1231,7 +1240,7 @@ namespace OOAdvantech.Remoting
     /// <MetaDataID>{63f2e6e8-e8fa-4808-8814-7e8100f81a43}</MetaDataID>
     public interface IProxy
     {
-
+        string Uri { get; }
         /// <MetaDataID>{7de248c7-74a5-4fd0-8d45-1c98e415a8fd}</MetaDataID>
         EventConsumingResolver EventConsumingResolver { get; set; }
         /// <MetaDataID>{d9cd4d5c-1240-4526-868b-ff629e762a40}</MetaDataID>

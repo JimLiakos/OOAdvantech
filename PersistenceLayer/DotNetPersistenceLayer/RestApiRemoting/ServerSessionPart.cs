@@ -805,8 +805,9 @@ namespace OOAdvantech.Remoting.RestApi
 
 
                     var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity);
+                    var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
 
-                    if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity)
+                    if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity|| ServerSessionPartUri != serverSessionPartUri)
                     {
 
 
@@ -831,6 +832,7 @@ namespace OOAdvantech.Remoting.RestApi
                         ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
                         _SessionIdentity = serverSessionPartInfo.SessionIdentity;
                         ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
+                        ServerSessionPartUri = serverSessionPartUri;
                         SynchronizeSession();
 
                         System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
@@ -854,6 +856,11 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     else
                     {
+                        
+                        if (ServerSessionPartUri != serverSessionPartUri )
+                        {
+
+                        }
                         //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel same ServerProcessIdentity {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
                     }
 

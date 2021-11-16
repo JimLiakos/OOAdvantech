@@ -188,6 +188,9 @@ namespace OOAdvantech.Remoting.RestApi
         [DataMember]
         public string SessionIdentity { get; set; }
 
+        [DataMember]
+        public string ServerSessionPartID { get; set; }
+
         /// <MetaDataID>{c15885a3-c546-438f-8176-a05679e89ae7}</MetaDataID>
         [DataMember]
         public string ChannelUri { get; set; }

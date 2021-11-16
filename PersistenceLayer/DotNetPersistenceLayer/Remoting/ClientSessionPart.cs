@@ -334,6 +334,7 @@ namespace OOAdvantech.Remoting
         }
         /// <MetaDataID>{7dbc8940-de28-4aa3-88a4-d822983a99e3}</MetaDataID>
         protected string _SessionIdentity;
+        protected string ServerSessionPartUri;
 
 
         /// <MetaDataID>{5fa27d40-31de-48f9-a94d-80163f7839cd}</MetaDataID>
@@ -351,8 +352,11 @@ namespace OOAdvantech.Remoting
         public void AttatchToServerSessionPart()
         {
             var serverSessionPartInfo = RemotingServices.GetServerSession(ChannelUri, Remoting.RemotingServices.ProcessIdentity);
+            //ServerSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.ObjectUri?.TransientUri;// ?.ObjectRef?.Uri;
+            ServerSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
             ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
             ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
+            
             ClientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
             _SessionIdentity = Remoting.RemotingServices.ProcessIdentity.ToString("N") + "." + ServerProcessIdentity.ToString("N");
 
@@ -375,6 +379,10 @@ namespace OOAdvantech.Remoting
         {
             Guid serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
             IServerSessionPart serverSessionPart = serverSessionPartInfo.ServerSessionPart;
+            //ServerSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
+            ServerSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
+
+
 
 
             ChannelUri = channelUri;
@@ -404,6 +412,7 @@ namespace OOAdvantech.Remoting
         }
         /// <MetaDataID>{cba2ffe0-22a6-41ad-9024-6e9e7f97c4e5}</MetaDataID>
         public System.Guid ServerProcessIdentity;
+        
         /// <MetaDataID>{2d1c8152-e360-41e0-baf9-39b2c81009cc}</MetaDataID>
         internal IProxy GetProxy(string objectUri)
         {

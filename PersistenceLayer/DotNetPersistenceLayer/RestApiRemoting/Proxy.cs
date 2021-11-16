@@ -7,6 +7,7 @@ using OOAdvantech.Json;
 using OOAdvantech.Json.Linq;
 using System.Runtime.Remoting.Messaging;
 using OOAdvantech.Remoting.RestApi.Serialization;
+using System.Collections.Generic;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -71,6 +72,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
             Type = System.Type.GetType(ProxyType.AssemblyQualifiedName);
+            
 
             if (Type == null)
                 Type = type;
@@ -179,6 +181,7 @@ namespace OOAdvantech.Remoting.RestApi
                 return _ObjectUri;
             }
         }
+    
         public string TypeFullName
         {
             get
@@ -208,6 +211,11 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
         public EventConsumingResolver EventConsumingResolver { get; set; }
+
+        string IProxy.Uri =>Uri;
+
+        //string IProxy.ChannelUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //EventConsumingResolver IProxy.EventConsumingResolver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 #if DeviceDotNet
         /// <MetaDataID>{1e88ef55-2ba9-4822-a580-4338e5a68ab9}</MetaDataID>
@@ -1027,6 +1035,16 @@ namespace OOAdvantech.Remoting.RestApi
         {
             return this;
         }
+
+        //IMessage IProxy.Invoke(IMessage msg)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //void IProxy.PublishEvent(EventInfo eventInfo, List<object> args)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 
     public delegate void ProxyRecconectedHandle(object sender);

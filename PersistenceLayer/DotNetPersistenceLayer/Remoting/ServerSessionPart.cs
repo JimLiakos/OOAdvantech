@@ -111,6 +111,9 @@ namespace OOAdvantech.Remoting
             }
         }
 
+        //public readonly string ServerSessionPartID = Guid.NewGuid().ToString();
+        
+
 
 
 
