@@ -20,7 +20,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             get
             {
-                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { ReferenceLoopHandling = OOAdvantech.Json.ReferenceLoopHandling.Serialize, TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new OOAdvantech.Remoting.RestApi.Serialization.ReferenceResolver() };
+                var jSetttings = new Json.JsonSerializerSettings() { ReferenceLoopHandling = Json.ReferenceLoopHandling.Serialize, TypeNameHandling = Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null, JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new ReferenceResolver() };
                 jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
                 jSetttings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
                 return jSetttings;
