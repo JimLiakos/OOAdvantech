@@ -388,7 +388,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
 
                                 }
-                                ClientSessionPart.Reconnect();
+                                ClientSessionPart.Reconnect(false);
 
                             }
                             else
@@ -539,7 +539,7 @@ namespace OOAdvantech.Remoting.RestApi
                         if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
                         {
                             WebSocketClient = webSocketClient;
-                            ClientSessionPart.Reconnect();
+                            ClientSessionPart.Reconnect(true);
                         }
                         else
                         {

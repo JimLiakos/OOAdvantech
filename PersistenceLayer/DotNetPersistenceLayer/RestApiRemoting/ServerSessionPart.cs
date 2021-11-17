@@ -790,8 +790,17 @@ namespace OOAdvantech.Remoting.RestApi
             return default(ServerSessionPartInfo);
         }
 
+
+        /// <summary>
+        /// This method reconnect client session part with the server
+        /// 
+        /// </summary>
+        /// <param name="disconnectedChanel">
+        /// When the previous channel closed unexpectedly  the value of the parameter is true.
+        /// Otherwise is false
+        /// </param>
         /// <MetaDataID>{c84867b4-e737-4de4-9b51-360677d9fbae}</MetaDataID>
-        internal void Reconnect()
+        internal void Reconnect( bool disconnectedChannel)
         {
             int tries = 5; //makes five tries to reconnect
             X_Access_Token = null;
@@ -856,7 +865,24 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     else
                     {
-                        
+                        if (disconnectedChannel)
+                        {
+                            foreach (System.WeakReference weakReference in Proxies.Values)
+                            {
+                                try
+                                {
+                                    if (weakReference.IsAlive)
+                                    {
+                                        var proxy = weakReference.Target as Proxy;
+                                        proxy.RaiseReconnectEvent();
+                                    }
+                                }
+                                catch (System.Exception error)
+                                {
+
+                                }
+                            }
+                        }
                         if (ServerSessionPartUri != serverSessionPartUri )
                         {
 
@@ -905,7 +931,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
             if ((System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ObjectRef.Uri != serverSessionObjectRef.Uri)
-                Reconnect();
+                Reconnect(true);
             //(System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ReconnectToServerObject(serverSessionObjectRef);
 
         }

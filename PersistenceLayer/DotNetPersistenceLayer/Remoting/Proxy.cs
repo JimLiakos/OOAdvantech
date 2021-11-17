@@ -676,12 +676,12 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{53955d65-1863-4664-bf29-c83c50382a82}</MetaDataID>
         public EventConsumingResolver EventConsumingResolver { get; set; }
 
-        string IProxy.Uri => throw new NotImplementedException();
+        string IProxy.Uri => URI?.TransientUri;
 
-        EventConsumingResolver IProxy.EventConsumingResolver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        string IProxy.ChannelUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //EventConsumingResolver IProxy.EventConsumingResolver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //string IProxy.ChannelUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        ExtObjectUri IProxy.ObjectUri => throw new NotImplementedException();
+        //ExtObjectUri IProxy.ObjectUri => URI;
 
 
         /// <MetaDataID>{95401A0A-911E-42BD-B2D6-007AB6056D33}</MetaDataID>

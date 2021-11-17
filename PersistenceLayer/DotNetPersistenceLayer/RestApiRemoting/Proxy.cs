@@ -434,7 +434,7 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     else
                     {
-                        System.Reflection.EventInfo eventInfo = methodBase.DeclaringType.GetMetaData().GetEvent(methodBase.Name.Substring("Add_".Length));
+                        System.Reflection.EventInfo eventInfo = methodBase.DeclaringType.GetMetaData().GetEvent(methodBase.Name.Substring("add_".Length));
                         if (eventInfo != null && eventInfo.AddMethod == methodBase)
                         {
                             EventConsumingResolver.EventConsumerSubscription(args[0] as System.Delegate, eventInfo);
