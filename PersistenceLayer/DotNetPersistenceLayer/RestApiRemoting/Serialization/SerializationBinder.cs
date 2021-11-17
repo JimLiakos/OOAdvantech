@@ -233,7 +233,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 else if (serializedType.GetMetaData().IsGenericType && TypesNamesDictionary.TryGetValue(serializedType.GetGenericTypeDefinition(), out typeName))
                     assemblyName = null;
                 else
+                {
+                    //serializedType.GetCustomAttribute<>
                     base.BindToName(serializedType, out assemblyName, out typeName);
+                }
             }
             else
                 base.BindToName(serializedType, out assemblyName, out typeName);
