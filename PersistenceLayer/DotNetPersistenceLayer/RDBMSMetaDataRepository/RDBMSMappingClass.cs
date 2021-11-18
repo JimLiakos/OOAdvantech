@@ -1277,7 +1277,12 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             {
             }
 
-       
+
+            if (OriginMetaObject.FullName == "FlavourBusinessManager.HumanResources.ServingShiftWork")
+            {
+
+            }
+
             var sds = Features;
 
             if (Name == "ItemPreparation")
@@ -1291,7 +1296,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             try
             {
                 MetaDataRepository.Class OriginClass = (MetaDataRepository.Class)OriginMetaObject;
-                 
+
                 if (OriginClass.IsTemplate)
                 {
                     if (_Name != OriginClass.Name)
@@ -1299,7 +1304,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         _Name = OriginClass.Name;
                         _CaseInsensitiveName = null;
                     }
-                     
+
 
                     if (_Namespace == null && PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Properties) != null)
                         PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Properties).LazyFetching("Namespace", typeof(MetaDataRepository.MetaObject));
@@ -1406,7 +1411,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         }
                     }
 
-                  
+
 
                     StateTransition.Consistent = true; ;
                 }
