@@ -350,12 +350,18 @@ namespace OOAdvantech.Remoting.RestApi
                     if (value != null && !propInfo.PropertyType.IsInstanceOfType(value))
                     {
 #if !DeviceDotNet
+
                         value = System.Convert.ChangeType(value, propInfo.PropertyType);
 #else
-                        if(value is  TransparentProxy)
-                            value = ((value as OOAdvantech.Remoting.RestApi.ITransparentProxy).GetProxy() as RestApi.Proxy).GetTransparentProxy(propInfo.PropertyType); 
+                        if (value is TransparentProxy)
+                            value = ((value as OOAdvantech.Remoting.RestApi.ITransparentProxy).GetProxy() as RestApi.Proxy).GetTransparentProxy(propInfo.PropertyType);
                         else
-                            value = System.Convert.ChangeType(value, propInfo.PropertyType, System.Globalization.CultureInfo.CurrentCulture.NumberFormat);
+                        {
+                            if (propInfo.PropertyType.BaseType == typeof(System.Enum))
+                                value = System.Enum.ToObject(propInfo.PropertyType, (int)System.Convert.ChangeType(value, typeof(int)));
+                            else
+                                value = System.Convert.ChangeType(value, propInfo.PropertyType, System.Globalization.CultureInfo.CurrentCulture.NumberFormat);
+                        }
 #endif
                         ObjectRef.MembersValues[propertyName] = value;
                     }
