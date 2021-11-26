@@ -128,7 +128,7 @@ namespace OOAdvantech.PersistenceLayerRunTime.Commands
                         CurrStorageInstanceRef.ReferentialIntegrityLinkRemoved();
                 }
             }
-            if (theOtherAssociationEnd.Navigable)
+
             {
                 if (LinkedObjects == null)
                     LinkedObjects = theResolver.GetLinkedStorageInstanceRefsUnderTransaction(false);
@@ -150,11 +150,18 @@ namespace OOAdvantech.PersistenceLayerRunTime.Commands
                     {
                         foreach (MultilingualObjectLink multilingualObjectLink in LinkedObjects)
                         {
-                            StorageInstanceRef storageInstanceRef = multilingualObjectLink.LinkedObject as StorageInstanceRef;
-                            using (CultureContext cultureContext = new CultureContext(multilingualObjectLink.Culture, false))
+                            
                             {
-                                storageInstanceRef.ClearObjectsLink(new AssociationEndAgent(theOtherAssociationEnd), DeletedStorageInstance.MemoryInstance, true);
+                                StorageInstanceRef storageInstanceRef = multilingualObjectLink.LinkedObject as StorageInstanceRef;
+                                using (CultureContext cultureContext = new CultureContext(multilingualObjectLink.Culture, false))
+                                {
+                                    if (theOtherAssociationEnd.Navigable)
+                                        storageInstanceRef.ClearObjectsLink(new AssociationEndAgent(theOtherAssociationEnd), DeletedStorageInstance.MemoryInstance, true);
+
+                                    DeletedStorageInstance.RealStorageInstanceRef.ClearObjectsLink(new AssociationEndAgent(theResolver.AssociationEnd), storageInstanceRef.MemoryInstance, true);
+                                }
                             }
+
                         }
                     }
                 }
@@ -174,7 +181,12 @@ namespace OOAdvantech.PersistenceLayerRunTime.Commands
 
                         }
                         else
+                        {
                             currStorageInstanceRef.ClearObjectsLink(new AssociationEndAgent(theOtherAssociationEnd), DeletedStorageInstance.MemoryInstance, true);
+                            DeletedStorageInstance.RealStorageInstanceRef.ClearObjectsLink(new AssociationEndAgent(theResolver.AssociationEnd), currStorageInstanceRef.MemoryInstance, true);
+
+
+                        }
                     }
                 }
 
