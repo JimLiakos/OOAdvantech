@@ -955,6 +955,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 using (Transactions.ObjectStateTransition stateTransition = new Transactions.ObjectStateTransition(ownerObject, transactionalMember, OOAdvantech.Transactions.TransactionOption.Supported))
                                 {
                                     (value as ICollectionMember).RemoveImplicitly(relatedObject);
+
+                                    MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                    if (operation != null)
+                                    {
+                                        try
+                                        {
+                                            System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                            AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                        }
+                                        catch (Exception error)
+                                        {
+                                        }
+                                    }
+
                                     if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                         (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                     else if (ownerObject != null)
@@ -971,6 +985,21 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             else
                             {
                                 (value as ICollectionMember).RemoveImplicitly(relatedObject);
+
+
+                                MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                if (operation != null)
+                                {
+                                    try
+                                    {
+                                        System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                        AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                    }
+                                    catch (Exception error)
+                                    {
+                                    }
+                                }
+
                                 if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                     (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                 else if (ownerObject != null)
@@ -988,6 +1017,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 using (Transactions.ObjectStateTransition stateTransition = new Transactions.ObjectStateTransition(ownerObject, OOAdvantech.Transactions.TransactionOption.Supported))
                                 {
                                     (value as ICollectionMember).RemoveImplicitly(relatedObject);
+
+                                    MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                    if (operation != null)
+                                    {
+                                        try
+                                        {
+                                            System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                            AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                        }
+                                        catch (Exception error)
+                                        {
+                                        }
+                                    }
+
                                     if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                         (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                     else if (ownerObject != null)
@@ -1002,6 +1045,22 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             else
                             {
                                 (value as ICollectionMember).RemoveImplicitly(relatedObject);
+
+
+                                MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                if (operation != null)
+                                {
+                                    try
+                                    {
+                                        System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                        AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                    }
+                                    catch (Exception error)
+                                    {
+                                    }
+                                }
+
+
                                 if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                     (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                 else if (ownerObject != null)
@@ -1033,6 +1092,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 if (relatedObject == exixtingRelatedObject)
                                 {
                                     Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, null);
+
+                                    MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                    if (operation != null)
+                                    {
+                                        try
+                                        {
+                                            System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                            AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                        }
+                                        catch (Exception error)
+                                        {
+                                        }
+                                    }
+
                                     if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                         (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                     else if (ownerObject != null)
@@ -1055,6 +1128,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             if (relatedObject == exixtingRelatedObject)
                             {
                                 Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, null);
+
+                                MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                if (operation != null)
+                                {
+                                    try
+                                    {
+                                        System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                        AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                    }
+                                    catch (Exception error)
+                                    {
+                                    }
+                                }
+
                                 if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                     (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                 else if (ownerObject != null)
@@ -1076,6 +1163,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 if (relatedObject == exixtingRelatedObject)
                                 {
                                     Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, null);
+
+                                    MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                    if (operation != null)
+                                    {
+                                        try
+                                        {
+                                            System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                            AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                        }
+                                        catch (Exception error)
+                                        {
+                                        }
+                                    }
+
                                     if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                         (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                     else if (ownerObject != null)
@@ -1097,6 +1198,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             if (relatedObject == exixtingRelatedObject)
                             {
                                 Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, null);
+
+                                MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                if (operation != null)
+                                {
+                                    try
+                                    {
+                                        System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                        AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                    }
+                                    catch (Exception error)
+                                    {
+                                    }
+                                }
+
                                 if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                     (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectRemoved(relatedObject, associationEnd);
                                 else if (ownerObject != null)
@@ -1262,6 +1377,19 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                     {
                                         (value as ICollectionMember).AddImplicitly(relatedObject);
 
+                                        MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                        if (operation != null)
+                                        {
+                                            try
+                                            {
+                                                System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                                AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, false });
+                                            }
+                                            catch (Exception error)
+                                            {
+                                            }
+                                        }
+
                                         if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                             (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectAdded(relatedObject, associationEnd);
                                         else if (ownerObject != null)
@@ -1278,6 +1406,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 else
                                 {
                                     (value as ICollectionMember).AddImplicitly(relatedObject);
+
+                                    MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                    if (operation != null)
+                                    {
+                                        try
+                                        {
+                                            System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                            AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, true });
+                                        }
+                                        catch (Exception error)
+                                        {
+                                        }
+                                    }
+
                                     if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                         (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectAdded(relatedObject, associationEnd);
                                     else if (ownerObject != null)
@@ -1296,6 +1438,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                     using (Transactions.ObjectStateTransition stateTransition = new Transactions.ObjectStateTransition(ownerObject, OOAdvantech.Transactions.TransactionOption.Supported))
                                     {
                                         (value as ICollectionMember).AddImplicitly(relatedObject);
+
+                                        MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                        if (operation != null)
+                                        {
+                                            try
+                                            {
+                                                System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                                AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, true });
+                                            }
+                                            catch (Exception error)
+                                            {
+                                            }
+                                        }
+
                                         if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                             (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectAdded(relatedObject, associationEnd);
                                         else
@@ -1310,6 +1466,18 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 else
                                 {
                                     (value as ICollectionMember).AddImplicitly(relatedObject);
+                                    MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                    if (operation != null)
+                                    {
+                                        try
+                                        {
+                                            System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                            AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, true });
+                                        }
+                                        catch (Exception error)
+                                        {
+                                        }
+                                    }
                                     if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                         (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectAdded(relatedObject, associationEnd);
                                     else if (ownerObject != null)
@@ -1366,6 +1534,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                     throw new System.Exception(string.Format("AssociationEnd '{0}' multiplicity mismatch", associationEnd.FullName));
 
                                 Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, relatedObject);
+
+                                MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                                if (operation != null)
+                                {
+                                    try
+                                    {
+                                        System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                        AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, true });
+                                    }
+                                    catch (Exception error)
+                                    {
+                                    }
+                                }
+
                                 if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                     (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectAdded(relatedObject, associationEnd);
                                 else if (ownerObject != null)
@@ -1385,6 +1567,20 @@ namespace OOAdvantech.DotNetMetaDataRepository
                                 throw new System.Exception(string.Format("AssociationEnd '{0}' multiplicity mismatch", associationEnd.FullName));
 
                             Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, relatedObject);
+
+                            MetaDataRepository.Operation operation = (Classifier.GetClassifier(ownerObject.GetType()) as Class)?.ObjectsLink;
+                            if (operation != null)
+                            {
+                                try
+                                {
+                                    System.Reflection.MethodInfo methodInfo = operation.GetExtensionMetaObject(typeof(System.Reflection.MethodInfo)) as System.Reflection.MethodInfo;
+                                    AccessorBuilder.GetMethodInvoker(methodInfo).Invoke(ownerObject, new object[3] { relatedObject, associationEnd, true });
+                                }
+                                catch (Exception error)
+                                {
+                                }
+                            }
+
                             if (ownerObject is PersistenceLayer.IObjectStateEventsConsumer)
                                 (ownerObject as PersistenceLayer.IObjectStateEventsConsumer).LinkedObjectAdded(relatedObject, associationEnd);
                             else if (ownerObject != null)

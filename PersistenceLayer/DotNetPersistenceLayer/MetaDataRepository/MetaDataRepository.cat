@@ -11,7 +11,7 @@
 	(object Attribute
 	    tool       	"MetaData"
 	    name       	"MetaObjectID"
-	    value      	"FlavourBusinessFacade.OOAdvantech.MetaDataRepository")
+	    value      	"OOAdvantech.MetaDataRepository")
 	(object Attribute
 	    tool       	"C#"
 	    name       	"FullName"
@@ -66901,7 +66901,7 @@
 	    zoom       	100
 	    max_height 	28350
 	    max_width  	21600
-	    origin_x   	832
+	    origin_x   	831
 	    origin_y   	0
 	    items      	(list diagram_item_list
 		(object ClassView "Class" "Logical View::OOAdvantech::MetaDataRepository::BehavioralFeature" @651
@@ -67562,6 +67562,24 @@
 		    line_color 	3342489
 		    fill_color 	16744704
 		    quidu      	"3ED7378F038A"
+		    compartment 	(object Compartment
+			Parent_View 	@681
+			location   	(2482, 1939)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	2
+			max_width  	553)
 		    width      	316
 		    height     	237
 		    annotation 	8)
@@ -67798,6 +67816,24 @@
 		    line_color 	3342489
 		    fill_color 	16744448
 		    quidu      	"45E52C820297"
+		    compartment 	(object Compartment
+			Parent_View 	@692
+			location   	(3087, 2538)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	5
+			max_width  	562)
 		    width      	658
 		    height     	380
 		    annotation 	8)

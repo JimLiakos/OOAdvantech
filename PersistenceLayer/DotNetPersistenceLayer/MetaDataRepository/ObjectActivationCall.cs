@@ -7,6 +7,11 @@ namespace OOAdvantech.MetaDataRepository
     {
     }
 
+    [AttributeUsage(AttributeTargets.Method)]
+    public class ObjectsLinkCall: System.Attribute
+    {
+    }
+
     /// <MetaDataID>{e0bd735a-82c4-4fb7-9650-a5fde44bdebc}</MetaDataID>
     [AttributeUsage(AttributeTargets.Method)]
     public class CommitObjectStateInStorageCall : System.Attribute

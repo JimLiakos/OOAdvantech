@@ -487,10 +487,32 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{ba4005f8-07a0-4733-aa52-a84f74d6e218}</MetaDataID>
         bool DeleteObjectOperationLoaded = false;
 
+        bool ObjectsLinkOperationLoaded = false;
+
 
         /// <MetaDataID>{fca7cfb7-2bfd-405f-a57d-26e968023696}</MetaDataID>
         bool BeforeCommitObjectStateInStorageOperationLoaded = false;
 
+
+        private Operation _ObjectsLink;
+
+        public Operation ObjectsLink
+        {
+            get
+            {
+                if (!ObjectsLinkOperationLoaded)
+                {
+
+                    LoadPersistenceLayerOperationCalls();
+                    ObjectActivationOperationLoaded = true;
+                    CommitObjectStateInStorageOperationLoaded = true;
+                    DeleteObjectOperationLoaded = true;
+                    ObjectsLinkOperationLoaded = true;
+                }
+
+                return _ObjectsLink;
+            }
+        }
 
         /// <exclude>Excluded</exclude>
         private Operation _DeleteObject;
@@ -502,40 +524,8 @@ namespace OOAdvantech.MetaDataRepository
 
                 if (!DeleteObjectOperationLoaded)
                 {
-                    foreach (Operation operation in GetOperations(true))
-                    {
-                        if (operation.GetPropertyValue<string>("OparetionType", "ObjectActivationCall").ToLower() == "true".ToLower())
-                        {
-                            _ObjectActivation = operation;
-                            ObjectActivationOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "CommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _CommitObjectStateInStorage = operation;
-                            CommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "BeforeCommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _BeforeCommitObjectStateInStorage = operation;
-                            BeforeCommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
 
-                        if (operation.GetPropertyValue<string>("OparetionType", "DeleteObjectCall").ToLower() == "true".ToLower())
-                        {
-                            _DeleteObject = operation;
-                            DeleteObjectOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-
-                    }
+                    LoadPersistenceLayerOperationCalls();
                     ObjectActivationOperationLoaded = true;
                     CommitObjectStateInStorageOperationLoaded = true;
                     DeleteObjectOperationLoaded = true;
@@ -544,6 +534,56 @@ namespace OOAdvantech.MetaDataRepository
                 return _DeleteObject;
 
             }
+        }
+
+        private void LoadPersistenceLayerOperationCalls()
+        {
+            foreach (Operation operation in GetOperations(true))
+            {
+                if (operation.GetPropertyValue<string>("OparetionType", "ObjectActivationCall").ToLower() == "true".ToLower())
+                {
+                    _ObjectActivation = operation;
+                    ObjectActivationOperationLoaded = true;
+                    if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded && ObjectsLinkOperationLoaded)
+                        break;
+                }
+                if (operation.GetPropertyValue<string>("OparetionType", "CommitObjectStateInStorageCall").ToLower() == "true".ToLower())
+                {
+                    _CommitObjectStateInStorage = operation;
+                    CommitObjectStateInStorageOperationLoaded = true;
+                    if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded && ObjectsLinkOperationLoaded)
+                        break;
+                }
+                if (operation.GetPropertyValue<string>("OparetionType", "BeforeCommitObjectStateInStorageCall").ToLower() == "true".ToLower())
+                {
+                    _BeforeCommitObjectStateInStorage = operation;
+                    BeforeCommitObjectStateInStorageOperationLoaded = true;
+                    if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded && ObjectsLinkOperationLoaded)
+                        break;
+                }
+
+                if (operation.GetPropertyValue<string>("OparetionType", "DeleteObjectCall").ToLower() == "true".ToLower())
+                {
+                    _DeleteObject = operation;
+                    DeleteObjectOperationLoaded = true;
+                    if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded && ObjectsLinkOperationLoaded)
+                        break;
+                }
+
+                if (operation.GetPropertyValue<string>("OparetionType", "ObjectsLinkCall")!=null&&operation.GetPropertyValue<string>("OparetionType", "ObjectsLinkCall").ToLower() == "true".ToLower())
+                {
+                    _ObjectsLink = operation;
+                    ObjectsLinkOperationLoaded = true;
+                    if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded && ObjectsLinkOperationLoaded)
+                        break;
+                }
+            }
+
+            ObjectActivationOperationLoaded = true;
+            CommitObjectStateInStorageOperationLoaded = true;
+            DeleteObjectOperationLoaded = true;
+            BeforeCommitObjectStateInStorageOperationLoaded = true;
+            ObjectsLinkOperationLoaded = true;
         }
 
 
@@ -565,39 +605,7 @@ namespace OOAdvantech.MetaDataRepository
 
                 if (!ObjectActivationOperationLoaded)
                 {
-                    foreach (Operation operation in GetOperations(true))
-                    {
-                        if (operation.GetPropertyValue<string>("OparetionType", "ObjectActivationCall").ToLower() == "true".ToLower())
-                        {
-                            _ObjectActivation = operation;
-                            ObjectActivationOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "CommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _CommitObjectStateInStorage = operation;
-                            CommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "BeforeCommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _BeforeCommitObjectStateInStorage = operation;
-                            BeforeCommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "DeleteObjectCall").ToLower() == "true".ToLower())
-                        {
-                            _DeleteObject = operation;
-                            DeleteObjectOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-
-                    }
+                    LoadPersistenceLayerOperationCalls();
                     ObjectActivationOperationLoaded = true;
                     CommitObjectStateInStorageOperationLoaded = true;
                     DeleteObjectOperationLoaded = true;
@@ -623,40 +631,7 @@ namespace OOAdvantech.MetaDataRepository
             {
                 if (!BeforeCommitObjectStateInStorageOperationLoaded)
                 {
-                    foreach (Operation operation in GetOperations(true))
-                    {
-                        if (operation.GetPropertyValue<string>("OparetionType", "ObjectActivationCall").ToLower() == "true".ToLower())
-                        {
-                            _ObjectActivation = operation;
-                            ObjectActivationOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "BeforeCommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _BeforeCommitObjectStateInStorage = operation;
-                            BeforeCommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "CommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _CommitObjectStateInStorage = operation;
-                            CommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-                        if (operation.GetPropertyValue<string>("OparetionType", "DeleteObjectCall").ToLower() == "true".ToLower())
-                        {
-                            _DeleteObject = operation;
-                            DeleteObjectOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-
-                    }
+                    LoadPersistenceLayerOperationCalls();
                     ObjectActivationOperationLoaded = true;
                     CommitObjectStateInStorageOperationLoaded = true;
                     DeleteObjectOperationLoaded = true;
@@ -680,41 +655,7 @@ namespace OOAdvantech.MetaDataRepository
             {
                 if (!CommitObjectStateInStorageOperationLoaded)
                 {
-                    foreach (Operation operation in GetOperations(true))
-                    {
-                        if (operation.GetPropertyValue<string>("OparetionType", "ObjectActivationCall").ToLower() == "true".ToLower())
-                        {
-                            _ObjectActivation = operation;
-                            ObjectActivationOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-                        if (operation.GetPropertyValue<string>("OparetionType", "BeforeCommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _BeforeCommitObjectStateInStorage = operation;
-                            BeforeCommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-                        if (operation.GetPropertyValue<string>("OparetionType", "CommitObjectStateInStorageCall").ToLower() == "true".ToLower())
-                        {
-                            _CommitObjectStateInStorage = operation;
-                            CommitObjectStateInStorageOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-                        if (operation.GetPropertyValue<string>("OparetionType", "DeleteObjectCall").ToLower() == "true".ToLower())
-                        {
-                            _DeleteObject = operation;
-                            DeleteObjectOperationLoaded = true;
-                            if (ObjectActivationOperationLoaded && BeforeCommitObjectStateInStorageOperationLoaded && CommitObjectStateInStorageOperationLoaded && DeleteObjectOperationLoaded)
-                                break;
-                        }
-
-
-                    }
+                    LoadPersistenceLayerOperationCalls();
                     ObjectActivationOperationLoaded = true;
                     CommitObjectStateInStorageOperationLoaded = true;
                     DeleteObjectOperationLoaded = true;
@@ -1073,7 +1014,7 @@ namespace OOAdvantech.MetaDataRepository
         {
             if (associationEnd == null)
                 return null;
-            foreach (AssociationEndRealization associationEndRealization  in Features.OfType<AssociationEndRealization>())
+            foreach (AssociationEndRealization associationEndRealization in Features.OfType<AssociationEndRealization>())
             {
                 if (associationEndRealization != null && associationEnd == associationEndRealization.Specification)
                     return associationEndRealization;
@@ -1167,7 +1108,7 @@ namespace OOAdvantech.MetaDataRepository
                     }
                 }
                 //TODO Προυποθέτει ότι έχει φορτωθεί η class πλήρως για την περίπτωση .Net
-                foreach (var attributeRealization in Features.OfType<AttributeRealization>().Where(x=>x.Specification!=null))
+                foreach (var attributeRealization in Features.OfType<AttributeRealization>().Where(x => x.Specification != null))
                     attributesPersistency[attributeRealization.Specification] = attributeRealization.Persistent;
 
                 foreach (Class _class in GetAllGeneralClasifiers().OfType<Class>())
@@ -1250,7 +1191,7 @@ namespace OOAdvantech.MetaDataRepository
         {
             lock (RolesLock)
             {
-             
+
                 if (!_HasReferentialIntegrityRelations.HasValue)
                 {
 

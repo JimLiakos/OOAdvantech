@@ -217,6 +217,21 @@ namespace OOAdvantech.DotNetMetaDataRepository
             else
                 PutPropertyValue("OparetionType", "ObjectActivationCall", "False");
 
+
+            attributes = WrMethod.GetCustomAttributes(typeof(MetaDataRepository.ObjectsLinkCall), false);
+            if (attributes.Length > 0)
+                PutPropertyValue("OparetionType", "ObjectsLinkCall", "True");
+            else
+                PutPropertyValue("OparetionType", "ObjectsLinkCall", "False");
+
+
+            attributes = WrMethod.GetCustomAttributes(typeof(MetaDataRepository.DeleteObjectCall), false);
+            if (attributes.Length > 0)
+                PutPropertyValue("OparetionType", "DeleteObjectCall", "True");
+            else
+                PutPropertyValue("OparetionType", "DeleteObjectCall", "False");
+
+
             attributes = WrMethod.GetCustomAttributes(typeof(MetaDataRepository.DeleteObjectCall), false);
             if (attributes.Length > 0)
                 PutPropertyValue("OparetionType", "DeleteObjectCall", "True");
@@ -445,6 +460,14 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 PutPropertyValue("OparetionType", "ObjectActivationCall", "True");
             else
                 PutPropertyValue("OparetionType", "ObjectActivationCall", "False");
+
+            attributes = WrMethod.GetCustomAttributes(typeof(MetaDataRepository.ObjectsLinkCall), false);
+            if (attributes.Length > 0)
+                PutPropertyValue("OparetionType", "ObjectsLinkCall", "True");
+            else
+                PutPropertyValue("OparetionType", "ObjectsLinkCall", "False");
+
+            
 
 
             attributes = WrMethod.GetCustomAttributes(typeof(MetaDataRepository.DeleteObjectCall), false);
