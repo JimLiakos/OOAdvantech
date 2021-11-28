@@ -96,7 +96,7 @@ namespace GenWebBrowser
         public event LoadCompletedEventHandler LoadCompleted;
 
 
-        
+
         public event ProcessRequestHandler ProcessRequest;
         //
         // Summary:
@@ -428,18 +428,42 @@ namespace GenWebBrowser
 
 
 
-        static WebBrowserOverlay()
+        public WebBrowserOverlay()
         {
+            if (!IsCefInitialized)
+                Initcef();
+        }
+
+
+
+        static bool IsCefInitialized = false;
+
+#if DEBUG
+        public static void SetCefExtraCachePath(string extraCachePath)
+        {
+            if (!IsCefInitialized)
+                Initcef(extraCachePath);
+        }
+#endif
+
+        private static void Initcef(string extraCachePath = null)
+        {
+            if (IsCefInitialized)
+                return;
             try
             {
+                IsCefInitialized = true;
+                string cachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format(@"Microneme\{0}\CefSharp\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", "")));
+                if (!string.IsNullOrWhiteSpace(extraCachePath))
+                    cachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format(@"Microneme\{0}\{1}\CefSharp\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""), extraCachePath));
+
                 var settings = new CefSettings()
                 {
                     //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
-                    //CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microneme\\CefSharp\\Cache"),
-                    CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format("Microneme\\{0}\\CefSharp\\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""))),
+                    CachePath = cachePath,
                     RemoteDebuggingPort = 9222,
                     IgnoreCertificateErrors = true
-                    
+
                 };
                 //CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format("Microneme\\{0}\\CefSharp\\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""))),
 
@@ -457,7 +481,7 @@ namespace GenWebBrowser
                 settings.CefCommandLineArgs.Add("enable-media-stream", "1");
 
 
-            
+
 
                 settings.RegisterScheme(new CefCustomScheme
                 {
@@ -473,6 +497,7 @@ namespace GenWebBrowser
 
             }
         }
+
         public void SetVisibility(Visibility visibility)
         {
 
@@ -532,7 +557,7 @@ namespace GenWebBrowser
                 //BrowserHostGrid.Children.Add(IEWebBrowser);
             }
             ChromeBrowser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
-            
+
             if (ChromeBrowser != null)
             {
                 CefSharpSettings.WcfEnabled = true;
@@ -574,13 +599,13 @@ namespace GenWebBrowser
                 }
             };
 
-            
+
             //owner.LayoutUpdated += new EventHandler(OnOwnerLayoutUpdated);
         }
 
         private void WebBrowserOverlay_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (ChromeBrowser != null&& ProcessActiveBrowsers.ContainsKey(ChromeBrowser))
+            if (ChromeBrowser != null && ProcessActiveBrowsers.ContainsKey(ChromeBrowser))
                 ProcessActiveBrowsers.Remove(ChromeBrowser);
         }
         static Dictionary<ChromiumWebBrowser, WebBrowserOverlay> ProcessActiveBrowsers = new Dictionary<ChromiumWebBrowser, WebBrowserOverlay>();
@@ -855,14 +880,14 @@ namespace GenWebBrowser
             CustomProtocolResponse customProtocolResponse = new CustomProtocolResponse();
             ProcessRequest?.Invoke(requestUri, customProtocolResponse);
             return customProtocolResponse;
-            
+
         }
 
         internal static WebBrowserOverlay GetWebBrowserOverlay(IBrowser browser)
         {
 
-            return ProcessActiveBrowsers.Where(x => x.Key.GetBrowser().Identifier == browser.Identifier).Select(x=>x.Value).FirstOrDefault();
-            
+            return ProcessActiveBrowsers.Where(x => x.Key.GetBrowser().Identifier == browser.Identifier).Select(x => x.Value).FirstOrDefault();
+
         }
     }
 
@@ -1002,7 +1027,7 @@ namespace GenWebBrowser
             return retVal.Result;
         }
 
-    
+
     }
 
     /// <MetaDataID>{29b20421-b002-4ac4-83e9-5b14aa83fbb3}</MetaDataID>

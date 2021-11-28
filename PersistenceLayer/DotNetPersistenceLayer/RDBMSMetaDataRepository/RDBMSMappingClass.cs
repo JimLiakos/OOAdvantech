@@ -1282,6 +1282,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             {
 
             }
+            var m_name = OriginMetaObject.FullName;
 
             var sds = Features;
 
