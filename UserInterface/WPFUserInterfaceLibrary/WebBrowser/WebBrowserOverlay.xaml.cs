@@ -519,7 +519,7 @@ namespace GenWebBrowser
 
         const string JavaScriptFunction = "var result;  function invokeCSharpAction(data){result=null; window.external.notify(data); return result;}  function CSharpCallResult(parameter){result = parameter;}";
         bool EnableRestApi;
-        public WebBrowserOverlay(FrameworkElement placementTarget, BrowserType browserType, bool enableRestApi = false)
+        public WebBrowserOverlay(FrameworkElement placementTarget, BrowserType browserType, bool enableRestApi = false):this()
         {
             EnableRestApi = enableRestApi;
             InitializeComponent();
