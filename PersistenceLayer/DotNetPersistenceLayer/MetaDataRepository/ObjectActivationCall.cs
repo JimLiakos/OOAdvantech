@@ -7,8 +7,9 @@ namespace OOAdvantech.MetaDataRepository
     {
     }
 
+    /// <MetaDataID>{13fb0ad7-0cc1-4428-915d-a4974f052485}</MetaDataID>
     [AttributeUsage(AttributeTargets.Method)]
-    public class ObjectsLinkCall: System.Attribute
+    public class ObjectsLinkCall : System.Attribute
     {
     }
 
