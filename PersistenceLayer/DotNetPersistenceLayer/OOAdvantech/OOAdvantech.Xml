@@ -2357,6 +2357,9 @@
         <member name="T:OOAdvantech.MetaDataRepository.ObjectActivationCall">
             <MetaDataID>{9B0BE316-2D03-418D-8BD4-E40CC94B0C51}</MetaDataID>
         </member>
+        <member name="T:OOAdvantech.MetaDataRepository.ObjectsLinkCall">
+            <MetaDataID>{13fb0ad7-0cc1-4428-915d-a4974f052485}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.MetaDataRepository.CommitObjectStateInStorageCall">
             <MetaDataID>{e0bd735a-82c4-4fb7-9650-a5fde44bdebc}</MetaDataID>
         </member>
