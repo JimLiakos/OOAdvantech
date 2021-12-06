@@ -4,6 +4,7 @@ namespace NotifyIconWpf.Interop
     /// The state of the icon - can be set to
     /// hide the icon.
     /// </summary>
+    /// <MetaDataID>{1577c08e-d01b-4c49-bfb8-8881fce47e19}</MetaDataID>
     public enum IconState
     {
         /// <summary>

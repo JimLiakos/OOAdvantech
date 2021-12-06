@@ -3,6 +3,7 @@
     /// <summary>
     /// Event flags for clicked events.
     /// </summary>
+    /// <MetaDataID>{2a444d7b-263b-4b3b-b97a-5efbbd99d951}</MetaDataID>
     public enum MouseEvent
     {
         /// <summary>

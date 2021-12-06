@@ -14,10 +14,11 @@ namespace NotifyIconWpf.Interop
     /// Win API WNDCLASS struct - represents a single window.
     /// Used to receive window messages.
     /// </summary>
+    /// <MetaDataID>{5781f8c4-b87d-4dcd-a5ed-0a9a117c9df9}</MetaDataID>
     [StructLayout(LayoutKind.Sequential)]
     public struct WindowClass
     {
-        #pragma warning disable 1591
+#pragma warning disable 1591
 
         public uint style;
         public WindowProcedureHandler lpfnWndProc;
@@ -30,6 +31,6 @@ namespace NotifyIconWpf.Interop
         [MarshalAs(UnmanagedType.LPWStr)] public string lpszMenuName;
         [MarshalAs(UnmanagedType.LPWStr)] public string lpszClassName;
 
-        #pragma warning restore 1591
+#pragma warning restore 1591
     }
 }

@@ -33,6 +33,7 @@ namespace NotifyIconWpf.Interop
     /// Receives messages from the taskbar icon through
     /// window messages of an underlying helper window.
     /// </summary>
+    /// <MetaDataID>{be16806c-90c6-4fd9-871f-cb7b0fa031d6}</MetaDataID>
     public class WindowMessageSink : IDisposable
     {
         #region members

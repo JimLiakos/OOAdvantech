@@ -7,9 +7,10 @@ namespace NotifyIconWpf.Interop
     /// A struct that is submitted in order to configure
     /// the taskbar icon. Provides various members that
     /// can be configured partially, according to the
-    /// values of the <see cref="IconDataMembers"/>
+    /// values of the <see cref="IconDataMembers" />
     /// that were defined.
     /// </summary>
+    /// <MetaDataID>{fd00fbf9-66a7-4c11-a457-982b6f05f984}</MetaDataID>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct NotifyIconData
     {
@@ -128,7 +129,7 @@ namespace NotifyIconWpf.Interop
             if (Environment.OSVersion.Version.Major >= 6)
             {
                 //use the current size
-                data.cbSize = (uint) Marshal.SizeOf(data);
+                data.cbSize = (uint)Marshal.SizeOf(data);
             }
             else
             {
@@ -143,7 +144,7 @@ namespace NotifyIconWpf.Interop
             data.WindowHandle = handle;
             data.TaskbarIconId = 0x0;
             data.CallbackMessageId = WindowMessageSink.CallbackMessageId;
-            data.VersionOrTimeout = (uint) NotifyIconVersion.Win95;
+            data.VersionOrTimeout = (uint)NotifyIconVersion.Win95;
 
             data.IconHandle = IntPtr.Zero;
 

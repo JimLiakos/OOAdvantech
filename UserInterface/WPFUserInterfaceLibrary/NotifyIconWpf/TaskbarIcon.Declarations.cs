@@ -38,6 +38,7 @@ namespace NotifyIconWpf
     /// Contains declarations of WPF dependency properties
     /// and events.
     /// </summary>
+    /// <MetaDataID>{93a08dbc-d564-4263-b352-c491861f9c8f}</MetaDataID>
     partial class TaskbarIcon
     {
         /// <summary>
@@ -54,7 +55,7 @@ namespace NotifyIconWpf
         /// TrayPopupResolved Read-Only Dependency Property
         /// </summary>
         private static readonly DependencyPropertyKey TrayPopupResolvedPropertyKey
-            = DependencyProperty.RegisterReadOnly("TrayPopupResolved", typeof (Popup), typeof (TaskbarIcon),
+            = DependencyProperty.RegisterReadOnly("TrayPopupResolved", typeof(Popup), typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
 
@@ -75,7 +76,7 @@ namespace NotifyIconWpf
         [Category(CategoryName)]
         public Popup TrayPopupResolved
         {
-            get { return (Popup) GetValue(TrayPopupResolvedProperty); }
+            get { return (Popup)GetValue(TrayPopupResolvedProperty); }
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace NotifyIconWpf
         /// TrayToolTipResolved Read-Only Dependency Property
         /// </summary>
         private static readonly DependencyPropertyKey TrayToolTipResolvedPropertyKey
-            = DependencyProperty.RegisterReadOnly("TrayToolTipResolved", typeof (ToolTip), typeof (TaskbarIcon),
+            = DependencyProperty.RegisterReadOnly("TrayToolTipResolved", typeof(ToolTip), typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
 
@@ -118,7 +119,7 @@ namespace NotifyIconWpf
         [Bindable(true)]
         public ToolTip TrayToolTipResolved
         {
-            get { return (ToolTip) GetValue(TrayToolTipResolvedProperty); }
+            get { return (ToolTip)GetValue(TrayToolTipResolvedProperty); }
         }
 
         /// <summary>
@@ -139,7 +140,7 @@ namespace NotifyIconWpf
         /// CustomBalloon Read-Only Dependency Property
         /// </summary>
         private static readonly DependencyPropertyKey CustomBalloonPropertyKey
-            = DependencyProperty.RegisterReadOnly("CustomBalloon", typeof (Popup), typeof (TaskbarIcon),
+            = DependencyProperty.RegisterReadOnly("CustomBalloon", typeof(Popup), typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -154,7 +155,7 @@ namespace NotifyIconWpf
         /// </summary>
         public Popup CustomBalloon
         {
-            get { return (Popup) GetValue(CustomBalloonProperty); }
+            get { return (Popup)GetValue(CustomBalloonProperty); }
         }
 
         /// <summary>
@@ -199,8 +200,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty IconSourceProperty =
             DependencyProperty.Register("IconSource",
-                typeof (ImageSource),
-                typeof (TaskbarIcon),
+                typeof(ImageSource),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null, IconSourcePropertyChanged));
 
         /// <summary>
@@ -212,7 +213,7 @@ namespace NotifyIconWpf
         [Description("Sets the displayed taskbar icon.")]
         public ImageSource IconSource
         {
-            get { return (ImageSource) GetValue(IconSourceProperty); }
+            get { return (ImageSource)GetValue(IconSourceProperty); }
             set { SetValue(IconSourceProperty, value); }
         }
 
@@ -227,7 +228,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void IconSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnIconSourcePropertyChanged(e);
         }
 
@@ -241,7 +242,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private void OnIconSourcePropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            ImageSource newValue = (ImageSource) e.NewValue;
+            ImageSource newValue = (ImageSource)e.NewValue;
 
             //resolving the ImageSource at design time is unlikely to work
             if (!Util.IsDesignMode) Icon = newValue.ToIcon();
@@ -257,8 +258,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty ToolTipTextProperty =
             DependencyProperty.Register("ToolTipText",
-                typeof (string),
-                typeof (TaskbarIcon),
+                typeof(string),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(String.Empty, ToolTipTextPropertyChanged));
 
 
@@ -272,7 +273,7 @@ namespace NotifyIconWpf
         [Description("Alternative to a fully blown ToolTip, which is only displayed on Vista and above.")]
         public string ToolTipText
         {
-            get { return (string) GetValue(ToolTipTextProperty); }
+            get { return (string)GetValue(ToolTipTextProperty); }
             set { SetValue(ToolTipTextProperty, value); }
         }
 
@@ -287,7 +288,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void ToolTipTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnToolTipTextPropertyChanged(e);
         }
 
@@ -331,8 +332,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty TrayToolTipProperty =
             DependencyProperty.Register("TrayToolTip",
-                typeof (UIElement),
-                typeof (TaskbarIcon),
+                typeof(UIElement),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null, TrayToolTipPropertyChanged));
 
         /// <summary>
@@ -346,7 +347,7 @@ namespace NotifyIconWpf
         [Description("Custom UI element that is displayed as a tooltip. Only on Vista and above")]
         public UIElement TrayToolTip
         {
-            get { return (UIElement) GetValue(TrayToolTipProperty); }
+            get { return (UIElement)GetValue(TrayToolTipProperty); }
             set { SetValue(TrayToolTipProperty, value); }
         }
 
@@ -361,7 +362,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void TrayToolTipPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnTrayToolTipPropertyChanged(e);
         }
 
@@ -381,13 +382,13 @@ namespace NotifyIconWpf
             if (e.OldValue != null)
             {
                 //remove the taskbar icon reference from the previously used element
-                SetParentTaskbarIcon((DependencyObject) e.OldValue, null);
+                SetParentTaskbarIcon((DependencyObject)e.OldValue, null);
             }
 
             if (e.NewValue != null)
             {
                 //set this taskbar icon as a reference to the new tooltip element
-                SetParentTaskbarIcon((DependencyObject) e.NewValue, this);
+                SetParentTaskbarIcon((DependencyObject)e.NewValue, this);
             }
 
             //update tooltip settings - needed to make sure a string is set, even
@@ -405,8 +406,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty TrayPopupProperty =
             DependencyProperty.Register("TrayPopup",
-                typeof (UIElement),
-                typeof (TaskbarIcon),
+                typeof(UIElement),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null, TrayPopupPropertyChanged));
 
         /// <summary>
@@ -418,7 +419,7 @@ namespace NotifyIconWpf
         [Description("Displayed as a Popup if the user clicks on the taskbar icon.")]
         public UIElement TrayPopup
         {
-            get { return (UIElement) GetValue(TrayPopupProperty); }
+            get { return (UIElement)GetValue(TrayPopupProperty); }
             set { SetValue(TrayPopupProperty, value); }
         }
 
@@ -433,7 +434,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void TrayPopupPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnTrayPopupPropertyChanged(e);
         }
 
@@ -450,14 +451,14 @@ namespace NotifyIconWpf
             if (e.OldValue != null)
             {
                 //remove the taskbar icon reference from the previously used element
-                SetParentTaskbarIcon((DependencyObject) e.OldValue, null);
+                SetParentTaskbarIcon((DependencyObject)e.OldValue, null);
             }
 
 
             if (e.NewValue != null)
             {
                 //set this taskbar icon as a reference to the new tooltip element
-                SetParentTaskbarIcon((DependencyObject) e.NewValue, this);
+                SetParentTaskbarIcon((DependencyObject)e.NewValue, this);
             }
 
             //create a pop
@@ -474,8 +475,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty MenuActivationProperty =
             DependencyProperty.Register("MenuActivation",
-                typeof (PopupActivationMode),
-                typeof (TaskbarIcon),
+                typeof(PopupActivationMode),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(PopupActivationMode.RightClick));
 
         /// <summary>
@@ -488,7 +489,7 @@ namespace NotifyIconWpf
         [Description("Defines what mouse events display the context menu.")]
         public PopupActivationMode MenuActivation
         {
-            get { return (PopupActivationMode) GetValue(MenuActivationProperty); }
+            get { return (PopupActivationMode)GetValue(MenuActivationProperty); }
             set { SetValue(MenuActivationProperty, value); }
         }
 
@@ -502,8 +503,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty PopupActivationProperty =
             DependencyProperty.Register("PopupActivation",
-                typeof (PopupActivationMode),
-                typeof (TaskbarIcon),
+                typeof(PopupActivationMode),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(PopupActivationMode.LeftClick));
 
         /// <summary>
@@ -516,7 +517,7 @@ namespace NotifyIconWpf
         [Description("Defines what mouse events display the TaskbarIconPopup.")]
         public PopupActivationMode PopupActivation
         {
-            get { return (PopupActivationMode) GetValue(PopupActivationProperty); }
+            get { return (PopupActivationMode)GetValue(PopupActivationProperty); }
             set { SetValue(PopupActivationProperty, value); }
         }
 
@@ -534,7 +535,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void VisibilityPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnVisibilityPropertyChanged(e);
         }
 
@@ -548,7 +549,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private void OnVisibilityPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            Visibility newValue = (Visibility) e.NewValue;
+            Visibility newValue = (Visibility)e.NewValue;
 
             //update
             if (newValue == Visibility.Visible)
@@ -598,7 +599,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void DataContextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnDataContextPropertyChanged(e);
         }
 
@@ -636,7 +637,7 @@ namespace NotifyIconWpf
         /// <param name="e">Provides information about the updated property.</param>
         private static void ContextMenuPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TaskbarIcon owner = (TaskbarIcon) d;
+            TaskbarIcon owner = (TaskbarIcon)d;
             owner.OnContextMenuPropertyChanged(e);
         }
 
@@ -652,16 +653,16 @@ namespace NotifyIconWpf
             if (e.OldValue != null)
             {
                 //remove the taskbar icon reference from the previously used element
-                SetParentTaskbarIcon((DependencyObject) e.OldValue, null);
+                SetParentTaskbarIcon((DependencyObject)e.OldValue, null);
             }
 
             if (e.NewValue != null)
             {
                 //set this taskbar icon as a reference to the new tooltip element
-                SetParentTaskbarIcon((DependencyObject) e.NewValue, this);
+                SetParentTaskbarIcon((DependencyObject)e.NewValue, this);
             }
 
-            UpdateDataContext((ContextMenu) e.NewValue, null, DataContext);
+            UpdateDataContext((ContextMenu)e.NewValue, null, DataContext);
         }
 
         #endregion
@@ -674,8 +675,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty DoubleClickCommandProperty =
             DependencyProperty.Register("DoubleClickCommand",
-                typeof (ICommand),
-                typeof (TaskbarIcon),
+                typeof(ICommand),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -688,7 +689,7 @@ namespace NotifyIconWpf
         [Description("A command that is being executed if the tray icon is being double-clicked.")]
         public ICommand DoubleClickCommand
         {
-            get { return (ICommand) GetValue(DoubleClickCommandProperty); }
+            get { return (ICommand)GetValue(DoubleClickCommandProperty); }
             set { SetValue(DoubleClickCommandProperty, value); }
         }
 
@@ -701,8 +702,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty DoubleClickCommandParameterProperty =
             DependencyProperty.Register("DoubleClickCommandParameter",
-                typeof (object),
-                typeof (TaskbarIcon),
+                typeof(object),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -727,8 +728,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty DoubleClickCommandTargetProperty =
             DependencyProperty.Register("DoubleClickCommandTarget",
-                typeof (IInputElement),
-                typeof (TaskbarIcon),
+                typeof(IInputElement),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -740,7 +741,7 @@ namespace NotifyIconWpf
         [Description("The target of the command that is fired if the notify icon is double clicked.")]
         public IInputElement DoubleClickCommandTarget
         {
-            get { return (IInputElement) GetValue(DoubleClickCommandTargetProperty); }
+            get { return (IInputElement)GetValue(DoubleClickCommandTargetProperty); }
             set { SetValue(DoubleClickCommandTargetProperty, value); }
         }
 
@@ -754,8 +755,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty LeftClickCommandProperty =
             DependencyProperty.Register("LeftClickCommand",
-                typeof (ICommand),
-                typeof (TaskbarIcon),
+                typeof(ICommand),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -768,7 +769,7 @@ namespace NotifyIconWpf
         [Description("A command that is being executed if the tray icon is being left-clicked.")]
         public ICommand LeftClickCommand
         {
-            get { return (ICommand) GetValue(LeftClickCommandProperty); }
+            get { return (ICommand)GetValue(LeftClickCommandProperty); }
             set { SetValue(LeftClickCommandProperty, value); }
         }
 
@@ -781,8 +782,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty LeftClickCommandParameterProperty =
             DependencyProperty.Register("LeftClickCommandParameter",
-                typeof (object),
-                typeof (TaskbarIcon),
+                typeof(object),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -808,8 +809,8 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly DependencyProperty LeftClickCommandTargetProperty =
             DependencyProperty.Register("LeftClickCommandTarget",
-                typeof (IInputElement),
-                typeof (TaskbarIcon),
+                typeof(IInputElement),
+                typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
@@ -822,7 +823,7 @@ namespace NotifyIconWpf
             )]
         public IInputElement LeftClickCommandTarget
         {
-            get { return (IInputElement) GetValue(LeftClickCommandTargetProperty); }
+            get { return (IInputElement)GetValue(LeftClickCommandTargetProperty); }
             set { SetValue(LeftClickCommandTargetProperty, value); }
         }
 
@@ -837,7 +838,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayLeftMouseDownEvent = EventManager.RegisterRoutedEvent(
             "TrayLeftMouseDown",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user presses the left mouse button.
@@ -881,7 +882,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayRightMouseDownEvent =
             EventManager.RegisterRoutedEvent("TrayRightMouseDown",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the presses the right mouse button.
@@ -923,7 +924,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayMiddleMouseDownEvent =
             EventManager.RegisterRoutedEvent("TrayMiddleMouseDown",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user presses the middle mouse button.
@@ -964,7 +965,7 @@ namespace NotifyIconWpf
         /// TrayLeftMouseUp Routed Event
         /// </summary>
         public static readonly RoutedEvent TrayLeftMouseUpEvent = EventManager.RegisterRoutedEvent("TrayLeftMouseUp",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user releases the left mouse button.
@@ -1005,7 +1006,7 @@ namespace NotifyIconWpf
         /// TrayRightMouseUp Routed Event
         /// </summary>
         public static readonly RoutedEvent TrayRightMouseUpEvent = EventManager.RegisterRoutedEvent("TrayRightMouseUp",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user releases the right mouse button.
@@ -1047,7 +1048,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayMiddleMouseUpEvent = EventManager.RegisterRoutedEvent(
             "TrayMiddleMouseUp",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user releases the middle mouse button.
@@ -1089,7 +1090,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayMouseDoubleClickEvent =
             EventManager.RegisterRoutedEvent("TrayMouseDoubleClick",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user double-clicks the taskbar icon.
@@ -1132,7 +1133,7 @@ namespace NotifyIconWpf
         /// TrayMouseMove Routed Event
         /// </summary>
         public static readonly RoutedEvent TrayMouseMoveEvent = EventManager.RegisterRoutedEvent("TrayMouseMove",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user moves the mouse over the taskbar icon.
@@ -1174,7 +1175,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayBalloonTipShownEvent =
             EventManager.RegisterRoutedEvent("TrayBalloonTipShown",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when a balloon ToolTip is displayed.
@@ -1216,7 +1217,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayBalloonTipClosedEvent =
             EventManager.RegisterRoutedEvent("TrayBalloonTipClosed",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when a balloon ToolTip was closed.
@@ -1258,7 +1259,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayBalloonTipClickedEvent =
             EventManager.RegisterRoutedEvent("TrayBalloonTipClicked",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Occurs when the user clicks on a balloon ToolTip.
@@ -1300,7 +1301,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent TrayContextMenuOpenEvent =
             EventManager.RegisterRoutedEvent("TrayContextMenuOpen",
-                RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Bubbled event that occurs when the context menu of the taskbar icon is being displayed.
@@ -1338,7 +1339,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent PreviewTrayContextMenuOpenEvent =
             EventManager.RegisterRoutedEvent("PreviewTrayContextMenuOpen",
-                RoutingStrategy.Tunnel, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Tunneled event that occurs when the context menu of the taskbar icon is being displayed.
@@ -1379,7 +1380,7 @@ namespace NotifyIconWpf
         /// TrayPopupOpen Routed Event
         /// </summary>
         public static readonly RoutedEvent TrayPopupOpenEvent = EventManager.RegisterRoutedEvent("TrayPopupOpen",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Bubbled event that occurs when the custom popup is being opened.
@@ -1417,7 +1418,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent PreviewTrayPopupOpenEvent =
             EventManager.RegisterRoutedEvent("PreviewTrayPopupOpen",
-                RoutingStrategy.Tunnel, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Tunneled event that occurs when the custom popup is being opened.
@@ -1458,7 +1459,7 @@ namespace NotifyIconWpf
         /// TrayToolTipOpen Routed Event
         /// </summary>
         public static readonly RoutedEvent TrayToolTipOpenEvent = EventManager.RegisterRoutedEvent("TrayToolTipOpen",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Bubbled event that occurs when the custom ToolTip is being displayed.
@@ -1496,7 +1497,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent PreviewTrayToolTipOpenEvent =
             EventManager.RegisterRoutedEvent("PreviewTrayToolTipOpen",
-                RoutingStrategy.Tunnel, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Tunneled event that occurs when the custom ToolTip is being displayed.
@@ -1537,7 +1538,7 @@ namespace NotifyIconWpf
         /// TrayToolTipClose Routed Event
         /// </summary>
         public static readonly RoutedEvent TrayToolTipCloseEvent = EventManager.RegisterRoutedEvent("TrayToolTipClose",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Bubbled event that occurs when a custom tooltip is being closed.
@@ -1575,7 +1576,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static readonly RoutedEvent PreviewTrayToolTipCloseEvent =
             EventManager.RegisterRoutedEvent("PreviewTrayToolTipClose",
-                RoutingStrategy.Tunnel, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+                RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Tunneled event that occurs when a custom tooltip is being closed.
@@ -1618,7 +1619,7 @@ namespace NotifyIconWpf
         /// PopupOpened Attached Routed Event
         /// </summary>
         public static readonly RoutedEvent PopupOpenedEvent = EventManager.RegisterRoutedEvent("PopupOpened",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Adds a handler for the PopupOpened attached event
@@ -1662,7 +1663,7 @@ namespace NotifyIconWpf
         /// ToolTipOpened Attached Routed Event
         /// </summary>
         public static readonly RoutedEvent ToolTipOpenedEvent = EventManager.RegisterRoutedEvent("ToolTipOpened",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Adds a handler for the ToolTipOpened attached event
@@ -1706,7 +1707,7 @@ namespace NotifyIconWpf
         /// ToolTipClose Attached Routed Event
         /// </summary>
         public static readonly RoutedEvent ToolTipCloseEvent = EventManager.RegisterRoutedEvent("ToolTipClose",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Adds a handler for the ToolTipClose attached event
@@ -1750,7 +1751,7 @@ namespace NotifyIconWpf
         /// BalloonShowing Attached Routed Event
         /// </summary>
         public static readonly RoutedEvent BalloonShowingEvent = EventManager.RegisterRoutedEvent("BalloonShowing",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Adds a handler for the BalloonShowing attached event
@@ -1794,7 +1795,7 @@ namespace NotifyIconWpf
         /// BalloonClosing Attached Routed Event
         /// </summary>
         public static readonly RoutedEvent BalloonClosingEvent = EventManager.RegisterRoutedEvent("BalloonClosing",
-            RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (TaskbarIcon));
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TaskbarIcon));
 
         /// <summary>
         /// Adds a handler for the BalloonClosing attached event
@@ -1845,7 +1846,7 @@ namespace NotifyIconWpf
         /// </code>
         /// </summary>  
         public static readonly DependencyProperty ParentTaskbarIconProperty =
-            DependencyProperty.RegisterAttached("ParentTaskbarIcon", typeof (TaskbarIcon), typeof (TaskbarIcon),
+            DependencyProperty.RegisterAttached("ParentTaskbarIcon", typeof(TaskbarIcon), typeof(TaskbarIcon),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -1854,7 +1855,7 @@ namespace NotifyIconWpf
         /// </summary>
         public static TaskbarIcon GetParentTaskbarIcon(DependencyObject d)
         {
-            return (TaskbarIcon) d.GetValue(ParentTaskbarIconProperty);
+            return (TaskbarIcon)d.GetValue(ParentTaskbarIconProperty);
         }
 
         /// <summary>
@@ -1877,15 +1878,15 @@ namespace NotifyIconWpf
         {
             //register change listener for the Visibility property
             var md = new PropertyMetadata(Visibility.Visible, VisibilityPropertyChanged);
-            VisibilityProperty.OverrideMetadata(typeof (TaskbarIcon), md);
+            VisibilityProperty.OverrideMetadata(typeof(TaskbarIcon), md);
 
             //register change listener for the DataContext property
             md = new FrameworkPropertyMetadata(new PropertyChangedCallback(DataContextPropertyChanged));
-            DataContextProperty.OverrideMetadata(typeof (TaskbarIcon), md);
+            DataContextProperty.OverrideMetadata(typeof(TaskbarIcon), md);
 
             //register change listener for the ContextMenu property
             md = new FrameworkPropertyMetadata(new PropertyChangedCallback(ContextMenuPropertyChanged));
-            ContextMenuProperty.OverrideMetadata(typeof (TaskbarIcon), md);
+            ContextMenuProperty.OverrideMetadata(typeof(TaskbarIcon), md);
         }
     }
 }

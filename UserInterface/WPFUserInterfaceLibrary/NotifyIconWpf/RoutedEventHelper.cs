@@ -5,8 +5,9 @@ namespace NotifyIconWpf
 {
     /// <summary>
     /// Helper class used by routed events of the
-    /// <see cref="TaskbarIcon"/> class.
+    /// <see cref="TaskbarIcon" /> class.
     /// </summary>
+    /// <MetaDataID>{ffcd46cf-6372-4839-8c79-f2fc6da67301}</MetaDataID>
     internal static class RoutedEventHelper
     {
         #region RoutedEvent Helper Methods

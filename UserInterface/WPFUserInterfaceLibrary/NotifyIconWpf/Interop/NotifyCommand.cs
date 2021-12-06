@@ -2,8 +2,9 @@ namespace NotifyIconWpf.Interop
 {
     /// <summary>
     /// Main operations performed on the
-    /// <see cref="WinApi.Shell_NotifyIcon"/> function.
+    /// <see cref="WinApi.Shell_NotifyIcon" /> function.
     /// </summary>
+    /// <MetaDataID>{bf11382e-6b89-4aad-98af-934cebe1fec4}</MetaDataID>
     public enum NotifyCommand
     {
         /// <summary>

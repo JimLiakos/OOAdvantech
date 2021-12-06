@@ -10,6 +10,7 @@ namespace NotifyIconWpf.Interop
     /// <summary>
     /// Resolves the current tray position.
     /// </summary>
+    /// <MetaDataID>{4ae26608-e27a-4e42-a50a-f0b5df814931}</MetaDataID>
     public static class TrayInfo
     {
         /// <summary>
@@ -45,11 +46,12 @@ namespace NotifyIconWpf.Interop
                 y = rcWorkArea.Bottom;
             }
 
-            return new Point {X = x, Y = y};
+            return new Point { X = x, Y = y };
         }
     }
 
 
+    /// <MetaDataID>{aee45e4b-123f-45fa-8941-f89886728356}</MetaDataID>
     internal class AppBarInfo
     {
         [DllImport("user32.dll")]
@@ -77,7 +79,7 @@ namespace NotifyIconWpf.Interop
 
         public ScreenEdge Edge
         {
-            get { return (ScreenEdge) m_data.uEdge; }
+            get { return (ScreenEdge)m_data.uEdge; }
         }
 
 
@@ -89,7 +91,7 @@ namespace NotifyIconWpf.Interop
                 var rc = new RECT();
                 IntPtr rawRect = Marshal.AllocHGlobal(Marshal.SizeOf(rc));
                 bResult = SystemParametersInfo(SPI_GETWORKAREA, 0, rawRect, 0);
-                rc = (RECT) Marshal.PtrToStructure(rawRect, rc.GetType());
+                rc = (RECT)Marshal.PtrToStructure(rawRect, rc.GetType());
 
                 if (bResult == 1)
                 {
@@ -105,7 +107,7 @@ namespace NotifyIconWpf.Interop
         public void GetPosition(string strClassName, string strWindowName)
         {
             m_data = new APPBARDATA();
-            m_data.cbSize = (UInt32) Marshal.SizeOf(m_data.GetType());
+            m_data.cbSize = (UInt32)Marshal.SizeOf(m_data.GetType());
 
             IntPtr hWnd = FindWindow(strClassName, strWindowName);
 

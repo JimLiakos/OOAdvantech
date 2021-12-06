@@ -28,6 +28,7 @@ namespace NotifyIconWpf
     /// Defines flags that define when a popup
     /// is being displyed.
     /// </summary>
+    /// <MetaDataID>{729c44aa-7aa8-4dcb-ab10-21b925ae8f9f}</MetaDataID>
     public enum PopupActivationMode
     {
         /// <summary>

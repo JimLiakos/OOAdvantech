@@ -6,6 +6,7 @@ namespace NotifyIconWpf.Interop
     /// <summary>
     /// Win32 API imports.
     /// </summary>
+    /// <MetaDataID>{e077685a-8b35-4ad4-af36-356c0513491c}</MetaDataID>
     internal static class WinApi
     {
         /// <summary>

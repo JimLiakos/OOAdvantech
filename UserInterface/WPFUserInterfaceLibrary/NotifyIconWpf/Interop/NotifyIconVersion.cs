@@ -4,6 +4,7 @@
     /// The notify icon version that is used. The higher
     /// the version, the more capabilities are available.
     /// </summary>
+    /// <MetaDataID>{5207d929-1e56-46c9-aabb-58d4170c8616}</MetaDataID>
     public enum NotifyIconVersion
     {
         /// <summary>

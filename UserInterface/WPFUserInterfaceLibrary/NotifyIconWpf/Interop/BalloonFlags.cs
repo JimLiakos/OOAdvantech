@@ -4,6 +4,7 @@ namespace NotifyIconWpf.Interop
     /// Flags that define the icon that is shown on a balloon
     /// tooltip.
     /// </summary>
+    /// <MetaDataID>{83a49c63-b9ec-4775-a602-6a4fab0975ef}</MetaDataID>
     public enum BalloonFlags
     {
         /// <summary>

@@ -37,6 +37,7 @@ namespace NotifyIconWpf
     /// <summary>
     /// Util and extension methods.
     /// </summary>
+    /// <MetaDataID>{b6c880dc-6b5c-48e1-bb70-80b8152be99a}</MetaDataID>
     internal static class Util
     {
         public static readonly object SyncRoot = new object();
@@ -62,7 +63,7 @@ namespace NotifyIconWpf
             isDesignMode =
                 (bool)
                     DependencyPropertyDescriptor.FromProperty(DesignerProperties.IsInDesignModeProperty,
-                        typeof (FrameworkElement))
+                        typeof(FrameworkElement))
                         .Metadata.DefaultValue;
         }
 

@@ -24,9 +24,10 @@
 
 namespace NotifyIconWpf
 {
-    ///<summary>
-    /// Supported icons for the tray's balloon messages.
-    ///</summary>
+    /// <summary>
+    ///  Supported icons for the tray's balloon messages.
+    /// </summary>
+    /// <MetaDataID>{8235b9c8-5ffb-48ff-b225-b500c7d20fa3}</MetaDataID>
     public enum BalloonIcon
     {
         /// <summary>

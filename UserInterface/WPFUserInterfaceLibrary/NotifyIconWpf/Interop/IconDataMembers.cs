@@ -3,10 +3,11 @@ using System;
 namespace NotifyIconWpf.Interop
 {
     /// <summary>
-    /// Indicates which members of a <see cref="NotifyIconData"/> structure
+    /// Indicates which members of a <see cref="NotifyIconData" /> structure
     /// were set, and thus contain valid data or provide additional information
     /// to the ToolTip as to how it should display.
     /// </summary>
+    /// <MetaDataID>{a1ad0540-9b90-4076-a111-af66cf13c612}</MetaDataID>
     [Flags]
     public enum IconDataMembers
     {
