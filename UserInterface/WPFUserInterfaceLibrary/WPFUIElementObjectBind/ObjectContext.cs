@@ -259,6 +259,7 @@ namespace WPFUIElementObjectBind
                 return FindParent<T>(parentObject);
         }
 
+        /// <MetaDataID>{4e9f556b-644c-47b4-9e64-13a7d180e53d}</MetaDataID>
         public static List<DependencyObject> GetAncestors(DependencyObject child)
         {
             List<DependencyObject> ancestors = new List<DependencyObject>();
@@ -275,6 +276,7 @@ namespace WPFUIElementObjectBind
 
         }
 
+        /// <MetaDataID>{e20ec612-8723-4267-bc5b-887afe385543}</MetaDataID>
         public bool HasChanges(bool checkOnlyPersistentClassInstances)
         {
 
@@ -286,6 +288,7 @@ namespace WPFUIElementObjectBind
             }
         }
 
+        /// <MetaDataID>{ad634864-1d61-4702-b477-444af4eddea6}</MetaDataID>
         public void Save()
         {
             FormObjectConnection.Save();
@@ -519,7 +522,9 @@ namespace WPFUIElementObjectBind
             //  GetUIElementHandlers(this.Parent as FrameworkElement);
         }
 
+        /// <MetaDataID>{4550e005-2818-4837-b821-6888b1c01a5f}</MetaDataID>
         object _CrossSessionValue;
+        /// <MetaDataID>{87b76b0f-3e1f-4053-a5e1-6ef53b1f693c}</MetaDataID>
         public object CrossSessionValue
         {
             get
@@ -747,6 +752,9 @@ namespace WPFUIElementObjectBind
                 return FormObjectConnection.Transaction.OpenStateTransitionsInOtherThreads;
             }
         }
+
+        /// <MetaDataID>{6aef92fd-2c3e-4978-a54c-4d510853733e}</MetaDataID>
+        public bool InvalidData { get; set; }
     }
 
 }

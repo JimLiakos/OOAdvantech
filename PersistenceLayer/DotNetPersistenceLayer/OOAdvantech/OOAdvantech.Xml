@@ -9144,6 +9144,9 @@
         <member name="M:OOAdvantech.Member`1.OOAdvantech#Transactions#ITransactionalObject#UndoChanges(OOAdvantech.Transactions.Transaction)">
             <MetaDataID>{baf791ef-259f-4fbe-99ac-fab93a3505c1}</MetaDataID>
         </member>
+        <member name="M:OOAdvantech.Member`1.OOAdvantech#Transactions#ITransactionalObject#ObjectHasGhanged(OOAdvantech.Transactions.TransactionRunTime)">
+            <MetaDataID>{d9699efe-7a3e-485e-8c2a-39c27a1b0ed3}</MetaDataID>
+        </member>
         <member name="M:OOAdvantech.Member`1.OOAdvantech#Transactions#ITransactionalObject#CommitChanges(OOAdvantech.Transactions.Transaction)">
             <MetaDataID>{892dd830-3b70-4140-bb41-201a6b9be767}</MetaDataID>
         </member>
@@ -9167,6 +9170,9 @@
         </member>
         <member name="M:OOAdvantech.Member`1.UndoChanges(OOAdvantech.Transactions.Transaction)">
             <MetaDataID>{50fddbf8-816d-4242-99ca-58d4904b6bf6}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.Member`1.ObjectHasGhanged(OOAdvantech.Transactions.Transaction)">
+            <MetaDataID>{a0fc758a-76e8-4a59-9310-c710850fe8de}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.Member`1.CommitChanges(OOAdvantech.Transactions.Transaction)">
             <MetaDataID>{3ecc0201-0749-4c7d-a29b-89554a2c1d52}</MetaDataID>

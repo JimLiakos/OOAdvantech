@@ -821,6 +821,7 @@ namespace OOAdvantech
             UndoChanges(transaction);
         }
 
+        /// <MetaDataID>{d9699efe-7a3e-485e-8c2a-39c27a1b0ed3}</MetaDataID>
         bool OOAdvantech.Transactions.ITransactionalObject.ObjectHasGhanged(Transactions.TransactionRunTime transaction)
         {
             return ObjectHasGhanged(transaction);
@@ -893,12 +894,13 @@ namespace OOAdvantech
             }
         }
 
+        /// <MetaDataID>{a0fc758a-76e8-4a59-9310-c710850fe8de}</MetaDataID>
         protected virtual bool ObjectHasGhanged(OOAdvantech.Transactions.Transaction transaction)
         {
             lock (this)
             {
                 object snapshotValue = Snapshots[transaction];
-                
+
                 if (typeof(T).GetMetaData().IsValueType || snapshotValue != null)
                 {
                     if (_Value != null)
@@ -912,7 +914,7 @@ namespace OOAdvantech
                     if (_Value != null)
                         return _Value.Equals(default(T));
                     else
-                        return default(T)!=null;
+                        return default(T) != null;
                 }
             }
         }

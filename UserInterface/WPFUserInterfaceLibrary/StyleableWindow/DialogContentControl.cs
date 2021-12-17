@@ -28,8 +28,15 @@ namespace StyleableWindow
             {
                 BeforeTransactionCommit?.Execute(sender);
                 var objectContext = this.GetObjectContext();
+
                 if (objectContext != null)
-                    objectContext.Save();
+                {
+                    if (!objectContext.InvalidData)
+                        objectContext.Save();
+                    else
+                        objectContext.InvalidData = true;
+                }
+
             });
 
             OKClickCommand = new WPFUIElementObjectBind.RelayCommand((object sender) =>
@@ -37,7 +44,15 @@ namespace StyleableWindow
                 BeforeTransactionCommit?.Execute(sender);
                 var objectContext = this.GetObjectContext();
                 if (objectContext != null)
-                    objectContext.OnOKCommand.CallExecute(sender);
+                {
+                    if (!objectContext.InvalidData)
+                        objectContext.OnOKCommand.CallExecute(sender);
+                    else
+                        objectContext.InvalidData = false;
+                }
+
+
+
 
 
             }, (object sender) => PreventTransactionCommit);
@@ -403,7 +418,7 @@ namespace StyleableWindow
                 if (!_IsSavePopUpOpen)
                 {
                     PageDialogViewEmulator page = WPFUIElementObjectBind.ObjectContext.FindParent<PageDialogViewEmulator>(this);
-                    
+
                 }
 
             }
