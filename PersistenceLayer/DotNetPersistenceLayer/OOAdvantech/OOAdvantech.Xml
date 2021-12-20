@@ -4730,6 +4730,9 @@
         <member name="P:OOAdvantech.Collections.Generic.Set`1.System#Collections#IList#Item(System.Int32)">
             <MetaDataID>{01c497f9-ffd4-453c-97c1-ba0e65ee1ab3}</MetaDataID>
         </member>
+        <member name="M:OOAdvantech.Collections.Generic.Set`1.CheckIndexes">
+            <MetaDataID>{15e48b64-cd42-4bf4-8fc1-63c6cf7b928f}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.Collections.Generic.Dictionary`2">
             <MetaDataID>{bb71f794-e65b-483f-8983-58616fe498e4}</MetaDataID>
         </member>

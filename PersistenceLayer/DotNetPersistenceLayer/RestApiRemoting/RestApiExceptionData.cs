@@ -10,17 +10,25 @@ namespace OOAdvantech.Remoting.RestApi
 
         public RestApiExceptionData(ExceptionCode exceptionCode,System.Exception exception)
         {
+            while (exception is System.Reflection.TargetInvocationException && exception.InnerException != null)
+                exception = exception.InnerException;
             ExceptionCode = exceptionCode;
             if (exception != null)
             {
                 ExceptionMessage = exception.Message;
                 ServerStackTrace = exception.StackTrace;
+                HResult = exception.HResult;
+
+
             }
             else
             {
 
             }
         }
+
+        public int HResult;
+
 
         /// <MetaDataID>{75190e5e-7800-4e4d-bfbd-fdfe6cb4f1a4}</MetaDataID>
         public string ExceptionMessage;

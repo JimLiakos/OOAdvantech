@@ -118,12 +118,14 @@ namespace OOAdvantech.Remoting
             // Create a delegate, which points to the custom event handler
             System.Delegate customEventDelegate = System.Delegate.CreateDelegate(eventInfo.EventHandlerType, AutoGenEventHandler, "CustomEventHandler");
 
-            eventInfo.AddEventHandler(eventPublisherObject, customEventDelegate);
+            
 
             // Map our own event handler to the common event
             System.Reflection.EventInfo commonEventInfo = AutoGenEventHandler.GetType().GetEvent("CommonEvent");
             System.Delegate commonDelegate = System.Delegate.CreateDelegate(commonEventInfo.EventHandlerType, this, "EventCallback");
             commonEventInfo.AddEventHandler(AutoGenEventHandler, commonDelegate);
+
+            eventInfo.AddEventHandler(eventPublisherObject, customEventDelegate);
 
 #endif
 

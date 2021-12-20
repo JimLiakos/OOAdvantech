@@ -824,8 +824,8 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (returnMessage.Exception != null)
             {
-                var exception = new Exception(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace);
-
+                var exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
+                
                 return new System.Runtime.Remoting.Messaging.ReturnMessage(exception, methodCallMessage);
             }
             MethodInfo method = methodCallMessage.MethodBase as MethodInfo;
@@ -1103,4 +1103,14 @@ namespace OOAdvantech.Remoting.RestApi
     //    }
     //}
 #endif
+
+    /// <MetaDataID>{b955d0ad-6a9e-4997-9fb2-d6cb1d615070}</MetaDataID>
+    class ServerException : Exception
+    {
+        public ServerException(string message, int hResult) : base(message)
+        {
+            this.HResult = hResult;
+        }
+
+    }
 }
