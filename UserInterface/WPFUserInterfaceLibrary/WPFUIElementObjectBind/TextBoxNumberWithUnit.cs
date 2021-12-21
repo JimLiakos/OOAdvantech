@@ -33,8 +33,13 @@ namespace System.Windows.Controls
             char decPoint= System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
             foreach(char ch in e.Text )
             {
-                bool numericTextPart = Char.IsDigit(ch) || ':'.Equals(ch) || decPoint.Equals(ch);
-                if(!numericTextPart)
+                bool numericTextPart = false;
+                if (Integer)
+                    numericTextPart = Char.IsDigit(ch);
+                else
+                    numericTextPart = Char.IsDigit(ch) || ':'.Equals(ch) || decPoint.Equals(ch);
+
+                if (!numericTextPart)
                 {
                     e.Handled = true;
                     break;
@@ -84,6 +89,38 @@ namespace System.Windows.Controls
         }
 
 
+        public bool Integer
+        {
+            get
+            {
+                object value = GetValue(IntegerProperty);
+                if (value is bool)
+                    return (bool)value;
+
+                return default(bool);
+            }
+            set
+            {
+                SetValue(IntegerProperty, value);
+            }
+        }
+        /// <MetaDataID>{547e83a9-7d89-4737-8cb1-f343771e7a7c}</MetaDataID>
+        public static readonly DependencyProperty IntegerProperty =
+                    DependencyProperty.Register(
+                    "Integer",
+                    typeof(bool),
+                    typeof(TextBoxNumberWithUnit),
+                    new PropertyMetadata(false, new PropertyChangedCallback(IntegerPropertyChangedCallback)));
+
+
+        public static void IntegerPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+            if (d is TextBoxNumberWithUnit)
+                (d as TextBoxNumberWithUnit).IntegerPropertyChanged();
+        }
+
+
         public string Unit
         {
             get
@@ -118,6 +155,15 @@ namespace System.Windows.Controls
                 Text = Number.ToString();
             else
                 Text = Number.ToString() + Unit;
+
+        }
+
+        private void IntegerPropertyChanged()
+        {
+            if (IsFocused)
+                Text = Number.ToString();
+            else
+                Text = Number.ToString() + Integer;
 
         }
         protected override void OnLostFocus(RoutedEventArgs e)
