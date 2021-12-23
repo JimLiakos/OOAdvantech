@@ -319,7 +319,8 @@
             }
             else
             {
-                var relatedObject = FastFieldAccessor.GetValue(Owner.MemoryInstance);
+                var relatedObject = Owner.GetMemoryInstanceMemberValue(this);
+                //FastFieldAccessor.GetValue(Owner.MemoryInstance);
 
                 if (relatedObject is IMultilingualMember)
                 {

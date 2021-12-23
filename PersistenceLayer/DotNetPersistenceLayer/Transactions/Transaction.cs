@@ -164,6 +164,28 @@ namespace OOAdvantech.Transactions
             }
         }
 
+    
+
+        public static void RunOnTransactionCompleted(Action action)
+        {
+            if (Transaction.Current != null)
+            {
+                TransactionCompletedEventHandler handler = null;
+                handler = (Transaction transaction) =>
+                {
+                    transaction.TransactionCompleted -= handler;
+                    action();
+                };
+
+                Current.TransactionCompleted += handler;
+            }
+            else
+            {
+                action();
+            }
+
+        }
+
 #if !DeviceDotNet
         /// <MetaDataID>{ba52ac74-821e-4077-bb0f-92020c79ca38}</MetaDataID>
         internal readonly WindowsIdentity TransactionInitiatorUser = WindowsIdentity.GetCurrent();
