@@ -70,6 +70,7 @@ namespace OOAdvantech.Remoting.RestApi
             DisconnectTimer.Interval = TimeSpan.FromMinutes(0.5).TotalMilliseconds;
             Elapsed = (object Header, ElapsedEventArgs e) =>
             {
+                _Connected = false;
                 DisconnectTimer.Elapsed -= Elapsed;
                 ClientProcessTerminates();
             };
@@ -117,6 +118,7 @@ namespace OOAdvantech.Remoting.RestApi
             lock (ServerSessions)
             {
                 ServerSessions.Remove(_SessionIdentity);
+
                 //ILease lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
                 //lease.Renew(TimeSpan.FromSeconds(3));
                 //lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
@@ -220,6 +222,7 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     catch (Exception error)
                     {
+                       
                         System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
 
 #if !DeviceDotNet
