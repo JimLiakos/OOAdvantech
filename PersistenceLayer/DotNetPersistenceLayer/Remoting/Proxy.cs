@@ -979,9 +979,21 @@ namespace OOAdvantech.Remoting
         {
             bool proceedToSessionSubscription;
             bool allowAsynchronous;
+
             EventConsumerSubscription(eventHandler, eventInfo, out proceedToSessionSubscription, out allowAsynchronous);
             if (proceedToSessionSubscription)
-                RenewalManager.GetSession(Proxy.ChannelUri, RemotingServices).Subscribe(Proxy, new EventInfoData(eventInfo), allowAsynchronous);
+            {
+                try
+                {
+                    RenewalManager.GetSession(Proxy.ChannelUri, RemotingServices).Subscribe(Proxy, new EventInfoData(eventInfo), allowAsynchronous);
+                }
+                catch (Exception error)
+                {
+                    bool sessionUnsubscribe = false;
+                    EventConsumerUnsubscribe(eventHandler, eventInfo, out sessionUnsubscribe);
+                    throw;
+                }
+            }
         }
         /// <MetaDataID>{e3a189c2-ec37-4b1e-aff3-a8f3dcbe1b3d}</MetaDataID>
         internal void EventConsumerSubscription(Delegate eventHandler, System.Reflection.EventInfo eventInfo, out bool proceedToSessionSubscription, out bool allowAsynchronous)
