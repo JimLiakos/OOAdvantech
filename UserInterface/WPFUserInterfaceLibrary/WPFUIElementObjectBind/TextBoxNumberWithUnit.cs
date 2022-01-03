@@ -163,7 +163,7 @@ namespace System.Windows.Controls
             if (IsFocused)
                 Text = Number.ToString();
             else
-                Text = Number.ToString() + Integer;
+                Text = Number.ToString() + Unit;
 
         }
         protected override void OnLostFocus(RoutedEventArgs e)
