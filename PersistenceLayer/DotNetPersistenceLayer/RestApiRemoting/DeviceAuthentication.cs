@@ -60,6 +60,23 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
         public static event EventHandler<AuthUser> AuthStateChanged;
+        event EventHandler<DeviceAuthentication> _SignOutRequest;
+        public event EventHandler<DeviceAuthentication> SignOutRequest
+        {
+            add
+            {
+                _SignOutRequest += value;
+            }
+            remove
+            {
+                _SignOutRequest -= value;
+            }
+        }
+
+        public void RaiseSignOutRequest()
+        {
+            _SignOutRequest?.Invoke(this, this);
+        }
 
 
 
