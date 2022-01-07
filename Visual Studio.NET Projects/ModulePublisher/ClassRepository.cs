@@ -709,8 +709,10 @@ namespace ModulePublisher
                 {
                     try
                     {
-
-
+                        if (ClassesAssemblies.ContainsKey(assemblyFullName))
+                            throw new System.IO.FileNotFoundException(assemblyFullName);
+                            
+                        ClassesAssemblies[assemblyFullName] = null;
                         assembly = AppDomain.Load(assemblyFullName);
                     }
                     catch (Exception error)

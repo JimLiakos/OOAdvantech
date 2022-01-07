@@ -228,6 +228,7 @@ namespace OOAdvantech.MetaDataRepository
         }
 
 
+        /// <MetaDataID>{04612abb-0e3b-4fb2-b590-2bef4b944ede}</MetaDataID>
         private object CaseInsensitiveNamesLock = new object();
         /// <MetaDataID>{35b50afd-9a2a-4e42-8d54-840a50af448b}</MetaDataID>
         System.Collections.Generic.Dictionary<MetaObject, string> ClassHerarchyCaseInsensitiveUniqueNames;
@@ -1218,8 +1219,10 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
+        /// <MetaDataID>{36baf1bd-2611-407f-a8f4-c410676310e2}</MetaDataID>
         protected readonly object ClassHierarchyLock = new object();
 
+        /// <MetaDataID>{f854a34d-4685-4677-bdd4-e4b13b9f3034}</MetaDataID>
         protected readonly object MembersSpecializationPropertiesLock = new object();
 
         /// <summary>This method retrieves the roles of the Classifiers associated with the specified classifier and returns them in the specified object. </summary>
@@ -1352,6 +1355,7 @@ namespace OOAdvantech.MetaDataRepository
 
         }
 
+        /// <MetaDataID>{086eb674-7a3a-4230-a593-efae55665263}</MetaDataID>
         private void RunClassHierarchyChanged()
         {
             ClassHierarchyChanged?.Invoke(this);
@@ -1536,8 +1540,10 @@ namespace OOAdvantech.MetaDataRepository
 
         }
 
+        /// <MetaDataID>{5e0ba341-0e62-40b4-9b41-4db350f3dd3c}</MetaDataID>
         protected readonly object SpecializationsLock = new object();
 
+        /// <MetaDataID>{60d7d2a8-5731-4e2e-b4e7-89f33d7f7cc4}</MetaDataID>
         protected readonly object GeneralizationLock = new object();
 
 
@@ -1560,6 +1566,7 @@ namespace OOAdvantech.MetaDataRepository
 
             }
         }
+        /// <MetaDataID>{d936b27c-692b-408e-89f8-31a379bdfe18}</MetaDataID>
         protected readonly object RolesLock = new object();
         /// <MetaDataID>{A666B867-944C-443A-A26E-43D1D202169D}</MetaDataID>
         /// <exclude>Excluded</exclude>
@@ -1592,6 +1599,7 @@ namespace OOAdvantech.MetaDataRepository
         }
 
 
+        /// <MetaDataID>{ec96548b-7b71-449f-858e-9a240d389294}</MetaDataID>
         protected readonly object FeaturesLock = new object();
 
         /// <MetaDataID>{308F7728-6E8D-480F-8B67-87E200F85EDB}</MetaDataID>

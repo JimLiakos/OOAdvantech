@@ -763,10 +763,6 @@
       <Project>{AAAE193A-3D76-41FF-AC8A-F4AE4EC53531}</Project>
       <Name>PropertyGrid - VS10</Name>
     </ProjectReference>
-    <ProjectReference Include="UserInterfaceMetaData\UserInterfaceMetaData - VS10.csproj">
-      <Project>{8F696A41-0F2A-476D-B140-42E21805CEA3}</Project>
-      <Name>UserInterfaceMetaData - VS10</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon1.ico" />

@@ -12,6 +12,7 @@ using DevExpress.Data.Design;
 using ConnectableControls;
 using OOAdvantech.MetaDataRepository;
 using OOAdvantech.UserInterface.ReportObjectDataSource;
+using System.Xml.Linq;
 
 namespace DXConnectableControls.XtraReports.UI
 {
@@ -89,7 +90,7 @@ namespace DXConnectableControls.XtraReports.UI
         {
             base.SerializeProperties(serializer);
             _ObjectsDataSource.EnsurePersistency();
-            serializer.SerializeValue("ObjectsDataSource", ObjectsDataSourceMetaData.OuterXml, typeof(string));
+            serializer.SerializeValue("ObjectsDataSource", ObjectsDataSourceMetaData.ToString(), typeof(string));
         }
         
         protected override void DeserializeProperties(DevExpress.XtraReports.Serialization.XRSerializer serializer)
@@ -98,8 +99,8 @@ namespace DXConnectableControls.XtraReports.UI
             string xml = serializer.DeserializeValue("ObjectsDataSource", typeof(string), null) as string;
             if (!string.IsNullOrEmpty(xml))
             {
-                ObjectsDataSourceMetaData = new System.Xml.XmlDocument();
-                ObjectsDataSourceMetaData.LoadXml(xml);
+                ObjectsDataSourceMetaData = XDocument.Parse(xml);
+                
 
                 OOAdvantech.PersistenceLayer.ObjectStorage storage = null;
                 try
@@ -108,7 +109,7 @@ namespace DXConnectableControls.XtraReports.UI
                 }
                 catch (OOAdvantech.PersistenceLayer.StorageException error)
                 {
-                    ObjectsDataSourceMetaData = new System.Xml.XmlDocument();
+                    ObjectsDataSourceMetaData = new XDocument();
                     storage = OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage("TemporarylistViewStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
                 }
 
@@ -192,7 +193,7 @@ namespace DXConnectableControls.XtraReports.UI
             
         }
 
-        System.Xml.XmlDocument ObjectsDataSourceMetaData;
+        XDocument ObjectsDataSourceMetaData;
         OOAdvantech.UserInterface.ReportObjectDataSource.ReportRootDataSource _ObjectsDataSource;
         [Editor(typeof(ConnectableControls.PropertyEditors.EditReportDataSource), typeof(System.Drawing.Design.UITypeEditor))]
         public object ObjectsDataSource
@@ -201,7 +202,7 @@ namespace DXConnectableControls.XtraReports.UI
             {
                 if (ObjectsDataSourceMetaData == null)
                 {
-                    ObjectsDataSourceMetaData = new System.Xml.XmlDocument();
+                    ObjectsDataSourceMetaData = new XDocument();
                     OOAdvantech.PersistenceLayer.ObjectStorage storage = null;
                     storage = OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage("TemporaryOperationCallStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
                     _ObjectsDataSource = new OOAdvantech.UserInterface.ReportObjectDataSource.ReportRootDataSource();
@@ -218,9 +219,9 @@ namespace DXConnectableControls.XtraReports.UI
 
                 UserInterfaceMetaData.MetaDataValue metaDataVaue = null;
                 if (_ObjectsDataSource == null)
-                    metaDataVaue = new UserInterfaceMetaData.MetaDataValue(ObjectsDataSourceMetaData.OuterXml as string, "none");
+                    metaDataVaue = new UserInterfaceMetaData.MetaDataValue(ObjectsDataSourceMetaData.ToString(), "none");
                 else
-                    metaDataVaue = new UserInterfaceMetaData.MetaDataValue(ObjectsDataSourceMetaData.OuterXml as string, _ObjectsDataSource.Name);
+                    metaDataVaue = new UserInterfaceMetaData.MetaDataValue(ObjectsDataSourceMetaData.ToString(), _ObjectsDataSource.Name);
 
                 metaDataVaue.MetaDataAsObject = _ObjectsDataSource;
                 return metaDataVaue;
@@ -251,11 +252,11 @@ namespace DXConnectableControls.XtraReports.UI
                 if (ObjectsDataSourceMetaData == null && metaDataVaue.XMLMetaData != null || (metaDataVaue != null && metaDataVaue.MetaDataAsObject == null))
                 {
                     _ObjectsDataSource = null;
-                    ObjectsDataSourceMetaData = new System.Xml.XmlDocument();
+                    ObjectsDataSourceMetaData = new XDocument();
                     try
                     {
                         if (!string.IsNullOrEmpty(metaData))
-                            ObjectsDataSourceMetaData.LoadXml(metaData);
+                            ObjectsDataSourceMetaData=XDocument.Parse(metaData);
                     }
                     catch (Exception error)
                     {
@@ -266,7 +267,7 @@ namespace DXConnectableControls.XtraReports.UI
                             storage = OOAdvantech.PersistenceLayer.ObjectStorage.OpenStorage("TemporarylistViewStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
                         else
                         {
-                            ObjectsDataSourceMetaData = new System.Xml.XmlDocument();
+                            ObjectsDataSourceMetaData = new XDocument();
                             storage = OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage("TemporarylistViewStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
                         }
 
@@ -277,7 +278,7 @@ namespace DXConnectableControls.XtraReports.UI
                     }
                     catch (OOAdvantech.PersistenceLayer.StorageException error)
                     {
-                        ObjectsDataSourceMetaData = new System.Xml.XmlDocument();
+                        ObjectsDataSourceMetaData = new XDocument();
                         storage = OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage("TemporarylistViewStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
                     }
 

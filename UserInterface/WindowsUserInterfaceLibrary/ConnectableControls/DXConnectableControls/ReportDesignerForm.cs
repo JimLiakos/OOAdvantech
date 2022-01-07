@@ -35,8 +35,17 @@ namespace DXConnectableControls.XtraReports.Design
 
             if (IsWindow(Handle))
             {
-                DesignPanel.CloseReport();
-                DesignPanel.OpenReport(_Report);
+                try
+                {
+                    DesignPanel.CloseReport();
+                    DesignPanel.OpenReport(_Report);
+
+                }
+                catch (Exception error)
+                {
+
+                    
+                }
             }
 
         }
@@ -49,7 +58,7 @@ namespace DXConnectableControls.XtraReports.Design
             {
                 DesignPanel.CloseReport();
                 DesignPanel.OpenReport(_Report);
-                
+
             }
             base.OnLoad(e);
         }

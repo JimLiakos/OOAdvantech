@@ -1131,6 +1131,9 @@
         <member name="M:OOAdvantech.MetaDataRepository.Classifier.GetMemberValue(System.Object,System.Reflection.MemberInfo)">
             <MetaDataID>{5ca98ab1-43d4-4bbc-a2b7-4c8c9260195b}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.CaseInsensitiveNamesLock">
+            <MetaDataID>{04612abb-0e3b-4fb2-b590-2bef4b944ede}</MetaDataID>
+        </member>
         <member name="F:OOAdvantech.MetaDataRepository.Classifier.ClassHerarchyCaseInsensitiveUniqueNames">
             <MetaDataID>{35b50afd-9a2a-4e42-8d54-840a50af448b}</MetaDataID>
         </member>
@@ -1337,6 +1340,12 @@
             Namespace::Namespace(...)::supplier_name  CPlusplus Style or Namespace.Namespace(...).supplier_name CSharp Style) </param>
             <MetaDataID>{38714D68-2814-4B49-87A0-86C154BFE3A1}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.ClassHierarchyLock">
+            <MetaDataID>{36baf1bd-2611-407f-a8f4-c410676310e2}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.MembersSpecializationPropertiesLock">
+            <MetaDataID>{f854a34d-4685-4677-bdd4-e4b13b9f3034}</MetaDataID>
+        </member>
         <member name="M:OOAdvantech.MetaDataRepository.Classifier.GetAssociateRoles(System.Boolean)">
             <summary>This method retrieves the roles of the Classifiers associated with the specified classifier and returns them in the specified object. </summary>
             <param name="Inherit">Specifies whether to search this member's inheritance chain to find the association end. </param>
@@ -1363,6 +1372,9 @@
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.Classifier.AddSpecialization(OOAdvantech.MetaDataRepository.Generalization)">
             <MetaDataID>{20B25610-2C79-4497-AB8C-D9D55FB778EB}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.MetaDataRepository.Classifier.RunClassHierarchyChanged">
+            <MetaDataID>{086eb674-7a3a-4230-a593-efae55665263}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.Classifier.GetFeatures(System.Boolean)">
             <MetaDataID>{0e3e775e-fdd6-4ffe-92fa-fb3322111f8f}</MetaDataID>
@@ -1395,6 +1407,12 @@
             <param name="Inherit">Specifies whether to search this member's inheritance chain to find the association end. </param>
             <MetaDataID>{F078E629-514C-4B83-BB6F-24A2EDA5DC4B}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.SpecializationsLock">
+            <MetaDataID>{5e0ba341-0e62-40b4-9b41-4db350f3dd3c}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.GeneralizationLock">
+            <MetaDataID>{60d7d2a8-5731-4e2e-b4e7-89f33d7f7cc4}</MetaDataID>
+        </member>
         <member name="F:OOAdvantech.MetaDataRepository.Classifier._Specializations">
             <MetaDataID>{4AC51B55-E213-4A67-B4DD-5E42A448F459}</MetaDataID>
             <exclude>Excluded</exclude>
@@ -1403,6 +1421,9 @@
             <summary>Designates a Generalization whose child GeneralizableElement is the immediate descendent of the current GeneralizableElement. </summary>
             <MetaDataID>{18082BA6-8A54-45F5-A426-F0D398A9E2AE}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.RolesLock">
+            <MetaDataID>{d936b27c-692b-408e-89f8-31a379bdfe18}</MetaDataID>
+        </member>
         <member name="F:OOAdvantech.MetaDataRepository.Classifier._Roles">
             <MetaDataID>{A666B867-944C-443A-A26E-43D1D202169D}</MetaDataID>
             <exclude>Excluded</exclude>
@@ -1410,6 +1431,9 @@
         <member name="P:OOAdvantech.MetaDataRepository.Classifier.Roles">
             <summary>Inverse of specification on association to AssociationEnd. Denotes that the Classifier participates in an Association. </summary>
             <MetaDataID>{8CE92882-3C35-452D-B675-1FA3D8A899C9}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.MetaDataRepository.Classifier.FeaturesLock">
+            <MetaDataID>{ec96548b-7b71-449f-858e-9a240d389294}</MetaDataID>
         </member>
         <member name="F:OOAdvantech.MetaDataRepository.Classifier._Features">
             <MetaDataID>{308F7728-6E8D-480F-8B67-87E200F85EDB}</MetaDataID>

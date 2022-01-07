@@ -149,6 +149,7 @@
     <Compile Include="DragDropActionManager.cs" />
     <Compile Include="DynamicUIProxy.cs" />
     <Compile Include="IConnectedCommand.cs" />
+    <Compile Include="MetaDataValue.cs" />
     <Compile Include="UIProxy.cs" />
     <Compile Include="FormConnectionControl.cs" />
     <Compile Include="IConnectableControl.cs" />

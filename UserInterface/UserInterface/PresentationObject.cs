@@ -54,6 +54,7 @@ namespace OOAdvantech.UserInterface.Runtime
                     return RealObject;
             }
         }
+        /// <MetaDataID>{aeb9150a-cd87-4b7a-b999-bb242b9a943c}</MetaDataID>
         public virtual void Initialize()
         {
 

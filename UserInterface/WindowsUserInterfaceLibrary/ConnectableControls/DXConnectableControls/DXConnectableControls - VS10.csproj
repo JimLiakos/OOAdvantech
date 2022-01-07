@@ -92,6 +92,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ComponentLoader.cs" />
@@ -171,12 +172,8 @@
       <Name>UserInterface - VS10</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectableControls - VS10.csproj">
-      <Project>{E83F3B97-6DC3-4744-B246-55174E74DAED}</Project>
+      <Project>{e83f3b97-6dc3-4744-b246-55174e74daed}</Project>
       <Name>ConnectableControls - VS10</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserInterfaceMetaData\UserInterfaceMetaData - VS10.csproj">
-      <Project>{8F696A41-0F2A-476D-B140-42E21805CEA3}</Project>
-      <Name>UserInterfaceMetaData - VS10</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -64,6 +64,7 @@ namespace ConnectableControls.PropertyEditors
     public class ReportDataNode : OOAdvantech.UserInterface.Runtime.IMetadataSelectionResolver
     {
 
+        /// <MetaDataID>{1d5036ee-e46c-415e-b63f-a53012326a4e}</MetaDataID>
         public OOAdvantech.MetaDataRepository.Classifier GetClassifierFor(ITypeDescriptorContext context)
         {
             if (context.PropertyDescriptor.Name == "Path")
@@ -73,6 +74,7 @@ namespace ConnectableControls.PropertyEditors
         }
 
 
+        /// <MetaDataID>{8b52f2c8-49e5-4af2-afe9-11889e26f641}</MetaDataID>
         public virtual bool CanItAccept(OOAdvantech.MetaDataRepository.MetaObject metaObject, string propertyDescriptor)
         {
             if (propertyDescriptor == "Path" && metaObject is OOAdvantech.MetaDataRepository.Attribute)
@@ -85,6 +87,7 @@ namespace ConnectableControls.PropertyEditors
 
         }
 
+        /// <MetaDataID>{d3d6e89d-adaf-4542-8065-2061b2bec80d}</MetaDataID>
         [Browsable(false)]
         public object ReportMetaDataObject
         {
@@ -96,6 +99,7 @@ namespace ConnectableControls.PropertyEditors
                     return this.ReportDataSourceMember;
             }
         }
+        /// <MetaDataID>{575af930-7b50-421b-92d1-6319b49f90e0}</MetaDataID>
         [Browsable(false)]
         public OOAdvantech.MetaDataRepository.Classifier Type
         {
@@ -112,6 +116,7 @@ namespace ConnectableControls.PropertyEditors
             }
         }
 
+        /// <MetaDataID>{77c0a6dd-7e02-48d0-9956-1cf7a9b77787}</MetaDataID>
         [Browsable(false)]
         public Image Image
         {
@@ -146,6 +151,7 @@ namespace ConnectableControls.PropertyEditors
                 return ConnectableControls.Properties.Resources.DataSource;
             }
         }
+        /// <MetaDataID>{0a709da4-5e4d-469e-8181-86073dfd9220}</MetaDataID>
         public string Name
         {
             get
@@ -181,6 +187,7 @@ namespace ConnectableControls.PropertyEditors
         }
 
 
+        /// <MetaDataID>{ef3c1f50-0d1c-4109-99c9-e31314650071}</MetaDataID>
         [Editor(typeof(EditMetaData), typeof(System.Drawing.Design.UITypeEditor))]
         public virtual Object Path
         {
@@ -230,8 +237,11 @@ namespace ConnectableControls.PropertyEditors
             }
         }
 
+        /// <MetaDataID>{762cdeb8-eba1-44d9-b7be-41a735b0f3f5}</MetaDataID>
         public readonly ReportDataNode Parent;
+        /// <MetaDataID>{545f0d5e-bc45-4161-b7a7-cc208540d2f4}</MetaDataID>
         protected OOAdvantech.UserInterface.ReportObjectDataSource.ReportDataSource ReportDataSource;
+        /// <MetaDataID>{56d0c43e-fc24-4bef-80e3-823287b7ac82}</MetaDataID>
         public ReportDataNode(OOAdvantech.UserInterface.ReportObjectDataSource.ReportDataSource reportDataSource, ReportDataNode parent)
         {
             Parent = parent;
@@ -240,6 +250,7 @@ namespace ConnectableControls.PropertyEditors
 
         }
 
+        /// <MetaDataID>{6223af45-7d44-4d04-813c-aa93e3577941}</MetaDataID>
         private void LoadSubReportDataNodes()
         {
             if (_SubReportDataNodes == null)
@@ -257,14 +268,18 @@ namespace ConnectableControls.PropertyEditors
             }
         }
 
+        /// <MetaDataID>{c7ef9427-ed3c-4795-bcba-a7ebc69d8e4f}</MetaDataID>
         protected OOAdvantech.UserInterface.ReportObjectDataSource.Member ReportDataSourceMember;
+        /// <MetaDataID>{009556ce-cb29-45c6-8b02-b868e45f15a8}</MetaDataID>
         public ReportDataNode(OOAdvantech.UserInterface.ReportObjectDataSource.Member reportDataSourceMember, ReportDataNode parent)
         {
             Parent = parent;
             ReportDataSourceMember = reportDataSourceMember;
         }
 
+        /// <MetaDataID>{3db4a03f-41cd-4658-88d0-abc8a62ccf10}</MetaDataID>
         protected List<ReportDataNode> _SubReportDataNodes = null;
+        /// <MetaDataID>{3c11bb09-46bf-4b44-8dd4-9ce58d6adf7b}</MetaDataID>
         [Browsable(false)]
         public List<ReportDataNode> SubReportDataNodes
         {
@@ -277,6 +292,7 @@ namespace ConnectableControls.PropertyEditors
             }
         }
 
+        /// <MetaDataID>{004bc208-5e91-43c4-bcac-032892cf11ea}</MetaDataID>
         internal void NewMember(string p)
         {
             throw new NotImplementedException();
@@ -285,6 +301,7 @@ namespace ConnectableControls.PropertyEditors
         public event OOAdvantech.ObjectChangeStateHandle ObjectChangeState;
 
 
+        /// <MetaDataID>{2fd1e70e-894f-46b7-b36f-32658b2b2f62}</MetaDataID>
         public void LoadTypeMembers()
         {
 
@@ -296,6 +313,7 @@ namespace ConnectableControls.PropertyEditors
 
         }
 
+        /// <MetaDataID>{418e6015-d565-4d6a-987f-53894eea3aaa}</MetaDataID>
         public void AddDataSourceMember()
         {
             if (ReportMetaDataObject is ReportDataSource)
@@ -309,6 +327,7 @@ namespace ConnectableControls.PropertyEditors
 
 
         }
+        /// <MetaDataID>{5a79bd59-a84f-4cf0-b153-9c6e716c525e}</MetaDataID>
         protected void Update(string member)
         {
             if (member == "SubReportDataNodes")
@@ -317,6 +336,7 @@ namespace ConnectableControls.PropertyEditors
             if (ObjectChangeState != null)
                 ObjectChangeState(this, member);
         }
+        /// <MetaDataID>{9c6b4518-8e0d-44c3-a6de-c7a20e8f0452}</MetaDataID>
         public void AddDetailDataSource()
         {
             if (ReportMetaDataObject is ReportDataSource)
@@ -329,6 +349,7 @@ namespace ConnectableControls.PropertyEditors
             }
         }
 
+        /// <MetaDataID>{c8183cba-0385-4690-ad1f-d87bf0e4e0f9}</MetaDataID>
         void DeleteNode(ReportDataNode reportDataNode)
         {
             if (_SubReportDataNodes.Contains(reportDataNode))
@@ -342,18 +363,19 @@ namespace ConnectableControls.PropertyEditors
 
                 if (ObjectChangeState != null)
                     ObjectChangeState(this, "SubReportDataNodes");
-                
+
 
             }
 
 
         }
+        /// <MetaDataID>{f0da8d26-85d6-4a85-b570-30d3048bbc97}</MetaDataID>
         public void DeleteNode()
         {
             if (Parent != null)
             {
                 Parent.DeleteNode(this);
-                
+
             }
 
         }

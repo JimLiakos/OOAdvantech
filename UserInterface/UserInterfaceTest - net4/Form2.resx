@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="OrderItemsList.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="OrderItemsList_Description.Caption" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="OrderItemsList_Description.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_Description.VisibleIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="OrderItemsList_Description.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="OrderItemsList_Amount.Caption" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="OrderItemsList_Amount.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_Amount.VisibleIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="OrderItemsList_Amount.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="OrderItemsList_Invoiced.Caption" xml:space="preserve">
+    <value>Invoiced</value>
+  </data>
+  <data name="OrderItemsList_Invoiced.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_Invoiced.VisibleIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="OrderItemsList_Invoiced.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="OrderItemsList_Product.Caption" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="OrderItemsList_Product.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_Product.VisibleIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="OrderItemsList_Product.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="OrderItemsList_Client.Caption" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="OrderItemsList_Client.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_Client.VisibleIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="OrderItemsList_Client.Width" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="OrderItemsList_Price.Caption" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="OrderItemsList_Price.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_Price.VisibleIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="OrderItemsList_Price.Width" type="System.Int32, mscorlib">
+    <value>105</value>
+  </data>
+  <data name="OrderItemsList_QAmount.Caption" xml:space="preserve">
+    <value>QAmount</value>
+  </data>
+  <data name="OrderItemsList_QAmount.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OrderItemsList_QAmount.VisibleIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="OrderItemsList_QAmount.Width" type="System.Int32, mscorlib">
+    <value>88</value>
+  </data>
+  <data name="Date.Caption" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Date.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Date.VisibleIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="Date.Width" type="System.Int32, mscorlib">
+    <value>128</value>
+  </data>
+  <assembly alias="DevExpress.Data.v9.3" name="DevExpress.Data.v9.3, Version=9.3.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="gridControl1.EmbeddedNavigator.AllowHtmlTextInToolTip" type="DevExpress.Utils.DefaultBoolean, DevExpress.Data.v9.3">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gridControl1.EmbeddedNavigator.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="gridControl1.EmbeddedNavigator.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="gridControl1.EmbeddedNavigator.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="DevExpress.XtraEditors.v9.3" name="DevExpress.XtraEditors.v9.3, Version=9.3.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="gridControl1.EmbeddedNavigator.TextLocation" type="DevExpress.XtraEditors.NavigatorButtonsTextLocation, DevExpress.XtraEditors.v9.3">
+    <value>None</value>
+  </data>
+  <assembly alias="DevExpress.Utils.v9.3" name="DevExpress.Utils.v9.3, Version=9.3.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="gridControl1.EmbeddedNavigator.ToolTipIconType" type="DevExpress.Utils.ToolTipIconType, DevExpress.Utils.v9.3">
+    <value>Application</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="gridControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 96</value>
+  </data>
+  <data name="gridControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>824, 400</value>
+  </data>
+  <data name="gridControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;gridControl1.Name" xml:space="preserve">
+    <value>gridControl1</value>
+  </data>
+  <data name="&gt;&gt;gridControl1.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.GridControl, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;gridControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gridControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1090, 529</value>
+  </data>
+
+  <data name="OrderState.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="OrderState.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;OrderState.Name" xml:space="preserve">
+    <value>OrderState</value>
+  </data>
+  <data name="&gt;&gt;OrderState.Type" xml:space="preserve">
+    <value>ConnectableControls.ComboBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;OrderState.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;OrderState.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dynamicViewContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>793, 12</value>
+  </data>
+  <data name="dynamicViewContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 78</value>
+  </data>
+  <data name="dynamicViewContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;dynamicViewContainer1.Name" xml:space="preserve">
+    <value>dynamicViewContainer1</value>
+  </data>
+  <data name="&gt;&gt;dynamicViewContainer1.Type" xml:space="preserve">
+    <value>ConnectableControls.DynamicViewContainer, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;dynamicViewContainer1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dynamicViewContainer1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+
+  <data name="treeView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 403</value>
+  </data>
+  <data name="treeView1.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="treeView1.Text" xml:space="preserve">
+    <value>treeView1</value>
+  </data>
+  <data name="&gt;&gt;treeView1.Name" xml:space="preserve">
+    <value>treeView1</value>
+  </data>
+  <data name="&gt;&gt;treeView1.Type" xml:space="preserve">
+    <value>ConnectableControls.Tree.TreeView, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;treeView1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;treeView1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+
+  <data name="comboBox2.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>380, 40</value>
+  </data>
+
+  <data name="comboBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="comboBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;comboBox2.Name" xml:space="preserve">
+    <value>comboBox2</value>
+  </data>
+  <data name="&gt;&gt;comboBox2.Type" xml:space="preserve">
+    <value>ConnectableControls.ComboBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;comboBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBox2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ClientB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>610, 70</value>
+  </data>
+  <data name="ClientB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ClientB.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ClientB.Name" xml:space="preserve">
+    <value>ClientB</value>
+  </data>
+  <data name="&gt;&gt;ClientB.Type" xml:space="preserve">
+    <value>ConnectableControls.TextBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;ClientB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ClientB.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 40</value>
+  </data>
+  <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
+    <value>textBox2</value>
+  </data>
+  <data name="&gt;&gt;textBox2.Type" xml:space="preserve">
+    <value>ConnectableControls.TextBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;textBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="Amount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 42</value>
+  </data>
+  <data name="Amount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="Amount.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Amount.Text" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="&gt;&gt;Amount.Name" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="&gt;&gt;Amount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Amount.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Amount.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 36</value>
+  </data>
+
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>ConnectableControls.Button, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="SearchOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 8</value>
+  </data>
+
+  <data name="SearchOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="SearchOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="SearchOrder.Text" xml:space="preserve">
+    <value>SearchOrder</value>
+  </data>
+  <data name="&gt;&gt;SearchOrder.Name" xml:space="preserve">
+    <value>SearchOrder</value>
+  </data>
+  <data name="&gt;&gt;SearchOrder.Type" xml:space="preserve">
+    <value>ConnectableControls.Button, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;SearchOrder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SearchOrder.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+
+  <data name="Client.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 19</value>
+  </data>
+  <data name="Client.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Client.Name" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="&gt;&gt;Client.Type" xml:space="preserve">
+    <value>ConnectableControls.SearchTextBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;Client.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Client.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>512, 12</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 42</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Client" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,24,12451,Percent,75,87549" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+
+  <data name="PriceList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="PriceList.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;PriceList.Name" xml:space="preserve">
+    <value>PriceList</value>
+  </data>
+  <data name="&gt;&gt;PriceList.Type" xml:space="preserve">
+    <value>ConnectableControls.ComboBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;PriceList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PriceList.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+
+  <data name="comboBox1.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 10</value>
+  </data>
+
+  <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
+    <value>comboBox1</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Type" xml:space="preserve">
+    <value>ConnectableControls.ComboBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="Invoiced.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Invoiced.Location" type="System.Drawing.Point, System.Drawing">
+    <value>537, 70</value>
+  </data>
+  <data name="Invoiced.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="Invoiced.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Invoiced.Text" xml:space="preserve">
+    <value>Invoiced</value>
+  </data>
+  <data name="&gt;&gt;Invoiced.Name" xml:space="preserve">
+    <value>Invoiced</value>
+  </data>
+  <data name="&gt;&gt;Invoiced.Type" xml:space="preserve">
+    <value>ConnectableControls.CheckBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;Invoiced.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Invoiced.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="dateTimePicker1Au.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 66</value>
+  </data>
+  <data name="dateTimePicker1Au.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 20</value>
+  </data>
+  <data name="dateTimePicker1Au.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1Au.Name" xml:space="preserve">
+    <value>dateTimePicker1Au</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1Au.Type" xml:space="preserve">
+    <value>ConnectableControls.DateTimePicker, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1Au.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1Au.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 502</value>
+  </data>
+ 
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>ConnectableControls.Button, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 68</value>
+  </data>
+  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
+    <value>textBox1</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+    <value>ConnectableControls.TextBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Form2</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList.Name" xml:space="preserve">
+    <value>OrderItemsList</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Views.Grid.GridView, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Description.Name" xml:space="preserve">
+    <value>OrderItemsList_Description</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Description.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Amount.Name" xml:space="preserve">
+    <value>OrderItemsList_Amount</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Amount.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Invoiced.Name" xml:space="preserve">
+    <value>OrderItemsList_Invoiced</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Invoiced.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Product.Name" xml:space="preserve">
+    <value>OrderItemsList_Product</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Product.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Client.Name" xml:space="preserve">
+    <value>OrderItemsList_Client</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Client.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Price.Name" xml:space="preserve">
+    <value>OrderItemsList_Price</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_Price.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_QAmount.Name" xml:space="preserve">
+    <value>OrderItemsList_QAmount</value>
+  </data>
+  <data name="&gt;&gt;OrderItemsList_QAmount.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;Date.Name" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="&gt;&gt;Date.Type" xml:space="preserve">
+    <value>DXConnectableControls.XtraGrid.Columns.GridColumn, DXConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=655cd54f8de5326f</value>
+  </data>
+  <data name="&gt;&gt;ViewControlObject.Name" xml:space="preserve">
+    <value>ViewControlObject</value>
+  </data>
+  <data name="&gt;&gt;ViewControlObject.Type" xml:space="preserve">
+    <value>ConnectableControls.FormConnectionControl, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;nodeTextBox1.Name" xml:space="preserve">
+    <value>nodeTextBox1</value>
+  </data>
+  <data name="&gt;&gt;nodeTextBox1.Type" xml:space="preserve">
+    <value>ConnectableControls.Tree.NodeControls.NodeTextBox, ConnectableControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0c69978b92bf20d</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form2</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  
+</root>

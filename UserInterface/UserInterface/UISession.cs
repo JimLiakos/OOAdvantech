@@ -1114,9 +1114,9 @@ namespace OOAdvantech.UserInterface.Runtime
                 try
                 {
                     object VSStudio = null;
-#if Net4
-                    IDEManagerType = ModulePublisher.ClassRepository.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager", "CodeMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9ce9f0a461f2c1a5");
-#else
+//#if Net4
+//                    IDEManagerType = ModulePublisher.ClassRepository.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager", "CodeMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9ce9f0a461f2c1a5");
+//#else
                     System.Reflection.Assembly assembly = System.Reflection.Assembly.Load("BuildControllAddin, Version=1.0.3.0, Culture=neutral, PublicKeyToken=b768d6b172456496");
 
                     VSStudio = assembly.GetType("BuildControllAddin.Connect").GetField("DTEObject").GetValue(null);
@@ -1125,7 +1125,7 @@ namespace OOAdvantech.UserInterface.Runtime
                         System.Reflection.Assembly codeMetaDataRepositoryAssembly = System.Reflection.Assembly.Load("CodeMetaDataRepository, Version=1.0.2.0, Culture=neutral, PublicKeyToken=a849addb868b59ea");
                         IDEManagerType = codeMetaDataRepositoryAssembly.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager");
                     }
-#endif
+//#endif
 
                 }
                 catch (System.Exception error)
@@ -1162,9 +1162,9 @@ namespace OOAdvantech.UserInterface.Runtime
 
 
                     object VSStudio = null;
-#if Net4
-                    IDEManagerType = ModulePublisher.ClassRepository.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager", "CodeMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9ce9f0a461f2c1a5");
-#else
+//#if Net4
+//                    IDEManagerType = ModulePublisher.ClassRepository.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager", "CodeMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9ce9f0a461f2c1a5");
+//#else
                     VSStudio = assembly.GetType("BuildControllAddin.Connect").GetField("DTEObject").GetValue(null);
                     if (VSStudio != null)
                     {
@@ -1172,7 +1172,7 @@ namespace OOAdvantech.UserInterface.Runtime
                         System.Reflection.Assembly codeMetaDataRepositoryAssembly = System.Reflection.Assembly.Load("CodeMetaDataRepository, Version=1.0.2.0, Culture=neutral, PublicKeyToken=a849addb868b59ea");
                         IDEManagerType = codeMetaDataRepositoryAssembly.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager");
                     }
-#endif
+//#endif
 
 
                 }
@@ -1184,7 +1184,9 @@ namespace OOAdvantech.UserInterface.Runtime
             if (IDEManagerType != null)
                 return IDEManagerType.GetMethod("GetClassifier", new Type[4] { typeof(string), typeof(string), typeof(bool), typeof(System.ComponentModel.Component) }).Invoke(null, new object[4] { fullName, assemblyName, caseSensitive, component }) as OOAdvantech.MetaDataRepository.Classifier;
             else
-                return MetaDataRepositoryAssemblyType.GetMethod("FindClassifier", new Type[4] { typeof(string), typeof(string), typeof(bool), typeof(System.Reflection.Assembly) }).Invoke(null, new object[2] { fullName, caseSensitive }) as OOAdvantech.MetaDataRepository.Classifier;
+                return MetaDataRepositoryAssemblyType.GetMethod("FindClassifier", new Type[4] { typeof(string), typeof(string), typeof(bool), typeof(System.Reflection.Assembly) }).Invoke(null, new object[4] { fullName, assemblyName, caseSensitive, System.Reflection.Assembly.GetEntryAssembly() }) as OOAdvantech.MetaDataRepository.Classifier;
+
+            
 
         }
 
