@@ -111,6 +111,7 @@
     <Compile Include="CCLookUpEditor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DevXpressModules.cs" />
     <Compile Include="GridColumn.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -127,6 +128,11 @@
       <DependentUpon>GridView.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Report.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -145,6 +151,10 @@
       <DependentUpon>GridControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="TextBox.resx">
       <DependentUpon>TextBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -155,6 +165,10 @@
     <None Include="StrongName.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\PersistenceLayer\DotNetPersistenceLayer\AssemblyCrypto\AssemblyCrypto - VS10.csproj">
+      <Project>{1b599ae4-4c9a-4cf8-988e-8fa2bd2cb309}</Project>
+      <Name>AssemblyCrypto - VS10</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
       <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
       <Name>OOAdvantechFacade -VS10</Name>
@@ -192,6 +206,24 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevXpresModules\DevExpress.Charts.v9.3.Core.mod" />
+    <Content Include="DevXpresModules\DevExpress.Data.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.Utils.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraBars.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraCharts.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraEditors.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraGrid.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraLayout.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraNavBar.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraPivotGrid.v9.3.Core.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraPivotGrid.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraPrinting.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraReports.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraRichEdit.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraTreeList.v9.3.mod" />
+    <Content Include="DevXpresModules\DevExpress.XtraVerticalGrid.v9.3.mod" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -110,7 +110,14 @@ namespace DXConnectableControls.XtraReports.UI
                 catch (OOAdvantech.PersistenceLayer.StorageException error)
                 {
                     ObjectsDataSourceMetaData = new XDocument();
-                    storage = OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage("TemporarylistViewStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
+                    try
+                    {
+                        storage = OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage("TemporarylistViewStorage", ObjectsDataSourceMetaData, "OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider");
+                    }
+                    catch (Exception errorB)
+                    {
+                        return;
+                    }
                 }
 
                 OOAdvantech.Collections.StructureSet set = storage.Execute("SELECT reportDataSource FROM OOAdvantech.UserInterface.ReportObjectDataSource.ReportRootDataSource reportDataSource ");
