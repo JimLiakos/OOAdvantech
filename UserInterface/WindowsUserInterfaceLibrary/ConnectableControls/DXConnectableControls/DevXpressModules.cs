@@ -13,9 +13,30 @@ namespace DXConnectableControls
         public static void LoadModules()
         {
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad1;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             System.Windows.Forms.MessageBox.Show("LoadModules");
             var sdsd=AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraReports_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_Charts_v9_3_Core);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_Data_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_Utils_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraBars_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraCharts_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraEditors_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraGrid_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraLayout_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraNavBar_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraPivotGrid_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraPivotGrid_v9_3_Core);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraPrinting_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraRichEdit_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraTreeList_v9_3);
+            sdsd = AssemblyNativeCode.AssemblyLoader.LoadRawAssembly(Properties.Resources.DevExpress_XtraVerticalGrid_v9_3);
+        }
+
+        private static void CurrentDomain_AssemblyLoad1(object sender, AssemblyLoadEventArgs args)
+        {
+            
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
