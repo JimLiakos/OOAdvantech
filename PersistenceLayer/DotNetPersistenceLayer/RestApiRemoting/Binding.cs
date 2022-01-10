@@ -13,7 +13,24 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{dc4cd108-0827-4b15-825a-7e5bb0a87266}</MetaDataID>
     public class Binding : IDefaultCommunicationTimeouts
     {
+        public static Binding GetBinding(TimeSpan? openTimeSpan, TimeSpan?  retryOpenTimeout, TimeSpan? sendTimeout, TimeSpan? receiveTimeout)
+        {
+            Binding binding = new Binding();
+            if (openTimeSpan != null)
+                binding.OpenTimeout = openTimeSpan.Value;
 
+            if (retryOpenTimeout != null)
+                binding.RetryOpenTimeout = retryOpenTimeout.Value;
+
+            if (sendTimeout != null)
+                binding.SendTimeout= sendTimeout.Value;
+
+            if (receiveTimeout != null)
+                binding.ReceiveTimeout = receiveTimeout.Value;
+
+            return binding;
+
+        }
         /// <MetaDataID>{20632625-12fa-49a8-ae15-d354efddfb21}</MetaDataID>
         public static Binding DefaultBinding = new Binding();
         /// <exclude>Excluded</exclude>

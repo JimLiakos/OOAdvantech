@@ -19,6 +19,7 @@ namespace OOAdvantech.Remoting.RestApi
                                  System.Threading.CancellationToken, // cancel
                                  System.Threading.Tasks.Task>;
     using System.Net.WebSockets;
+    using System.Runtime.Remoting.Messaging;
 
     /// <MetaDataID>{5bb6c37b-309c-4370-8d54-45dbe68837ec}</MetaDataID>
     public enum WebSocketState
@@ -535,12 +536,18 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{60d273ba-fb0c-487c-a47c-7b4b74433cf1}</MetaDataID>
         public Task<ResponseData> SendRequestAsync(RequestData request)
         {
+            
+
+            Binding binding = CallContext.LogicalGetData("Binding") as Binding;
+            if(binding==null)
+             binding = Binding;
+            
 
             TaskCompletionSource<ResponseData> taskCompletionSource;
             if (!EnsureConnection())
             {
                 if (State == WebSocketState.Closed)
-                    EnsureConnection(this.Uri, this.Binding);
+                    EnsureConnection(this.Uri, binding);
 
                 if (!EnsureConnection())
                 {
@@ -574,14 +581,18 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{33ad8d1a-fd7d-4c76-ba1a-0b1df2e87dee}</MetaDataID>
         public OOAdvantech.Remoting.RestApi.ResponseData SendRequest(RequestData request)
         {
+            Binding binding = CallContext.LogicalGetData("Binding") as Binding;
+            if (binding == null)
+                binding = this.Binding;
+
             var task = SendRequestAsync(request);
 
             if (!task.Wait(TimeSpan.FromSeconds(25)))
             {
-                if (task.Wait(Binding.SendTimeout))
+                if (task.Wait(binding.SendTimeout))
                 {
                     RejectRequest(task);
-                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                 }
 
 
@@ -894,7 +905,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             WebSocketClient.WebSocketConnections.Remove(uri.ToLower());
                         }
-                        webSocket.SocketException = new System.TimeoutException(string.Format("OpenTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+                        webSocket.SocketException = new System.TimeoutException(string.Format("OpenTimeout {0} expired", binding.OpenTimeout));
                         return webSocket;
                     }
                     else

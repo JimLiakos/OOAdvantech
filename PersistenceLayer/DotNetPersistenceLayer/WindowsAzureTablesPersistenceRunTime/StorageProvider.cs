@@ -101,7 +101,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
                 account = CloudStorageAccount.DevelopmentStorageAccount;
             else
-                account = new CloudStorageAccount(new StorageCredentials(userName, password), StorageLocation, true);
+                account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
             Account = account;
 
             CloudTableClient tableClient = account.CreateCloudTableClient();
@@ -193,7 +193,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName)||userName== "devstoreaccount1"))
                     account = CloudStorageAccount.DevelopmentStorageAccount;
                 else
-                    account = new CloudStorageAccount(new StorageCredentials(userName, password), StorageLocation, true);
+                    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
                 CloudTableClient tableClient = account.CreateCloudTableClient();
 
                 CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
@@ -651,7 +651,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
                 account = CloudStorageAccount.DevelopmentStorageAccount;
             else
-                account = new CloudStorageAccount(new StorageCredentials(userName, password), storageLocation, true);
+                account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
             CloudTableClient tableClient = account.CreateCloudTableClient();
             CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
             if (!storagesMetadataTable.Exists())

@@ -238,15 +238,34 @@ namespace OOAdvantech.PersistenceLayerRunTime
             InitPersistencyService(null);
         }
 
+        static bool ServiceForInstanceExist(String instanceName)
+        {
+            if (instanceName == null || instanceName.Trim().Length == 0)
+                return false;
+            string serviceName;
+            if (instanceName.Trim().ToLower() == "default")
+                serviceName = "StorageServer";
+            else
+                serviceName = "StorageServer$" + instanceName;
+
+            return System.ServiceProcess.ServiceController.GetServices().FirstOrDefault(x => x.ServiceName == serviceName) != null;
+        }
+
         /// <MetaDataID>{bd396910-00ea-4721-b057-3070d0025e5e}</MetaDataID>
         static bool InitOodtc()
         {
 #if !DeviceDotNet
-            System.ServiceProcess.ServiceController control = new System.ServiceProcess.ServiceController("OOAdvantechTransactionCoordinator");
-            if (control.Status == System.ServiceProcess.ServiceControllerStatus.Stopped)
-                control.Start();
-            else if (control.Status == System.ServiceProcess.ServiceControllerStatus.Paused)
-                control.Continue();
+            if (ServiceForInstanceExist("OOAdvantechTransactionCoordinator"))
+            {
+                System.ServiceProcess.ServiceController control = new System.ServiceProcess.ServiceController("OOAdvantechTransactionCoordinator");
+                if (control.Status == System.ServiceProcess.ServiceControllerStatus.Stopped)
+                    control.Start();
+                else if (control.Status == System.ServiceProcess.ServiceControllerStatus.Paused)
+                    control.Continue();
+                return true;
+            }
+            else
+                return false;
 #endif
 
             return true;

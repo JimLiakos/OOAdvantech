@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi.Serialization;
+using System.Runtime.Remoting.Messaging;
 
 namespace OOAdvantech.Remoting.RestApi
 {
@@ -537,10 +538,10 @@ namespace OOAdvantech.Remoting.RestApi
                 var task = webSocket.SendRequestAsync(request);
                 if (!task.Wait(System.TimeSpan.FromSeconds(25)))
                 {
-                    if (!task.Wait(Binding.DefaultBinding.SendTimeout))
+                    if (!task.Wait(binding.SendTimeout))
                     {
                         webSocket.RejectRequest(task);
-                        throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+                        throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                     }
 
                 }
@@ -621,30 +622,17 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.RequestType = RequestType.MethodCall;
 
             var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
-            //var content = new StringContent(myJson, Encoding.UTF8, "application/json");
-
-            //var response = client.PostAsync(channelUri + "/RestApiMessages", content).Result;
-            //string internalchannelUri = null;
+      
             requestData.ChannelUri = channelUri;
 
-            //if (channelUri.IndexOf("(") != -1)
-            //{
-            //    //internalchannelUri = channelUri.Substring(channelUri.IndexOf("(") + 1);
-            //    //internalchannelUri = internalchannelUri.Substring(0, internalchannelUri.Length - 1);
-            //    channelUri = channelUri.Substring(0, channelUri.IndexOf("("));
-            ////    requestData.InternalChannelUri = internalchannelUri;
-            ////    requestData.PublicChannelUri = channelUri;
-            //}
-            ////else
 
-            var responseData = Invoke(requestData.PublicChannelUri, requestData, null, null, Binding.DefaultBinding);
+            Binding binding = CallContext.LogicalGetData("Binding") as Binding;
+            binding = Binding.DefaultBinding;
+
+            var responseData = Invoke(requestData.PublicChannelUri, requestData, null, null, binding);
             if (responseData != null)
             {
 
-                //var task = response.Content.ReadAsStringAsync();
-                //task.Wait();
-                //var responseDataString = response;
-                //var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseData>(responseDataString);
                 var returnMessage = OOAdvantech.Json.JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
                 if (returnMessage.ServerSessionObjectRef != null)
                 {
@@ -671,13 +659,7 @@ namespace OOAdvantech.Remoting.RestApi
                 var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
                 ObjRef remoteRef = JsonConvert.DeserializeObject<ObjRef>(returnMessage.ReturnObjectJson, jSetttings);
 
-                //JsonConvert.DeserializeObject(returnMessage.ReturnObjectJson, jSetttings) as ByRef;
-                //if (remoteRef == null)
-                //{
-                //    SerializedData serData = Newtonsoft.Json.JsonConvert.DeserializeObject<SerializedData>(returnMessage.ReturnObjectJson);
-                //    remoteRef = serData.Ref;// Newtonsoft.Json.JsonConvert.DeserializeObject<ByRef>(returnMessage.ReturnObjectJson);
-                //}
-
+      
                 Proxy proxy = new Proxy(remoteRef, typeof(IServerSessionPart));// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.IServerSessionPart));
 
 

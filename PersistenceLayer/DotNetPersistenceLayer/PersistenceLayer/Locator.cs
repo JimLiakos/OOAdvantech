@@ -136,6 +136,19 @@ namespace OOAdvantech.PersistenceLayer
             else
                 return new System.ServiceProcess.ServiceController("StorageServer$" + instanceName);
         }
+
+        public bool ServiceForInstanceExist(String instanceName)
+        {
+            if (instanceName == null || instanceName.Trim().Length == 0)
+                return false;
+            string serviceName;
+            if (instanceName.Trim().ToLower() == "default")
+                serviceName="StorageServer";
+            else
+                serviceName = "StorageServer$" + instanceName;
+
+            return System.ServiceProcess.ServiceController.GetServices().FirstOrDefault(x => x.ServiceName == serviceName) != null;
+        }
         /// <MetaDataID>{e6bcf4c8-afdc-49cf-96ab-a17e0d41dfdb}</MetaDataID>
         public void Start(String instanceName)
         {

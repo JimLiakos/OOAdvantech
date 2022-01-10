@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -355,7 +356,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
                                 System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel replace WebSocketClient  {0} ", timestamp));
 
-#region Wait pending requests to complete  
+                                #region Wait pending requests to complete  
                                 Dictionary<int, TaskCompletionSource<ResponseData>> requestTasks = _WebSocketClient.GetRequestTasks();
                                 if (requestTasks.Count > 0)
                                 {
@@ -369,7 +370,7 @@ namespace OOAdvantech.Remoting.RestApi
                                         }
                                     }
                                 }
-#endregion
+                                #endregion
 
                                 CloseWebSocket();
 
@@ -517,7 +518,7 @@ namespace OOAdvantech.Remoting.RestApi
                 Task.Run(() =>
                 {
                     while (true)
-                    { 
+                    {
 
 #if DeviceDotNet
                         if (Connectivity.NetworkAccess != NetworkAccess.Internet)
@@ -527,169 +528,169 @@ namespace OOAdvantech.Remoting.RestApi
                         }
 #endif
 
-                    try
-                    {
-                        string publicChannelUri = null;
-                        string internalchannelUri = null;
-                        ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-                        var binding = new Binding();
-                        binding.OpenTimeout = TimeSpan.FromSeconds(3);
-
-                        var webSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
-                        if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
+                        try
                         {
-                            WebSocketClient = webSocketClient;
-                            ClientSessionPart.Reconnect(true);
+                            string publicChannelUri = null;
+                            string internalchannelUri = null;
+                            ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+                            var binding = new Binding();
+                            binding.OpenTimeout = TimeSpan.FromSeconds(3);
+
+                            var webSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
+                            if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
+                            {
+                                WebSocketClient = webSocketClient;
+                                ClientSessionPart.Reconnect(true);
+                            }
+                            else
+                            {
+                            }
                         }
+                        catch (Exception error)
+                        {
+                        }
+                        if (WebSocketClient != null && WebSocketClient.State == WebSocketState.Open)
+                            break;
                         else
                         {
                         }
                     }
-                    catch (Exception error)
-                    {
-                    }
-                    if (WebSocketClient != null && WebSocketClient.State == WebSocketState.Open)
-                        break;
-                    else
-                    {
-                    }
-                }
 
                 });
-        }
-    }
-
-    /// <MetaDataID>{624c1f21-7502-42ce-b896-ad111b5d36a4}</MetaDataID>
-    public IEndPoint EndPoint
-    {
-        get
-        {
-
-            bool lockTaken = false;
-            try
-            {
-                Monitor.TryEnter(this, 25000, ref lockTaken);
-                if (!lockTaken)
-                    throw new TimeoutException(); // or compensate
-
-                return WebSocketEndPoint;                                    // work here...
-            }
-            finally
-            {
-                if (lockTaken) Monitor.Exit(this);
-            }
-
-            //lock (this)
-            //{
-            //    return WebSocketEndPoint;
-            //}
-        }
-
-        set
-        {
-            WebSocketEndPoint = value;
-            if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(WebSocketEndPoint as MarshalByRefObject))
-            {
-
             }
         }
-    }
 
-
-    ///// <MetaDataID>{a5bb4adc-2933-4a89-b8bf-bf302f1cc7bc}</MetaDataID>
-    //WebSocketClient WebSocketClient
-    //{
-    //    get
-    //    {
-    //        return _WebSocketClient;
-    //    }
-    //    set
-    //    {
-    //        if (_WebSocketClient != value && _WebSocketClient != null)
-    //        {
-    //            _WebSocketClient.RemoveWebSocketChannel(this);
-    //            if (_WebSocketClient.WebSocketChannels.Count == 0 && _WebSocketClient.State == WebSocketState.Open)
-    //            {
-    //                if (_WebSocketClient.PendingRequest > 0)
-    //                {
-    //                    PendingClientSocketsToClose.Add(_WebSocketClient);
-    //                    CloseConnectionTimer.Start();
-    //                }
-    //                else
-    //                {
-    //                    _WebSocketClient.CloseAsync();
-    //                    System.Threading.Thread.Sleep(1000);
-    //                }
-    //            }
-
-    //            DropLogicalConnection(_WebSocketClient);
-    //        }
-    //        if (_WebSocketClient != null)
-    //        {
-    //            _WebSocketClient = value;
-    //            WebSocketEndPoint = WebSocketClient;
-    //            _WebSocketClient.AddWebSocketChannel(this);
-    //            ClientSessionPart.Reconnect();
-    //        }
-    //        else
-    //        {
-    //            _WebSocketClient = value;
-    //            WebSocketEndPoint = WebSocketClient;
-    //            _WebSocketClient.AddWebSocketChannel(this);
-    //        }
-    //    }
-    //}
-
-    /// <MetaDataID>{e5ff0c28-c397-46cc-bfa1-cec9eb3a17af}</MetaDataID>
-    private void DropPhysicalConnection(WebSocketClient webSocket)
-    {
-        string clientProcessIdentity = ClientSessionPart.SessionIdentity.Substring(0, ClientSessionPart.SessionIdentity.IndexOf("."));
-        var datetime = DateTime.Now;
-        string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
-        //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel DropLogicalConnection  {0} ", timestamp));
-
-        var methodCallMessage = new MethodCallMessage(ClientSessionPart.ChannelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.Disconnected, new object[0]);
-        RequestData requestData = new RequestData();
-        requestData.RequestType = RequestType.Disconnect;
-        requestData.SessionIdentity = ClientSessionPart.SessionIdentity;
-        requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
-        var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
-        requestData.ChannelUri = ClientSessionPart.ChannelUri;
-        var task = webSocket.SendRequestAsync(requestData);
-        if (!task.Wait(System.TimeSpan.FromSeconds(2)))
-            if (!task.Wait(System.TimeSpan.FromSeconds(25)))
-                task.Wait(Binding.DefaultBinding.SendTimeout);
-    }
-
-    //private void ReconfigureLogicalConnection(WebSocketClient webSocket)
-    //{
-
-    //    var datetime = DateTime.Now;
-    //    string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
-    //    System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel Send ReconfigureChannel  {0} {1} ", timestamp, ClientSessionPart.SessionIdentity));
-
-
-    //    string clientProcessIdentity = ClientSessionPart.SessionIdentity.Substring(0, ClientSessionPart.SessionIdentity.IndexOf("."));
-    //    var methodCallMessage = new MethodCallMessage(ClientSessionPart.ChannelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.ReconfigureChannel, new object[0]);
-    //    RequestData requestData = new RequestData();
-    //    requestData.RequestType = RequestType.Disconnect;
-    //    requestData.SessionIdentity = ClientSessionPart.SessionIdentity;
-    //    requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
-    //    var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
-    //    requestData.ChannelUri = ClientSessionPart.ChannelUri;
-    //    var task = webSocket.SendRequestAsync(requestData);
-    //    if (!task.Wait(System.TimeSpan.FromSeconds(2)))
-    //        if (!task.Wait(System.TimeSpan.FromSeconds(25)))
-    //            task.Wait(Binding.DefaultBinding.SendTimeout);
-    //}
-    /// <MetaDataID>{c30cb6c5-12be-49c3-8a19-07f1a2282082}</MetaDataID>
-    internal IEndPoint WebSocketEndPoint;
-
-    /// <MetaDataID>{89c008a5-539c-4a94-b983-49f0ff9d09ff}</MetaDataID>
-    public Task<ResponseData> AsyncProcessRequest(RequestData requestData)
-    {
-        if (EndPoint != null)
+        /// <MetaDataID>{624c1f21-7502-42ce-b896-ad111b5d36a4}</MetaDataID>
+        public IEndPoint EndPoint
         {
+            get
+            {
+
+                bool lockTaken = false;
+                try
+                {
+                    Monitor.TryEnter(this, 25000, ref lockTaken);
+                    if (!lockTaken)
+                        throw new TimeoutException(); // or compensate
+
+                    return WebSocketEndPoint;                                    // work here...
+                }
+                finally
+                {
+                    if (lockTaken) Monitor.Exit(this);
+                }
+
+                //lock (this)
+                //{
+                //    return WebSocketEndPoint;
+                //}
+            }
+
+            set
+            {
+                WebSocketEndPoint = value;
+                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(WebSocketEndPoint as MarshalByRefObject))
+                {
+
+                }
+            }
+        }
+
+
+        ///// <MetaDataID>{a5bb4adc-2933-4a89-b8bf-bf302f1cc7bc}</MetaDataID>
+        //WebSocketClient WebSocketClient
+        //{
+        //    get
+        //    {
+        //        return _WebSocketClient;
+        //    }
+        //    set
+        //    {
+        //        if (_WebSocketClient != value && _WebSocketClient != null)
+        //        {
+        //            _WebSocketClient.RemoveWebSocketChannel(this);
+        //            if (_WebSocketClient.WebSocketChannels.Count == 0 && _WebSocketClient.State == WebSocketState.Open)
+        //            {
+        //                if (_WebSocketClient.PendingRequest > 0)
+        //                {
+        //                    PendingClientSocketsToClose.Add(_WebSocketClient);
+        //                    CloseConnectionTimer.Start();
+        //                }
+        //                else
+        //                {
+        //                    _WebSocketClient.CloseAsync();
+        //                    System.Threading.Thread.Sleep(1000);
+        //                }
+        //            }
+
+        //            DropLogicalConnection(_WebSocketClient);
+        //        }
+        //        if (_WebSocketClient != null)
+        //        {
+        //            _WebSocketClient = value;
+        //            WebSocketEndPoint = WebSocketClient;
+        //            _WebSocketClient.AddWebSocketChannel(this);
+        //            ClientSessionPart.Reconnect();
+        //        }
+        //        else
+        //        {
+        //            _WebSocketClient = value;
+        //            WebSocketEndPoint = WebSocketClient;
+        //            _WebSocketClient.AddWebSocketChannel(this);
+        //        }
+        //    }
+        //}
+
+        /// <MetaDataID>{e5ff0c28-c397-46cc-bfa1-cec9eb3a17af}</MetaDataID>
+        private void DropPhysicalConnection(WebSocketClient webSocket)
+        {
+            string clientProcessIdentity = ClientSessionPart.SessionIdentity.Substring(0, ClientSessionPart.SessionIdentity.IndexOf("."));
+            var datetime = DateTime.Now;
+            string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
+            //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel DropLogicalConnection  {0} ", timestamp));
+
+            var methodCallMessage = new MethodCallMessage(ClientSessionPart.ChannelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.Disconnected, new object[0]);
+            RequestData requestData = new RequestData();
+            requestData.RequestType = RequestType.Disconnect;
+            requestData.SessionIdentity = ClientSessionPart.SessionIdentity;
+            requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
+            var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
+            requestData.ChannelUri = ClientSessionPart.ChannelUri;
+            var task = webSocket.SendRequestAsync(requestData);
+            if (!task.Wait(System.TimeSpan.FromSeconds(2)))
+                if (!task.Wait(System.TimeSpan.FromSeconds(25)))
+                    task.Wait(Binding.DefaultBinding.SendTimeout);
+        }
+
+        //private void ReconfigureLogicalConnection(WebSocketClient webSocket)
+        //{
+
+        //    var datetime = DateTime.Now;
+        //    string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
+        //    System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel Send ReconfigureChannel  {0} {1} ", timestamp, ClientSessionPart.SessionIdentity));
+
+
+        //    string clientProcessIdentity = ClientSessionPart.SessionIdentity.Substring(0, ClientSessionPart.SessionIdentity.IndexOf("."));
+        //    var methodCallMessage = new MethodCallMessage(ClientSessionPart.ChannelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.ReconfigureChannel, new object[0]);
+        //    RequestData requestData = new RequestData();
+        //    requestData.RequestType = RequestType.Disconnect;
+        //    requestData.SessionIdentity = ClientSessionPart.SessionIdentity;
+        //    requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
+        //    var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
+        //    requestData.ChannelUri = ClientSessionPart.ChannelUri;
+        //    var task = webSocket.SendRequestAsync(requestData);
+        //    if (!task.Wait(System.TimeSpan.FromSeconds(2)))
+        //        if (!task.Wait(System.TimeSpan.FromSeconds(25)))
+        //            task.Wait(Binding.DefaultBinding.SendTimeout);
+        //}
+        /// <MetaDataID>{c30cb6c5-12be-49c3-8a19-07f1a2282082}</MetaDataID>
+        internal IEndPoint WebSocketEndPoint;
+
+        /// <MetaDataID>{89c008a5-539c-4a94-b983-49f0ff9d09ff}</MetaDataID>
+        public Task<ResponseData> AsyncProcessRequest(RequestData requestData)
+        {
+            if (EndPoint != null)
+            {
 #if DeviceDotNet
             var task = WebSocketEndPoint.SendRequestAsync(requestData);
             return task;
@@ -708,65 +709,134 @@ namespace OOAdvantech.Remoting.RestApi
                       });
                 }
 #endif
-        }
-        else
-        {
-#region Uses web socket request channel
-            //string publicChannelUri = null;
-            //string internalchannelUri = null;
-            //ByRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-
-            //WebSocketClient webSocket = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages");
-
-
-            //if (webSocket.State != WebSocket4Net.WebSocketState.Open)
-            //{
-            //    ReturnMessage responseMessage = new ReturnMessage();
-            //    responseMessage.Exception = new RestApiExceptionData();
-            //    responseMessage.Exception.ExceptionMessage = webSocket.SocketException.Message;
-            //    responseMessage.Exception.ServerStackTrace = webSocket.SocketException.StackTrace;
-            //    responseMessage.Exception.ExceptionCode = ExceptionCode.ConnectionError;
-            //    return Task<ResponseData>.Factory.StartNew(() =>
-            //    {
-            //        return new ResponseData() { CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-            //    });
-            //}
-            var task = WebSocketEndPoint.SendRequestAsync(requestData);
-            return task;
-#endregion
-        }
-    }
-
-    /// <MetaDataID>{cfb7fd00-d3cb-4edb-88c0-70b0cc072829}</MetaDataID>
-    public ResponseData ProcessRequest(RequestData requestData)
-    {
-        //EnsureChannelIsOpen();
-
-        IEndPoint endPoint = null;
-
-        try
-        {
-            endPoint = EndPoint;
-        }
-        catch (TimeoutException error)
-        {
-            throw new System.Net.WebException(error.Message, error, System.Net.WebExceptionStatus.ConnectFailure, null);
-        }
-
-        if (endPoint != null)
-        {
-            var task = endPoint.SendRequestAsync(requestData);
-            if (!task.Wait(System.TimeSpan.FromSeconds(25)))
+            }
+            else
             {
-                if (!task.Wait(Binding.DefaultBinding.SendTimeout))
+                #region Uses web socket request channel
+                //string publicChannelUri = null;
+                //string internalchannelUri = null;
+                //ByRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+
+                //WebSocketClient webSocket = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages");
+
+
+                //if (webSocket.State != WebSocket4Net.WebSocketState.Open)
+                //{
+                //    ReturnMessage responseMessage = new ReturnMessage();
+                //    responseMessage.Exception = new RestApiExceptionData();
+                //    responseMessage.Exception.ExceptionMessage = webSocket.SocketException.Message;
+                //    responseMessage.Exception.ServerStackTrace = webSocket.SocketException.StackTrace;
+                //    responseMessage.Exception.ExceptionCode = ExceptionCode.ConnectionError;
+                //    return Task<ResponseData>.Factory.StartNew(() =>
+                //    {
+                //        return new ResponseData() { CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                //    });
+                //}
+                var task = WebSocketEndPoint.SendRequestAsync(requestData);
+                return task;
+                #endregion
+            }
+        }
+
+        /// <MetaDataID>{cfb7fd00-d3cb-4edb-88c0-70b0cc072829}</MetaDataID>
+        public ResponseData ProcessRequest(RequestData requestData)
+        {
+            //EnsureChannelIsOpen();
+            Binding binding = CallContext.LogicalGetData("Binding") as Binding;
+            if (binding == null)
+                binding = Binding.DefaultBinding;
+            IEndPoint endPoint = null;
+
+            try
+            {
+                endPoint = EndPoint;
+            }
+            catch (TimeoutException error)
+            {
+                throw new System.Net.WebException(error.Message, error, System.Net.WebExceptionStatus.ConnectFailure, null);
+            }
+
+            if (endPoint != null)
+            {
+                var task = endPoint.SendRequestAsync(requestData);
+                if (!task.Wait(System.TimeSpan.FromSeconds(25)))
                 {
-                    endPoint.RejectRequest(task);
-                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+                    if (!task.Wait(binding.SendTimeout))
+                    {
+                        endPoint.RejectRequest(task);
+                        throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                    }
+
+                }
+                var responseData = task.Result;
+                if (!responseData.DirectConnect)
+                {
+                    lock (this)
+                    {
+                        if (!DirectConnectionCheck)
+                        {
+                            if (!DirectConnectionTimer.Enabled)
+                                DirectConnectionTimer.Start();
+                        }
+                    }
                 }
 
+                //task.Wait();
+                return responseData;
             }
-            var responseData = task.Result;
-            if (!responseData.DirectConnect)
+            else
+            {
+                #region Uses web socket request channel
+                //string publicChannelUri = null;
+                //string internalchannelUri = null;
+                //ByRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+
+                //WebSocketClient webSocket = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages");
+                //if (webSocket.State != WebSocket4Net.WebSocketState.Open)
+                //{
+                //    ReturnMessage responseMessage = new ReturnMessage();
+                //    responseMessage.Exception = new RestApiExceptionData();
+                //    responseMessage.Exception.ExceptionMessage = webSocket.SocketException.Message;
+                //    responseMessage.Exception.ServerStackTrace = webSocket.SocketException.StackTrace;
+                //    responseMessage.Exception.ExceptionCode = ExceptionCode.ConnectionError;
+                //    return new ResponseData() { CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                //}
+
+                return endPoint.SendRequest(requestData);
+                //var task = WebSocketEndPoint.SendRequestWithResponceAsync(requestData);
+                //if (!task.Wait(System.TimeSpan.FromSeconds(25)))
+                //{
+                //    task.Wait();
+                //}
+                //task.Wait();
+                //return task.Result;
+                #endregion
+            }
+        }
+
+
+
+        /// <MetaDataID>{93778861-f327-4e2b-aad7-7bacde6fffc5}</MetaDataID>
+        public void Close()
+        {
+            if (WebSocketClient != null)
+                WebSocketClient.CloseAsync();
+#if DeviceDotNet
+        OOAdvantech.DeviceApplication.Current.Resumed -= Apllication_Resumed;
+#endif
+
+        }
+
+        /// <MetaDataID>{72be126e-7a66-4512-978b-cd813cc82b3f}</MetaDataID>
+        public void DropPhysicalConnection()
+        {
+            string publicChannelUri = null;
+            string internalchannelUri = null;
+            ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+
+            var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
+
+            if (tryDirectConnectionSocketClient == null)
             {
                 lock (this)
                 {
@@ -777,76 +847,9 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                 }
             }
+            else
+                WebSocketClient = tryDirectConnectionSocketClient;
 
-            //task.Wait();
-            return responseData;
-        }
-        else
-        {
-#region Uses web socket request channel
-            //string publicChannelUri = null;
-            //string internalchannelUri = null;
-            //ByRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-
-            //WebSocketClient webSocket = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages");
-            //if (webSocket.State != WebSocket4Net.WebSocketState.Open)
-            //{
-            //    ReturnMessage responseMessage = new ReturnMessage();
-            //    responseMessage.Exception = new RestApiExceptionData();
-            //    responseMessage.Exception.ExceptionMessage = webSocket.SocketException.Message;
-            //    responseMessage.Exception.ServerStackTrace = webSocket.SocketException.StackTrace;
-            //    responseMessage.Exception.ExceptionCode = ExceptionCode.ConnectionError;
-            //    return new ResponseData() { CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-            //}
-
-            return endPoint.SendRequest(requestData);
-            //var task = WebSocketEndPoint.SendRequestWithResponceAsync(requestData);
-            //if (!task.Wait(System.TimeSpan.FromSeconds(25)))
-            //{
-            //    task.Wait();
-            //}
-            //task.Wait();
-            //return task.Result;
-#endregion
         }
     }
-
-
-
-    /// <MetaDataID>{93778861-f327-4e2b-aad7-7bacde6fffc5}</MetaDataID>
-    public void Close()
-    {
-        if (WebSocketClient != null)
-            WebSocketClient.CloseAsync();
-#if DeviceDotNet
-        OOAdvantech.DeviceApplication.Current.Resumed -= Apllication_Resumed;
-#endif
-
-    }
-
-    /// <MetaDataID>{72be126e-7a66-4512-978b-cd813cc82b3f}</MetaDataID>
-    public void DropPhysicalConnection()
-    {
-        string publicChannelUri = null;
-        string internalchannelUri = null;
-        ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-
-        var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
-
-        if (tryDirectConnectionSocketClient == null)
-        {
-            lock (this)
-            {
-                if (!DirectConnectionCheck)
-                {
-                    if (!DirectConnectionTimer.Enabled)
-                        DirectConnectionTimer.Start();
-                }
-            }
-        }
-        else
-            WebSocketClient = tryDirectConnectionSocketClient;
-
-    }
-}
 }

@@ -103,10 +103,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public override PersistenceLayerRunTime.ObjectStorage NewStorage(PersistenceLayer.Storage OriginalStorage, string storageName, string storageLocation, string userName = "", string password = "")
         {
             CloudStorageAccount account = null;
+
             if (storageLocation.ToLower() == @"DevStorage".ToLower() && string.IsNullOrWhiteSpace(userName))
                 account = CloudStorageAccount.DevelopmentStorageAccount;
             else
-                account = new CloudStorageAccount(new StorageCredentials(userName, password), storageLocation, true);
+                account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
             ObjectStorage objectStorage = new ObjectStorage(storageName, storageLocation, true, account);
 
             return objectStorage;
@@ -121,11 +122,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <MetaDataID>{d12ddd26-dbf7-43df-868e-020d53f29b53}</MetaDataID>
         public override PersistenceLayerRunTime.ObjectStorage OpenStorage(string storageName, string storageLocation, string userName = "", string password = "")
         {
+
+            //string connectionString = @"DefaultEndpointsProtocol=http;AccountName=asfameazure;AccountKey=pJL6v5+z9tRTOxpg/tzuh71j19s/16rKMiPSlTyLmJdqkIrdms/EV5ZO/ptz8ZCQYNaOC7Kba+gtQl8X1qVZ7g==";
+            //var sdsd= CloudStorageAccount.Parse(connectionString);
+
             CloudStorageAccount account = null;
             if (storageLocation.ToLower() == @"DevStorage".ToLower() && string.IsNullOrWhiteSpace(userName))
                 account = CloudStorageAccount.DevelopmentStorageAccount;
             else
-                account = new CloudStorageAccount(new StorageCredentials(userName, password), storageLocation, true);
+                account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
             ObjectStorage objectStorage = new ObjectStorage(storageName, storageLocation, false, account);
 
             return objectStorage;
