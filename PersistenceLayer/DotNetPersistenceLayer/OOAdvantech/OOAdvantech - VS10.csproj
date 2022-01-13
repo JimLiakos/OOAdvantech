@@ -82,7 +82,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;DISTRIBUTED_TRANSACTIONS;OOAdvantech</DefineConstants>
+    <DefineConstants>TRACE;OOAdvantech;DISTRIBUTED_TRANSACTIONS</DefineConstants>
     <DocumentationFile>OOAdvantech.Xml</DocumentationFile>
     <DebugSymbols>false</DebugSymbols>
     <FileAlignment>4096</FileAlignment>

@@ -144,6 +144,8 @@ namespace OOAdvantech.Linq
 
             }
 
+#else
+        LastQueryResult = _QueryResultType;
 #endif
         }
         /// <MetaDataID>{9b867627-ed30-49cd-bf8c-c7eb1782fc2e}</MetaDataID>

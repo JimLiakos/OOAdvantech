@@ -13,6 +13,8 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 #if DEBUG
         /// <MetaDataID>{86353a21-5562-428c-b823-03c4ea3c55ba}</MetaDataID>
         public static QueryResultType LastQueryResult;
+#else
+        public static QueryResultType LastQueryResult;
 #endif
         [IgnoreErrorCheck]
         [RoleBMultiplicityRange(1, 1)]

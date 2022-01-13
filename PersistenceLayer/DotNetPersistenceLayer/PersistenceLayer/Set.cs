@@ -646,8 +646,10 @@ namespace OOAdvantech.Collections.Generic
         /// <MetaDataID>{15e48b64-cd42-4bf4-8fc1-63c6cf7b928f}</MetaDataID>
         public void CheckIndexes()
         {
+#if DEBUG
             if (theObjects != null)
                 theObjects.CheckIndexes();
+#endif
         }
 
         #endregion
