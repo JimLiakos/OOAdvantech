@@ -15,7 +15,11 @@ namespace OOAdvantech.PersistenceLayer
 
     public delegate void ObjectStorageResolveHandler(object sender, string StorageIdentity);
     public delegate void ObjectStorageLoadeHandler(object sender, string StorageIdentity);
-    
+
+    public interface IErrorLog
+    {
+        void WriteLog(string message);
+    }
 
 
     /// <MetaDataID>{3096B31D-B5CC-4B5C-823B-41CE91DA5C98}</MetaDataID>
@@ -25,9 +29,9 @@ namespace OOAdvantech.PersistenceLayer
     /// equivalent to an actual network connection to the server. </summary>
     public abstract class ObjectStorage : ObjectsContext
     {
- 
 
-        public  virtual  bool IsReadonly
+        public static IErrorLog ErrorLog;
+        public virtual bool IsReadonly
         {
             get
             {
@@ -75,7 +79,7 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{10b11e44-39ed-4732-b7f1-0b06c8c91026}</MetaDataID>
         public override string Identity
         {
-            get 
+            get
             {
                 return StorageMetaData.StorageIdentity;
             }
@@ -88,7 +92,7 @@ namespace OOAdvantech.PersistenceLayer
             return base.ToString();
         }
 
-        
+
 
         /// <MetaDataID>{3BE94029-4BDC-4C2E-AFBB-7C3BBEB0D287}</MetaDataID>
         /// <summary>This method creates a new storage with name, type and location that defined from parameters StorageName, StorageType and StorageLocation. </summary>
@@ -104,7 +108,7 @@ namespace OOAdvantech.PersistenceLayer
         {
             return default(ObjectStorage);
         }
-//#if !DeviceDotNet
+        //#if !DeviceDotNet
         /// <MetaDataID>{73594137-3720-48C5-8525-A47D0A7C7DAD}</MetaDataID>
         public abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(MetaDataRepository.Classifier classifier, DateTime timePeriodStartDate, DateTime timePeriodEndDate);
 
@@ -116,7 +120,7 @@ namespace OOAdvantech.PersistenceLayer
 
         /// <MetaDataID>{DCE3F3A4-5569-45CD-B0C7-0E0907C5E53A}</MetaDataID>
         public abstract OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.RelatedStorageCell> GetRelationObjectsStorageCells(OOAdvantech.MetaDataRepository.Association association, OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.StorageCell> relatedStorageCells, OOAdvantech.MetaDataRepository.Roles storageCellsRole, string ofTypeIdentity = null);
-        
+
 
 
         /// <MetaDataID>{ee9ab3c8-f821-4c4a-852f-052de8773012}</MetaDataID>
@@ -126,26 +130,26 @@ namespace OOAdvantech.PersistenceLayer
         public abstract MetaDataRepository.StorageCell GetStorageCell(object ObjectID);
 
 
-//#else
-//         /// <MetaDataID>{73594137-3720-48C5-8525-A47D0A7C7DAD}</MetaDataID>
-//         protected abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(MetaDataRepository.Classifier classifier, DateTime timePeriodStartDate, DateTime timePeriodEndDate);
-//        /// <MetaDataID>{F233F4D7-6327-4104-9420-696611432F26}</MetaDataID>
-//         protected abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetLinkedStorageCells(MetaDataRepository.AssociationEnd associationEnd,MetaDataRepository.ValueTypePath  valueTypePath,Collections.Generic.Set<MetaDataRepository.StorageCell> relatedStorageCell);
-//        /// <MetaDataID>{75BA88E5-01BE-456A-AF4F-A0DE58C2B258}</MetaDataID>
-//        abstract  protected Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(MetaDataRepository.Classifier classifier);
-//        /// <MetaDataID>{DCE3F3A4-5569-45CD-B0C7-0E0907C5E53A}</MetaDataID>
-//         protected abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetRelationObjectsStorageCells(MetaDataRepository.Association association, Collections.Generic.Set<MetaDataRepository.StorageCell> relatedStorageCells, MetaDataRepository.Roles storageCellsRole);
+        //#else
+        //         /// <MetaDataID>{73594137-3720-48C5-8525-A47D0A7C7DAD}</MetaDataID>
+        //         protected abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(MetaDataRepository.Classifier classifier, DateTime timePeriodStartDate, DateTime timePeriodEndDate);
+        //        /// <MetaDataID>{F233F4D7-6327-4104-9420-696611432F26}</MetaDataID>
+        //         protected abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetLinkedStorageCells(MetaDataRepository.AssociationEnd associationEnd,MetaDataRepository.ValueTypePath  valueTypePath,Collections.Generic.Set<MetaDataRepository.StorageCell> relatedStorageCell);
+        //        /// <MetaDataID>{75BA88E5-01BE-456A-AF4F-A0DE58C2B258}</MetaDataID>
+        //        abstract  protected Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(MetaDataRepository.Classifier classifier);
+        //        /// <MetaDataID>{DCE3F3A4-5569-45CD-B0C7-0E0907C5E53A}</MetaDataID>
+        //         protected abstract Collections.Generic.Set<MetaDataRepository.StorageCell> GetRelationObjectsStorageCells(MetaDataRepository.Association association, Collections.Generic.Set<MetaDataRepository.StorageCell> relatedStorageCells, MetaDataRepository.Roles storageCellsRole);
 
 
-//        /// <MetaDataID>{69D4B685-85C4-49A9-97BB-9AB05AD1ADD8}</MetaDataID>
-//         protected abstract MetaDataRepository.StorageCell GetStorageCell(object ObjectID);
+        //        /// <MetaDataID>{69D4B685-85C4-49A9-97BB-9AB05AD1ADD8}</MetaDataID>
+        //         protected abstract MetaDataRepository.StorageCell GetStorageCell(object ObjectID);
 
-//#endif
+        //#endif
 
 
         /// <MetaDataID>{94945BEF-3659-4123-AA02-4F1B08CB56D7}</MetaDataID>
 
-        protected OOAdvantech.Synchronization.ReaderWriterLock ReaderWriterLock=new OOAdvantech.Synchronization.ReaderWriterLock();
+        protected OOAdvantech.Synchronization.ReaderWriterLock ReaderWriterLock = new OOAdvantech.Synchronization.ReaderWriterLock();
 
         /// <MetaDataID>{5D58FD9B-441A-4CE5-B36C-2C55BAF5FA8D}</MetaDataID>
         public static void DeleteStorage(string StorageName, string StorageLocation, string StorageType)
@@ -162,7 +166,7 @@ namespace OOAdvantech.PersistenceLayer
 
             try
             {
-                return PersistenceLayer.ObjectStorage.PersistencyService.IsPersistent(_object); 
+                return PersistenceLayer.ObjectStorage.PersistencyService.IsPersistent(_object);
             }
             catch (System.Exception Error)
             {
@@ -244,26 +248,26 @@ namespace OOAdvantech.PersistenceLayer
         /// </code>
         /// </example>
         /// <MetaDataID>{2317D690-9012-439C-8C11-9363A51C2BA0}</MetaDataID>
-        public abstract Collections.StructureSet Execute(string OQLStatement, Collections.Generic.Dictionary<string,object> parameters);
-       
+        public abstract Collections.StructureSet Execute(string OQLStatement, Collections.Generic.Dictionary<string, object> parameters);
+
         ///// <summary>Parse the specified query in OQLStatement parameter.
         ///// Return a StructureSet object with meta data of query statement. </summary>
         ///// <param name="OQLStatement">A String value that contains the OQL statement </param>
         ///// <MetaDataID>{CB433922-3D17-441D-863A-510594924477}</MetaDataID>
         //public abstract Collections.StructureSet Parse(string OQLStatement);
-        
+
         /// <summary>The object deleted if passes all the criteria for object 
         /// deletion (Referential integrity et cetera). 
         /// If it fails to delete the object then abort the transaction. 
         /// If the object is transient then simply return. </summary>
         /// <param name="thePersistentObject">The persistent object, which will be deleted. Remember that the object has implicitly connection with storage instance. </param>
         /// <MetaDataID>{8F583B55-2366-4B74-9344-27B96729DECF}</MetaDataID>
-		public static void DeleteObject(object thePersistentObject)
-		{
-			if(thePersistentObject==null)
-				throw new System.Exception("null object can't be deleted");
-			DeleteObject(thePersistentObject,DeleteOptions.EnsureObjectDeletion);
-		}
+        public static void DeleteObject(object thePersistentObject)
+        {
+            if (thePersistentObject == null)
+                throw new System.Exception("null object can't be deleted");
+            DeleteObject(thePersistentObject, DeleteOptions.EnsureObjectDeletion);
+        }
 
 
 
@@ -294,13 +298,13 @@ namespace OOAdvantech.PersistenceLayer
         /// If deleteOption is TryToDelete then there is nothing to do simply try.
         /// If deleteOption is EnsureObjectDeletion then abort transaction. </param>
         /// <MetaDataID>{F1FE60A1-72B9-4828-A6A2-51FF71EA268C}</MetaDataID>
-        public static void DeleteObject(object thePersistentObject,DeleteOptions deleteOption)
-		{
-			ObjectStorage objectStorage=GetStorageOfObject(thePersistentObject);
-			if(objectStorage==null)
-				return;
-			objectStorage.Delete(thePersistentObject,deleteOption);
-		}
+        public static void DeleteObject(object thePersistentObject, DeleteOptions deleteOption)
+        {
+            ObjectStorage objectStorage = GetStorageOfObject(thePersistentObject);
+            if (objectStorage == null)
+                return;
+            objectStorage.Delete(thePersistentObject, deleteOption);
+        }
 
 
 
@@ -320,12 +324,12 @@ namespace OOAdvantech.PersistenceLayer
         /// <param name="Object">Define the object that will commit its state. </param>
         /// <MetaDataID>{A3E4CF94-A2FE-426F-A531-01EB8C03DD92}</MetaDataID>
 		public static void CommitObjectState(object Object)
-		{
-			using (Transactions.ObjectStateTransition StateTransition=new OOAdvantech.Transactions.ObjectStateTransition(Object))
-			{
-				StateTransition.Consistent=true;;
-			}
-		}
+        {
+            using (Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(Object))
+            {
+                StateTransition.Consistent = true; ;
+            }
+        }
 
 
 
@@ -360,21 +364,21 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{67aed712-478b-4040-8c1f-185deef526f1}</MetaDataID>
         public T NewObject<T>()
         {
-            return  (T)NewObject(typeof(T)) ;
+            return (T)NewObject(typeof(T));
         }
 
         /// <MetaDataID>{df8d0442-ccb9-4d02-98ec-bb1b475c0f3b}</MetaDataID>
         public T NewObject<T>(Type[] paramsTypes, params object[] ctorParams)
         {
-            return (T)NewObject(typeof(T),paramsTypes, ctorParams);
+            return (T)NewObject(typeof(T), paramsTypes, ctorParams);
         }
 
         /// <MetaDataID>{5D58FD9B-441A-4CE5-B36C-2C55BAF5FA8D}</MetaDataID>
-		public static ObjectStorage OpenStorage(string StorageName, string StorageLocation, string StorageType,bool InProcess, string userName = "", string password = "")
-		{
+		public static ObjectStorage OpenStorage(string StorageName, string StorageLocation, string StorageType, bool InProcess, string userName = "", string password = "")
+        {
 
-			return PersistencyService.OpenStorage(StorageName,StorageLocation,StorageType);
-		}
+            return PersistencyService.OpenStorage(StorageName, StorageLocation, StorageType);
+        }
 
         /// <summary>Open a session to access the storage that defined from the parameters.
         /// If something goes wrong then raise <see cref="StorageException">
@@ -395,7 +399,7 @@ namespace OOAdvantech.PersistenceLayer
         }
 
 
-         
+
         /// <summary>
         /// Open a session to access the storage that defined from the parameters.
         /// System return the same object  if you call method more than once for the same storage
@@ -407,14 +411,18 @@ namespace OOAdvantech.PersistenceLayer
         /// Actual is the full name of Storage Provider for example 
         /// OOAdvantech.MSSQLPersistenceRunTime.StorageProvider. </param>
         /// <MetaDataID>{58834B72-37CA-4F14-BDEB-3559AE0E665E}</MetaDataID>
-		public static ObjectStorage OpenStorage(string StorageName, string StorageLocation, string storageType,string userName="",string password="")
-		{
-            
+        public static ObjectStorage OpenStorage(string StorageName, string StorageLocation, string storageType, string userName = "", string password = "")
+        {
+
             string storageProvider = null;
             if (StorageProviders.TryGetValue(storageType, out storageProvider))
-                storageType=storageProvider;
-			return PersistencyService.OpenStorage(StorageName,StorageLocation,storageType,userName,password);
-		}
+                storageType = storageProvider;
+
+            if (ObjectStorage.ErrorLog != null)
+                ObjectStorage.ErrorLog.WriteLog("PersistencyService.OpenStorage");
+
+            return PersistencyService.OpenStorage(StorageName, StorageLocation, storageType, userName, password);
+        }
 
         public static void UpdateOperativeOperativeObjects(string storageIdentity)
         {
@@ -430,43 +438,43 @@ namespace OOAdvantech.PersistenceLayer
         /// <param name="storageType">This parameter used to specify the type of new storage. Actual is the full name of Storage Provider for example MSSQLRunTime. MSSQLStorageProvider. </param>
         /// <MetaDataID>{81120A5D-356C-4350-B3D2-3C6A937CFA74}</MetaDataID>
 		public static ObjectStorage NewStorage(Storage storageMetadata, string StorageName, string StorageLocation, string storageType)
-		{
+        {
             string storageProvider = null;
             if (StorageProviders.TryGetValue(storageType, out storageProvider))
                 storageType = storageProvider;
-			return PersistencyService.NewStorage(storageMetadata,StorageName,StorageLocation,storageType,false);
-		}
-		/// <summary>This method creates a new storage with name, type and location that defined from parameters StorageName, StorageType and StorageLocation. </summary>
-		/// <param name="StorageName">Define the name of new storage. </param>
-		/// <param name="StorageLocation">This string used to specify the location of new storage. Maybe is a SQL server name or URL (Uniform Resource Locator). The format of string depends from the type of new storage </param>
-		/// <param name="storageType">This parameter used to specify the type of new storage. Actual is the full name of Storage Provider for example MSSQLRunTime. MSSQLStorageProvider. </param>
-		/// <MetaDataID>{FFB7D927-CBEA-4E29-856A-ADE660045143}</MetaDataID>
-		public static ObjectStorage NewStorage(string StorageName, string StorageLocation, string storageType, string userName = "", string password = "")
-		{
+            return PersistencyService.NewStorage(storageMetadata, StorageName, StorageLocation, storageType, false);
+        }
+        /// <summary>This method creates a new storage with name, type and location that defined from parameters StorageName, StorageType and StorageLocation. </summary>
+        /// <param name="StorageName">Define the name of new storage. </param>
+        /// <param name="StorageLocation">This string used to specify the location of new storage. Maybe is a SQL server name or URL (Uniform Resource Locator). The format of string depends from the type of new storage </param>
+        /// <param name="storageType">This parameter used to specify the type of new storage. Actual is the full name of Storage Provider for example MSSQLRunTime. MSSQLStorageProvider. </param>
+        /// <MetaDataID>{FFB7D927-CBEA-4E29-856A-ADE660045143}</MetaDataID>
+        public static ObjectStorage NewStorage(string StorageName, string StorageLocation, string storageType, string userName = "", string password = "")
+        {
             string storageProvider = null;
             if (StorageProviders.TryGetValue(storageType, out storageProvider))
                 storageType = storageProvider;
-			return PersistencyService.NewStorage(null,StorageName,StorageLocation,storageType,false,userName,password);
-		}
+            return PersistencyService.NewStorage(null, StorageName, StorageLocation, storageType, false, userName, password);
+        }
 
         /// <summary>This method creates a new storage with name, type and location that defined from parameters StorageName, StorageType and StorageLocation. </summary>
         /// <param name="StorageName">Define the name of new storage. </param>
         /// <param name="StorageLocation">This string used to specify the location of new storage. Maybe is a SQL server name or URL (Uniform Resource Locator). The format of string depends from the type of new storage </param>
         /// <param name="storageType">This parameter used to specify the type of new storage. Actual is the full name of Storage Provider for example MSSQLRunTime. MSSQLStorageProvider. </param>
         /// <MetaDataID>{FFB7D927-CBEA-4E29-856A-ADE660045143}</MetaDataID>
-        public static ObjectStorage NewLogicalStorage(string hostingStorageName, string hostingStorageLocation, string hostingStorageType,string logicalStorageName)
+        public static ObjectStorage NewLogicalStorage(string hostingStorageName, string hostingStorageLocation, string hostingStorageType, string logicalStorageName)
         {
             string storageProvider = null;
             if (StorageProviders.TryGetValue(hostingStorageType, out storageProvider))
                 hostingStorageType = storageProvider;
-            return PersistencyService.NewLogicalStorage( hostingStorageName, hostingStorageLocation, hostingStorageType, logicalStorageName, false);
+            return PersistencyService.NewLogicalStorage(hostingStorageName, hostingStorageLocation, hostingStorageType, logicalStorageName, false);
         }
 
         /// <MetaDataID>{93d2af58-307c-4ae1-bc0f-f03c9ce8a83d}</MetaDataID>
         public static ObjectStorage NewLogicalStorage(ObjectStorage hostingStorage, string logicalStorageName)
         {
 
-            return PersistencyService.NewLogicalStorage(hostingStorage,  logicalStorageName);
+            return PersistencyService.NewLogicalStorage(hostingStorage, logicalStorageName);
         }
 
         /// <MetaDataID>{148f0b13-fbd5-451a-9cbe-6c98456ad9c4}</MetaDataID>
@@ -476,7 +484,7 @@ namespace OOAdvantech.PersistenceLayer
             string[] persistentObjectUriParts = persistentUri.Split('\\');
             string storageIdentity = persistentObjectUriParts[0];
             var storageMetaData = PersistenceLayer.StorageServerInstanceLocator.Current.GetSorageMetaData(storageIdentity);
-            if (storageMetaData!=null&& storageMetaData.MultipleObjectContext)
+            if (storageMetaData != null && storageMetaData.MultipleObjectContext)
             {
                 var objectStorage = PersistenceLayer.ObjectStorage.OpenStorage(storageMetaData.StorageName, storageMetaData.StorageLocation, storageMetaData.StorageType);
                 @object = objectStorage.GetObject(persistentUri);
@@ -523,20 +531,20 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{0FEAEFED-3186-45DB-BFD3-DF5A3906F8F8}</MetaDataID>
         public static ObjectStorage NewStorage(string StorageName, string StorageLocation, string storageType, bool InProcess)
         {
-            
+
             return PersistencyService.NewStorage(null, StorageName, StorageLocation, storageType, InProcess);
         }
 
         /// <MetaDataID>{ed20c440-2c81-4d20-8a19-26e9e6d27087}</MetaDataID>
         public static void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool InProcess, string userName = "", string password = "")
         {
-             PersistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName,password);
+            PersistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password);
         }
 
         /// <MetaDataID>{edb1711c-b65b-485c-b3ea-2dd730dc8246}</MetaDataID>
         public static void Repair(string storageName, string storageLocation, string storageType, bool InProcess)
         {
-            PersistencyService.Repair( storageName, storageLocation, storageType, InProcess);
+            PersistencyService.Repair(storageName, storageLocation, storageType, InProcess);
         }
 
 
@@ -547,14 +555,14 @@ namespace OOAdvantech.PersistenceLayer
         /// <param name="rawStorageData">This parameter defines an object which contains the raw data for stored object.
         /// It can be an xml document a file or memory stream etc. the storage loaded in process by default. </param>
         public static ObjectStorage NewStorage(string StorageName, object rawStorageData, string storageType)
-		{
+        {
             string storageProvider = null;
             if (StorageProviders.TryGetValue(storageType, out storageProvider))
                 storageType = storageProvider;
             return PersistencyService.NewStorage(null, StorageName, rawStorageData, storageType);
-		}
+        }
 
-     
+
 
 
         /// <MetaDataID>{cc5a29aa-347a-42d4-a204-f03f658a31fb}</MetaDataID>
@@ -567,7 +575,7 @@ namespace OOAdvantech.PersistenceLayer
 
 
         /// <MetaDataID>{6219a9c7-8ce3-477c-a450-263a9d53d3e3}</MetaDataID>
-       internal protected static System.Collections.Generic.Dictionary<string, string> StorageProviders = new System.Collections.Generic.Dictionary<string, string>()
+        internal protected static System.Collections.Generic.Dictionary<string, string> StorageProviders = new System.Collections.Generic.Dictionary<string, string>()
         {
             {"Microsoft SQL Server","OOAdvantech.MSSQLPersistenceRunTime.StorageProvider"},
             {"Microsoft SQL Server Compact","OOAdvantech.MSSQLCompactPersistenceRunTime.StorageProvider"},
@@ -576,7 +584,7 @@ namespace OOAdvantech.PersistenceLayer
             {"In Process Microsoft SQL Server","OOAdvantech.MSSQLPersistenceRunTime.EmbeddedStorageProvider"},
             {"In Process Oracle Database","OOAdvantech.OraclePersistenceRunTime.EmbeddedStorageProvider"}
         };
-            
+
 
 
         /// <summary>This method can be used in the case where you want to create a transient 
@@ -595,12 +603,12 @@ namespace OOAdvantech.PersistenceLayer
         /// with an existing storage. </summary>
         /// <MetaDataID>{53EE346D-3ED3-4282-BA4F-37357A6E5F45}</MetaDataID>
         public static IPersistencyService PersistencyService
-		{
-			set
-			{
-			}
-			get
-			{
+        {
+            set
+            {
+            }
+            get
+            {
 
                 if (null == _PersistencyService)
                 {
@@ -612,12 +620,12 @@ namespace OOAdvantech.PersistenceLayer
                     if (System.Environment.Version.Major == 4)
                     {
 
-                        _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"),true);
+                        _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"), true);
                     }
                     else
                     {
 
-                        _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"),true);
+                        _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"), true);
 
                     }
 #else
@@ -626,39 +634,39 @@ namespace OOAdvantech.PersistenceLayer
 #endif
                 }
                 return _PersistencyService;
-			}
-		}
+            }
+        }
 
-     
+
         /// <summary>This method retrieves a storage session with storage of object if it is persistent. If the object is transient return null. </summary>
         /// <param name="_object">Define the object from which you wand retrieve the storage session. </param>
         /// <MetaDataID>{5E8CE175-8E8A-424E-801A-2BCED2AA4816}</MetaDataID>
-		public static ObjectStorage GetStorageOfObject(object _object)
-		{
+        public static ObjectStorage GetStorageOfObject(object _object)
+        {
             bool remoteObject = false;
 #if !DeviceDotNet
-            remoteObject=Remoting.RemotingServices.IsOutOfProcess(_object as System.MarshalByRefObject);
+            remoteObject = Remoting.RemotingServices.IsOutOfProcess(_object as System.MarshalByRefObject);
 #endif
 
             if (_object is MarshalByRefObject && remoteObject)
-				return PersistencyService.GetStorageOfObject(_object);
-			else
-			{
-				// Error prone πρόβλημα αν το object είναι σε άλλο process και το ExtensionProperties member δε είναι public
-				StorageInstanceRef storageInstanceRef=StorageInstanceRef.GetStorageInstanceRef(_object);
-				// Error prone Client StorageSession εαν είναι remote
-				if(storageInstanceRef!=null)
-				{
+                return PersistencyService.GetStorageOfObject(_object);
+            else
+            {
+                // Error prone πρόβλημα αν το object είναι σε άλλο process και το ExtensionProperties member δε είναι public
+                StorageInstanceRef storageInstanceRef = StorageInstanceRef.GetStorageInstanceRef(_object);
+                // Error prone Client StorageSession εαν είναι remote
+                if (storageInstanceRef != null)
+                {
 #if !DeviceDotNet
-					if(OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef)||OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef.ObjectStorage))
-						return AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.ClientStorageSession",""),new System.Type[1]{typeof(PersistenceLayer.ObjectStorage)},storageInstanceRef.ObjectStorage) as PersistenceLayer.ObjectStorage ;
+                    if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef) || OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef.ObjectStorage))
+                        return AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.ClientStorageSession", ""), new System.Type[1] { typeof(PersistenceLayer.ObjectStorage) }, storageInstanceRef.ObjectStorage) as PersistenceLayer.ObjectStorage;
 #endif
-					return  storageInstanceRef.ObjectStorage;
-				}
-				else 
-					return null;
-			}
-		}
+                    return storageInstanceRef.ObjectStorage;
+                }
+                else
+                    return null;
+            }
+        }
 
         /// <MetaDataID>{214d0009-ed00-4e3c-bd7f-7f72f2d91b7d}</MetaDataID>
         public static ObjectStorage GetStorage(OOAdvantech.PersistenceLayer.Storage storageMetaData)
@@ -669,28 +677,28 @@ namespace OOAdvantech.PersistenceLayer
             else
                 return objectStorage;
             bool remoteObject = false;
-//#if !DeviceDotNet
-//            remoteObject = Remoting.RemotingServices.IsOutOfProcess(_object as System.MarshalByRefObject);
-//#endif
+            //#if !DeviceDotNet
+            //            remoteObject = Remoting.RemotingServices.IsOutOfProcess(_object as System.MarshalByRefObject);
+            //#endif
 
-//            if (_object is System.MarshalByRefObject && remoteObject)
-//                return PersistencyService.GetStorageOfObject(_object);
-//            else
-//            {
-//                // Error prone πρόβλημα αν το object είναι σε άλλο process και το ExtensionProperties member δε είναι public
-//                StorageInstanceRef storageInstanceRef = OOAdvantech.ExtensionProperties.GetExtensionPropertiesFromObject(_object).StorageInstanceRef;
-//                // Error prone Client StorageSession εαν είναι remote
-//                if (storageInstanceRef != null)
-//                {
-//#if !DeviceDotNet
-//                    if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef) || OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef.ObjectStorage))
-//                        return AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.ClientStorageSession", ""), new System.Type[1] { typeof(PersistenceLayer.ObjectStorage) }, storageInstanceRef.ObjectStorage) as PersistenceLayer.ObjectStorage;
-//#endif
-//                    return storageInstanceRef.ObjectStorage;
-//                }
-//                else
-//                    return null;
-//            }
+            //            if (_object is System.MarshalByRefObject && remoteObject)
+            //                return PersistencyService.GetStorageOfObject(_object);
+            //            else
+            //            {
+            //                // Error prone πρόβλημα αν το object είναι σε άλλο process και το ExtensionProperties member δε είναι public
+            //                StorageInstanceRef storageInstanceRef = OOAdvantech.ExtensionProperties.GetExtensionPropertiesFromObject(_object).StorageInstanceRef;
+            //                // Error prone Client StorageSession εαν είναι remote
+            //                if (storageInstanceRef != null)
+            //                {
+            //#if !DeviceDotNet
+            //                    if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef) || OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(storageInstanceRef.ObjectStorage))
+            //                        return AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.ClientStorageSession", ""), new System.Type[1] { typeof(PersistenceLayer.ObjectStorage) }, storageInstanceRef.ObjectStorage) as PersistenceLayer.ObjectStorage;
+            //#endif
+            //                    return storageInstanceRef.ObjectStorage;
+            //                }
+            //                else
+            //                    return null;
+            //            }
         }
         /// <summary>This method retrieves a storage session with storage of object if it is persistent from extension properties.
         /// If the object is transient return null. The extension properties 
@@ -700,27 +708,27 @@ namespace OOAdvantech.PersistenceLayer
         /// <param name="extensionProperties">The extension properties collection is a link of object with persistency subsystem or transaction subsystem or other functional areas of OOAdvance system. </param>
         /// <MetaDataID>{46FCBEE8-D414-43A0-A676-6D8119EA7931}</MetaDataID>
 		public static ObjectStorage GetStorageOfObject(OOAdvantech.ObjectStateManagerLink extensionProperties)
-		{
-			if(extensionProperties==null)
-				return null;
-			StorageInstanceRef storageInstanceRef=extensionProperties.StorageInstanceRef;
-			if(storageInstanceRef!=null)
-				return storageInstanceRef.ObjectStorage;
-			else 
-				return null;
-		}
+        {
+            if (extensionProperties == null)
+                return null;
+            StorageInstanceRef storageInstanceRef = extensionProperties.StorageInstanceRef;
+            if (storageInstanceRef != null)
+                return storageInstanceRef.ObjectStorage;
+            else
+                return null;
+        }
 
 
 
         /// <summary>This property defines the Meta data of storage. </summary>
         /// <MetaDataID>{68FC876D-EFC6-4D30-A585-C9FA99258BF8}</MetaDataID>
         public abstract Storage StorageMetaData
-		{
-			
-			get;
+        {
+
+            get;
 
 
-		}
+        }
 
         /// <summary>Executes the specified query in OQLStatement parameter </summary>
         /// <param name="OQLStatement">A String value that contains the OQL statement </param>
@@ -787,7 +795,7 @@ namespace OOAdvantech.PersistenceLayer
         }
 
 
-        
+
     }
     /// <MetaDataID>{106ba9a6-5bd8-418a-8e12-20313b5606a5}</MetaDataID>
     public static class ObjectStorageMoveOptionsExtraOperators
@@ -795,7 +803,7 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{1440f04b-affe-4970-a280-0bdffaff05a6}</MetaDataID>
         public static TSource GetInside<TSource>(this TSource source, params object[] list) { return default(TSource); }
         /// <MetaDataID>{dc1c6433-76f5-4768-9895-475dd550b154}</MetaDataID>
-        public static TSource LetOut<TSource>(this TSource source, params object[] list) { return default(TSource);}
+        public static TSource LetOut<TSource>(this TSource source, params object[] list) { return default(TSource); }
     }
 
 
