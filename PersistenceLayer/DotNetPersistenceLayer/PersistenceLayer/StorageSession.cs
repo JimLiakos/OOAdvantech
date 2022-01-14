@@ -16,10 +16,6 @@ namespace OOAdvantech.PersistenceLayer
     public delegate void ObjectStorageResolveHandler(object sender, string StorageIdentity);
     public delegate void ObjectStorageLoadeHandler(object sender, string StorageIdentity);
 
-    public interface IErrorLog
-    {
-        void WriteLog(string message);
-    }
 
 
     /// <MetaDataID>{3096B31D-B5CC-4B5C-823B-41CE91DA5C98}</MetaDataID>
@@ -30,7 +26,7 @@ namespace OOAdvantech.PersistenceLayer
     public abstract class ObjectStorage : ObjectsContext
     {
 
-        public static IErrorLog ErrorLog;
+        //public static MetaDataRepository.IErrorLog ErrorLog;
         public virtual bool IsReadonly
         {
             get
@@ -418,9 +414,7 @@ namespace OOAdvantech.PersistenceLayer
             if (StorageProviders.TryGetValue(storageType, out storageProvider))
                 storageType = storageProvider;
 
-            if (ObjectStorage.ErrorLog != null)
-                ObjectStorage.ErrorLog.WriteLog("PersistencyService.OpenStorage");
-
+         
             return PersistencyService.OpenStorage(StorageName, StorageLocation, storageType, userName, password);
         }
 

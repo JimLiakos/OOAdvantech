@@ -15,7 +15,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     /// <MetaDataID>{3dc902aa-cda5-4694-8f5e-ad91a896bb47}</MetaDataID>
     public class StorageProvider : PersistenceLayerRunTime.StorageProvider
     {
+        static Dictionary<string, StorageCredentials> ImplicitOpenStorageCredentials = new Dictionary<string, StorageCredentials>();
+        //Set Implicit Open Storage Credentials
+        public static void SetImplicitOpenStorageCredentials(string storageLocation, StorageCredentials storageCredentials)
+        {
+            ImplicitOpenStorageCredentials[storageLocation] = storageCredentials;
 
+        }
 
         public StorageProvider()
         {
@@ -190,10 +196,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 CloudStorageAccount account = null;
 
-                if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName)||userName== "devstoreaccount1"))
+                if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
                     account = CloudStorageAccount.DevelopmentStorageAccount;
                 else
-                    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+                {
+                    if(string.IsNullOrWhiteSpace(userName)&&OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(StorageLocation))
+                        account = new CloudStorageAccount(OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials[StorageLocation], true);
+                    else
+                        account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+                }
                 CloudTableClient tableClient = account.CreateCloudTableClient();
 
                 CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
