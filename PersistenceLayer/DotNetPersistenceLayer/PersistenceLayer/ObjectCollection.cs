@@ -78,7 +78,7 @@ namespace OOAdvantech.PersistenceLayer
         int IndexOf(object item, int index);
         /// <MetaDataID>{edcec974-4a49-4c60-8cf0-947251c26b7b}</MetaDataID>
         int IndexOf(object item, int index, int count);
-        List<object> ToThreadSafeList();
+        System.Collections.Generic.IList<object> ToThreadSafeList();
 
 		System.Collections.ICollection ToThreadSafeSet(Type setType);
         

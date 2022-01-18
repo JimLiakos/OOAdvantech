@@ -16,15 +16,27 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
             throw new NotImplementedException();
         }
+
+        bool? _Multilingual;
+
         public override bool Multilingual
         {
             get
             {
-                if (FieldMember != null && FieldMember.FieldType.IsGenericType && FieldMember.FieldType.GetGenericTypeDefinition() == typeof(MultilingualMember<>))
-                    return true;
+                if (_Multilingual != null)
+                    return _Multilingual.Value;
 
-                return base.Multilingual;
+                if (FieldMember != null && FieldMember.FieldType.IsGenericType && FieldMember.FieldType.GetGenericTypeDefinition() == typeof(MultilingualMember<>))
+                {
+                    _Multilingual = true;
+                    return true;
+                }
+
+                _Multilingual = base.Multilingual;
+                return _Multilingual.Value;
             }
+
+         
             set => base.Multilingual = value;
         }
         public override void SetValue(object _object, object value)

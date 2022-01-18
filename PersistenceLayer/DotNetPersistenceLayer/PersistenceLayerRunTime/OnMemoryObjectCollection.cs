@@ -441,6 +441,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// </param>
         private void IndirectIndexRebuild(System.Collections.Generic.List<CollectionChange> collectionChanges)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             foreach (var collectionChange in collectionChanges)
             {
                 if (collectionChange.TypeOfChange == CollectionChange.ChangeType.Added && collectionChange.Implicitly && collectionChange.Index == -1)
@@ -898,7 +903,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{42A863A7-2B32-466B-A7E4-1F20D3D78AA2}</MetaDataID>
         public virtual void CommitChanges(OOAdvantech.Transactions.Transaction transaction)
         {
-
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             if (Multilingual)
             {
                 lock (MultilingualCollectionChanges)
@@ -1105,6 +1114,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{26E578F7-7C7F-4404-BBDA-A24EFDC32662}</MetaDataID>
         public virtual void RemoveObjects(PersistenceLayer.ObjectCollection objects)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             foreach (object _object in objects)
                 Remove(_object);
         }
@@ -1112,12 +1126,23 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{7911E9D0-5412-41FE-BD70-ABFB015106A2}</MetaDataID>
         public virtual void AddObjects(PersistenceLayer.ObjectCollection objects)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             foreach (object currObject in objects)
                 Add(currObject);
+          
         }
         /// <MetaDataID>{AC2006AD-EC68-465A-80E2-8E308B268AAE}</MetaDataID>
         public virtual void RemoveAll()
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
 
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
@@ -1191,7 +1216,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{38b29c2b-5cd4-43d7-8b90-77db4ede296c}</MetaDataID>
         public void RemoveAt(int index)
         {
-
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
 
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
@@ -1444,7 +1473,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{179E418D-8D84-43FE-AC9A-A5FBBF4D3736}</MetaDataID>
         public void Add(object theObject, bool implicitly)
         {
-
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
 
             if (RelResolver != null && theObject is OOAdvantech.MetaDataRepository.MetaObject && (theObject as OOAdvantech.MetaDataRepository.MetaObject).Name == "List`1")
             {
@@ -1624,7 +1657,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return;
             if (!implicitly && !Contains(item))
                 return;
-
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
 
             if (RelResolver != null && (RelResolver.AssociationEnd.Association.Name == "HallLayoutShape" || RelResolver.AssociationEnd.Association.Name == "SalesOffice_AccountabilityTypes"))
             {
@@ -1954,7 +1991,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{ac2a6bc1-c3d0-4ceb-889d-2d82d6bed023}</MetaDataID>
         void AddCollectionChange(CollectionChange collectionChangement, Transactions.Transaction transaction)
         {
-
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try
             {
@@ -1988,6 +2029,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{a7c33e50-5ad0-4b44-906c-4f655959995f}</MetaDataID>
         void RemoveCollectionChange(CollectionChange collectionChangement)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             foreach (System.Collections.Generic.KeyValuePair<string, Collections.Generic.Dictionary<object, CollectionChange>> entry in CollectionChanges)
             {
                 if (entry.Value.ContainsKey(collectionChangement.Object))
@@ -2003,6 +2049,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{bb368544-7d3a-445e-b13a-be0f087a8906}</MetaDataID>
         public virtual void UndoChanges(OOAdvantech.Transactions.Transaction transaction)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
+
             if (Multilingual)
             {
                 lock (MultilingualCollectionChanges)
@@ -2336,10 +2388,15 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return cultures;
             }
         }
+        IList ThreadSafeSet= null;
         public System.Collections.ICollection ToThreadSafeSet(Type setType)
         {
-
-
+           
+                lock (ThreadSafeLock)
+            {
+                if (ThreadSafeSet != null)
+                    return ThreadSafeSet;
+            }
             IList list = Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType)) as IList;
             ReaderWriterLock.AcquireReaderLock(10000);
 
@@ -2360,7 +2417,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 foreach (var obj in this)
                     list.Add(obj);
-                return list;
+                
             }
             finally
             {
@@ -2382,9 +2439,21 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
 
             }
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeSet= Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType), list, Collections.CollectionAccessType.ReadOnly) as IList;
+                return ThreadSafeSet;
+            }
         }
-        public OOAdvantech.Collections.Generic.List<object> ToThreadSafeList()
+        object ThreadSafeLock = new object();
+        OOAdvantech.Collections.Generic.List<object> ThreadSafeList = null;
+        public System.Collections.Generic.IList<object> ToThreadSafeList()
         {
+            lock(ThreadSafeLock)
+            {
+                if (ThreadSafeList != null)
+                    return ThreadSafeList.AsReadOnly();
+            }
             ReaderWriterLock.AcquireReaderLock(10000);
             //int fc = ReaderWriterLock.SystemReaderWriterLock.ReadLocks.Count;
             //int frc = ReaderWriterLock.SystemReaderWriterLock.RefCount();
@@ -2402,12 +2471,13 @@ namespace OOAdvantech.PersistenceLayerRunTime
             //{
 
             //}
+            List<object> list = new List<object>();
             try
             {
-                List<object> list = new List<object>();
+                
                 foreach (var obj in this)
                     list.Add(obj);
-                return list;
+                
             }
             finally
             {
@@ -2425,6 +2495,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 //  
 
             }
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = list;
+            }
+            return list.AsReadOnly();
         }
 
         /// <MetaDataID>{1761192F-01A5-4C02-A065-FC02EFE68A67}</MetaDataID>
@@ -2732,6 +2807,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{1a25600a-5d11-4344-a524-56d19ad1fcd6}</MetaDataID>
         void ICollectionMember.AddImplicitly(object _object)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             if (RelResolver != null && RelResolver.AssociationEnd.Indexer && NextIndex == -1 && !RelResolver.IsCompleteLoaded)
                 NextIndex = (RelResolver as System.Collections.ICollection).Count;
             OOAdvantech.PersistenceLayerRunTime.Commands.Command command = null;
@@ -2740,11 +2820,17 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 TransactionContext.CurrentTransactionContext.EnlistedCommands.TryGetValue(Commands.UpdateStorageInstanceCommand.GetIdentity(RelResolver.Owner), out command))
                 (command as Commands.UpdateStorageInstanceCommand).RefreshSubCommands();
             Add(_object, true);
+          
         }
 
         /// <MetaDataID>{ecd2f1a5-2986-4751-8617-aaa88efda3e8}</MetaDataID>
         void ICollectionMember.RemoveImplicitly(object _object)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             if (RelResolver != null)
             {
                 OOAdvantech.PersistenceLayerRunTime.Commands.Command command = null;
@@ -2755,6 +2841,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
 
             Remove(_object, true);
+          
         }
 
         /// <MetaDataID>{df95e6ba-a8e1-47db-8125-9cad5c33cf62}</MetaDataID>
@@ -2991,6 +3078,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         public void IndexRebuilded(string localTransactionUri)
         {
+            lock (ThreadSafeLock)
+            {
+                ThreadSafeList = null;
+                ThreadSafeSet = null;
+            }
             foreach (var collectionChange in GetCollectionChanges(Transactions.Transaction.Current))
                 collectionChange.RelatedObjectsIndexesRebuilded = true;
             //RelatedObjectsIndexesRebuilded = true;
