@@ -1133,7 +1133,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
             foreach (object currObject in objects)
                 Add(currObject);
-          
+
         }
         /// <MetaDataID>{AC2006AD-EC68-465A-80E2-8E308B268AAE}</MetaDataID>
         public virtual void RemoveAll()
@@ -2388,11 +2388,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return cultures;
             }
         }
-        IList ThreadSafeSet= null;
+        IList ThreadSafeSet = null;
         public System.Collections.ICollection ToThreadSafeSet(Type setType)
         {
-           
-                lock (ThreadSafeLock)
+
+            lock (ThreadSafeLock)
             {
                 if (ThreadSafeSet != null)
                     return ThreadSafeSet;
@@ -2417,7 +2417,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 foreach (var obj in this)
                     list.Add(obj);
-                
+
             }
             finally
             {
@@ -2441,7 +2441,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
             lock (ThreadSafeLock)
             {
-                ThreadSafeSet= Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType), list, Collections.CollectionAccessType.ReadOnly) as IList;
+                ThreadSafeSet = Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType), list, Collections.CollectionAccessType.ReadOnly) as IList;
                 return ThreadSafeSet;
             }
         }
@@ -2449,7 +2449,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         OOAdvantech.Collections.Generic.List<object> ThreadSafeList = null;
         public System.Collections.Generic.IList<object> ToThreadSafeList()
         {
-            lock(ThreadSafeLock)
+            lock (ThreadSafeLock)
             {
                 if (ThreadSafeList != null)
                     return ThreadSafeList.AsReadOnly();
@@ -2474,10 +2474,10 @@ namespace OOAdvantech.PersistenceLayerRunTime
             List<object> list = new List<object>();
             try
             {
-                
+
                 foreach (var obj in this)
                     list.Add(obj);
-                
+
             }
             finally
             {
@@ -2820,7 +2820,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 TransactionContext.CurrentTransactionContext.EnlistedCommands.TryGetValue(Commands.UpdateStorageInstanceCommand.GetIdentity(RelResolver.Owner), out command))
                 (command as Commands.UpdateStorageInstanceCommand).RefreshSubCommands();
             Add(_object, true);
-          
+
         }
 
         /// <MetaDataID>{ecd2f1a5-2986-4751-8617-aaa88efda3e8}</MetaDataID>
@@ -2841,7 +2841,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
 
             Remove(_object, true);
-          
+
         }
 
         /// <MetaDataID>{df95e6ba-a8e1-47db-8125-9cad5c33cf62}</MetaDataID>
@@ -3074,7 +3074,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         }
 
-       // bool RelatedObjectsIndexesRebuilded;
+        // bool RelatedObjectsIndexesRebuilded;
 
         public void IndexRebuilded(string localTransactionUri)
         {

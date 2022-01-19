@@ -301,10 +301,17 @@ namespace ModulePublisher
 #if DeviceDotNet
                 return type;
 #else
-
-                var classAssembly = (from assem in System.AppDomain.CurrentDomain.GetAssemblies()
+                Assembly classAssembly = null;
+                if(assemblyData!=null)
+                    ClassesAssemblies.TryGetValue(assemblyData, out classAssembly);
+                if (classAssembly == null)
+                    classAssembly = (from assem in System.AppDomain.CurrentDomain.GetAssemblies()
                                      where assem.GetName().FullName == assemblyData
                                      select assem).FirstOrDefault();
+                else
+                {
+
+                }
 
                 if (classAssembly == null && !string.IsNullOrEmpty(assemblyData))
                 {
@@ -319,6 +326,7 @@ namespace ModulePublisher
 
                 if (classAssembly != null)
                 {
+                    ClassesAssemblies[classAssembly.FullName] = classAssembly;
                     type = classAssembly.GetType(classFullName);
                     if (type != null && !string.IsNullOrEmpty(assemblyData))
                     {
@@ -711,7 +719,7 @@ namespace ModulePublisher
                     {
                         if (ClassesAssemblies.ContainsKey(assemblyFullName))
                             throw new System.IO.FileNotFoundException(assemblyFullName);
-                            
+
                         ClassesAssemblies[assemblyFullName] = null;
                         assembly = AppDomain.Load(assemblyFullName);
                     }
@@ -737,7 +745,7 @@ namespace ModulePublisher
 
                                 }
                             }
-                            if(!assemblyLoaded)
+                            if (!assemblyLoaded)
                             {
                                 ErrorLoadingRefDll.Add(assemblyFullName);
                             }
