@@ -960,7 +960,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             {
 
                 CloudTableClient tableClient = Account.CreateCloudTableClient();
-                AzureTableMetaDataPersistenceRunTime.Storage metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider").StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+                AzureTableMetaDataPersistenceRunTime.Storage metaDataStorage = null;
+                if (Account.Credentials.AccountName== CloudStorageAccount.DevelopmentStorageAccount.Credentials.AccountName)
+                    metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider").StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+                else
+                    metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", Account.Credentials.AccountName, Account.Credentials.Key).StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+
 
                 var classBLOBDataColumns = AzureTableMetaDataPersistenceRunTime.ClassBLOBData.ListOfColumns;
                 var classBLOBDataTable = tableClient.GetTableReference(metaDataStorage.ClassBLOBDataTableName);
