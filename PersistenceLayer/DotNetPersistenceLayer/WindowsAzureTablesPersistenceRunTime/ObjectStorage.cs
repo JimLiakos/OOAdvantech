@@ -1139,7 +1139,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, CloudTable classBLOBDataTable)
         {
             var query = new TableQuery<ElasticTableEntity>();
-            var tableEntities = classBLOBDataTable.ExecuteQuery(query.Select(columns.Select(x => x.Name).ToList())).ToList();
+            var tableEntities = classBLOBDataTable.ExecuteQuery(query.Select(columns.Select(x => x.DataBaseColumnName).ToList())).ToList();
 
             Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member> tableMembersDictionary = new Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member>();
             List<AzureTableMetaDataPersistenceRunTime.Member> tableMembers = new List<AzureTableMetaDataPersistenceRunTime.Member>();
@@ -1152,8 +1152,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             tableMembers.Add(member);
             foreach (var column in columns)
             {
-                member = new AzureTableMetaDataPersistenceRunTime.Member(column.Name, TypeDictionary.GetEdmType(column.Type.GetExtensionMetaObject<System.Type>()));
-                tableMembersDictionary[column.Name] = member;
+                member = new AzureTableMetaDataPersistenceRunTime.Member(column.DataBaseColumnName, TypeDictionary.GetEdmType(column.Type.GetExtensionMetaObject<System.Type>()));
+                tableMembersDictionary[column.DataBaseColumnName] = member;
                 tableMembers.Add(member);
             }
 
