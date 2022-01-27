@@ -960,7 +960,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             {
 
                 CloudTableClient tableClient = Account.CreateCloudTableClient();
-                AzureTableMetaDataPersistenceRunTime.Storage metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider").StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+                AzureTableMetaDataPersistenceRunTime.Storage metaDataStorage = null;
+                if (Account.Credentials.AccountName== CloudStorageAccount.DevelopmentStorageAccount.Credentials.AccountName)
+                    metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider").StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+                else
+                    metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", Account.Credentials.AccountName, Account.Credentials.Key).StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+
 
                 var classBLOBDataColumns = AzureTableMetaDataPersistenceRunTime.ClassBLOBData.ListOfColumns;
                 var classBLOBDataTable = tableClient.GetTableReference(metaDataStorage.ClassBLOBDataTableName);
@@ -1134,7 +1139,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, CloudTable classBLOBDataTable)
         {
             var query = new TableQuery<ElasticTableEntity>();
-            var tableEntities = classBLOBDataTable.ExecuteQuery(query.Select(columns.Select(x => x.Name).ToList())).ToList();
+            var tableEntities = classBLOBDataTable.ExecuteQuery(query.Select(columns.Select(x => x.DataBaseColumnName).ToList())).ToList();
 
             Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member> tableMembersDictionary = new Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member>();
             List<AzureTableMetaDataPersistenceRunTime.Member> tableMembers = new List<AzureTableMetaDataPersistenceRunTime.Member>();
@@ -1147,8 +1152,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             tableMembers.Add(member);
             foreach (var column in columns)
             {
-                member = new AzureTableMetaDataPersistenceRunTime.Member(column.Name, TypeDictionary.GetEdmType(column.Type.GetExtensionMetaObject<System.Type>()));
-                tableMembersDictionary[column.Name] = member;
+                member = new AzureTableMetaDataPersistenceRunTime.Member(column.DataBaseColumnName, TypeDictionary.GetEdmType(column.Type.GetExtensionMetaObject<System.Type>()));
+                tableMembersDictionary[column.DataBaseColumnName] = member;
                 tableMembers.Add(member);
             }
 
