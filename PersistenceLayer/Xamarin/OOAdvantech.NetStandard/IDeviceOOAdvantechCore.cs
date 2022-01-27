@@ -233,7 +233,7 @@ namespace OOAdvantech
 
 
     /// <MetaDataID>{86be3bae-7dca-45e1-8e54-9b1e142b144f}</MetaDataID>
-    public class BackgroundServiceState
+     public class BackgroundServiceState
     {
         public bool Terminate;
 
