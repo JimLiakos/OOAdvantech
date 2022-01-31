@@ -1570,7 +1570,7 @@
                 int count = 0;
                 foreach (CompositeRowData rowData in QueryResultType.DataLoader)
                 {
-                    count = (int)rowData[QueryResultType.ConventionTypeRowIndex][QueryResultType.ConventionTypeColumnIndex];
+                    count = (int)(ulong)rowData[QueryResultType.ConventionTypeRowIndex][QueryResultType.ConventionTypeColumnIndex];
                     break;
                 }
 
