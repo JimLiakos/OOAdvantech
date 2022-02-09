@@ -623,7 +623,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     {
                         loadObjectLinks = (bool)_Data.Rows[objectActivationData.RowIndex][objectActivationData.LoadObjectLinksIndex];
                         if (loadObjectLinks && objectActivationData.DataLoader.DataNode.ValueTypePath.Count == 0)
-                            PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object).ObjectActived();
+                            PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.ObjectActived();
                     }
 
                     //  object _object =objectActivationData.DataLoader.GetObject(objectActivationData.ObjectSate, out loadObjectLinks);
