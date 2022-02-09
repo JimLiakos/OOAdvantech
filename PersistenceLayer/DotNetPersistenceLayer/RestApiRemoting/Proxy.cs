@@ -824,8 +824,17 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (returnMessage.Exception != null)
             {
-                var exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
+                System.Exception exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
+
+                if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingCollectedFromGC)
+                    exception= new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
+
+
+                if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingDeletedFromStorage)
+                    exception= new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
+
                 
+
                 return new System.Runtime.Remoting.Messaging.ReturnMessage(exception, methodCallMessage);
             }
             MethodInfo method = methodCallMessage.MethodBase as MethodInfo;

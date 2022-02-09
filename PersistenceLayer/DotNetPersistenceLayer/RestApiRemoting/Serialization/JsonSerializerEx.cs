@@ -67,7 +67,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     realObject = ServerSessionPart.GetObjectFromUri(extObjectUri);
 
                     if (realObject == null)
-                        throw new System.Exception("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.");
+                    {
+                        if (!string.IsNullOrWhiteSpace(extObjectUri.PersistentUri))
+                            throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
+                        else
+                            throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
+
+                    }
 
 
                 }
@@ -80,7 +86,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     OOAdvantech.Remoting.RestApi.Proxy restapiProxy = null;
                     lock (clientSessionPart)
                     {
-                        restapiProxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri ) as Proxy;
+                        restapiProxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri) as Proxy;
                         if (restapiProxy == null)
                         {
                             restapiProxy = new Proxy(objRef);// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.RestApi.RemotingServicesServer));

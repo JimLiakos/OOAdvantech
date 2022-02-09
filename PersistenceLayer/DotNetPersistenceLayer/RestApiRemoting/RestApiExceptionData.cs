@@ -8,7 +8,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
         }
 
-        public RestApiExceptionData(ExceptionCode exceptionCode,System.Exception exception)
+        public RestApiExceptionData(ExceptionCode exceptionCode, System.Exception exception)
         {
             while (exception is System.Reflection.TargetInvocationException && exception.InnerException != null)
                 exception = exception.InnerException;
@@ -18,6 +18,15 @@ namespace OOAdvantech.Remoting.RestApi
                 ExceptionMessage = exception.Message;
                 ServerStackTrace = exception.StackTrace;
                 HResult = exception.HResult;
+                if(exception is MissingServerObjectException)
+                {
+                    if ((exception as MissingServerObjectException).Reason == MissingServerObjectException.MissingServerObjectReason.CollectedFromGC)
+                        ExceptionCode = ExceptionCode.MissingCollectedFromGC;
+
+                    if ((exception as MissingServerObjectException).Reason == MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage)
+                        ExceptionCode = ExceptionCode.MissingDeletedFromStorage;
+
+                }
 
 
             }
@@ -44,8 +53,28 @@ namespace OOAdvantech.Remoting.RestApi
     {
         ServerError = 1,
         AccessTokenExpired = 12,
-        ConnectionError = 2
+        ConnectionError = 2,
+        MissingCollectedFromGC=4,
+        MissingDeletedFromStorage=8
+
     }
+
+
+    public class MissingServerObjectException : System.Exception
+    {
+        public MissingServerObjectException(string message, MissingServerObjectReason reason) : base(message)
+        {
+            Reason = reason;
+        }
+        public readonly MissingServerObjectReason Reason;
+
+        public enum MissingServerObjectReason
+        {
+            CollectedFromGC,
+            DeletedFromStorage
+        }
+    }
+
 
     /// <MetaDataID>{15b03d23-dc51-4586-883e-060fdb44c9b8}</MetaDataID>
     public class EndpointNotFoundException : System.Exception

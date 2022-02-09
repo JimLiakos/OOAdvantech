@@ -1515,7 +1515,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
                                 object oldRelatedObject = Member<object>.GetValue(fastFieldAccessor.GetValue, ownerObject);
                                 if (relatedObject != null && oldRelatedObject != null && oldRelatedObject != relatedObject)
-                                    throw new System.Exception(string.Format("AssociationEnd '{0}' multiplicity mismatch", associationEnd.FullName));
+                                    throw new System.Exception(string.Format("{0} AssociationEnd '{1}' multiplicity mismatch", ownerObject.ToString(), associationEnd.FullName));
                                 Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, relatedObject);
                                 stateTransition.Consistent = true;
                             }
@@ -1524,7 +1524,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         {
                             object oldRelatedObject = Member<object>.GetValue(fastFieldAccessor.GetValue, ownerObject);
                             if (relatedObject != null && oldRelatedObject != null && oldRelatedObject != relatedObject)
-                                throw new System.Exception(string.Format("AssociationEnd '{0}' multiplicity mismatch", associationEnd.FullName));
+                                throw new System.Exception(string.Format("{0} AssociationEnd '{1}' multiplicity mismatch", ownerObject.ToString(), associationEnd.FullName));
                             Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, relatedObject);
                         }
                     }
@@ -1537,7 +1537,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
                                 object oldRelatedObject = Member<object>.GetValue(fastFieldAccessor.GetValue, ownerObject);
                                 if (relatedObject != null && oldRelatedObject != null && oldRelatedObject != relatedObject)
-                                    throw new System.Exception(string.Format("AssociationEnd '{0}' multiplicity mismatch", associationEnd.FullName));
+                                    throw new System.Exception(string.Format("{0} - {1} AssociationEnd '{2}' multiplicity mismatch", ownerObject.ToString(), relatedObject.ToString(), associationEnd.FullName));
 
                                 Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, relatedObject);
 
@@ -1570,7 +1570,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         {
                             object oldRelatedObject = Member<object>.GetValue(fastFieldAccessor.GetValue, ownerObject);
                             if (relatedObject != null && oldRelatedObject != null && oldRelatedObject != relatedObject)
-                                throw new System.Exception(string.Format("AssociationEnd '{0}' multiplicity mismatch", associationEnd.FullName));
+                                throw new System.Exception(string.Format("{0} AssociationEnd '{1}' multiplicity mismatch", ownerObject.ToString(), associationEnd.FullName));
 
                             Member<object>.SetValueImplicitly(fastFieldAccessor, ref ownerObject, relatedObject);
 

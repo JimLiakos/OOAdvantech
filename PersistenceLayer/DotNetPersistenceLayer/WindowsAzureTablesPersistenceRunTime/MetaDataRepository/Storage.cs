@@ -105,7 +105,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     //}
                     //if (!PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistedCommands.ContainsKey(updateStorageSchema.Identity))
                     //    PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistCommand(updateStorageSchema);
-                    //StorageMetaObjects = null;
+
+                    StorageMetaObjects = null;//Force system to update cache of storage meta objects
+
                     stateTransition.Consistent = true;
                 }
             }
@@ -158,7 +160,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         if (column.MappedAttribute != null && @class.GetAttributeRealization(column.MappedAttribute) != null)
                             column.MappedAttributeRealizationIdentity = @class.GetAttributeRealization(column.MappedAttribute).Identity.ToString();
 
-                        if (column.MappedAssociationEnd != null && column.MappedAssociationEnd.GetOtherEnd()!=null && @class.GetAssociationEndRealization(column.MappedAssociationEnd.GetOtherEnd()) != null)
+                        if (column.MappedAssociationEnd != null && column.MappedAssociationEnd.GetOtherEnd() != null && @class.GetAssociationEndRealization(column.MappedAssociationEnd.GetOtherEnd()) != null)
                             column.MappedAssociationEndRealizationIdentity = @class.GetAssociationEndRealization(column.MappedAssociationEnd.GetOtherEnd()).Identity.ToString();
 
                     }
@@ -219,7 +221,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         }
                     }
 
-               
+
                     mComponent.Synchronize(Component);
 
                     string myName = (string)mComponent.GetPropertyValue(typeof(string), "Persosnal", "Myname");
@@ -288,10 +290,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             catch (Exception error)
             {
 
-                
+
             }
 
-  
+
 
         }
 

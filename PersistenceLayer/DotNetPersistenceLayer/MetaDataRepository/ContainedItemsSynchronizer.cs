@@ -60,6 +60,11 @@ namespace OOAdvantech.MetaDataRepository
                         }
                         catch (System.Exception error)
                         {
+                            if(Transactions.Transaction.Current!=null&&Transactions.Transaction.Current.Status==Transactions.TransactionStatus.Aborted)
+                            {
+                                Transactions.Transaction.Current.Abort(error);
+                                throw;
+                            }
                         }
                         break;
                     }

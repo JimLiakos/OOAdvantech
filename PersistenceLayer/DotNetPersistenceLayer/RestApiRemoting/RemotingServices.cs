@@ -641,6 +641,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                 if (returnMessage.Exception != null)
                 {
+
+              
+
                     if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                         throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
 #if DeviceDotNet

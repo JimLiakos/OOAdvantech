@@ -542,11 +542,13 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     var objectStorage = PersistenceLayer.ObjectStorage.OpenStorage(storageMetaData.StorageName, storageMetaData.StorageLocation, storageMetaData.StorageType);
                     @object = objectStorage.GetObject(extObjectUri.PersistentUri);
-                    int sel = 0;
+                    
+
+                    
+
                     if (@object == null)
-                    {
-                        sel++;
-                    }
+                        throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.PersistentUri + "' has been disconnected or does not exist at the server.",MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
+                        
                     var objRef = System.Runtime.Remoting.RemotingServices.Marshal(@object as MarshalByRefObject);
                     Remoting.Tracker.WeakReferenceOnMarshaledObjects[extObjectUri.TransientUri] = new WeakReference(@object);
 

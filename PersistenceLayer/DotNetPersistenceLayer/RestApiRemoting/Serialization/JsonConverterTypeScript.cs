@@ -241,7 +241,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
 
-            if (reader.Path == "$values[0].$value.ClientSession.$value.MembersValues.$values[0].value")
+            if (reader.Path == "$value.Shapes")
             {
 
             }

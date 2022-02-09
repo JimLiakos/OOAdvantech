@@ -42,6 +42,13 @@ namespace OOAdvantech.MetaDataRepository
     {
         public event MetaObjectChangedEventHandler Changed;
 
+        public override string ToString()
+        {
+            if (FullName != null)
+                return FullName;
+            return base.ToString();
+        }
+
         /// <MetaDataID>{913c300a-7a68-4a3a-8f97-6aecbf712310}</MetaDataID>
         public void MetaObjectChangeState()
         {

@@ -22,7 +22,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     /// <MetaDataID>{2b7851b1-e8da-4690-ba7b-a85d2c577549}</MetaDataID>
     public class SerializationBinder : DefaultSerializationBinder
     {
-        
+
 
         JsonSerializationFormat SerializationFormat;
         //bool Web;
@@ -124,6 +124,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             Type type = null;
             int openBracketIndex = typeName.IndexOf('[');
+            int closeBracketIndex = typeName.LastIndexOf(']');
+         
+           
             if (openBracketIndex >= 0)
             {
                 string genericTypeDefName = typeName.Substring(0, openBracketIndex);
@@ -136,6 +139,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     int endIndex = typeName.Length - 1;
                     for (int i = openBracketIndex + 1; i < endIndex; ++i)
                     {
+                        if (i >= typeName.Length)
+                        {
+
+                        }
                         char current = typeName[i];
                         switch (current)
                         {
@@ -151,26 +158,26 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                 if (scope == 0)
                                 {
                                     string typeArgAssemblyQualifiedName = typeName.Substring(typeArgStartIndex, i - typeArgStartIndex);
-
+                                    string scopeTypeName = null;
 #if DeviceDotNet
                                     TypeNameKey typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(typeArgAssemblyQualifiedName);
 #if NetStandard
                                     string assemblyName = typeNameKey.Value1;
-                                    typeName = typeNameKey.Value2;
+                                    scopeTypeName = typeNameKey.Value2;
 #else
                                     string assemblyName = typeNameKey.AssemblyName;
-                                    typeName = typeNameKey.TypeName;
+                                    scopeTypeName  = typeNameKey.TypeName;
 #endif
-                                    genericTypeArguments.Add(BindToType(assemblyName, typeName));
+                                    genericTypeArguments.Add(BindToType(assemblyName, scopeTypeName ));
 #elif Json4
                                     TypeNameKey typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(typeArgAssemblyQualifiedName);
                                     string assemblyName = typeNameKey.Value1;
-                                    typeName = typeNameKey.Value2;
+                                    scopeTypeName = typeNameKey.Value2;
 
-                                    var argType = BindToType(assemblyName, typeName);
-                                    if(argType==null)
+                                    var argType = BindToType(assemblyName, scopeTypeName);
+                                    if (argType == null)
                                         throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName));
-                                    genericTypeArguments.Add(argType );
+                                    genericTypeArguments.Add(argType);
 #else
                                     string theTypeName;
                                     string assemblyName;
@@ -187,7 +194,16 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         }
                     }
 
-                    type = genericTypeDef.MakeGenericType(genericTypeArguments.ToArray());
+                    try
+                    {
+                        if(genericTypeArguments.Count>0)
+                            type = genericTypeDef.MakeGenericType(genericTypeArguments.ToArray());
+                    }
+                    catch (Exception error)
+                    {
+
+                        throw;
+                    }
                 }
             }
 
@@ -204,14 +220,19 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 #if DeviceDotNet
             return _typeCache.Get(new TypeNameKey(assemblyName, typeName));
 #else
-            type= _typeCache.Get(new TypeNameKey(assemblyName, typeName));
-            if (type == null) 
+            type = _typeCache.Get(new TypeNameKey(assemblyName, typeName));
+            if (type == null)
             {
                 type = ModulePublisher.ClassRepository.GetType(typeName, assemblyName);
                 return type;
             }
             else
+            {
+                var overrideType = GetGenericTypeFromTypeName(typeName, type.Assembly);
+                if (overrideType != null)
+                    return overrideType;
                 return type;
+            }
 
             //return base.BindToType(assemblyName, typeName);
 #endif
@@ -225,7 +246,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     serializedType = typeof(List<>);
                 if (serializedType.GetMetaData().IsGenericType && serializedType.GetGenericTypeDefinition() == typeof(Dictionary<,>))
                     serializedType = typeof(Dictionary<,>);
-                if (serializedType== typeof(System.Collections.Hashtable))
+                if (serializedType == typeof(System.Collections.Hashtable))
                     serializedType = typeof(Dictionary<,>);
 
                 if (TypesNamesDictionary.TryGetValue(serializedType, out typeName))
