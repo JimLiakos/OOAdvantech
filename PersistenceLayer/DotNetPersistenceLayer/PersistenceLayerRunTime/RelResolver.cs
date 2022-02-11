@@ -880,6 +880,12 @@
             StorageInstanceAgent relatedStorageInstance = StorageInstanceRef.GetStorageInstanceAgent(relatedObject);
             if (relatedStorageInstance == null)
             {
+
+                if (InternalRelatedObject == relatedObject)
+                {
+                    InternalRelatedObject = null;
+                    changeApplied = true;
+                }
                 //if (this.Owner.Class.AllowTransient(this.AssociationEnd))
                 //    return;
 
