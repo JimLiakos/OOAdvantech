@@ -412,8 +412,10 @@ namespace OOAdvantech.Remoting.RestApi
                 //System.IO.File.AppendAllLines("/storage/emulated/0/test.txt", new string[] { "Exception 1 :  " + error.Message });
                 throw;
             }
+            
             if (this.Object == null)
-                throw new System.Exception("The object with ObjUri '" + ExtObjectUri.TransientUri + "' has been disconnected or does not exist at the server.");
+                throw new MissingServerObjectException("The object with ObjUri '" + ExtObjectUri.TransientUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
+            
 
 
             int i = 0;
@@ -564,6 +566,10 @@ namespace OOAdvantech.Remoting.RestApi
                     throw new Exception("The " + extObjectUri.MonoStateTypeFullName + " isn't type of System.MarshalByRefObject");
                 @object = (IExtMarshalByRefObject)NewInstance;
 
+            }
+            else if (@object == null)
+            {
+                throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
             }
             return @object;
         }

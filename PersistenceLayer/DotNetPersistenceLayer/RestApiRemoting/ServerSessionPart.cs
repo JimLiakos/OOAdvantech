@@ -748,7 +748,21 @@ namespace OOAdvantech.Remoting.RestApi
 
         public override void Subscribe(IProxy proxy, EventInfoData eventInfoData, bool allowAsynchronous)
         {
-            base.Subscribe(proxy, eventInfoData, allowAsynchronous);
+            try
+            {
+                base.Subscribe(proxy, eventInfoData, allowAsynchronous);
+            }
+            catch (MissingServerObjectException error)
+            {
+                Reconnect(false);
+                base.Subscribe(proxy, eventInfoData, allowAsynchronous);
+
+            }
+            catch (Exception error)
+            {
+
+                throw;
+            }
         }
 
         public override bool UseNetRemotingChamnel => false;

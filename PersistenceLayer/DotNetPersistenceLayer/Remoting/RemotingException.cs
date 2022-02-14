@@ -7,7 +7,8 @@ namespace OOAdvantech.Remoting
 		{
 			CannotReconnect =0,
 			ParameterLostConnection,
-			ExceptionCatcher
+			ExceptionCatcher,
+			MissingServerObject
 			
 		}
 		/// <MetaDataID>{C05F05AC-6CD0-4E47-AD1E-02A9FF42D5C2}</MetaDataID>
