@@ -302,7 +302,7 @@ namespace ModulePublisherHostProcess
             }
             finally
             {
-
+                 
                 //System.Windows.Forms.MessageBox.Show(projectFullPath);
 
                 if (!string.IsNullOrWhiteSpace(projectFullPath) &&System.IO.Directory.Exists(projectFullPath))

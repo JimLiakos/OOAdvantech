@@ -240,6 +240,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         static bool ServiceForInstanceExist(String instanceName)
         {
+#if !DeviceDotNet
             if (instanceName == null || instanceName.Trim().Length == 0)
                 return false;
             string serviceName;
@@ -249,6 +250,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 serviceName = "StorageServer$" + instanceName;
 
             return System.ServiceProcess.ServiceController.GetServices().FirstOrDefault(x => x.ServiceName == serviceName) != null;
+#endif
+            return true;
         }
 
         /// <MetaDataID>{bd396910-00ea-4721-b057-3070d0025e5e}</MetaDataID>
@@ -752,7 +755,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             if (storageType == "OOAdvantech.SQLiteMetaDataPersistenceRunTime.StorageProvider")
                 storageProvider = AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType(storageType, "SQLitePersistenceRunTime, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null")) as StorageProvider;
 
-            if (storageProvider==null)
+            if (storageProvider == null)
             {
                 throw new OOAdvantech.PersistenceLayer.StorageException("PersistencyService can't instantiate the " + storageType + " Provider",
                  OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageProviderError);

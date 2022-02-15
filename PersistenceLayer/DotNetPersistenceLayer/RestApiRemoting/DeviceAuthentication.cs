@@ -16,10 +16,17 @@ using Newtonsoft.Json.Linq;
 namespace OOAdvantech.Remoting.RestApi
 {
 
+    [MetaDataRepository.HttpVisible]
+    public interface IDeviceAuthentication
+    {
+        [MetaDataRepository.GenerateEventConsumerProxy]
+        event EventHandler<DeviceAuthentication> SignOutRequest;
+
+    }
 
     /// <MetaDataID>{44ed95c5-3794-4f1a-bec3-3664e0b7c529}</MetaDataID>
     [MetaDataRepository.HttpVisible]
-    public class DeviceAuthentication : MonoStateClass
+    public class DeviceAuthentication : MonoStateClass, IDeviceAuthentication
     {
 
         public DeviceAuthentication()
@@ -35,13 +42,13 @@ namespace OOAdvantech.Remoting.RestApi
         }
         static void OnTimer(object state)
         {
-            if(_AuthUser!=null)
+            if (_AuthUser != null)
             {
-                if(_AuthUser.ExpirationTime<DateTime.Now)
+                if (_AuthUser.ExpirationTime < DateTime.Now)
                 {
 
                 }
-                if(((_AuthUser.ExpirationTime- DateTime.Now).TotalMinutes<2))
+                if (((_AuthUser.ExpirationTime - DateTime.Now).TotalMinutes < 2))
                 {
 
                 }
@@ -61,6 +68,8 @@ namespace OOAdvantech.Remoting.RestApi
 
         public static event EventHandler<AuthUser> AuthStateChanged;
         event EventHandler<DeviceAuthentication> _SignOutRequest;
+
+        
         public event EventHandler<DeviceAuthentication> SignOutRequest
         {
             add
@@ -181,7 +190,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
                 else
                 {
-                    
+
                     _AuthUser = GetAuthData(idToken);
                     if (_AuthUser == null && authUserData != null)
                     {

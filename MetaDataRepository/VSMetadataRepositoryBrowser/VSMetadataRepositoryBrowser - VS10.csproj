@@ -119,10 +119,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\UserInterface\UserInterface\bin\Net4Debug\UserInterface.dll</HintPath>
     </Reference>
-    <Reference Include="UserInterfaceMetaData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b3e50f0a5b696156, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\UserInterfaceMetaData\bin\Debug\UserInterfaceMetaData.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssociationEndTypeTreeNode .cs" />

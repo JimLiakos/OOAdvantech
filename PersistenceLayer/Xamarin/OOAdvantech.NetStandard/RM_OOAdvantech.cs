@@ -244,6 +244,31 @@ public event OOAdvantech.Remoting.RestApi.ProxyRecconectedHandle Reconnected
             return this.Proxy.GetValue<OOAdvantech.Remoting.MarshalByRefObject>(retValue);
         }
     }
+    
+    public sealed class CNSPr_IDeviceAuthentication_SignOutRequest : OOAdvantech.Remoting.EventConsumerHandler
+    {
+        
+        public void Invoke(object sender, OOAdvantech.Remoting.RestApi.DeviceAuthentication e)
+        {
+            object[] args = new object[2];
+            System.Type[] argsTypes = new System.Type[2];
+            args[0] = sender;
+            argsTypes[0] = typeof(object);
+            args[1] = e;
+            argsTypes[1] = typeof(OOAdvantech.Remoting.RestApi.DeviceAuthentication);
+            object retValue = this.Invoke(typeof(System.EventHandler<OOAdvantech.Remoting.RestApi.DeviceAuthentication>), "Invoke", args, argsTypes);
+        }
+        
+        public override void AddEventHandler(object target, System.Reflection.EventInfo eventInfo)
+        {
+            eventInfo.AddEventHandler(target, new System.EventHandler<OOAdvantech.Remoting.RestApi.DeviceAuthentication>(this.Invoke));
+        }
+        
+        public override void RemoveEventHandler(object target, System.Reflection.EventInfo eventInfo)
+        {
+            eventInfo.RemoveEventHandler(target, new System.EventHandler<OOAdvantech.Remoting.RestApi.DeviceAuthentication>(this.Invoke));
+        }
+    }
 }
 namespace OOAdvantech.Authentication.Proxies
 {
