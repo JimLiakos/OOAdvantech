@@ -471,6 +471,11 @@ namespace System.Runtime.Remoting.Messaging
             if (CallContextData.IsValueCreated&& CallContextData.Value.ContainsKey(name))
                 CallContextData.Value.Remove(name );
         }
+
+        internal static object LogicalGetData(string name)
+        {
+            return GetData(name);
+        }
     }
 }
 namespace System.Runtime.Remoting.Services

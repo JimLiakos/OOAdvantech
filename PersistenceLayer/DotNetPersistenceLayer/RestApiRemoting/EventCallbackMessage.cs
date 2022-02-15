@@ -16,19 +16,40 @@ namespace OOAdvantech.Remoting.RestApi
         public void UnMarshal()
         {
 
-#if DeviceDotNet
-            //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
-#else
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
-            //{ TypeNameHandling = TypeNameHandling.All, Binder = new SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
-            //if(Web)
-            //{
-            //    jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
-            //    jSetttings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-            //}
-#endif 
-            Args = JsonConvert.DeserializeObject<object[]>(JsonArgs, jSetttings);
+
+            try
+            {
+                Args = MethodCallMessage.UnMarshalArguments(JsonArgs, this.EventInfoData.EventInfo.EventHandlerType.GetMethod("Invoke"), null, false);
+            }
+            catch (Exception error)
+            {
+
+                throw;
+            }
+
+//#if DeviceDotNet
+//            //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+//            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+//#else
+//            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+//            //{ TypeNameHandling = TypeNameHandling.All, Binder = new SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+//            //if(Web)
+//            //{
+//            //    jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
+//            //    jSetttings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+//            //}
+//#endif 
+//            Args = JsonConvert.DeserializeObject<object[]>(JsonArgs, jSetttings);
+
+//            try
+//            {
+                
+//                Args = args;
+//            }
+//            catch (Exception error)
+//            {
+//                throw;
+//            }
         }
         public bool Web { get; set; }
 

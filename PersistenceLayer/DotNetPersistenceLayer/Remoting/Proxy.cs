@@ -935,10 +935,20 @@ namespace OOAdvantech.Remoting
                 {
                     try
                     {
+                        //var argsTypes = eventHandler.Method.GetParameters().Select(x => x.ParameterType).ToArray();
+                        //for(int i=0;i<argsTypes.Length;i++)
+                        //{
+                        //    if(argsTypes[i].IsValueType)
+                                
+                        //}
+
+
+
                         eventHandler.Method.Invoke(eventHandler.Target, args.ToArray());
                     }
                     catch (System.Exception error)
                     {
+                        System.Diagnostics.Debug.Assert(false, "RestApi PublishEvent failed");
                     }
                 }
             }

@@ -418,52 +418,19 @@ namespace OOAdvantech.Remoting.RestApi
             
 
 
-            int i = 0;
+            
             if (MethodInfo == null)
             {
-
                 throw new System.Exception(string.Format("method '{0}' isn't implemented ", MethodName));
             }
             try
             {
-                var parameters = MethodInfo.GetParameters();
-                Type[] argsTypes = (from parameter in parameters select parameter.ParameterType).ToArray();
-#if DeviceDotNet
-                //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);
-#else
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
-#endif
-                //if (Web)
-                //{
-                //    //jSetttings.ReferenceResolver = new ReferenceResolver();
-                //    jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
-                //    jSetttings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-                //}
-
-                Args = JsonConvert.DeserializeObject<object[]>(JsonArgs, jSetttings);
-                if (MethodName == "SetObj")
-                {
-
-                }
+                
+                var methodInfo = MethodInfo;
+                var jsonArgs = JsonArgs;
+                object[] args = UnMarshalArguments( jsonArgs, methodInfo, serverSessionPart,Web);
+                Args = args;
                 ArgCount = Args.Length;
-                foreach (var argValue in Args)
-                {
-                    Type parameterType = parameters[i].ParameterType;
-                    if (parameterType.GetMetaData().IsPrimitive)
-                        Args[i] = Convert.ChangeType(Args[i], parameterType);
-                    else if (parameterType == typeof(decimal))
-                        Args[i] = Convert.ChangeType(Args[i], parameterType);
-                    else if (parameterType.GetMetaData().IsEnum && Args[i] is long)
-                        Args[i] = (int)(long)Args[i];
-                    else if (parameterType.GetMetaData().IsEnum && Args[i] is ulong)
-                        Args[i] = (int)(ulong)Args[i];
-
-
-                    i++;
-
-
-                }
             }
             catch (Exception error)
             {
@@ -490,6 +457,43 @@ namespace OOAdvantech.Remoting.RestApi
             //    }
             //}
             //Args = unmarshalledArgs;
+        }
+
+        internal static object[] UnMarshalArguments(string jsonArgs, MethodInfo methodInfo,  ServerSessionPart serverSessionPart,bool web)
+        {
+            int i = 0;
+            var parameters = methodInfo.GetParameters();
+            Type[] argsTypes = (from parameter in parameters select parameter.ParameterType).ToArray();
+#if DeviceDotNet
+                //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);
+#else
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
+#endif
+            //if (Web)
+            //{
+            //    //jSetttings.ReferenceResolver = new ReferenceResolver();
+            //    jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
+            //    jSetttings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            //}
+
+            var args = JsonConvert.DeserializeObject<object[]>(jsonArgs, jSetttings);
+            foreach (var argValue in args)
+            {
+                Type parameterType = parameters[i].ParameterType;
+                if (parameterType.GetMetaData().IsPrimitive)
+                    args[i] = Convert.ChangeType(args[i], parameterType);
+                else if (parameterType == typeof(decimal))
+                    args[i] = Convert.ChangeType(args[i], parameterType);
+                else if (parameterType.GetMetaData().IsEnum && args[i] is long)
+                    args[i] = (int)(long)args[i];
+                else if (parameterType.GetMetaData().IsEnum && args[i] is ulong)
+                    args[i] = (int)(ulong)args[i];
+
+                i++;
+            }
+
+            return args;
         }
 
         #region Removed code
