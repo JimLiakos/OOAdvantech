@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 namespace OOAdvantech.Remoting.RestApi
 {
 
+    /// <MetaDataID>{2a0208ce-644a-45ae-801c-6e0d7b867380}</MetaDataID>
     [MetaDataRepository.HttpVisible]
     public interface IDeviceAuthentication
     {
