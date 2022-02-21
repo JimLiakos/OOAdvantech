@@ -132,12 +132,13 @@ namespace OOAdvantech.SQLiteMetaDataPersistenceRunTime
             throw new NotImplementedException();
         }
 
-        public override void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password)
+   
+        public override void Repair(string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password)
         {
             throw new NotImplementedException();
         }
 
-        public override void Repair(string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password)
+        public override void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password, bool overrideObjectStorage)
         {
             throw new NotImplementedException();
         }

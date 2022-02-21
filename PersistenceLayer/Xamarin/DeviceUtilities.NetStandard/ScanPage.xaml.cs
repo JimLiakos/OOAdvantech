@@ -22,6 +22,7 @@ namespace DeviceUtilities.NetStandard
             InitializeComponent();
             ToggleTorchButton.Clicked += ToggleTorchButton_Clicked;
             SizeChanged += ScanPage_SizeChanged;
+            
 
             ZxingView.OnScanResult += (result) =>
             {
@@ -65,6 +66,7 @@ namespace DeviceUtilities.NetStandard
             }
         }
 
+        public bool? UseFrontCameraIfAvailable { get=> ZxingView.Options.UseFrontCameraIfAvailable; set=> ZxingView.Options.UseFrontCameraIfAvailable=value; }
 
         private void ScanPage_SizeChanged(object sender, EventArgs e)
         {
@@ -130,7 +132,7 @@ namespace DeviceUtilities.NetStandard
         ScanPage ScanPage = new ScanPage();
         TaskCompletionSource<ZXing.Result> ConnectToServicePointTask;
         bool OnScan = false;
-        public Task<ZXing.Result>  Scan(string headerText,string footerText )
+        public Task<ZXing.Result>  Scan(string headerText,string footerText,bool? useFrontCameraIfAvailable=null)
         {
             if(!(Xamarin.Forms.Application.Current.MainPage is NavigationPage))
             {
@@ -145,6 +147,7 @@ namespace DeviceUtilities.NetStandard
                 OnScan = true;
                 ScanPage.HeaderText = headerText;
                 ScanPage.FooterText = footerText;
+                ScanPage.UseFrontCameraIfAvailable = useFrontCameraIfAvailable;
                 ConnectToServicePointTask = new TaskCompletionSource<ZXing.Result>();
             }
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
