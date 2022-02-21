@@ -3667,7 +3667,7 @@
         <member name="M:OOAdvantech.PersistenceLayer.IPersistencyService.NewLogicalStorage(OOAdvantech.PersistenceLayer.ObjectStorage,System.String)">
             <MetaDataID>{d3136ed2-77cd-4b35-9d66-8fa5266e067f}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.PersistenceLayer.IPersistencyService.Restore(OOAdvantech.PersistenceLayer.IBackupArchive,System.String,System.String,System.String,System.Boolean,System.String,System.String)">
+        <member name="M:OOAdvantech.PersistenceLayer.IPersistencyService.Restore(OOAdvantech.PersistenceLayer.IBackupArchive,System.String,System.String,System.String,System.Boolean,System.String,System.String,System.Boolean)">
             <MetaDataID>{6205b17f-c516-461b-9d3e-3f0e9856ce6d}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayer.IPersistencyService.Repair(System.String,System.String,System.String,System.Boolean,System.String,System.String)">
@@ -4450,7 +4450,7 @@
             All storage types doesn't allow this possibility, some allow and others not. </param>
             <MetaDataID>{0FEAEFED-3186-45DB-BFD3-DF5A3906F8F8}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.Restore(OOAdvantech.PersistenceLayer.IBackupArchive,System.String,System.String,System.String,System.Boolean,System.String,System.String)">
+        <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.Restore(OOAdvantech.PersistenceLayer.IBackupArchive,System.String,System.String,System.String,System.Boolean,System.String,System.String,System.Boolean)">
             <MetaDataID>{ed20c440-2c81-4d20-8a19-26e9e6d27087}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.Repair(System.String,System.String,System.String,System.Boolean)">

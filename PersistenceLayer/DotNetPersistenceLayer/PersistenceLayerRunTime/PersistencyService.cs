@@ -501,7 +501,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
             #endregion
         }
-        public void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool InProcess, string userName = "", string password = "")
+        public void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool InProcess, string userName = "", string password = "", bool overrideObjectStorage = false)
         {
 
 
@@ -535,7 +535,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 PersistenceLayer.IPersistencyService persistencyService = GetPersistencyServiceOnMachine(storageHostComputerName, instanceName);
                 if (Remoting.RemotingServices.IsOutOfProcess(persistencyService as MarshalByRefObject))
                 {
-                    persistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password);
+                    persistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password,overrideObjectStorage);
                     return;
                 }
 #endif
@@ -545,7 +545,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             #region Creates storage and load in this server instance and return the new storage.
 
-            storageProvider.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password);
+            storageProvider.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password, overrideObjectStorage);
 
             #endregion
 

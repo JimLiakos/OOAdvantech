@@ -530,9 +530,9 @@ namespace OOAdvantech.PersistenceLayer
         }
 
         /// <MetaDataID>{ed20c440-2c81-4d20-8a19-26e9e6d27087}</MetaDataID>
-        public static void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool InProcess, string userName = "", string password = "")
+        public static void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool InProcess, string userName = "", string password = "", bool overrideObjectStorage = false)
         {
-            PersistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password);
+            PersistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password, overrideObjectStorage);
         }
 
         /// <MetaDataID>{edb1711c-b65b-485c-b3ea-2dd730dc8246}</MetaDataID>

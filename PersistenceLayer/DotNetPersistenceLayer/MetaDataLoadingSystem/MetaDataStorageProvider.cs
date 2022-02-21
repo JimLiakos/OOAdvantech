@@ -276,7 +276,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
             throw new System.NotImplementedException();
         }
 
-        public override void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password)
+        public override void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password, bool overrideObjectStorage )
         {
             throw new NotImplementedException();
         }

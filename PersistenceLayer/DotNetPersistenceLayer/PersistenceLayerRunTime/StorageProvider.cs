@@ -78,7 +78,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         public abstract OOAdvantech.PersistenceLayer.ObjectStorage CreateNewLogicalStorage(OOAdvantech.PersistenceLayer.ObjectStorage hostingObjectStorage, string storageName);
 
-        public abstract void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password);
+        public abstract void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password, bool overrideObjectStorage );
 
         public abstract void Repair(string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password);
     }

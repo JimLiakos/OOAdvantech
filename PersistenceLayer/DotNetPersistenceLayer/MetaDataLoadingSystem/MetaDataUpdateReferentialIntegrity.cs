@@ -24,7 +24,6 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
 			ObjectStorageSession.Dirty=true;
 
-		
 		}
 	}
 }

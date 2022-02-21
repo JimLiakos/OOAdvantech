@@ -87,7 +87,7 @@ namespace OOAdvantech.PersistenceLayer
         ObjectStorage NewLogicalStorage(ObjectStorage hostingStorage, string logicalStorageName);
 
         /// <MetaDataID>{6205b17f-c516-461b-9d3e-3f0e9856ce6d}</MetaDataID>
-        void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName = "", string password = "");
+        void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName = "", string password = "",bool overrideObjectStorage=false);
 
 
         /// <MetaDataID>{5df88e9a-4d65-41bd-8d6a-f72dd307f287}</MetaDataID>

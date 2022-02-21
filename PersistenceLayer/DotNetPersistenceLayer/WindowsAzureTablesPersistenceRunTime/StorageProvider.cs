@@ -132,12 +132,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
             else
             {
-                while(storageMetadata.UnderConstruction)
+                while (storageMetadata.UnderConstruction)
                 {
                     System.Threading.Thread.Sleep(100);
                     storageMetadata = (from storageMetada in table.CreateQuery<StorageMetadata>()
-                                                       where storageMetada.StorageName == StorageName //&& storageMetada.UnderConstruction == false
-                                                       select storageMetada).FirstOrDefault();
+                                       where storageMetada.StorageName == StorageName //&& storageMetada.UnderConstruction == false
+                                       select storageMetada).FirstOrDefault();
                 }
                 PersistenceLayer.ObjectStorage existinObjectStorage = null;
                 try
@@ -200,7 +200,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     account = CloudStorageAccount.DevelopmentStorageAccount;
                 else
                 {
-                    if(string.IsNullOrWhiteSpace(userName)&&OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(StorageLocation))
+                    if (string.IsNullOrWhiteSpace(userName) && OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(StorageLocation))
                         account = new CloudStorageAccount(OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials[StorageLocation], true);
                     else
                         account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
@@ -212,7 +212,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 {
 
                     StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
-                                                       where storageMetada.StorageName == storageName 
+                                                       where storageMetada.StorageName == storageName
                                                        select storageMetada).FirstOrDefault();
 
                     if (storageMetadata == null)
@@ -222,8 +222,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     {
                         System.Threading.Thread.Sleep(100);
                         storageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
-                                                where storageMetada.StorageName == storageName 
-                                                select storageMetada).FirstOrDefault();
+                                           where storageMetada.StorageName == storageName
+                                           select storageMetada).FirstOrDefault();
                     }
                     objectStorage = OpenStorage(storageName, StorageLocation, account, storageMetadata);
 
@@ -292,19 +292,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
         static byte[] Buffer = new byte[32768];
-        public override void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password)
+        public override void Restore(IBackupArchive archive, string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password, bool overrideObjectStorage)
         {
             System.IO.Stream memoryStream = System.IO.File.Open(archive.LocalFileName, FileMode.Open, FileAccess.Read);
 
             try
             {
-                #region Reads header type and must be 0 for backup storage metadata
+                #region Reads header type and must be 0 for backup storage meta data
                 memoryStream.Position = 0;
                 memoryStream.Read(Buffer, 0, 1);
                 int headerType = Buffer[0];
                 #endregion
 
-                #region Reads storage metadata  bytes length
+                #region Reads storage meta data  bytes length
                 memoryStream.Read(Buffer, 0, 4);
                 int streamLength = BitConverter.ToInt32(Buffer, 0);
                 memoryStream.Read(Buffer, 0, streamLength);
@@ -333,7 +333,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
                     account = CloudStorageAccount.DevelopmentStorageAccount;
                 else
-                    account = new CloudStorageAccount(new StorageCredentials(userName, password),true);
+                    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
                 CloudTableClient cloudTablesClient = account.CreateCloudTableClient();
 
 
@@ -365,7 +365,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 List<string> replacedDataTables = new List<string>();
                 if (storageMetadata == null)
                 {
-                    #region Creates storage metada entry.
+                    #region Creates storage meta data entry.
 
                     storageMetadata = new StorageMetadata("AAA", Guid.NewGuid().ToString());
                     storageMetadata.StorageName = storageName;
@@ -384,7 +384,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     #region provides new storage prefix for restore and change object storage state to under construction;
 
                     string uniqueStoragePrefix = MakeStoragePrefixUnique(storagesMetadataTable, storageMetadata.StorageName);
-                    storagePrefix = uniqueStoragePrefix;
+                    if (overrideObjectStorage)
+                        storagePrefix = storageMetadata.StoragePrefix;
+                    else
+                        storagePrefix = uniqueStoragePrefix;
+
+
                     replacedDataStoragePrefix = storageMetadata.StoragePrefix;
 
                     try
