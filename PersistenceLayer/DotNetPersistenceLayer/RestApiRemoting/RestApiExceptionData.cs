@@ -60,21 +60,6 @@ namespace OOAdvantech.Remoting.RestApi
     }
 
 
-    /// <MetaDataID>{595c337d-cfce-4795-9dcb-5d5efa9c7a98}</MetaDataID>
-    public class MissingServerObjectException : System.Exception
-    {
-        public MissingServerObjectException(string message, MissingServerObjectReason reason) : base(message)
-        {
-            Reason = reason;
-        }
-        public readonly MissingServerObjectReason Reason;
-
-        public enum MissingServerObjectReason
-        {
-            CollectedFromGC,
-            DeletedFromStorage
-        }
-    }
 
 
     /// <MetaDataID>{15b03d23-dc51-4586-883e-060fdb44c9b8}</MetaDataID>

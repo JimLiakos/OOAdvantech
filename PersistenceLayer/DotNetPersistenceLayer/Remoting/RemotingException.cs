@@ -29,4 +29,22 @@ namespace OOAdvantech.Remoting
 		/// <MetaDataID>{66CCE606-4F27-422E-8AFC-248D240020FA}</MetaDataID>
 		public ExceptionCause RemotingExceptionCause;
 	}
+
+
+
+	/// <MetaDataID>{595c337d-cfce-4795-9dcb-5d5efa9c7a98}</MetaDataID>
+	public class MissingServerObjectException : System.Exception
+	{
+		public MissingServerObjectException(string message, MissingServerObjectReason reason) : base(message)
+		{
+			Reason = reason;
+		}
+		public readonly MissingServerObjectReason Reason;
+
+		public enum MissingServerObjectReason
+		{
+			CollectedFromGC,
+			DeletedFromStorage
+		}
+	}
 }

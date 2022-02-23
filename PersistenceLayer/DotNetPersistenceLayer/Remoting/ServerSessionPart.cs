@@ -231,25 +231,34 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{06a8bd80-4e74-4cf4-b51f-b20adb381614}</MetaDataID>
         public void Unsubscribe(ExtObjectUri eventPublisherUri, EventInfoData eventInfoData)
         {
-            var eventInfo = eventInfoData.EventInfo;
-
-            MarshalByRefObject eventPublisherObject = GetObjectFromUri(eventPublisherUri);
-            if (eventPublisherObject == null)
-                return;
-
-            lock (EventConsumers)
+            try
             {
+                var eventInfo = eventInfoData.EventInfo;
 
-                if (EventConsumers.ContainsKey(eventPublisherUri.Uri) && EventConsumers[eventPublisherUri.Uri].ContainsKey(eventInfo))
+                MarshalByRefObject eventPublisherObject = GetObjectFromUri(eventPublisherUri);
+                if (eventPublisherObject == null)
+                    return;
+
+                lock (EventConsumers)
                 {
-                    EventConsumerProxy eventConsumerProxy = EventConsumers[eventPublisherUri.Uri][eventInfo];
-                    EventConsumers[eventPublisherUri.Uri].Remove(eventInfo);
-                    if (EventConsumers[eventPublisherUri.Uri].Count == 0)
-                        EventConsumers.Remove(eventPublisherUri.Uri);
 
-                    eventConsumerProxy.RemoveSubscription(eventPublisherObject);
+                    if (EventConsumers.ContainsKey(eventPublisherUri.Uri) && EventConsumers[eventPublisherUri.Uri].ContainsKey(eventInfo))
+                    {
+                        EventConsumerProxy eventConsumerProxy = EventConsumers[eventPublisherUri.Uri][eventInfo];
+                        EventConsumers[eventPublisherUri.Uri].Remove(eventInfo);
+                        if (EventConsumers[eventPublisherUri.Uri].Count == 0)
+                            EventConsumers.Remove(eventPublisherUri.Uri);
 
+                        eventConsumerProxy.RemoveSubscription(eventPublisherObject);
+
+                    }
                 }
+            }
+            catch (MissingServerObjectException error)
+            {
+                //There isn't server object too remove subscription 
+                //object collected from garbage collector 
+                
             }
         }
 
@@ -491,10 +500,20 @@ namespace OOAdvantech.Remoting
 
 #else
         /// <MetaDataID>{a6d16c7b-e1c8-49ce-9f83-1c47b253baff}</MetaDataID>
-        public void Subscribe(System.Collections.Generic.List<RemoteEventSubscription> eventSubscriptions)
+        public virtual void Subscribe(System.Collections.Generic.List<RemoteEventSubscription> eventSubscriptions)
         {
             foreach (RemoteEventSubscription eventSubscription in eventSubscriptions)
-                Subscribe(eventSubscription.ExtObjectUri, eventSubscription.eventInfo);
+            {
+                try
+                {
+                    Subscribe(eventSubscription.ExtObjectUri, eventSubscription.eventInfo);
+                }
+                catch (Exception error )
+                {
+                    // massive event subscription on reconnect does not propagate subscription exception
+                    //if the server has restarted the transient object did not exist  and  event subscription failed
+                }
+            }
 
         }
 

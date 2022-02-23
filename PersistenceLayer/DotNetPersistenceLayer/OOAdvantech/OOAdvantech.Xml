@@ -6345,6 +6345,9 @@
         <member name="F:OOAdvantech.Remoting.RemotingException.RemotingExceptionCause">
             <MetaDataID>{66CCE606-4F27-422E-8AFC-248D240020FA}</MetaDataID>
         </member>
+        <member name="T:OOAdvantech.Remoting.MissingServerObjectException">
+            <MetaDataID>{595c337d-cfce-4795-9dcb-5d5efa9c7a98}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.Remoting.RenewalManager">
             <MetaDataID>{0E57BDE7-C647-4167-90A6-D0385F999EEA}</MetaDataID>
             <summary>The .Net Remoting system manage object lifetime with leasing. For more information you can see the "Microsoft .NET Remoting: A Technical Overview" article.
