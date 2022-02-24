@@ -1653,6 +1653,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 if (!task.Wait(Binding.DefaultBinding.SendTimeout))
                 {
+                    
                     throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
                 }
             }
