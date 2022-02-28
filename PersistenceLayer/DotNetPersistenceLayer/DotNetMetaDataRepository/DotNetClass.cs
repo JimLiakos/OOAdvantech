@@ -1277,7 +1277,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
         }
 
 
-
+        object TransactionalMembersLock = new object();
         //TransactionalMembers
         /// <MetaDataID>{6adc00d7-f1dc-4038-9712-d74c5b35a1b3}</MetaDataID>
         public System.Reflection.MemberInfo GetTransactionalMember(AssociationEnd associationEnd)
@@ -1291,20 +1291,29 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
                 System.Reflection.MemberInfo transactionalMember = null;
 
-                if (TransactionalMembers.TryGetValue(associationEnd, out transactionalMember))
-                    return transactionalMember;
+                lock (TransactionalMembersLock)
+                {
+                    if (TransactionalMembers.TryGetValue(associationEnd, out transactionalMember))
+                        return transactionalMember; 
+                }
 
                 if (associationEnd.AssociationEndRealizations.Count == 0)
                 {
                     if (associationEnd.FieldMember != null && associationEnd.FieldMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
                     {
-                        TransactionalMembers[associationEnd] = associationEnd.FieldMember;
-                        return associationEnd.FieldMember;
+                        lock (TransactionalMembersLock)
+                        {
+                            TransactionalMembers[associationEnd] = associationEnd.FieldMember;
+                            return associationEnd.FieldMember; 
+                        }
                     }
                     if (associationEnd.PropertyMember != null && associationEnd.PropertyMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
                     {
-                        TransactionalMembers[associationEnd] = associationEnd.PropertyMember;
-                        return associationEnd.PropertyMember;
+                        lock (TransactionalMembersLock)
+                        {
+                            TransactionalMembers[associationEnd] = associationEnd.PropertyMember;
+                            return associationEnd.PropertyMember; 
+                        }
                     }
 
                 }
@@ -1316,13 +1325,19 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
                         if (associationEndRealization.FieldMember != null && associationEndRealization.FieldMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
                         {
-                            TransactionalMembers[associationEnd] = associationEndRealization.FieldMember;
-                            return associationEndRealization.FieldMember;
+                            lock (TransactionalMembersLock)
+                            {
+                                TransactionalMembers[associationEnd] = associationEndRealization.FieldMember;
+                                return associationEndRealization.FieldMember; 
+                            }
                         }
                         if (associationEndRealization.PropertyMember != null && associationEndRealization.PropertyMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
                         {
-                            TransactionalMembers[associationEnd] = associationEndRealization.PropertyMember;
-                            return associationEndRealization.PropertyMember;
+                            lock (TransactionalMembersLock)
+                            {
+                                TransactionalMembers[associationEnd] = associationEndRealization.PropertyMember;
+                                return associationEndRealization.PropertyMember; 
+                            }
                         }
                     }
                 }
@@ -1335,23 +1350,35 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     transactionalMember = _class.GetTransactionalMember(associationEnd);
                     if (transactionalMember != null)
                     {
-                        TransactionalMembers[associationEnd] = transactionalMember;
-                        return transactionalMember;
+                        lock (TransactionalMembersLock)
+                        {
+                            TransactionalMembers[associationEnd] = transactionalMember;
+                            return transactionalMember; 
+                        }
                     }
                 }
 
                 if (associationEnd.FieldMember != null && associationEnd.FieldMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
                 {
-                    TransactionalMembers[associationEnd] = associationEnd.FieldMember;
-                    return associationEnd.FieldMember;
+                    lock (TransactionalMembersLock)
+                    {
+                        TransactionalMembers[associationEnd] = associationEnd.FieldMember;
+                        return associationEnd.FieldMember; 
+                    }
                 }
                 if (associationEnd.PropertyMember != null && associationEnd.PropertyMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
                 {
-                    TransactionalMembers[associationEnd] = associationEnd.PropertyMember;
-                    return associationEnd.PropertyMember;
+                    lock (TransactionalMembersLock)
+                    {
+                        TransactionalMembers[associationEnd] = associationEnd.PropertyMember;
+                        return associationEnd.PropertyMember; 
+                    }
                 }
-                TransactionalMembers[associationEnd] = null;
-                return null;
+                lock (TransactionalMembersLock)
+                {
+                    TransactionalMembers[associationEnd] = null;
+                    return null; 
+                }
             }
             catch (System.Exception error)
             {
