@@ -907,10 +907,6 @@ namespace OOAdvantech.Remoting.RestApi
                         //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel same ServerProcessIdentity {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
                     }
 
-
-
-
-
                     return;
                 }
                 catch (Exception error)
