@@ -13,7 +13,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
     /// <MetaDataID>{56c89abc-dab1-4736-be6e-e31a1390b973}</MetaDataID>
-     class StandardActions
+    class StandardActions
     {
         /// <MetaDataID>{68cb2a39-2c60-4672-af3d-a44a510750ea}</MetaDataID>
         public const string CreateCommunicationSession = "40f00e031643eb943a91f14651eda2";
@@ -159,14 +159,54 @@ namespace OOAdvantech.Remoting.RestApi
                 return (RealProxy as IProxy).ObjectUri.TransientUri;
             else
                 ObjRef = System.Runtime.Remoting.RemotingServices.GetObjRefForProxy(marshalByRefObject);
-            
+
             return ObjRef.URI;
 
 #endif
         }
 
+        public static string GetComputingContextPersistentUri(object marshalByRefObject)
+        {
+            if (marshalByRefObject == null)
+                return null;
+            string publicChannelUri = null;
+            string computingContextID = null;
+            System.Runtime.Remoting.Proxies.RealProxy RealProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(marshalByRefObject);
+            if (RealProxy == null)
+                return null;
+#if DeviceDotNet
+            if (RealProxy is IProxy)
+            {
+                var channelUri = (RealProxy as IProxy).ChannelUri;
+                ObjRef.GetChannelUriParts(channelUri, out publicChannelUri, out computingContextID);
+                if (!string.IsNullOrWhiteSpace(computingContextID))
+                    return computingContextID + ";" + (RealProxy as IProxy).ObjectUri.PersistentUri;
+                return (RealProxy as IProxy).ObjectUri.PersistentUri;
+            }
+            else
+                return null;
+#else
 
-        public static string GetObjectPersistentUri(object marshalByRefObject)
+            if (RealProxy is Remoting.Proxy)
+            {
+                var channelUri = (RealProxy as Remoting.Proxy).ChannelUri;
+                ObjRef.GetChannelUriParts(channelUri, out publicChannelUri, out computingContextID);
+                if (!string.IsNullOrWhiteSpace(computingContextID))
+                    return computingContextID + ";" + (RealProxy as IProxy).ObjectUri.PersistentUri;
+                return (RealProxy as Remoting.Proxy).URI.PersistentUri;
+            }
+            else if (RealProxy is IProxy)
+            {
+                var channelUri = (RealProxy as IProxy).ChannelUri;
+                ObjRef.GetChannelUriParts(channelUri, out publicChannelUri, out computingContextID);
+                if (!string.IsNullOrWhiteSpace(computingContextID))
+                    return computingContextID + ";" + (RealProxy as IProxy).ObjectUri.PersistentUri;
+                return (RealProxy as IProxy).ObjectUri.PersistentUri;
+            }
+            return null;
+#endif
+        }
+        public static string GetPersistentUri(object marshalByRefObject)
         {
             if (marshalByRefObject == null)
                 return null;
@@ -179,14 +219,12 @@ namespace OOAdvantech.Remoting.RestApi
             else
                 return null;
 #else
-            
+
             if (RealProxy is Remoting.Proxy)
                 return (RealProxy as Remoting.Proxy).URI.PersistentUri;
             else if (RealProxy is IProxy)
                 return (RealProxy as IProxy).ObjectUri.PersistentUri;
-
             return null;
-
 #endif
         }
         public static ExtObjectUri GetObjRefForProxy(object @object)
@@ -224,13 +262,46 @@ namespace OOAdvantech.Remoting.RestApi
             return obj;
         }
 
+        public static T GetPersistentObject<T>(string serverUrl, string persistentUri) where T : class
+        {
+            return GetPersistentObject(serverUrl, persistentUri) as T;
+        }
+        public static object GetPersistentObject(string persistentUri)
+        {
+
+            string[] parts = persistentUri.Split(';');
+            if (parts.Length == 2)
+            {
+                string computingContextID = parts[0];
+                string objectUri = parts[1];
+
+                string channelUri = string.Format("{0}({1})", RemotingServices.ServerPublicUrl, computingContextID);
+                var roleObject = RemotingServices.GetPersistentObject(channelUri, objectUri);
+                return roleObject;
+            }
+            else
+                return null;
+        }
         public static object GetPersistentObject(string serverUrl, string persistentUri)
         {
             try
             {
-                var remotingServices = GetRemotingServices(serverUrl);
-                return remotingServices.GetPersistentObject(persistentUri);
 
+                string[] parts = persistentUri.Split(';');
+                if (parts.Length == 2)
+                {
+                    string computingContextID = parts[0];
+                    string objectUri = parts[1];
+                    string channelUri = string.Format("{0}({1})", serverUrl, computingContextID);
+                    var roleObject = RemotingServices.GetPersistentObject(channelUri, objectUri);
+                    return roleObject;
+                }
+                else
+                {
+                    var remotingServices = GetRemotingServices(serverUrl);
+                    return remotingServices.GetPersistentObject(persistentUri);
+
+                }
                 //#if DeviceDotNet
                 //                return RemotingServices.CastTransparentProxy <OOAdvantech.Remoting.MarshalByRefObject>( remotingServices.GetPersistentObject(persistentUri));
                 //#else
@@ -622,7 +693,7 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.RequestType = RequestType.MethodCall;
 
             var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
-      
+
             requestData.ChannelUri = channelUri;
 
 
@@ -642,7 +713,7 @@ namespace OOAdvantech.Remoting.RestApi
                 if (returnMessage.Exception != null)
                 {
 
-              
+
 
                     if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                         throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
@@ -662,7 +733,7 @@ namespace OOAdvantech.Remoting.RestApi
                 var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
                 ObjRef remoteRef = JsonConvert.DeserializeObject<ObjRef>(returnMessage.ReturnObjectJson, jSetttings);
 
-      
+
                 Proxy proxy = new Proxy(remoteRef, typeof(IServerSessionPart));// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.IServerSessionPart));
 
 
@@ -671,6 +742,8 @@ namespace OOAdvantech.Remoting.RestApi
             }
             return default(ServerSessionPartInfo);
         }
+
+
 
         /// <MetaDataID>{cf27488f-0faa-4d28-a0ed-2285b9cf63a0}</MetaDataID>
         public OOAdvantech.Remoting.ClientSessionPart CreateClientSessionPart(string channelUri, Guid clientProcessIdentity, ServerSessionPartInfo serverSessionPartInfo)
