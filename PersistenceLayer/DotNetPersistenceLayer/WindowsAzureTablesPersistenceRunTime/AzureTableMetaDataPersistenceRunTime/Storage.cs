@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Microsoft.Azure.Cosmos.Table;
 
 using OOAdvantech.DotNetMetaDataRepository;
+using OOAdvantech.Transactions;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
@@ -55,23 +56,23 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         }
 
-        internal static string GetClassBLOBDataTableNameFor( string storagePrefix)
+        internal static string GetClassBLOBDataTableNameFor(string storagePrefix)
         {
-            return storagePrefix + "ClassBLOBData"; 
+            return storagePrefix + "ClassBLOBData";
         }
 
         internal static string GetObjectBLOBDataTableNameFor(string storagePrefix)
         {
-            return storagePrefix + "ObjectBLOBData"; 
+            return storagePrefix + "ObjectBLOBData";
         }
 
         internal static string GetMetadataIdentityTableNameFro(string storagePrefix)
         {
-            return storagePrefix + "MetadataIdentitiesTable"; 
+            return storagePrefix + "MetadataIdentitiesTable";
         }
 
         /// <MetaDataID>{9e7e3f3b-7172-42c9-b8f2-a102c2954693}</MetaDataID>
-        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, Microsoft.Azure.Cosmos.Table.CloudStorageAccount account, OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata storageMetadata=null)
+        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, Microsoft.Azure.Cosmos.Table.CloudStorageAccount account, OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata storageMetadata = null)
         {
             StorageName = storageName;
             StorageLocation = storageLocation;
@@ -427,19 +428,31 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             try
             {
-
-                foreach (var classBLOBData in (from classBLOBData in ClassBLOBDataTable.CreateQuery<ClassBLOBData>()
-                                               select classBLOBData))
+                using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
 
-                    Guid ID = Guid.Parse(classBLOBData.RowKey);
-                    string metaObjectIdentity = classBLOBData.MetaObjectIdentity;
-                    byte[] ClassData = classBLOBData.ClassData;
-                    int offset = 4;
-                    ClassBLOB classBLOB = new ClassBLOB(ClassData, offset);
-                    ClassBLOBs.Add(ID, classBLOB);
-                    classBLOB.ID = ID;
+                    foreach (var classBLOBData in (from classBLOBData in ClassBLOBDataTable.CreateQuery<ClassBLOBData>()
+                                                   select classBLOBData))
+                    {
+
+                        Guid ID = Guid.Parse(classBLOBData.RowKey);
+                        string metaObjectIdentity = classBLOBData.MetaObjectIdentity;
+                        byte[] ClassData = classBLOBData.ClassData;
+                        int offset = 4;
+                        ClassBLOB classBLOB = new ClassBLOB(ClassData, offset);
+                        ClassBLOBs.Add(ID, classBLOB);
+                        classBLOB.ID = ID;
+                    }
+
+                    foreach (ClassBLOB classBlob in ClassBLOBs.Values)
+                    {
+                        var Generalizations = classBlob.Class.Generalizations;
+                        var features = classBlob.Class.Features;
+                        var roles = classBlob.Class.Roles;
+                    } 
+                    stateTransition.Consistent = true;
                 }
+
 
             }
             catch (System.Exception Error)
@@ -469,7 +482,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             BackwardCompatibilities.Add("RDBMSMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=ab7ad9c2d64354ad",
                                    "RDBMSMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=483eb08c93287fcd");
 
-            
+
         }
 
         public Storage(string storageName, string storageLocation, string storageType, bool newStorage, CloudStorageAccount account, CloudTable storageMetadataEntry) : this(storageName, storageLocation, storageType, newStorage, account)

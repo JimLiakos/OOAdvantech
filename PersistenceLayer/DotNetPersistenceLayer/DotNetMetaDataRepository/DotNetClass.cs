@@ -84,7 +84,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     Refer = (OOAdvantech.DotNetMetaDataRepository.Type)value;
                 return ObjectMemberGetSet.MemberValueSetted;
             }
-         
+
             //if (member.Name == nameof(CachedClassHierarchyAssociateRoles))
             //{
             //    lock (ClassHierarcyObjectLock)
@@ -365,14 +365,17 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             //lock (ClassHierarcyObjectLock)
             {
-                if (HierarchyRealizationsLoaded)
-                    return;
-                long count = Features.Count;
-                foreach (MetaDataRepository.Generalization specialization in _Specializations.ToThreadSafeSet())
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
-                    (specialization.Child as Class).LoadHierarchyRealizations();
+                    if (HierarchyRealizationsLoaded)
+                        return;
+                    long count = Features.Count;
+                    foreach (MetaDataRepository.Generalization specialization in _Specializations.ToThreadSafeSet())
+                    {
+                        (specialization.Child as Class).LoadHierarchyRealizations();
+                    }
+                    HierarchyRealizationsLoaded = true;
                 }
-                HierarchyRealizationsLoaded = true;
             }
         }
         /// <MetaDataID>{9da49144-2d19-40d0-a27f-ae2e3bac0012}</MetaDataID>
@@ -382,19 +385,22 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             //lock (ClassHierarcyObjectLock)
             {
-                if (_HasReferentialIntegrityRelations.UnInitialized)
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
-                    foreach (AssociationEnd associationEnd in GetAssociateRoles(true))
+                    if (_HasReferentialIntegrityRelations.UnInitialized)
                     {
-                        if (associationEnd.Specification is Class)
-                            (associationEnd.Specification as Class).LoadHierarchyRealizations();
-                        if (associationEnd.Specification is Interface)
-                            (associationEnd.Specification as Interface).LoadHierarchyRealizations();
+                        foreach (AssociationEnd associationEnd in GetAssociateRoles(true))
+                        {
+                            if (associationEnd.Specification is Class)
+                                (associationEnd.Specification as Class).LoadHierarchyRealizations();
+                            if (associationEnd.Specification is Interface)
+                                (associationEnd.Specification as Interface).LoadHierarchyRealizations();
 
+                        }
+                        _HasReferentialIntegrityRelations.Value = base.HasReferentialIntegrityRelations();
                     }
-                    _HasReferentialIntegrityRelations.Value = base.HasReferentialIntegrityRelations();
+                    return _HasReferentialIntegrityRelations.Value;
                 }
-                return _HasReferentialIntegrityRelations.Value;
             }
         }
 
@@ -425,48 +431,50 @@ namespace OOAdvantech.DotNetMetaDataRepository
             if (ClassHierarchyLinkAssociation == null)
                 throw new System.Exception("The class " + FullName + " it isn't link class.");
 
-
-            var features = Features;
-            if (ClassHierarchyLinkAssociation != null)
+            using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
-                // lock (ClassHierarcyObjectLock)
+                var features = Features;
+                if (ClassHierarchyLinkAssociation != null)
                 {
-                    foreach (MetaDataRepository.Feature feature in features)
+                    // lock (ClassHierarcyObjectLock)
                     {
-                        System.Reflection.MemberInfo memberInfo = null;
-                        if (feature is Attribute && (feature as Attribute).wrMember.GetCustomAttributes(typeof(MetaDataRepository.AssociationClassRole), false).Length > 0)
-                            memberInfo = (feature as Attribute).wrMember;
-
-                        if (feature is AttributeRealization && (feature as AttributeRealization).PropertyMember.GetCustomAttributes(typeof(MetaDataRepository.AssociationClassRole), false).Length > 0)
-                            memberInfo = (feature as AttributeRealization).PropertyMember;
-
-                        if (memberInfo != null)
+                        foreach (MetaDataRepository.Feature feature in features)
                         {
-                            if (memberInfo is System.Reflection.PropertyInfo && (memberInfo as System.Reflection.PropertyInfo).GetAccessors()[0].IsAbstract)
-                                continue;
-                            MetaDataRepository.AssociationClassRole AssociationClassRole = memberInfo.GetCustomAttributes(typeof(MetaDataRepository.AssociationClassRole), true)[0] as MetaDataRepository.AssociationClassRole;
-                            System.Reflection.FieldInfo FieldRole = null;
-                            if (memberInfo is System.Reflection.FieldInfo)
-                                FieldRole = memberInfo as System.Reflection.FieldInfo;
-                            else
-                                FieldRole = memberInfo.DeclaringType.GetMetaData().GetField(AssociationClassRole.ImplMemberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance); // Error Prone if FieldRoleA==null;
+                            System.Reflection.MemberInfo memberInfo = null;
+                            if (feature is Attribute && (feature as Attribute).wrMember.GetCustomAttributes(typeof(MetaDataRepository.AssociationClassRole), false).Length > 0)
+                                memberInfo = (feature as Attribute).wrMember;
 
-                            if (AssociationClassRole.IsRoleA)
-                                _LinkClassRoleAField = FieldRole;
-                            else
-                                _LinkClassRoleBField = FieldRole;
-                        }
-                    }
-                    if (_LinkClassRoleBField == null && _LinkClassRoleAField == null)
-                    {
-                        foreach (Class _class in GetGeneralClasifiers().OfType<Class>())
-                        {
-                  
-                            if (_class.ClassHierarchyLinkAssociation != null)
+                            if (feature is AttributeRealization && (feature as AttributeRealization).PropertyMember.GetCustomAttributes(typeof(MetaDataRepository.AssociationClassRole), false).Length > 0)
+                                memberInfo = (feature as AttributeRealization).PropertyMember;
+
+                            if (memberInfo != null)
                             {
-                                _class.GetLinkClassRoleFields();
-                                _LinkClassRoleAField = (_class).LinkClassRoleAField;
-                                _LinkClassRoleBField = (_class).LinkClassRoleBField;
+                                if (memberInfo is System.Reflection.PropertyInfo && (memberInfo as System.Reflection.PropertyInfo).GetAccessors()[0].IsAbstract)
+                                    continue;
+                                MetaDataRepository.AssociationClassRole AssociationClassRole = memberInfo.GetCustomAttributes(typeof(MetaDataRepository.AssociationClassRole), true)[0] as MetaDataRepository.AssociationClassRole;
+                                System.Reflection.FieldInfo FieldRole = null;
+                                if (memberInfo is System.Reflection.FieldInfo)
+                                    FieldRole = memberInfo as System.Reflection.FieldInfo;
+                                else
+                                    FieldRole = memberInfo.DeclaringType.GetMetaData().GetField(AssociationClassRole.ImplMemberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance); // Error Prone if FieldRoleA==null;
+
+                                if (AssociationClassRole.IsRoleA)
+                                    _LinkClassRoleAField = FieldRole;
+                                else
+                                    _LinkClassRoleBField = FieldRole;
+                            }
+                        }
+                        if (_LinkClassRoleBField == null && _LinkClassRoleAField == null)
+                        {
+                            foreach (Class _class in GetGeneralClasifiers().OfType<Class>())
+                            {
+
+                                if (_class.ClassHierarchyLinkAssociation != null)
+                                {
+                                    _class.GetLinkClassRoleFields();
+                                    _LinkClassRoleAField = (_class).LinkClassRoleAField;
+                                    _LinkClassRoleBField = (_class).LinkClassRoleBField;
+                                }
                             }
                         }
                     }
@@ -482,25 +490,28 @@ namespace OOAdvantech.DotNetMetaDataRepository
         /// <MetaDataID>{CE5A6C85-2FD9-406E-9A1C-2CE432944C1F}</MetaDataID>
         void RolesFieldsTypeCheck()
         {
-            if (_LinkClassRoleAField == null)
-                throw new System.Exception("MDR Error: There isn't field definition for role A in Association class '" + FullName + "'.");
-
-            if (_LinkClassRoleBField == null)
-                throw new System.Exception("MDR Error: There isn't field definition for role B in Association class '" + FullName + "'.");
-
-            System.Type RoleAType = ClassHierarchyLinkAssociation.RoleA.Specification.GetExtensionMetaObject(typeof(System.Type)) as System.Type;
-            System.Type RoleBType = ClassHierarchyLinkAssociation.RoleB.Specification.GetExtensionMetaObject(typeof(System.Type)) as System.Type;
-            string ErrorMessage = null;
-            if (RoleAType != _LinkClassRoleAField.FieldType)
-                ErrorMessage += "\nMDR Error: RoleA type mismatch at " + _LinkClassRoleAField.DeclaringType + "." + _LinkClassRoleAField.Name + ".\n";
-
-            if (RoleBType != _LinkClassRoleBField.FieldType)
-                ErrorMessage += "\nMDR Error: RoleB type mismatch at " + _LinkClassRoleBField.DeclaringType + "." + _LinkClassRoleBField.Name + ".\n";
-            if (ErrorMessage != null)
+            using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
-                _LinkClassRoleAField = null;
-                _LinkClassRoleBField = null;
-                throw new System.Exception(ErrorMessage);
+                if (_LinkClassRoleAField == null)
+                    throw new System.Exception("MDR Error: There isn't field definition for role A in Association class '" + FullName + "'.");
+
+                if (_LinkClassRoleBField == null)
+                    throw new System.Exception("MDR Error: There isn't field definition for role B in Association class '" + FullName + "'.");
+
+                System.Type RoleAType = ClassHierarchyLinkAssociation.RoleA.Specification.GetExtensionMetaObject(typeof(System.Type)) as System.Type;
+                System.Type RoleBType = ClassHierarchyLinkAssociation.RoleB.Specification.GetExtensionMetaObject(typeof(System.Type)) as System.Type;
+                string ErrorMessage = null;
+                if (RoleAType != _LinkClassRoleAField.FieldType)
+                    ErrorMessage += "\nMDR Error: RoleA type mismatch at " + _LinkClassRoleAField.DeclaringType + "." + _LinkClassRoleAField.Name + ".\n";
+
+                if (RoleBType != _LinkClassRoleBField.FieldType)
+                    ErrorMessage += "\nMDR Error: RoleB type mismatch at " + _LinkClassRoleBField.DeclaringType + "." + _LinkClassRoleBField.Name + ".\n";
+                if (ErrorMessage != null)
+                {
+                    _LinkClassRoleAField = null;
+                    _LinkClassRoleBField = null;
+                    throw new System.Exception(ErrorMessage);
+                }
             }
         }
 
@@ -513,6 +524,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             get
             {
+
                 if (_LinkClassRoleAFastFieldAccessor != null)
                     return _LinkClassRoleAFastFieldAccessor;
                 else
@@ -606,27 +618,29 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
                 lock (ClassObjectLock)
                 {
-
-                    if (_NestedClasses == null)
+                    using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {
-                        Collections.Generic.Set<MetaDataRepository.Classifier> nestedClasses;
-                        lock (Type.LoadDotnetMetadataLock)
+                        if (_NestedClasses == null)
                         {
-                            nestedClasses = Refer.GetNestedClassifier();
-                        }
-                        foreach (MetaDataRepository.Classifier classifier in nestedClasses)
-                        {
-                            if (classifier is Class)
-                                (classifier as Class).SetNamespace(this);
+                            Collections.Generic.Set<MetaDataRepository.Classifier> nestedClasses;
+                            lock (Type.LoadDotnetMetadataLock)
+                            {
+                                nestedClasses = Refer.GetNestedClassifier();
+                            }
+                            foreach (MetaDataRepository.Classifier classifier in nestedClasses)
+                            {
+                                if (classifier is Class)
+                                    (classifier as Class).SetNamespace(this);
 
-                            if (classifier is Structure)
-                                (classifier as Structure).SetNamespace(this);
+                                if (classifier is Structure)
+                                    (classifier as Structure).SetNamespace(this);
 
-                            if (classifier is Interface)
-                                (classifier as Interface).SetNamespace(this);
-                            _OwnedElements.Add(classifier);
+                                if (classifier is Interface)
+                                    (classifier as Interface).SetNamespace(this);
+                                _OwnedElements.Add(classifier);
+                            }
+                            _NestedClasses = nestedClasses;
                         }
-                        _NestedClasses = nestedClasses;
                     }
                 }
 
@@ -652,7 +666,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
             }
         }
 
-   
+
         /// <MetaDataID>{8CA44CDB-B36A-4A9E-BDFA-17612D25EB91}</MetaDataID>
         public override Collections.Generic.Set<MetaDataRepository.Feature> Features
         {
@@ -660,14 +674,17 @@ namespace OOAdvantech.DotNetMetaDataRepository
             {
                 lock (FeaturesLock)
                 {
-                    if (!FeaturesLoaded)
+                    using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {
-                        Refer.GetFeatures(this, ref _Features);
-                        foreach (MetaDataRepository.Feature feature in _Features)
-                            _OwnedElements.Add(feature);
-                        FeaturesLoaded = true;
+                        if (!FeaturesLoaded)
+                        {
+                            Refer.GetFeatures(this, ref _Features);
+                            foreach (MetaDataRepository.Feature feature in _Features)
+                                _OwnedElements.Add(feature);
+                            FeaturesLoaded = true;
+                        }
+                        return _Features.ToThreadSafeSet();
                     }
-                    return _Features.ToThreadSafeSet();
                 }
             }
         }
@@ -711,32 +728,35 @@ namespace OOAdvantech.DotNetMetaDataRepository
             {
                 lock (RolesLock)
                 {
-                    if (RolesLoaded)
-                    {
 
+                    using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                    {
+                        if (RolesLoaded)
                             return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.AssociationEnd>(_Roles.ToThreadSafeSet(), OOAdvantech.Collections.CollectionAccessType.ReadOnly);
-                    }
-                    try
-                    {
-                        using (ObjectStateTransition stateTransition = new ObjectStateTransition(this, TransactionOption.Suppress))
+                        try
                         {
-
-                            Refer.GetRoles(this);
-
-                            object[] Attributes = Refer.WrType.GetMetaData().GetCustomAttributes(typeof(MetaDataRepository.AssociationClass), false);
-                            if (Attributes.Length > 0)
+                            using (ObjectStateTransition stateTransition = new ObjectStateTransition(this, TransactionOption.Suppress))
                             {
-                                MetaDataRepository.AssociationClass associationClass = (MetaDataRepository.AssociationClass)Attributes[0];
-                                _LinkAssociation = Refer.GetAssociation(associationClass);
+
+                                Refer.GetRoles(this);
+
+                                object[] Attributes = Refer.WrType.GetMetaData().GetCustomAttributes(typeof(MetaDataRepository.AssociationClass), false);
+                                if (Attributes.Length > 0)
+                                {
+                                    MetaDataRepository.AssociationClass associationClass = (MetaDataRepository.AssociationClass)Attributes[0];
+                                    _LinkAssociation = Refer.GetAssociation(associationClass);
+                                }
+                                RolesLoaded = true;
+                                return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.AssociationEnd>(_Roles, OOAdvantech.Collections.CollectionAccessType.ReadOnly);
                             }
-                            RolesLoaded = true;
-                            return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.AssociationEnd>(_Roles, OOAdvantech.Collections.CollectionAccessType.ReadOnly);
                         }
+                        catch (System.Exception error)
+                        {
+                            throw;
+                        }
+
                     }
-                    catch (System.Exception error)
-                    {
-                        throw;
-                    }
+
 
                 }
 
@@ -782,16 +802,19 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             get
             {
-                try
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
+                    try
+                    {
 
-                    if (!GeneralizationsLoaded)
-                        LoadGeneralizations();
-                    return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.Generalization>(_Generalizations.ToThreadSafeSet(), OOAdvantech.Collections.CollectionAccessType.ReadOnly);
-                }
-                catch (System.Exception error)
-                {
-                    throw;
+                        if (!GeneralizationsLoaded)
+                            LoadGeneralizations();
+                        return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.Generalization>(_Generalizations.ToThreadSafeSet(), OOAdvantech.Collections.CollectionAccessType.ReadOnly);
+                    }
+                    catch (System.Exception error)
+                    {
+                        throw;
+                    }
                 }
             }
         }
@@ -973,20 +996,23 @@ namespace OOAdvantech.DotNetMetaDataRepository
         /// <MetaDataID>{8E9A2ED0-BCB5-49D3-8204-5206388EC8FB}</MetaDataID>
         private void LoadGeneralizations()
         {
-            try
+            using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
-                lock (GeneralizationLock)
+                try
                 {
-                    if (!GeneralizationsLoaded)
+                    lock (GeneralizationLock)
                     {
-                        _Generalizations = Refer.GetGeneralizations(this);
-                        GeneralizationsLoaded = true;
+                        if (!GeneralizationsLoaded)
+                        {
+                            _Generalizations = Refer.GetGeneralizations(this);
+                            GeneralizationsLoaded = true;
+                        }
                     }
                 }
-            }
-            catch (System.Exception error)
-            {
-                throw;
+                catch (System.Exception error)
+                {
+                    throw;
+                }
             }
         }
 
@@ -995,10 +1021,13 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             lock (RealizationsLock)
             {
-                if (!RealizationsLoaded)
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
-                    Refer.GetRealizations(ref _Realizations, this);
-                    RealizationsLoaded = true;
+                    if (!RealizationsLoaded)
+                    {
+                        Refer.GetRealizations(ref _Realizations, this);
+                        RealizationsLoaded = true;
+                    }
                 }
             }
         }
@@ -1235,6 +1264,10 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
             if (associationEnd.AssociationEndRealizations.Count == 0)
             {
+                //if (associationEnd.Name == "TypeView")
+                //{
+
+                //}
                 //TODO: ο παρακάτω κώδικας αποτελή μέρος του κώδικα ελέχγου όρθοτητας του persistent metamodel και πρέπει
                 //να μεταφερθεί εκεί όστε να μην είναι δυνατόν να κάνω register το assembly σε ένα storage.
                 if (associationEnd.Persistent == true && Persistent && associationEnd.FieldMember == null)
@@ -1245,6 +1278,10 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
             foreach (AssociationEndRealization associationEndRealization in associationEnd.AssociationEndRealizations)
             {
+                //if (associationEnd.Name == "TypeView")
+                //{
+
+                //}
                 if (associationEndRealization.Namespace == this)
                 {
                     if (associationEndRealization.FieldMember != null)
@@ -1254,6 +1291,10 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     }
                 }
             }
+            //if (associationEnd.Name == "TypeView")
+            //{
+
+            //}
             foreach (MetaDataRepository.Classifier classifier in GetGeneralClasifiers())
             {
                 if (classifier is MetaDataRepository.Interface)
@@ -1294,7 +1335,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 lock (TransactionalMembersLock)
                 {
                     if (TransactionalMembers.TryGetValue(associationEnd, out transactionalMember))
-                        return transactionalMember; 
+                        return transactionalMember;
                 }
 
                 if (associationEnd.AssociationEndRealizations.Count == 0)
@@ -1304,7 +1345,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         lock (TransactionalMembersLock)
                         {
                             TransactionalMembers[associationEnd] = associationEnd.FieldMember;
-                            return associationEnd.FieldMember; 
+                            return associationEnd.FieldMember;
                         }
                     }
                     if (associationEnd.PropertyMember != null && associationEnd.PropertyMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
@@ -1312,7 +1353,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         lock (TransactionalMembersLock)
                         {
                             TransactionalMembers[associationEnd] = associationEnd.PropertyMember;
-                            return associationEnd.PropertyMember; 
+                            return associationEnd.PropertyMember;
                         }
                     }
 
@@ -1328,7 +1369,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             lock (TransactionalMembersLock)
                             {
                                 TransactionalMembers[associationEnd] = associationEndRealization.FieldMember;
-                                return associationEndRealization.FieldMember; 
+                                return associationEndRealization.FieldMember;
                             }
                         }
                         if (associationEndRealization.PropertyMember != null && associationEndRealization.PropertyMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
@@ -1336,7 +1377,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                             lock (TransactionalMembersLock)
                             {
                                 TransactionalMembers[associationEnd] = associationEndRealization.PropertyMember;
-                                return associationEndRealization.PropertyMember; 
+                                return associationEndRealization.PropertyMember;
                             }
                         }
                     }
@@ -1353,7 +1394,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         lock (TransactionalMembersLock)
                         {
                             TransactionalMembers[associationEnd] = transactionalMember;
-                            return transactionalMember; 
+                            return transactionalMember;
                         }
                     }
                 }
@@ -1363,7 +1404,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     lock (TransactionalMembersLock)
                     {
                         TransactionalMembers[associationEnd] = associationEnd.FieldMember;
-                        return associationEnd.FieldMember; 
+                        return associationEnd.FieldMember;
                     }
                 }
                 if (associationEnd.PropertyMember != null && associationEnd.PropertyMember.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).Length > 0)
@@ -1371,13 +1412,13 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     lock (TransactionalMembersLock)
                     {
                         TransactionalMembers[associationEnd] = associationEnd.PropertyMember;
-                        return associationEnd.PropertyMember; 
+                        return associationEnd.PropertyMember;
                     }
                 }
                 lock (TransactionalMembersLock)
                 {
                     TransactionalMembers[associationEnd] = null;
-                    return null; 
+                    return null;
                 }
             }
             catch (System.Exception error)
@@ -1582,7 +1623,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
 
         }
-    
+
         /// <MetaDataID>{f44aed23-1ee7-468f-84c5-30a49a2b549d}</MetaDataID>
         string ID = System.Guid.NewGuid().ToString();
 
@@ -1591,7 +1632,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             try
             {
-                
+
                 //if (theType.WrType.FullName == "OOAdvantech.Remoting.RestApi.ServerSessionPart")
                 //{
                 //}
@@ -1612,6 +1653,10 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 _Persistent = false;
                 _Abstract = theType.WrType.GetMetaData().IsAbstract;
                 _Name = theType.Name;
+                //if (theType.WrType.FullName == "OOAdvantech.RDBMSMetaDataRepository.Interface")
+                //{
+
+                //}
                 Refer = theType;
                 Visibility = Refer.Visibility;
 
@@ -1778,7 +1823,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 if (!string.IsNullOrEmpty(theType.WrType.Namespace))
                 {
                     Namespace mNamespace = Type.GetNameSpace(theType.WrType.Namespace);
-                   
+
                     mNamespace.AddOwnedElement(this);
                     SetNamespace(mNamespace);
                 }

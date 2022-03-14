@@ -443,8 +443,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             foreach (var collectionChange in collectionChanges)
             {
@@ -903,11 +903,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{42A863A7-2B32-466B-A7E4-1F20D3D78AA2}</MetaDataID>
         public virtual void CommitChanges(OOAdvantech.Transactions.Transaction transaction)
         {
-            lock (ThreadSafeLock)
-            {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
-            }
+       
             if (Multilingual)
             {
                 lock (MultilingualCollectionChanges)
@@ -926,6 +922,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 InternalCommitChanges(transaction);
             }
 
+            lock (ThreadSafeLock)
+            {
+                _ThreadSafeList.Clear();
+                _ThreadSafeSet.Clear();
+            }
 
             //System.Diagnostics.Debug.WriteLine("################# Commit ####################");
         }
@@ -1116,8 +1117,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             foreach (object _object in objects)
                 Remove(_object);
@@ -1128,8 +1129,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             foreach (object currObject in objects)
                 Add(currObject);
@@ -1140,8 +1141,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
 
             #region Get indexChange taransactions
@@ -1218,8 +1219,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
 
             #region Get indexChange taransactions
@@ -1475,8 +1476,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(default(OOAdvantech.Collections.Generic.List<object>));
+                SetThreadSafeSet(null);
             }
 
             if (RelResolver != null && theObject is OOAdvantech.MetaDataRepository.MetaObject && (theObject as OOAdvantech.MetaDataRepository.MetaObject).Name == "List`1")
@@ -1643,6 +1644,9 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
 
         }
+
+
+
         /// <MetaDataID>{c8daa7a4-646b-41f8-be0e-f792ca537c73}</MetaDataID>
         public virtual void Remove(object theObject)
         {
@@ -1659,8 +1663,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return;
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
 
             if (RelResolver != null && (RelResolver.AssociationEnd.Association.Name == "HallLayoutShape" || RelResolver.AssociationEnd.Association.Name == "SalesOffice_AccountabilityTypes"))
@@ -1792,6 +1796,67 @@ namespace OOAdvantech.PersistenceLayerRunTime
             if (!implicitly)
                 UpdateTheEndObjectsForRelationChange(item, CollectionChange.ChangeType.Deleteded);
 
+        }
+
+   
+
+        object ThreadSafeLock = new object();
+        Dictionary<string, OOAdvantech.Collections.Generic.List<object>> _ThreadSafeList = new Dictionary<string, List<object>>();
+             Dictionary<string, IList> _ThreadSafeSet = new Dictionary<string, IList>();
+
+   
+        private void SetThreadSafeList(List<object> list)
+        {
+            lock (ThreadSafeLock)
+            {
+                string localTransactionUri = "null_transaction";
+                if (Transaction.Current != null)
+                    localTransactionUri = Transaction.Current.LocalTransactionUri;
+                _ThreadSafeList[localTransactionUri] = list;
+            }
+        }
+        private List<object> GetThreadSafeList()
+        {
+            lock (ThreadSafeLock)
+            {
+                string localTransactionUri = "null_transaction";
+                if (Transaction.Current != null)
+                    localTransactionUri = Transaction.Current.LocalTransactionUri;
+
+                List<object> threadSafeList = null;
+                _ThreadSafeList.TryGetValue(localTransactionUri, out threadSafeList);
+
+                return threadSafeList;
+            }
+        }
+
+
+        private void SetThreadSafeSet(IList list)
+        {
+            lock (ThreadSafeLock)
+            {
+                
+                string localTransactionUri = "null_transaction";
+                if (Transaction.Current != null)
+                    localTransactionUri = Transaction.Current.LocalTransactionUri;
+
+                _ThreadSafeSet[localTransactionUri] = list;
+            }
+        }
+
+        private IList GetThreadSafeSet()
+        {
+            lock (ThreadSafeLock)
+            {
+                string localTransactionUri = "null_transaction";
+                if (Transaction.Current != null)
+                    localTransactionUri = Transaction.Current.LocalTransactionUri;
+
+                IList threadSafeSet = null;
+                _ThreadSafeSet.TryGetValue(localTransactionUri, out threadSafeSet);
+
+                return threadSafeSet;
+            }
         }
 
 
@@ -1993,8 +2058,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try
@@ -2031,8 +2096,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             foreach (System.Collections.Generic.KeyValuePair<string, Collections.Generic.Dictionary<object, CollectionChange>> entry in CollectionChanges)
             {
@@ -2049,11 +2114,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{bb368544-7d3a-445e-b13a-be0f087a8906}</MetaDataID>
         public virtual void UndoChanges(OOAdvantech.Transactions.Transaction transaction)
         {
-            lock (ThreadSafeLock)
-            {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
-            }
+          
 
             if (Multilingual)
             {
@@ -2071,6 +2132,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
             else
             {
                 InternalUndoChanges(transaction);
+            }
+
+            lock (ThreadSafeLock)
+            {
+                _ThreadSafeList.Clear();
+                _ThreadSafeSet.Clear();
             }
 
 
@@ -2388,14 +2455,14 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return cultures;
             }
         }
-        IList ThreadSafeSet = null;
+
         public System.Collections.ICollection ToThreadSafeSet(Type setType)
         {
 
             lock (ThreadSafeLock)
             {
-                if (ThreadSafeSet != null)
-                    return ThreadSafeSet;
+                if (GetThreadSafeSet() != null)
+                    return GetThreadSafeSet();
             }
             IList list = Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType)) as IList;
             ReaderWriterLock.AcquireReaderLock(10000);
@@ -2441,18 +2508,17 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
             lock (ThreadSafeLock)
             {
-                ThreadSafeSet = Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType), list, Collections.CollectionAccessType.ReadOnly) as IList;
-                return ThreadSafeSet;
+                SetThreadSafeSet(Activator.CreateInstance(typeof(Set<>).MakeGenericType(setType), list, Collections.CollectionAccessType.ReadOnly) as IList);
+                return GetThreadSafeSet();
             }
         }
-        object ThreadSafeLock = new object();
-        OOAdvantech.Collections.Generic.List<object> ThreadSafeList = null;
+
         public System.Collections.Generic.IList<object> ToThreadSafeList()
         {
             lock (ThreadSafeLock)
             {
-                if (ThreadSafeList != null)
-                    return ThreadSafeList.AsReadOnly();
+                if (GetThreadSafeList() != null)
+                    return GetThreadSafeList().AsReadOnly();
             }
             ReaderWriterLock.AcquireReaderLock(10000);
             //int fc = ReaderWriterLock.SystemReaderWriterLock.ReadLocks.Count;
@@ -2497,7 +2563,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = list;
+                SetThreadSafeList(list);
             }
             return list.AsReadOnly();
         }
@@ -2809,8 +2875,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             if (RelResolver != null && RelResolver.AssociationEnd.Indexer && NextIndex == -1 && !RelResolver.IsCompleteLoaded)
                 NextIndex = (RelResolver as System.Collections.ICollection).Count;
@@ -2828,8 +2894,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             if (RelResolver != null)
             {
@@ -3080,8 +3146,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             lock (ThreadSafeLock)
             {
-                ThreadSafeList = null;
-                ThreadSafeSet = null;
+                SetThreadSafeList(null);
+                SetThreadSafeSet(null);
             }
             foreach (var collectionChange in GetCollectionChanges(Transactions.Transaction.Current))
                 collectionChange.RelatedObjectsIndexesRebuilded = true;

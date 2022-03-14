@@ -3274,6 +3274,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             object memoryInstance = MemoryInstance;
             System.Type type = MemoryInstance.GetType();
+        
             lock (relResolver)
             {
                 if (relResolver.FieldInfo.DeclaringType == type || type.GetMetaData().IsSubclassOf(relResolver.FieldInfo.DeclaringType)) //if (Class.IsA(relResolver.AssociationEnd.Namespace as MetaDataRepository.Classifier))

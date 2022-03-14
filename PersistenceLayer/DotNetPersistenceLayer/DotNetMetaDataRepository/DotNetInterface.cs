@@ -49,7 +49,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     if (value == null)
                         ExtensionMetaObjects = default(System.Collections.Generic.List<object>);
                     else
-                        ExtensionMetaObjects = (System.Collections.Generic.List<object>)value; 
+                        ExtensionMetaObjects = (System.Collections.Generic.List<object>)value;
                 }
                 return ObjectMemberGetSet.MemberValueSetted;
             }
@@ -359,14 +359,17 @@ namespace OOAdvantech.DotNetMetaDataRepository
             {
                 lock (FeaturesLock)
                 {
-                    if (!FeaturesLoaded)
+                    using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {
-                        Refer.GetFeatures(this, ref _Features);
-                        foreach (MetaDataRepository.Feature feature in _Features)
-                            _OwnedElements.Add(feature);
-                        FeaturesLoaded = true;
+                        if (!FeaturesLoaded)
+                        {
+                            Refer.GetFeatures(this, ref _Features);
+                            foreach (MetaDataRepository.Feature feature in _Features)
+                                _OwnedElements.Add(feature);
+                            FeaturesLoaded = true;
+                        }
+                        return _Features.ToThreadSafeSet();
                     }
-                    return _Features.ToThreadSafeSet();
                 }
             }
         }
@@ -375,12 +378,15 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             get
             {
-                lock (GeneralizationLock)
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
-                    if (!GeneralizationsLoaded)
-                        LoadGeneralizations();
+                    lock (GeneralizationLock)
+                    {
+                        if (!GeneralizationsLoaded)
+                            LoadGeneralizations();
+                    }
+                    return new Collections.Generic.Set<OOAdvantech.MetaDataRepository.Generalization>(_Generalizations.ToThreadSafeSet(), Collections.CollectionAccessType.ReadOnly);
                 }
-                return new Collections.Generic.Set<OOAdvantech.MetaDataRepository.Generalization>(_Generalizations.ToThreadSafeSet(), Collections.CollectionAccessType.ReadOnly);
 
             }
         }
@@ -391,28 +397,31 @@ namespace OOAdvantech.DotNetMetaDataRepository
             {
                 lock (RolesLock)
                 {
-                    if (RolesLoaded)
+                    using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {
+                        if (RolesLoaded)
+
                             return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.AssociationEnd>(_Roles.ToThreadSafeSet(), OOAdvantech.Collections.CollectionAccessType.ReadOnly);
-                    }
-                    try
-                    {
-                        using (ObjectStateTransition stateTransition = new ObjectStateTransition(this, TransactionOption.Suppress))
+
+                        try
                         {
-                            Refer.GetRoles(this);
-                            object[] Attributes = Refer.WrType.GetMetaData().GetCustomAttributes(typeof(MetaDataRepository.AssociationClass), false);
-                            if (Attributes.Length > 0)
+                            using (ObjectStateTransition stateTransition = new ObjectStateTransition(this, TransactionOption.Suppress))
                             {
-                                MetaDataRepository.AssociationClass associationClass = (MetaDataRepository.AssociationClass)Attributes[0];
-                                _LinkAssociation = Refer.GetAssociation(associationClass);
+                                Refer.GetRoles(this);
+                                object[] Attributes = Refer.WrType.GetMetaData().GetCustomAttributes(typeof(MetaDataRepository.AssociationClass), false);
+                                if (Attributes.Length > 0)
+                                {
+                                    MetaDataRepository.AssociationClass associationClass = (MetaDataRepository.AssociationClass)Attributes[0];
+                                    _LinkAssociation = Refer.GetAssociation(associationClass);
+                                }
+                                RolesLoaded = true;
+                                return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.AssociationEnd>(_Roles, OOAdvantech.Collections.CollectionAccessType.ReadOnly);
                             }
-                            RolesLoaded = true;
-                            return new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.AssociationEnd>(_Roles, OOAdvantech.Collections.CollectionAccessType.ReadOnly);
                         }
-                    }
-                    catch (System.Exception error)
-                    {
-                        throw;
+                        catch (System.Exception error)
+                        {
+                            throw;
+                        }
                     }
                 }
 
@@ -550,15 +559,27 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
             lock (GeneralizationLock)
             {
-                if (!GeneralizationsLoaded)
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
-                    _Generalizations = Refer.GetGeneralizations(this);
-                    GeneralizationsLoaded = true;
+                    if (!GeneralizationsLoaded)
+                    {
+                        _Generalizations = Refer.GetGeneralizations(this);
+                        GeneralizationsLoaded = true;
+                    }
                 }
             }
         }
 
-        public override Collections.Generic.Set<Generalization> Specializations => new Collections.Generic.Set<Generalization>(base.Specializations);
+        public override Collections.Generic.Set<Generalization> Specializations
+        {
+            get
+            {
+                using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                {
+                    return new Collections.Generic.Set<Generalization>(base.Specializations);
+                }
+            }
+        }
         /// <MetaDataID>{05DB0397-6131-48DE-9353-C9A9A42D1CA2}</MetaDataID>
         internal Interface(Type theType)
         {

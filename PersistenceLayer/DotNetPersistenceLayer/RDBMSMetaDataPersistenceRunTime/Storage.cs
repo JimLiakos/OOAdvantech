@@ -166,6 +166,13 @@ namespace OOAdvantech.RDBMSMetaDataPersistenceRunTime
                     int erera = 0;
                 }
                 dataReader.Close();
+
+                foreach (var classBlob in ClassBLOBs.Values)
+                {
+                    var Generalizations = classBlob.Class.Generalizations;
+                    var features = classBlob.Class.Features;
+                    var roles = classBlob.Class.Roles;
+                }
             }
             catch (System.Exception Error)
             {
