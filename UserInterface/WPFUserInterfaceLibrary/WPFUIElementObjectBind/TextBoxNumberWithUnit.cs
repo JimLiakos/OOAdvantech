@@ -16,6 +16,8 @@ namespace System.Windows.Controls
         public TextBoxNumberWithUnit()
         {
 
+
+
         }
         protected override void OnInitialized(EventArgs e)
         {
@@ -28,6 +30,10 @@ namespace System.Windows.Controls
             
         }
 
+        protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
+        {
+            base.OnPreviewLostKeyboardFocus(e);
+        }
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
         {
             char decPoint= System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
@@ -48,6 +54,9 @@ namespace System.Windows.Controls
             
             base.OnPreviewTextInput(e);
         }
+        
+
+        
         public decimal Number
         {
             get
@@ -168,6 +177,7 @@ namespace System.Windows.Controls
         }
         protected override void OnLostFocus(RoutedEventArgs e)
         {
+
             decimal result = 0;
             decimal.TryParse(Text, out result);
             Number = result;

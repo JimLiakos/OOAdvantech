@@ -914,13 +914,30 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         public ObjRef GetObjectRefValue(object _obj)
         {
-
+            OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
             if (_obj is ITransparentProxy)
             {
                 var proxy = (_obj as ITransparentProxy).GetProxy();
                 if (proxy is  Proxy)
                 {
-                    return (proxy as Proxy).ObjectRef;
+                    if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
+                    {
+                        httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
+                        if (ServerSessionPart != null&& httpProxyType!=null)
+                            ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
+                        var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
+
+                        objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
+
+                        return objectRef;
+                    }
+                    else
+                    {
+                        var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
+                        return objectRef;
+                    }
+
+
                 }
             }
             string uri = System.Runtime.Remoting.RemotingServices.GetObjectUri(_obj as MarshalByRefObject);
@@ -944,7 +961,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
             }
-            OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
+            
             Type type = _obj.GetType();
             bool typeAlreadyMarshaled = false;
 

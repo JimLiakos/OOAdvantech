@@ -322,9 +322,9 @@
                 var relatedObject = Owner.GetMemoryInstanceMemberValue(this);
                 //FastFieldAccessor.GetValue(Owner.MemoryInstance);
 
-                if (relatedObject is IMultilingualMember)
+                if (Multilingual)
                 {
-                    foreach (System.Collections.DictionaryEntry relatedObjectEntry in (relatedObject as IMultilingual).Values)
+                    foreach (System.Collections.DictionaryEntry relatedObjectEntry in relatedObject as System.Collections.IDictionary)
                     {
 
                         if (relatedObjectEntry.Value != null)

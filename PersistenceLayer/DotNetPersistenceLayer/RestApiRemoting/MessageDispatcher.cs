@@ -212,8 +212,14 @@ namespace OOAdvantech.Remoting.RestApi
                         ProxyType proxyType = null;
                         System.Reflection.EventInfo objectChangeState = null;
                         bool updateCachingClientSideProperties = false;
-                        if (methodCallMessage.Object != null && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                        if (methodCallMessage.Object != null)// && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
+                            if(!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                            {
+                                proxyType = new ProxyType(methodCallMessage.Object.GetType());
+                                serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
+                            }
+
                             if (proxyType != null && proxyType.HasCachingClientSideProperties)
                                 objectChangeState = proxyType.GetObjectChangeState();
                         }
@@ -450,11 +456,16 @@ namespace OOAdvantech.Remoting.RestApi
                         ProxyType proxyType = null;
                         Dictionary<string, object> membersValues = null;
                         System.Reflection.EventInfo objectChangeState = null;
-                        if (methodCallMessage.Object != null && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                        if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
-                            if (proxyType != null && proxyType.HasCachingClientSideProperties)
-                                objectChangeState = proxyType.GetObjectChangeState();
+                            proxyType = new ProxyType(methodCallMessage.Object.GetType());
+                            serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
                         }
+
+                        if (proxyType != null && proxyType.HasCachingClientSideProperties)
+                            objectChangeState = proxyType.GetObjectChangeState();
+
+                   
                         bool updateCachingClientSideProperties = false;
                         ObjectChangeStateHandle handler = (object _object, string member) =>
                          {
