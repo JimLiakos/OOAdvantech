@@ -48,7 +48,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             System.Collections.Generic.List<ValueOfAttribute> valuesOfAttribute = GetPersistentAttributeMetaData();
 
             if (PersistentObjectID.ToString() == "43e99dd3-7a05-4a9a-90f6-3e73a9e593d2")
-            { 
+            {
 
             }
             foreach (Member member in SerializationMetada.Members)
@@ -158,17 +158,40 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             foreach (PersistenceLayerRunTime.RelResolver relResolver in RelResolvers)
             {
+
                 PersistenceLayerRunTime.RelResolver mResolver = relResolver;
                 DotNetMetaDataRepository.AssociationEnd associationEnd = mResolver.AssociationEnd as DotNetMetaDataRepository.AssociationEnd;
 
-                //System.Reflection.FieldInfo CurrFieldInfo=Class.GetFieldMember(associationEnd);
                 if (associationEnd.Multiplicity.IsMany)
                     continue;
+
                 //if(CurrFieldInfo.FieldType==typeof(PersistenceLayer.ObjectContainer)||CurrFieldInfo.FieldType.IsSubclassOf(typeof(PersistenceLayer.ObjectContainer)))
                 //    continue;
+                if ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne)&&
+                   mResolver.AssociationEnd.GetOtherEnd().Navigable &&
+                   mResolver.AssociationEnd.Multiplicity.IsMany)
+                {
+                    continue;
+                }
+                //if (!Class.IsLazyFetching(mResolver.AssociationEnd))
+                //{
+                //    LazyFetching(mResolver, MemoryInstance.GetType());
+                //}
 
-                if (!Class.IsLazyFetching(mResolver.AssociationEnd))
+                if (!Class.IsLazyFetching(mResolver.AssociationEnd) ||
+                    ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
+                    mResolver.AssociationEnd.GetOtherEnd().Multiplicity.IsMany))
+                {
                     LazyFetching(mResolver, MemoryInstance.GetType());
+
+                    if ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
+                        mResolver.AssociationEnd.GetOtherEnd().Navigable &&
+                        mResolver.AssociationEnd.GetOtherEnd().Multiplicity.IsMany)
+                    {
+                        if (mResolver.RelatedObject != null)
+                            DotNetMetaDataRepository.AssociationEnd.AddObjectsLink(mResolver.AssociationEnd.GetOtherEnd(), mResolver.RelatedObject, MemoryInstance);
+                    }
+                }
             }
         }
 

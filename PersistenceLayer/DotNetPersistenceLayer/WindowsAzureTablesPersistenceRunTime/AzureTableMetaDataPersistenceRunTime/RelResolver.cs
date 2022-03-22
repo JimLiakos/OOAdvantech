@@ -44,6 +44,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             //System.Reflection.FieldInfo associationEndFieldInfo= Owner.Class.GetFieldMember(AssociationEnd as DotNetMetaDataRepository.AssociationEnd);
             if (AssociationEnd.Multiplicity.IsMany)// associationEndFieldInfo.FieldType==typeof(PersistenceLayer.ObjectContainer)||associationEndFieldInfo.FieldType.IsSubclassOf(typeof(PersistenceLayer.ObjectContainer)))
             {
+                if ((AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
+                 AssociationEnd.GetOtherEnd().Navigable &&
+                 AssociationEnd.Multiplicity.IsMany)
+                {
+                    //relationDataSream = new byte[0];
+                    //RelationDataSream = relationDataSream;
+                    return RelationDataSream;
+                }
+
+
                 //Παράγει τα transaction command σε περίπτωση που το Field είναι συνδεδεμένο 
                 //με Persistency Layer collection.
                 OOAdvantech.AccessorBuilder.FieldPropertyAccessor fastPropertyAccessor = Owner.Class.GetFastFieldAccessor(AssociationEnd as DotNetMetaDataRepository.AssociationEnd);

@@ -773,7 +773,7 @@
       <Name>AssemblyCrypto - VS10</Name>
     </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.Json\OOAdvantech.Json.csproj">
-      <Project>{f20e4565-5ddb-4e1e-a343-369927c01277}</Project>
+      <Project>{F20E4565-5DDB-4E1E-A343-369927C01277}</Project>
       <Name>OOAdvantech.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">

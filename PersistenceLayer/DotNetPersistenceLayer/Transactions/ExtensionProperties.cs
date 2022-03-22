@@ -42,12 +42,15 @@ namespace OOAdvantech
         public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             OOAdvantech.Collections.Hashtable SerializedPrperties = new OOAdvantech.Collections.Hashtable();
-            foreach (var entry in Properties)
+            if (Properties != null)
             {
-                if (entry.Value != null && (entry.Value.GetType().IsMarshalByRef || entry.Value.GetType().IsSerializable))
-                    SerializedPrperties.Add(entry.Key, entry.Value);
-                else
-                    SerializedPrperties.Add(entry.Key, null);
+                foreach (var entry in Properties)
+                {
+                    if (entry.Value != null && (entry.Value.GetType().IsMarshalByRef || entry.Value.GetType().IsSerializable))
+                        SerializedPrperties.Add(entry.Key, entry.Value);
+                    else
+                        SerializedPrperties.Add(entry.Key, null);
+                }
             }
             info.AddValue("Properties", SerializedPrperties);
         }

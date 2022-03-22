@@ -8,6 +8,7 @@ namespace OOAdvantech.Remoting
     using System.Collections;
     using System.Reflection;
     using Json;
+    using OOAdvantech.Json;
 
     /// <MetaDataID>{30FE77F8-D725-4C93-9912-2301D9D22462}</MetaDataID>
     /// <summary>Proxy class is an extension of real proxy. It has the advantage of reconnect with remote object. Client and server machine maybe loose the connection if lease time expired then the server object disconnected from network. If the client and server machine regain the connection the proxy class try to reconnect with remote object, and reconnect with the object if isn't collected from GC. If remote object is persistent then the proxy will reconnect and in case where the object collected. The persistency system will build the object from the storage instance. </summary>
