@@ -64,12 +64,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public void LoadMemberData(byte[] byteStream, int offset, out int nextAvailablePos, ElasticTableEntity entity)
         {
             nextAvailablePos = offset;
-            
+
             if (Type == typeof(string))
             {
                 string value = OOAdvantech.BinaryFormatter.BinaryFormatter.ToString(byteStream, offset, ref offset);
                 nextAvailablePos = offset;
-                
+
                 if (Name == "RowKey")
                     entity.RowKey = value;
                 else if (Name == "PartitionKey")
@@ -77,7 +77,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 else
                     entity[Name] = value;
             }
-            else if(Type==typeof(byte[]))
+            else if (Type == typeof(byte[]))
             {
                 byte[] value;
                 OOAdvantech.BinaryFormatter.BinaryFormatter.ToBytes(byteStream, offset, ref offset, out value);
@@ -160,11 +160,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
                 if (storageInstanceRef.PersistentObjectID.ToString() == "43e99dd3-7a05-4a9a-90f6-3e73a9e593d2")
                 {
-                    if(Name== "Generalizations")
+                    if (Name == "Generalizations")
                     {
 
                     }
-                    if(Name== "Specializations")
+                    if (Name == "Specializations")
                     {
 
                     }
@@ -179,6 +179,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 for (int i = 0; i != count; i++)
                 {
                     RelResolver relResolver = storageInstanceRef.RelResolvers[i] as RelResolver;
+                    if ((relResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || relResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
+                   relResolver.AssociationEnd.GetOtherEnd().Navigable &&
+                   relResolver.AssociationEnd.Multiplicity.IsMany)
+                    {
+                        continue;
+                    }
+
                     DotNetMetaDataRepository.AssociationEnd associationEnd = relResolver.AssociationEnd;
                     if (associationEnd == (MetaData as DotNetMetaDataRepository.AssociationEnd))
                     {
@@ -359,7 +366,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
                 for (int i = 0; i != count; i++)
                 {
-                    
+
                     RelResolver relResolver = storageInstanceRef.RelResolvers[i] as RelResolver;
                     if (relResolver.RelationDataSream == null && relationStream == null)
                         return true;
@@ -797,7 +804,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                         {
                         }
                     }
-                    if(MetaData==null)
+                    if (MetaData == null)
                     {
                         byte[] relationStream = null;
                         BinaryFormatter.BinaryFormatter.Serialize(relationStream, Buffer, offset, ref offset);
@@ -821,6 +828,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                             //    var sdsd = (storageInstanceRef.MemoryInstance as MetaDataRepository.Component).Residents.Select(x => x.FullName).ToArray();
                             //}
                             byte[] relationStream = relResolver.GetRelationStream();
+                            if (relationStream != null && relationStream.Length > 3000)
+                            {
+
+                            }
 
                             if (relationStream != null && relationStream.Length > Buffer.Length - offset)
                             {
@@ -981,6 +992,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 #endif
             finally
             {
+                if (memoryStream.Length > 20000)
+                {
+
+                }
                 //  ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
 
             }

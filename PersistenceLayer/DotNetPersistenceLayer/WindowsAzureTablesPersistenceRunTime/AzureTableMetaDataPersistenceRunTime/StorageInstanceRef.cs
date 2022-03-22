@@ -167,7 +167,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
                 //if(CurrFieldInfo.FieldType==typeof(PersistenceLayer.ObjectContainer)||CurrFieldInfo.FieldType.IsSubclassOf(typeof(PersistenceLayer.ObjectContainer)))
                 //    continue;
-                if ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne)&&
+                if ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
                    mResolver.AssociationEnd.GetOtherEnd().Navigable &&
                    mResolver.AssociationEnd.Multiplicity.IsMany)
                 {
@@ -189,7 +189,20 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                         mResolver.AssociationEnd.GetOtherEnd().Multiplicity.IsMany)
                     {
                         if (mResolver.RelatedObject != null)
-                            DotNetMetaDataRepository.AssociationEnd.AddObjectsLink(mResolver.AssociationEnd.GetOtherEnd(), mResolver.RelatedObject, MemoryInstance);
+                        {
+
+                            var storageInstanceRef = StorageInstanceRef.GetStorageInstanceRef(mResolver.RelatedObject) as StorageInstanceRef;
+                            var relationResolver = storageInstanceRef.RelResolvers.Where(x => x.AssociationEnd == mResolver.AssociationEnd.GetOtherEnd()).FirstOrDefault() as RelResolver;
+
+                            if(relationResolver.AssociationEnd.Name== "Residents")
+                            {
+
+                            }
+                            if (relationResolver.LinkedStorageInstanceRefs == null)
+                                relationResolver.LinkedStorageInstanceRefs = new List<StorageInstanceRef>();
+                            if(!relationResolver.LinkedStorageInstanceRefs.Contains(this))
+                                relationResolver.LinkedStorageInstanceRefs.Add(this);
+                        }
                     }
                 }
             }

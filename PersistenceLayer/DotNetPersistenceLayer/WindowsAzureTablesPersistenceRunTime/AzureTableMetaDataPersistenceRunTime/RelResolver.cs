@@ -49,7 +49,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                  AssociationEnd.Multiplicity.IsMany)
                 {
                     //relationDataSream = new byte[0];
-                    //RelationDataSream = relationDataSream;
+                    RelationDataSream = null;
                     return RelationDataSream;
                 }
 
@@ -131,6 +131,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <MetaDataID>{6DA556CA-B8DF-475C-8CC3-3F577595E4FD}</MetaDataID>
         public override System.Collections.Generic.List<object> GetLinkedObjects(string criterion)
         {
+            if(AssociationEnd.Name == "Residents")
+            {
+
+            }
             if (Owner.PersistentObjectID.ToString() == "43e99dd3-7a05-4a9a-90f6-3e73a9e593d2")
             {
 
@@ -180,6 +184,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <MetaDataID>{7C25A119-74A8-4952-8E34-91CFFD19B1C9}</MetaDataID>
         public override System.Collections.Generic.List<object> GetLinkedStorageInstanceRefs(bool OperativeObjectOnly)
         {
+            if (LinkedStorageInstanceRefs != null)
+                return LinkedStorageInstanceRefs.OfType<object>().ToList();
+
             OOAdvantech.Collections.Generic.List<object> Objects = new Collections.Generic.List<object>();
             if (RelationDataSream == null)
                 return Objects;
@@ -217,5 +224,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             return Objects;
 
         }
+
+
+        internal List<StorageInstanceRef> LinkedStorageInstanceRefs = null;
     }
 }
