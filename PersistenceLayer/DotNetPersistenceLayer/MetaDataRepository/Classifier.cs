@@ -887,7 +887,7 @@ namespace OOAdvantech.MetaDataRepository
                     count = Roles.Count;
                     count = OriginClassifier.Roles.Count;
 
-                    if (Identity.ToString() == "{174fc4ef-b90f-4a30-892d-7cc9c28f8fe0}")
+                    if (Identity.ToString() == "{0705a4fa-af2e-4a58-b666-e1bba0e07f2a}")
                     {
 
                     }
@@ -908,6 +908,9 @@ namespace OOAdvantech.MetaDataRepository
                             else
                             {
                                 (deleteCommand.CandidateForDeleteObject as AssociationEnd).Specification.RemoveRole((deleteCommand.CandidateForDeleteObject as AssociationEnd).GetOtherEnd());
+
+                                OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(deleteCommand.CandidateForDeleteObject);
+
                             }
                         }
                        

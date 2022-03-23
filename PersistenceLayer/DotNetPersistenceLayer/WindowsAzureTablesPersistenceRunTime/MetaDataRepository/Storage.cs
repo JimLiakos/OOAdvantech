@@ -257,8 +257,32 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
         void UpdateRelations()
         {
+            Dictionary<string, List<MetaObject>> metaObjects = new Dictionary<string, List<MetaObject>>();
+
+            Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute("SELECT MetaObject FROM " + typeof(MetaDataRepository.MetaObject).FullName + " MetaObject ");//WHERE MetaObjectIDStream = \""+OriginMetaObject.Identity.ToString()+"\" ");
+            
+            
+            
+            foreach (Collections.StructureSet Rowset in aStructureSet)
+            {
+                MetaDataRepository.MetaObject metaObject = (MetaDataRepository.MetaObject)Rowset["MetaObject"];
+                if (metaObject.Identity.ToString() == null)
+                {
+                    int were = 0;
+                }
+                List<MetaObject> IdMetaobjects = null;
+                if (!metaObjects.TryGetValue(metaObject.Identity.ToString(), out IdMetaobjects))
+                {
+                    IdMetaobjects = new List<MetaObject>();
+                    metaObjects[metaObject.Identity.ToString()] = IdMetaobjects;
+                }
+
+                IdMetaobjects.Add(metaObject);
+            }
+            var sso= metaObjects.Where(x => x.Value.Count > 1).ToArray();
             string Query = "SELECT storageCellsLink FROM " + typeof(RDBMSMetaDataRepository.StorageCellsLink).FullName + " storageCellsLink";
             Collections.StructureSet structureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute(Query);
+
 
             try
             {
@@ -266,6 +290,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 {
                     RDBMSMetaDataRepository.StorageCellsLink storageCellsLink = (RDBMSMetaDataRepository.StorageCellsLink)Rowset["storageCellsLink"];
 
+                    if (storageCellsLink.Type!=null&& storageCellsLink.Type.Connections.Count!=2)
+                    {
+                        if(storageCellsLink.Type.Connections.Count>2)
+                        {
+                            
+                        }
+                    }
                     if (storageCellsLink.Type.RoleA == null || storageCellsLink.Type.RoleB == null)
                         continue;
 

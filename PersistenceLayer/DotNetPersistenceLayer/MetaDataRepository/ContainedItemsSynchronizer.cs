@@ -1,3 +1,4 @@
+using System.Linq;
 namespace OOAdvantech.MetaDataRepository
 {
     /// <MetaDataID>{5883F983-F36E-419B-A5C8-54B58FDA87F1}</MetaDataID>
@@ -120,17 +121,24 @@ namespace OOAdvantech.MetaDataRepository
                 if (NewMetaObject != null)
                     AddedObjectsCommands.Add(new AddCommand(NewMetaObject, Updated));
             }
+            var source = Source.Cast<MetaObject>().ToList();
             foreach (MetaObject CurrMetaObject in Updated)
             {
                 MetaObject DeleteMetaObject = CurrMetaObject;
-                foreach (MetaObject CurrSourceMetaObject in Source)
+
+                
+
+                foreach (MetaObject CurrSourceMetaObject in source.ToList())
                     if (MetaObjectsStack.CurrentMetaObjectCreator.GetIdentity(CurrSourceMetaObject) == MetaObjectsStack.CurrentMetaObjectCreator.GetIdentity(CurrMetaObject))
                     {
+                        
                         if (GetMetaDataRepositoryClass(CurrMetaObject) == GetMetaDataRepositoryClass(CurrSourceMetaObject))
                         {
+                            source.Remove(CurrSourceMetaObject);
                             DeleteMetaObject = null;
                             break;
                         }
+                        
                     }
                 if (DeleteMetaObject != null)
                     DeletedObjectsCommands.Add(new DeleteCommand(DeleteMetaObject, Updated));
