@@ -299,29 +299,30 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         public override bool CheckForVersionUpgrate(string assemblyFullName)
         {
-            DotNetMetaDataRepository.Assembly mAssembly = null;
-            System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
-            object[] objects = dotNetAssembly.GetCustomAttributes(typeof(MetaDataRepository.BuildAssemblyMetadata), false);
-            if (objects.Length == 0)
-                throw new System.Exception("You must declare in assemblyInfo file of  '" + dotNetAssembly.FullName + " the OOAdvantech.MetaDataRepository.BuildAssemblyMetadata attribute");
-            mAssembly = DotNetMetaDataRepository.Assembly.GetComponent(dotNetAssembly) as DotNetMetaDataRepository.Assembly;
 
-            OOAdvantech.Linq.Storage linqStorage = new Linq.Storage(OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(this));
-            var storageComponent = (from component in linqStorage.GetObjectCollection<RDBMSMetaDataRepository.Component>() select component).ToList().Where(x => x.Identity.ToString() == mAssembly.Identity.ToString()).FirstOrDefault();
+            //DotNetMetaDataRepository.Assembly mAssembly = null;
+            //System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
+            //object[] objects = dotNetAssembly.GetCustomAttributes(typeof(MetaDataRepository.BuildAssemblyMetadata), false);
+            //if (objects.Length == 0)
+            //    throw new System.Exception("You must declare in assemblyInfo file of  '" + dotNetAssembly.FullName + " the OOAdvantech.MetaDataRepository.BuildAssemblyMetadata attribute");
+            //mAssembly = DotNetMetaDataRepository.Assembly.GetComponent(dotNetAssembly) as DotNetMetaDataRepository.Assembly;
 
-            if (storageComponent == null)
-                return true;
+            //OOAdvantech.Linq.Storage linqStorage = new Linq.Storage(OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(this));
+            //var storageComponent = (from component in linqStorage.GetObjectCollection<RDBMSMetaDataRepository.Component>() select component).ToList().Where(x => x.Identity.ToString() == mAssembly.Identity.ToString()).FirstOrDefault();
 
-            Version storageComponentMappingVersion = null;
-            if (!Version.TryParse(storageComponent.MappingVersion, out storageComponentMappingVersion))
-                storageComponentMappingVersion = new Version();
+            //if (storageComponent == null)
+            //    return true;
 
-            Version componentMappingVersionVersion = null;
-            if (!Version.TryParse(mAssembly.MappingVersion, out componentMappingVersionVersion))
-                componentMappingVersionVersion = new Version();
+            //Version storageComponentMappingVersion = null;
+            //if (!Version.TryParse(storageComponent.MappingVersion, out storageComponentMappingVersion))
+            //    storageComponentMappingVersion = new Version();
 
-            if (componentMappingVersionVersion > storageComponentMappingVersion)
-                return true;
+            //Version componentMappingVersionVersion = null;
+            //if (!Version.TryParse(mAssembly.MappingVersion, out componentMappingVersionVersion))
+            //    componentMappingVersionVersion = new Version();
+
+            //if (componentMappingVersionVersion > storageComponentMappingVersion)
+            //    return true;
 
             return false;
         }

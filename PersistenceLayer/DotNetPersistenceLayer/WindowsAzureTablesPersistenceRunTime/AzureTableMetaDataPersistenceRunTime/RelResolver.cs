@@ -44,14 +44,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             //System.Reflection.FieldInfo associationEndFieldInfo= Owner.Class.GetFieldMember(AssociationEnd as DotNetMetaDataRepository.AssociationEnd);
             if (AssociationEnd.Multiplicity.IsMany)// associationEndFieldInfo.FieldType==typeof(PersistenceLayer.ObjectContainer)||associationEndFieldInfo.FieldType.IsSubclassOf(typeof(PersistenceLayer.ObjectContainer)))
             {
+                #region Resolver
                 if ((AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
-                 AssociationEnd.GetOtherEnd().Navigable &&
-                 AssociationEnd.Multiplicity.IsMany)
+                       AssociationEnd.GetOtherEnd().Navigable &&
+                       AssociationEnd.Multiplicity.IsMany)
                 {
                     //relationDataSream = new byte[0];
                     RelationDataSream = null;
                     return RelationDataSream;
                 }
+                #endregion
 
 
                 //Παράγει τα transaction command σε περίπτωση που το Field είναι συνδεδεμένο 

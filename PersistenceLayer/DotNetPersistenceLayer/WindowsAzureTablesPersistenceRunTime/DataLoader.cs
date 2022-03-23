@@ -691,6 +691,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         }
                         else
                         {
+                            if(DataNode.FullName == "FoodServiceClientSession")
+                            {
+
+                            }
                             #region Moves storageInstance to operate mode
                             storageInstanceRef = (StorageInstanceRef)(ObjectStorage as ObjectStorage).CreateStorageInstanceRef(AccessorBuilder.CreateInstance(LastStorageCellType), objectID, LastStorageCell);
                             storageInstanceRef.InstantiateObjectQueryIdentity = DataNode.ObjectQuery.QueryIdentity;
@@ -770,6 +774,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <MetaDataID>{cd56dfc7-cf9c-42e6-9e9f-4932d7d37b05}</MetaDataID>
         private ClassMembersMappedColumnsIndices BuildClassMembersMappedColumnsIndices(System.Collections.Generic.Dictionary<string, int> columnsIndices, string columnPrefix)
         {
+            if (DataNode.FullName == "FoodServiceClientSession")
+            {
+
+            }
 
             ClassMembersMappedColumnsIndices metaObjectsColumnsIndices = new ClassMembersMappedColumnsIndices();
             metaObjectsColumnsIndices.AttributeIndices = new Dictionary<OOAdvantech.MetaDataRepository.MetaObjectID, Dictionary<string, int>>();
@@ -3242,6 +3250,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                     #endregion
 
+
+                    if (DataNode.FullName == "FoodServiceClientSession")
+                    {
+
+                    }
+
                     if (ObjectActivation)
                     {
                         AddObjectIDColumns = true;
@@ -3408,6 +3422,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             {
                                 foreach (RDBMSMetaDataRepository.AssociationEnd associationEnd in _class.GetRoles(true))
                                 {
+                                    if (DataNode.FullName == "FoodServiceClientSession")
+                                    {
+
+                                    }
+
                                     GetAssociationEndColumns(associationEnd, _class, columnNames, coloumns);
                                 }
                                 if (_class.ClassHierarchyLinkAssociation != null)

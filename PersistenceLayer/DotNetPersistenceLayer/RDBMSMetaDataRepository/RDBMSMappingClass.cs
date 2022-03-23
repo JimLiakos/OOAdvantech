@@ -1412,7 +1412,13 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         }
                     }
 
+                    foreach(var associationEnd in GetRoles(true))
+                    {
+                        if(associationEnd.Association.Connections.Count>2)
+                        {
 
+                        }
+                    }
 
                     StateTransition.Consistent = true; ;
                 }

@@ -179,12 +179,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 for (int i = 0; i != count; i++)
                 {
                     RelResolver relResolver = storageInstanceRef.RelResolvers[i] as RelResolver;
+
+                    #region Resolver
                     if ((relResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || relResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
-                   relResolver.AssociationEnd.GetOtherEnd().Navigable &&
-                   relResolver.AssociationEnd.Multiplicity.IsMany)
+                               relResolver.AssociationEnd.GetOtherEnd().Navigable &&
+                               relResolver.AssociationEnd.Multiplicity.IsMany)
                     {
                         continue;
                     }
+                    #endregion
 
                     DotNetMetaDataRepository.AssociationEnd associationEnd = relResolver.AssociationEnd;
                     if (associationEnd == (MetaData as DotNetMetaDataRepository.AssociationEnd))
@@ -732,7 +735,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 else if (Type == typeof(double))
                 {
                     //ulong value=(ulong)FieldInfo.GetValue(memoryInstamce);
-                    double? value = entityProperty.DoubleValue.Value;
+                    double? value = entityProperty.DoubleValue;
                     OOAdvantech.BinaryFormatter.BinaryFormatter.Serialize(value, byteStream, offset, ref offset);
 
                 }

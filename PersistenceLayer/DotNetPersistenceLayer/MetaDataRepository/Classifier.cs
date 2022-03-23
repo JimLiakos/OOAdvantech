@@ -1585,7 +1585,7 @@ namespace OOAdvantech.MetaDataRepository
                 ReaderWriterLock.AcquireReaderLock(10000);
                 try
                 {
-                        return new OOAdvantech.Collections.Generic.Set<AssociationEnd>(_Roles.ToThreadSafeSet().Where(role => role.Association != null && role.Association.Connections.Count == 2).ToList());//, OOAdvantech.Collections.CollectionAccessType.ReadOnly);
+                        return new OOAdvantech.Collections.Generic.Set<AssociationEnd>(_Roles.ToThreadSafeSet().Where(role => role.Association != null && role.Association.Connections.Count >= 2).ToList());//, OOAdvantech.Collections.CollectionAccessType.ReadOnly);
                 }
                 catch (System.Exception)
                 {

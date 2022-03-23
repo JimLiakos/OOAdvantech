@@ -940,7 +940,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
             return new DataLoader(dataNode, dataLoaderMetadata);
         }
-        static byte[] Buffer = new byte[65536];
+        static byte[] Buffer = new byte[66536];
         static byte[] MembersBuffer = new byte[16384];
 
 

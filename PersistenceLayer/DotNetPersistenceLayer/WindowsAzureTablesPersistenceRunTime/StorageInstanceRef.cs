@@ -6,6 +6,7 @@ using PartTypeName = System.String;
 using CreatorIdentity = System.String;
 
 using OOAdvantech.RDBMSMetaDataRepository;
+using System.Linq;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
@@ -55,7 +56,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 lock (TablesEntities)
                 {
                     Dictionary<string, StorageInstanceRef> tableStorageInstanceRefs = null;
-                    if (StorageInstanceSet!=null&&TablesEntities.TryGetValue((StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable, out tableStorageInstanceRefs))
+                    if (StorageInstanceSet != null && TablesEntities.TryGetValue((StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable, out tableStorageInstanceRefs))
                         if (tableStorageInstanceRefs.ContainsKey(TableEntity.PartitionKey + TableEntity.RowKey))
                             tableStorageInstanceRefs.Remove(TableEntity.PartitionKey + TableEntity.RowKey);
                 }
@@ -161,13 +162,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             // (StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).GetRelationshipColumns();
 
-
+            
 
             foreach (RDBMSMetaDataRepository.Table table in (StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MappedTables)
             {
+                if (Class.FullName == "FlavourBusinessManager.EndUsers.FoodServiceClientSession")
+                {
+                    var sss = table.ContainedColumns.Where(x => x is IdentityColumn && x.MappedAssociationEnd != null);
+                }
+
                 foreach (RDBMSMetaDataRepository.Column column in table.ContainedColumns)
                 {
-                    if (column is IdentityColumn&& column.MappedAssociationEnd != null)
+                   
+                    if (column is IdentityColumn && column.MappedAssociationEnd != null)
                     {
                         var objIdType = (column as RDBMSMetaDataRepository.IdentityColumn).ObjectIdentityType;
                         RelationshipColumnsValues[column] = null;
@@ -181,7 +188,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         //        RelationshipColumnsValues[indexerColumn] = null;
                         //}
                     }
-                    if (column.IndexerAssociationEnd != null&& column.IndexerAssociationEnd.Indexer)
+                    if (column.IndexerAssociationEnd != null && column.IndexerAssociationEnd.Indexer)
                         RelationshipColumnsValues[column] = null;
                 }
             }
@@ -209,7 +216,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     Class.IsPersistent(rdbmsAttribute);
 
 
-                 value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
+                value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
                 if (valueOfAttribute.FieldInfo.FieldType.GetMetaData().IsGenericType &&
                     !valueOfAttribute.FieldInfo.FieldType.GetMetaData().IsGenericTypeDefinition &&
                     valueOfAttribute.FieldInfo.FieldType.GetGenericTypeDefinition() == typeof(System.Nullable<>))
@@ -219,7 +226,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 if (value is System.DBNull)
                     value = null;
-                if(value is DateTime)
+                if (value is DateTime)
                     value = ((DateTime)value).ToUniversalTime().ToLocalTime();
                 SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
                 SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
@@ -227,12 +234,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
             foreach (RDBMSMetaDataRepository.Column column in new System.Collections.Generic.List<RDBMSMetaDataRepository.Column>(RelationshipColumnsValues.Keys))
             {
-                if (column is IdentityColumn&& column.MappedAssociationEnd != null)
+                if (column is IdentityColumn && column.MappedAssociationEnd != null)
                 {
                     value = DbDataRecord[metaObjectsColumnsIndices.AssociationEndIndices[column.CreatorIdentity][column.MappedAssociationEnd.Identity][(column as RDBMSMetaDataRepository.IdentityColumn).ObjectIdentityType][(column as MetaDataRepository.IIdentityPart).PartTypeName]];
                     RelationshipColumnsValues[column] = value;
                 }
-                if (column.IndexerAssociationEnd != null&& column.IndexerAssociationEnd.Indexer)
+                if (column.IndexerAssociationEnd != null && column.IndexerAssociationEnd.Indexer)
                 {
                     value = DbDataRecord[metaObjectsColumnsIndices.AssociationEndIndexerColumnIndices[column.CreatorIdentity][column.IndexerAssociationEnd.Identity]];
                     RelationshipColumnsValues[column] = value;

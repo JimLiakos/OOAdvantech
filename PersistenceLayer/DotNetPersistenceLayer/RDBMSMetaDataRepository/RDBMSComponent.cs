@@ -139,7 +139,10 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         mappedClasses[_class.Identity] = _class;
                     }
                     storageCellsLinks = new System.Collections.Generic.List<StorageCellsLink>(from storageCellsLink in storage.GetObjectCollection<OOAdvantech.RDBMSMetaDataRepository.StorageCellsLink>()
-                                                                                              select storageCellsLink);
+                                                                                              select storageCellsLink).ToList();
+                    storageCellsLinks = (from storageCellsLink in storageCellsLinks
+                                         where storageCellsLink.Type.RoleA != null && storageCellsLink.Type.RoleB != null && storageCellsLink.Type.RoleA.Specification != null && storageCellsLink.Type.RoleB.Specification != null
+                                         select storageCellsLink).ToList();
 
                 }
 
@@ -231,11 +234,17 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         if (key.Columns.Count != key.ReferedColumns.Count || key.Columns.Count == 0)
                             key.OriginTable.RemoveForeignKey(key);
                     }
+
                     foreach (StorageCellsLink storageCellsLink in from storageCellsLink in storage.GetObjectCollection<OOAdvantech.RDBMSMetaDataRepository.StorageCellsLink>()
                                                                   select storageCellsLink)
                     {
-                        storageCellsLink.UpdateForeignKeys();
-                        storageCellsLinks.Add(storageCellsLink);
+                        if (storageCellsLink.ObjectLinksTable != null &&
+                               storageCellsLink.Type.RoleA != null && storageCellsLink.Type.RoleB != null &&
+                               storageCellsLink.Type.RoleA.Specification != null && storageCellsLink.Type.RoleB.Specification != null)
+                        {
+                            storageCellsLink.UpdateForeignKeys();
+                            storageCellsLinks.Add(storageCellsLink);
+                        }
                     }
                     foreach (StorageCellsLink storageCellsLink in storageCellsLinks)
                     {
@@ -266,7 +275,9 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         //if (newStorageCellsLink.ValueTypePath == null)
                         //    newStorageCellsLink.ValueTypePath = "";
 
-                        if (storageCellsLink.ObjectLinksTable != null && storageCellsLink.Type.RoleA != null && storageCellsLink.Type.RoleB != null)
+                        if (storageCellsLink.ObjectLinksTable != null &&
+                            storageCellsLink.Type.RoleA != null && storageCellsLink.Type.RoleB != null &&
+                            storageCellsLink.Type.RoleA.Specification != null && storageCellsLink.Type.RoleB.Specification != null)
                         {
                             //Table objectLinksTable = new Table(storageCellsLink.ObjectLinksTable.Name, newStorageCellsLink);
                             //OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).CommitTransientObjectState(objectLinksTable);

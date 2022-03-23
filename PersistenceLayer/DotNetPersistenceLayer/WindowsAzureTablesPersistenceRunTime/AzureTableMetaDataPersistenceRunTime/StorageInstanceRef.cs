@@ -167,16 +167,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
                 //if(CurrFieldInfo.FieldType==typeof(PersistenceLayer.ObjectContainer)||CurrFieldInfo.FieldType.IsSubclassOf(typeof(PersistenceLayer.ObjectContainer)))
                 //    continue;
+
+                //if (!Class.IsLazyFetching(mResolver.AssociationEnd))
+                //    LazyFetching(mResolver, MemoryInstance.GetType());
+
+                #region MyRegion resolver
+
                 if ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
-                   mResolver.AssociationEnd.GetOtherEnd().Navigable &&
-                   mResolver.AssociationEnd.Multiplicity.IsMany)
+                       mResolver.AssociationEnd.GetOtherEnd().Navigable &&
+                       mResolver.AssociationEnd.Multiplicity.IsMany)
                 {
                     continue;
                 }
-                //if (!Class.IsLazyFetching(mResolver.AssociationEnd))
-                //{
-                //    LazyFetching(mResolver, MemoryInstance.GetType());
-                //}
 
                 if (!Class.IsLazyFetching(mResolver.AssociationEnd) ||
                     ((mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.OneToMany || mResolver.AssociationEnd.Association.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne) &&
@@ -194,17 +196,23 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                             var storageInstanceRef = StorageInstanceRef.GetStorageInstanceRef(mResolver.RelatedObject) as StorageInstanceRef;
                             var relationResolver = storageInstanceRef.RelResolvers.Where(x => x.AssociationEnd == mResolver.AssociationEnd.GetOtherEnd()).FirstOrDefault() as RelResolver;
 
-                            if(relationResolver.AssociationEnd.Name== "Residents")
+                            if (relationResolver.AssociationEnd.Name == "Residents")
                             {
 
                             }
                             if (relationResolver.LinkedStorageInstanceRefs == null)
                                 relationResolver.LinkedStorageInstanceRefs = new List<StorageInstanceRef>();
-                            if(!relationResolver.LinkedStorageInstanceRefs.Contains(this))
+
+                            if(relationResolver.IsCompleteLoaded)
+                            {
+
+                            }
+                            if (!relationResolver.LinkedStorageInstanceRefs.Contains(this))
                                 relationResolver.LinkedStorageInstanceRefs.Add(this);
                         }
                     }
                 }
+                #endregion
             }
         }
 
