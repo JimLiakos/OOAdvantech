@@ -187,6 +187,63 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         PersistenceLayer.ObjectStorage.CommitObjectState(this);
                     }
 
+                    Dictionary<string, List<MetaObject>> metaObjects = new Dictionary<string, List<MetaObject>>();
+                    List<MetaObject> storageMetaObjects = new List<MetaObject>();
+
+                    Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute("SELECT MetaObject FROM " + typeof(MetaDataRepository.MetaObject).FullName + " MetaObject ");//WHERE MetaObjectIDStream = \""+OriginMetaObject.Identity.ToString()+"\" ");
+
+                    foreach (Collections.StructureSet Rowset in aStructureSet)
+                    {
+                        MetaDataRepository.MetaObject metaObject = (MetaDataRepository.MetaObject)Rowset["MetaObject"];
+                        storageMetaObjects.Add(metaObject);
+                        if (metaObject.Identity.ToString() == null)
+                        {
+                            int were = 0;
+                        }
+                    }
+
+                    var associationEndDictionary = (from metaObject in storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>()
+                                                    group metaObject by metaObject.Identity.ToString() into identityMetaObjecst
+                                                    select new { identityMetaObjecst.Key, metaObjects = identityMetaObjecst.ToList() }).ToDictionary(x => x.Key);
+
+
+
+
+                    var associationEnds = storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>().Where(x => x.Association == null || x.Specification == null || x.GetOtherEnd().Specification == null).ToList();
+                    var m_operations = storageMetaObjects.OfType<MetaDataRepository.Operation>().ToList();
+                    var m_del_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x=>x.Namespace==null) .ToList();
+                    var m_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x => x.Namespace != null).ToList();
+                    var clses = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().Where(x => x.Namespace == null).ToList();
+                    var sds = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().Select(x => x.Identity).ToList();
+                    var sdss = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().OrderBy(x=>x.Identity.ToString()) .Select(x => x.Identity).ToList();
+                    foreach (var delTable in m_del_tables)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(delTable);
+                    }
+                    var storageCellsLinks = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.ObjectLinksTable != null).ToList();
+                    foreach (var associationEnd in associationEnds)
+                    {
+                        var spec = associationEnd.Specification;
+                        if (associationEnd.Association != null)
+                        {
+                            var specA = associationEnd.Association.RoleA?.Specification;
+                            var specB = associationEnd.Association.RoleB?.Specification;
+                            if (associationEnd.Association.RoleA != null)
+                                OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association.RoleA);
+                            if (associationEnd.Association.RoleB != null)
+                                OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association.RoleB);
+                            OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association);
+
+                        }
+                        else
+                            OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd);
+
+
+                    }
+
+
+
+
                     MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator = new RDBMSMetaDataRepository.MetaObjectsStack();
 
 
@@ -258,28 +315,36 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         void UpdateRelations()
         {
             Dictionary<string, List<MetaObject>> metaObjects = new Dictionary<string, List<MetaObject>>();
+            List<MetaObject> storageMetaObjects = new List<MetaObject>();
 
             Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute("SELECT MetaObject FROM " + typeof(MetaDataRepository.MetaObject).FullName + " MetaObject ");//WHERE MetaObjectIDStream = \""+OriginMetaObject.Identity.ToString()+"\" ");
-            
-            
-            
+
             foreach (Collections.StructureSet Rowset in aStructureSet)
             {
                 MetaDataRepository.MetaObject metaObject = (MetaDataRepository.MetaObject)Rowset["MetaObject"];
+                storageMetaObjects.Add(metaObject);
                 if (metaObject.Identity.ToString() == null)
                 {
                     int were = 0;
                 }
-                List<MetaObject> IdMetaobjects = null;
-                if (!metaObjects.TryGetValue(metaObject.Identity.ToString(), out IdMetaobjects))
-                {
-                    IdMetaobjects = new List<MetaObject>();
-                    metaObjects[metaObject.Identity.ToString()] = IdMetaobjects;
-                }
-
-                IdMetaobjects.Add(metaObject);
             }
-            var sso= metaObjects.Where(x => x.Value.Count > 1).ToArray();
+
+            var associationEndDictionary = (from metaObject in storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>()
+                                            group metaObject by metaObject.Identity.ToString() into identityMetaObjecst
+                                            select identityMetaObjecst).ToDictionary(x => x.Key);
+
+
+
+            //List<MetaObject> IdMetaobjects = null;
+            //if (!metaObjects.TryGetValue(metaObject.Identity.ToString(), out IdMetaobjects))
+            //{
+            //    IdMetaobjects = new List<MetaObject>();
+            //    metaObjects[metaObject.Identity.ToString()] = IdMetaobjects;
+            //}
+
+            //IdMetaobjects.Add(metaObject);
+            //}
+            var sso = metaObjects.Where(x => x.Value.Count > 1).ToArray();
             string Query = "SELECT storageCellsLink FROM " + typeof(RDBMSMetaDataRepository.StorageCellsLink).FullName + " storageCellsLink";
             Collections.StructureSet structureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute(Query);
 
@@ -290,11 +355,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 {
                     RDBMSMetaDataRepository.StorageCellsLink storageCellsLink = (RDBMSMetaDataRepository.StorageCellsLink)Rowset["storageCellsLink"];
 
-                    if (storageCellsLink.Type!=null&& storageCellsLink.Type.Connections.Count!=2)
+                    if (storageCellsLink.Type != null && storageCellsLink.Type.Connections.Count != 2)
                     {
-                        if(storageCellsLink.Type.Connections.Count>2)
+                        if (storageCellsLink.Type.Connections.Count > 2)
                         {
-                            
+
                         }
                     }
                     if (storageCellsLink.Type.RoleA == null || storageCellsLink.Type.RoleB == null)

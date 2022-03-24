@@ -35,7 +35,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 				Microsoft.Azure.Cosmos.Table.TableOperation insertOperation = Microsoft.Azure.Cosmos.Table.TableOperation.Delete(objectBLOBData);
                 objectBLOBDataTable.Execute(insertOperation);
                 StorageInstanceForDeletion.PersistentObjectID = null;
-            }
+				(StorageInstanceForDeletion as StorageInstanceRef).ObjectBLOBData = null;
+
+			}
 #if DEBUG
             catch (System.Exception Error)
             {

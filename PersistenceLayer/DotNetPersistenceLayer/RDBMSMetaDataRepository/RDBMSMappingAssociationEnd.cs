@@ -10,6 +10,10 @@ namespace OOAdvantech.RDBMSMetaDataRepository
     [Persistent()]
     public class AssociationEnd : MetaDataRepository.AssociationEnd
     {
+        public AssociationEnd()
+        {
+
+        }
         public override ObjectMemberGetSet SetMemberValue(object token, System.Reflection.MemberInfo member, object value)
         {
             if (member.Name == nameof(_IdentityTypes))

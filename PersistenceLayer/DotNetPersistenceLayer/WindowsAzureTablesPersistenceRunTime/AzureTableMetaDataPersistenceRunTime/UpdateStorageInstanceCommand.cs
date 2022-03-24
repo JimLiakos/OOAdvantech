@@ -1,5 +1,7 @@
 
 
+using System.Linq;
+
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
     /// <MetaDataID>{A1646E36-A355-4F5C-A04E-F167DEF62DF2}</MetaDataID>
@@ -33,6 +35,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 memoryStream.Read(BLOB, 0, (int)memoryStream.Length);
 
                 objectBLOBData.ObjectData = BLOB;
+
+
 
 
                 try
@@ -81,7 +85,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 if (!hasChangeState && !UpdatedStorageInstanceRef.HasChangeState())
                     return;
 
+                if((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectBLOBData==null)
+                {
 
+                }
                 ObjectBLOBData objectBLOBData = (UpdatedStorageInstanceRef as StorageInstanceRef).ObjectBLOBData;
 
 
@@ -94,7 +101,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 byte[] BLOB = new byte[memoryStream.Length];
                 memoryStream.Position = 0;
                 memoryStream.Read(BLOB, 0, (int)memoryStream.Length);
-
+                if (objectBLOBData.ObjectData != null && objectBLOBData.ObjectData.SequenceEqual(BLOB))
+                    return;
                 objectBLOBData.ObjectData = BLOB;
 
                 try
