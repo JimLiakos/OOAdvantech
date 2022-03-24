@@ -232,13 +232,16 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                                                                 select key)
                     {
                         if (key.Columns.Count != key.ReferedColumns.Count || key.Columns.Count == 0)
-                            key.OriginTable.RemoveForeignKey(key);
+                        {
+                            if(key.OriginTable!=null)
+                                key.OriginTable.RemoveForeignKey(key);
+                        }
                     }
 
                     foreach (StorageCellsLink storageCellsLink in from storageCellsLink in storage.GetObjectCollection<OOAdvantech.RDBMSMetaDataRepository.StorageCellsLink>()
                                                                   select storageCellsLink)
                     {
-                        if (storageCellsLink.ObjectLinksTable != null &&
+                        if (storageCellsLink.ObjectLinksTable != null && storageCellsLink.Type!=null&&
                                storageCellsLink.Type.RoleA != null && storageCellsLink.Type.RoleB != null &&
                                storageCellsLink.Type.RoleA.Specification != null && storageCellsLink.Type.RoleB.Specification != null)
                         {

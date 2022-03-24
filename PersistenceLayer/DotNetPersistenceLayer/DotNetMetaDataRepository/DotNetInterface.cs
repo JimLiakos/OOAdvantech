@@ -646,7 +646,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
             {
                 _Identity = new MetaDataRepository.MetaObjectID(Refer.WrType.ToString());
                 if (Refer.WrType.GetMetaData().IsGenericType && !Refer.WrType.GetMetaData().IsGenericTypeDefinition)
-                    _Identity = new MetaDataRepository.MetaObjectID(Refer.WrType.ToString() + Refer.WrType.GetHashCode().ToString());
+                    _Identity = new MetaDataRepository.MetaObjectID(Refer.WrType.ToString());// + Refer.WrType.GetHashCode().ToString());
 
             }
             #endregion

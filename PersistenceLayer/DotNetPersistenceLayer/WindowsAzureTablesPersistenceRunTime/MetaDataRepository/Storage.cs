@@ -209,13 +209,44 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-                    var associationEnds = storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>().Where(x => x.Association == null || x.Specification == null || x.GetOtherEnd().Specification == null).ToList();
+                    var associationEnds = storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>().Where(x => x.Association == null || x.Association.RoleA?.Specification == null || x.Association.RoleB?.Specification == null).ToList();
                     var m_operations = storageMetaObjects.OfType<MetaDataRepository.Operation>().ToList();
                     var m_del_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x=>x.Namespace==null) .ToList();
                     var m_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x => x.Namespace != null).ToList();
                     var clses = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().Where(x => x.Namespace == null).ToList();
                     var sds = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().Select(x => x.Identity).ToList();
-                    var sdss = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().OrderBy(x=>x.Identity.ToString()) .Select(x => x.Identity).ToList();
+
+                    var dynamicTypes = storageMetaObjects.Where(x => x.ToString().IndexOf("<>")==0).ToList();
+                    
+                    foreach (var dynamicType in dynamicTypes)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(dynamicType);
+                    }
+
+                    var genericClasses = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>()
+                                where IdentityWithHashCode(meta.Identity.ToString())
+                                orderby meta.Identity.ToString()
+                                select meta).ToList();
+
+                    foreach(var generic in genericClasses)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(generic);
+                    }
+                    var genericInterfaces = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Interface>()
+                            where IdentityWithHashCode(meta.Identity.ToString())
+                            orderby meta.Identity.ToString()
+                            select meta).ToList();
+
+                    foreach (var generic in genericInterfaces)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(generic);
+                    }
+                    var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null).ToList();
+                    var emtysting = storageMetaObjects.Where(x => string.IsNullOrWhiteSpace(x.ToString())).ToArray();
+                    foreach (var feature in features)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(feature);
+                    }
                     foreach (var delTable in m_del_tables)
                     {
                         PersistenceLayer.ObjectStorage.DeleteObject(delTable);
@@ -312,6 +343,22 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
         }
+
+        private bool IdentityWithHashCode(string identity)
+        {
+            if(!string.IsNullOrWhiteSpace(identity))
+            {
+                if(identity.LastIndexOf("]")!=-1)
+                {
+                    string hasCodeStr = identity.Substring(identity.LastIndexOf("]") + 1);
+                    int hasCode = 0;
+                    return int.TryParse(hasCodeStr, out hasCode);
+                }
+            }
+            return false;
+            
+        }
+
         void UpdateRelations()
         {
             Dictionary<string, List<MetaObject>> metaObjects = new Dictionary<string, List<MetaObject>>();
