@@ -289,6 +289,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{34632C23-973D-49B3-A29D-A4135750C045}</MetaDataID>
         [Association("TableObjectIDColumn", typeof(OOAdvantech.RDBMSMetaDataRepository.IdentityColumn), Roles.RoleA, "{4F5C824C-6713-4EC0-8603-5E1F8A9A17F8}")]
         [PersistentMember("_ObjectIDColumns")]
+        [AssociationEndBehavior(PersistencyFlag.CascadeDelete)]
         [RoleAMultiplicityRange(1)]
         [RoleBMultiplicityRange(1, 1)]
         public Collections.Generic.Set<IdentityColumn> ObjectIDColumns

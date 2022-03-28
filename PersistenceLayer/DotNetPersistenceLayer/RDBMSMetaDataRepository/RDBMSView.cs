@@ -297,6 +297,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{B8D763C9-02DA-4435-B2F6-0DC3B14BD75B}</MetaDataID>
         [Association("SubView", typeof(OOAdvantech.RDBMSMetaDataRepository.View), Roles.RoleA, "{C1311155-5065-4DD7-9448-F3BB065EA0FF}")]
         [PersistentMember("_SubViews")]
+        [AssociationEndBehavior(PersistencyFlag.CascadeDelete)]
         [RoleAMultiplicityRange(0)]
         [RoleBMultiplicityRange(0)]
         public Collections.Generic.Set<View> SubViews
@@ -349,6 +350,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{B4E2161B-6172-4F57-AF97-BF2455CEBA7A}</MetaDataID>
         [Association("ViewColumn", typeof(OOAdvantech.RDBMSMetaDataRepository.Column), Roles.RoleA, "{BD85B68A-9590-427D-AC44-A524CEF110B2}")]
         [PersistentMember("_ViewColumns")]
+        [AssociationEndBehavior(PersistencyFlag.CascadeDelete)]
         [RoleAMultiplicityRange(1)]
         [RoleBMultiplicityRange(0)]
         public Collections.Generic.Set<Column> ViewColumns

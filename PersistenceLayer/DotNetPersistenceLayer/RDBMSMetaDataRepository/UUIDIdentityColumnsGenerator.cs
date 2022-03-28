@@ -3,16 +3,16 @@ using System.Linq;
 namespace OOAdvantech.RDBMSMetaDataRepository
 {
     using OOAdvantech.Transactions;
-	/// <MetaDataID>{BCFC20A8-5EAA-416F-8366-8EE7A4461544}</MetaDataID>
-	public class UUIDAutoProduceColumnsGenerator : AutoProduceColumnsGenerator
-	{
+    /// <MetaDataID>{BCFC20A8-5EAA-416F-8366-8EE7A4461544}</MetaDataID>
+    public class UUIDAutoProduceColumnsGenerator : AutoProduceColumnsGenerator
+    {
 
-     
-  //      /// <MetaDataID>{5e8ee1f0-bba5-4edf-96b4-a0cc8e52a1ab}</MetaDataID>
-		//static OOAdvantech.Collections.Map SystemGuidTypes=new OOAdvantech.Collections.Map();
+
+        //      /// <MetaDataID>{5e8ee1f0-bba5-4edf-96b4-a0cc8e52a1ab}</MetaDataID>
+        //static OOAdvantech.Collections.Map SystemGuidTypes=new OOAdvantech.Collections.Map();
         /// <MetaDataID>{9068d502-5eda-4fe2-a21c-1254924483f3}</MetaDataID>
-		public override MetaDataRepository.ObjectIdentityType GetObjectIdentityType(MetaDataRepository.MetaObject placeIdentifier)
-		{
+        public override MetaDataRepository.ObjectIdentityType GetObjectIdentityType(MetaDataRepository.MetaObject placeIdentifier)
+        {
 
 
             //using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
@@ -28,7 +28,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     systemGuidType = (placeIdentifier.Namespace.ImplementationUnit.Context as Storage).GetEquivalentMetaObject(doteNetGuid) as MetaDataRepository.Structure;
                 else
                     if (placeIdentifier is MetaDataRepository.Feature)
-                        systemGuidType = ((placeIdentifier as MetaDataRepository.Feature).Owner.ImplementationUnit.Context as Storage).GetEquivalentMetaObject(doteNetGuid) as MetaDataRepository.Structure;
+                    systemGuidType = ((placeIdentifier as MetaDataRepository.Feature).Owner.ImplementationUnit.Context as Storage).GetEquivalentMetaObject(doteNetGuid) as MetaDataRepository.Structure;
 
                 if (systemGuidType == null && MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator is RDBMSMetaDataRepository.MetaObjectsStack)
                 {
@@ -59,20 +59,20 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 MetaDataRepository.ObjectIdentityType objectIdentityType = new OOAdvantech.MetaDataRepository.ObjectIdentityType(identityColums);
                 //foreach (IdentityColumn idColumn in objectIdentityType.Parts)
                 //    idColumn.ObjectIdentityType = objectIdentityType; 
-          
-        
 
-          
+
+
+
                 return objectIdentityType;
-             
+
             }
 
-            
-			
-		}
+
+
+        }
 
         /// <MetaDataID>{bb5f21c4-8900-4c2a-b3dd-ba5b9ac58ca4}</MetaDataID>
-        public override MetaDataRepository.ObjectIdentityType GetObjectIdentityRefernce(OOAdvantech.MetaDataRepository.MetaObject placeIdentifier, AssociationEnd associationEnd,string associationName)
+        public override MetaDataRepository.ObjectIdentityType GetObjectIdentityRefernce(OOAdvantech.MetaDataRepository.MetaObject placeIdentifier, AssociationEnd associationEnd, string associationName)
         {
 
             //using (Transactions.SystemStateTransition stateTransition = new Transactions.SystemStateTransition(Transactions.TransactionOption.Suppress))
@@ -85,7 +85,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
 
                 //if (associationEnd is RDBMSMetaDataRepository.AssociationEnd &&  associationEnd.ImplementationUnit.Context == null)
                 //{
-                  
+
                 //    OOAdvantech.Linq.Storage theStorage = new Linq.Storage(PersistenceLayer.ObjectStorage.GetStorageOfObject(associationEnd));
 
                 //    var storage = (from metastorage in theStorage.GetObjectCollection<Storage>() select metastorage).FirstOrDefault();
@@ -95,7 +95,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 //}
                 //else
                 {
-      
+
                     if (placeIdentifier is MetaDataRepository.Classifier)
                         systemGuidType = (placeIdentifier.ImplementationUnit.Context as Storage).GetEquivalentMetaObject(doteNetGuid) as MetaDataRepository.Structure;
                     else if (placeIdentifier.Namespace is MetaDataRepository.Classifier)
@@ -173,22 +173,22 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 //    idColumn.ObjectIdentityType = objectIdentityType;
                 return objectIdentityType;
             }
-		
+
         }
 
         /// <MetaDataID>{7daeccee-7fec-40ba-af4a-5dc60cad58d0}</MetaDataID>
-		static System.Collections.Generic.Dictionary<OOAdvantech.PersistenceLayer.ObjectStorage, MetaDataRepository.Primitive> SystemInt32Types = new System.Collections.Generic.Dictionary<PersistenceLayer.ObjectStorage, MetaDataRepository.Primitive>(); 
+		static System.Collections.Generic.Dictionary<OOAdvantech.PersistenceLayer.ObjectStorage, MetaDataRepository.Primitive> SystemInt32Types = new System.Collections.Generic.Dictionary<PersistenceLayer.ObjectStorage, MetaDataRepository.Primitive>();
         /// <MetaDataID>{4f8a1331-8542-4ed4-9bd8-7577f269755b}</MetaDataID>
-		public override Collections.Generic.Set<Column> GetAuxiliaryColumns(MetaDataRepository.MetaObject placeIdentifier)
-		{
+        public override Collections.Generic.Set<Column> GetAuxiliaryColumns(MetaDataRepository.MetaObject placeIdentifier)
+        {
 
-           // using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+            // using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
                 Collections.Generic.Set<Column> columns = new OOAdvantech.Collections.Generic.Set<Column>();
                 // Δεν είναι καλή ιδέα να χρησιμοποιής MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator γιατί αλλάζει καλήτερα να το ψάχνεις στην storage
                 MetaDataRepository.Primitive SystemInt32Type = null; //SystemInt32Types[PersistenceLayer.ObjectStorage.GetStorageOfObject(placeIdentifier.Properties)] as MetaDataRepository.Primitive;
                 SystemInt32Types.TryGetValue(PersistenceLayer.ObjectStorage.GetStorageOfObject(placeIdentifier.Properties), out SystemInt32Type);
-                
+
                 //SystemInt32Type = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace("System.Int32", placeIdentifier) as MetaDataRepository.Primitive;
                 //Αυτό γιατί αν αποτύχη η transaction η τιμή του name θα γυρίσει σε null
                 //TODO πρέπει να λυθεί το πρόβλημα με την χρήση new transaction.
@@ -199,8 +199,11 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     //MetaDataRepository.Primitive mPrimitive = new MetaDataRepository.Primitive();
                     //mPrimitive.Name = "Int32";
                     //mNamespace.AddOwnedElement(mPrimitive);
+
                     MetaDataRepository.Primitive mPrimitive = MetaDataRepository.Classifier.GetClassifier(typeof(int)) as MetaDataRepository.Primitive;
-                    SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, placeIdentifier);
+                    SystemInt32Type = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mPrimitive, placeIdentifier) as Primitive;
+                    if (SystemInt32Type == null)
+                        SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, placeIdentifier);
                     SystemInt32Type.Synchronize(mPrimitive);
                     SystemInt32Types[PersistenceLayer.ObjectStorage.GetStorageOfObject(placeIdentifier.Properties)] = SystemInt32Type;
                 }
@@ -214,20 +217,20 @@ namespace OOAdvantech.RDBMSMetaDataRepository
 
                 return columns;
             }
-		}
+        }
 
         /// <MetaDataID>{186dda91-db2d-4a38-90aa-65260378e9b8}</MetaDataID>
 		public override string[] GetObjectIdentityColumnsName()
-		{
-			return new string[1]{"ObjectID"};
-		}
+        {
+            return new string[1] { "ObjectID" };
+        }
         /// <MetaDataID>{1ff48c24-8ab9-4f7f-b62d-dcd4ab5d637c}</MetaDataID>
 		public override string[] GetAuxiliaryColumnsName()
-		{
-			return new string[1]{"TypeID"};
-		}
+        {
+            return new string[1] { "TypeID" };
+        }
 
 
 
-	}
+    }
 }

@@ -1,5 +1,7 @@
 
 
+using System.Linq;
+
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
 	/// <MetaDataID>{5C5EBFD6-EEEE-44A5-86CD-DC97CA70745D}</MetaDataID>
@@ -8,12 +10,21 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 		/// <MetaDataID>{C37DAC75-3A77-4593-8ADE-B59491B5E885}</MetaDataID>
 		public DeleteStorageInstanceCommand(PersistenceLayerRunTime.StorageInstanceRef storageInstanceForDeletion,PersistenceLayer.DeleteOptions deleteOption):base(storageInstanceForDeletion,deleteOption)
 		{
-		
+			if (StorageInstanceForDeletion.MemoryInstance is OOAdvantech.MetaDataRepository.Parameter)
+			{
+
+			}
+
 		}
+
 		/// <MetaDataID>{C5FFD006-35F7-40B7-9F32-E994A379A871}</MetaDataID>
 		/// <summary>With this method execute the command. </summary>
 		public override void Execute()
 		{
+			if(StorageInstanceForDeletion.MemoryInstance is OOAdvantech.MetaDataRepository.Parameter)
+            {
+
+            }
 		
 			try
 			{
@@ -32,9 +43,22 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             try
             {
-				Microsoft.Azure.Cosmos.Table.TableOperation insertOperation = Microsoft.Azure.Cosmos.Table.TableOperation.Delete(objectBLOBData);
-                objectBLOBDataTable.Execute(insertOperation);
-                StorageInstanceForDeletion.PersistentObjectID = null;
+				//Microsoft.Azure.Cosmos.Table.TableOperation insertOperation = Microsoft.Azure.Cosmos.Table.TableOperation.Delete(objectBLOBData);
+
+				Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((StorageInstanceForDeletion as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
+				if (objectBLOBData.RowKey == "4593f98b-71f6-4c6d-a03a-85d73674886e")
+                {
+
+                }
+				foreach (var tableOperation in TableBatchOperation.Where(x => x.Entity.RowKey == objectBLOBData.RowKey).ToList())
+					TableBatchOperation.Remove(tableOperation);
+
+
+				TableBatchOperation.Delete(objectBLOBData);
+				
+
+				//objectBLOBDataTable.Execute(insertOperation);
+				StorageInstanceForDeletion.PersistentObjectID = null;
 				(StorageInstanceForDeletion as StorageInstanceRef).ObjectBLOBData = null;
 
 			}

@@ -49,6 +49,9 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             }
         }
 
+        virtual public bool SupportStoreProcedures { get => true; }
+
+        virtual public bool SupportViews { get => true; }
         /// <MetaDataID>{b1da1e62-b417-4382-aa3a-ec3c46100647}</MetaDataID>
         protected Storage()
         {

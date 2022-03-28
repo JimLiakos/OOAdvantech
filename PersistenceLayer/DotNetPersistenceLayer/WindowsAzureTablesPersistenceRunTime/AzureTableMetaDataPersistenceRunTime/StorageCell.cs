@@ -12,8 +12,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <MetaDataID>{d4a6f4e2-5a23-4f49-84b4-ea7bb511969e}</MetaDataID>
         public override void ActivateAllObjects()
         {
-
         }
+
+
+        
+
+
+
+
+
         /// <MetaDataID>{9f05c410-75b1-4875-9531-3bf244231fe8}</MetaDataID>
         public override OOAdvantech.MetaDataRepository.ObjectIdentityType ObjectIdentityType
         {

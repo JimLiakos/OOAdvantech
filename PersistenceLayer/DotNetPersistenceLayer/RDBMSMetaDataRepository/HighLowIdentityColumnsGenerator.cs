@@ -123,7 +123,9 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 //mPrimitive.Name = "Int32";
                 //mNamespace.AddOwnedElement(mPrimitive);
                 MetaDataRepository.Primitive mPrimitive = MetaDataRepository.Classifier.GetClassifier(typeof(int)) as MetaDataRepository.Primitive;
-                SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, placeIdentifier);
+				SystemInt32Type = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mPrimitive, placeIdentifier) as Primitive;
+				if (SystemInt32Type == null)
+					SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, placeIdentifier);
                 SystemInt32Type.Synchronize(mPrimitive);
             }
             if (associationEnd.IsRoleA)

@@ -964,7 +964,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 foreach (Column column in MainTable.ContainedColumns)
                 {
 
-                
+
                     if (column.MappedAttribute != null)
                     {
                         if ((from valueTypePathAttribute in valueTypePathAttributes
@@ -989,7 +989,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         if (!String.IsNullOrWhiteSpace(column.MappedAssociationEndRealizationIdentity))
                         {
                             var associationEndRealization = Type.Features.OfType<AssociationEndRealization>().Where(x => x.Identity.ToString() == column.MappedAssociationEndRealizationIdentity).FirstOrDefault();
-                            if (associationEndRealization != null&& associationEndRealization.Specification!=null)
+                            if (associationEndRealization != null && associationEndRealization.Specification != null)
                                 column.MappedAssociationEnd = associationEndRealization.Specification.GetOtherEnd() as AssociationEnd;
                         }
                     }
@@ -1002,7 +1002,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         bool isAuxColumn = false;
                         foreach (var auxColumn in AutoProduceColumnsGenerator.CurrentAutoProduceColumnsGenerator.GetAuxiliaryColumns(this))
                         {
-                            if (auxColumn.Type.FullName == column.Type.FullName && auxColumn.Name == column.Name)
+                            if (auxColumn.Type.FullName == column?.Type.FullName && auxColumn.Name == column.Name)
                             {
                                 isAuxColumn = true;
                                 break;
@@ -1014,8 +1014,8 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 }
 
 
-                
-                foreach (Attribute attribute in attributes.Where(x=>((x as RDBMSMetaDataRepository.Attribute).GetColumnsFor(this).Count()!=0)))
+
+                foreach (Attribute attribute in attributes.Where(x => ((x as RDBMSMetaDataRepository.Attribute).GetColumnsFor(this).Count() != 0)))
                 {
                     //update existing columns
                     if (Type.IsPersistent(attribute))
@@ -1062,7 +1062,9 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                             //mPrimitive.Name = "Int32";
                             //mNamespace.AddOwnedElement(mPrimitive);
                             MetaDataRepository.Primitive mPrimitive = MetaDataRepository.Classifier.GetClassifier(typeof(int)) as MetaDataRepository.Primitive;
-                            SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, this);
+                            SystemInt32Type = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mPrimitive, this) as Primitive;
+                            if (SystemInt32Type == null)
+                                SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, this);
                             SystemInt32Type.Synchronize(mPrimitive);
                         }
                         Column referentialIntegrityColumn = new Column("ReferenceCount", SystemInt32Type, 0, true, false, 1);
@@ -1468,7 +1470,9 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         //mPrimitive.Name = "Int32";
                         //mNamespace.AddOwnedElement(mPrimitive);
                         MetaDataRepository.Primitive mPrimitive = MetaDataRepository.Classifier.GetClassifier(typeof(int)) as MetaDataRepository.Primitive;
-                        SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, this);
+                        SystemInt32Type = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mPrimitive, this) as Primitive;
+                        if (SystemInt32Type == null)
+                            SystemInt32Type = (Primitive)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mPrimitive, this);
                         SystemInt32Type.Synchronize(mPrimitive);
                     }
                     storageCellColumn = new Column("StorageCellID", SystemInt32Type);
@@ -1507,21 +1511,21 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             {
                 column.Refresh();
                 var oldcolumn = oldColumns.Where(x => x.Name == column.Name).FirstOrDefault();
-                if(oldcolumn!=null)
+                if (oldcolumn != null)
                 {
 
                 }
-                    //if(column.MappedAttribute==null&&column.MappedAssociationEnd==null
-                    //    &&column.MappedAssociationEndRealizationIdentity==null&&column.MappedAttributeRealizationIdentity==null
-                    //    &&column.RealColumn==null)
-                    //{
-                    //    _ClassView.RemoveColumn(column);
-                    //}
-                    //if(oldColumns..ContainsKey(column.Name))
-                    //{ 
+                //if(column.MappedAttribute==null&&column.MappedAssociationEnd==null
+                //    &&column.MappedAssociationEndRealizationIdentity==null&&column.MappedAttributeRealizationIdentity==null
+                //    &&column.RealColumn==null)
+                //{
+                //    _ClassView.RemoveColumn(column);
+                //}
+                //if(oldColumns..ContainsKey(column.Name))
+                //{ 
 
-                    //}
-                    oldColumns.Add(column);
+                //}
+                oldColumns.Add(column);
             }
             #endregion
 
@@ -1537,7 +1541,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 //if (oldColumns.ContainsKey(CurrColumn.Name))
                 //    oldColumns.Remove(CurrColumn.Name);
             }
-            foreach(var column in oldColumns.Where(x => x.Name == "StorageCellID"|| x.Name == "TypeID").ToList())
+            foreach (var column in oldColumns.Where(x => x.Name == "StorageCellID" || x.Name == "TypeID").ToList())
                 oldColumns.Remove(column);
 
             //if (oldColumns.ContainsKey("StorageCellID"))
@@ -1863,13 +1867,43 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 }
 
 
-#if!DeviceDotNet
-                BuildUpdateStoreProcedure();
-                BuildNewStoreProcedure();
-                BuildDeleteStoreProcedure();
+#if !DeviceDotNet
+                if ((Namespace as RDBMSMetaDataRepository.Storage).SupportStoreProcedures)
+                {
+                    BuildUpdateStoreProcedure();
+                    BuildNewStoreProcedure();
+                    BuildDeleteStoreProcedure();
+                }
+                else
+                {
+                    if (_UpdateStoreProcedure != null)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(_UpdateStoreProcedure);
+                        _UpdateStoreProcedure = null;
+                    }
+                    if (_NewStoreProcedure != null)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(_NewStoreProcedure);
+                        _NewStoreProcedure = null;
+                    }
+                    if (_DeleteStoreProcedure != null)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(_DeleteStoreProcedure);
+                        _DeleteStoreProcedure = null;
+                    }
+                }
 #endif
 
-                BuildClassView();
+                if ((Namespace as RDBMSMetaDataRepository.Storage).SupportViews)
+                    BuildClassView();
+                else
+                {
+                    if (_ClassView != null)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(_ClassView);
+                        _ClassView = null;
+                    }
+                }
                 stateTransition.Consistent = true;
             }
 
@@ -2087,12 +2121,43 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     }
                     BuildMainTable();
                     UpdateMainTableColumns();
-#if!DeviceDotNet
-                    BuildUpdateStoreProcedure();
-                    BuildNewStoreProcedure();
-                    BuildDeleteStoreProcedure();
+#if !DeviceDotNet
+
+                    if ((Namespace as RDBMSMetaDataRepository.Storage).SupportStoreProcedures)
+                    {
+                        BuildUpdateStoreProcedure();
+                        BuildNewStoreProcedure();
+                        BuildDeleteStoreProcedure();
+                    }
+                    else
+                    {
+                        if (_UpdateStoreProcedure != null)
+                        {
+                            PersistenceLayer.ObjectStorage.DeleteObject(_UpdateStoreProcedure);
+                            _UpdateStoreProcedure = null;
+                        }
+                        if (_NewStoreProcedure != null)
+                        {
+                            PersistenceLayer.ObjectStorage.DeleteObject(_NewStoreProcedure);
+                            _NewStoreProcedure = null;
+                        }
+                        if (_DeleteStoreProcedure != null)
+                        {
+                            PersistenceLayer.ObjectStorage.DeleteObject(_DeleteStoreProcedure);
+                            _DeleteStoreProcedure = null;
+                        }
+                    }
 #endif
-                    BuildClassView();
+                    if ((Namespace as RDBMSMetaDataRepository.Storage).SupportViews)
+                        BuildClassView();
+                    else
+                    {
+                        if (_ClassView != null)
+                        {
+                            PersistenceLayer.ObjectStorage.DeleteObject(_ClassView);
+                            _ClassView = null;
+                        }
+                    }
                     StateTransition.Consistent = true; ;
 
                 }

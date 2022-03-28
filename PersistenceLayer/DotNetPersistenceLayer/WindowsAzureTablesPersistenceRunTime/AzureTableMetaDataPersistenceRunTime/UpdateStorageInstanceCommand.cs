@@ -56,6 +56,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 {
 
                     Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
+                    if (objectBLOBData.RowKey == "4593f98b-71f6-4c6d-a03a-85d73674886e")
+                    {
+
+                    }
                     TableBatchOperation.Insert(objectBLOBData);
                     //TableOperation insertOperation = TableOperation.Insert(objectBLOBData);
                     //objectBLOBDataTable.Execute(insertOperation);
@@ -119,7 +123,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 try
                 {
 
+
                     Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
+                    if(objectBLOBData.RowKey== "004ba188-4d83-4445-b66e-e6637a57063d")
+                    {
+
+                    }
                     TableBatchOperation.InsertOrReplace(objectBLOBData);
 
 
