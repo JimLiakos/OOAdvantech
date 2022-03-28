@@ -1892,6 +1892,14 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         _DeleteStoreProcedure = null;
                     }
                 }
+
+                if (!(Namespace as RDBMSMetaDataRepository.Storage).SupportForeignKeys)
+                {
+                    foreach (var mappedTable in MappedTables)
+                        foreach (var foreignKey in mappedTable.ForeignKeys.ToList())
+                            mappedTable.RemoveForeignKey(foreignKey);
+
+                }
 #endif
 
                 if ((Namespace as RDBMSMetaDataRepository.Storage).SupportViews)
@@ -2148,6 +2156,14 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         }
                     }
 #endif
+                    if (!(Namespace as RDBMSMetaDataRepository.Storage).SupportForeignKeys)
+                    {
+                        foreach (var mappedTable in MappedTables)
+                            foreach (var foreignKey in mappedTable.ForeignKeys.ToList())
+                                mappedTable.RemoveForeignKey(foreignKey);
+
+                    }
+
                     if ((Namespace as RDBMSMetaDataRepository.Storage).SupportViews)
                         BuildClassView();
                     else

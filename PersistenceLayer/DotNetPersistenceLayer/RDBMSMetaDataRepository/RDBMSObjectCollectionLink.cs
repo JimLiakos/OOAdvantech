@@ -709,135 +709,171 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{617F24C6-D761-4439-91E8-264FE3001072}</MetaDataID>
         public void UpdateForeignKeys()
         {
-            OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-            try
+            if ((Namespace as RDBMSMetaDataRepository.Storage).SupportForeignKeys)
             {
-                if (Type.RoleA == null && Type.RoleB == null) //Relation removed
-                    return;
-                //TODO Αυτό έαν η σχέση βρίσκεται σε class που δεν σώζει στο main table πχ one table per class
-                //Τοτε ο παρακάτω κώδικας έχει σφάλμα
-                using (OOAdvantech.Transactions.ObjectStateTransition stateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
+                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
+                try
                 {
-                    if (Type.LinkClass != null)
+                    if (Type.RoleA == null && Type.RoleB == null) //Relation removed
+                        return;
+                    //TODO Αυτό έαν η σχέση βρίσκεται σε class που δεν σώζει στο main table πχ one table per class
+                    //Τοτε ο παρακάτω κώδικας έχει σφάλμα
+                    using (OOAdvantech.Transactions.ObjectStateTransition stateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
                     {
-
-                        foreach (StorageCell linkClassStorageCell in this.AssotiationClassStorageCells)
+                        if (Type.LinkClass != null)
                         {
 
-                            System.Collections.Generic.List<MetaDataRepository.IIdentityPart> parts = new List<OOAdvantech.MetaDataRepository.IIdentityPart>();
-                            foreach (MetaDataRepository.IIdentityPart part in (Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell))
-                                parts.Add(part);
-                            MetaDataRepository.ObjectIdentityType roleAObjectIdentityType = new OOAdvantech.MetaDataRepository.ObjectIdentityType(parts);
-
-                            parts = new List<OOAdvantech.MetaDataRepository.IIdentityPart>();
-                            foreach (MetaDataRepository.IIdentityPart part in (Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell))
-                                parts.Add(part);
-                            MetaDataRepository.ObjectIdentityType roleBObjectIdentityType = new OOAdvantech.MetaDataRepository.ObjectIdentityType(parts);
-                            if ((RoleAStorageCell as RDBMSMetaDataRepository.StorageCell).ObjectIdentityType != roleAObjectIdentityType ||
-                            (RoleBStorageCell as RDBMSMetaDataRepository.StorageCell).ObjectIdentityType != roleBObjectIdentityType)
+                            foreach (StorageCell linkClassStorageCell in this.AssotiationClassStorageCells)
                             {
-                                using (OOAdvantech.Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
+
+                                System.Collections.Generic.List<MetaDataRepository.IIdentityPart> parts = new List<OOAdvantech.MetaDataRepository.IIdentityPart>();
+                                foreach (MetaDataRepository.IIdentityPart part in (Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell))
+                                    parts.Add(part);
+                                MetaDataRepository.ObjectIdentityType roleAObjectIdentityType = new OOAdvantech.MetaDataRepository.ObjectIdentityType(parts);
+
+                                parts = new List<OOAdvantech.MetaDataRepository.IIdentityPart>();
+                                foreach (MetaDataRepository.IIdentityPart part in (Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell))
+                                    parts.Add(part);
+                                MetaDataRepository.ObjectIdentityType roleBObjectIdentityType = new OOAdvantech.MetaDataRepository.ObjectIdentityType(parts);
+                                if ((RoleAStorageCell as RDBMSMetaDataRepository.StorageCell).ObjectIdentityType != roleAObjectIdentityType ||
+                                (RoleBStorageCell as RDBMSMetaDataRepository.StorageCell).ObjectIdentityType != roleBObjectIdentityType)
                                 {
-                                    if (_ObjectLinksTable == null)
+                                    using (OOAdvantech.Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
                                     {
-                                        string path = null;
-                                        path = BuiltPathString();
-                                        System.Type[] ctorParameters = { typeof(string), typeof(StorageCellsLink) };
-                                        _ObjectLinksTable = new Table((Namespace as Storage).TablePrefix + path + "_" + (Type as Association).Name, this);
-                                        PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).CommitTransientObjectState(_ObjectLinksTable);
-                                        (Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleBStorageCell as StorageCell).ObjectIdentityType);
-                                        (Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleAStorageCell as StorageCell).ObjectIdentityType);
+                                        if (_ObjectLinksTable == null)
+                                        {
+                                            string path = null;
+                                            path = BuiltPathString();
+                                            System.Type[] ctorParameters = { typeof(string), typeof(StorageCellsLink) };
+                                            _ObjectLinksTable = new Table((Namespace as Storage).TablePrefix + path + "_" + (Type as Association).Name, this);
+                                            PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).CommitTransientObjectState(_ObjectLinksTable);
+                                            (Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleBStorageCell as StorageCell).ObjectIdentityType);
+                                            (Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleAStorageCell as StorageCell).ObjectIdentityType);
 
-                                        foreach (IdentityColumn part in linkClassStorageCell.ObjectIdentityType.Parts)
-                                            _ObjectLinksTable.AddObjectIDColumn(part.Name, (part as IIdentityPart).Type, part.Length, part.IsIdentity, part.IdentityIncrement);
+                                            foreach (IdentityColumn part in linkClassStorageCell.ObjectIdentityType.Parts)
+                                                _ObjectLinksTable.AddObjectIDColumn(part.Name, (part as IIdentityPart).Type, part.Length, part.IsIdentity, part.IdentityIncrement);
+                                        }
+                                        StateTransition.Consistent = true;
                                     }
-                                    StateTransition.Consistent = true;
+
+                                    if (!(RoleAStorageCell is StorageCellReference))
+                                        CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
+                                    if (!(RoleBStorageCell is StorageCellReference))
+                                        CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
+
                                 }
-
-                                if (!(RoleAStorageCell is StorageCellReference))
-                                    CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
-                                if (!(RoleBStorageCell is StorageCellReference))
-                                    CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
-
+                                else
+                                {
+                                    if (!(linkClassStorageCell is StorageCellReference) && !(RoleAStorageCell is StorageCellReference))
+                                        CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell, ValueTypePath), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
+                                    if (!(linkClassStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
+                                        CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell, ValueTypePath), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
+                                }
                             }
-                            else
+                        }
+                        if (Type.LinkClass == null && (Type.MultiplicityType == MetaDataRepository.AssociationType.ManyToMany || RoleAStorageCell.ObjectIdentityType != RoleBStorageCell.ObjectIdentityType))
+                        {
+                            if (_ObjectLinksTable == null)
                             {
-                                if (!(linkClassStorageCell is StorageCellReference) && !(RoleAStorageCell is StorageCellReference))
-                                    CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell, ValueTypePath), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
-                                if (!(linkClassStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
-                                    CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(linkClassStorageCell, ValueTypePath), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
+                                string path = null;
+                                path = BuiltPathString();
+                                System.Type[] ctorParameters = { typeof(string), typeof(StorageCellsLink) };
+                                _ObjectLinksTable = new Table((Namespace as Storage).TablePrefix + path + (Namespace as Storage).CompositeNameSeparatorSign + (Type as Association).Name, this);
+                                PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).CommitTransientObjectState(_ObjectLinksTable);
+                                (Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleBStorageCell as StorageCell).ObjectIdentityType);
+                                (Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleAStorageCell as StorageCell).ObjectIdentityType);
+
+                            }
+                            //else
+                            //{
+                            //    var mTable = Namespace.OwnedElements.OfType<Table>().Where(x => x.Name == (Namespace as Storage).TablePrefix + BuiltPathString() + (Type as Association).Name).FirstOrDefault();
+                            //    if (mTable != null && mTable != _ObjectLinksTable)
+                            //    {
+                            //        _ObjectLinksTable = mTable;
+
+                            //        foreach (var rtable in Namespace.OwnedElements.OfType<Table>().Where(x => x.Name.LastIndexOf((Namespace as Storage).TablePrefix + BuiltPathString() + "_" + (Type as Association).Name) == 0).ToArray())
+                            //        {
+                            //            Namespace.RemoveOwnedElement(rtable);
+                            //            PersistenceLayer.ObjectStorage.DeleteObject(rtable);
+                            //        }
+                            //    }
+                            //}
+                            if (!(RoleBStorageCell is StorageCellReference))
+                                CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
+                            if (!(RoleAStorageCell is StorageCellReference))
+                                CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
+                        }
+                        else if (Type.LinkClass == null && ObjectLinksTable != null)
+                        {
+                            if (!(RoleBStorageCell is StorageCellReference))
+                                CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
+                            if (!(RoleAStorageCell is StorageCellReference))
+                                CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
+                        }
+                        else if (Type.LinkClass == null && Type.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne)
+                        {
+                            if (!(RoleAStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
+                                CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(RoleAStorageCell as StorageCell, ValueTypePath), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
+                        }
+                        else if (Type.LinkClass == null && (Type.MultiplicityType == MetaDataRepository.AssociationType.OneToOne))
+                        {
+                            if (!(RoleAStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
+                            {
+                                if ((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(RoleAStorageCell as StorageCell, ValueTypePath).Count > 0)
+                                    CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(RoleAStorageCell as StorageCell, ValueTypePath), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
+                                else
+                                    CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(RoleBStorageCell as StorageCell, ValueTypePath), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
                             }
                         }
-                    }
-                    if (Type.LinkClass == null && (Type.MultiplicityType == MetaDataRepository.AssociationType.ManyToMany || RoleAStorageCell.ObjectIdentityType != RoleBStorageCell.ObjectIdentityType))
-                    {
-                        if (_ObjectLinksTable == null)
+                        else if (Type.LinkClass == null && Type.MultiplicityType == MetaDataRepository.AssociationType.OneToMany)
                         {
-                            string path = null;
-                            path = BuiltPathString();
-                            System.Type[] ctorParameters = { typeof(string), typeof(StorageCellsLink) };
-                            _ObjectLinksTable = new Table((Namespace as Storage).TablePrefix + path + (Namespace as Storage).CompositeNameSeparatorSign + (Type as Association).Name, this);
-                            PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).CommitTransientObjectState(_ObjectLinksTable);
-                            (Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleBStorageCell as StorageCell).ObjectIdentityType);
-                            (Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).AddReferenceColumnsToTable(_ObjectLinksTable, ValueTypePath, new ValueTypePath(ValueTypePath), (RoleAStorageCell as StorageCell).ObjectIdentityType);
-
-                        }
-                        //else
-                        //{
-                        //    var mTable = Namespace.OwnedElements.OfType<Table>().Where(x => x.Name == (Namespace as Storage).TablePrefix + BuiltPathString() + (Type as Association).Name).FirstOrDefault();
-                        //    if (mTable != null && mTable != _ObjectLinksTable)
-                        //    {
-                        //        _ObjectLinksTable = mTable;
-
-                        //        foreach (var rtable in Namespace.OwnedElements.OfType<Table>().Where(x => x.Name.LastIndexOf((Namespace as Storage).TablePrefix + BuiltPathString() + "_" + (Type as Association).Name) == 0).ToArray())
-                        //        {
-                        //            Namespace.RemoveOwnedElement(rtable);
-                        //            PersistenceLayer.ObjectStorage.DeleteObject(rtable);
-                        //        }
-                        //    }
-                        //}
-                        if (!(RoleBStorageCell is StorageCellReference))
-                            CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
-                        if (!(RoleAStorageCell is StorageCellReference))
-                            CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
-                    }
-                    else if (Type.LinkClass == null && ObjectLinksTable != null)
-                    {
-                        if (!(RoleBStorageCell is StorageCellReference))
-                            CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
-                        if (!(RoleAStorageCell is StorageCellReference))
-                            CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(ObjectLinksTable), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
-                    }
-                    else if (Type.LinkClass == null && Type.MultiplicityType == MetaDataRepository.AssociationType.ManyToOne)
-                    {
-                        if (!(RoleAStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
-                            CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(RoleAStorageCell as StorageCell, ValueTypePath), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
-                    }
-                    else if (Type.LinkClass == null && (Type.MultiplicityType == MetaDataRepository.AssociationType.OneToOne))
-                    {
-                        if (!(RoleAStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
-                        {
-                            if ((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(RoleAStorageCell as StorageCell, ValueTypePath).Count > 0)
-                                CreateForeignKeyIfNotExist((Type.RoleA as AssociationEnd).GetReferenceColumnsFor(RoleAStorageCell as StorageCell, ValueTypePath), (RoleBStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleB);
-                            else
+                            if (!(RoleAStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
                                 CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(RoleBStorageCell as StorageCell, ValueTypePath), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
                         }
+                        stateTransition.Consistent = true;
                     }
-                    else if (Type.LinkClass == null && Type.MultiplicityType == MetaDataRepository.AssociationType.OneToMany)
-                    {
-                        if (!(RoleAStorageCell is StorageCellReference) && !(RoleBStorageCell is StorageCellReference))
-                            CreateForeignKeyIfNotExist((Type.RoleB as AssociationEnd).GetReferenceColumnsFor(RoleBStorageCell as StorageCell, ValueTypePath), (RoleAStorageCell as StorageCell).MainTable.ObjectIDColumns, Roles.RoleA);
-                    }
-                    stateTransition.Consistent = true;
+
+
                 }
-
-
+                finally
+                {
+                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                }
             }
-            finally
+            else
             {
-                ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
+                try
+                {
+                    if(_ObjectLinksTable!=null)
+                    {
+                        foreach(var foreignKey in _ObjectLinksTable.ForeignKeys.ToList())
+                            _ObjectLinksTable.RemoveForeignKey(foreignKey);
+                    }
+                    if (RoleAStorageCell != null)
+                    {
+                        foreach (var mappedTable in (RoleAStorageCell as StorageCell).MappedTables)
+                        {
+                            foreach (var foreignKey in mappedTable.ForeignKeys.ToList())
+                                mappedTable.RemoveForeignKey(foreignKey);
+                        }
+                    }
+                    if (RoleBStorageCell != null)
+                    {
+                        foreach (var mappedTable in (RoleBStorageCell as StorageCell).MappedTables)
+                        {
+                            foreach (var foreignKey in mappedTable.ForeignKeys.ToList())
+                                mappedTable.RemoveForeignKey(foreignKey);
+                        }
+                    }
+                }
+                finally
+                {
+                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                }
             }
         }
+        
 
 
 

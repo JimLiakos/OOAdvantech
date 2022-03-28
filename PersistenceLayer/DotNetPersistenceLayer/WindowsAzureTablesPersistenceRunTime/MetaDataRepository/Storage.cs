@@ -25,6 +25,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         public override bool SupportViews => false;
 
+        public override bool SupportForeignKeys { get => false; }
+
+        public override bool SupportPrimaryKeys { get => false; }
+
         /// <MetaDataID>{802c5d63-6d2b-4a6a-bfc4-5511b1dac7fe}</MetaDataID>
         public Storage(string storageName, string storageLocation, string storageType, StorageMetadata azureStorageMetadata)
         {
@@ -273,6 +277,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             }
 
+            var keys = storageMetaObjects.OfType<RDBMSMetaDataRepository.Key>().ToList();
 
             var storageCells = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCell>().Where(x => x.MappedTables.Count == 0).ToList();
 
@@ -296,26 +301,34 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             var freeColumns = storageMetaObjects.OfType<RDBMSMetaDataRepository.Column>().Where(x => !activeColumns.Contains(x)).ToList();
             freeColumns.AddRange(storageMetaObjects.OfType<RDBMSMetaDataRepository.IdentityColumn>().Where(x => !activeColumns.Contains(x)).ToList());
+            if (freeColumns.Count > 0)
+                System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
             foreach (var column in freeColumns)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(column);
+
+                PersistenceLayer.ObjectStorage.DeleteObject(column);
             }
 
 
 
             var generlizations = storageMetaObjects.OfType<MetaDataRepository.Generalization>().Where(x => x.Child == null || x.Parent == null).ToList();
+
+            if (generlizations.Count > 0)
+                System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
+
             foreach (var generlization in generlizations)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(generlization);
+
+                PersistenceLayer.ObjectStorage.DeleteObject(generlization);
             }
 
             var realizations = storageMetaObjects.OfType<MetaDataRepository.Realization>().Where(x => x.Abstarction == null || x.Implementor == null).ToList();
+            if (realizations.Count > 0)
+                System.Diagnostics.Debug.Assert(false, "garbage realizations.");
+
             foreach (var realization in realizations)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage realizations.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(realization);
+                PersistenceLayer.ObjectStorage.DeleteObject(realization);
             }
 
 
@@ -327,18 +340,24 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
             var orphan_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x => x.Namespace == null).ToList();
+
+            if (orphan_tables.Count > 0)
+                System.Diagnostics.Debug.Assert(false, "garbage orphan tables.");
+
             foreach (var orphan_table in orphan_tables)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage orphan tables.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(orphan_table);
+
+                PersistenceLayer.ObjectStorage.DeleteObject(orphan_table);
             }
 
             var dynamicTypes = storageMetaObjects.Where(x => x.ToString().IndexOf("<") == 0).ToList();
 
+            if(dynamicTypes.Count>0)
+                System.Diagnostics.Debug.Assert(false, "garbage dynamic types.");
             foreach (var dynamicType in dynamicTypes)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage dynamic types.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(dynamicType);
+                
+                PersistenceLayer.ObjectStorage.DeleteObject(dynamicType);
             }
             foreach (var entry in (from primitive in storageMetaObjects.OfType<RDBMSMetaDataRepository.Primitive>()
                                    group primitive by primitive.Identity.ToString() into doublePripetives
@@ -363,33 +382,37 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                   where IdentityWithHashCode(meta.Identity.ToString())
                                   orderby meta.Identity.ToString()
                                   select meta).ToList();
-
+            if(genericClasses.Count>0)
+                System.Diagnostics.Debug.Assert(false, "garbage generic classes.");
             foreach (var generic in genericClasses)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage generic classes.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(generic);
+                
+                PersistenceLayer.ObjectStorage.DeleteObject(generic);
             }
             var genericInterfaces = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Interface>()
                                      where IdentityWithHashCode(meta.Identity.ToString())
                                      orderby meta.Identity.ToString()
                                      select meta).ToList();
 
+            if(genericInterfaces.Count>0)
+                System.Diagnostics.Debug.Assert(false, "garbage generic interfaces.");
             foreach (var generic in genericInterfaces)
             {
-                System.Diagnostics.Debug.Assert(false, "garbage generic interfaces.");
-                //PersistenceLayer.ObjectStorage.DeleteObject(generic);
+                
+                PersistenceLayer.ObjectStorage.DeleteObject(generic);
             }
-            var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null).ToList();
+            var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null&&!(x is OOAdvantech.RDBMSMetaDataRepository.StoreProcedure)).ToList();
             //var emtysting = storageMetaObjects.Where(x => string.IsNullOrWhiteSpace(x.ToString())).ToArray();
+            if(features.Count>0)
+                System.Diagnostics.Debug.Assert(false, "garbage Features.");
             foreach (var feature in features)
             {
 
 
-                if (feature is OOAdvantech.RDBMSMetaDataRepository.StoreProcedure)
-                    continue;
-                System.Diagnostics.Debug.Assert(false, "garbage Features.");
+            
+            
 
-                // PersistenceLayer.ObjectStorage.DeleteObject(feature);
+                PersistenceLayer.ObjectStorage.DeleteObject(feature);
             }
 
             var storageCellsLinks = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.ObjectLinksTable != null).ToList();

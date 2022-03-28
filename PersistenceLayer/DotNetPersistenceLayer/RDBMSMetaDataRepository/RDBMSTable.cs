@@ -325,7 +325,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 ReaderWriterLock.AcquireReaderLock(10000);
                 try
                 {
-                    if(FullName== "FlavourBusinesses.TFlavourBusinessesOrganization")
+                    if (FullName == "FlavourBusinesses.TFlavourBusinessesOrganization")
                     {
 
                     }
@@ -531,11 +531,13 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 #region Create the standard columns and primary key for a mapping Table if there aren't
                 if (_ObjectIDColumns.Count == 0)
                 {
-
-                    _PrimaryKey = (Key)PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).NewObject(typeof(Key));
-                    _PrimaryKey.PrimaryKeyCreator = this;
-                    //_PrimaryKey.OriginTable=this;
-                    _PrimaryKey.IsPrimaryKey = true;
+                    if ((Namespace as RDBMSMetaDataRepository.Storage).SupportPrimaryKeys)
+                    {
+                        _PrimaryKey = (Key)PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).NewObject(typeof(Key));
+                        _PrimaryKey.PrimaryKeyCreator = this;
+                        //_PrimaryKey.OriginTable=this;
+                        _PrimaryKey.IsPrimaryKey = true;
+                    }
                     using (OOAdvantech.Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
                     {
                         var objectIdentityType = AutoProduceColumnsGenerator.CurrentAutoProduceColumnsGenerator.GetObjectIdentityType(this);
@@ -545,7 +547,8 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                             PersistenceLayer.ObjectStorage.GetStorageOfObject(Properties).CommitTransientObjectState(identityColumn);
                             _ObjectIDColumns.Add(identityColumn);
                             AddOwnedElement(identityColumn);
-                            _PrimaryKey.AddColumn(identityColumn);
+                            if ((Namespace as RDBMSMetaDataRepository.Storage).SupportPrimaryKeys)
+                                _PrimaryKey.AddColumn(identityColumn);
                             identityColumn.AllowNulls = false;
                             identityColumn.ObjectIdentityType = objectIdentityType;
                         }
@@ -564,7 +567,18 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 Name = (Namespace as Storage).TablePrefix + (TableCreator as StorageCell).Type.Name;
 
                 (Namespace as Storage).MakeNameUnaryInNamesapce(this);
-                _PrimaryKey.Name = "PK_" + Name;
+
+                if ((Namespace as RDBMSMetaDataRepository.Storage).SupportPrimaryKeys)
+                    _PrimaryKey.Name = "PK_" + Name;
+                else
+                {
+                    if (_PrimaryKey != null)
+                    {
+                        PersistenceLayer.ObjectStorage.DeleteObject(PrimaryKey);
+                        _PrimaryKey = null;
+                        
+                    }
+                }
 
 
             }
@@ -667,13 +681,13 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                                 removeColumns.Add(currColumn);
                             else if (currColumn.MappedAssociationEnd != null && currColumn.MappedAssociationEnd.Namespace == null)
                                 removeColumns.Add(currColumn);
-                            else if(currColumn.MappedAssociationEnd==null&&
-                                currColumn.MappedAttribute==null&& 
-                                !AutoProduceColumnsGenerator.CurrentAutoProduceColumnsGenerator.GetAuxiliaryColumns(this).Select(x=>x.Name).ToList().Contains(Column.Name))
+                            else if (currColumn.MappedAssociationEnd == null &&
+                                currColumn.MappedAttribute == null &&
+                                !AutoProduceColumnsGenerator.CurrentAutoProduceColumnsGenerator.GetAuxiliaryColumns(this).Select(x => x.Name).ToList().Contains(Column.Name))
                             {
                                 removeColumns.Add(currColumn);
                             }
-                            else 
+                            else
                                 throw new System.Exception("Column '" + Column.Name + "' already exists.");
                         }
                 }
