@@ -188,186 +188,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         _StorageIdentity = System.Guid.NewGuid().ToString();
                         PersistenceLayer.ObjectStorage.CommitObjectState(this);
                     }
-
-                    Dictionary<string, List<MetaObject>> metaObjects = new Dictionary<string, List<MetaObject>>();
-                    List<MetaObject> storageMetaObjects = new List<MetaObject>();
-
-                    Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute("SELECT MetaObject FROM " + typeof(MetaDataRepository.MetaObject).FullName + " MetaObject ");//WHERE MetaObjectIDStream = \""+OriginMetaObject.Identity.ToString()+"\" ");
-
-                    foreach (Collections.StructureSet Rowset in aStructureSet)
-                    {
-                        MetaDataRepository.MetaObject metaObject = (MetaDataRepository.MetaObject)Rowset["MetaObject"];
-                        storageMetaObjects.Add(metaObject);
-                        if (metaObject.Identity.ToString() == null)
-                        {
-                            int were = 0;
-                        }
-                    }
-
-
-                    var storageCells = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCell>().Where(x => x.MappedTables.Count == 0).ToList();
-
-                    var ss = storageMetaObjects.OrderBy(x => x.ToString()).ToList();
-
-                    List<RDBMSMetaDataRepository.Column> activeColumns = new List<RDBMSMetaDataRepository.Column>();
-
-                    activeColumns.AddRange((from table in storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>()
-                                            from identityColumn in table.ObjectIDColumns
-                                            select identityColumn).ToList());
-                    activeColumns.AddRange((from table in storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>()
-                                            where table.ReferentialIntegrityColumn != null
-                                            select table.ReferentialIntegrityColumn).ToList());
-
-                    activeColumns.AddRange((from table in storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>()
-                                            from column in table.ContainedColumns
-                                            select column).ToList());
-
-                    activeColumns.AddRange((from view in storageMetaObjects.OfType<RDBMSMetaDataRepository.View>()
-                                            from column in view.ViewColumns
-                                            select column).ToList());
-
-                    var freeColumns = storageMetaObjects.OfType<RDBMSMetaDataRepository.Column>().Where(x => !activeColumns.Contains(x)).ToList();
-                    freeColumns.AddRange(storageMetaObjects.OfType<RDBMSMetaDataRepository.IdentityColumn>().Where(x => !activeColumns.Contains(x)).ToList());
-                    foreach (var column in freeColumns)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(column);
-                    }
-
-
-
-                    int ttto = 0;
-                    var validColumns = storageMetaObjects.OfType<RDBMSMetaDataRepository.Column>().Where(x => x.Namespace != null).ToList();
-                    //foreach (var column in freeColumns)
-                    //{
-                    //   // PersistenceLayer.ObjectStorage.DeleteObject(column);
-                    //}
-
-                    var generlizations = storageMetaObjects.OfType<MetaDataRepository.Generalization>().Where(x => x.Child == null || x.Parent == null).ToList();
-                    foreach (var generlization in generlizations)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(generlization);
-                    }
-
-                    var realizations = storageMetaObjects.OfType<MetaDataRepository.Realization>().Where(x => x.Abstarction == null || x.Implementor == null).ToList();
-                    foreach (var realization in realizations)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(realization);
-                    }
-
-                    //foreach (var parameter in parameters)
-                    //{
-                    //    //PersistenceLayer.ObjectStorage.DeleteObject(parameter);
-                    //}
-
-                    //var associationEndDictionary = (from metaObject in storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>()
-                    //                                group metaObject by metaObject.Identity.ToString() into identityMetaObjecst
-                    //                                select new { identityMetaObjecst.Key, metaObjects = identityMetaObjecst.ToList() }).ToDictionary(x => x.Key);
-
-
-                    //var views = storageMetaObjects.OfType<RDBMSMetaDataRepository.View>().ToList();
-                    //var storageCellViews = (from storageCell in storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCell>()
-                    //                     select storageCell.ClassView).ToList();
-                    //foreach (var vew in views)
-                    //{
-                    //    PersistenceLayer.ObjectStorage.DeleteObject(vew);
-                    //}
-
-                    var associationEnds = storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>().Where(x => x.Association == null || x.Association.RoleA?.Specification == null || x.Association.RoleB?.Specification == null).ToList();
-                    var m_operations = storageMetaObjects.OfType<MetaDataRepository.Operation>().ToList();
-                    var m_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x => x.Namespace != null).ToList();
-                    var clses = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().Where(x => x.Namespace == null).ToList();
-                    var sds = storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>().Select(x => x.Identity).ToList();
-
-                    var identityColumns = storageMetaObjects.OfType<RDBMSMetaDataRepository.IdentityColumn>().ToList();
-                    var columns = storageMetaObjects.OfType<RDBMSMetaDataRepository.Column>().ToList();
-
-
-
-                    var orphan_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x => x.Namespace == null).ToList();
-                    foreach (var orphan_table in orphan_tables)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(orphan_table);
-                    }
-
-                    var dynamicTypes = storageMetaObjects.Where(x => x.ToString().IndexOf("<") == 0).ToList();
-
-                    foreach (var dynamicType in dynamicTypes)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(dynamicType);
-                    }
-                    foreach (var entry in (from primitive in storageMetaObjects.OfType<RDBMSMetaDataRepository.Primitive>()
-                                           group primitive by primitive.Identity.ToString() into doublePripetives
-                                           select new { identity = doublePripetives.Key, PrimitiveEntries = doublePripetives.ToList() }))
-                    {
-                        while (entry.PrimitiveEntries.ToList().Count > 1)
-                        {
-                            var _primitive = entry.PrimitiveEntries.Last();
-
-                            foreach (var column in activeColumns.Where(x => x.Type == _primitive))
-                                column.Type = entry.PrimitiveEntries.First();
-
-                            PersistenceLayer.ObjectStorage.DeleteObject(_primitive);
-                            entry.PrimitiveEntries.Remove(_primitive);
-
-                        }
-                    }
-
-                    var genericClasses = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>()
-                                          where IdentityWithHashCode(meta.Identity.ToString())
-                                          orderby meta.Identity.ToString()
-                                          select meta).ToList();
-
-                    foreach (var generic in genericClasses)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(generic);
-                    }
-                    var genericInterfaces = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Interface>()
-                                             where IdentityWithHashCode(meta.Identity.ToString())
-                                             orderby meta.Identity.ToString()
-                                             select meta).ToList();
-
-                    foreach (var generic in genericInterfaces)
-                    {
-                        PersistenceLayer.ObjectStorage.DeleteObject(generic);
-                    }
-                    var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null).ToList();
-                    //var emtysting = storageMetaObjects.Where(x => string.IsNullOrWhiteSpace(x.ToString())).ToArray();
-                    foreach (var feature in features)
-                    {
-                        var dd = feature.Namespace;
-                        var ddq = feature.Owner;
-                        var ful = feature.ToString();
-                        //System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
-
-                        if (feature is OOAdvantech.RDBMSMetaDataRepository.StoreProcedure)
-                            continue;
-
-                        PersistenceLayer.ObjectStorage.DeleteObject(feature);
-                    }
-
-                    //var storageCellsLinks = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.ObjectLinksTable != null).ToList();
-                    //foreach (var associationEnd in associationEnds)
-                    //{
-                    //    var spec = associationEnd.Specification;
-                    //    if (associationEnd.Association != null)
-                    //    {
-                    //        var specA = associationEnd.Association.RoleA?.Specification;
-                    //        var specB = associationEnd.Association.RoleB?.Specification;
-                    //        if (associationEnd.Association.RoleA != null)
-                    //            OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association.RoleA);
-                    //        if (associationEnd.Association.RoleB != null)
-                    //            OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association.RoleB);
-                    //        OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association);
-
-                    //    }
-                    //    else
-                    //        OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd);
-
-
-                    //}
-
-
-
+                    CheckForUnusedMetaData();
 
                     MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator = new RDBMSMetaDataRepository.MetaObjectsStack();
 
@@ -436,6 +257,159 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
 
 
+        }
+
+        private void CheckForUnusedMetaData()
+        {
+            Dictionary<string, List<MetaObject>> metaObjects = new Dictionary<string, List<MetaObject>>();
+            List<MetaObject> storageMetaObjects = new List<MetaObject>();
+
+            Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorageOfObject(this).Execute("SELECT MetaObject FROM " + typeof(MetaDataRepository.MetaObject).FullName + " MetaObject ");//WHERE MetaObjectIDStream = \""+OriginMetaObject.Identity.ToString()+"\" ");
+
+            foreach (Collections.StructureSet Rowset in aStructureSet)
+            {
+                MetaDataRepository.MetaObject metaObject = (MetaDataRepository.MetaObject)Rowset["MetaObject"];
+                storageMetaObjects.Add(metaObject);
+
+            }
+
+
+            var storageCells = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCell>().Where(x => x.MappedTables.Count == 0).ToList();
+
+
+            List<RDBMSMetaDataRepository.Column> activeColumns = new List<RDBMSMetaDataRepository.Column>();
+
+            activeColumns.AddRange((from table in storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>()
+                                    from identityColumn in table.ObjectIDColumns
+                                    select identityColumn).ToList());
+            activeColumns.AddRange((from table in storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>()
+                                    where table.ReferentialIntegrityColumn != null
+                                    select table.ReferentialIntegrityColumn).ToList());
+
+            activeColumns.AddRange((from table in storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>()
+                                    from column in table.ContainedColumns
+                                    select column).ToList());
+
+            activeColumns.AddRange((from view in storageMetaObjects.OfType<RDBMSMetaDataRepository.View>()
+                                    from column in view.ViewColumns
+                                    select column).ToList());
+
+            var freeColumns = storageMetaObjects.OfType<RDBMSMetaDataRepository.Column>().Where(x => !activeColumns.Contains(x)).ToList();
+            freeColumns.AddRange(storageMetaObjects.OfType<RDBMSMetaDataRepository.IdentityColumn>().Where(x => !activeColumns.Contains(x)).ToList());
+            foreach (var column in freeColumns)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
+                PersistenceLayer.ObjectStorage.DeleteObject(column);
+            }
+
+
+
+            var generlizations = storageMetaObjects.OfType<MetaDataRepository.Generalization>().Where(x => x.Child == null || x.Parent == null).ToList();
+            foreach (var generlization in generlizations)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
+                //PersistenceLayer.ObjectStorage.DeleteObject(generlization);
+            }
+
+            var realizations = storageMetaObjects.OfType<MetaDataRepository.Realization>().Where(x => x.Abstarction == null || x.Implementor == null).ToList();
+            foreach (var realization in realizations)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage realizations.");
+                //PersistenceLayer.ObjectStorage.DeleteObject(realization);
+            }
+
+
+            var associationEnds = storageMetaObjects.OfType<RDBMSMetaDataRepository.AssociationEnd>().Where(x => x.Association == null || x.Association.RoleA?.Specification == null || x.Association.RoleB?.Specification == null).ToList();
+
+            var identityColumns = storageMetaObjects.OfType<RDBMSMetaDataRepository.IdentityColumn>().ToList();
+            var columns = storageMetaObjects.OfType<RDBMSMetaDataRepository.Column>().ToList();
+
+
+
+            var orphan_tables = storageMetaObjects.OfType<RDBMSMetaDataRepository.Table>().Where(x => x.Namespace == null).ToList();
+            foreach (var orphan_table in orphan_tables)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage orphan tables.");
+                //PersistenceLayer.ObjectStorage.DeleteObject(orphan_table);
+            }
+
+            var dynamicTypes = storageMetaObjects.Where(x => x.ToString().IndexOf("<") == 0).ToList();
+
+            foreach (var dynamicType in dynamicTypes)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage dynamic types.");
+                //PersistenceLayer.ObjectStorage.DeleteObject(dynamicType);
+            }
+            foreach (var entry in (from primitive in storageMetaObjects.OfType<RDBMSMetaDataRepository.Primitive>()
+                                   group primitive by primitive.Identity.ToString() into doublePripetives
+                                   select new { identity = doublePripetives.Key, PrimitiveEntries = doublePripetives.ToList() }))
+            {
+                while (entry.PrimitiveEntries.ToList().Count > 1)
+                {
+
+                    break;
+                    //var _primitive = entry.PrimitiveEntries.Last();
+
+                    //foreach (var column in activeColumns.Where(x => x.Type == _primitive))
+                    //    column.Type = entry.PrimitiveEntries.First();
+
+                    //PersistenceLayer.ObjectStorage.DeleteObject(_primitive);
+                    //entry.PrimitiveEntries.Remove(_primitive);
+
+                }
+            }
+
+            var genericClasses = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Class>()
+                                  where IdentityWithHashCode(meta.Identity.ToString())
+                                  orderby meta.Identity.ToString()
+                                  select meta).ToList();
+
+            foreach (var generic in genericClasses)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage generic classes.");
+                //PersistenceLayer.ObjectStorage.DeleteObject(generic);
+            }
+            var genericInterfaces = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Interface>()
+                                     where IdentityWithHashCode(meta.Identity.ToString())
+                                     orderby meta.Identity.ToString()
+                                     select meta).ToList();
+
+            foreach (var generic in genericInterfaces)
+            {
+                System.Diagnostics.Debug.Assert(false, "garbage generic interfaces.");
+                //PersistenceLayer.ObjectStorage.DeleteObject(generic);
+            }
+            var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null).ToList();
+            //var emtysting = storageMetaObjects.Where(x => string.IsNullOrWhiteSpace(x.ToString())).ToArray();
+            foreach (var feature in features)
+            {
+
+
+                if (feature is OOAdvantech.RDBMSMetaDataRepository.StoreProcedure)
+                    continue;
+                System.Diagnostics.Debug.Assert(false, "garbage Features.");
+
+                // PersistenceLayer.ObjectStorage.DeleteObject(feature);
+            }
+
+            var storageCellsLinks = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.ObjectLinksTable != null).ToList();
+            foreach (var associationEnd in associationEnds)
+            {
+                var spec = associationEnd.Specification;
+                if (associationEnd.Association != null)
+                {
+                    var specA = associationEnd.Association.RoleA?.Specification;
+                    var specB = associationEnd.Association.RoleB?.Specification;
+                    if (associationEnd.Association.RoleA != null)
+                        OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association.RoleA);
+                    if (associationEnd.Association.RoleB != null)
+                        OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association.RoleB);
+                    OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd.Association);
+
+                }
+                else
+                    OOAdvantech.PersistenceLayer.ObjectStorage.DeleteObject(associationEnd);
+            }
         }
 
         private bool IdentityWithHashCode(string identity)
