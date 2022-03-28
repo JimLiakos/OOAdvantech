@@ -299,7 +299,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             foreach (var column in freeColumns)
             {
                 System.Diagnostics.Debug.Assert(false, "garbage generlizations.");
-                PersistenceLayer.ObjectStorage.DeleteObject(column);
+                //PersistenceLayer.ObjectStorage.DeleteObject(column);
             }
 
 
