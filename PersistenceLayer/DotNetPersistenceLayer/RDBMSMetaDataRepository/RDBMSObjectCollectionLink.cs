@@ -850,7 +850,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         foreach(var foreignKey in _ObjectLinksTable.ForeignKeys.ToList())
                             _ObjectLinksTable.RemoveForeignKey(foreignKey);
                     }
-                    if (RoleAStorageCell != null)
+                    if (RoleAStorageCell is StorageCell)
                     {
                         foreach (var mappedTable in (RoleAStorageCell as StorageCell).MappedTables)
                         {
@@ -858,7 +858,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                                 mappedTable.RemoveForeignKey(foreignKey);
                         }
                     }
-                    if (RoleBStorageCell != null)
+                    if (RoleBStorageCell is StorageCell)
                     {
                         foreach (var mappedTable in (RoleBStorageCell as StorageCell).MappedTables)
                         {
@@ -897,6 +897,8 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     if (_ObjectLinksTable != null)
                         return _ObjectLinksTable;
                     _NewTableCreated = false;
+                    if (Type == null)
+                        return null;
                     if (Type.MultiplicityType == MetaDataRepository.AssociationType.ManyToMany
                         || RoleAStorageCell is StorageCellReference
                         || RoleBStorageCell is StorageCellReference

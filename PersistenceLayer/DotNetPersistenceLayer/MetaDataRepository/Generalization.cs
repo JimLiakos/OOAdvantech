@@ -48,20 +48,16 @@ namespace OOAdvantech.MetaDataRepository
 		{
 			get
 			{
-				ReaderWriterLock.AcquireReaderLock(10000);
-				try
+				lock (identityLock)
 				{
-					if(MetaObjectIDStream!=null)
+					if (MetaObjectIDStream!=null)
 						if(MetaObjectIDStream.Length>0)
 							_Identity=new MetaObjectID(MetaObjectIDStream);
 					if(_Identity==null)
 						_Identity=new MetaObjectID(Child.Identity.ToString()+"."+Parent.Identity.ToString());
 					return _Identity;
 				}
-				finally
-				{
-					ReaderWriterLock.ReleaseReaderLock();
-				}
+				
 			}
 		}
 		/// <MetaDataID>{82E74063-F132-452B-8A3F-078D865864C1}</MetaDataID>

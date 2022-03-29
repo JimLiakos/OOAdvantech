@@ -342,10 +342,13 @@ namespace OOAdvantech.MetaDataRepository
                 {
                     Component mSourceComponent = (Component)OriginMetaObject;
                     int count = mSourceComponent.Residents.Count;
-                    if (_Identity == null)
+                    lock (identityLock)
                     {
-                        _Identity = new MetaObjectID(OriginMetaObject.Identity.ToString());
-                        MetaObjectIDStream = _Identity.ToString();
+                        if (_Identity == null)
+                        {
+                            _Identity = new MetaObjectID(OriginMetaObject.Identity.ToString());
+                            MetaObjectIDStream = _Identity.ToString();
+                        }
                     }
                     AssemblyString = (OriginMetaObject as OOAdvantech.MetaDataRepository.Component).AssemblyString;
                     base.Synchronize(OriginMetaObject);

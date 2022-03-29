@@ -573,17 +573,14 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             get
             {
 
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+                lock (identityLock)
+
                 {
                     if (_Identity == null)
                         _Identity = new MetaDataRepository.MetaObjectID((_Namespace.Value as PersistenceLayer.Storage).StorageIdentity + "_" + SerialNumber.ToString());
                     return _Identity;
                 }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
+               
             }
         }
         /// <exclude>Excluded</exclude>

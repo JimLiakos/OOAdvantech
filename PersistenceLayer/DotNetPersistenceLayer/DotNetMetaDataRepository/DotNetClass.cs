@@ -1712,7 +1712,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     }
                     else if (Refer.WrType.GetMetaData().ContainsGenericParameters)
                     {
-                        _Identity = new MetaDataRepository.MetaObjectID(Refer.WrType.ToString() + Refer.WrType.GetHashCode().ToString());
+                        _Identity = new MetaDataRepository.MetaObjectID(Refer.WrType.ToString());// + Refer.WrType.GetHashCode().ToString()) ;
                         string ddf = Refer.WrType.AssemblyQualifiedName;
                     }
 

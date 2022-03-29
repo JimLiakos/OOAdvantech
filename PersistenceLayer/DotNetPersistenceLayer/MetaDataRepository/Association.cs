@@ -557,8 +557,11 @@ namespace OOAdvantech.MetaDataRepository
                     throw new System.ArgumentException("The association end roleB has RoleA definition", "roleB");
 
                 _Name = name;
-                if (identity != null)
-                    _Identity = new MetaObjectID(identity);
+                lock (identityLock)
+                {
+                    if (identity != null)
+                        _Identity = new MetaObjectID(identity);
+                }
 
 
                 _Connections.Add(roleA);

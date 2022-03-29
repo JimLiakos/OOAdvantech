@@ -183,7 +183,7 @@ namespace OOAdvantech.MetaDataRepository
             return dependency;
         }
         /// <MetaDataID>{196415FA-E22A-4610-8C30-F7AF05D4117D}</MetaDataID>
-        public ObjectStateManagerLink Properties=new ObjectStateManagerLink();
+        public ObjectStateManagerLink Properties = new ObjectStateManagerLink();
 
 
         /// <summary>Check the Meta data if the declaration is consistent or not 
@@ -195,7 +195,13 @@ namespace OOAdvantech.MetaDataRepository
         {
             string identity = null;
             try { identity = Identity.ToString(); }
-            catch { identity = _Identity.ToString(); }
+            catch
+            {
+                lock (identityLock)
+                {
+                    identity = _Identity.ToString();
+                }
+            }
 
             if (Identities.ContainsKey(identity))
             {
@@ -337,10 +343,13 @@ namespace OOAdvantech.MetaDataRepository
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try
             {
+                lock (identityLock)
+                {
 
-                if (_Identity != null && _Identity != theIdentity)
-                    throw new System.Exception("The identity of Meta Object is already set.");
-                _Identity = new MetaObjectID(theIdentity.ToString());
+                    if (_Identity != null && _Identity != theIdentity)
+                        throw new System.Exception("The identity of Meta Object is already set.");
+                    _Identity = new MetaObjectID(theIdentity.ToString());
+                }
                 MetaObjectIDStream = theIdentity.ToString();
             }
             finally
@@ -423,6 +432,8 @@ namespace OOAdvantech.MetaDataRepository
             }
 
         }
+
+        protected object identityLock = new object();
         /// <MetaDataID>{BB7B1145-5377-48CF-B387-76240243AD83}</MetaDataID>
         /// <exclude>Excluded</exclude>
         protected MetaObjectID _Identity;
@@ -438,8 +449,8 @@ namespace OOAdvantech.MetaDataRepository
             get
             {
 
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+
+                lock (identityLock)
                 {
                     if (_Identity == null)
                     {
@@ -463,10 +474,7 @@ namespace OOAdvantech.MetaDataRepository
 
                 }
 
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
+
             }
         }
 
@@ -585,12 +593,15 @@ namespace OOAdvantech.MetaDataRepository
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try
             {
-                if (_Identity != null && _Identity.ToString() == FullName)
+                lock (identityLock)
                 {
-                    if (_Namespace.Value != null && _Namespace.Value != mNamespace)
+                    if (_Identity != null && _Identity.ToString() == FullName)
                     {
-                        //TODO Αυτή η γραμμή κώδικα μπορεί να δημιουργήσει προβλήματα.
-                        _Identity = null;
+                        if (_Namespace.Value != null && _Namespace.Value != mNamespace)
+                        {
+                            //TODO Αυτή η γραμμή κώδικα μπορεί να δημιουργήσει προβλήματα.
+                            _Identity = null;
+                        }
                     }
                 }
                 _Namespace.Value = mNamespace;
@@ -831,13 +842,16 @@ namespace OOAdvantech.MetaDataRepository
                     MetaObjectIDStream = (string)value;
                 return ObjectMemberGetSet.MemberValueSetted;
             }
-            if (member.Name == nameof(_Identity))
+            lock (identityLock)
             {
-                if (value == null)
-                    _Identity = default(OOAdvantech.MetaDataRepository.MetaObjectID);
-                else
-                    _Identity = (OOAdvantech.MetaDataRepository.MetaObjectID)value;
-                return ObjectMemberGetSet.MemberValueSetted;
+                if (member.Name == nameof(_Identity))
+                {
+                    if (value == null)
+                        _Identity = default(OOAdvantech.MetaDataRepository.MetaObjectID);
+                    else
+                        _Identity = (OOAdvantech.MetaDataRepository.MetaObjectID)value;
+                    return ObjectMemberGetSet.MemberValueSetted;
+                }
             }
             if (member.Name == nameof(_ClientDependencies))
             {
@@ -904,9 +918,11 @@ namespace OOAdvantech.MetaDataRepository
 
             if (member.Name == nameof(MetaObjectIDStream))
                 return MetaObjectIDStream;
-
-            if (member.Name == nameof(_Identity))
-                return _Identity;
+            lock (identityLock)
+            {
+                if (member.Name == nameof(_Identity))
+                    return _Identity;
+            }
 
             if (member.Name == nameof(_ClientDependencies))
                 return _ClientDependencies;

@@ -192,7 +192,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         _StorageIdentity = System.Guid.NewGuid().ToString();
                         PersistenceLayer.ObjectStorage.CommitObjectState(this);
                     }
-                    CheckForUnusedMetaData();
+                    
 
                     MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator = new RDBMSMetaDataRepository.MetaObjectsStack();
 
@@ -250,7 +250,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
 
                     UpdateRelations();
+
                     MetaDataRepository.SynchronizerSession.StopSynchronize();
+
+                    CheckForUnusedMetaData();
 
                     StateTransition.Consistent = true; ;
                 }
@@ -352,11 +355,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             var dynamicTypes = storageMetaObjects.Where(x => x.ToString().IndexOf("<") == 0).ToList();
 
-            if(dynamicTypes.Count>0)
+            if (dynamicTypes.Count > 0)
                 System.Diagnostics.Debug.Assert(false, "garbage dynamic types.");
             foreach (var dynamicType in dynamicTypes)
             {
-                
+
                 PersistenceLayer.ObjectStorage.DeleteObject(dynamicType);
             }
             foreach (var entry in (from primitive in storageMetaObjects.OfType<RDBMSMetaDataRepository.Primitive>()
@@ -365,15 +368,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             {
                 while (entry.PrimitiveEntries.ToList().Count > 1)
                 {
+                    //System.Diagnostics.Debug.Assert(false, "garbage multiple primitives.");
 
-                    break;
-                    //var _primitive = entry.PrimitiveEntries.Last();
-
-                    //foreach (var column in activeColumns.Where(x => x.Type == _primitive))
-                    //    column.Type = entry.PrimitiveEntries.First();
-
-                    //PersistenceLayer.ObjectStorage.DeleteObject(_primitive);
-                    //entry.PrimitiveEntries.Remove(_primitive);
+                    //break;
+                    var _primitive = entry.PrimitiveEntries.Last();
+                    foreach (var column in activeColumns.Where(x => x.Type == _primitive))
+                    {
+                        column.Type = entry.PrimitiveEntries.First();
+                    }
+                    PersistenceLayer.ObjectStorage.DeleteObject(_primitive);
+                    entry.PrimitiveEntries.Remove(_primitive);
 
                 }
             }
@@ -382,11 +386,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                   where IdentityWithHashCode(meta.Identity.ToString())
                                   orderby meta.Identity.ToString()
                                   select meta).ToList();
-            if(genericClasses.Count>0)
+            if (genericClasses.Count > 0)
                 System.Diagnostics.Debug.Assert(false, "garbage generic classes.");
             foreach (var generic in genericClasses)
             {
-                
+
                 PersistenceLayer.ObjectStorage.DeleteObject(generic);
             }
             var genericInterfaces = (from meta in storageMetaObjects.OfType<RDBMSMetaDataRepository.Interface>()
@@ -394,28 +398,28 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                      orderby meta.Identity.ToString()
                                      select meta).ToList();
 
-            if(genericInterfaces.Count>0)
+            if (genericInterfaces.Count > 0)
                 System.Diagnostics.Debug.Assert(false, "garbage generic interfaces.");
             foreach (var generic in genericInterfaces)
             {
-                
+
                 PersistenceLayer.ObjectStorage.DeleteObject(generic);
             }
-            var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null&&!(x is OOAdvantech.RDBMSMetaDataRepository.StoreProcedure)).ToList();
+            var features = storageMetaObjects.OfType<MetaDataRepository.Feature>().Where(x => x.Owner == null && !(x is OOAdvantech.RDBMSMetaDataRepository.StoreProcedure)).ToList();
             //var emtysting = storageMetaObjects.Where(x => string.IsNullOrWhiteSpace(x.ToString())).ToArray();
-            if(features.Count>0)
+            if (features.Count > 0)
                 System.Diagnostics.Debug.Assert(false, "garbage Features.");
             foreach (var feature in features)
             {
 
 
-            
-            
+
+
 
                 PersistenceLayer.ObjectStorage.DeleteObject(feature);
             }
 
-            var storageCellsLinks = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.ObjectLinksTable != null).ToList();
+            var storageCellsLinks = storageMetaObjects.OfType<RDBMSMetaDataRepository.StorageCellsLink>().Where(x => x.Type != null && x.ObjectLinksTable != null).ToList();
             foreach (var associationEnd in associationEnds)
             {
                 var spec = associationEnd.Specification;
@@ -534,29 +538,29 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         public override bool CheckForVersionUpgrate(string assemblyFullName)
         {
 
-            //DotNetMetaDataRepository.Assembly mAssembly = null;
-            //System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
-            //object[] objects = dotNetAssembly.GetCustomAttributes(typeof(MetaDataRepository.BuildAssemblyMetadata), false);
-            //if (objects.Length == 0)
-            //    throw new System.Exception("You must declare in assemblyInfo file of  '" + dotNetAssembly.FullName + " the OOAdvantech.MetaDataRepository.BuildAssemblyMetadata attribute");
-            //mAssembly = DotNetMetaDataRepository.Assembly.GetComponent(dotNetAssembly) as DotNetMetaDataRepository.Assembly;
+            DotNetMetaDataRepository.Assembly mAssembly = null;
+            System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
+            object[] objects = dotNetAssembly.GetCustomAttributes(typeof(MetaDataRepository.BuildAssemblyMetadata), false);
+            if (objects.Length == 0)
+                throw new System.Exception("You must declare in assemblyInfo file of  '" + dotNetAssembly.FullName + " the OOAdvantech.MetaDataRepository.BuildAssemblyMetadata attribute");
+            mAssembly = DotNetMetaDataRepository.Assembly.GetComponent(dotNetAssembly) as DotNetMetaDataRepository.Assembly;
 
-            //OOAdvantech.Linq.Storage linqStorage = new Linq.Storage(OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(this));
-            //var storageComponent = (from component in linqStorage.GetObjectCollection<RDBMSMetaDataRepository.Component>() select component).ToList().Where(x => x.Identity.ToString() == mAssembly.Identity.ToString()).FirstOrDefault();
+            OOAdvantech.Linq.Storage linqStorage = new Linq.Storage(OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(this));
+            var storageComponent = (from component in linqStorage.GetObjectCollection<RDBMSMetaDataRepository.Component>() select component).ToList().Where(x => x.Identity.ToString() == mAssembly.Identity.ToString()).FirstOrDefault();
 
-            //if (storageComponent == null)
-            //    return true;
+            if (storageComponent == null)
+                return true;
 
-            //Version storageComponentMappingVersion = null;
-            //if (!Version.TryParse(storageComponent.MappingVersion, out storageComponentMappingVersion))
-            //    storageComponentMappingVersion = new Version();
+            Version storageComponentMappingVersion = null;
+            if (!Version.TryParse(storageComponent.MappingVersion, out storageComponentMappingVersion))
+                storageComponentMappingVersion = new Version();
 
-            //Version componentMappingVersionVersion = null;
-            //if (!Version.TryParse(mAssembly.MappingVersion, out componentMappingVersionVersion))
-            //    componentMappingVersionVersion = new Version();
+            Version componentMappingVersionVersion = null;
+            if (!Version.TryParse(mAssembly.MappingVersion, out componentMappingVersionVersion))
+                componentMappingVersionVersion = new Version();
 
-            //if (componentMappingVersionVersion > storageComponentMappingVersion)
-            //    return true;
+            if (componentMappingVersionVersion > storageComponentMappingVersion)
+                return true;
 
             return false;
         }

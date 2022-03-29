@@ -488,15 +488,19 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 _PersistentObjectID = value;
                 ClassObjectCollection[value] = this;
 
-                CreateMarshalByRefUri();
+                
+                    CreateMarshalByRefUri();
 
             }
         }
         string MarshalByRefUri;
         private void CreateMarshalByRefUri()
         {
+            if ((MemoryInstance is MetaDataRepository.MetaObject))
+                return;
+
 #if !DeviceDotNet
-            if (StorageInstanceSet != null && MarshalByRefUri == null)
+                if (StorageInstanceSet != null && MarshalByRefUri == null)
             {
                 string persistentUri = null;
                 if (ObjectID != null && MemoryInstance is MarshalByRefObject)
