@@ -38,6 +38,11 @@ namespace OOAdvantech
         {
 
         }
+        public MultilingualMember(IMultilingual multilingual) : this(multilingual.Values, MultilingualRelationsType.IgnoreDefaultLanguageValues)
+        {
+            _DefaultLanguage = multilingual.DefaultLanguage;
+        }
+
         public MultilingualMember(IDictionary values, MultilingualRelationsType multilingualRelationsType)
         {
             MultilingualRelationsType = multilingualRelationsType;
@@ -129,14 +134,19 @@ namespace OOAdvantech
                             if (cultureInfo != null && MultilingualValue.TryGetValue(cultureInfo, out value))
                                 return value;
                         }
+                     
                     }
-
+                    if (useDefaultCultureValue&&DefaultLanguage != null)
+                    {
+                        if (cultureInfo != null && MultilingualValue.TryGetValue(DefaultLanguage, out value))
+                            return value;
+                    }
                     return default(T);
                 }
             }
             set
             {
-                if(value==null)
+                if (value == null)
                 {
 
                 }
