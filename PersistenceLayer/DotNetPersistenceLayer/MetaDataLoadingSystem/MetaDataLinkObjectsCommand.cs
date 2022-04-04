@@ -220,7 +220,47 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                     else
                         newXmlElement.SetAttribute("Sort", index.ToString());
                 }
-                System.Diagnostics.Debug.Assert(!associationEnd.Multiplicity.IsMany && objRefCollection.Elements().Count() == 0, "Multiplicity mismatch");
+                bool multiplicityCheckPassed = false;
+                if (associationEnd.Multiplicity.IsMany)
+                {
+                    multiplicityCheckPassed = true;
+                    //if (associationEnd.Multiplicity.HighLimit > 0 && objRefCollection.Elements().Count() >= associationEnd.Multiplicity.HighLimit)
+                    //    multiplicityCheckPassed = false;
+                    //PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistedCommands.Values
+
+
+                }
+                else
+                {
+                    if(ownerObjectRef.PersistentObjectID.ToString() == "101")
+                    {
+                        if(associationEnd.Name == "Column")
+                        {
+                            //2749
+                        }
+                    }
+
+                    multiplicityCheckPassed = objRefCollection.Elements().Count() == 0;
+                    if (associationEnd.IsRoleA && !multiplicityCheckPassed)
+                    {
+                        var unlinkCommnds = PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistedCommands.Values.OfType<MetaDataUnLinkObjectsCommand>().Where(x => x.RoleB == ownerObjectRef && x.LinkInitiatorAssociationEnd.Association == associationEnd.Association).ToList();
+                        System.Collections.Generic.List<string> relatedIds = unlinkCommnds.Select(x => x.RoleA.PersistentObjectID.ToString()).ToList();
+                        multiplicityCheckPassed = objRefCollection.Elements().Select(x => x.Value).All(x => relatedIds.Contains(x));
+
+                        //var unlinkCommnd = PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistedCommands.Values.OfType<MetaDataUnLinkObjectsCommand>().Where(x => x.RoleB == ownerObjectRef && x.LinkInitiatorAssociationEnd.Association == associationEnd.Association).ToList();
+                        //if (unlinkCommnd.Count == objRefCollection.Elements().Count())
+                        //    multiplicityCheckPassed = true;
+                    }
+                    if (!associationEnd.IsRoleA && !multiplicityCheckPassed)
+                    {
+                        var unlinkCommnds = PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistedCommands.Values.OfType<MetaDataUnLinkObjectsCommand>().Where(x => x.RoleA == ownerObjectRef && x.LinkInitiatorAssociationEnd.Association == associationEnd.Association).ToList();
+                        System.Collections.Generic.List<string> relatedIds = unlinkCommnds.Select(x => x.RoleB.PersistentObjectID.ToString()).ToList();
+                        multiplicityCheckPassed = objRefCollection.Elements().Select(x => x.Value).All(x => relatedIds.Contains(x));
+                    }
+
+
+                }
+                System.Diagnostics.Debug.Assert(multiplicityCheckPassed, "Multiplicity mismatch");
 
                 objRefCollection.Add(newXmlElement);//(System.Xml.XmlNode)
                 newXmlElement.Value = _roleObjectIDAsStr;

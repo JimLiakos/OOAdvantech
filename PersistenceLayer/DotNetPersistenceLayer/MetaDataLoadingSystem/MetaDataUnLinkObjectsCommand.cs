@@ -108,8 +108,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                                 if (storageCulture != null && Culture == storageCulture)
                                     RoleBCollection = Element;
                             }
-                            else
-                                break;
+                          
                         }
 
                         //ObjectStorage.StorageMetaData.Culture.
