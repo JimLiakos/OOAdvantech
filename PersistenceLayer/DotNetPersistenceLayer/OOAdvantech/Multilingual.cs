@@ -8,7 +8,7 @@ using OOAdvantech.Json;
 namespace OOAdvantech
 {
     /// <MetaDataID>{a6a905f8-8da3-4983-9cb4-37de81be5503}</MetaDataID>
-    public class Multilingual: IMultilingual
+    public class Multilingual : IMultilingual
     {
 
         /// <MetaDataID>{307c6aa8-57fd-435f-8ea1-2e65a20ee987}</MetaDataID>
@@ -21,8 +21,7 @@ namespace OOAdvantech
         /// <MetaDataID>{2dd74378-f0ef-4561-b44e-d4c3e626ace9}</MetaDataID>
         public Multilingual(IMultilingual multilingual)
         {
-            if (multilingual.DefaultLanguage != null)
-                Def = multilingual.DefaultLanguage.Name;
+            Def = multilingual.Def;
             Values = new Dictionary<string, object>();
             foreach (System.Collections.DictionaryEntry entry in multilingual.Values)
                 Values.Add((entry.Key as System.Globalization.CultureInfo).Name, entry.Value);
@@ -48,7 +47,7 @@ namespace OOAdvantech
             {
                 var cultureInfo = OOAdvantech.CultureContext.CurrentNeutralCultureInfo;
                 bool useDefaultCultureValue = OOAdvantech.CultureContext.UseDefaultCultureValue;
-                object value =null;
+                object value = null;
                 if (Values.TryGetValue(cultureInfo.Name, out value))
                     return true;
                 else
@@ -56,17 +55,7 @@ namespace OOAdvantech
             }
         }
 
-        public System.Globalization.CultureInfo DefaultLanguage
-        {
-            get
-            {
-                if (Def != null)
-                    return System.Globalization.CultureInfo.GetCultureInfo(Def);
-                else
-                    return null;
 
-            }
-        }
 
         IDictionary IMultilingual.Values => this.Values;
 

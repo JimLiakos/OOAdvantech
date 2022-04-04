@@ -458,7 +458,7 @@ namespace OOAdvantech.UserInterface.Runtime
 
             if (UserInterfaceObjectConnection != null && UserInterfaceObjectConnection.Culture != null)
             {
-                using (OOAdvantech.CultureContext cultureContext = new CultureContext(UserInterfaceObjectConnection.Culture, UserInterfaceObjectConnection.UseDefaultCultureWhenValueMissing))
+                using (OOAdvantech.CultureContext cultureContext = new CultureContext(UserInterfaceObjectConnection.Culture, false))
                 {
                     if (WPF)
                         UserInterfaceObjectConnection.SetValue(DisplayedValue.Value, value, MetaDataRepository.Classifier.GetClassifier(_RealTransparentProxy.GetType()), memberInfo.Name);

@@ -434,7 +434,9 @@ namespace System.Windows.Controls
                 {
                     try
                     {
-                        Text = Translator.TranslateString(Text, OOAdvantech.CultureContext.CurrentNeutralCultureInfo.Name);
+                        string text = Text;
+                        Text = Translator.TranslateString(text, OOAdvantech.CultureContext.CurrentNeutralCultureInfo.Name);
+                      
                         UnTranslated = false;
                         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UnTranslated)));
                     }

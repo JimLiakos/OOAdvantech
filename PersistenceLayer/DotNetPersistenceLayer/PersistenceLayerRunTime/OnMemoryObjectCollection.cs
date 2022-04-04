@@ -949,7 +949,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         {
                             if (!ContainObjects.Contains(collectionChangement.Object))
                             {
-                                if (collectionChangement.Index == -1)
+                                System.Diagnostics.Debug.Assert(collectionChangement.Index <= ContainObjects.Count, "index is out of bound");
+                                if (collectionChangement.Index == -1|| collectionChangement.Index> ContainObjects.Count)
                                 {
                                     ContainObjects.Add(collectionChangement.Object);
                                     //System.Diagnostics.Debug.WriteLine("commit Add");
@@ -3013,6 +3014,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return CultureInfo.CurrentCulture;
             }
         }
+
+        public string Def => DefaultLanguage?.Name;
 
         #endregion
 

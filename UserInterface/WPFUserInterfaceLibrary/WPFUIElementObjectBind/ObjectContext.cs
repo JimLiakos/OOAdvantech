@@ -365,7 +365,14 @@ namespace WPFUIElementObjectBind
             Dispatcher.BeginInvoke((Action)(() =>
             {
 
-                FormObjectConnection.RefreshUserInterface();
+                try
+                {
+                    FormObjectConnection.RefreshUserInterface();
+                }
+                catch (Exception error)
+                {
+
+                }
 
             }));
 

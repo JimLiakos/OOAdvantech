@@ -2029,8 +2029,12 @@ namespace OOAdvantech.UserInterface.Runtime
                                 if (path == "(ViewControlObject)")
                                     Instance = value;
                                 else
-                                    UserInterfaceSession.SetValue(obj, value, type, path);
-
+                                {
+                                    if(Culture!= CultureContext.CurrentCultureInfo||UseDefaultCultureWhenValueMissing!= CultureContext.UseDefaultCultureValue)
+                                        UserInterfaceSession.SetValue(obj, value, type, path, true);
+                                    else
+                                        UserInterfaceSession.SetValue(obj, value, type, path, false);
+                                }
                             }
                             stateTransition.Consistent = true;
                         }
@@ -2051,7 +2055,13 @@ namespace OOAdvantech.UserInterface.Runtime
                                 if (path == "(ViewControlObject)")
                                     Instance = value;
                                 else
-                                    UserInterfaceSession.SetValue(obj, value, type, path);
+                                {
+                                    if (Culture != CultureContext.CurrentCultureInfo || UseDefaultCultureWhenValueMissing != CultureContext.UseDefaultCultureValue)
+                                        UserInterfaceSession.SetValue(obj, value, type, path,true);
+                                    else
+                                        UserInterfaceSession.SetValue(obj, value, type, path, false);
+
+                                }
                             }
 
                             stateTransition.Consistent = true;

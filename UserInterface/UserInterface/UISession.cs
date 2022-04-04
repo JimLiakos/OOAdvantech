@@ -428,7 +428,7 @@ namespace OOAdvantech.UserInterface.Runtime
         }
 
         /// <MetaDataID>{fce0ab6e-fe2f-476a-b2b6-217e3bffb2f8}</MetaDataID>
-        internal bool SetValue(object obj, object value, Type type, string path)
+        internal bool SetValue(object obj, object value, Type type, string path,bool ignoreOldValue=false)
         {
             bool pathValueChanged = false;
             if (string.IsNullOrEmpty(path))
@@ -462,7 +462,7 @@ namespace OOAdvantech.UserInterface.Runtime
 
                         if (parentDisplayedValue != null && parentDisplayedValue.Members.ContainsKey(path) &&
                             !memberType.IsValueType &&
-                            object.Equals(oldValue, value))
+                            object.Equals(oldValue, value)&&!ignoreOldValue)
                         {
                             //Don't set for the same values
                             //TODO σε μερικές περιπτώσεις μπορεί να χρειάζεται object.ReferenceEquals
@@ -527,7 +527,7 @@ namespace OOAdvantech.UserInterface.Runtime
                                 if (oldDisplayValue.Value != null)
                                     newValue = CopyValue(oldDisplayValue.Value);// (Activator.CreateInstance(typeof(BoxedValue<>).MakeGenericType(oldDisplayValue.Value.GetType()), oldDisplayValue.Value) as IValueType).CopyValue();
 
-                                pathValueChanged = SetValue(newValue, value, memberType, path);
+                                pathValueChanged = SetValue(newValue, value, memberType, path, ignoreOldValue);
                                 if (pathValueChanged)
                                 {
 
@@ -540,13 +540,13 @@ namespace OOAdvantech.UserInterface.Runtime
                             }
 
                             else
-                                pathValueChanged = SetValue(parentDisplayedValue.Members[member][0].Value, value, memberType, path);
+                                pathValueChanged = SetValue(parentDisplayedValue.Members[member][0].Value, value, memberType, path, ignoreOldValue);
 
                         }
                         else
                         {
                             System.Reflection.MemberInfo memberInfo = GetMember(type, member);
-                            pathValueChanged = SetValue(GetMemberValue(obj, memberInfo), value, GetMemberType(memberInfo), path);
+                            pathValueChanged = SetValue(GetMemberValue(obj, memberInfo), value, GetMemberType(memberInfo), path, ignoreOldValue);
                         }
                     }
                 }

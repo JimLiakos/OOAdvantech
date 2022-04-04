@@ -220,6 +220,8 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                     else
                         newXmlElement.SetAttribute("Sort", index.ToString());
                 }
+                System.Diagnostics.Debug.Assert(!associationEnd.Multiplicity.IsMany && objRefCollection.Elements().Count() == 0, "Multiplicity mismatch");
+
                 objRefCollection.Add(newXmlElement);//(System.Xml.XmlNode)
                 newXmlElement.Value = _roleObjectIDAsStr;
                 newXmlElement.SetAttribute("ClassInstaditationName", relatedObjectRef.MemoryInstance.GetType().FullName);

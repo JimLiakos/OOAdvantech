@@ -12,7 +12,7 @@ namespace OOAdvantech
     {
         IDictionary Values { get; }
 
-        System.Globalization.CultureInfo DefaultLanguage
+        string Def
         {
             get;
         }
@@ -40,7 +40,8 @@ namespace OOAdvantech
         }
         public MultilingualMember(IMultilingual multilingual) : this(multilingual.Values, MultilingualRelationsType.IgnoreDefaultLanguageValues)
         {
-            _DefaultLanguage = multilingual.DefaultLanguage;
+            if (!string.IsNullOrWhiteSpace(multilingual.Def))
+                _DefaultLanguage = CultureInfo.GetCultureInfo(multilingual.Def);
         }
 
         public MultilingualMember(IDictionary values, MultilingualRelationsType multilingualRelationsType)
@@ -134,9 +135,9 @@ namespace OOAdvantech
                             if (cultureInfo != null && MultilingualValue.TryGetValue(cultureInfo, out value))
                                 return value;
                         }
-                     
+
                     }
-                    if (useDefaultCultureValue&&DefaultLanguage != null)
+                    if (useDefaultCultureValue && DefaultLanguage != null)
                     {
                         if (cultureInfo != null && MultilingualValue.TryGetValue(DefaultLanguage, out value))
                             return value;
@@ -306,6 +307,8 @@ namespace OOAdvantech
                     return _DefaultLanguage;
             }
         }
+
+        public string Def => DefaultLanguage?.Name;
 
         public static object GetValue(AccessorBuilder.GetHandler fieldGet, object memberOwner)
         {

@@ -26,12 +26,14 @@ namespace OOAdvantech.Collections.Generic
         {
             get
             {
-                if (theObjects is IMultilingual)
-                    return (theObjects as IMultilingual).DefaultLanguage;
+                if (theObjects is IMultilingual && !string.IsNullOrWhiteSpace((theObjects as IMultilingual).Def))
+                    return CultureInfo.GetCultureInfo((theObjects as IMultilingual).Def);
                 else
                     return null;
             }
         }
+
+        public string Def => DefaultLanguage?.Name;
 
         protected internal override ObjectCollection theObjects
         {

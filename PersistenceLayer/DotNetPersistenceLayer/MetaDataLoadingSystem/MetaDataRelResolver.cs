@@ -317,6 +317,10 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
                         if (Multilingual)
                         {
+                            if (roleName == "Page")
+                            {
+
+                            }
                             XElement roleElement = element.Element(roleName);
                             if (roleElement != null)
                             {
@@ -413,7 +417,36 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 }
             }
 
-            foreach (var refElement in roleElement.Elements("oid"))
+            var refElements = roleElement.Elements("oid").ToList();
+            if (!AssociationEnd.Multiplicity.IsMany && refElements.Count > 1)
+            {
+                int i = 0;
+                foreach (var refElement in refElements)
+                {
+                    if (i == 0)
+                    {
+                        ObjectID RefObjectID = new ObjectID((ulong)System.Convert.ChangeType(refElement.Value, (Owner.PersistentObjectID as PersistenceLayer.ObjectID).ObjectIDPartsValues[0].GetType()));
+                        string classInstaditationName = refElement.GetAttribute("ClassInstaditationName");
+                        string assemblyFullName = refElement.GetAttribute("AssemblyFullName");
+                        System.Type StorageInstanceType = ModulePublisher.ClassRepository.GetType(classInstaditationName, assemblyFullName);
+                        MetaDataStorageInstanceRef storageInstanceRef = OwnerStorageSession.GetStorageInstanceRef(StorageInstanceType, RefObjectID);
+                        if(storageInstanceRef==null)
+                            refElement.Remove();
+                        else
+                            i++;
+                    }
+                    else
+                    {
+                        refElement.Remove();
+                        i++;
+                    }
+                    
+
+                }
+                refElements = roleElement.Elements("oid").ToList();
+            }
+
+            foreach (var refElement in refElements.ToList())
             {
                 if (refElement.Name != "oid")
                 {
@@ -422,20 +455,36 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 ObjectID RefObjectID = new ObjectID((ulong)System.Convert.ChangeType(refElement.Value, (Owner.PersistentObjectID as PersistenceLayer.ObjectID).ObjectIDPartsValues[0].GetType()));
                 string classInstaditationName = refElement.GetAttribute("ClassInstaditationName");
                 string assemblyFullName = refElement.GetAttribute("AssemblyFullName");
-
                 System.Type StorageInstanceType = ModulePublisher.ClassRepository.GetType(classInstaditationName, assemblyFullName);
+                MetaDataStorageInstanceRef storageInstanceRef = OwnerStorageSession.GetStorageInstanceRef(StorageInstanceType, RefObjectID);
+
                 int sort = -1;
                 int.TryParse(refElement.GetAttribute("Sort"), out sort);
                 //PersistenceLayerRunTime.PersClassObjects ClassObjects=((PersistenceLayerRunTime.StorageSession)OwnerStorageSession).OperativeObjectCollections[ModulePublisher.ClassRepository.GetType(ClassInstaditationName,"Version")];
                 SortedObject sortedObject;
-                MetaDataStorageInstanceRef storageInstanceRef = OwnerStorageSession.GetStorageInstanceRef(StorageInstanceType, RefObjectID);
+                
                 if (storageInstanceRef == null)
                 {
                     thereAreUnknownRelatedObjects = true;
+                    refElement.Remove();
                     continue;
                 }
                 else
                 {
+                    if (AssociationEnd.Multiplicity.IsMany && AssociationEnd.GetOtherEnd().Navigable && !AssociationEnd.GetOtherEnd().Multiplicity.IsMany)
+                    {
+                        var otherEndRelationResolver = storageInstanceRef.RelResolvers.Where(x => x.AssociationEnd == AssociationEnd.GetOtherEnd()).FirstOrDefault();
+                        if (otherEndRelationResolver != null)
+                        {
+                            var relateObj = otherEndRelationResolver.RelatedObject;
+                            if(Owner.MemoryInstance!=relateObj)
+                            {
+
+                            }
+                        }
+                    }
+
+
                     sortedObject.index = sort;
                     if (Multilingual)
                     {
