@@ -942,7 +942,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     var collectionChanges = GetCollectionChanges(transaction);
                     if (collectionChanges == null)
                         return;
-                    foreach (CollectionChange collectionChangement in collectionChanges)
+                    foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x=>x.Index))
                     {
                         //CollectionChangement collectionChangement = entry.Value as CollectionChangement;
                         if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added)

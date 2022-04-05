@@ -448,10 +448,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
             foreach (var refElement in refElements.ToList())
             {
-                if (refElement.Name != "oid")
-                {
-
-                }
+               
                 ObjectID RefObjectID = new ObjectID((ulong)System.Convert.ChangeType(refElement.Value, (Owner.PersistentObjectID as PersistenceLayer.ObjectID).ObjectIDPartsValues[0].GetType()));
                 string classInstaditationName = refElement.GetAttribute("ClassInstaditationName");
                 string assemblyFullName = refElement.GetAttribute("AssemblyFullName");
@@ -460,7 +457,6 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
                 int sort = -1;
                 int.TryParse(refElement.GetAttribute("Sort"), out sort);
-                //PersistenceLayerRunTime.PersClassObjects ClassObjects=((PersistenceLayerRunTime.StorageSession)OwnerStorageSession).OperativeObjectCollections[ModulePublisher.ClassRepository.GetType(ClassInstaditationName,"Version")];
                 SortedObject sortedObject;
                 
                 if (storageInstanceRef == null)
@@ -471,20 +467,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 }
                 else
                 {
-                    if (AssociationEnd.Multiplicity.IsMany && AssociationEnd.GetOtherEnd().Navigable && !AssociationEnd.GetOtherEnd().Multiplicity.IsMany)
-                    {
-                        var otherEndRelationResolver = storageInstanceRef.RelResolvers.Where(x => x.AssociationEnd == AssociationEnd.GetOtherEnd()).FirstOrDefault();
-                        if (otherEndRelationResolver != null)
-                        {
-                            var relateObj = otherEndRelationResolver.RelatedObject;
-                            if(Owner.MemoryInstance!=relateObj)
-                            {
-
-                            }
-                        }
-                    }
-
-
+        
                     sortedObject.index = sort;
                     if (Multilingual)
                     {

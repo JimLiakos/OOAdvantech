@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Xml.Linq;
 
 namespace OOAdvantech.MetaDataLoadingSystem.Commands
@@ -17,18 +18,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
         /// <MetaDataID>{3E8908A1-C3AA-4F5D-9C57-98D0124E657A}</MetaDataID>
         public override void Execute()
         {
-
-            if (ObjectStorage.StorageIdentity != RoleA.StorageIdentity || ObjectStorage.StorageIdentity != RoleB.StorageIdentity)
-            {
-
-            }
-
-            if (RoleA.RealStorageInstanceRef.PersistentObjectID != null && RoleB.RealStorageInstanceRef.PersistentObjectID != null && (RoleB.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022" || RoleA.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022"))
-            {
-
-            }
-
-            #region Preconditions Chechk
+            #region Preconditions Check
             if (RoleA == null || RoleB == null)
                 throw (new System.Exception("You must set the objects that will be linked before the execution of command."));//Message
             #endregion
@@ -39,11 +29,6 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 MetaDataStorageSession ObjectStorageSession = (MetaDataStorageSession)RoleA.ObjectStorage;
                 ObjectStorageSession.Dirty = true;
 
-                XDocument XmlDocument = ObjectStorageSession.XMLDocument;
-                string StorageName = XmlDocument.Root.Name.LocalName;
-
-                string XQuery = null;
-
                 if (RoleA.PersistentObjectID != null)
                 {
                     RoleAStorageInstance = ObjectStorageSession.GetXMLElement(RoleA.MemoryInstance.GetType(), (ObjectID)RoleA.PersistentObjectID);
@@ -52,18 +37,14 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 }
             }
             XElement RoleBStorageInstance = null;
-            if (RoleB.StorageIdentity == this.ObjectStorage.StorageIdentity)
+            if (RoleB.StorageIdentity == ObjectStorage.StorageIdentity)
             {
                 MetaDataStorageSession ObjectStorageSession = (MetaDataStorageSession)RoleB.ObjectStorage;
-                XDocument XmlDocument = ObjectStorageSession.XMLDocument;
-                string StorageName = XmlDocument.Root.Name.LocalName;
-
-
 
                 if (RoleB.PersistentObjectID != null)
                 {
                     RoleBStorageInstance = ObjectStorageSession.GetXMLElement(RoleB.MemoryInstance.GetType(), (ObjectID)RoleB.PersistentObjectID);//(XElement)ObjectStorageSession.XMLDocument.SelectSingleNode(XQuery);
-                    ObjectStorageSession.NodeChangedUnderTransaction(RoleBStorageInstance, this.OwnerTransactiont);
+                    ObjectStorageSession.NodeChangedUnderTransaction(RoleBStorageInstance, OwnerTransactiont);
                     RoleBStorageInstance.SetAttribute("ReferentialIntegrityCount", RoleB.RealStorageInstanceRef.ReferentialIntegrityCount.ToString());
                 }
             }
@@ -74,83 +55,55 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 StrObjectID = RoleB.PersistentObjectID.ToString();
                 MetaDataStorageSession ObjectStorageSession = ObjectStorage as MetaDataStorageSession;
 
-                string RoleBName = ObjectStorageSession.GetMappedTagName(LinkInitiatorAssociationEnd.Association.RoleB.Identity.ToString().ToLower());
-                if (RoleBName == null)
+                #region gets role name with backward computability
+                string roleBName = ObjectStorageSession.GetMappedTagName(LinkInitiatorAssociationEnd.Association.RoleB.Identity.ToString().ToLower());
+                if (string.IsNullOrWhiteSpace(roleBName))
                 {
-                    RoleBName = LinkInitiatorAssociationEnd.Association.RoleB.Name;
-                    if (string.IsNullOrEmpty(RoleBName))
-                        RoleBName = LinkInitiatorAssociationEnd.Association.Name + "RoleBName";
-                    ObjectStorageSession.SetMappedTagName(LinkInitiatorAssociationEnd.Association.RoleB.Identity.ToString().ToLower(), RoleBName);
+                    roleBName = LinkInitiatorAssociationEnd.Association.RoleB.Name;
+                    if (string.IsNullOrEmpty(roleBName))
+                        roleBName = LinkInitiatorAssociationEnd.Association.Name + "RoleBName";
+                    ObjectStorageSession.SetMappedTagName(LinkInitiatorAssociationEnd.Association.RoleB.Identity.ToString().ToLower(), roleBName);
                 }
+                #endregion
 
-                foreach (XElement CurrNode in RoleAStorageInstance.Elements())
+                XElement element = RoleAStorageInstance.Elements().Where(x => x.Name == roleBName).FirstOrDefault();
+                if (element != null)
                 {
-                    XElement Element = (XElement)CurrNode;
-
-                    //string RoleBName=LinkInitiatorAssociationEnd.Association.RoleB.Name;
-                    //if(RoleBName==null||RoleBName.Trim().Length==0)
-                    //    RoleBName=LinkInitiatorAssociationEnd.Association.Name+"RoleBName";
-
-                    if (Element.Name == RoleBName)
+                    int index = -1;
+                    RoleBCollection = element;
+                    if (Multilingual && Culture != null)
                     {
-
-
-
-                        int index = -1;
-                        RoleBCollection = Element;
-                        if (Multilingual && Culture != null)
+                        RoleBCollection = RoleBCollection.Element(Culture.Name);
+                        if (RoleBCollection == null)
                         {
-
-                            RoleBCollection = RoleBCollection.Element(Culture.Name);
-                            if (RoleBCollection == null)
-                            {
-                                var storageCulture = CultureContext.GetNeutralCultureInfo(ObjectStorage.StorageMetaData.Culture);
-                                if (storageCulture != null && Culture == storageCulture)
-                                    RoleBCollection = Element;
-                            }
-                          
+                            System.Globalization.CultureInfo storageCulture = CultureContext.GetNeutralCultureInfo(ObjectStorage.StorageMetaData.Culture);
+                            if (storageCulture != null && Culture == storageCulture)
+                                RoleBCollection = element;
                         }
-
-                        //ObjectStorage.StorageMetaData.Culture.
-                        if (RoleBCollection != null)
+                    }
+                    if (RoleBCollection != null)
+                    {
+                        XElement refElement = RoleBCollection.Elements().FirstOrDefault(x => x.Value == StrObjectID);
+                        if (refElement != null)
                         {
-                            foreach (XElement inCurrNode in RoleBCollection.Elements())
+                            if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
                             {
-
-                                XElement inElement = (XElement)inCurrNode;
-
-
-                                if (inElement.Value == StrObjectID)
-                                {
-                                    if (LinkInitiatorAssociationEnd.Association.RoleB.Indexer)
-                                    {
-                                        if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                                            int.TryParse(inElement.GetAttribute("Sort"), out index);
-
-                                    }
-                                    inElement.Remove();
-
-
-                                    break;
-                                }
-
+                                if (!string.IsNullOrEmpty(refElement.GetAttribute("Sort")))
+                                    int.TryParse(refElement.GetAttribute("Sort"), out index);
                             }
+                            refElement.Remove();
                         }
-
-
-                        break;
                     }
                 }
             }
+
             XElement RoleACollection = null;
             if (RoleA.PersistentObjectID != null && RoleBStorageInstance != null)
             {
+                StrObjectID = RoleA.PersistentObjectID.ToString();
                 MetaDataStorageSession ObjectStorageSession = ObjectStorage as MetaDataStorageSession;
 
-                StrObjectID = RoleA.PersistentObjectID.ToString();
-
                 #region gets role name with backward computability
-
                 string roleAName = ObjectStorageSession.GetMappedTagName(LinkInitiatorAssociationEnd.Association.RoleA.Identity.ToString().ToLower());
                 if (string.IsNullOrWhiteSpace(roleAName))
                 {
@@ -161,41 +114,35 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                 }
                 #endregion
 
-
-                foreach (XElement element in RoleBStorageInstance.Elements())
+                XElement element = RoleBStorageInstance.Elements().Where(x => x.Name == roleAName).FirstOrDefault();
+                if (element != null)
                 {
-
-                    //if(Element.Name==mResolver.RoleAName)
-                    //string RoleAName=LinkInitiatorAssociationEnd.Association.RoleA.Name;
-                    //if(RoleAName==null||RoleAName.Trim().Length==0)
-                    //    RoleAName=LinkInitiatorAssociationEnd.Association.Name+"RoleAName";
-                    if (element.Name == roleAName)
+                    int index = -1;
+                    RoleACollection = element;
+                    if (Multilingual && Culture != null)
                     {
-                        int index = -1;
-                        RoleACollection = element;
-
-                        if (Multilingual && Culture != null)
-                            RoleACollection = RoleACollection.Element(Culture.Name);
-
-                        foreach (XElement inCurrNode in RoleACollection.Elements())
+                        RoleACollection = RoleACollection.Element(Culture.Name);
+                        if (RoleACollection == null)
                         {
-                            XElement inElement = (XElement)inCurrNode;
-                            //string Strvalue=inElement.GetAttribute("oid");
-                            if (inElement.Value == StrObjectID)
-                            //if(inElement.GetAttribute("oid")==StrObjectID)
-                            {
-                                if (LinkInitiatorAssociationEnd.Association.RoleA.Indexer)
-                                {
-                                    if (!string.IsNullOrEmpty(inElement.GetAttribute("Sort")))
-                                        int.TryParse(inElement.GetAttribute("Sort"), out index);
-                                }
-                                inElement.Remove();
-                                break;
-                            }
+                            System.Globalization.CultureInfo storageCulture = CultureContext.GetNeutralCultureInfo(ObjectStorage.StorageMetaData.Culture);
+                            if (storageCulture != null && Culture == storageCulture)
+                                RoleACollection = element;
                         }
-             
-                        break;
                     }
+                    if (RoleACollection != null)
+                    {
+                        XElement refElement = RoleACollection.Elements().FirstOrDefault(x => x.Value == StrObjectID);
+                        if (refElement != null)
+                        {
+                            if (LinkInitiatorAssociationEnd.Association.RoleA.Indexer)
+                            {
+                                if (!string.IsNullOrEmpty(refElement.GetAttribute("Sort")))
+                                    int.TryParse(refElement.GetAttribute("Sort"), out index);
+                            }
+                            refElement.Remove();
+                        }
+                    }
+
                 }
             }
 
