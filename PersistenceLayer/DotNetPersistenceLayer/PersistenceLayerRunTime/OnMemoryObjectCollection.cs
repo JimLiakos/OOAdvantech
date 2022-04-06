@@ -3020,6 +3020,33 @@ namespace OOAdvantech.PersistenceLayerRunTime
         #endregion
 
 
+
+        public System.Collections.Generic.List<IndexChange> GetTheIndexesOfAdditionalObject(string transactionUri)
+        {
+            
+            System.Collections.Generic.List<IndexChange> IndexesOfNewRelatedObject = new System.Collections.Generic.List<IndexChange>();
+            if (RelResolver != null)
+            {
+
+                if (RelResolver.IsCompleteLoaded)
+                {
+                    foreach(var collectionChange in GetCollectionChanges(Transactions.Transaction.Current).Where(x=>x.TypeOfChange==CollectionChange.ChangeType.Added))
+                    {
+                        int oldIndex = -1;
+                        if (RelResolver.LoadedRelatedObjects.Contains(collectionChange.Object))
+                            oldIndex = RelResolver.LoadedRelatedObjects.IndexOf(collectionChange.Object);
+                        if (oldIndex == -1)
+                        {
+                            var indexChange = new IndexChange(StorageInstanceRef.GetStorageInstanceRef(collectionChange.Object) as StorageInstanceRef, oldIndex, this.IndexOf(collectionChange.Object));
+                            IndexesOfNewRelatedObject.Add(indexChange);
+                        }
+                    }
+                }
+            }
+
+            return IndexesOfNewRelatedObject;
+        }
+
         /// <MetaDataID>{4de053d2-3860-484e-92f2-901c03340f3b}</MetaDataID>
         public System.Collections.Generic.List<GroupIndexChange> GetIndexChanges(string transactionUri)
         {
@@ -3312,8 +3339,32 @@ namespace OOAdvantech.PersistenceLayerRunTime
     /// <MetaDataID>{147fb4d2-d6d3-426a-a70a-c8c17f27046b}</MetaDataID>
     public interface IndexedCollection
     {
+        /// <summary>
+        /// This method gets the changes of items position  as group.
+        /// For instance the items at position 5 to 12 moving 2 positions back
+        /// or the items at position 20 to 40 moving 1 position forward
+        /// </summary>
+        /// <param name="transactionUri">
+        /// Defines the transaction id 
+        /// </param>
+        /// <returns>
+        /// Return the groups of items position change 
+        /// </returns>
         /// <MetaDataID>{3e5f0193-0746-4955-b29e-b0b1ec3ba5f3}</MetaDataID>
         System.Collections.Generic.List<GroupIndexChange> GetIndexChanges(string transactionUri);
+
+        /// <summary>
+        /// Get the positions of object which added in collection under transaction
+        /// </summary>
+        /// <param name="transactionUri">
+        /// Defines the Identity of the transaction
+        /// </param>
+        /// <returns>
+        /// Returns the positions as indexes changes with. the position stored at NewIndex field. The OldIndex has the value -1 
+        /// </returns>
+        System.Collections.Generic.List<IndexChange> GetTheIndexesOfAdditionalObject(string transactionUri);
+
+
         void IndexRebuilded(string localTransactionUri);
 
         /// <MetaDataID>{98115ff8-6d3f-48d3-b3f6-eef4dc9bcb2e}</MetaDataID>
@@ -3344,7 +3395,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{f6508b8c-5ef7-478a-99ca-1a2abb948bb8}</MetaDataID>
         public readonly int NewIndex;
         /// <MetaDataID>{14cca152-167f-4e85-8c88-d963be5e00a1}</MetaDataID>
-        readonly StorageInstanceRef CollectionItem;
+        public readonly StorageInstanceRef CollectionItem;
 
     }
 

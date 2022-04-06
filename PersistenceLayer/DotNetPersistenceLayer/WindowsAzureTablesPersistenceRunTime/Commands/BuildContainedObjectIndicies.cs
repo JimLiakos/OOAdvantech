@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Cosmos.Table;
+using OOAdvantech.PersistenceLayerRunTime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,40 +27,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
             List<OOAdvantech.PersistenceLayerRunTime.GroupIndexChange> groupIndexChanges = new List<OOAdvantech.PersistenceLayerRunTime.GroupIndexChange>();
 
-            //var connection = (Collection.RelResolver.Owner.ObjectStorage.StorageMetaData as RDBMSPersistenceRunTime.Storage).StorageDataBase.Connection;
-            //if (connection.State != RDBMSMetaDataPersistenceRunTime.ConnectionState.Open)
-            //    connection.Open();
 
             RDBMSMetaDataRepository.AssociationEnd associationEnd = (Collection.RelResolver.Owner.ObjectStorage.StorageMetaData as Storage).GetEquivalentMetaObject(Collection.RelResolver.AssociationEnd) as RDBMSMetaDataRepository.AssociationEnd;
             associationEnd = (associationEnd.Association as RDBMSMetaDataRepository.Association).GetAssociationEndWithReferenceColumns();
             groupIndexChanges = Collection.GetIndexChanges(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
-            //indexChanges.Sort(new Comparison<PersistenceLayerRunTime.IndexChange>(PersistenceLayerRunTime.IndexChange.Compare));
-
-            //OOAdvantech.PersistenceLayerRunTime.GroupIndexChange groupIndexChange = null;
-            //int change = 0;
-            //foreach (PersistenceLayerRunTime.IndexChange indexChange in indexChanges)
-            //{
-            //    if (indexChange.OldIndex == -1)
-            //        continue;
-            //    if (groupIndexChange == null || change != indexChange.NewIndex - indexChange.OldIndex)
-            //    {
-            //        if (groupIndexChange != null)
-            //            groupIndexChanges.Add(groupIndexChange);
-            //        groupIndexChange = new GroupIndexChange();
-            //        groupIndexChange.StartIndex = indexChange.OldIndex;
-            //        groupIndexChange.EndIndex = indexChange.OldIndex;
-            //        change = indexChange.NewIndex - indexChange.OldIndex;
-            //        groupIndexChange.Change = change;
-            //    }
-            //    if (groupIndexChange != null)
-            //        groupIndexChange.EndIndex = indexChange.OldIndex;
-
-            //}
-            //if (groupIndexChange != null)
-            //    groupIndexChanges.Add(groupIndexChange);
-
-            ////(collectionOwner.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell)
-            //groupIndexChanges.Sort(new Comparison<GroupIndexChange>(BuildContainedObjectIndicies.Descend));
+            System.Collections.Generic.List<IndexChange> indexesOfNewRelatedObject = Collection.GetTheIndexesOfAdditionalObject(Transactions.Transaction.Current.LocalTransactionUri);
 
             foreach (OOAdvantech.PersistenceLayerRunTime.GroupIndexChange currentGroupIndexChange in groupIndexChanges)
             {
@@ -101,9 +73,6 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
                     }
 
-
-
-
                     string filterScript = (collectionOwner.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
                     int i = 0;
                     foreach (RDBMSMetaDataRepository.IdentityColumn objectIDColumn in storageCellLinkColumns)
@@ -138,13 +107,21 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     if (azureTable.Exists())
                     {
                         var query = new TableQuery<ElasticTableEntity>();
-
                         var entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
                         foreach (ElasticTableEntity entity in entities)
                         {
+                            int? sortIndex = null;
+                            IndexChange indexChangeForNewObjectLink = indexesOfNewRelatedObject.Where(x => x.CollectionItem?.PersistentObjectID.ToString() == entity.RowKey).FirstOrDefault();
 
-                            var sortIndex = entity.Properties[indexerColumn.DataBaseColumnName].Int32Value;
-                            sortIndex += change;
+                            if (indexChangeForNewObjectLink != null && indexChangeForNewObjectLink.OldIndex == -1)
+                            {
+                                sortIndex=indexChangeForNewObjectLink.NewIndex;
+                            }
+                            else
+                            {
+                                sortIndex = entity.Properties[indexerColumn.DataBaseColumnName].Int32Value;
+                                sortIndex += change;
+                            }
 
                             StorageInstanceRef recordOwnerObject = null;
                             if (storageCellsLink.ObjectLinksTable == null)
@@ -157,16 +134,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                                 entity[indexerColumn.DataBaseColumnName] = sortIndex;
                                 (collectionOwner.ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Replace(entity);
                             }
+
                         }
                     }
-
-                    //indexerColumn
-
-
-
-
-
-
                 }
             }
             Collection.IndexRebuilded(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
