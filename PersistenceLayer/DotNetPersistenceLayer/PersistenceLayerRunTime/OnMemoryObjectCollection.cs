@@ -336,7 +336,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             if (RelResolver != null)
             {
-                if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2022")
+                if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2242")
                 {
                 }
             }
@@ -424,9 +424,9 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
                 if (RelResolver != null)
                 {
-                    if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2022")
+                    if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2242")
                     {
-
+                        var sss = this.GetIndexChanges(OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri);
                     }
                 }
             }
@@ -3026,7 +3026,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             if (RelResolver != null)
             {
-                if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2022")
+                if (RelResolver.Owner.PersistentObjectID != null && RelResolver.Owner.PersistentObjectID.ToString() == "2242")
                 {
                 }
             }
