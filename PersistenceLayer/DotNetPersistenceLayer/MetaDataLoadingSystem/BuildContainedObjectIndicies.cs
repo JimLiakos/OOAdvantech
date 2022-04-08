@@ -81,6 +81,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
                 if (objRefCollection.Elements().Select(x => GetIndex(x)).Distinct().Count() != objRefCollection.Elements().Count())
                 {
+                    System.Diagnostics.Debug.Assert(false, "There two items in same position");
                     int i = 0;
 
                 }
