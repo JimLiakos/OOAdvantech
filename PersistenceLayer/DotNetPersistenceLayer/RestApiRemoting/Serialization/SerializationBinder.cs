@@ -87,7 +87,16 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 if (assembly == null)
                 {
-                    throw new JsonSerializationException("Could not load assembly '{0}'.".FormatWith(CultureInfo.InvariantCulture, assemblyName));
+                    try
+                    {
+                        return Type.GetType(typeName);
+                    }
+                    catch (Exception error)
+                    {
+                        throw new JsonSerializationException("Could not load assembly '{0}'.".FormatWith(CultureInfo.InvariantCulture, assemblyName));
+
+                    }
+                    
                 }
 
                 Type type = assembly.GetType(typeName);
