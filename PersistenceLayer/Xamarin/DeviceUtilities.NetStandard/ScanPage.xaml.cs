@@ -92,6 +92,7 @@ namespace DeviceUtilities.NetStandard
         }
     }
 
+    /// <MetaDataID>{470a2c41-4704-45fd-8517-1061f01c66be}</MetaDataID>
     public class ScanCode
     {
 
@@ -109,7 +110,7 @@ namespace DeviceUtilities.NetStandard
                         OnScan = false;
                     }
 
-       
+
                     // Navigate away
                     try
                     {
@@ -125,16 +126,16 @@ namespace DeviceUtilities.NetStandard
             ScanPage.Disappearing += (object sender, EventArgs e) =>
             {
                 OnScan = false;
-                if(ConnectToServicePointTask!=null)
+                if (ConnectToServicePointTask != null)
                     ConnectToServicePointTask.SetResult(null);
             };
         }
         ScanPage ScanPage = new ScanPage();
         TaskCompletionSource<ZXing.Result> ConnectToServicePointTask;
         bool OnScan = false;
-        public Task<ZXing.Result>  Scan(string headerText,string footerText,bool? useFrontCameraIfAvailable=null)
+        public Task<ZXing.Result> Scan(string headerText, string footerText, bool? useFrontCameraIfAvailable = null)
         {
-            if(!(Xamarin.Forms.Application.Current.MainPage is NavigationPage))
+            if (!(Xamarin.Forms.Application.Current.MainPage is NavigationPage))
             {
                 throw new Exception("MainPage must be NavigationPage");
             }

@@ -874,6 +874,10 @@ namespace OOAdvantech.MetaDataRepository
                     count = Features.Count;
                     ContainedItemsSynchronizer FeatureSynchronizer = MetaObjectsStack.CurrentMetaObjectCreator.BuildItemsSychronizer(OriginClassifier.Features, _Features, this);
                     FeatureSynchronizer.FindModifications();
+                    if(FeatureSynchronizer.DeletedObjectsCommands.Count>0)
+                    {
+
+                    }
                     FeatureSynchronizer.ExecuteAddCommand();
                     FeatureSynchronizer.ExecuteDeleteCommand();
                     foreach (Feature CurrFeature in _Features)
@@ -1612,6 +1616,7 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{29973E45-AD39-4942-9752-FE2A5FA87C53}</MetaDataID>
         [Association("ClassifierMember", MetaDataRepository.Roles.RoleA, "{38679851-A962-46C4-A940-20522E07D301}")]
         [PersistentMember("_Features")]
+        [AssociationEndBehavior(PersistencyFlag.CascadeDelete)]
         [RoleAMultiplicityRange(0)]
         public virtual OOAdvantech.Collections.Generic.Set<Feature> Features
         {

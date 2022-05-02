@@ -133,6 +133,7 @@
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemoteActivetor.cs" Link="Remoting\RemoteActivetor.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemoteEventHandler.cs" Link="Remoting\RemoteEventHandler.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemoteEventPublishAttribute.cs" Link="Remoting\RemoteEventPublishAttribute.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RemotingException.cs" Link="Remoting\RemotingException.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\RenewalManger.cs" Link="Remoting\RenewalManger.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\ServerSessionPart.cs" Link="Remoting\ServerSessionPart.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\Tracker.cs" Link="Remoting\Tracker.cs" />
