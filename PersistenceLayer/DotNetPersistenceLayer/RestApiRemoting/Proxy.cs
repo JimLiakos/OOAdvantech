@@ -72,7 +72,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
             Type = System.Type.GetType(ProxyType.AssemblyQualifiedName);
-            
+
 
             if (Type == null)
                 Type = type;
@@ -181,7 +181,7 @@ namespace OOAdvantech.Remoting.RestApi
                 return _ObjectUri;
             }
         }
-    
+
         public string TypeFullName
         {
             get
@@ -212,7 +212,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         public EventConsumingResolver EventConsumingResolver { get; set; }
 
-        string IProxy.Uri =>Uri;
+        string IProxy.Uri => Uri;
 
         //string IProxy.ChannelUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         //EventConsumingResolver IProxy.EventConsumingResolver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -346,7 +346,7 @@ namespace OOAdvantech.Remoting.RestApi
                 if (propInfo != null && ObjectRef.MembersValues != null && ObjectRef.MembersValues.TryGetValue(propertyName, out value))
                 {
                     outArgs = new object[0];
-                    
+
                     if (value != null && !propInfo.PropertyType.IsInstanceOfType(value))
                     {
 #if !DeviceDotNet
@@ -604,7 +604,7 @@ namespace OOAdvantech.Remoting.RestApi
                 else
                     clientSessionPart.X_Access_Token = null;
                 var message = UnMarshal((msg as IMethodCallMessage), returnMessage);
-                if(responseData.UpdateCaching)
+                if (responseData.UpdateCaching)
                 {
                     try
                     {
@@ -668,7 +668,17 @@ namespace OOAdvantech.Remoting.RestApi
                         if (propInfo.PropertyType.BaseType == typeof(System.Enum))
                             value = System.Enum.ToObject(propInfo.PropertyType, (int)System.Convert.ChangeType(value, typeof(int)));
                         else
-                            value = System.Convert.ChangeType(value, propInfo.PropertyType);
+                        {
+                            if (propInfo.PropertyType.IsGenericType && !propInfo.PropertyType.IsGenericTypeDefinition && propInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                            {
+
+                                value = System.Convert.ChangeType(value, propInfo.PropertyType.GenericTypeArguments[0]);
+
+                                value = Activator.CreateInstance(propInfo.PropertyType, value);
+                            }
+                            else
+                                value = System.Convert.ChangeType(value, propInfo.PropertyType);
+                        }
 #else
                         value = System.Convert.ChangeType(value, propInfo.PropertyType, System.Globalization.CultureInfo.CurrentCulture.NumberFormat);
 #endif
@@ -827,13 +837,13 @@ namespace OOAdvantech.Remoting.RestApi
                 System.Exception exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
 
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingCollectedFromGC)
-                    exception= new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
+                    exception = new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
 
 
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingDeletedFromStorage)
-                    exception= new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
+                    exception = new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
 
-                
+
 
                 return new System.Runtime.Remoting.Messaging.ReturnMessage(exception, methodCallMessage);
             }
