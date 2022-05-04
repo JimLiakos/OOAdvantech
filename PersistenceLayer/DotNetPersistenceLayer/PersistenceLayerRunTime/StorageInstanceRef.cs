@@ -489,8 +489,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 _PersistentObjectID = value;
                 ClassObjectCollection[value] = this;
 
-                
-                    CreateMarshalByRefUri();
+
+                CreateMarshalByRefUri();
 
             }
         }
@@ -501,7 +501,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 return;
 
 #if !DeviceDotNet
-                if (StorageInstanceSet != null && MarshalByRefUri == null)
+            if (StorageInstanceSet != null && MarshalByRefUri == null)
             {
                 string persistentUri = null;
                 if (ObjectID != null && MemoryInstance is MarshalByRefObject)
@@ -555,22 +555,26 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             get
             {
-                
+               
                 return _MemoryInstance;//.Target;
 
             }
         }
 
 
-        public void WaitUntilObjectIsActive()
-        {
-            bool isActive = IsObjectActive;
-            while(!isActive)
-            {
-                Thread.Sleep(100);
-                isActive = IsObjectActive;
-            }
-        }
+        //public override void WaitUntilObjectIsActive()
+        //{
+        //    if (this.ObjectID != null && this.ObjectID.ToString() == "37c98759-de79-4361-83a1-94d56fdb788d")
+        //    {
+
+        //    }
+        //    bool isActive = IsObjectActive;
+        //    while (!isActive)
+        //    {
+        //        Thread.Sleep(100);
+        //        isActive = IsObjectActive;
+        //    }
+        //}
 
         #endregion
 
@@ -958,6 +962,14 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{e49ebda2-836c-4a3b-9af5-5d9bd553fc59}</MetaDataID>
         public override void ObjectActived()
         {
+
+            if (this.ObjectID.ToString() == "37c98759-de79-4361-83a1-94d56fdb788d")
+            {
+               
+            }
+
+
+
             if (!IsObjectActive)
             {
 
@@ -3291,7 +3303,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             object memoryInstance = MemoryInstance;
             System.Type type = MemoryInstance.GetType();
-        
+
             lock (relResolver)
             {
                 if (relResolver.FieldInfo.DeclaringType == type || type.GetMetaData().IsSubclassOf(relResolver.FieldInfo.DeclaringType)) //if (Class.IsA(relResolver.AssociationEnd.Namespace as MetaDataRepository.Classifier))

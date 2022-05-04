@@ -281,7 +281,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             {
                 if (DataNode.AssignedMetaObject is AssociationEnd && (DataNode.AssignedMetaObject as AssociationEnd).Indexer)
                     return (DataNode.AssignedMetaObject as AssociationEnd).Name + "_Indexer";
-                else 
+                else
                     return null;
 
             }
@@ -622,8 +622,14 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     if (_object != DBNull.Value)
                     {
                         loadObjectLinks = (bool)_Data.Rows[objectActivationData.RowIndex][objectActivationData.LoadObjectLinksIndex];
-                        if (loadObjectLinks && objectActivationData.DataLoader.DataNode.ValueTypePath.Count == 0)
-                            PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.ObjectActived();
+                        if (objectActivationData.DataLoader.DataNode.ValueTypePath.Count == 0)
+                        {
+                            if (loadObjectLinks)
+                                PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.ObjectActived();
+                            //else
+                            //    PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.WaitUntilObjectIsActive();
+                        }
+
                     }
 
                     //  object _object =objectActivationData.DataLoader.GetObject(objectActivationData.ObjectSate, out loadObjectLinks);

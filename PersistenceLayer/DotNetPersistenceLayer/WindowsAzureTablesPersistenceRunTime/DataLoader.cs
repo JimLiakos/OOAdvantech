@@ -665,10 +665,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                     else
                     {
+                       
                         StorageInstanceRef storageInstanceRef = (ObjectStorage as PersistenceLayerRunTime.ObjectStorage).OperativeObjectCollections[LastStorageCellType][objectID] as StorageInstanceRef;
                         if (storageInstanceRef != null)
                         {
                             _object = storageInstanceRef.MemoryInstance;
+
                             storageInstanceRef.TableEntity = EntitiesDictionary[objectID.GetPartValue(0).ToString().ToLower()];
                             if (DataNode.RefreshObjectState)
                             {
@@ -688,10 +690,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                     }
                                 }
                             }
+                            
                         }
                         else
                         {
-                            if(DataNode.FullName == "FoodServiceClientSession")
+                            if (objectID.ToString() == "37c98759-de79-4361-83a1-94d56fdb788d")
+                            {
+
+                            }
+                            if (DataNode.FullName == "FoodServiceClientSession")
                             {
 
                             }

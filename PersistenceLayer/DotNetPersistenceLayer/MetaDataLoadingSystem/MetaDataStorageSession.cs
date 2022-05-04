@@ -787,7 +787,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
             var storageInstanceRef = operativeObjectCollection[objectID];
             if (storageInstanceRef != null)
             {
-                storageInstanceRef.WaitUntilObjectIsActive();
+                
                 return storageInstanceRef.MemoryInstance;
             }
             else

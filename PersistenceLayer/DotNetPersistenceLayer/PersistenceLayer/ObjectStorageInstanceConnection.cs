@@ -30,6 +30,8 @@ using MarshalByRefObject = OOAdvantech.Remoting.MarshalByRefObject;
        
         /// <MetaDataID>{e49ebda2-836c-4a3b-9af5-5d9bd553fc59}</MetaDataID>
         public abstract void ObjectActived();
+        //public abstract void WaitUntilObjectIsActive();
+
 
         public abstract void ObjectDeleting();
 

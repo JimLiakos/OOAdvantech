@@ -439,7 +439,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             var storageInstanceRef = operativeObjectCollection[objectID];
             if (storageInstanceRef != null)
             {
-                storageInstanceRef.WaitUntilObjectIsActive();
+                //storageInstanceRef.WaitUntilObjectIsActive();
                 return storageInstanceRef.MemoryInstance;
             }
             else
