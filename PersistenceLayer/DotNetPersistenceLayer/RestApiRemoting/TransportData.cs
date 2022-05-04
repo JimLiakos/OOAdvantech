@@ -191,6 +191,9 @@ namespace OOAdvantech.Remoting.RestApi
         [DataMember]
         public string ServerSessionPartID { get; set; }
 
+        [JsonIgnore]
+        public ServerSessionPart ServerSession { get; internal set; }
+
         /// <MetaDataID>{c15885a3-c546-438f-8176-a05679e89ae7}</MetaDataID>
         [DataMember]
         public string ChannelUri { get; set; }
@@ -246,6 +249,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// </summary>
         [DataMember]
         public string PhysicalConnectionID { get; set; }
+        
 
 
         /// <MetaDataID>{8dcafe1d-afcf-43f3-90c3-5a4e39a90391}</MetaDataID>

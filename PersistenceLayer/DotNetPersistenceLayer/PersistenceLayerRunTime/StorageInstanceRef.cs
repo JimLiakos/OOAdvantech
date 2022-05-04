@@ -19,6 +19,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
     using System;
     using OOAdvantech.DotNetMetaDataRepository;
     using System.Runtime.InteropServices.ComTypes;
+    using System.Threading;
 #endif
     internal delegate void StorageInstanceRefChangeState(object sender);
 
@@ -554,8 +555,20 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             get
             {
+                
                 return _MemoryInstance;//.Target;
 
+            }
+        }
+
+
+        public void WaitUntilObjectIsActive()
+        {
+            bool isActive = IsObjectActive;
+            while(!isActive)
+            {
+                Thread.Sleep(100);
+                isActive = IsObjectActive;
             }
         }
 

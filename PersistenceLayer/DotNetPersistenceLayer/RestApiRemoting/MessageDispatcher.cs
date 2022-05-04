@@ -424,6 +424,8 @@ namespace OOAdvantech.Remoting.RestApi
 
                     }
                     System.Runtime.Remoting.Messaging.CallContext.SetData("AutUser", authUser);
+                    request.ServerSession = serverSession;
+                    System.Runtime.Remoting.Messaging.CallContext.SetData("RestApiRequest", request);
 
                     responseMessage.Web = methodCallMessage.Web;
                     responseMessage.ReAuthenticate = methodCallMessage.ReAuthenticate;

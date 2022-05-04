@@ -18,6 +18,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
         /// <summary>With this method execute the command. </summary>
         public override void Execute()
         {
+            if (!UpdatedStorageInstanceRef.HasChangeState())
+                return;
             Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.UpdateStorageInstance(UpdatedStorageInstanceRef);
         }
 

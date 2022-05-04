@@ -158,7 +158,10 @@ namespace OOAdvantech.RDBMSMetaDataPersistenceRunTime
             if (storageInstanceRef == null)
                 return null;
             else
+            {
+                storageInstanceRef.WaitUntilObjectIsActive();
                 return storageInstanceRef.MemoryInstance;
+            }
 
         }
 

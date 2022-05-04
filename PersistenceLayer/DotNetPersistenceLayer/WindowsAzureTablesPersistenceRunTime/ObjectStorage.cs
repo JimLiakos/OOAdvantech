@@ -438,7 +438,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             var operativeObjectCollection = OperativeObjectCollections[storageCell.Type.GetExtensionMetaObject<System.Type>()];
             var storageInstanceRef = operativeObjectCollection[objectID];
             if (storageInstanceRef != null)
+            {
+                storageInstanceRef.WaitUntilObjectIsActive();
                 return storageInstanceRef.MemoryInstance;
+            }
             else
             {
                 object @object = GetObjectFromStorageCell(storageCell, objectID);
