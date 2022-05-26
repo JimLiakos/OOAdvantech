@@ -19,7 +19,7 @@ using OOAdvantech.UserInterface.Runtime;
 namespace WPFUIElementObjectBind
 {
     /// <MetaDataID>{ebb9d023-9803-4389-a8f4-d36b13998bb9}</MetaDataID>
-    public class ViewControlObject : UserControl, OOAdvantech.UserInterface.Runtime.IPresentationContextViewControl, System.ComponentModel.INotifyPropertyChanged
+    public class ViewControlObject : UserControl, IPresentationContextViewControl, System.ComponentModel.INotifyPropertyChanged
     {
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;

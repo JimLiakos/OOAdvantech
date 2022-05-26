@@ -41,7 +41,7 @@ namespace OOAdvantech.UserInterface.Runtime
         class ObjectChangeStateEvent
         {
             public readonly string Member;
-            public  CultureInfo Culture { get; }
+            public CultureInfo Culture { get; }
 
             public bool UseDefaultCultureValue { get; }
 
@@ -214,14 +214,14 @@ namespace OOAdvantech.UserInterface.Runtime
         /// <MetaDataID>{06A8C29D-1978-4B3C-8695-A54BB6DCAB9C}</MetaDataID>
         internal DisplayedValue(object value, UISession userInterfaceSession)
         {
-        
+
             try
             {
                 if (value is System.DBNull)
                 {
                     int tt = 0;
                 }
-             
+
                 UIProxy UIProxy = UIProxy.GetUIProxy(value);
                 if (UIProxy != null)
                 {
@@ -396,8 +396,8 @@ namespace OOAdvantech.UserInterface.Runtime
             {
                 int tt = 0;
             }
-            
-            if (FindIEnumerable(valueType)!=null && !Members.ContainsKey("Items"))
+
+            if (FindIEnumerable(valueType) != null && !Members.ContainsKey("Items"))
             {
                 Members.Add("Items", new Member("Items", this, valueType, FindIEnumerable(valueType)));
                 int loadedCount = Members["Items"].ValuesCollection.Count;
@@ -828,57 +828,68 @@ namespace OOAdvantech.UserInterface.Runtime
         {
             if (_Value != null)
             {
-                try
-                {
-                    UserInterfaceSession.StartControlValuesUpdate();
-                    if (UserInterfaceSession.Transaction != null)
-                    {
+                System.Globalization.CultureInfo culture = this._UIProxy?.UserInterfaceObjectConnection?.Culture;
+                if (culture == null)
+                    culture = UserInterfaceSession?.StartingFormObjectConnection?.Culture;
+                if (culture == null)
+                    culture = OOAdvantech.CultureContext.CurrentCultureInfo;
 
-                        using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition(UserInterfaceSession.Transaction))
+                using (OOAdvantech.CultureContext cultureContext = new OOAdvantech.CultureContext(culture, false))
+                {
+                    try
+                    {
+                        UserInterfaceSession.StartControlValuesUpdate();
+                        if (UserInterfaceSession.Transaction != null)
                         {
-                            try
+
+                            using (OOAdvantech.Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition(UserInterfaceSession.Transaction))
                             {
-                                foreach (ObjectChangeStateEvent ObjectChangeStateEvent in TransctionedObjectChangeStateEvents[transaction])
+                                //UserInterfaceSession.StartingFormObjectConnection
+
+                                try
                                 {
-                                    if (string.IsNullOrEmpty(ObjectChangeStateEvent.Member))
+                                    foreach (ObjectChangeStateEvent ObjectChangeStateEvent in TransctionedObjectChangeStateEvents[transaction])
                                     {
-                                        foreach (System.Collections.Generic.KeyValuePair<string, Member> entry in Members)
-                                            UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), entry.Key), _Value.GetType(), entry.Key, entry.Key);
+                                        if (string.IsNullOrEmpty(ObjectChangeStateEvent.Member))
+                                        {
+                                            foreach (System.Collections.Generic.KeyValuePair<string, Member> entry in Members)
+                                                UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), entry.Key), _Value.GetType(), entry.Key, entry.Key);
 
+                                        }
+                                        else
+                                            UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), ObjectChangeStateEvent.Member), _Value.GetType(), ObjectChangeStateEvent.Member, ObjectChangeStateEvent.Member);
                                     }
-                                    else
-                                        UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), ObjectChangeStateEvent.Member), _Value.GetType(), ObjectChangeStateEvent.Member, ObjectChangeStateEvent.Member);
                                 }
-                            }
-                            catch (System.Exception error)
-                            {
-                                throw;
-                            }
+                                catch (System.Exception error)
+                                {
+                                    throw;
+                                }
 
-                            stateTransition.Consistent = true;
+                                stateTransition.Consistent = true;
+                            }
                         }
-                    }
-                    else
-                    {
-                        foreach (ObjectChangeStateEvent ObjectChangeStateEvent in TransctionedObjectChangeStateEvents[transaction])
+                        else
                         {
-                            if (string.IsNullOrEmpty(ObjectChangeStateEvent.Member))
+                            foreach (ObjectChangeStateEvent ObjectChangeStateEvent in TransctionedObjectChangeStateEvents[transaction])
                             {
-                                foreach (System.Collections.Generic.KeyValuePair<string, Member> entry in Members)
-                                    UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), entry.Key), _Value.GetType(), entry.Key, entry.Key);
+                                if (string.IsNullOrEmpty(ObjectChangeStateEvent.Member))
+                                {
+                                    foreach (System.Collections.Generic.KeyValuePair<string, Member> entry in Members)
+                                        UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), entry.Key), _Value.GetType(), entry.Key, entry.Key);
+
+                                }
+                                else
+                                    UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), ObjectChangeStateEvent.Member), _Value.GetType(), ObjectChangeStateEvent.Member, ObjectChangeStateEvent.Member);
 
                             }
-                            else
-                                UserInterfaceSession.UpdateValue(_Value, UISession.GetValue(_Value, _Value.GetType(), ObjectChangeStateEvent.Member), _Value.GetType(), ObjectChangeStateEvent.Member, ObjectChangeStateEvent.Member);
 
                         }
+                    }
+                    finally
+                    {
+                        UserInterfaceSession.EndControlValuesUpdate();
 
                     }
-                }
-                finally
-                {
-                    UserInterfaceSession.EndControlValuesUpdate();
-
                 }
             }
 
