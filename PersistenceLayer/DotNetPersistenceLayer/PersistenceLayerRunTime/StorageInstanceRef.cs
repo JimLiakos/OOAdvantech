@@ -555,7 +555,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             get
             {
-               
+
                 return _MemoryInstance;//.Target;
 
             }
@@ -965,7 +965,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
             if (this.ObjectID.ToString() == "37c98759-de79-4361-83a1-94d56fdb788d")
             {
-               
+
             }
 
 
@@ -2534,8 +2534,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
         private void MakeRelationChangesCommands(RelResolver relResolver)
         {
             #region Produce commands for association end with multiplicity zero or one
-            object newValue = GetMemoryInstanceMemberValue(relResolver);
 
+
+            object newValue = null;
+            System.Runtime.Remoting.Messaging.CallContext.SetData("MakeRelationChangesCommands", true);
+            newValue = GetMemoryInstanceMemberValue(relResolver);
+            System.Runtime.Remoting.Messaging.CallContext.FreeNamedDataSlot("MakeRelationChangesCommands");
 
 
             object storageInstanceRelatedObject = null;
@@ -2543,7 +2547,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
             bool relResolverCompleteLoaded = relResolver.IsCompleteLoaded;
             using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
-                storageInstanceRelatedObject = relResolver.RelatedObject;
+                if(relResolver.IsCompleteLoaded)
+                    storageInstanceRelatedObject = relResolver.RelatedObject;
                 stateTransition.Consistent = true;
             }
 
@@ -2561,7 +2566,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
 
                 if (newValue == null)
+                {
+                    System.Runtime.Remoting.Messaging.CallContext.SetData("MakeRelationChangesCommands", true);
                     newValue = GetMemoryInstanceMemberValue(relResolver);
+                    System.Runtime.Remoting.Messaging.CallContext.FreeNamedDataSlot("MakeRelationChangesCommands");
+                }
             }
 
             //TODO Εδώ υπάρχει λίγο μπέρδεμα γιατί αν κάποιος σετάρει null και υπάρχει τιμή στην storage αλλά λόγο του lazy fetcing

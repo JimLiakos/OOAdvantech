@@ -251,35 +251,45 @@ namespace OOAdvantech
                 {
                     if (!_Initialized && RelResolver != null)
                     {
-                        _Initialized = true;
 
-                        try
+                        bool? relationChangesCommand = System.Runtime.Remoting.Messaging.CallContext.GetData("MakeRelationChangesCommands") as bool?;
+                        if (!relationChangesCommand.HasValue || relationChangesCommand.Value == false)
                         {
-                            PersistenceLayer.StorageInstanceRef storageInstanceRef = PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Owner);
-                            if (storageInstanceRef != null)
+
+                            _Initialized = true;
+
+                            try
                             {
-                                _Initialized = true;
-                                using (Transactions.SystemStateTransition stateTransition = new Transactions.SystemStateTransition(Transactions.TransactionOption.Suppress))
+                                PersistenceLayer.StorageInstanceRef storageInstanceRef = PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Owner);
+                                if (storageInstanceRef != null)
                                 {
-                                    storageInstanceRef.LazyFetching(RelResolver, Owner.GetType());
-                                    if (_Snapshots != null && _Snapshots.Count > 0)
+                                    _Initialized = true;
+                                    using (Transactions.SystemStateTransition stateTransition = new Transactions.SystemStateTransition(Transactions.TransactionOption.Suppress))
                                     {
-                                        foreach (Transactions.Transaction transaction in new List<Transactions.Transaction>(_Snapshots.Keys))
-                                            _Snapshots[transaction] = _Value;
+                                        storageInstanceRef.LazyFetching(RelResolver, Owner.GetType());
+                                        if (_Snapshots != null && _Snapshots.Count > 0)
+                                        {
+                                            foreach (Transactions.Transaction transaction in new List<Transactions.Transaction>(_Snapshots.Keys))
+                                                _Snapshots[transaction] = _Value;
+                                        }
+                                        stateTransition.Consistent = true;
                                     }
-                                    stateTransition.Consistent = true;
                                 }
+                                else
+                                    return default(T);
+
                             }
-                            else
-                                return default(T);
+                            catch (Exception error)
+                            {
+                                _Initialized = false;
+                                throw;
+                            }
+                            _Initialized = true;
+                        }
+                        else
+                        {
 
                         }
-                        catch (Exception error)
-                        {
-                            _Initialized = false;
-                            throw;
-                        }
-                        _Initialized = true;
                     }
                     return _Value;
                 }
