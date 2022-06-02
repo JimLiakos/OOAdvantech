@@ -12,7 +12,7 @@ namespace OOAdvantech.MetaDataRepository
     {
 
         /// <exclude>Excluded</exclude>
-        bool _Multilingual;
+        volatile bool _Multilingual;
 
         /// <MetaDataID>{8e152cc8-e633-41a0-ac90-2d92f7963634}</MetaDataID>
         /// <summary>Declare that the value of attribute of the objects will be Multilingual. </summary>
@@ -294,30 +294,22 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+
+                lock (this)
                 {
                     if (!_HasBehavioralSettings)
                         throw new System.NotSupportedException("It hasn't BehavioralSettings");
                     return _AllowTransient;
-                }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
+
                 }
 
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
-                {
 
-                    _AllowTransient = value;
-                }
-                finally
+                lock (this)
                 {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                    _AllowTransient = value;
                 }
             }
         }
@@ -348,29 +340,18 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+                lock (this)
                 {
                     return _Indexer;
+                }
 
-                }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
 
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
+                lock (this)
                 {
                     _Indexer = value;
-
-                }
-                finally
-                {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
                 }
 
             }
@@ -462,19 +443,10 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
-                {
                     if (IsRoleA)
                         return Roles.RoleA;
                     else
                         return Roles.RoleB;
-
-                }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
 
             }
             set
@@ -484,9 +456,9 @@ namespace OOAdvantech.MetaDataRepository
                 {
 
                     if (value == Roles.RoleA)
-                        _IsRoleA = true;
+                        IsRoleA = true;
                     else
-                        _IsRoleA = false;
+                        IsRoleA = false;
 
                 }
                 finally
@@ -690,29 +662,18 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+                lock (this)
                 {
-                    return _IsRoleA;
-                }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
+                    return _IsRoleA; 
                 }
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
+                lock (this)
                 {
-
                     _IsRoleA = value;
-                }
-                finally
-                {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
-                }
 
+                }
             }
         }
         /// <MetaDataID>{59BA3D0F-E57F-42BC-A7EF-F3EA625FC7BE}</MetaDataID>
@@ -725,31 +686,18 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+                lock (this)
                 {
-                    //if(!_HasBehavioralSettings)
-                    //    throw new System.NotSupportedException("It doesn't has BehavioralSettings");
-                    return _LazyFetching;
+                    return _LazyFetching; 
                 }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
+               
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
+                lock (this)
                 {
-
-                    _LazyFetching = true;
+                    _LazyFetching = true; 
                 }
-                finally
-                {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
-                }
-
             }
         }
 
@@ -763,27 +711,19 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+
+                lock (this)
                 {
-                    return _TryOnObjectActivationFetching;
+                    return _TryOnObjectActivationFetching; 
                 }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
+               
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
-                {
 
-                    _TryOnObjectActivationFetching = true;
-                }
-                finally
+                lock (this)
                 {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                    _TryOnObjectActivationFetching = true; 
                 }
 
             }
@@ -799,30 +739,20 @@ namespace OOAdvantech.MetaDataRepository
         {
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+
+                lock (this)
                 {
                     if (!_HasBehavioralSettings)
                         throw new System.NotSupportedException("It hasn't BehavioralSettings");
                     return _CascadeDelete;
-                }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
+                }               
 
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
+                lock (this)
                 {
-
-                    _CascadeDelete = value;
-                }
-                finally
-                {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+                    _CascadeDelete = value; 
                 }
             }
         }
@@ -837,32 +767,20 @@ namespace OOAdvantech.MetaDataRepository
 
             get
             {
-                ReaderWriterLock.AcquireReaderLock(10000);
-                try
+
+                lock (this)
                 {
                     if (!_HasBehavioralSettings)
                         throw new System.NotSupportedException("It hasn't BehavioralSettings");
                     return _ReferentialIntegrity;
-                }
-                finally
-                {
-                    ReaderWriterLock.ReleaseReaderLock();
-                }
-
+                }               
             }
             set
             {
-                OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-                try
+                lock (this)
                 {
-
-                    _ReferentialIntegrity = value;
+                    _ReferentialIntegrity = value; 
                 }
-                finally
-                {
-                    ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
-                }
-
             }
         }
 

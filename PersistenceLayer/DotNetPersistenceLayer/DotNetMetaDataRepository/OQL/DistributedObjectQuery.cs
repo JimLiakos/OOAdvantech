@@ -3,6 +3,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using PartialRelationIdentity = System.String;
     delegate void LoadDataLocallyHandeler();
 
@@ -94,17 +95,32 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     dataLoaders.Add(dataLoader);
                 dataLoaders.Sort(new DataLoader.DataLoaderSorting());
 
+                Dictionary<DataLoader, Task> retrieveFromStorageTasks = new Dictionary<DataLoader, Task>();
+
                 foreach (DataLoader dataloader in dataLoaders)
                 {
                     if (!dataloader.DataLoaded)
                     {
                         dataloader.RetrieveFromStorage();
+
                         foreach (var criterion in (dataloader as StorageDataLoader).GlobalResolveCriterions)
                             criterion.Applied = false;
                         foreach (var criterion in (dataloader as StorageDataLoader).LocalResolvedCriterions.Keys)
                             criterion.Applied = true;
                     }
                 }
+
+                //foreach (DataLoader dataloader in dataLoaders)
+                //{
+                //    if (!dataloader.DataLoaded)
+                //    {
+                //        Task task = new Task(() => dataloader.RetrieveFromStorage());
+                //        retrieveFromStorageTasks[dataloader] = task;
+                //        task.Start();
+                //    }
+                //}
+                //Task.WaitAll(retrieveFromStorageTasks.Values.ToArray());
+
 
                 ObjectQueryDataSet = DataSource.DataObjectsInstantiator.CreateDataSet();
                 foreach (DataLoader dataloader in dataLoaders)
@@ -1029,7 +1045,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             if (referenceDataNode.Type == DataNode.DataNodeType.Group)
             {
                 GroupDataNode groupDataNode = referenceDataNode as GroupDataNode;
-                prefetchingMemberDataNodes.AddRange( groupDataNode.GroupedDataNode.CreatePrefetchingMemberDataNodes(ref queryStorageIdentities));
+                prefetchingMemberDataNodes.AddRange(groupDataNode.GroupedDataNode.CreatePrefetchingMemberDataNodes(ref queryStorageIdentities));
             }
 
             if (referenceDataNode.DataSource == null || !referenceDataNode.DataSource.ThereAreObjectsToActivate)
@@ -1173,7 +1189,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     }
                 }
             }
-         
+
             if (referenceDataNode.Classifier != null && (referenceDataNode.Classifier as MetaDataRepository.Classifier).ClassHierarchyLinkAssociation != null && (referenceDataNode.ObjectQuery.SelectListItems.Contains(referenceDataNode) || referenceDataNode.MembersFetchingObjectActivation))
             {
 
@@ -1528,7 +1544,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             #region Add new sub data node for  association end
             DataNode MyDataNode = new DataNode(theDataNode.ObjectQuery);
             MyDataNode.ParentDataNode = theDataNode;
-            
+
             if (associationEnd.Association.LinkClass == null)
                 MyDataNode.Name = associationEnd.Name;
             else

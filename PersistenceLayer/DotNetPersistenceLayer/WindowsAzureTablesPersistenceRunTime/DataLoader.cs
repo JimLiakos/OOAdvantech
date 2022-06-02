@@ -4068,6 +4068,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
     }
 
+    class AzureTableEntitiesRetriever
+    {
 
+        string CloudTableName;
+        List<string> SelectionColumns;
+        string FilterScript;
+        List<ElasticTableEntity> Wntities;
+    }
 
 }
