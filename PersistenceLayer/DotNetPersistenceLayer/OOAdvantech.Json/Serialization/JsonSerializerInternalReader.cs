@@ -989,6 +989,8 @@ namespace OOAdvantech.Json.Serialization
 #endif
 
                         // this won't work when converting to a custom IConvertible
+                        if (value == null&&(contract.NonNullableUnderlyingType.IsValueType|| contract.NonNullableUnderlyingType.IsPrimitive))
+                            return null;
                         return Convert.ChangeType(value, contract.NonNullableUnderlyingType, culture);
                     }
 

@@ -10,6 +10,7 @@ namespace OOAdvantech.Transactions
     using LockCookie = OOAdvantech.Synchronization.LockCookie;
     using System;
     using System.Threading;
+    using System.Diagnostics;
 #else
 
         using ReaderWriterLock = System.Threading.ReaderWriterLock;
@@ -623,7 +624,7 @@ namespace OOAdvantech.Transactions
 
         public bool HasChangesOnElistedObjects(bool checkOnlyPersistentClassInstances)
         {
-            
+
             {
                 System.Collections.Generic.List<object> enlistObjects = null;
                 lock (this)
@@ -837,7 +838,7 @@ namespace OOAdvantech.Transactions
             LockType oldLockType;
             bool newMemberLocked = false;
 
-        Start:
+            Start:
 
             //Defines the lockObjectEntry for transaction context
             //There is only one lockObjectEntry for transaction and nested transactions of this transaction
@@ -1109,12 +1110,17 @@ namespace OOAdvantech.Transactions
             #endregion
 
             return transactionContextLockObjectEntry;
-        WaitForTransactionComplete:
+            WaitForTransactionComplete:
             foreach (LockedObjectEntry lockedObjectEntry in lockedObjectEntries)
             {
-                //TODO ο τελικός χρόνος που θα κάνει μπορεί να είνα πάνω από 30 δευτερόλεπτα
-                if (!lockedObjectEntry.TransactionContext.Transaction.WaitToComplete((int)LogicalThread.ObjectEnlistmentTimeOut.TotalMilliseconds))
-                    throw new OOAdvantech.Transactions.TransactionException("Time out expired. Object is locked from other transaction");
+                if (!lockedObjectEntry.TransactionContext.Transaction.WaitToComplete((int)5))
+                {
+                    //TODO ο τελικός χρόνος που θα κάνει μπορεί να είνα πάνω από 30 δευτερόλεπτα
+                    if (!lockedObjectEntry.TransactionContext.Transaction.WaitToComplete((int)LogicalThread.ObjectEnlistmentTimeOut.TotalMilliseconds))
+                    {
+                        throw new OOAdvantech.Transactions.TransactionException("Time out expired. Object is locked from other transaction");
+                    }
+                }
             }
             goto Start;
         }
@@ -1188,6 +1194,8 @@ namespace OOAdvantech.Transactions
         {
 
             ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId;
+            NativeThreadID = AppDomain.GetCurrentThreadId();
+
             LockedObject = lockedObject;
             LockType = LockType.SharedFieldsParticipation;
             if (transactionalMember == null)
@@ -1215,6 +1223,9 @@ namespace OOAdvantech.Transactions
         }
 
         int ThreadID;
+
+        public int NativeThreadID { get; }
+
         ///<summary>
         ///This filed defines the object which lock entry refered.
         ///</summary>
@@ -1537,7 +1548,7 @@ namespace OOAdvantech.Transactions
             }
         }
 
-        internal bool HasGhanged(TransactionContext transactionContext,bool checkOnlyPersistentClassInstances)
+        internal bool HasGhanged(TransactionContext transactionContext, bool checkOnlyPersistentClassInstances)
         {
             lock (SynchroObject)
             {

@@ -2158,81 +2158,140 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
+                
                 var query = new TableQuery<ElasticTableEntity>();
+                Dictionary<MetaDataRepository.StorageCell, AzureTableEntitiesRetriever> azureTableEntitiesRetrievers = new Dictionary<MetaDataRepository.StorageCell, AzureTableEntitiesRetriever>();
+
+
+                using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                {
+                    foreach (MetaDataRepository.StorageCell storageCell in DataLoaderMetadata.StorageCells)
+                    {
+                        if (storageCell is MetaDataRepository.StorageCellReference)
+                            continue;
+                        AzureTableEntitiesRetriever azureTableEntitiesRetriever = new AzureTableEntitiesRetriever();
+                        azureTableEntitiesRetrievers[storageCell] = azureTableEntitiesRetriever;
+                        azureTableEntitiesRetriever.ColumnsMap = GetColumnsMap(storageCell);
+
+                        Dictionary<string, string> columnsNamesMap = new Dictionary<PartTypeName, PartTypeName>();
+                        foreach (var columnsMapEntry in azureTableEntitiesRetriever.ColumnsMap)
+                            columnsNamesMap[columnsMapEntry.Key.Name] = columnsMapEntry.Value.DataBaseColumnName;
+
+
+                        azureTableEntitiesRetriever.SelectionColumns = new List<string>();
+                        foreach (DataLoader.DataColumn dataColumn in ClassifierDataColumns)
+                        {
+
+                            RDBMSMetaDataRepository.Column column = null;
+                            azureTableEntitiesRetriever.ColumnsMap.TryGetValue(dataColumn, out column);
+
+                            if (column != null && column.DataBaseColumnName != dataColumn.Name)
+                            {
+
+                            }
+
+                            if (!TemporaryDataTable.Columns.Contains(dataColumn.Name))
+                            {
+                                if (dataColumn.Name != "StorageCellID")
+                                    azureTableEntitiesRetriever.SelectionColumns.Add(column.DataBaseColumnName);
+
+                                if (string.IsNullOrWhiteSpace(dataColumn.Alias))
+                                    TemporaryDataTable.Columns.Add(dataColumn.Name, dataColumn.Type);
+                                else
+                                    TemporaryDataTable.Columns.Add(dataColumn.Alias, dataColumn.Type);
+                            }
+                        }
+
+                        azureTableEntitiesRetriever.PartitionKey = storageCell.SerialNumber.ToString();
+                        azureTableEntitiesRetriever.CloudTableName = (storageCell as RDBMSMetaDataRepository.StorageCell).MainTable.DataBaseTableName;
+
+                        azureTableEntitiesRetriever.FilterScript = BuildFilterString(columnsNamesMap);
+
+                        if (string.IsNullOrWhiteSpace(azureTableEntitiesRetriever.FilterScript))
+                            azureTableEntitiesRetriever.FilterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", azureTableEntitiesRetriever.PartitionKey);
+                        else
+                            azureTableEntitiesRetriever.FilterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", azureTableEntitiesRetriever.PartitionKey) + " and " + azureTableEntitiesRetriever.FilterScript;
+
+                    } 
+                    stateTransition.Consistent = true;
+                }
 
 
                 CloudTableClient tableClient = account.CreateCloudTableClient();
+
+
                 foreach (MetaDataRepository.StorageCell storageCell in DataLoaderMetadata.StorageCells)
                 {
                     if (storageCell is MetaDataRepository.StorageCellReference)
                         continue;
 
 
-                    Dictionary<DataLoader.DataColumn, RDBMSMetaDataRepository.Column> columnsMap = GetColumnsMap(storageCell);
 
-                    Dictionary<string, string> columnsNamesMap = new Dictionary<PartTypeName, PartTypeName>();
-                    foreach (var columnsMapEntry in columnsMap)
-                        columnsNamesMap[columnsMapEntry.Key.Name] = columnsMapEntry.Value.DataBaseColumnName;
+                    //Dictionary<DataLoader.DataColumn, RDBMSMetaDataRepository.Column> columnsMap = GetColumnsMap(storageCell);
 
-
-                    IList<string> selectionColumns = new List<string>();
-                    foreach (DataLoader.DataColumn dataColumn in ClassifierDataColumns)
-                    {
-
-                        RDBMSMetaDataRepository.Column column = null;
-                        columnsMap.TryGetValue(dataColumn, out column);
-
-                        if (column != null && column.DataBaseColumnName != dataColumn.Name)
-                        {
-
-                        }
-
-                        if (!TemporaryDataTable.Columns.Contains(dataColumn.Name))
-                        {
-                            if (dataColumn.Name != "StorageCellID")
-                                selectionColumns.Add(column.DataBaseColumnName);
-
-                            if (string.IsNullOrWhiteSpace(dataColumn.Alias))
-                                TemporaryDataTable.Columns.Add(dataColumn.Name, dataColumn.Type);
-                            else
-                                TemporaryDataTable.Columns.Add(dataColumn.Alias, dataColumn.Type);
-
-                        }
-                    }
-
-                    string partitionKey = storageCell.SerialNumber.ToString();
-
-                    string cloudTableName = (storageCell as RDBMSMetaDataRepository.StorageCell).MainTable.DataBaseTableName;
+                    //Dictionary<string, string> columnsNamesMap = new Dictionary<PartTypeName, PartTypeName>();
+                    //foreach (var columnsMapEntry in columnsMap)
+                    //    columnsNamesMap[columnsMapEntry.Key.Name] = columnsMapEntry.Value.DataBaseColumnName;
 
 
+                    //IList<string> selectionColumns = new List<string>();
+                    //foreach (DataLoader.DataColumn dataColumn in ClassifierDataColumns)
+                    //{
+
+                    //    RDBMSMetaDataRepository.Column column = null;
+                    //    columnsMap.TryGetValue(dataColumn, out column);
+
+                    //    if (column != null && column.DataBaseColumnName != dataColumn.Name)
+                    //    {
+
+                    //    }
+
+                    //    if (!TemporaryDataTable.Columns.Contains(dataColumn.Name))
+                    //    {
+                    //        if (dataColumn.Name != "StorageCellID")
+                    //            selectionColumns.Add(column.DataBaseColumnName);
+
+                    //        if (string.IsNullOrWhiteSpace(dataColumn.Alias))
+                    //            TemporaryDataTable.Columns.Add(dataColumn.Name, dataColumn.Type);
+                    //        else
+                    //            TemporaryDataTable.Columns.Add(dataColumn.Alias, dataColumn.Type);
+
+                    //    }
+                    //}
+
+                    //string partitionKey = storageCell.SerialNumber.ToString();
+
+                    //string cloudTableName = (storageCell as RDBMSMetaDataRepository.StorageCell).MainTable.DataBaseTableName;
+
+                    AzureTableEntitiesRetriever azureTableEntitiesRetriever = azureTableEntitiesRetrievers[storageCell];
 
 
 
-                    CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                    CloudTable azureTable = tableClient.GetTableReference(azureTableEntitiesRetriever.CloudTableName);
                     if (azureTable.Exists())
                     {
-                        //string filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
-                        string filterScript = BuildFilterString(columnsNamesMap);
+                        ////string filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
+                        //filterScript = BuildFilterString(columnsNamesMap);
 
-                        if (string.IsNullOrWhiteSpace(filterScript))
-                            filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
-                        else
-                            filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey) + " and " + filterScript;
+                        //if (string.IsNullOrWhiteSpace(filterScript))
+                        //    filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
+                        //else
+                        //    filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey) + " and " + filterScript;
 
 
                         List<ElasticTableEntity> entities = null;
                         //if (string.IsNullOrWhiteSpace(filterScript))
                         //    entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
                         //else
-                        entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+                        entities = azureTable.ExecuteQuery(query.Select(azureTableEntitiesRetriever.SelectionColumns).Where(azureTableEntitiesRetriever.FilterScript)).ToList();
 
 
                         int storageIdentity = QueryStorageIdentities.IndexOf(storageCell.StorageIdentity);
 
                         foreach (ElasticTableEntity entity in entities)
                         {
-                            entity.AzureTableName = cloudTableName;
-                            entity.LoadRow(TemporaryDataTable, this, storageIdentity, columnsMap);
+                            entity.AzureTableName = azureTableEntitiesRetriever.CloudTableName;
+                            entity.LoadRow(TemporaryDataTable, this, storageIdentity, azureTableEntitiesRetriever.ColumnsMap);
                             EntitiesDictionary[entity.RowKey.ToLower()] = entity;
                         }
                     }
@@ -4071,10 +4130,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     class AzureTableEntitiesRetriever
     {
 
-        string CloudTableName;
-        List<string> SelectionColumns;
-        string FilterScript;
-        List<ElasticTableEntity> Wntities;
+
+        public string CloudTableName;
+        public Dictionary<DataLoader.DataColumn, RDBMSMetaDataRepository.Column> ColumnsMap;
+        public string PartitionKey;
+        public IList<string> SelectionColumns;
+        public string FilterScript;
+
+        //List<ElasticTableEntity> Wntities;
     }
 
 }
