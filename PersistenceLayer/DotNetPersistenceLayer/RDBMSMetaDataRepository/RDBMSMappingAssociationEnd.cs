@@ -181,8 +181,8 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{FAF20458-7A79-4927-A5FC-52C8DD89BFA4}</MetaDataID>
         [OOAdvantech.MetaDataRepository.Association("AssociationEndColumn", typeof(OOAdvantech.RDBMSMetaDataRepository.Column), Roles.RoleA, "{732E13CB-2C8D-4E7B-8219-89B25403A7CE}")]
         [AssociationEndBehavior(PersistencyFlag.AllowTransient)]
-        [PersistentMember("_MappedColumns")]
-        [TransactionalMember(LockOptions.Shared, "_MappedColumns")]
+        [PersistentMember(nameof(_MappedColumns))]
+        [TransactionalMember(LockOptions.Shared, nameof(_MappedColumns))]
         [RoleAMultiplicityRange(1)]
         public Collections.Generic.Set<Column> MappedColumns
         {
