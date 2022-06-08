@@ -1015,7 +1015,11 @@ namespace OOAdvantech.Remoting
 
             System.Runtime.Remoting.ObjRef ObjRef = System.Runtime.Remoting.RemotingServices.GetObjRefForProxy(GetOrgObject(marshalByRefObject) as MarshalByRefObject);
             if (ObjRef == null)
+            {
+                if (System.Runtime.Remoting.RemotingServices.GetRealProxy(marshalByRefObject) as IProxy != null)
+                    return true;
                 return false;
+            }
             else
                 return true;
         }
