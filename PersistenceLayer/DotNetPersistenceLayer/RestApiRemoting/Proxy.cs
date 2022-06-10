@@ -111,6 +111,14 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     else
                         _ObjectUri = new ExtObjectUri(Uri, null, null, null, RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices).ClientProcessIdentity);
+
+                    if (ProxyType?.Name == "PreparationStation")
+                    {
+                        if (nPos == -1)
+                        {
+
+                        }
+                    }
                 }
             }
 
@@ -151,7 +159,9 @@ namespace OOAdvantech.Remoting.RestApi
             }
             else
             {
-
+                if (ProxyType?.Name == "PreparationStation")
+                {
+                }
                 nPos = Uri.IndexOf("#PID#");
                 if (nPos != -1)
                 {
@@ -161,6 +171,14 @@ namespace OOAdvantech.Remoting.RestApi
                 }
                 else
                     _ObjectUri = new ExtObjectUri(Uri, null, null, null, RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices).ClientProcessIdentity);
+
+                if (ProxyType?.Name == "PreparationStation")
+                {
+                    if (nPos == -1)
+                    {
+
+                    }
+                }
 
             }
             RenewalManager.AddProxy(this, RemotingServices.CurrentRemotingServices);

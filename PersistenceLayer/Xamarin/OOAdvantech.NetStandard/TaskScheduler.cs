@@ -11,7 +11,21 @@ namespace OOAdvantech
     {
         /// <MetaDataID>{64e5f331-062a-4eb4-b473-46c5b67ccdbc}</MetaDataID>
         Queue<Func<Task<bool>>> Tasks = new Queue<Func<Task<bool>>>();
-        bool Runs = true;
+        bool _Runs = true;
+
+        bool Runs
+        {
+            get
+            {
+                lock (this)
+                    return _Runs;
+            }
+            set
+            {
+                lock (this)
+                    _Runs=value;
+            }
+        }
 
         Task ActiveTask;
 
@@ -26,21 +40,24 @@ namespace OOAdvantech
                 SerializeTaskActive = true;
                 while (Runs)
                 {
-                    if (Tasks.Count > 0)
+                    lock (Tasks)
                     {
-                        try
+                        if (Tasks.Count > 0)
                         {
-                            Func<Task<bool>> function = Tasks.Dequeue();
-                            var task = Task<bool>.Run(function);
-                            task.Wait();
+                            try
+                            {
+                                Func<Task<bool>> function = Tasks.Dequeue();
+                                var task = Task<bool>.Run(function);
+                                task.Wait();
+                            }
+                            catch (Exception error)
+                            {
+                            }
                         }
-                        catch (Exception error)
+                        else
                         {
+                            System.Threading.Thread.Sleep(100);
                         }
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(100);
                     }
                 }
                 SerializeTaskActive = false;
