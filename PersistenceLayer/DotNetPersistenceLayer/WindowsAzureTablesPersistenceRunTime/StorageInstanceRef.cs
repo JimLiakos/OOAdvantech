@@ -372,8 +372,6 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <MetaDataID>{70eb72c9-95c9-47a8-a845-b40d9d117559}</MetaDataID>
         public PersistenceLayerRunTime.StorageInstanceRef.ObjectSate DbDataRecord;
 
-        /// <MetaDataID>{1e0a8b82-c4f5-4587-a018-a27afd5a6964}</MetaDataID>
-        protected OOAdvantech.MetaDataRepository.StorageCell _StorageInstanceSet;
 
         /// <MetaDataID>{755574c1-4fe1-4ac4-acbc-f608cf09cb39}</MetaDataID>
         public override OOAdvantech.MetaDataRepository.StorageCell StorageInstanceSet
@@ -387,10 +385,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         /// <MetaDataID>{90815f6c-db63-4214-9a37-10d40390adf6}</MetaDataID>
         public StorageInstanceRef(object memoryInstance, OOAdvantech.MetaDataRepository.StorageCell storageCell, ObjectStorage activeStorageSession, PersistenceLayer.ObjectID objectID)
-            : base(memoryInstance, activeStorageSession, objectID)
+            : base(memoryInstance, activeStorageSession, storageCell, objectID)
         {
             _StorageInstanceSet = storageCell;
-
 
         }
 

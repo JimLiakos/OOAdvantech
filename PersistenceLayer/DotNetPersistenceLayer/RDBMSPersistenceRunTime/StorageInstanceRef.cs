@@ -316,7 +316,7 @@ namespace OOAdvantech.RDBMSPersistenceRunTime
         }
         /// <MetaDataID>{90815f6c-db63-4214-9a37-10d40390adf6}</MetaDataID>
         public StorageInstanceRef(object memoryInstance, OOAdvantech.MetaDataRepository.StorageCell storageCell, ObjectStorage activeStorageSession, PersistenceLayer.ObjectID objectID)
-            : base(memoryInstance, activeStorageSession, objectID)
+            : base(memoryInstance, activeStorageSession, storageCell,objectID)
         {
             _StorageInstanceSet = storageCell;
         }

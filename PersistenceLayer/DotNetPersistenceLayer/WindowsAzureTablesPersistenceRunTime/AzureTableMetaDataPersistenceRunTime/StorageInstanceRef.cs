@@ -28,7 +28,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public readonly ClassBLOB SerializationMetada;
         /// <MetaDataID>{43A985E6-225F-4C25-A0B8-C93701547847}</MetaDataID>
         public StorageInstanceRef(object memoryInstance, OOAdvantech.PersistenceLayerRunTime.ObjectStorage activeStorageSession, PersistenceLayer.ObjectID objectID)
-            : base(memoryInstance, activeStorageSession, objectID)
+            : base(memoryInstance, activeStorageSession,null, objectID)
         {
             SerializationMetada = (ObjectStorage.StorageMetaData as Storage).GetClassBLOB(Class as DotNetMetaDataRepository.Class);
         }

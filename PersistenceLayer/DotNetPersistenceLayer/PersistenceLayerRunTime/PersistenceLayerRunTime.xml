@@ -1790,6 +1790,9 @@
             </summary>
              <MetaDataID>{58B0175C-298C-418A-901F-3730138118E3}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._StorageInstanceSet">
+            <MetaDataID>{1e0a8b82-c4f5-4587-a018-a27afd5a6964}</MetaDataID>
+        </member>
         <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.RelResolvers">
             <summary>
             Defines the collection with relation resolvers  
@@ -2186,7 +2189,7 @@
         <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.Remoting_Identity_GetNextSeqNum">
             <MetaDataID>{bb91f487-e2df-4d30-8ea1-7a8869b1a099}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.#ctor(System.Object,OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayer.ObjectID,System.Boolean)">
+        <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.#ctor(System.Object,OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.MetaDataRepository.StorageCell,OOAdvantech.PersistenceLayer.ObjectID,System.Boolean)">
             <MetaDataID>{2EF1044F-CD39-47FB-9C09-232C66860A57}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.Finalize">

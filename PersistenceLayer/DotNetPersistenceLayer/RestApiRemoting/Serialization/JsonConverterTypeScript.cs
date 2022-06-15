@@ -944,6 +944,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
             if (uri == null)
             {
+   
                 var proxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(_obj as MarshalByRefObject) as OOAdvantech.Remoting.RestApi.Proxy;
                 if (proxy != null)
                 {

@@ -19,7 +19,7 @@ namespace OOAdvantech.RDBMSMetaDataPersistenceRunTime
 		public readonly DataObjects.ClassBLOB SerializationMetada;
 		/// <MetaDataID>{43A985E6-225F-4C25-A0B8-C93701547847}</MetaDataID>
         public StorageInstanceRef(object memoryInstance, OOAdvantech.PersistenceLayerRunTime.ObjectStorage activeStorageSession, PersistenceLayer.ObjectID objectID, bool doubleStorageInstanceRefCheck = true)
-            : base(memoryInstance, activeStorageSession, objectID, doubleStorageInstanceRefCheck)
+            : base(memoryInstance, activeStorageSession,null, objectID, doubleStorageInstanceRefCheck)
 		{
             SerializationMetada=(ObjectStorage.StorageMetaData as Storage).GetClassBLOB(Class as DotNetMetaDataRepository.Class);
 		}

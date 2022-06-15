@@ -23,6 +23,17 @@ namespace OOAdvantech.Remoting
                         if (!Remoting.RemotingServices.IsOutOfProcess(obj as MarshalByRefObject))
                             RemotingServices.ReorderServerSideObjRefCahnnelData(objRef);
 #endif
+#if DEBUG
+                    if (objRef.URI != null && PersistenceLayer.ObjectStorage.PersistencyService != null && PersistenceLayer.ObjectStorage.PersistencyService.ClassOfObjectIsPersistent(obj))
+                    {
+                        int nPos = objRef.URI.IndexOf("#PID#");
+                        if (nPos == -1)
+                        {
+                            System.Diagnostics.Debug.Assert(false, "Persistent object transient uri ");
+                        }
+                    }
+#endif
+
                 }
             }
         }

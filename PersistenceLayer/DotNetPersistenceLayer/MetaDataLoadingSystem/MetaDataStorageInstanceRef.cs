@@ -10,7 +10,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
     public class MetaDataStorageInstanceRef : PersistenceLayerRunTime.StorageInstanceRef
     {
         public MetaDataStorageInstanceRef(object memoryInstance, MetaDataStorageSession activeStorageSession, PersistenceLayer.ObjectID objectID)
-            : base(memoryInstance, activeStorageSession, objectID)
+            : base(memoryInstance, activeStorageSession,null, objectID)
         {
 
         }

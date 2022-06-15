@@ -123,6 +123,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
             return (PersistenceLayer.ObjectStorage.PersistencyService as PersistencyService).GetStorageInsatnceAgent(persistentObject);
         }
 
+        /// <MetaDataID>{1e0a8b82-c4f5-4587-a018-a27afd5a6964}</MetaDataID>
+        protected OOAdvantech.MetaDataRepository.StorageCell _StorageInstanceSet;
 
 
         ///<summary>
@@ -488,6 +490,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 LifeTimeController = ClassObjectCollection;
                 _PersistentObjectID = value;
                 ClassObjectCollection[value] = this;
+            
 
 
                 CreateMarshalByRefUri();
@@ -516,8 +519,11 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     str = str.Replace('/', '_') + "_" + Remoting_Identity_GetNextSeqNum() + "#PID#" + persistentUri;
                     MarshalByRefUri = str;
                     System.Runtime.Remoting.RemotingServices.Marshal(MemoryInstance as System.MarshalByRefObject, str);
+              
                 }
+              
             }
+        
 #endif
         }
 
@@ -2547,7 +2553,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             bool relResolverCompleteLoaded = relResolver.IsCompleteLoaded;
             using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
-                if(relResolver.IsCompleteLoaded)
+                if (relResolver.IsCompleteLoaded)
                     storageInstanceRelatedObject = relResolver.RelatedObject;
                 stateTransition.Consistent = true;
             }
@@ -3738,12 +3744,14 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
 
         /// <MetaDataID>{2EF1044F-CD39-47FB-9C09-232C66860A57}</MetaDataID>
-        public StorageInstanceRef(object memoryInstance, ObjectStorage activeStorage, PersistenceLayer.ObjectID objectID, bool doubleStorageInstanceRefCheck = true)
+        public StorageInstanceRef(object memoryInstance, ObjectStorage activeStorage, MetaDataRepository.StorageCell storageCell, PersistenceLayer.ObjectID objectID, bool doubleStorageInstanceRefCheck = true)
         {
             if (memoryInstance == null)
                 throw new System.ArgumentNullException("You can't create StorageInstanceRef with out memory instance");
             if (activeStorage == null)
                 throw new System.ArgumentNullException("You can't create StorageInstanceRef with out Active storege session");
+
+            _StorageInstanceSet = storageCell;
 
             if (doubleStorageInstanceRefCheck)
             {
