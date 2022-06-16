@@ -194,7 +194,15 @@ namespace OOAdvantech.Transactions
         /// <MetaDataID>{58fb70c9-5b4e-4469-917e-22df3f9db616}</MetaDataID>
         internal static TransactionalMemberAttribute GetTransactionalMember(System.Reflection.MemberInfo memberInfo ,System.Type objectType)
         {
-            if(memberInfo is System.Reflection.FieldInfo)
+            if (objectType == null)
+            {
+#if DEBUG
+                System.Diagnostics.Debug.Assert(false, "parameter objectType must be not null ");
+#endif
+                throw new ArgumentNullException("parameter objectType must be not null ");
+            }
+
+            if (memberInfo is System.Reflection.FieldInfo)
             {
                 TransactionalMemberAttribute transactionalMember = memberInfo.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).FirstOrDefault() as TransactionalMemberAttribute;
                 transactionalMember.InitForm(objectType,memberInfo);
@@ -212,6 +220,7 @@ namespace OOAdvantech.Transactions
                 if (transactionalMembers == null)
                 {
                     transactionalMembers = new System.Collections.Generic.Dictionary<System.Reflection.MemberInfo, TransactionalMemberAttribute>();
+                  
                     TransactionalMembers[objectType] = transactionalMembers;
                 }
 
