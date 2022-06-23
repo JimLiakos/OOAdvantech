@@ -24,12 +24,15 @@ namespace OOAdvantech.Remoting
                             RemotingServices.ReorderServerSideObjRefCahnnelData(objRef);
 #endif
 #if DEBUG
-                    if (objRef.URI != null && PersistenceLayer.ObjectStorage.PersistencyService != null && PersistenceLayer.ObjectStorage.PersistencyService.ClassOfObjectIsPersistent(obj))
+                    if (!(obj is PersistenceLayer.IPersistencyService))
                     {
-                        int nPos = objRef.URI.IndexOf("#PID#");
-                        if (nPos == -1)
+                        if (objRef.URI != null && PersistenceLayer.ObjectStorage.PersistencyService != null && PersistenceLayer.ObjectStorage.PersistencyService.ClassOfObjectIsPersistent(obj))
                         {
-                            System.Diagnostics.Debug.Assert(false, "Persistent object transient uri ");
+                            int nPos = objRef.URI.IndexOf("#PID#");
+                            if (nPos == -1)
+                            {
+                                System.Diagnostics.Debug.Assert(false, "Persistent object transient uri ");
+                            }
                         }
                     }
 #endif

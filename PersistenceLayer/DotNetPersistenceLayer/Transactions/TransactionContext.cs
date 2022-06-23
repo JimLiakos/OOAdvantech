@@ -1194,7 +1194,10 @@ namespace OOAdvantech.Transactions
         {
 
             ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId;
+
+#if !DeviceDotNet
             NativeThreadID = AppDomain.GetCurrentThreadId();
+#endif
 
             LockedObject = lockedObject;
             LockType = LockType.SharedFieldsParticipation;
@@ -1224,7 +1227,7 @@ namespace OOAdvantech.Transactions
 
         int ThreadID;
 
-        public int NativeThreadID { get; }
+        public int NativeThreadID { get; } = 0;
 
         ///<summary>
         ///This filed defines the object which lock entry refered.
@@ -1240,7 +1243,7 @@ namespace OOAdvantech.Transactions
         /// <MetaDataID>{CA6FBE07-B8F1-45C1-A833-0BF34C3168F0}</MetaDataID>
         public OOAdvantech.Collections.Generic.Dictionary<TransactionContext, ObjectStateSnapshot> ObjectStateSnapshots = new OOAdvantech.Collections.Generic.Dictionary<TransactionContext, ObjectStateSnapshot>();
 
-        #region Takes Snapshots
+#region Takes Snapshots
         ///<summary>
         ///Takes a snapshot of object state for transaction context 
         ///</summary>
@@ -1415,7 +1418,7 @@ namespace OOAdvantech.Transactions
             }
         }
 
-        #endregion
+#endregion
 
         /// <MetaDataID>{fc5d6cbf-4b38-4786-a19f-9f0d3a91a74f}</MetaDataID>
         internal static bool IsLocked(object lockedObject, System.Reflection.MemberInfo memberInfo)
@@ -1449,7 +1452,7 @@ namespace OOAdvantech.Transactions
                             //the lock entry is not for shared fields
                             if (transactionalMember == null || transactionalMember.MemberTransactionLockOption == LockOptions.Exclusive)
                             {
-                                #region Search for lock object entries where system must be wait on the lock object entry transactions to complete
+#region Search for lock object entries where system must be wait on the lock object entry transactions to complete
                                 if (transactionalMember == null && lockedObjectEntry.LockType != LockType.SharedFieldsParticipation)
                                     return true;
                                 else if (lockedObjectEntry.LockType == LockType.ObjectLock &&  //(lockedObjectEntry.SnapshotAllFields &&
@@ -1462,7 +1465,7 @@ namespace OOAdvantech.Transactions
                                         lockedObjectEntry.LockEntryField.ContainsKey(transactionalMember.FieldInfo))
                                     return true;
 
-                                #endregion
+#endregion
                             }
 
                         }
@@ -1482,7 +1485,7 @@ namespace OOAdvantech.Transactions
                             //the lock entry is not for shared fields
                             if (transactionalMember == null || transactionalMember.MemberTransactionLockOption == LockOptions.Exclusive)
                             {
-                                #region Search for lock object entries where system must be wait on the lock object entry transactions to complete
+#region Search for lock object entries where system must be wait on the lock object entry transactions to complete
                                 if (transactionalMember == null && lockedObjectEntry.LockType != LockType.SharedFieldsParticipation)
                                     return true;
                                 else if (lockedObjectEntry.LockType == LockType.ObjectLock &&  //(lockedObjectEntry.SnapshotAllFields &&
@@ -1494,7 +1497,7 @@ namespace OOAdvantech.Transactions
                                         transactionalMember.MemberTransactionLockOption == LockOptions.Exclusive &&
                                         lockedObjectEntry.LockEntryField.ContainsKey(transactionalMember.FieldInfo))
                                     return true;
-                                #endregion
+#endregion
                             }
 
                         }

@@ -414,7 +414,7 @@ namespace OOAdvantech.PersistenceLayer
             if (StorageProviders.TryGetValue(storageType, out storageProvider))
                 storageType = storageProvider;
 
-         
+
             return PersistencyService.OpenStorage(StorageName, StorageLocation, storageType, userName, password);
         }
 
@@ -591,6 +591,9 @@ namespace OOAdvantech.PersistenceLayer
         /// <exclude>Excluded</exclude>
         /// <MetaDataID>{924FEFB9-B8A0-46A6-AFCF-95A7B19D357F}</MetaDataID>
         protected static IPersistencyService _PersistencyService;
+
+        static object PersistencyServiceLock = new object();
+
         /// <summary>Used from static method of storage session class to
         /// communicate with core object of persistence system. 
         /// It is useful for storage creation or for opening a storage session
@@ -603,29 +606,34 @@ namespace OOAdvantech.PersistenceLayer
             }
             get
             {
-
-                if (null == _PersistencyService)
+                lock (PersistencyServiceLock)
                 {
+
+                    if (null == _PersistencyService)
+                    {
 
 #if !DeviceDotNet
 
-                    //"PersistenceLayerRunTime, Culture=neutral, PublicKeyToken=95eeb2468d93212b"
+                        //"PersistenceLayerRunTime, Culture=neutral, PublicKeyToken=95eeb2468d93212b"
 
-                    if (System.Environment.Version.Major == 4)
-                    {
+                        if (System.Environment.Version.Major == 4)
+                        {
 
-                        _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"), true);
-                    }
-                    else
-                    {
+                            _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"), true);
+                        }
+                        else
+                        {
 
-                        _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"), true);
+                            _PersistencyService = (IPersistencyService)MonoStateClass.GetInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=95eeb2468d93212b"), true);
 
-                    }
+                        }
 #else
-                    _PersistencyService = (IPersistencyService)AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"));
+
+                        _PersistencyService = (IPersistencyService)AccessorBuilder.CreateInstance(ModulePublisher.ClassRepository.GetType("OOAdvantech.PersistenceLayerRunTime.PersistencyService", "PersistenceLayerRunTime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"));
+                    
 
 #endif
+                    }
                 }
                 return _PersistencyService;
             }
