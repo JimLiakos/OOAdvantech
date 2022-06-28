@@ -31,7 +31,8 @@ namespace OOAdvantech.Remoting
                             int nPos = objRef.URI.IndexOf("#PID#");
                             if (nPos == -1)
                             {
-                                System.Diagnostics.Debug.Assert(false, "Persistent object transient uri ");
+                                if(obj.GetType()?.Assembly?.FullName?.IndexOf("CodeMetaDataRepository") == -1&& obj.GetType()?.Assembly?.FullName?.IndexOf("OOAdvantech") == -1)
+                                    System.Diagnostics.Debug.Assert(false, "Persistent object transient uri ");
                             }
                         }
                     }
