@@ -462,7 +462,8 @@ namespace GenWebBrowser
                     //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
                     CachePath = cachePath,
                     RemoteDebuggingPort = 9222,
-                    IgnoreCertificateErrors = true
+                    IgnoreCertificateErrors = true,
+                    Locale = OOAdvantech.CultureContext.CurrentNeutralCultureInfo.Name
 
                 };
                 //CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format("Microneme\\{0}\\CefSharp\\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""))),

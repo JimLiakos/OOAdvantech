@@ -261,8 +261,12 @@ namespace OOAdvantech.Remoting
         {
             lock (RenewalManager.Sessions)
             {
+                ObjRef myObjRef = null;
                 System.Runtime.Remoting.Channels.IChannel[] Channels = System.Runtime.Remoting.Channels.ChannelServices.RegisteredChannels;
-                ObjRef myObjRef = System.Runtime.Remoting.RemotingServices.Marshal(theRealObject as MarshalByRefObject);
+                if (System.Runtime.Remoting.RemotingServices.IsTransparentProxy(theRealObject) && System.Runtime.Remoting.RemotingServices.GetRealProxy(theRealObject) != null)
+                    myObjRef = System.Runtime.Remoting.RemotingServices.GetObjRefForProxy(theRealObject as MarshalByRefObject);
+                else
+                    myObjRef = System.Runtime.Remoting.RemotingServices.Marshal(theRealObject as MarshalByRefObject);
 
                 string objectChannelUri = Remoting.RemotingServices.GetChannelUri(theRealObject as MarshalByRefObject);
                 if (Remoting.RemotingServices.GetServerChannelUris().Contains(objectChannelUri))
