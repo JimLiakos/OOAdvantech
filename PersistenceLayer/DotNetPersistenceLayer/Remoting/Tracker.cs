@@ -14,13 +14,15 @@ namespace OOAdvantech.Remoting
         {
             if (obj is IExtMarshalByRefObject)
             {
+#if !DeviceDotNet
                 if (System.Runtime.Remoting.RemotingServices.IsTransparentProxy(obj))
                     return;
+#endif
 
                 lock (WeakReferenceOnMarshaledObjects)
                 {
 
-                        WeakReferenceOnMarshaledObjects[objRef.URI] = new WeakReference(obj);
+                    WeakReferenceOnMarshaledObjects[objRef.URI] = new WeakReference(obj);
 #if !DeviceDotNet
                         if (!Remoting.RemotingServices.IsOutOfProcess(obj as MarshalByRefObject))
                             RemotingServices.ReorderServerSideObjRefCahnnelData(objRef);
@@ -33,9 +35,9 @@ namespace OOAdvantech.Remoting
                             int nPos = objRef.URI.IndexOf("#PID#");
                             if (nPos == -1)
                             {
-                                if(obj.GetType()?.Assembly?.FullName?.IndexOf("CodeMetaDataRepository") == -1
+                                if (obj.GetType()?.Assembly?.FullName?.IndexOf("CodeMetaDataRepository") == -1
                                     && obj.GetType()?.Assembly?.FullName?.IndexOf("OOAdvantech") == -1
-                                    && obj.GetType()?.Assembly?.FullName?.IndexOf("RoseMetadaRepository") == -1 )
+                                    && obj.GetType()?.Assembly?.FullName?.IndexOf("RoseMetadaRepository") == -1)
                                     System.Diagnostics.Debug.Assert(false, "Persistent object transient uri ");
                             }
                         }
