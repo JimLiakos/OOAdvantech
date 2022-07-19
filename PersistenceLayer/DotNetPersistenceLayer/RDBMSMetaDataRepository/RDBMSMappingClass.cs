@@ -315,7 +315,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     if (caseInsensitiveName.Trim().ToLower() != associationEnd.Association.Name.ToLower())
                         associationEnd.Association.CaseInsensitiveName = caseInsensitiveName;
                 }
-                foreach (AssociationEnd associationEnd in GetAssociateRoles(true))
+                foreach (AssociationEnd associationEnd in GetAssociateRoles(true).Where(x=>x.Association!=null))
                 {
                     string caseInsensitiveName = associationEnd.Association.CaseInsensitiveName;
                     int count = 1;
