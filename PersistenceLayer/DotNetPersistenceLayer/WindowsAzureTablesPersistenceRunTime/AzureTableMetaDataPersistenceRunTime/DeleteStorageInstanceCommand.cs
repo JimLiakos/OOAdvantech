@@ -46,7 +46,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 				//Microsoft.Azure.Cosmos.Table.TableOperation insertOperation = Microsoft.Azure.Cosmos.Table.TableOperation.Delete(objectBLOBData);
 
 				Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((StorageInstanceForDeletion as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
-				if (objectBLOBData.RowKey == "4593f98b-71f6-4c6d-a03a-85d73674886e")
+				if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                 {
 
                 }

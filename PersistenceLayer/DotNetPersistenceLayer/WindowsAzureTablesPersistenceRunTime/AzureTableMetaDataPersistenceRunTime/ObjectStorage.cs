@@ -377,14 +377,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 {
                     foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
                     {
+                        bool retry = false;
                         try
                         {
                             transactionTableBatchOperationsEntry.Key.ExecuteBatch(tableBatchOperation);
                         }
                         catch (Exception error)
                         {
-
-                            throw;
+                            if(!retry)
+                                throw;
                         }
 
                     }

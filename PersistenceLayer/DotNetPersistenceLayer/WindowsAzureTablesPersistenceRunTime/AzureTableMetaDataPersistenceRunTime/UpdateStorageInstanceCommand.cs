@@ -56,7 +56,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 {
 
                     Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
-                    if (objectBLOBData.RowKey == "4593f98b-71f6-4c6d-a03a-85d73674886e")
+                    if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                     {
 
                     }
@@ -96,7 +96,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 ObjectBLOBData objectBLOBData = (UpdatedStorageInstanceRef as StorageInstanceRef).ObjectBLOBData;
 
 
-                if (UpdatedStorageInstanceRef.PersistentObjectID.ToString() == "43e99dd3-7a05-4a9a-90f6-3e73a9e593d2")
+                if (UpdatedStorageInstanceRef.PersistentObjectID.ToString() == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                 {
 
                 }

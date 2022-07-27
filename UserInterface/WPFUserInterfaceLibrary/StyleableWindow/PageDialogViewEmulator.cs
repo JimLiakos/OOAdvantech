@@ -432,7 +432,7 @@ namespace StyleableWindow
                 DialogContentControl.CloseClickCommand = new WPFUIElementObjectBind.RelayCommand((object sender) =>
                 {
                     var objectContext = this.GetObjectContext();
-                    if (objectContext.RollbackOnNegativeAnswer == false || !objectContext.HasChanges(true))
+                    if (objectContext.RollbackOnNegativeAnswer == false || !objectContext.HasChanges(CheckOnlyPersistentClassInstancesForChanges))
                     {
                         var objectContextConnection = this.GetObjectContextConnection();
                         if (objectContextConnection != null)
@@ -557,7 +557,7 @@ namespace StyleableWindow
             var objectContext = this.GetObjectContext();
             if (NavigationWindow.CanGoBack)
             {
-                if (objectContext.RollbackOnExitWithoutAnswer == false || !objectContext.HasChanges(true))
+                if (objectContext.RollbackOnExitWithoutAnswer == false || !objectContext.HasChanges(CheckOnlyPersistentClassInstancesForChanges))
                 {
                     NavigationWindow.GoBack();
                     var objectContextConnection = this.GetObjectContextConnection();
@@ -597,7 +597,7 @@ namespace StyleableWindow
             RootPage = rootPage;
             NewPage = newPage;
             var objectContext = this.GetObjectContext();
-            if (objectContext.RollbackOnExitWithoutAnswer == false || !objectContext.HasChanges(true))
+            if (objectContext.RollbackOnExitWithoutAnswer == false || !objectContext.HasChanges(CheckOnlyPersistentClassInstancesForChanges))
             {
                 if (NavigationWindow.CanGoBack)
                     NavigationWindow.GoBack();
@@ -615,6 +615,7 @@ namespace StyleableWindow
             }
         }
 
+        protected virtual bool CheckOnlyPersistentClassInstancesForChanges { get => true; }
 
         public bool Closing(CancelEventArgs eventArg)
         {
@@ -623,7 +624,7 @@ namespace StyleableWindow
             if (this.GetObjectContextConnection() != null && this.GetObjectContextConnection().State == OOAdvantech.UserInterface.Runtime.ViewControlObjectState.Passive)
                 return true;
 
-            if (objectContext.RollbackOnExitWithoutAnswer && objectContext.HasChanges(true))
+            if (objectContext.RollbackOnExitWithoutAnswer && objectContext.HasChanges(CheckOnlyPersistentClassInstancesForChanges))
             {
                 eventArg.Cancel = true;
                 if (DialogContentControl.IsSavePopUpOpen)
