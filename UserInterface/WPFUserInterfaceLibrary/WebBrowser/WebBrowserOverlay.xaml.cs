@@ -88,7 +88,17 @@ namespace GenWebBrowser
     public partial class WebBrowserOverlay : Window, IEndPoint, IHtmlView
     {
 
+        public void DisposeBrowser()
+        {
 
+            if (ChromeBrowser != null && ProcessActiveBrowsers.ContainsKey(ChromeBrowser))
+            {
+                ChromeBrowser.Dispose();
+               
+                ProcessActiveBrowsers.Remove(ChromeBrowser);
+                ChromeBrowser = null;
+            }
+        }
 
         public event EventHandler<object> DataContexRetrieving;
 
@@ -522,6 +532,7 @@ namespace GenWebBrowser
         bool EnableRestApi;
         public WebBrowserOverlay(FrameworkElement placementTarget, BrowserType browserType, bool enableRestApi = false):this()
         {
+
             EnableRestApi = enableRestApi;
             InitializeComponent();
 
@@ -536,35 +547,9 @@ namespace GenWebBrowser
             Window owner = Window.GetWindow(placementTarget);
             Debug.Assert(owner != null);
 
-            if (browserType == BrowserType.Chrome)
-            {
+            LaunchBrowser(browserType);
 
-
-
-                ChromeBrowser = new ChromiumWebBrowser();
-                ChromeBrowser.MenuHandler = new CustomMenuHandler();
-                BrowserHostGrid.Children.Add(ChromeBrowser);
-
-            }
-            if (browserType == BrowserType.IE)
-            {
-                //WebBrowserHelper.ClearCache();
-                IEWebBrowser = new WebBrowser();
-                BrowserHostGrid.Children.Add(IEWebBrowser);
-            }
-            if (browserType == BrowserType.Edge)
-            {
-                //EdgeWebBrowser = new Microsoft.Toolkit.Win32.UI.Controls.WPF.WebView();
-                //BrowserHostGrid.Children.Add(IEWebBrowser);
-            }
-            ChromeBrowser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
-
-            if (ChromeBrowser != null)
-            {
-                CefSharpSettings.WcfEnabled = true;
-                ChromeBrowser.JavascriptObjectRepository.Register("cscallbackObj", new CallbackObjectForJs(this), isAsync: false, options: BindingOptions.DefaultBinder);
-            }
-            // ChromeBrowser.RegisterAsyncJsObject("cscallbackObj", new CallbackObjectForJs(this));
+        
 
             _placementTarget.LayoutUpdated += delegate { OnSizeLocationChanged(); };
             owner.LocationChanged += delegate { OnSizeLocationChanged(); };
@@ -604,15 +589,56 @@ namespace GenWebBrowser
             //owner.LayoutUpdated += new EventHandler(OnOwnerLayoutUpdated);
         }
 
+     
+
+        private void LaunchBrowser(BrowserType browserType)
+        {
+            if (browserType == BrowserType.Chrome)
+            {
+
+
+
+                ChromeBrowser = new ChromiumWebBrowser();
+                ChromeBrowser.MenuHandler = new CustomMenuHandler();
+                BrowserHostGrid.Children.Add(ChromeBrowser);
+
+            }
+            if (browserType == BrowserType.IE)
+            {
+                //WebBrowserHelper.ClearCache();
+                IEWebBrowser = new WebBrowser();
+                BrowserHostGrid.Children.Add(IEWebBrowser);
+            }
+            if (browserType == BrowserType.Edge)
+            {
+                //EdgeWebBrowser = new Microsoft.Toolkit.Win32.UI.Controls.WPF.WebView();
+                //BrowserHostGrid.Children.Add(IEWebBrowser);
+            }
+            ChromeBrowser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+
+            if (ChromeBrowser != null)
+            {
+                CefSharpSettings.WcfEnabled = true;
+                ChromeBrowser.JavascriptObjectRepository.Register("cscallbackObj", new CallbackObjectForJs(this), isAsync: false, options: BindingOptions.DefaultBinder);
+            }
+            // ChromeBrowser.RegisterAsyncJsObject("cscallbackObj", new CallbackObjectForJs(this));
+        }
+
         private void WebBrowserOverlay_Unloaded(object sender, RoutedEventArgs e)
         {
             if (ChromeBrowser != null && ProcessActiveBrowsers.ContainsKey(ChromeBrowser))
+            {
+                //ChromeBrowser.Dispose();
+                
                 ProcessActiveBrowsers.Remove(ChromeBrowser);
+            }
         }
         static Dictionary<ChromiumWebBrowser, WebBrowserOverlay> ProcessActiveBrowsers = new Dictionary<ChromiumWebBrowser, WebBrowserOverlay>();
 
         private void WebBrowserOverlay_Loaded(object sender, RoutedEventArgs e)
         {
+            if (BrowserType == BrowserType.Chrome && ChromeBrowser != null && ChromeBrowser.IsDisposed)
+                LaunchBrowser(BrowserType);
             if (ChromeBrowser != null)
                 ProcessActiveBrowsers[ChromeBrowser] = this;
         }
@@ -659,6 +685,7 @@ namespace GenWebBrowser
 
             if (ChromeBrowser != null)
             {
+
                 ChromeBrowser.Loaded += delegate (object sender, RoutedEventArgs e)
                 {
                     if (!Dispatcher.CheckAccess())

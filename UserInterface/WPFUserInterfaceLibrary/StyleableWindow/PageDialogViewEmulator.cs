@@ -420,9 +420,9 @@ namespace StyleableWindow
 
             Loaded += PageDialogViewEmulator_Loaded;
 
-
-
         }
+
+      
 
         private void PageDialogViewEmulator_Loaded(object sendera, RoutedEventArgs e)
         {
