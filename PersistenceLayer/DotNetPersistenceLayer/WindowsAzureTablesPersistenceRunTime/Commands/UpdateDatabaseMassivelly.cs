@@ -30,7 +30,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 {
                     exist = UpdateDatabaseMassivellyCommands.TryGetValue(Transactions.Transaction.Current.LocalTransactionUri, out updateDatabaseMassivelly);
                 }
-                if(!exist)
+                if (!exist)
                 {
                     updateDatabaseMassivelly = new UpdateDatabaseMassivelly();
                     PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistCommand(updateDatabaseMassivelly);
@@ -454,10 +454,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     }
                 }
                 MetaDataRepository.ObjectQueryLanguage.IDataRow dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
-
-                object value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
+                object value = null;
+                if (attributeValue.IsMultilingual)
+                    value = OOAdvantech.Json.JsonConvert.SerializeObject(attributeValue.Value);
+                else
+                    value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType)
                 if (value != null)
                 {
+
                     dataRow[column.DataBaseColumnName] = value;
                     if (attributeValue.Value is DateTime)
                     {

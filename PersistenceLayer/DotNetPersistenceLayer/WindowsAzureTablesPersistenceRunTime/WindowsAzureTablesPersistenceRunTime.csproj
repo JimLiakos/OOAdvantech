@@ -248,6 +248,10 @@
       <Project>{b5802b17-b3a0-4e40-a393-d1c57a53edcb}</Project>
       <Name>Linq - VS10</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech.Json\OOAdvantech.Json.csproj">
+      <Project>{f20e4565-5ddb-4e1e-a343-369927c01277}</Project>
+      <Name>OOAdvantech.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
       <Project>{09083b37-96ef-4867-aa51-4d698ad34344}</Project>
       <Name>OOAdvantechFacade -VS10</Name>

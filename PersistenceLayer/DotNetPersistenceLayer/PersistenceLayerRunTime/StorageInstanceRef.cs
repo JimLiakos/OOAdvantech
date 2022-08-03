@@ -1063,7 +1063,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         ///The values are valid for current transaction 
         ///</summary>
         /// <MetaDataID>{5d366054-d4d5-40d8-91ac-dadf1656f780}</MetaDataID>
-        public System.Collections.Generic.List<ValueOfAttribute> GetPersistentAttributeValues()
+        public List<ValueOfAttribute> GetPersistentAttributeValues()
         {
 
 
