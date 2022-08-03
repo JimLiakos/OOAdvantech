@@ -580,7 +580,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         _Identity = new MetaDataRepository.MetaObjectID((_Namespace.Value as PersistenceLayer.Storage).StorageIdentity + "_" + SerialNumber.ToString());
                     return _Identity;
                 }
-               
+
             }
         }
         /// <exclude>Excluded</exclude>
@@ -1774,6 +1774,11 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             else
                 Name = Type.CaseInsensitiveName;
 
+            if (Name == "FlavourBusinessManager.FoodTypeTag")
+            {
+
+            }
+
 
             using (ObjectStateTransition stateTransition = new ObjectStateTransition(this))
             {
@@ -1815,6 +1820,21 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         newColumn.Length = column.Length;
                         newColumn.AllowNulls = column.AllowNulls;
                         newColumn.CreatorIdentity = column.CreatorIdentity;
+                        if (Type.IsMultilingual(attribute))
+                        {
+                          
+
+                            MetaDataRepository.Class SystemStringType = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace("System.String", this) as MetaDataRepository.Class;
+                            if (SystemStringType == null)
+                            {
+                                MetaDataRepository.Class mClass = MetaDataRepository.Classifier.GetClassifier(typeof(string)) as MetaDataRepository.Class;
+                                SystemStringType = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mClass, this) as MetaDataRepository.Class;
+                                if (SystemStringType == null)
+                                    SystemStringType = (Class)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mClass, this);
+                                SystemStringType.Synchronize(mClass);
+                            }
+                            newColumn.Type = SystemStringType;
+                        }
                     }
                     if (column.MappedAssociationEnd != null)
                     {

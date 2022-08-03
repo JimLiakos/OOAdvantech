@@ -108,7 +108,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 account = CloudStorageAccount.DevelopmentStorageAccount;
             else
                 account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
-            ObjectStorage objectStorage = new ObjectStorage(storageName, storageLocation, true, account);
+            ObjectStorage objectStorage = new ObjectStorage(storageName, storageLocation, true, account,new Azure.Data.Tables.TableServiceClient(account.ToString(true)));
 
             return objectStorage;
         }
@@ -125,13 +125,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             //string connectionString = @"DefaultEndpointsProtocol=http;AccountName=asfameazure;AccountKey=pJL6v5+z9tRTOxpg/tzuh71j19s/16rKMiPSlTyLmJdqkIrdms/EV5ZO/ptz8ZCQYNaOC7Kba+gtQl8X1qVZ7g==";
             //var sdsd= CloudStorageAccount.Parse(connectionString);
-
+            
             CloudStorageAccount account = null;
             if (storageLocation.ToLower() == @"DevStorage".ToLower() && string.IsNullOrWhiteSpace(userName))
                 account = CloudStorageAccount.DevelopmentStorageAccount;
             else
                 account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
-            ObjectStorage objectStorage = new ObjectStorage(storageName, storageLocation, false, account);
+
+            Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+            ObjectStorage objectStorage = new ObjectStorage(storageName, storageLocation, false, account, tablesAccount);
 
             return objectStorage;
         }

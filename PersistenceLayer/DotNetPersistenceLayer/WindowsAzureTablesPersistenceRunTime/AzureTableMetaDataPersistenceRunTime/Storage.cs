@@ -38,8 +38,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         public readonly CloudTable MetadataIdentitiesTable;
 
+        public readonly Azure.Data.Tables.TableClient ClassBLOBDataTable_a;
+
+        public readonly Azure.Data.Tables.TableClient ObjectBLOBDataTable_a;
+
+        public readonly Azure.Data.Tables.TableClient MetadataIdentitiesTable_a;
+
         /// <MetaDataID>{65a1dbc5-fd0c-4e00-99e3-b67a5be6f106}</MetaDataID>
         CloudStorageAccount Account;
+
+        Azure.Data.Tables.TableServiceClient TablesAccount;
         /// <MetaDataID>{c23223b4-7b23-42af-b02e-56f3d813eb80}</MetaDataID>
         StorageMetadata StorageMetadata;
 
@@ -72,20 +80,28 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         /// <MetaDataID>{9e7e3f3b-7172-42c9-b8f2-a102c2954693}</MetaDataID>
-        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, Microsoft.Azure.Cosmos.Table.CloudStorageAccount account, OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata storageMetadata = null)
+        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, CloudStorageAccount account, Azure.Data.Tables.TableServiceClient tablesAccount, StorageMetadata storageMetadata = null)
         {
             StorageName = storageName;
             StorageLocation = storageLocation;
             StorageType = storageType;
             this.newStorage = newStorage;
             Account = account;
+            TablesAccount = tablesAccount;
             StorageMetadata = storageMetadata;
             CloudTableClient tableClient = account.CreateCloudTableClient();
 
             if (StorageMetadata == null)
             {
-                CloudTable table = tableClient.GetTableReference("StoragesMetadata");
-                StorageMetadata = (from storageMetada in table.CreateQuery<StorageMetadata>()
+                CloudTable storageMetadataTable = tableClient.GetTableReference("StoragesMetadata");
+                Azure.Data.Tables.TableClient storageMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
+
+                var storageMetadataEntity = (from storageMetada in storageMetadataTable_a.Query<Azure.Data.Tables.TableEntity>()
+                                                 //from storageMetada in storageMetadaPage
+                                             where storageMetada.GetString("StorageName") == StorageName
+                                             select storageMetada).FirstOrDefault();
+
+                StorageMetadata = (from storageMetada in storageMetadataTable.CreateQuery<StorageMetadata>()
                                    where storageMetada.StorageName == StorageName
                                    select storageMetada).FirstOrDefault();
             }
@@ -101,6 +117,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             ClassBLOBDataTable = tableClient.GetTableReference(ClassBLOBDataTableName);
             ObjectBLOBDataTable = tableClient.GetTableReference(ObjectBLOBDataTableName);
             MetadataIdentitiesTable = tableClient.GetTableReference(MetadataIdentityTableName);
+            ClassBLOBDataTable_a = TablesAccount.GetTableClient(ClassBLOBDataTableName);
+            ObjectBLOBDataTable_a = TablesAccount.GetTableClient(ObjectBLOBDataTableName);
+            MetadataIdentitiesTable_a = TablesAccount.GetTableClient(MetadataIdentityTableName);
 
 
             if (newStorage)
@@ -449,7 +468,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                         var Generalizations = classBlob.Class.Generalizations;
                         var features = classBlob.Class.Features;
                         var roles = classBlob.Class.Roles;
-                    } 
+                    }
                     stateTransition.Consistent = true;
                 }
 
@@ -485,7 +504,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         }
 
-        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, CloudStorageAccount account, CloudTable storageMetadataEntry) : this(storageName, storageLocation, storageType, newStorage, account)
+        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, CloudStorageAccount account, Azure.Data.Tables.TableServiceClient tablesAccount, CloudTable storageMetadataEntry) : this(storageName, storageLocation, storageType, newStorage, account, tablesAccount)
         {
             this.storageMetadataEntry = storageMetadataEntry;
         }

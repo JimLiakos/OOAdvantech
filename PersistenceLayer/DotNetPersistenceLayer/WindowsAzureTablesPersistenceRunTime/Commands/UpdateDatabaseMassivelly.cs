@@ -458,7 +458,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 if (attributeValue.IsMultilingual)
                     value = OOAdvantech.Json.JsonConvert.SerializeObject(attributeValue.Value);
                 else
-                    value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType)
+                    value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
                 if (value != null)
                 {
 
