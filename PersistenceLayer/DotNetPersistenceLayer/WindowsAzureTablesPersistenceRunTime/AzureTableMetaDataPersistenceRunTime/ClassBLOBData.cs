@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Azure;
+using Azure.Data.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Text;
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
     /// <MetaDataID>{ecdb7768-48a2-43e3-b21b-636f2b1ea537}</MetaDataID>
-    public class ClassBLOBData : Microsoft.Azure.Cosmos.Table.TableEntity
+    public class ClassBLOBData :Microsoft.Azure.Cosmos.Table.TableEntity,Azure.Data.Tables.ITableEntity
     {
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         /// <MetaDataID>{f3b3e37e-e7f1-4dff-87bb-ad84f711eee2}</MetaDataID>
         public string MetaObjectIdentity { get; set; }
-
+        DateTimeOffset? ITableEntity.Timestamp { get ; set; }
+        ETag ITableEntity.ETag { get ; set ; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Azure.Cosmos.Table;
 using OOAdvantech.Collections;
-using OOAdvantech.Collections.Generic;
+
 using OOAdvantech.DotNetMetaDataRepository;
 using OOAdvantech.MetaDataRepository;
 using OOAdvantech.MetaDataRepository.ObjectQueryLanguage;
@@ -59,11 +59,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         }
 
-        public ObjectStorage(string storageName, string storageLocation, bool newStorage, CloudStorageAccount account, global::Azure.Data.Tables.TableServiceClient tablesAccount,OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata storageMetadataEntry )
+        public ObjectStorage(string storageName, string storageLocation, bool newStorage, CloudStorageAccount account, global::Azure.Data.Tables.TableServiceClient tablesAccount, OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata storageMetadataEntry)
         {
             Account = account;
             TablesAccount = tablesAccount;
-            _StorageMetaData = new Storage(storageName, storageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", newStorage, account, tablesAccount,storageMetadataEntry);
+            _StorageMetaData = new Storage(storageName, storageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", newStorage, account, tablesAccount, storageMetadataEntry);
             System.DateTime start = System.DateTime.Now;
             if (!newStorage)
                 LoadStorageObjects();
@@ -81,10 +81,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         {
 
             var objectBLOBDataTable = (StorageMetaData as Storage).ObjectBLOBDataTable;
+            var objectBLOBDataTable_a = (StorageMetaData as Storage).ObjectBLOBDataTable_a;
             int lastOID = 0;
             int count = 0;
-            foreach (var objectBLOBData in (from objectBLOBData in objectBLOBDataTable.CreateQuery<ObjectBLOBData>()
-                                            select objectBLOBData))
+            //foreach (var objectBLOBData in (from objectBLOBData in objectBLOBDataTable.CreateQuery<ObjectBLOBData>()
+            //                                select objectBLOBData))
+            foreach (var objectBLOBData in objectBLOBDataTable_a.Query<ObjectBLOBData>())
             {
 
                 Guid OID = Guid.Parse(objectBLOBData.RowKey);
@@ -122,6 +124,40 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>> TableBatchOperations = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>>();
+
+        System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<Azure.Data.Tables.TableClient, System.Collections.Generic.List<System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction>>>> TableBatchOperations_a = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<Azure.Data.Tables.TableClient, System.Collections.Generic.List<System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction>>>>();
+
+
+
+        internal System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction> GetTableBatchOperation_a(Azure.Data.Tables.TableClient azureTable)
+        {
+            string localTransactionUri = "null_transaction";
+
+            localTransactionUri = OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri.ToLower();
+
+            Dictionary<Azure.Data.Tables.TableClient, List<List<Azure.Data.Tables.TableTransactionAction>>> transactionTableBatchOperations = null;
+            
+
+            if (!TableBatchOperations_a.TryGetValue(localTransactionUri, out transactionTableBatchOperations))
+            {
+                transactionTableBatchOperations = new Dictionary<Azure.Data.Tables.TableClient, List<List<Azure.Data.Tables.TableTransactionAction>>>();
+                TableBatchOperations_a[localTransactionUri] = transactionTableBatchOperations;
+            }
+
+            List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations = null;
+
+            if (!transactionTableBatchOperations.TryGetValue(azureTable, out tableBatchOperations))
+            {
+                tableBatchOperations = new List<List<Azure.Data.Tables.TableTransactionAction>> ();
+                transactionTableBatchOperations[azureTable] = tableBatchOperations;
+            }
+
+
+            if (tableBatchOperations.Count == 0 || tableBatchOperations.Last().Count == 100)
+                tableBatchOperations.Add(new List<Azure.Data.Tables.TableTransactionAction>());
+            return tableBatchOperations.Last();
+        }
+
         internal TableBatchOperation GetTableBatchOperation(CloudTable azureTable)
         {
             string localTransactionUri = "null_transaction";
@@ -368,7 +404,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public override void MakeChangesDurable(TransactionContext theTransaction)
         {
 
-           (this.StorageMetaData as Storage). MetadataIdentitiesTable.UpdateEntity((this.StorageMetaData as Storage).MetadataIdentities);
+            (this.StorageMetaData as Storage).MetadataIdentitiesTable.UpdateEntity((this.StorageMetaData as Storage).MetadataIdentities);
 
             if (TableBatchOperations.ContainsKey(theTransaction.Transaction.LocalTransactionUri.ToLower()))
             {
@@ -384,7 +420,34 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                         }
                         catch (Exception error)
                         {
-                            if(!retry)
+                            if (!retry)
+                                throw;
+                        }
+
+                    }
+                }
+                TimeSpan timeSpan = DateTime.Now - start;
+                //System.Windows.Forms.MessageBox.Show(timeSpan.ToString());
+                TableBatchOperations.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
+            }
+
+
+            if (TableBatchOperations_a.ContainsKey(theTransaction.Transaction.LocalTransactionUri.ToLower()))
+            {
+                DateTime start = DateTime.Now;
+                foreach (var transactionTableBatchOperationsEntry in TableBatchOperations_a[theTransaction.Transaction.LocalTransactionUri.ToLower()])
+                {
+                    foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
+                    {
+                        bool retry = false;
+                        try
+                        {
+                            
+                            transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
+                        }
+                        catch (Exception error)
+                        {
+                            if (!retry)
                                 throw;
                         }
 
@@ -436,7 +499,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         /// <MetaDataID>{0950f5e9-fce9-4c91-8d0d-23ca85808001}</MetaDataID>
-        public override Set<MetaDataRepository.StorageCell> GetStorageCells(Classifier classifier, DateTime timePeriodStartDate, DateTime timePeriodEndDate)
+        public override Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(Classifier classifier, DateTime timePeriodStartDate, DateTime timePeriodEndDate)
         {
             throw new NotImplementedException();
         }
@@ -446,7 +509,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         System.Collections.Generic.Dictionary<MetaDataRepository.Class, OOAdvantech.MetaDataRepository.StorageCell> StorageCells = new System.Collections.Generic.Dictionary<OOAdvantech.MetaDataRepository.Class, OOAdvantech.MetaDataRepository.StorageCell>();
 
         /// <MetaDataID>{2f3242bb-a92b-4a5a-93c1-a953eb1a5f3f}</MetaDataID>
-        public override Set<MetaDataRepository.StorageCell> GetStorageCells(Classifier classifier)
+        public override Collections.Generic.Set<MetaDataRepository.StorageCell> GetStorageCells(Classifier classifier)
         {
             OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.StorageCell> storageCells = new OOAdvantech.Collections.Generic.Set<OOAdvantech.MetaDataRepository.StorageCell>();
 
@@ -517,12 +580,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             throw new NotImplementedException();
         }
 
-        public override Set<RelatedStorageCell> GetLinkedStorageCells(MetaDataRepository.AssociationEnd associationEnd, ValueTypePath valueTypePath, Set<MetaDataRepository.StorageCell> relatedStorageCell, string ofTypeIdentity = null)
+        public override Collections.Generic.Set<RelatedStorageCell> GetLinkedStorageCells(MetaDataRepository.AssociationEnd associationEnd, ValueTypePath valueTypePath, Collections.Generic.Set<MetaDataRepository.StorageCell> relatedStorageCell, string ofTypeIdentity = null)
         {
             throw new NotImplementedException();
         }
 
-        public override Set<RelatedStorageCell> GetRelationObjectsStorageCells(MetaDataRepository.Association association, Set<MetaDataRepository.StorageCell> relatedStorageCells, Roles storageCellsRole, string ofTypeIdentity = null)
+        public override Collections.Generic.Set<RelatedStorageCell> GetRelationObjectsStorageCells(MetaDataRepository.Association association, Collections.Generic.Set<MetaDataRepository.StorageCell> relatedStorageCells, Roles storageCellsRole, string ofTypeIdentity = null)
         {
             throw new NotImplementedException();
         }

@@ -17,8 +17,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <summary>With this method execute the command. </summary>
         public override void Execute()
         {
-            var objectBLOBDataTable = ((UpdatedStorageInstanceRef.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable;
-
+            //var objectBLOBDataTable = ((UpdatedStorageInstanceRef.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable;
+            var objectBLOBDataTable_a = ((UpdatedStorageInstanceRef.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable_a;
             if (FromNewCommand)
             {
                 ObjectBLOBData objectBLOBData = new ObjectBLOBData("AAA", UpdatedStorageInstanceRef.PersistentObjectID.GetMemberValue("ObjectID").ToString());
@@ -55,12 +55,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 try
                 {
 
-                    Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
+                    var TableBatchOperation_a = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation_a(objectBLOBDataTable_a);
                     if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                     {
 
                     }
-                    TableBatchOperation.Insert(objectBLOBData);
+                    TableBatchOperation_a.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Add, objectBLOBData));
+
+                    
                     //TableOperation insertOperation = TableOperation.Insert(objectBLOBData);
                     //objectBLOBDataTable.Execute(insertOperation);
                     //TableBatchOperation TableBatchOperation = new TableBatchOperation();
@@ -124,12 +126,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 {
 
 
-                    Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
-                    if(objectBLOBData.RowKey== "004ba188-4d83-4445-b66e-e6637a57063d")
+                    //Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
+                    //if(objectBLOBData.RowKey== "004ba188-4d83-4445-b66e-e6637a57063d")
+                    //{
+
+                    //}
+                    //TableBatchOperation.InsertOrReplace(objectBLOBData);
+
+                    var TableBatchOperation_a = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation_a(objectBLOBDataTable_a);
+                    if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                     {
 
                     }
-                    TableBatchOperation.InsertOrReplace(objectBLOBData);
+                    TableBatchOperation_a.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpsertReplace, objectBLOBData));
 
 
                     //TableOperation insertOrReplaceOperation = TableOperation.InsertOrReplace(objectBLOBData);
