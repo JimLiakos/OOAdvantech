@@ -13,6 +13,15 @@ namespace OOAdvantech.RDBMSMetaDataRepository
     [Persistent()]
     public class Class : OOAdvantech.MetaDataRepository.Class, MappedClassifier
     {
+        public override bool IsMultilingual(MetaDataRepository.Attribute attribute)
+        {
+            MetaDataRepository.Attribute _attribute = OOAdvantech.MetaDataRepository.Classifier.GetClassifier(GetExtensionMetaObject<System.Type>())?.GetFeature(attribute.Identity.ToString(), true) as MetaDataRepository.Attribute;
+            if (_attribute != null)
+                return (OOAdvantech.MetaDataRepository.Classifier.GetClassifier(GetExtensionMetaObject<System.Type>()) as MetaDataRepository.Class).IsMultilingual(_attribute);
+            else
+                return false;
+            
+        }
         public override MetaDataRepository.Component ImplementationUnit
         {
             get

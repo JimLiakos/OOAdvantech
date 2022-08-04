@@ -11,7 +11,7 @@ namespace OOAdvantech.MetaDataRepository
     public class Class : MetaDataRepository.Classifier, InterfaceImplementor
     {
         /// <MetaDataID>{6fc44e88-ae51-469b-b6cb-685819b2794e}</MetaDataID>
-        public bool IsMultilingual(Attribute attribute)
+        public virtual bool IsMultilingual(Attribute attribute)
         {
             if (attribute.Multilingual)
                 return true;

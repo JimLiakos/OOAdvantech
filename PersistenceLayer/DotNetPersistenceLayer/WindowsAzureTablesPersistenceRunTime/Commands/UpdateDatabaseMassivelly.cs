@@ -263,6 +263,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
                 object value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
 
+                if (attributeValue.IsMultilingual && attributeValue.Value != null)
+                    value = OOAdvantech.Json.JsonConvert.SerializeObject(attributeValue.Value);
+                else
+                    value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
+
+
+
                 if (value != null)
                 {
                     dataRow[column.DataBaseColumnName] = value;
@@ -455,7 +462,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 }
                 MetaDataRepository.ObjectQueryLanguage.IDataRow dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
                 object value = null;
-                if (attributeValue.IsMultilingual)
+                if (attributeValue.IsMultilingual&& attributeValue.Value!=null)
                     value = OOAdvantech.Json.JsonConvert.SerializeObject(attributeValue.Value);
                 else
                     value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);

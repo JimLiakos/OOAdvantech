@@ -854,6 +854,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         {
             bool hasOwnedTable = false;
 
+
             using (ObjectStateTransition stateTransition = new ObjectStateTransition(this))
             {
                 #region Check the inheritance relationsips to find if has its owned table
@@ -928,6 +929,10 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{2487ACE7-FFCE-44DC-84AA-6D326277773E}</MetaDataID>
         private void UpdateMainTableColumns()
         {
+            if (Type != null && Type.FullName == "FlavourBusinessManager.FoodTypeTag")
+            {
+
+            }
             using (OOAdvantech.Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
             {
                 bool ClassHierarchyMembers = false;
@@ -1016,13 +1021,13 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                 {
                     //update existing columns
                     if (Type.IsPersistent(attribute))
-                        attribute.AddColumnToTableOrUpdate(MainTable);
+                        attribute.AddColumnToTableOrUpdate(MainTable,Type.IsMultilingual(attribute) );
                 }
                 foreach (Attribute attribute in attributes.Where(x => ((x as RDBMSMetaDataRepository.Attribute).GetColumnsFor(this).Count() == 0)))
                 {
                     //add new columns
                     if (Type.IsPersistent(attribute))
-                        attribute.AddColumnToTableOrUpdate(MainTable);
+                        attribute.AddColumnToTableOrUpdate(MainTable,Type.IsMultilingual(attribute));
                 }
 
 
@@ -1774,10 +1779,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             else
                 Name = Type.CaseInsensitiveName;
 
-            if (Name == "FlavourBusinessManager.FoodTypeTag")
-            {
-
-            }
+           
 
 
             using (ObjectStateTransition stateTransition = new ObjectStateTransition(this))
@@ -1814,27 +1816,13 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     if (column.MappedAttribute != null)
                     {
                         Attribute attribute = GetColumnMappedAttribute(column, Type, new ValueTypePath());
-                        Column newColumn = attribute.AddColumnToTableOrUpdate(_MainTable, column.Name);
+                        Column newColumn = attribute.AddColumnToTableOrUpdate(_MainTable, column.Name,Type.IsMultilingual(attribute));
                         newColumn.IsIdentity = column.IsIdentity;
                         newColumn.IdentityIncrement = column.IdentityIncrement;
                         newColumn.Length = column.Length;
                         newColumn.AllowNulls = column.AllowNulls;
                         newColumn.CreatorIdentity = column.CreatorIdentity;
-                        if (Type.IsMultilingual(attribute))
-                        {
-                          
-
-                            MetaDataRepository.Class SystemStringType = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace("System.String", this) as MetaDataRepository.Class;
-                            if (SystemStringType == null)
-                            {
-                                MetaDataRepository.Class mClass = MetaDataRepository.Classifier.GetClassifier(typeof(string)) as MetaDataRepository.Class;
-                                SystemStringType = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mClass, this) as MetaDataRepository.Class;
-                                if (SystemStringType == null)
-                                    SystemStringType = (Class)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mClass, this);
-                                SystemStringType.Synchronize(mClass);
-                            }
-                            newColumn.Type = SystemStringType;
-                        }
+                      
                     }
                     if (column.MappedAssociationEnd != null)
                     {
@@ -2122,10 +2110,8 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         /// <MetaDataID>{8C0EC232-6FD3-44BE-8A9E-93DEE7EF0FF2}</MetaDataID>
         public void BuildMappingElement()
         {
-            if (Type != null && Type.Name == "Organization")
-            {
-
-            }
+           
+      
 
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             try

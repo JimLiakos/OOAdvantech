@@ -269,6 +269,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     break;
                 }
 
+
+                try
+                {
+                    var tabeClient = tablesAcount.GetTableClient("AuthUserRefCloudTable");
+                    var ddd = tabeClient.Query<Azure.Data.Tables.TableEntity>().ToList();
+
+                }
+                catch (Exception error)
+                {
+
+                    
+                }
                 if (storage == null)
                     throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + StorageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist);
 

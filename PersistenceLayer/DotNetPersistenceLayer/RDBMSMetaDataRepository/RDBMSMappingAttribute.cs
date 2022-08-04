@@ -140,17 +140,35 @@ namespace OOAdvantech.RDBMSMetaDataRepository
         }
 
         /// <MetaDataID>{bb6f6d19-943c-43ee-a88e-b2f6b5fbe856}</MetaDataID>
-        System.Collections.Generic.List<Column> AddColumnToTableOrUpdate(Table table, string path, MetaDataRepository.ValueTypePath pathIdentity)
+        System.Collections.Generic.List<Column> AddColumnToTableOrUpdate(Table table, string path, MetaDataRepository.ValueTypePath pathIdentity, bool isMultilingual)
         {
-            return AddColumnToTableOrUpdate(table, "", path, pathIdentity);
+            return AddColumnToTableOrUpdate(table, "", path, pathIdentity, isMultilingual);
         }
 
         /// <MetaDataID>{b6acf8fd-4dcd-4e9f-9a34-2934e8c5a391}</MetaDataID>
-        System.Collections.Generic.List<Column> AddColumnToTableOrUpdate(Table table, string columnName, string path, MetaDataRepository.ValueTypePath pathIdentity)
+        System.Collections.Generic.List<Column> AddColumnToTableOrUpdate(Table table, string columnName, string path, MetaDataRepository.ValueTypePath pathIdentity, bool isMultilingual)
         {
             StorageCellsColumns.Clear();
             //TODO να γραφτεί test case για την περίπτωση που προστεθεί persistent attribute με τον όρο new στην
             //sub class και έχει ίδιο όνομα με persistent attribute της parent class.
+
+
+            MetaDataRepository.Class systemStringType = null;
+            if (isMultilingual)
+            {
+
+
+                systemStringType = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace("System.String", this) as MetaDataRepository.Class;
+                if (systemStringType == null)
+                {
+                    MetaDataRepository.Class mClass = MetaDataRepository.Classifier.GetClassifier(typeof(string)) as MetaDataRepository.Class;
+                    systemStringType = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(mClass, this) as MetaDataRepository.Class;
+                    if (systemStringType == null)
+                        systemStringType = (Class)MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.CreateMetaObjectInPlace(mClass, this);
+                    systemStringType.Synchronize(mClass);
+                }
+                
+            }
 
 
             System.Collections.Generic.List<Column> columns = new System.Collections.Generic.List<Column>();
@@ -178,12 +196,20 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                     foreach (Attribute attribute in attributes)
                     {
 
-
+                        
                         if ((Type as MetaDataRepository.Structure).IsPersistent(attribute))
-                            columns.AddRange(attribute.AddColumnToTableOrUpdate(table, path + Name, pathIdentity));
+                            columns.AddRange(attribute.AddColumnToTableOrUpdate(table, path + Name, pathIdentity,isMultilingual));
                     }
                     foreach (Column column in table.ContainedColumns)
                     {
+                        if(isMultilingual)
+                        {
+
+                            if (column.MappedAttribute != null && !attributes.Contains(column.MappedAttribute) && (column.MappedAttribute == this || Type == column.MappedAttribute.Owner || Type.IsA(column.MappedAttribute.Owner)))
+                                table.RemoveColumn(column);
+
+                        }
+
                         if (column.MappedAttribute != null && !attributes.Contains(column.MappedAttribute) && (column.MappedAttribute == this || Type == column.MappedAttribute.Owner || Type.IsA(column.MappedAttribute.Owner)))
                             table.RemoveColumn(column);
                     }
@@ -212,8 +238,10 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         {
                             MetaDataRepository.AttributeRealization attributeRealization = (table.TableCreator as StorageCell).Type.GetAttributeRealization(this);
                             column.Name = path + CaseInsensitiveName;
-
-                            column.Type = Type;
+                            if (isMultilingual)
+                                column.Type = systemStringType;
+                            else
+                                column.Type = Type;
                             object mLength = null;
 
                             if (attributeRealization != null)
@@ -268,6 +296,9 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                                 newColumn.Name = columnName;
                             if (attributeRealization != null)
                                 newColumn.MappedAttributeRealizationIdentity = attributeRealization.Identity.ToString();
+                            
+                            if (isMultilingual)
+                                newColumn.Type = systemStringType;
 
                             MappedColumns.Add(newColumn);
                             //table.MakeNameUnaryInNamesapce(newColumn);
@@ -365,14 +396,14 @@ namespace OOAdvantech.RDBMSMetaDataRepository
 
 
         /// <MetaDataID>{015D321D-6AA9-43CC-8F28-E025DF024C28}</MetaDataID>
-        public System.Collections.Generic.List<Column> AddColumnToTableOrUpdate(Table table)
+        public System.Collections.Generic.List<Column> AddColumnToTableOrUpdate(Table table, bool isMultilingual)
         {
-            return AddColumnToTableOrUpdate(table, "", new ValueTypePath());
+            return AddColumnToTableOrUpdate(table, "", new ValueTypePath(), isMultilingual);
         }
         /// <MetaDataID>{550d31e3-2cd9-4fee-ab91-84d751669ac9}</MetaDataID>
-        public Column AddColumnToTableOrUpdate(Table table, string columnName)
+        public Column AddColumnToTableOrUpdate(Table table, string columnName, bool isMultilingual)
         {
-            return AddColumnToTableOrUpdate(table, columnName, "", new ValueTypePath())[0];
+            return AddColumnToTableOrUpdate(table, columnName, "", new ValueTypePath(), isMultilingual)[0];
         }
 
         /// <MetaDataID>{382b5df2-0050-4eb3-bc16-6e74f8fee83b}</MetaDataID>

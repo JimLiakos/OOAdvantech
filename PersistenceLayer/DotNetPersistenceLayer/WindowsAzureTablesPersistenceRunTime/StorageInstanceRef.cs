@@ -217,19 +217,47 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
                 value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
-                if (valueOfAttribute.FieldInfo.FieldType.GetMetaData().IsGenericType &&
-                    !valueOfAttribute.FieldInfo.FieldType.GetMetaData().IsGenericTypeDefinition &&
-                    valueOfAttribute.FieldInfo.FieldType.GetGenericTypeDefinition() == typeof(System.Nullable<>))
-                    value = TypeDictionary.Convert(value, valueOfAttribute.FieldInfo.FieldType.GetMetaData().GetGenericArguments()[0]);
-                else
-                    value = TypeDictionary.Convert(value, valueOfAttribute.FieldInfo.FieldType);
+                if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null)
+                {
+                    var attributeType = valueOfAttribute.Attribute.Type.GetExtensionMetaObject<System.Type>();
+                    var dictionaryType = typeof(Dictionary<,>).MakeGenericType(typeof(string), attributeType);
+                    var multiligualDictionary = OOAdvantech.Json.JsonConvert.DeserializeObject(value as string, dictionaryType) as System.Collections.IDictionary;
+                
+                    foreach (var entryKey in multiligualDictionary.Keys)
+                    {
+                        var culture = System.Globalization.CultureInfo.GetCultureInfo(entryKey as string);
+                        using (OOAdvantech.CultureContext cultureContext = new CultureContext(culture, false))
+                        {
+                            value = multiligualDictionary[entryKey];
+                            SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
+                            SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
+                        }
+                    }
 
-                if (value is System.DBNull)
-                    value = null;
-                if (value is DateTime)
-                    value = ((DateTime)value).ToUniversalTime().ToLocalTime();
-                SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
-                SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
+                }
+                else
+                {
+                    if (valueOfAttribute.FieldInfo.FieldType.GetMetaData().IsGenericType &&
+                        !valueOfAttribute.FieldInfo.FieldType.GetMetaData().IsGenericTypeDefinition &&
+                        valueOfAttribute.FieldInfo.FieldType.GetGenericTypeDefinition() == typeof(System.Nullable<>))
+                        value = TypeDictionary.Convert(value, valueOfAttribute.FieldInfo.FieldType.GetMetaData().GetGenericArguments()[0]);
+                    else
+                        value = TypeDictionary.Convert(value, valueOfAttribute.FieldInfo.FieldType);
+
+
+                    if (value is System.DBNull)
+                        value = null;
+                    if (value is DateTime)
+                        value = ((DateTime)value).ToUniversalTime().ToLocalTime();
+                    else
+                    {
+                        SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
+                        SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
+
+                    }
+                }
+
+
                 RelationshipColumnsValues.Remove(column);
             }
             foreach (RDBMSMetaDataRepository.Column column in new System.Collections.Generic.List<RDBMSMetaDataRepository.Column>(RelationshipColumnsValues.Keys))
