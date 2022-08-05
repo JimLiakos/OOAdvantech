@@ -11,14 +11,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     {
 
         /// <MetaDataID>{8f4491db-e7ee-4a65-9564-10e8448ff67e}</MetaDataID>
-        static public void InsertEntity(this Microsoft.Azure.Cosmos.Table.CloudTable table, Microsoft.Azure.Cosmos.Table.TableEntity tableEntity)
+        static  void InsertEntity(this Microsoft.Azure.Cosmos.Table.CloudTable table, Microsoft.Azure.Cosmos.Table.TableEntity tableEntity)
         {
             TableOperation insertOrMergeOperation = TableOperation.Insert(tableEntity);
             TableResult result = table.Execute(insertOrMergeOperation);
 
         }
 
-        static public void UpdateEntity(this CloudTable table, Microsoft.Azure.Cosmos.Table.TableEntity tableEntity)
+        static  void UpdateEntity(this CloudTable table, Microsoft.Azure.Cosmos.Table.TableEntity tableEntity)
         {
 
             TableOperation insertOrUpdateOperation = TableOperation.InsertOrReplace(tableEntity);

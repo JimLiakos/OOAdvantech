@@ -111,13 +111,20 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             Account = account;
             Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
 
-            CloudTableClient tableClient = account.CreateCloudTableClient();
-            CloudTable table = tableClient.GetTableReference("StoragesMetadata");
-            if (!table.Exists())
-                table.CreateIfNotExists();
+            //CloudTableClient tableClient = account.CreateCloudTableClient();
+            //CloudTable table = tableClient.GetTableReference("StoragesMetadata");
+            //if (!table.Exists())
+            //    table.CreateIfNotExists();
+            Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
+
+            Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "StoragesMetadata"));
+            bool storagesMetadataTable_exist = queryTableResults.Count() > 0;
+
+            if (storagesMetadataTable_exist)
+                storagesMetadataTable_a.CreateIfNotExists();
 
 
-            StorageMetadata storageMetadata = (from storageMetada in table.CreateQuery<StorageMetadata>()
+            StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                                where storageMetada.StorageName == StorageName //&& storageMetada.UnderConstruction == false
                                                select storageMetada).FirstOrDefault();
 
@@ -127,16 +134,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 storageMetadata = new StorageMetadata("AAA", Guid.NewGuid().ToString());
                 storageMetadata.StorageName = StorageName;
                 storageMetadata.StoragePrefix = StorageName;
-
-                TableOperation insertOperation = TableOperation.Insert(storageMetadata);
-                var result = table.Execute(insertOperation);
+                
+                //TableOperation insertOperation = TableOperation.Insert(storageMetadata);
+                //var result = table.Execute(insertOperation);
+                storagesMetadataTable_a.AddEntity(storageMetadata);
             }
             else
             {
                 while (storageMetadata.UnderConstruction)
-                {
+                {storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
                     System.Threading.Thread.Sleep(100);
-                    storageMetadata = (from storageMetada in table.CreateQuery<StorageMetadata>()
+                    storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                        where storageMetada.StorageName == StorageName //&& storageMetada.UnderConstruction == false
                                        select storageMetada).FirstOrDefault();
                 }
@@ -170,8 +178,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             {
                 storageMetadata.UnderConstruction = false;
                 storageMetadata.StorageIdentity = storageMetadata.StorageIdentity;
-                TableOperation replaceOperation = TableOperation.Replace(storageMetadata);
-                var result = table.Execute(replaceOperation);
+                //TableOperation replaceOperation = TableOperation.Replace(storageMetadata);
+                //var result = table.Execute(replaceOperation);
+
+                storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
             }
 
             return objectStorage;
@@ -206,13 +216,22 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     else
                         account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
                 }
-                CloudTableClient tableClient = account.CreateCloudTableClient();
+                Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+                //CloudTableClient tableClient = account.CreateCloudTableClient();
 
-                CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
-                if (storagesMetadataTable.Exists())
+                //CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
+
+                Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
+
+                Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "StoragesMetadata"));
+                bool storagesMetadataTable_exist = queryTableResults.Count() > 0;
+
+                
+
+                if (storagesMetadataTable_exist)
                 {
 
-                    StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
+                    StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                                        where storageMetada.StorageName == storageName
                                                        select storageMetada).FirstOrDefault();
 
@@ -222,19 +241,20 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     while (storageMetadata.UnderConstruction)
                     {
                         System.Threading.Thread.Sleep(100);
-                        storageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
+                        storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                            where storageMetada.StorageName == storageName
                                            select storageMetada).FirstOrDefault();
                     }
-                    global::Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+                    //global::Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
                     objectStorage = OpenStorage(storageName, StorageLocation, account, tablesAccount, storageMetadata);
 
 
                     if (string.IsNullOrWhiteSpace(storageMetadata.StorageIdentity))
                     {
                         storageMetadata.StorageIdentity = objectStorage.StorageIdentity;
-                        TableOperation insertOperation = TableOperation.Replace(storageMetadata);
-                        var result = storagesMetadataTable.Execute(insertOperation);
+                        storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+                        //TableOperation insertOperation = TableOperation.Replace(storageMetadata);
+                        //var result = storagesMetadataTable.Execute(insertOperation);
                     }
 
 
@@ -348,23 +368,32 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     account = CloudStorageAccount.DevelopmentStorageAccount;
                 else
                     account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
-                CloudTableClient cloudTablesClient = account.CreateCloudTableClient();
+                //CloudTableClient cloudTablesClient = account.CreateCloudTableClient();
 
                 Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
 
-                CloudTable storagesMetadataTable = cloudTablesClient.GetTableReference("StoragesMetadata");
-                if (!storagesMetadataTable.Exists())
-                    storagesMetadataTable.CreateIfNotExists();
+                //CloudTable storagesMetadataTable = cloudTablesClient.GetTableReference("StoragesMetadata");
+                Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
 
-                StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
+                Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "StoragesMetadata"));
+                bool storagesMetadataTable_exist = queryTableResults.Count() > 0;
+
+                if (storagesMetadataTable_exist)
+                    storagesMetadataTable_a.CreateIfNotExists();
+
+
+                //if (!storagesMetadataTable.Exists())
+                //    storagesMetadataTable.CreateIfNotExists();
+
+                StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                                    where storageMetada.StorageName == storageName && storageMetada.StorageIdentity == backupStorageIdentity
                                                    select storageMetada).FirstOrDefault();
 
-                StorageMetadata otherStorageWithSamePrefix = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
+                StorageMetadata otherStorageWithSamePrefix = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                                               where storageMetada.StoragePrefix == storageName && storageMetada.StorageIdentity != backupStorageIdentity
                                                               select storageMetada).FirstOrDefault();
 
-                StorageMetadata otherStorageWithSameName = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
+                StorageMetadata otherStorageWithSameName = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                                             where storageMetada.StorageName == storageName && storageMetada.StorageIdentity != backupStorageIdentity
                                                             select storageMetada).FirstOrDefault();
 
@@ -385,11 +414,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     storageMetadata = new StorageMetadata("AAA", Guid.NewGuid().ToString());
                     storageMetadata.StorageName = storageName;
 
-                    string uniqueStoragePrefix = MakeStoragePrefixUnique(storagesMetadataTable, storageName);
+                    string uniqueStoragePrefix = MakeStoragePrefixUnique(storagesMetadataTable_a, storageName);
 
                     storageMetadata.StoragePrefix = uniqueStoragePrefix;
                     storageMetadata.StorageIdentity = backupStorageIdentity;
-                    storagesMetadataTable.InsertEntity(storageMetadata);
+                    storagesMetadataTable_a.AddEntity(storageMetadata);
                     storagePrefix = storageMetadata.StoragePrefix;
 
                     #endregion
@@ -398,7 +427,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 {
                     #region provides new storage prefix for restore and change object storage state to under construction;
 
-                    string uniqueStoragePrefix = MakeStoragePrefixUnique(storagesMetadataTable, storageMetadata.StorageName);
+                    string uniqueStoragePrefix = MakeStoragePrefixUnique(storagesMetadataTable_a, storageMetadata.StorageName);
                     if (overrideObjectStorage)
                         storagePrefix = storageMetadata.StoragePrefix;
                     else
@@ -423,7 +452,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         OpenStorages.Remove(storageMetadata.StorageName);
                     }
                     storageMetadata.UnderConstruction = true;
-                    storagesMetadataTable.UpdateEntity(storageMetadata);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
+
                     #endregion
                 }
 
@@ -439,7 +469,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     ObjectStorage.DeserializeTable(memoryStream, out tableName, out deserializedEntities);
                     tableName = restoredStorageManager.ResolveTableName(tableName);
                     storageMetadata.AddTemporaryTable(tableName);
-                    storagesMetadataTable.UpdateEntity(storageMetadata);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
 
                     TransferTableRecords(tableName, deserializedEntities, account, tablesAccount);
 
@@ -466,7 +496,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     storageMetadata.ClearTemporaryTables();
                     storageMetadata.AddTemporaryTables(restoredStorageManager.GetReplacedTablesNames());
 
-                    storagesMetadataTable.UpdateEntity(storageMetadata);
+                    //storagesMetadataTable.UpdateEntity(storageMetadata);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
                 }
 
                 //foreach (string replacesDataTableName in restoredStorageManager.GetReplacedTablesNames())
@@ -498,16 +529,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <returns>
         /// return the unique storage prefix
         /// </returns>
-        private static string MakeStoragePrefixUnique(CloudTable storagesMetadataTable, string storagePrefix)
+        private static string MakeStoragePrefixUnique(Azure.Data.Tables.TableClient storagesMetadataTable, string storagePrefix)
         {
             int count = 0;
-            StorageMetadata storageMetadataWithStoragePrefix = (from storageMetadataEntry in storagesMetadataTable.CreateQuery<StorageMetadata>()
+            StorageMetadata storageMetadataWithStoragePrefix = (from storageMetadataEntry in storagesMetadataTable.Query<StorageMetadata>()
                                                                 where storageMetadataEntry.StoragePrefix == storagePrefix
                                                                 select storageMetadataEntry).FirstOrDefault();
             while (storageMetadataWithStoragePrefix != null)
             {
                 count++;
-                storageMetadataWithStoragePrefix = (from storageMetadataEntry in storagesMetadataTable.CreateQuery<StorageMetadata>()
+                storageMetadataWithStoragePrefix = (from storageMetadataEntry in storagesMetadataTable.Query<StorageMetadata>()
                                                     where storageMetadataEntry.StoragePrefix == storagePrefix + count.ToString()
                                                     select storageMetadataEntry).FirstOrDefault();
                 storagePrefix = storagePrefix + count.ToString();
@@ -522,22 +553,29 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             try
             {
-                CloudTableClient tableClient = account.CreateCloudTableClient();
-                CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-                if (!azureTable.Exists())
-                {
-                    azureTable = tableClient.GetTableReference(cloudTableName);
-                    azureTable.CreateIfNotExists();
-                }
-                else
-                {
-                    azureTable = tableClient.GetTableReference(cloudTableName);
-                    azureTable.DeleteIfExists();
-                    azureTable.CreateIfNotExists();
+                //CloudTableClient tableClient = account.CreateCloudTableClient();
+                //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                //if (!azureTable.Exists())
+                //{
+                //    azureTable = tableClient.GetTableReference(cloudTableName);
+                //    azureTable.CreateIfNotExists();
+                //}
+                //else
+                //{
+                //    azureTable = tableClient.GetTableReference(cloudTableName);
+                //    azureTable.DeleteIfExists();
+                //    azureTable.CreateIfNotExists();
 
-                }
+                //}
+
 
                 var azureTable_a = tablesAccount.GetTableClient(cloudTableName);
+                Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "cloudTableName"));
+                bool azureTable_exist = queryTableResults.Count() > 0;
+
+                if (azureTable_exist)
+                    azureTable_a.CreateIfNotExists();
+
 
                 List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations = new List<List<Azure.Data.Tables.TableTransactionAction>>();
 
@@ -689,14 +727,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             Azure.Data.Tables.TableServiceClient tablesAcount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
             CloudTableClient tableClient = account.CreateCloudTableClient();
-            CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
+            //CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
             Azure.Data.Tables.TableClient storagesMetadataTable_a= tablesAcount.GetTableClient("StoragesMetadata");
 
             //storagesMetadataTable_a.CreateIfNotExists(); 
-            if (!storagesMetadataTable.Exists())
-                storagesMetadataTable.CreateIfNotExists();
+            //if (!storagesMetadataTable.Exists())
+            //    storagesMetadataTable.CreateIfNotExists();
 
-            StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
+            StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                                where storageMetada.StorageName == storageName
                                                select storageMetada).FirstOrDefault();
 
@@ -707,7 +745,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (storageMetadata.UnderConstruction)
             {
                 storageMetadata.UnderConstruction = false;
-                storagesMetadataTable.UpdateEntity(storageMetadata);
+                //storagesMetadataTable.UpdateEntity(storageMetadata);
+                storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
             }
 
         }
