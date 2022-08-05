@@ -55,7 +55,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 try
                 {
 
-                    var TableBatchOperation_a = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation_a(objectBLOBDataTable_a);
+                    var TableBatchOperation_a = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable_a);
                     if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                     {
 
@@ -133,7 +133,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                     //}
                     //TableBatchOperation.InsertOrReplace(objectBLOBData);
 
-                    var TableBatchOperation_a = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation_a(objectBLOBDataTable_a);
+                    var TableBatchOperation_a = ((UpdatedStorageInstanceRef as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable_a);
                     if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                     {
 

@@ -26,7 +26,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
             get
             {
-                
+
                 if (DataNode.BranchSearchCriterions.Count > 0)
                     return true;
                 else
@@ -665,7 +665,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                     else
                     {
-                       
+
                         StorageInstanceRef storageInstanceRef = (ObjectStorage as PersistenceLayerRunTime.ObjectStorage).OperativeObjectCollections[LastStorageCellType][objectID] as StorageInstanceRef;
                         if (storageInstanceRef != null)
                         {
@@ -690,7 +690,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                     }
                                 }
                             }
-                            
+
                         }
                         else
                         {
@@ -2141,6 +2141,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (DataNode.Type == DataNode.DataNodeType.Group)
                 GroupedDataLoaded = true;
             var account = (ObjectStorage as ObjectStorage).Account;
+            var tablesAccount = (ObjectStorage as ObjectStorage).TablesAccount;
+            
             lock (account)
             {
 
@@ -2158,7 +2160,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-                
+
                 var query = new TableQuery<ElasticTableEntity>();
                 Dictionary<MetaDataRepository.StorageCell, AzureTableEntitiesRetriever> azureTableEntitiesRetrievers = new Dictionary<MetaDataRepository.StorageCell, AzureTableEntitiesRetriever>();
 
@@ -2212,12 +2214,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         else
                             azureTableEntitiesRetriever.FilterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", azureTableEntitiesRetriever.PartitionKey) + " and " + azureTableEntitiesRetriever.FilterScript;
 
-                    } 
+                    }
                     stateTransition.Consistent = true;
                 }
 
 
                 CloudTableClient tableClient = account.CreateCloudTableClient();
+
 
 
                 foreach (MetaDataRepository.StorageCell storageCell in DataLoaderMetadata.StorageCells)
@@ -2267,28 +2270,22 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-                    CloudTable azureTable = tableClient.GetTableReference(azureTableEntitiesRetriever.CloudTableName);
-                    if (azureTable.Exists())
+                    //CloudTable azureTable = tableClient.GetTableReference(azureTableEntitiesRetriever.CloudTableName);
+
+
+                    //if (azureTable.Exists())
+                    if ((ObjectStorage as ObjectStorage).TableExist(azureTableEntitiesRetriever.CloudTableName))
                     {
-                        ////string filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
-                        //filterScript = BuildFilterString(columnsNamesMap);
-
-                        //if (string.IsNullOrWhiteSpace(filterScript))
-                        //    filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
-                        //else
-                        //    filterScript = (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey) + " and " + filterScript;
 
 
+                        Azure.Data.Tables.TableClient azureTable_a = tablesAccount.GetTableClient(azureTableEntitiesRetriever.CloudTableName);
                         List<ElasticTableEntity> entities = null;
-                        //if (string.IsNullOrWhiteSpace(filterScript))
-                        //    entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
-                        //else
-                        entities = azureTable.ExecuteQuery(query.Select(azureTableEntitiesRetriever.SelectionColumns).Where(azureTableEntitiesRetriever.FilterScript)).ToList();
-
-
+                        //List<Azure.Data.Tables.TableEntity> entities = null;
+                        //entities = azureTable.ExecuteQuery(query.Select(azureTableEntitiesRetriever.SelectionColumns).Where(azureTableEntitiesRetriever.FilterScript)).ToList();
+                        entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(azureTableEntitiesRetriever.FilterScript,null, azureTableEntitiesRetriever.SelectionColumns).Select(x=>new ElasticTableEntity(x)).ToList();
+                        
                         int storageIdentity = QueryStorageIdentities.IndexOf(storageCell.StorageIdentity);
-
-                        foreach (ElasticTableEntity entity in entities)
+                        foreach (var entity in entities)
                         {
                             entity.AzureTableName = azureTableEntitiesRetriever.CloudTableName;
                             entity.LoadRow(TemporaryDataTable, this, storageIdentity, azureTableEntitiesRetriever.ColumnsMap);
@@ -2298,7 +2295,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 }
                 LoadDataLoaderTable(TemporaryDataTable.CreateDataReader(), new Dictionary<string, string>(), false);
                 // ActivateObjects();
-                LoadManyToManyRelationData(tableClient);
+                LoadManyToManyRelationData(tableClient, tablesAccount );
                 EntitiesDictionary.Clear();
 
             }
@@ -2420,7 +2417,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <param name="connection">RDBMS ADO.NET Connection to retrieve relationship data </param>
         /// <param name="dataReader">Defines an ADO.NET DataReader. It is useful in case where RDBMS load batch all data at once</param>
         /// <MetaDataID>{6dc1fbd0-abd9-48ef-b53e-1ba0e85dc1f0}</MetaDataID>
-        private void LoadManyToManyRelationData(CloudTableClient tableClient)
+        private void LoadManyToManyRelationData(CloudTableClient tableClient, Azure.Data.Tables.TableServiceClient tablesAccount)
         {
 
 
@@ -2497,7 +2494,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-        manyToManyRelationData.Columns.Add("RoleAStorageIdentity", typeof(int));
+                manyToManyRelationData.Columns.Add("RoleAStorageIdentity", typeof(int));
                 manyToManyRelationData.Columns.Add("RoleBStorageIdentity", typeof(int));
 
                 var query = new TableQuery<ElasticTableEntity>();
@@ -2510,8 +2507,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     if (storageCellsLink.ObjectLinksTable != null)
                     {
                         string cloudTableName = storageCellsLink.ObjectLinksTable.Name;//.DataBaseTableName;
-                        CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-                        if (azureTable.Exists())
+                        //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                        Azure.Data.Tables.TableClient azureTable_a = tablesAccount.GetTableClient(cloudTableName);
+                        if ((ObjectStorage as ObjectStorage).TableExist(cloudTableName))
                         {
 
                             List<DataLoader.DataColumn> associationTableColumns = GetAssociationTableColumns(associationEnd.Association as RDBMSMetaDataRepository.Association, roleAObjectIdentityTypes, roleBObjectIdentityTypes, storageCellsLink as RDBMSMetaDataRepository.StorageCellsLink);
@@ -2519,7 +2517,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             IList<string> selectionColumns = new List<string>();
                             foreach (DataLoader.DataColumn column in associationTableColumns)
                                 selectionColumns.Add(column.Name);
-                            List<ElasticTableEntity> entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
+                            //List<ElasticTableEntity> entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
+                            List<ElasticTableEntity> entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(default(string),default(int?) , selectionColumns).Select(x => new ElasticTableEntity(x)).ToList();
                             int roleAStorageIdentity = QueryStorageIdentities.IndexOf(storageCellsLink.RoleAStorageCell.StorageIdentity);
                             int roleBStorageIdentity = QueryStorageIdentities.IndexOf(storageCellsLink.RoleBStorageCell.StorageIdentity);
 

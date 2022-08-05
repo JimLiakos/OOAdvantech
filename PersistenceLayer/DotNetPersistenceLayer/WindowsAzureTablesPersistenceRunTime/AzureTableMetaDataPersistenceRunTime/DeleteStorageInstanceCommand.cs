@@ -38,14 +38,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 					throw  new System.Exception(Error.Message,Error);
 			}
 
-            var objectBLOBDataTable = ((StorageInstanceForDeletion.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable;
+            var objectBLOBDataTable = ((StorageInstanceForDeletion.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable_a;
             ObjectBLOBData objectBLOBData = (StorageInstanceForDeletion as StorageInstanceRef).ObjectBLOBData;
 
             try
             {
 				//Microsoft.Azure.Cosmos.Table.TableOperation insertOperation = Microsoft.Azure.Cosmos.Table.TableOperation.Delete(objectBLOBData);
 
-				Microsoft.Azure.Cosmos.Table.TableBatchOperation TableBatchOperation = ((StorageInstanceForDeletion as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
+				var TableBatchOperation = ((StorageInstanceForDeletion as StorageInstanceRef).ObjectStorage as ObjectStorage).GetTableBatchOperation(objectBLOBDataTable);
 				if (objectBLOBData.RowKey == "e8d1ff5e-98bd-46db-a6cf-bbbbc5304aea")
                 {
 
@@ -54,8 +54,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 					TableBatchOperation.Remove(tableOperation);
 
 
-				TableBatchOperation.Delete(objectBLOBData);
-				
+				//TableBatchOperation.Delete(objectBLOBData);
+				TableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Delete, objectBLOBData));
 
 				//objectBLOBDataTable.Execute(insertOperation);
 				StorageInstanceForDeletion.PersistentObjectID = null;

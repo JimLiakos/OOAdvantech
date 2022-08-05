@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
+using Azure;
 using Microsoft.Azure.Cosmos.Table;
 using OOAdvantech.MetaDataRepository.ObjectQueryLanguage;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
     /// <MetaDataID>{a80daf56-59e9-4bc5-9b57-024add4357b8}</MetaDataID>
-    public class ElasticTableEntity : DynamicObject, ITableEntity,
+    public class ElasticTableEntity : DynamicObject, ITableEntity, Azure.Data.Tables.ITableEntity,
             ICustomMemberProvider // For LinqPad's Dump
     {
         public ElasticTableEntity()
         {
             this.Properties = new Dictionary<string, EntityProperty>();
         }
+
+        internal Azure.Data.Tables.TableEntity Values;
+        public ElasticTableEntity(Azure.Data.Tables.TableEntity values)
+        {
+            Values = values;
+            this.PartitionKey = values.PartitionKey;
+            this.RowKey = values.RowKey;
+            this._ETag = values.ETag.ToString();
+
+        }
+
 
         public String Value(String name)
         {
@@ -30,7 +42,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
         }
 
-        public IDictionary<string, EntityProperty> Properties { get; set; }
+        public IDictionary<string, OOAdvantech.WindowsAzureTablesPersistenceRunTime.EntityProperty> Properties { get; set; }
 
         public void SetNull(string key, System.Type type)
         {
@@ -114,14 +126,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
 
         public string AzureTableName { get; internal set; }
+        DateTimeOffset? Azure.Data.Tables.ITableEntity.Timestamp { get; set; }
+        ETag Azure.Data.Tables.ITableEntity.ETag { get; set; }
 
-        public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
+        public void ReadEntity(IDictionary<string, Microsoft.Azure.Cosmos.Table.EntityProperty> properties, OperationContext operationContext)
         {
             this.Properties = properties;
         }
 
-        public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
+
+
+        public IDictionary<string, Microsoft.Azure.Cosmos.Table.EntityProperty> WriteEntity(OperationContext operationContext)
         {
+            
             return this.Properties;
         }
 
@@ -274,6 +291,265 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
 
 
+
+    }
+
+
+    public class EntityProperty
+    {
+
+        Microsoft.Azure.Cosmos.Table.EntityProperty Property;
+        public EntityProperty(Microsoft.Azure.Cosmos.Table.EntityProperty property)
+        {
+            Property = property;
+        }
+
+        public EdmType PropertyType
+        {
+            get
+            {
+
+                return Property.PropertyType;
+            }
+        }
+        //
+        // Summary:
+        //     Gets or sets the byte array value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The byte array value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a byte array.
+        public byte[] BinaryValue { get => Property.BinaryValue; set => Property.BinaryValue = value; }
+        //
+        // Summary:
+        //     Gets or sets the boolean value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The boolean value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a boolean
+        //     value.
+        public bool? BooleanValue { get => Property.BooleanValue; set => Property.BooleanValue = value; }
+        //
+        // Summary:
+        //     Gets or sets the Microsoft.Azure.Cosmos.Table.EntityProperty.DateTime value of
+        //     this Microsoft.Azure.Cosmos.Table.EntityProperty object. An exception will be
+        //     thrown if you attempt to set this property to anything other than a Microsoft.Azure.Cosmos.Table.EntityProperty.DateTime
+        //     object.
+        //
+        // Value:
+        //     The Microsoft.Azure.Cosmos.Table.EntityProperty.DateTime value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        public DateTime? DateTime { get => Property.DateTime; set => Property.DateTime = value; }
+        //
+        // Summary:
+        //     Gets or sets the System.DateTimeOffset value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The System.DateTimeOffset value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a System.DateTimeOffset
+        //     value.
+        public DateTimeOffset? DateTimeOffsetValue { get=>Property.DateTimeOffsetValue; set => Property.DateTimeOffsetValue=value; }
+        //
+        // Summary:
+        //     Gets or sets the double value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The double value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a double
+        //     value.
+        public double? DoubleValue { get => Property.DoubleValue; set => Property.DoubleValue = value; }
+        //
+        // Summary:
+        //     Gets or sets the System.Guid value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The System.Guid value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a System.Guid
+        //     value.
+        public Guid? GuidValue { get => Property.GuidValue; set => Property.GuidValue = value; }
+        //
+        // Summary:
+        //     Gets or sets the System.Int32 value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The System.Int32 value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a System.Int32
+        //     value.
+        public int? Int32Value { get => Property.Int32Value; set => Property.Int32Value = value; }
+        //
+        // Summary:
+        //     Gets the Microsoft.Azure.Cosmos.Table.EdmType of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The Microsoft.Azure.Cosmos.Table.EdmType of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+
+        //
+        // Summary:
+        //     Gets the Microsoft.Azure.Cosmos.Table.EntityProperty as a generic object.
+        public object PropertyAsObject { get => Property.PropertyAsObject;  }
+        //
+        // Summary:
+        //     Gets or sets the string value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The string value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than a string
+        //     value.
+        public string StringValue { get => Property.StringValue; set => Property.StringValue = value; }
+        //
+        // Summary:
+        //     Gets or sets the System.Int64 value of this Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     object.
+        //
+        // Value:
+        //     The System.Int64 value of this Microsoft.Azure.Cosmos.Table.EntityProperty object.
+        //
+        // Remarks:
+        //     An exception is thrown if this property is set to a value other than an System.Int64
+        //     value.
+        public long? Int64Value { get => Property.Int64Value; set => Property.Int64Value = value; }
+
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.String value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(string input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.Int64 value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(long? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.Int32 value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(int? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.Guid value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(Guid? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.Double value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(double? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the Microsoft.Azure.Cosmos.Table.EntityProperty.DateTime value
+        //     of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(DateTime? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.DateTimeOffset value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(DateTimeOffset? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the System.Boolean value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(bool? input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the Microsoft.Azure.Cosmos.Table.EntityProperty
+        //     class by using the byte array value of the property.
+        //
+        // Parameters:
+        //   input:
+        //     The value for the new Microsoft.Azure.Cosmos.Table.EntityProperty.
+        public EntityProperty(byte[] input)
+        {
+            Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
+        }
 
     }
 }

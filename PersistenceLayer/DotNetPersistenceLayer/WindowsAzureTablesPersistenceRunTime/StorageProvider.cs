@@ -109,6 +109,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             else
                 account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
             Account = account;
+            Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
 
             CloudTableClient tableClient = account.CreateCloudTableClient();
             CloudTable table = tableClient.GetTableReference("StoragesMetadata");
@@ -164,7 +165,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             Storage storage = new Storage(StorageName, StorageLocation, this.GetType().FullName, storageMetadata);
             metaDataStorage.CommitTransientObjectState(storage);
 
-            ObjectStorage objectStorage = new ObjectStorage(storage, account);
+            ObjectStorage objectStorage = new ObjectStorage(storage, account,tablesAccount);
 
             {
                 storageMetadata.UnderConstruction = false;
@@ -286,7 +287,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 storage.AzureStorageMetadata = storageMetadata;
 
-                objectStorage = new ObjectStorage(storage, account);
+                objectStorage = new ObjectStorage(storage, account, tablesAcount);
                 InitializeDataPartioningMetaData(objectStorage, storage);
                 objectStorage.ActivateObjectsInPreoadedStorageCells();
                 stateTransition.Consistent = true;

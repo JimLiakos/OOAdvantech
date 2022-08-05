@@ -94,23 +94,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 }
                 throw new System.Exception(ErrorMessage);
             }
-            CloudStorageAccount account = (ObjectStorage.GetStorageOfObject(this) as WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ObjectStorage).Account;
-            CloudTableClient cloudTablesClient = account.CreateCloudTableClient();
-            CloudTable storagesMetadataTable = cloudTablesClient.GetTableReference("StoragesMetadata");
-            BeginSynchronous(storagesMetadataTable);
+            Azure.Data.Tables.TableServiceClient tablesAccount = (ObjectStorage.GetStorageOfObject(this) as WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ObjectStorage).TablesAccount;
+            Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
+            BeginSynchronous(storagesMetadataTable_a);
+
+            //CloudStorageAccount account = (ObjectStorage.GetStorageOfObject(this) as WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ObjectStorage).Account;
+            //CloudTableClient cloudTablesClient = account.CreateCloudTableClient();
+            //CloudTable storagesMetadataTable = cloudTablesClient.GetTableReference("StoragesMetadata");
+            //BeginSynchronous(storagesMetadataTable);
             try
             {
                 using (Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
                 {
                     RegisterComponent(mAssembly);
-
-                    //OOAdvantech.RDBMSPersistenceRunTime.Commands.UpdateStorageSchema updateStorageSchema = new OOAdvantech.RDBMSPersistenceRunTime.Commands.UpdateStorageSchema(ObjectStorage.OpenStorage(StorageName, StorageLocation, StorageType) as PersistenceLayerRunTime.ObjectStorage);
-                    //if (!StorageDataBase.RDBMSSQLScriptGenarator.SupportAddRemoveKeys)
-                    //{
-                    //    CreateStorageCellsLinks();
-                    //}
-                    //if (!PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistedCommands.ContainsKey(updateStorageSchema.Identity))
-                    //    PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistCommand(updateStorageSchema);
 
                     StorageMetaObjects = null;//Force system to update cache of storage meta objects
 
@@ -119,7 +115,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
             finally
             {
-                EndSynchronous(storagesMetadataTable);
+                //EndSynchronous(storagesMetadataTable);
+                EndSynchronous(storagesMetadataTable_a);
             }
 
 
@@ -192,7 +189,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         _StorageIdentity = System.Guid.NewGuid().ToString();
                         PersistenceLayer.ObjectStorage.CommitObjectState(this);
                     }
-                    
+
 
                     MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator = new RDBMSMetaDataRepository.MetaObjectsStack();
 
@@ -575,6 +572,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             storagesMetadataTable.Execute(updateOperation);
         }
 
+        private void EndSynchronous(Azure.Data.Tables.TableClient storagesMetadataTable)
+        {
+            AzureStorageMetadata = (from storageMetada in storagesMetadataTable.Query<StorageMetadata>()
+                                    where storageMetada.StorageName == StorageName && storageMetada.StorageIdentity == StorageIdentity
+                                    select storageMetada).FirstOrDefault();
+
+            AzureStorageMetadata.UnderConstruction = false;
+            storagesMetadataTable.UpdateEntity(AzureStorageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+
+        }
+
         private void BeginSynchronous(CloudTable storagesMetadataTable)
         {
             while (AzureStorageMetadata.UnderConstruction)
@@ -609,6 +617,42 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 }
             }
         }
+
+
+        private void BeginSynchronous(Azure.Data.Tables.TableClient storagesMetadataTable)
+        {
+            while (AzureStorageMetadata.UnderConstruction)
+            {
+                System.Threading.Thread.Sleep(100);
+                AzureStorageMetadata = (from storageMetada in storagesMetadataTable.Query<StorageMetadata>()
+                                        where storageMetada.StorageName == StorageName && storageMetada.StorageIdentity == StorageIdentity
+                                        select storageMetada).FirstOrDefault();
+            }
+            while (true)
+            {
+                try
+                {
+
+                    AzureStorageMetadata.UnderConstruction = true;
+                    storagesMetadataTable.UpdateEntity(AzureStorageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+                    break;
+                }
+                catch (Exception error)
+                {
+                    if (error.Message == "The remote server returned an error: (412) Precondition Failed.")
+                    {
+                        while (AzureStorageMetadata.UnderConstruction)
+                        {
+                            System.Threading.Thread.Sleep(100);
+                            AzureStorageMetadata = (from storageMetada in storagesMetadataTable.Query<StorageMetadata>()
+                                                    where storageMetada.StorageName == StorageName && storageMetada.StorageIdentity == StorageIdentity
+                                                    select storageMetada).FirstOrDefault();
+                        }
+                    }
+                }
+            }
+        }
+
 
         public override string StorageName { get => base.StorageName; set { } }
 

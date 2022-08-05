@@ -39,11 +39,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
         public readonly CloudStorageAccount Account;
-
+        public readonly Azure.Data.Tables.TableServiceClient TablesAccount;
         /// <MetaDataID>{3f203356-42c6-44fa-b0bc-cb8422f90cc2}</MetaDataID>
-        public ObjectStorage(Storage theStorageMetaData, CloudStorageAccount account)
+        public ObjectStorage(Storage theStorageMetaData, CloudStorageAccount account,Azure.Data.Tables.TableServiceClient tablesAccount)
         {
             Account = account;
+            TablesAccount = tablesAccount;
             SetObjectStorage(theStorageMetaData);
 
         }
@@ -1204,6 +1205,35 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         protected override void UpdateOperativeObjects()
         {
+        }
+
+        object AzureStorageTabesLock = new object();
+        List<string> AzureStorageTabes = null;
+        internal bool TableExist(string cloudTableName)
+        {
+            lock (AzureStorageTabesLock)
+            {
+                if (AzureStorageTabes == null)
+                {
+                    AzureStorageTabes = TablesAccount.Query().Select(x => x.Name).ToList();
+                    return AzureStorageTabes.Contains(cloudTableName);
+                }
+                if (AzureStorageTabes.Contains(cloudTableName))
+                    return true;
+                else
+                {
+                    Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = TablesAccount.Query(String.Format("TableName eq '{0}'", cloudTableName));
+                    bool azureTable_exist = queryTableResults.Count() > 0;
+                    if (azureTable_exist)
+                    {
+                        AzureStorageTabes.Add(cloudTableName);
+                        return true;
+                    }
+                    else
+                        return false;
+
+                } 
+            }
         }
     }
 }

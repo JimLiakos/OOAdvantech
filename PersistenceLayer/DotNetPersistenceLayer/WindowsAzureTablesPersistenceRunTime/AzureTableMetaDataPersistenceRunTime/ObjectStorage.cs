@@ -80,7 +80,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         protected void LoadStorageObjects()
         {
 
-            var objectBLOBDataTable = (StorageMetaData as Storage).ObjectBLOBDataTable;
+            //var objectBLOBDataTable = (StorageMetaData as Storage).ObjectBLOBDataTable;
             var objectBLOBDataTable_a = (StorageMetaData as Storage).ObjectBLOBDataTable_a;
             int lastOID = 0;
             int count = 0;
@@ -129,7 +129,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
 
 
-        internal System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction> GetTableBatchOperation_a(Azure.Data.Tables.TableClient azureTable)
+        internal System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction> GetTableBatchOperation(Azure.Data.Tables.TableClient azureTable)
         {
             string localTransactionUri = "null_transaction";
 

@@ -34,9 +34,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         private bool newStorage;
 
         /// <MetaDataID>{cb961e4c-5bbc-4c81-a497-95ebc2d1be45}</MetaDataID>
-        public readonly CloudTable ClassBLOBDataTable;
+        //public readonly CloudTable ClassBLOBDataTable;
         /// <MetaDataID>{3345967a-891f-4096-9822-90cf0b78d61f}</MetaDataID>
-        public readonly CloudTable ObjectBLOBDataTable;
+        //public readonly CloudTable ObjectBLOBDataTable;
 
         public readonly CloudTable MetadataIdentitiesTable;
 
@@ -116,8 +116,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
 
 
-            ClassBLOBDataTable = tableClient.GetTableReference(ClassBLOBDataTableName);
-            ObjectBLOBDataTable = tableClient.GetTableReference(ObjectBLOBDataTableName);
+            //ClassBLOBDataTable = tableClient.GetTableReference(ClassBLOBDataTableName);
+            //ObjectBLOBDataTable = tableClient.GetTableReference(ObjectBLOBDataTableName);
             MetadataIdentitiesTable = tableClient.GetTableReference(MetadataIdentityTableName);
             ClassBLOBDataTable_a = TablesAccount.GetTableClient(ClassBLOBDataTableName);
             ObjectBLOBDataTable_a = TablesAccount.GetTableClient(ObjectBLOBDataTableName);
@@ -126,18 +126,26 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             Pageable<TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", MetadataIdentityTableName));
             bool metadataIdentitiesTable_exist = queryTableResults.Count() > 0;
 
+            queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", ClassBLOBDataTableName));
+            bool classBLOBDataTable_exist = queryTableResults.Count() > 0;
+
+            queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", ObjectBLOBDataTableName));
+            bool objectBLOBDataTable_exist = queryTableResults.Count() > 0;
+
             if (newStorage)
             {
 
-                if (!ClassBLOBDataTable.Exists())
-                    ClassBLOBDataTable.CreateIfNotExists();
+                //if (!ClassBLOBDataTable.Exists())
+                //    ClassBLOBDataTable.CreateIfNotExists();
 
-                ClassBLOBDataTable_a.CreateIfNotExists();
+                if (!classBLOBDataTable_exist)
+                    ClassBLOBDataTable_a.CreateIfNotExists();
 
-                if (!ObjectBLOBDataTable.Exists())
-                    ObjectBLOBDataTable.CreateIfNotExists();
+                //if (!ObjectBLOBDataTable.Exists())
+                //    ObjectBLOBDataTable.CreateIfNotExists();
 
-                ObjectBLOBDataTable_a.CreateIfNotExists();
+                if (objectBLOBDataTable_exist)
+                    ObjectBLOBDataTable_a.CreateIfNotExists();
 
 
                 if (!metadataIdentitiesTable_exist)
@@ -266,7 +274,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             components.Add(Component);
             System.Collections.Generic.Dictionary<string, ClassBLOB> insertedClassBlobs = new System.Collections.Generic.Dictionary<string, ClassBLOB>();
             System.Collections.Generic.List<TableBatchOperation> tableBatchOperations = new List<TableBatchOperation>();
-
+            List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations_a = new List<List<Azure.Data.Tables.TableTransactionAction>>();
             foreach (MetaDataRepository.Component _Component in components)
             {
                 if (_Component.Identity.ToString() == typeof(DotNetMetaDataRepository.Assembly).GetMetaData().Assembly.FullName)
@@ -304,15 +312,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                     }
                 }
             }
-            foreach (var tableBatchOperation in tableBatchOperations)
-                ClassBLOBDataTable.ExecuteBatch(tableBatchOperation);
+            //foreach (var tableBatchOperation in tableBatchOperations)
+            //    ClassBLOBDataTable.ExecuteBatch(tableBatchOperation);
 
 
-            //CloudTableClient tableClient = Account.CreateCloudTableClient();
-            //CloudTable table = tableClient.GetTableReference("ClassBLOBData");
+            foreach (var tableBatchOperation in tableBatchOperations_a)
+                ClassBLOBDataTable_a.SubmitTransaction(tableBatchOperation);
 
 
-            foreach (var classBLOBData in (from classBLOBData in ClassBLOBDataTable.CreateQuery<ClassBLOBData>()
+
+
+            foreach (var classBLOBData in (from classBLOBData in ClassBLOBDataTable_a.Query<ClassBLOBData>()
                                            select classBLOBData))
             {
 
@@ -421,7 +431,64 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             }
 
         }
+        protected void RegisterClass(System.Collections.Generic.Dictionary<string, OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ClassBLOB> insertedClassBlobs, OOAdvantech.DotNetMetaDataRepository.Class _class, List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations)
+        {
+            //TableBatchOperation_a.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpsertReplace, objectBLOBData));
 
+            ClassBLOB classBLOB = GetClassBLOBIfExist(_class);
+
+
+
+            if (tableBatchOperations.Count == 0 || tableBatchOperations.Last().Count == 100)
+                tableBatchOperations.Add(new List<Azure.Data.Tables.TableTransactionAction>());
+            List<Azure.Data.Tables.TableTransactionAction> tableBatchOperation = tableBatchOperations.Last();
+
+            byte[] byteStream = new byte[65536];
+            int offset = 4;
+
+            if (classBLOB == null)
+            {
+                ClassBLOBData classBLOBData = new ClassBLOBData("AAA", Guid.NewGuid().ToString());
+                classBLOB = new ClassBLOB(_class, classBLOBData);
+                classBLOB.Serialize(byteStream, offset, out offset);
+                int nextpos = 0;
+                OOAdvantech.BinaryFormatter.BinaryFormatter.Serialize(offset - 4, byteStream, 0, ref nextpos, true);
+                byte[] outByteStream = new byte[offset];
+
+                for (int i = 0; i != offset; i++)
+                    outByteStream[i] = byteStream[i];
+
+                classBLOB.ClassBLOBData.ClassData = outByteStream;
+                classBLOB.ClassBLOBData.MetaObjectIdentity = _class.Identity.ToString();
+
+                insertedClassBlobs.Add(_class.Identity.ToString(), classBLOB);
+
+                tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Add, classBLOB.ClassBLOBData));
+
+            }
+            else
+            {
+                if (classBLOB.HasChange)
+                {
+                    classBLOB.Serialize(byteStream, offset, out offset);
+                    int nextpos = 0;
+                    OOAdvantech.BinaryFormatter.BinaryFormatter.Serialize(offset - 4, byteStream, 0, ref nextpos, true);
+                    byte[] outByteStream = new byte[offset];
+                    for (int i = 0; i != offset; i++)
+                        outByteStream[i] = byteStream[i];
+
+                    classBLOB.ClassBLOBData.ClassData = outByteStream;
+                    classBLOB.ClassBLOBData.MetaObjectIdentity = _class.Identity.ToString();
+
+                    insertedClassBlobs.Add(_class.Identity.ToString(), classBLOB);
+
+                    tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpdateReplace, classBLOB.ClassBLOBData));
+                    
+                }
+            }
+
+
+        }
 
 
 
