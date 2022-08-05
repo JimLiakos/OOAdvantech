@@ -404,7 +404,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public override void MakeChangesDurable(TransactionContext theTransaction)
         {
 
-            (this.StorageMetaData as Storage).MetadataIdentitiesTable.UpdateEntity((this.StorageMetaData as Storage).MetadataIdentities);
+            (this.StorageMetaData as Storage).MetadataIdentitiesTable_a.UpdateEntity((this.StorageMetaData as Storage).MetadataIdentities,Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
 
             if (TableBatchOperations.ContainsKey(theTransaction.Transaction.LocalTransactionUri.ToLower()))
             {

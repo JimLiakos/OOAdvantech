@@ -38,7 +38,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <MetaDataID>{3345967a-891f-4096-9822-90cf0b78d61f}</MetaDataID>
         //public readonly CloudTable ObjectBLOBDataTable;
 
-        public readonly CloudTable MetadataIdentitiesTable;
+        //public readonly CloudTable MetadataIdentitiesTable;
 
         public readonly Azure.Data.Tables.TableClient ClassBLOBDataTable_a;
 
@@ -118,7 +118,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             //ClassBLOBDataTable = tableClient.GetTableReference(ClassBLOBDataTableName);
             //ObjectBLOBDataTable = tableClient.GetTableReference(ObjectBLOBDataTableName);
-            MetadataIdentitiesTable = tableClient.GetTableReference(MetadataIdentityTableName);
+            //MetadataIdentitiesTable = tableClient.GetTableReference(MetadataIdentityTableName);
             ClassBLOBDataTable_a = TablesAccount.GetTableClient(ClassBLOBDataTableName);
             ObjectBLOBDataTable_a = TablesAccount.GetTableClient(ObjectBLOBDataTableName);
             MetadataIdentitiesTable_a = TablesAccount.GetTableClient(MetadataIdentityTableName);
@@ -150,23 +150,24 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
                 if (!metadataIdentitiesTable_exist)
                 {
+                    MetadataIdentitiesTable_a.CreateIfNotExists();
                     MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
                     MetadataIdentities.NextOID = 1;
-                    MetadataIdentitiesTable.InsertEntity(MetadataIdentities);
+                    MetadataIdentitiesTable_a.AddEntity(MetadataIdentities);
                 }
 
-                if (!MetadataIdentitiesTable.Exists())
-                {
-                    MetadataIdentitiesTable.CreateIfNotExists();
+                //if (!MetadataIdentitiesTable.Exists())
+                //{
+                //    MetadataIdentitiesTable.CreateIfNotExists();
 
 
-                    MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
-                    MetadataIdentities.NextOID = 1;
-                    MetadataIdentitiesTable.InsertEntity(MetadataIdentities);
-                }
+                //    MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
+                //    MetadataIdentities.NextOID = 1;
+                //    MetadataIdentitiesTable.InsertEntity(MetadataIdentities);
+                //}
                 else
                 {
-                    foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable.CreateQuery<MetadataIdentities>()
+                    foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable_a.Query<MetadataIdentities>()
                                                         select metadataIdentities))
                     {
                         MetadataIdentities = metadataIdentities;
@@ -181,19 +182,20 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             {
                 if (!metadataIdentitiesTable_exist)
                 {
+                    MetadataIdentitiesTable_a.CreateIfNotExists();
                     MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
                     MetadataIdentities.NextOID = 1;
-                    MetadataIdentitiesTable.InsertEntity(MetadataIdentities);
+                    MetadataIdentitiesTable_a.AddEntity(MetadataIdentities);
                 }
-                if (!MetadataIdentitiesTable.Exists())
-                {
-                    MetadataIdentitiesTable.CreateIfNotExists();
+                //if (!MetadataIdentitiesTable.Exists())
+                //{
+                //    MetadataIdentitiesTable.CreateIfNotExists();
 
 
-                    MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
-                    MetadataIdentities.NextOID = 1;
-                    MetadataIdentitiesTable.InsertEntity(MetadataIdentities);
-                }
+                //    MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
+                //    MetadataIdentities.NextOID = 1;
+                //    MetadataIdentitiesTable.InsertEntity(MetadataIdentities);
+                //}
 
                 LoadClassBlobs();
             }
@@ -575,7 +577,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             {
                 throw;
             }
-            foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable.CreateQuery<MetadataIdentities>()
+            foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable_a.Query<MetadataIdentities>()
                                                 select metadataIdentities))
             {
                 MetadataIdentities = metadataIdentities;

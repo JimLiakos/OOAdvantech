@@ -61,7 +61,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 throw new System.Exception("Invalid member");
         }
 
-        public void LoadMemberData(byte[] byteStream, int offset, out int nextAvailablePos, ElasticTableEntity entity)
+        public void LoadMemberData(byte[] byteStream, int offset, out int nextAvailablePos, Azure.Data.Tables.TableEntity entity)
         {
             nextAvailablePos = offset;
 

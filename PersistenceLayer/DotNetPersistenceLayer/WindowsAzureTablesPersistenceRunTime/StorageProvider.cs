@@ -431,7 +431,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 RestoredStorageManager restoredStorageManager = new RestoredStorageManager(storageName, storageLocation, storagePrefix, backupStoragePrefix, backupTablePrefix, replacedDataStoragePrefix, replacedDataTables);
 
                 string tableName = null;
-                List<ElasticTableEntity> deserializedEntities = null;
+                List<Azure.Data.Tables.TableEntity> deserializedEntities = null;
 
                 int testI = 0;
                 while (memoryStream.Position < memoryStream.Length)
@@ -517,7 +517,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
 
-        internal void TransferTableRecords(string cloudTableName, List<ElasticTableEntity> tableEntities, CloudStorageAccount account, Azure.Data.Tables.TableServiceClient tablesAccount)
+        internal void TransferTableRecords(string cloudTableName, List<Azure.Data.Tables.TableEntity> tableEntities, CloudStorageAccount account, Azure.Data.Tables.TableServiceClient tablesAccount)
         {
 
             try
@@ -537,18 +537,21 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 }
 
-                List<TableBatchOperation> tableBatchOperations = new List<TableBatchOperation>();
+                var azureTable_a = tablesAccount.GetTableClient(cloudTableName);
+
+                List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations = new List<List<Azure.Data.Tables.TableTransactionAction>>();
 
                 foreach (var entity in tableEntities)
                 {
                     if (tableBatchOperations.Count == 0 || tableBatchOperations.Last().Count == 100)
-                        tableBatchOperations.Add(new TableBatchOperation());
+                        tableBatchOperations.Add(new List<Azure.Data.Tables.TableTransactionAction>());
 
-                    tableBatchOperations.Last().Insert(entity);
+
+                    tableBatchOperations.Last().Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Add, entity));
                 }
 
                 foreach (var tableBatchOperation in tableBatchOperations)
-                    azureTable.ExecuteBatch(tableBatchOperation);
+                    azureTable_a.SubmitTransaction(tableBatchOperation);
 
             }
             catch (Exception error)

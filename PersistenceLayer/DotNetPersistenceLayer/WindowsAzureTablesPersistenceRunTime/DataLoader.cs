@@ -2280,10 +2280,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                         Azure.Data.Tables.TableClient azureTable_a = tablesAccount.GetTableClient(azureTableEntitiesRetriever.CloudTableName);
                         List<ElasticTableEntity> entities = null;
+                        if (!azureTableEntitiesRetriever.SelectionColumns.Contains("RowKey"))
+                            azureTableEntitiesRetriever.SelectionColumns.Add("RowKey");
+                        if (!azureTableEntitiesRetriever.SelectionColumns.Contains("PartitionKey"))
+                            azureTableEntitiesRetriever.SelectionColumns.Add("PartitionKey");
+
+                 
                         //List<Azure.Data.Tables.TableEntity> entities = null;
                         //entities = azureTable.ExecuteQuery(query.Select(azureTableEntitiesRetriever.SelectionColumns).Where(azureTableEntitiesRetriever.FilterScript)).ToList();
                         entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(azureTableEntitiesRetriever.FilterScript,null, azureTableEntitiesRetriever.SelectionColumns).Select(x=>new ElasticTableEntity(x)).ToList();
-                        
                         int storageIdentity = QueryStorageIdentities.IndexOf(storageCell.StorageIdentity);
                         foreach (var entity in entities)
                         {
@@ -2517,6 +2522,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             IList<string> selectionColumns = new List<string>();
                             foreach (DataLoader.DataColumn column in associationTableColumns)
                                 selectionColumns.Add(column.Name);
+
+                            selectionColumns.Add("RowKey");
+                            selectionColumns.Add("PartitionKey");
+
                             //List<ElasticTableEntity> entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
                             List<ElasticTableEntity> entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(default(string),default(int?) , selectionColumns).Select(x => new ElasticTableEntity(x)).ToList();
                             int roleAStorageIdentity = QueryStorageIdentities.IndexOf(storageCellsLink.RoleAStorageCell.StorageIdentity);

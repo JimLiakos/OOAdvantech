@@ -26,6 +26,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             this.RowKey = values.RowKey;
             this._ETag = values.ETag.ToString();
 
+            this.Properties = new Dictionary<string, EntityProperty>();
+
+            foreach (var entry in values)
+            {
+                this.Properties[entry.Key] = new EntityProperty(entry.Key, entry.Value, values);
+            }
+
         }
 
 
@@ -41,6 +48,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     return this.Properties[name].StringValue;
             }
         }
+
+        private IDictionary<string, Microsoft.Azure.Cosmos.Table.EntityProperty> CosmoProperties;
 
         public IDictionary<string, OOAdvantech.WindowsAzureTablesPersistenceRunTime.EntityProperty> Properties { get; set; }
 
@@ -131,15 +140,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         public void ReadEntity(IDictionary<string, Microsoft.Azure.Cosmos.Table.EntityProperty> properties, OperationContext operationContext)
         {
-            this.Properties = properties;
+            CosmoProperties = properties;
+            this.Properties = new Dictionary<string, EntityProperty>();
+            foreach (var entry in CosmoProperties)
+                this.Properties[entry.Key] = new EntityProperty(entry.Value);
         }
 
 
 
         public IDictionary<string, Microsoft.Azure.Cosmos.Table.EntityProperty> WriteEntity(OperationContext operationContext)
         {
-            
-            return this.Properties;
+
+            return this.CosmoProperties;
         }
 
         #endregion
@@ -304,12 +316,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             Property = property;
         }
 
+        EdmType _PropertyType;
         public EdmType PropertyType
         {
             get
             {
-
-                return Property.PropertyType;
+                if (Property != null)
+                    return Property.PropertyType;
+                else
+                    return _PropertyType;
             }
         }
         //
@@ -322,7 +337,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         //
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a byte array.
-        public byte[] BinaryValue { get => Property.BinaryValue; set => Property.BinaryValue = value; }
+        public byte[] BinaryValue
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.Binary)
+                        return (byte[])Value;
+                }
+                return Property?.BinaryValue;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.BinaryValue = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the boolean value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -334,7 +367,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a boolean
         //     value.
-        public bool? BooleanValue { get => Property.BooleanValue; set => Property.BooleanValue = value; }
+        public bool? BooleanValue
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.Boolean)
+                        return (bool)Value;
+                }
+                return Property?.BooleanValue;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.BooleanValue = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the Microsoft.Azure.Cosmos.Table.EntityProperty.DateTime value of
@@ -345,7 +396,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Value:
         //     The Microsoft.Azure.Cosmos.Table.EntityProperty.DateTime value of this Microsoft.Azure.Cosmos.Table.EntityProperty
         //     object.
-        public DateTime? DateTime { get => Property.DateTime; set => Property.DateTime = value; }
+        public DateTime? DateTime
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.DateTime)
+                        return (DateTime)Value;
+                }
+                return Property?.DateTime;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.DateTime = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the System.DateTimeOffset value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -358,7 +427,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a System.DateTimeOffset
         //     value.
-        public DateTimeOffset? DateTimeOffsetValue { get=>Property.DateTimeOffsetValue; set => Property.DateTimeOffsetValue=value; }
+        public DateTimeOffset? DateTimeOffsetValue
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.DateTime)
+                        return (DateTime)Value;
+                }
+                return Property?.DateTimeOffsetValue;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.DateTimeOffsetValue = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the double value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -370,7 +457,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a double
         //     value.
-        public double? DoubleValue { get => Property.DoubleValue; set => Property.DoubleValue = value; }
+        public double? DoubleValue
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.Double)
+                        return (Double)Value;
+                }
+                return Property?.DoubleValue;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.DoubleValue = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the System.Guid value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -382,7 +487,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a System.Guid
         //     value.
-        public Guid? GuidValue { get => Property.GuidValue; set => Property.GuidValue = value; }
+        public Guid? GuidValue
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.Guid)
+                        return (Guid)Value;
+                }
+                return Property?.GuidValue;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.GuidValue = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the System.Int32 value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -394,7 +517,26 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a System.Int32
         //     value.
-        public int? Int32Value { get => Property.Int32Value; set => Property.Int32Value = value; }
+        public int? Int32Value
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.Int32)
+                        return (int)Value;
+                }
+                return Property?.Int32Value;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.Int32Value = value;
+            }
+        }
+
         //
         // Summary:
         //     Gets the Microsoft.Azure.Cosmos.Table.EdmType of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -407,7 +549,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         //
         // Summary:
         //     Gets the Microsoft.Azure.Cosmos.Table.EntityProperty as a generic object.
-        public object PropertyAsObject { get => Property.PropertyAsObject;  }
+        public object PropertyAsObject
+        {
+            get
+            {
+                if (Property == null)
+                    return Value;
+                return Property?.Int32Value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the string value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -419,7 +569,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than a string
         //     value.
-        public string StringValue { get => Property.StringValue; set => Property.StringValue = value; }
+        public string StringValue
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.String)
+                        return (string)Value;
+                }
+                return Property?.StringValue;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.StringValue = value;
+            }
+        }
         //
         // Summary:
         //     Gets or sets the System.Int64 value of this Microsoft.Azure.Cosmos.Table.EntityProperty
@@ -431,7 +599,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         // Remarks:
         //     An exception is thrown if this property is set to a value other than an System.Int64
         //     value.
-        public long? Int64Value { get => Property.Int64Value; set => Property.Int64Value = value; }
+        public long? Int64Value
+        {
+            get
+            {
+                if (Property == null)
+                {
+                    if (PropertyType == EdmType.Int64)
+                        return (System.Int64)Value;
+                }
+                return Property?.Int64Value;
+            }
+            set
+            {
+                if (TableEntity != null)
+                    TableEntity[Name] = value;
+                else
+                    Property.Int64Value = value;
+            }
+        }
 
 
         //
@@ -551,5 +737,38 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             Property = new Microsoft.Azure.Cosmos.Table.EntityProperty(input);
         }
 
+        object Value;
+        string Name;
+        Azure.Data.Tables.TableEntity TableEntity;
+        public EntityProperty(string name, object value, Azure.Data.Tables.TableEntity tableEntity)
+        {
+            TableEntity = tableEntity;
+
+            Value = value;
+            if (value is byte[])
+                _PropertyType = EdmType.Binary;
+
+            if (value is bool)
+                _PropertyType = EdmType.Boolean;
+
+            if (value is DateTime)
+                _PropertyType = EdmType.DateTime;
+
+            if (value is double)
+                _PropertyType = EdmType.Double;
+
+            if (value is Guid)
+                _PropertyType = EdmType.Guid;
+
+            if (value is System.Int32)
+                _PropertyType = EdmType.Int32;
+
+            if (value is System.Int64)
+                _PropertyType = EdmType.Int64;
+
+            if (value is string)
+                _PropertyType = EdmType.String;
+
+        }
     }
 }

@@ -1078,7 +1078,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             offset = 0;
             string rStorageMetaDataXml = BinaryFormatter.BinaryFormatter.ToString(Buffer, offset, ref offset);
             string tableName = null;
-            List<ElasticTableEntity> deserializedEntities = null;
+            List<Azure.Data.Tables.TableEntity> deserializedEntities = null;
 
             while (memoryStream.Position < memoryStream.Length)
             {
@@ -1096,10 +1096,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
 
-        static internal void DeserializeTable(Stream memoryStream, out string tableName, out List<ElasticTableEntity> deserializedEntities)
+        static internal void DeserializeTable(Stream memoryStream, out string tableName, out List<Azure.Data.Tables.TableEntity> deserializedEntities)
         {
 
-            deserializedEntities = new List<ElasticTableEntity>();
+            deserializedEntities = new List<Azure.Data.Tables.TableEntity>();
             memoryStream.Read(Buffer, 0, 1);
             int headerType = Buffer[0];
             memoryStream.Read(Buffer, 0, 4);
@@ -1132,7 +1132,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 memoryStream.Read(Buffer, 0, 4);
                 streamLength = BitConverter.ToInt32(Buffer, 0);
                 memoryStream.Read(Buffer, 0, streamLength);
-                ElasticTableEntity entity = new ElasticTableEntity();
+                Azure.Data.Tables.TableEntity entity = new Azure.Data.Tables.TableEntity();
                 offset = 0;
                 foreach (var member in members)
                     member.LoadMemberData(Buffer, offset, out offset, entity);

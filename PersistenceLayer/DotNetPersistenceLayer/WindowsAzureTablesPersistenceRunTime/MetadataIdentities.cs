@@ -1,7 +1,11 @@
+using Azure;
+using Azure.Data.Tables;
+using System;
+
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
     /// <MetaDataID>{34f61f48-a15e-48ec-ab2a-68ee2409c94c}</MetaDataID>
-    public class MetadataIdentities : Microsoft.Azure.Cosmos.Table.TableEntity
+    public class MetadataIdentities : Microsoft.Azure.Cosmos.Table.TableEntity,Azure.Data.Tables.ITableEntity
     {
 
         /// <MetaDataID>{ddc52708-cfe0-44e2-a0d2-d3879bdcb0e5}</MetaDataID>
@@ -23,6 +27,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         /// <MetaDataID>{78d7d923-af54-4890-a23a-6611af7cd084}</MetaDataID>
         public int NextOID { get; set; }
-
+        DateTimeOffset? ITableEntity.Timestamp { get ; set ; }
+        ETag ITableEntity.ETag { get; set ; }
     }
 }
