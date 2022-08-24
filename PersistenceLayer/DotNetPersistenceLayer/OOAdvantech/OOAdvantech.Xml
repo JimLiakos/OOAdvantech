@@ -4187,6 +4187,9 @@
             In the case of a client/server database system, it may be 
             equivalent to an actual network connection to the server. </summary>
         </member>
+        <member name="P:OOAdvantech.PersistenceLayer.ObjectStorage.IsReadonly">
+            <MetaDataID>{b096806d-ed23-4129-9792-a6deaf42fb8f}</MetaDataID>
+        </member>
         <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.Backup(OOAdvantech.PersistenceLayer.IBackupArchive)">
             <MetaDataID>{e91b5c0d-61c4-4acf-a0ff-2fd8ee804cdc}</MetaDataID>
         </member>
@@ -4404,6 +4407,9 @@
             OOAdvantech.MSSQLPersistenceRunTime.StorageProvider. </param>
             <MetaDataID>{58834B72-37CA-4F14-BDEB-3559AE0E665E}</MetaDataID>
         </member>
+        <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.UpdateOperativeOperativeObjects(System.String)">
+            <MetaDataID>{92d67ee4-f8ed-4548-b696-accbb363d8da}</MetaDataID>
+        </member>
         <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage(OOAdvantech.PersistenceLayer.Storage,System.String,System.String,System.String)">
             <summary>This method creates a new storage with name, type and location that defined from parameters StorageName, StorageType and StorageLocation.
             The schema of storage will be the same with the OriginalStorage. </summary>
@@ -4432,6 +4438,9 @@
         </member>
         <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.GetObjectFromUri(System.String)">
             <MetaDataID>{148f0b13-fbd5-451a-9cbe-6c98456ad9c4}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.GetObjectFromUri``1(System.String)">
+            <MetaDataID>{2c7035bf-37a9-4ef4-926f-8fe64a7656ed}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageFromUri(System.String)">
             <MetaDataID>{3a304faa-ec3f-4349-ad9d-cd1694034139}</MetaDataID>
@@ -4479,6 +4488,9 @@
         <member name="F:OOAdvantech.PersistenceLayer.ObjectStorage._PersistencyService">
             <exclude>Excluded</exclude>
             <MetaDataID>{924FEFB9-B8A0-46A6-AFCF-95A7B19D357F}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.PersistenceLayer.ObjectStorage.PersistencyServiceLock">
+            <MetaDataID>{e2f6ca57-f1e1-4658-bd48-72f162679617}</MetaDataID>
         </member>
         <member name="P:OOAdvantech.PersistenceLayer.ObjectStorage.PersistencyService">
             <summary>Used from static method of storage session class to

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Microsoft.Azure.Cosmos.Table;
 using OOAdvantech.PersistenceLayer;
 using OOAdvantech.PersistenceLayerRunTime;
 using OOAdvantech.Transactions;
@@ -15,14 +14,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     /// <MetaDataID>{3dc902aa-cda5-4694-8f5e-ad91a896bb47}</MetaDataID>
     public class StorageProvider : PersistenceLayerRunTime.StorageProvider
     {
-        static Dictionary<string, StorageCredentials> ImplicitOpenStorageCredentials = new Dictionary<string, StorageCredentials>();
+        // static Dictionary<string, StorageCredentials> ImplicitOpenStorageCredentials = new Dictionary<string, StorageCredentials>();
+        static Dictionary<string, Azure.Data.Tables.TableSharedKeyCredential> ImplicitOpenStorageCredentials = new Dictionary<string, Azure.Data.Tables.TableSharedKeyCredential>();
         //Set Implicit Open Storage Credentials
-        public static void SetImplicitOpenStorageCredentials(string storageLocation, StorageCredentials storageCredentials)
+        //public static void SetImplicitOpenStorageCredentials(string storageLocation, StorageCredentials storageCredentials)
+        //{
+        //    ImplicitOpenStorageCredentials[storageLocation] = storageCredentials;
+        //}
+        //Set Implicit Open Storage Credentials
+        public static void SetImplicitOpenStorageCredentials(string storageLocation, Azure.Data.Tables.TableSharedKeyCredential storageCredentials)
         {
             ImplicitOpenStorageCredentials[storageLocation] = storageCredentials;
-
         }
-
         public StorageProvider()
         {
 
@@ -99,17 +102,31 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             throw new NotImplementedException();
         }
 
-        CloudStorageAccount Account;
-        public override PersistenceLayerRunTime.ObjectStorage NewStorage(PersistenceLayer.Storage OriginalStorage, string StorageName, string StorageLocation, string userName = "", string password = "")
+        //CloudStorageAccount Account;
+        public override PersistenceLayerRunTime.ObjectStorage NewStorage(PersistenceLayer.Storage OriginalStorage, string StorageName, string storageLocation, string userName = "", string password = "")
         {
-            CloudStorageAccount account = null;
+            //CloudStorageAccount account = null;
 
-            if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
-                account = CloudStorageAccount.DevelopmentStorageAccount;
+            //if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+            //    account = CloudStorageAccount.DevelopmentStorageAccount;
+            //else
+            //    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+            //Account = account;
+            // Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+            Azure.Data.Tables.TableServiceClient tablesAccount = null;
+            Azure.Data.Tables.TableSharedKeyCredential azureTablesCredential = null;
+            if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+                tablesAccount = new Azure.Data.Tables.TableServiceClient(Storage.DevelopmentStorage);
             else
-                account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
-            Account = account;
-            Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+            {
+                Uri endPoint = new Uri(string.Format("https://{0}.table.core.windows.net", storageLocation));
+                if (string.IsNullOrWhiteSpace(userName) && OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(storageLocation))
+                    azureTablesCredential = StorageProvider.ImplicitOpenStorageCredentials[storageLocation];
+                else
+                    azureTablesCredential = new Azure.Data.Tables.TableSharedKeyCredential(userName, password);
+
+                tablesAccount = new Azure.Data.Tables.TableServiceClient(endPoint, azureTablesCredential);
+            }
 
             //CloudTableClient tableClient = account.CreateCloudTableClient();
             //CloudTable table = tableClient.GetTableReference("StoragesMetadata");
@@ -134,7 +151,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 storageMetadata = new StorageMetadata("AAA", Guid.NewGuid().ToString());
                 storageMetadata.StorageName = StorageName;
                 storageMetadata.StoragePrefix = StorageName;
-                
+
                 //TableOperation insertOperation = TableOperation.Insert(storageMetadata);
                 //var result = table.Execute(insertOperation);
                 storagesMetadataTable_a.AddEntity(storageMetadata);
@@ -142,7 +159,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             else
             {
                 while (storageMetadata.UnderConstruction)
-                {storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
+                {
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
                     System.Threading.Thread.Sleep(100);
                     storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
                                        where storageMetada.StorageName == StorageName //&& storageMetada.UnderConstruction == false
@@ -151,7 +169,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 PersistenceLayer.ObjectStorage existinObjectStorage = null;
                 try
                 {
-                    existinObjectStorage = OpenStorage(StorageName, StorageLocation, userName, password);
+                    existinObjectStorage = OpenStorage(StorageName, storageLocation, userName, password);
 
                 }
                 catch (OOAdvantech.PersistenceLayer.StorageException Error)
@@ -165,15 +183,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     throw new OOAdvantech.PersistenceLayer.StorageException(string.Format("Storage with name '{0}' already exist", StorageName), PersistenceLayer.StorageException.ExceptionReason.StorageAlreadyExist);
             }
 
-            PersistenceLayer.ObjectStorage metaDataStorage = PersistenceLayer.ObjectStorage.NewStorage(StorageName, StorageLocation,
+            PersistenceLayer.ObjectStorage metaDataStorage = PersistenceLayer.ObjectStorage.NewStorage(StorageName, storageLocation,
                          "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", true);
             string assemblyFullName = typeof(OOAdvantech.WindowsAzureTablesPersistenceRunTime.Storage).Assembly.FullName;
             metaDataStorage.StorageMetaData.RegisterComponent(assemblyFullName);
 
-            Storage storage = new Storage(StorageName, StorageLocation, this.GetType().FullName, storageMetadata);
+            Storage storage = new Storage(StorageName, storageLocation, this.GetType().FullName, storageMetadata);
             metaDataStorage.CommitTransientObjectState(storage);
 
-            ObjectStorage objectStorage = new ObjectStorage(storage, account,tablesAccount);
+            ObjectStorage objectStorage = new ObjectStorage(storage, tablesAccount,userName, password);
 
             {
                 storageMetadata.UnderConstruction = false;
@@ -181,7 +199,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 //TableOperation replaceOperation = TableOperation.Replace(storageMetadata);
                 //var result = table.Execute(replaceOperation);
 
-                storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
+                storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
             }
 
             return objectStorage;
@@ -197,7 +215,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
         static protected System.Collections.Generic.Dictionary<string, ObjectStorage> OpenStorages = new System.Collections.Generic.Dictionary<string, ObjectStorage>();
-        public override PersistenceLayerRunTime.ObjectStorage OpenStorage(string storageName, string StorageLocation, string userName = "", string password = "")
+        public override PersistenceLayerRunTime.ObjectStorage OpenStorage(string storageName, string storageLocation, string userName = "", string password = "")
         {
             lock (OpenStorageLock)
             {
@@ -205,18 +223,30 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 if (OpenStorages.TryGetValue(storageName.ToLower(), out objectStorage))
                     return objectStorage;
 
-                CloudStorageAccount account = null;
+                Azure.Data.Tables.TableServiceClient tablesAccount = null;
 
-                if (StorageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
-                    account = CloudStorageAccount.DevelopmentStorageAccount;
+                if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+                    tablesAccount = new Azure.Data.Tables.TableServiceClient(Storage.DevelopmentStorage);
                 else
                 {
-                    if (string.IsNullOrWhiteSpace(userName) && OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(StorageLocation))
-                        account = new CloudStorageAccount(OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials[StorageLocation], true);
+                    Uri endPoint = new Uri(string.Format("https://{0}.table.core.windows.net", storageLocation));
+                    if (string.IsNullOrWhiteSpace(userName) && OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(storageLocation))
+                        tablesAccount = new Azure.Data.Tables.TableServiceClient(endPoint, StorageProvider.ImplicitOpenStorageCredentials[storageLocation]);
                     else
-                        account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+                        tablesAccount = new Azure.Data.Tables.TableServiceClient(endPoint, new Azure.Data.Tables.TableSharedKeyCredential(userName, password));
                 }
-                Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+
+
+                //CloudStorageAccount account = null;
+                //if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+                //    account = CloudStorageAccount.DevelopmentStorageAccount;
+                //else
+                //{
+                //    if (string.IsNullOrWhiteSpace(userName) && OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials.ContainsKey(storageLocation))
+                //        account = new CloudStorageAccount(OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageProvider.ImplicitOpenStorageCredentials[storageLocation], true);
+                //    else
+                //        account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+                //}
                 //CloudTableClient tableClient = account.CreateCloudTableClient();
 
                 //CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
@@ -226,7 +256,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "StoragesMetadata"));
                 bool storagesMetadataTable_exist = queryTableResults.Count() > 0;
 
-                
+
 
                 if (storagesMetadataTable_exist)
                 {
@@ -236,7 +266,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                                        select storageMetada).FirstOrDefault();
 
                     if (storageMetadata == null)
-                        throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + StorageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist, null);
+                        throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + storageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist, null);
 
                     while (storageMetadata.UnderConstruction)
                     {
@@ -246,7 +276,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                            select storageMetada).FirstOrDefault();
                     }
                     //global::Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
-                    objectStorage = OpenStorage(storageName, StorageLocation, account, tablesAccount, storageMetadata);
+                    objectStorage = OpenStorage(storageName, storageLocation, tablesAccount,userName,password, storageMetadata);
 
 
                     if (string.IsNullOrWhiteSpace(storageMetadata.StorageIdentity))
@@ -263,7 +293,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 }
                 else
                 {
-                    throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + StorageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist, null);
+                    throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + storageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist, null);
                 }
 
 
@@ -272,13 +302,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
         }
 
-        private ObjectStorage OpenStorage(string storageName, string StorageLocation, CloudStorageAccount account,Azure.Data.Tables.TableServiceClient tablesAcount, StorageMetadata storageMetadata)
+        private ObjectStorage OpenStorage(string storageName, string StorageLocation, Azure.Data.Tables.TableServiceClient tablesAcount, string userName, string pasword, StorageMetadata storageMetadata)
         {
             ObjectStorage objectStorage = null;
             using (Transactions.SystemStateTransition stateTransition = new OOAdvantech.Transactions.SystemStateTransition())
             {
                 Storage storage = null;
-                PersistenceLayer.ObjectStorage metaDataObjectStorage = new AzureTableMetaDataPersistenceRunTime.ObjectStorage(storageName, StorageLocation, false, account, tablesAcount,storageMetadata);
+                PersistenceLayer.ObjectStorage metaDataObjectStorage = new AzureTableMetaDataPersistenceRunTime.ObjectStorage(storageName, StorageLocation, false, tablesAcount, storageMetadata);
 
                 //PersistenceLayer.ObjectStorage.OpenStorage(storageName, StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider");
 
@@ -300,14 +330,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 catch (Exception error)
                 {
 
-                    
+
                 }
                 if (storage == null)
                     throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + StorageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist);
 
                 storage.AzureStorageMetadata = storageMetadata;
 
-                objectStorage = new ObjectStorage(storage, account, tablesAcount);
+                objectStorage = new ObjectStorage(storage, tablesAcount,userName,pasword);
                 InitializeDataPartioningMetaData(objectStorage, storage);
                 objectStorage.ActivateObjectsInPreoadedStorageCells();
                 stateTransition.Consistent = true;
@@ -363,15 +393,24 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     storageName = backupStorageName;
 
 
-                CloudStorageAccount account = null;
-                if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
-                    account = CloudStorageAccount.DevelopmentStorageAccount;
-                else
-                    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+                //CloudStorageAccount account = null;
+                //if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+                //    account = CloudStorageAccount.DevelopmentStorageAccount;
+                //else
+                //    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
                 //CloudTableClient cloudTablesClient = account.CreateCloudTableClient();
 
-                Azure.Data.Tables.TableServiceClient tablesAccount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
 
+                Azure.Data.Tables.TableServiceClient tablesAccount = null;
+                if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+                    tablesAccount = new Azure.Data.Tables.TableServiceClient(Storage.DevelopmentStorage);
+                else
+                {
+                    Uri endPoint = new Uri(string.Format("https://{0}.table.core.windows.net", storageLocation));
+                    tablesAccount = new Azure.Data.Tables.TableServiceClient(endPoint, new Azure.Data.Tables.TableSharedKeyCredential(userName, password));
+                }
+
+            
                 //CloudTable storagesMetadataTable = cloudTablesClient.GetTableReference("StoragesMetadata");
                 Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
 
@@ -438,7 +477,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                     try
                     {
-                        var replacedDataStorage = OpenStorage(storageMetadata.StorageName, storageLocation, account, tablesAccount, storageMetadata) as ObjectStorage;//.StorageMetaData as Storage;
+                        var replacedDataStorage = OpenStorage(storageMetadata.StorageName, storageLocation, tablesAccount, userName, password, storageMetadata) as ObjectStorage;//.StorageMetaData as Storage;
                         replacedDataTables = replacedDataStorage.GetAzureStorageDataTablesNames();
 
                     }
@@ -452,7 +491,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         OpenStorages.Remove(storageMetadata.StorageName);
                     }
                     storageMetadata.UnderConstruction = true;
-                    storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
 
                     #endregion
                 }
@@ -469,9 +508,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     ObjectStorage.DeserializeTable(memoryStream, out tableName, out deserializedEntities);
                     tableName = restoredStorageManager.ResolveTableName(tableName);
                     storageMetadata.AddTemporaryTable(tableName);
-                    storagesMetadataTable_a.UpdateEntity(storageMetadata,Azure.ETag.All,Azure.Data.Tables.TableUpdateMode.Replace);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
 
-                    TransferTableRecords(tableName, deserializedEntities, account, tablesAccount);
+                    TransferTableRecords(tableName, deserializedEntities, tablesAccount);
 
                     //testI++;
 
@@ -480,7 +519,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 }
 
                 storageMetadata.StoragePrefix = storagePrefix;
-                ObjectStorage restoredObjectStorage = OpenStorage(storageName, storageLocation, account,tablesAccount, storageMetadata);
+                ObjectStorage restoredObjectStorage = OpenStorage(storageName, storageLocation, tablesAccount, userName, password, storageMetadata);
 
                 restoredStorageManager.UpdateStorageMetaData(restoredObjectStorage);
 
@@ -548,7 +587,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
 
-        internal void TransferTableRecords(string cloudTableName, List<Azure.Data.Tables.TableEntity> tableEntities, CloudStorageAccount account, Azure.Data.Tables.TableServiceClient tablesAccount)
+        internal void TransferTableRecords(string cloudTableName, List<Azure.Data.Tables.TableEntity> tableEntities, Azure.Data.Tables.TableServiceClient tablesAccount)
         {
 
             try
@@ -719,16 +758,25 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         public override void Repair(string storageName, string storageLocation, string storageType, bool inProcess, string userName, string password)
         {
-            CloudStorageAccount account = null;
-            if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
-                account = CloudStorageAccount.DevelopmentStorageAccount;
-            else
-                account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
+            //CloudStorageAccount account = null;
+            //if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+            //    account = CloudStorageAccount.DevelopmentStorageAccount;
+            //else
+            //    account = new CloudStorageAccount(new StorageCredentials(userName, password), true);
 
-            Azure.Data.Tables.TableServiceClient tablesAcount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
-            CloudTableClient tableClient = account.CreateCloudTableClient();
+            // Azure.Data.Tables.TableServiceClient tablesAcount = new Azure.Data.Tables.TableServiceClient(account.ToString(true));
+
+            Azure.Data.Tables.TableServiceClient tablesAccount = null;
+            if (storageLocation.ToLower() == @"DevStorage".ToLower() && (string.IsNullOrWhiteSpace(userName) || userName == "devstoreaccount1"))
+                tablesAccount = new Azure.Data.Tables.TableServiceClient(OOAdvantech.WindowsAzureTablesPersistenceRunTime.Storage.DevelopmentStorage);
+            else
+            {
+                Uri endPoint = new Uri(string.Format("https://{0}.table.core.windows.net", storageLocation));
+                tablesAccount = new Azure.Data.Tables.TableServiceClient(endPoint, new Azure.Data.Tables.TableSharedKeyCredential(userName, password));
+            }
+            //CloudTableClient tableClient = account.CreateCloudTableClient();
             //CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
-            Azure.Data.Tables.TableClient storagesMetadataTable_a= tablesAcount.GetTableClient("StoragesMetadata");
+            Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
 
             //storagesMetadataTable_a.CreateIfNotExists(); 
             //if (!storagesMetadataTable.Exists())
@@ -738,7 +786,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                                where storageMetada.StorageName == storageName
                                                select storageMetada).FirstOrDefault();
 
-            var objectStorage = OpenStorage(storageMetadata.StorageName, storageLocation, account,tablesAcount, storageMetadata) as ObjectStorage;//.StorageMetaData as Storage;
+            var objectStorage = OpenStorage(storageMetadata.StorageName, storageLocation, tablesAccount, userName, password, storageMetadata) as ObjectStorage;//.StorageMetaData as Storage;
 
             var azureStorageDataTablesNames = objectStorage.GetAzureStorageDataTablesNames();
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 
 using System.Linq;
-using Microsoft.Azure.Cosmos.Table;
 //using ObjectID = OOAdvantech.PersistenceLayer.ObjectID;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
@@ -216,14 +215,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
 
             string cloudTableName = objectCollectionsLink.ObjectLinksTable.Name;
-            var account = (ObjectStorage as ObjectStorage).Account;
-            CloudTableClient tableClient = account.CreateCloudTableClient();
-            CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+            var account = (ObjectStorage as ObjectStorage).TablesAccount;
+            //CloudTableClient tableClient = account.CreateCloudTableClient();
+            //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
 
             string filterScript = null;
 
-            if (azureTable.Exists())
+            //if (azureTable.Exists())
+            if ((ObjectStorage as ObjectStorage).TableExist(cloudTableName))
             {
+                Azure.Data.Tables.TableClient azureTable_a = account.GetTableClient(cloudTableName);
 
                 IList<string> selectionColumns = new List<string>();
 
@@ -233,7 +234,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         filterScript += " and ";
 
                     filterScript += " " + (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor(column.Name, "eq", (RoleB.PersistentObjectID as ObjectID).GetMemberValue(column.ColumnType));
-                    selectionColumns.Add(column.Name);
+                    selectionColumns.Add(column.DataBaseColumnName);
                 }
 
                 foreach (RDBMSMetaDataRepository.IdentityColumn column in roleBColumns)
@@ -243,14 +244,24 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
                     filterScript += " " + (this.ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor(column.Name, "eq", (RoleA.PersistentObjectID as ObjectID).GetMemberValue(column.ColumnType));
 
-                    selectionColumns.Add(column.Name);
+                    selectionColumns.Add(column.DataBaseColumnName);
                 }
-                var query = new TableQuery<ElasticTableEntity>();
-                List<ElasticTableEntity> entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+                if (!selectionColumns.Contains("RowKey"))
+                    selectionColumns.Add("RowKey");
+                if (!selectionColumns.Contains("PartitionKey"))
+                    selectionColumns.Add("PartitionKey");
+                //var query = new TableQuery<ElasticTableEntity>();
+                //List<ElasticTableEntity> entities = azureTable.Query<Azure.Data.Tables.TableEntity>(query.Select(selectionColumns).Where(filterScript)).ToList();
+                List<ElasticTableEntity> entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(filterScript,null, selectionColumns).Select(x => new ElasticTableEntity(x)).ToList(); ;
 
+             
                 foreach (var entity in entities)
                 {
-                    (this.ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Delete(entity);
+                    var tableBatchOperation = (ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable_a);
+
+                    tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Delete, entity.Values));
+
+                    //(this.ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Delete(entity);
                 }
             }
 

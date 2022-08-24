@@ -4,7 +4,6 @@ using OOAdvantech.Collections.Generic;
 using OOAdvantech.PersistenceLayerRunTime;
 using OOAdvantech.RDBMSMetaDataRepository;
 using System.Linq;
-using Microsoft.Azure.Cosmos.Table;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 {
@@ -72,7 +71,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
         /// <param name="deletedObjectID">
         /// Defines the object identity of deleted Object
         /// </param>
-        void DeleteTableRowsForManyToManyRelation( StorageCellsLink storageCellsLink,
+        void DeleteTableRowsForManyToManyRelation(StorageCellsLink storageCellsLink,
                                                     Table objectLinksTable,
                                                     Set<RDBMSMetaDataRepository.IdentityColumn> deletedObjectRefColumns,
                                                     PersistenceLayer.ObjectID deletedObjectID)
@@ -101,21 +100,36 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             if (!selectionColumns.Contains("PartitionKey"))
                 selectionColumns.Add("PartitionKey");
 
-            var account = (ObjectStorage as ObjectStorage).Account;
-            CloudTableClient tableClient = account.CreateCloudTableClient();
-            CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-            if (azureTable.Exists())
+            //var account = (ObjectStorage as ObjectStorage).Account;
+            //CloudTableClient tableClient = account.CreateCloudTableClient();
+            //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+            //if (azureTable.Exists())
+            if ((ObjectStorage as ObjectStorage).TableExist(cloudTableName))
             {
-                var query = new TableQuery<ElasticTableEntity>();
+                Azure.Data.Tables.TableClient azureTable_a = (ObjectStorage as ObjectStorage).TablesAccount.GetTableClient(cloudTableName);
+
+                //var query = new TableQuery<ElasticTableEntity>();
 
                 System.Collections.Generic.List<ElasticTableEntity> entities = null;
+                //if (string.IsNullOrWhiteSpace(filterScript))
+                //    entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
+                //else
+                //    entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
                 if (string.IsNullOrWhiteSpace(filterScript))
-                    entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
-                else
-                    entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+                    entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), selectionColumns).Select(x => new ElasticTableEntity(x)).ToList();
 
+                else
+                    entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(filterScript, null, selectionColumns).Select(x => new ElasticTableEntity(x)).ToList(); ;
+
+
+         
                 foreach (ElasticTableEntity entity in entities)
-                    (ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Delete(entity);
+                {
+                    var tableBatchOperation = (ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable_a);
+                    tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Delete, entity.Values));
+
+                    //(ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Delete(entity);
+                }
 
             }
         }
@@ -146,17 +160,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             string partitionKey = storageCellWithColumns.SerialNumber.ToString();
             string cloudTableName = keepObjectsLinkColumnTable.Name;
 
-           //Linq.Storage storage=new Linq.Storage(   PersistenceLayer.ObjectStorage.GetStorageOfObject(keepObjectsLinkColumnTable));
-           // var storgeCell = (from storageCell in storage.GetObjectCollection<StorageCell>()
-           //                   from table in storageCell.MappedTables
-           //                   where table == keepObjectsLinkColumnTable || table == storageCell.MainTable
-           //                   select storageCell).FirstOrDefault();
+            //Linq.Storage storage=new Linq.Storage(   PersistenceLayer.ObjectStorage.GetStorageOfObject(keepObjectsLinkColumnTable));
+            // var storgeCell = (from storageCell in storage.GetObjectCollection<StorageCell>()
+            //                   from table in storageCell.MappedTables
+            //                   where table == keepObjectsLinkColumnTable || table == storageCell.MainTable
+            //                   select storageCell).FirstOrDefault();
 
-           // if(storgeCell!=null)!
-           // {
+            // if(storgeCell!=null)!
+            // {
 
-           // }
-             
+            // }
+
             System.Collections.Generic.IList<string> selectionColumns = new List<string>();
             string filterScript = (ObjectStorage as ObjectStorage).TypeDictionary.GenerateFilterConditionFor("PartitionKey", "eq", partitionKey);
             foreach (RDBMSMetaDataRepository.IdentityColumn currColumn in deletedObjectRefColumns)
@@ -175,20 +189,31 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             if (!selectionColumns.Contains("PartitionKey"))
                 selectionColumns.Add("PartitionKey");
 
-            var account = (ObjectStorage as ObjectStorage).Account;
+            var account = (ObjectStorage as ObjectStorage).TablesAccount;
             lock (account)
             {
-                CloudTableClient tableClient = account.CreateCloudTableClient();
-                CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-                if (azureTable.Exists())
+                //CloudTableClient tableClient = account.CreateCloudTableClient();
+                //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                //if (azureTable.Exists())
+                if ((ObjectStorage as ObjectStorage).TableExist(cloudTableName))
                 {
-                    var query = new TableQuery<ElasticTableEntity>();
+                    Azure.Data.Tables.TableClient azureTable_a = account.GetTableClient(cloudTableName);
+                    var tableBatchOperation = (ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable_a);
+
+                   // var query = new TableQuery<ElasticTableEntity>();
 
                     System.Collections.Generic.List<ElasticTableEntity> entities = null;
+                    //if (string.IsNullOrWhiteSpace(filterScript))
+                    //    entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
+                    //else
+                    //    entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+
                     if (string.IsNullOrWhiteSpace(filterScript))
-                        entities = azureTable.ExecuteQuery(query.Select(selectionColumns)).ToList();
+                        entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), selectionColumns).Select(x => new ElasticTableEntity(x)).ToList();
                     else
-                        entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+                        entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(filterScript, null, selectionColumns).Select(x => new ElasticTableEntity(x)).ToList(); ;
+
+
 
                     foreach (ElasticTableEntity entity in entities)
                     {
@@ -202,7 +227,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         {
                             foreach (RDBMSMetaDataRepository.IdentityColumn currColumn in deletedObjectRefColumns)
                                 entity[currColumn.Name] = null;
-                            (ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Replace(entity);
+
+                            tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpdateReplace, entity.Values));
+
+                            //(ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Replace(entity);
                         }
                     }
                 }
@@ -218,7 +246,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
             AssociationEnd keepAssociationEndColumns = null;
             if (theAssociationEnd.Multiplicity.IsMany)
-                keepAssociationEndColumns = theAssociationEnd as RDBMSMetaDataRepository.AssociationEnd; 
+                keepAssociationEndColumns = theAssociationEnd as RDBMSMetaDataRepository.AssociationEnd;
             if (keepAssociationEndColumns == null && theAssociationEnd.GetOtherEnd().Multiplicity.IsMany)
                 keepAssociationEndColumns = theAssociationEnd.GetOtherEnd() as RDBMSMetaDataRepository.AssociationEnd;
             if (keepAssociationEndColumns == null)
@@ -234,18 +262,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             RDBMSMetaDataRepository.Table keepColumnTable = null;
             Collections.Generic.Set<RDBMSMetaDataRepository.IdentityColumn> linkColumns = null;
             ObjectID deletedObjectID = (ObjectID)DeletedStorageInstance.PersistentObjectID;
-            
+
             //TODO τι γίνεται στην περίπτωση που έχουμε one table per class και οι columns του association end βρίσκονται σε table  της parent class
-            
+
             linkColumns = keepAssociationEndColumns.GetReferenceColumnsFor(StorageCellWithColumns);
-            
+
             foreach (RDBMSMetaDataRepository.Column column in linkColumns)
             {
                 keepColumnTable = column.Namespace as RDBMSMetaDataRepository.Table;
                 break;
             }
 
-            UpdateTableRowsForOneToMany_OneToOne(StorageCellWithColumns, keepColumnTable, linkColumns,  deletedObjectID);
+            UpdateTableRowsForOneToMany_OneToOne(StorageCellWithColumns, keepColumnTable, linkColumns, deletedObjectID);
 
         }
 
@@ -268,7 +296,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 ////TODO τι γίνεται στην περίπτωση που έχουμε one table per class και οι columns του association end βρίσκονται σε table  της parent class
 
                 Collections.Generic.Set<RDBMSMetaDataRepository.IdentityColumn> deletedObjectIdentityColumns = associationEndWithDeletedObjectIdentityColumns.GetReferenceColumnsFor(objectLinksTable);
-                DeleteTableRowsForManyToManyRelation(StorageCellsLink, objectLinksTable, deletedObjectIdentityColumns,  deletedObjectID);
+                DeleteTableRowsForManyToManyRelation(StorageCellsLink, objectLinksTable, deletedObjectIdentityColumns, deletedObjectID);
             }
             else
                 throw new NotImplementedException();

@@ -217,7 +217,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
                 value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
-                if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null)
+                if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null&& value != DBNull.Value)
                 {
                     var attributeType = valueOfAttribute.Attribute.Type.GetExtensionMetaObject<System.Type>();
                     var dictionaryType = typeof(Dictionary<,>).MakeGenericType(typeof(string), attributeType);

@@ -8528,7 +8528,7 @@
 				default_color 	TRUE)
 			    label      	(object ItemLabel
 				Parent_View 	@13
-				location   	(1238, 746)
+				location   	(1238, 741)
 				fill_color 	13434879
 				nlines     	1
 				max_width  	432
@@ -8536,7 +8536,7 @@
 				label      	"RemotingServices")
 			    stereotype 	(object ItemLabel
 				Parent_View 	@13
-				location   	(1238, 696)
+				location   	(1238, 695)
 				fill_color 	13434879
 				anchor     	10
 				nlines     	1
@@ -8770,7 +8770,7 @@
 			    supplier   	"RenewalManager"
 			    quidu      	"5AD2EE7303A1"
 			    messages   	(list Messages
-				(object Message "AddProxy(  )"
+				(object Message "AddProxy(proxy, remotingServices)"
 				    quid       	"5AD2EF6A024C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8811,7 +8811,7 @@
 			    supplier   	"RenewalManager"
 			    quidu      	"5AD2EE7303A1"
 			    messages   	(list Messages
-				(object Message "GetSession(   )"
+				(object Message "GetSession(channelUri, create, remotingServices)"
 				    quid       	"5AD36B130291"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8849,7 +8849,7 @@
 			    supplier   	"$UNNAMED$46"
 			    quidu      	"48DB4F620290"
 			    messages   	(list Messages
-				(object Message "Invoke( )"
+				(object Message "Invoke(msg)"
 				    quid       	"48DB4F8E0186"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8869,7 +8869,7 @@
 			    supplier   	"$UNNAMED$47"
 			    quidu      	"5C121BE601AF"
 			    messages   	(list Messages
-				(object Message "EventConsumerSubscription(  )"
+				(object Message "EventConsumerSubscription(eventHandler, eventInfo)"
 				    quid       	"5C121CBE0361"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8891,7 +8891,7 @@
 			    supplier   	"$UNNAMED$49"
 			    quidu      	"48DB58260290"
 			    messages   	(list Messages
-				(object Message "Subscribe(  )"
+				(object Message "Subscribe(eventPublisherUri, eventInfo)"
 				    quid       	"48DB5B67003E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8913,7 +8913,7 @@
 			    supplier   	"$UNNAMED$50"
 			    quidu      	"48DB5EDD033C"
 			    messages   	(list Messages
-				(object Message "EventConsumerProxy(    )"
+				(object Message "EventConsumerProxy(eventPublisherUri, eventPublisherObject, eventInfo, clientSessionPart)"
 				    quid       	"48DB5F81000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8942,7 +8942,7 @@
 			    supplier   	"$UNNAMED$48"
 			    quidu      	"48DB51A3002E"
 			    messages   	(list Messages
-				(object Message "Subscribe(  )"
+				(object Message "Subscribe(proxy, eventInfo)"
 				    quid       	"48DB639D02CE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8973,7 +8973,7 @@
 			    supplier   	"$UNNAMED$52"
 			    quidu      	"48DB67C7013A"
 			    messages   	(list Messages
-				(object Message "Invoke( )"
+				(object Message "Invoke(msg)"
 				    quid       	"48DB67C70143"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8993,7 +8993,7 @@
 			    supplier   	"$UNNAMED$53"
 			    quidu      	"5C121E330309"
 			    messages   	(list Messages
-				(object Message "EventConsumerUnsubscribe(  )"
+				(object Message "EventConsumerUnsubscribe(removedEventHandler, eventInfo)"
 				    quid       	"5C121EA601AF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9015,7 +9015,7 @@
 			    supplier   	"$UNNAMED$51"
 			    quidu      	"48DB67C70128"
 			    messages   	(list Messages
-				(object Message "RemoveSubscription( )"
+				(object Message "RemoveSubscription(eventPublisherObject)"
 				    quid       	"48DB67C7012C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9037,7 +9037,7 @@
 			    supplier   	"$UNNAMED$54"
 			    quidu      	"48DB67C7012B"
 			    messages   	(list Messages
-				(object Message "Unsubscribe(  )"
+				(object Message "Unsubscribe(eventPublisherUri, eventInfo)"
 				    quid       	"48DB67FF02EE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9061,7 +9061,7 @@
 			    supplier   	"$UNNAMED$55"
 			    quidu      	"48DB8EA90157"
 			    messages   	(list Messages
-				(object Message "EventCallback(  )"
+				(object Message "EventCallback(EventType, args)"
 				    quid       	"48DB922B0148"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9084,7 +9084,7 @@
 			    supplier   	"$UNNAMED$56"
 			    quidu      	"48DB96A803C8"
 			    messages   	(list Messages
-				(object Message "EventCallback(  )"
+				(object Message "EventCallback(EventType, args)"
 				    quid       	"48DB96C2000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9120,7 +9120,7 @@
 				    ordinal    	5
 				    quidu      	"48DB905B03D8"
 				    creation   	FALSE)
-				(object Message "PublishEvent(  )"
+				(object Message "PublishEvent(eventInfo, args)"
 				    quid       	"48DBAA56034B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9179,7 +9179,7 @@
 			    supplier   	"$UNNAMED$58"
 			    quidu      	"48DB8F550203"
 			    messages   	(list Messages
-				(object Message "EventCallback(   )"
+				(object Message "EventCallback(objectUri, eventInfo, args)"
 				    quid       	"48DB9436004E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9223,7 +9223,7 @@
 			    supplier   	"$UNNAMED$61"
 			    quidu      	"48DB975D000F"
 			    messages   	(list Messages
-				(object Message "Update(   )"
+				(object Message "Update(jastCreatedProxies, collectedProxies, pendingEvents)"
 				    quid       	"48DB979300DA"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9237,7 +9237,7 @@
 			    supplier   	"$UNNAMED$62"
 			    quidu      	"48DBAB0E01B5"
 			    messages   	(list Messages
-				(object Message "PublishEvent(  )"
+				(object Message "PublishEvent(eventInfo, args)"
 				    quid       	"48DBAB1C01E4"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9321,7 +9321,7 @@
 			    supplier   	"$UNNAMED$64"
 			    quidu      	"48DB9DC80224"
 			    messages   	(list Messages
-				(object Message "EventCallback(  )"
+				(object Message "EventCallback(EventType, args)"
 				    quid       	"48DB9DC80205"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9335,7 +9335,7 @@
 			    supplier   	"$UNNAMED$65"
 			    quidu      	"48DB9DC80229"
 			    messages   	(list Messages
-				(object Message "EventCallback(  )"
+				(object Message "EventCallback(EventType, args)"
 				    quid       	"48DB9DC80208"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9384,7 +9384,7 @@
 			    supplier   	"$UNNAMED$65"
 			    quidu      	"48DB9DC80229"
 			    messages   	(list Messages
-				(object Message "EventCallback(   )"
+				(object Message "EventCallback(objectUri, eventInfo, args)"
 				    quid       	"48DBA0860177"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9398,7 +9398,7 @@
 			    supplier   	"$UNNAMED$66"
 			    quidu      	"48DB9DC8020B"
 			    messages   	(list Messages
-				(object Message "PublishEvent(  )"
+				(object Message "PublishEvent(eventInfo, args)"
 				    quid       	"48DBA14E01B5"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9420,7 +9420,7 @@
 			    supplier   	"$UNNAMED$64"
 			    quidu      	"48DB9DC80224"
 			    messages   	(list Messages
-				(object Message "EventCallback(   )"
+				(object Message "EventCallback(objectUri, eventInfo, args)"
 				    quid       	"48DBA082035B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9434,7 +9434,7 @@
 			    supplier   	"$UNNAMED$69"
 			    quidu      	"48DBA5A90261"
 			    messages   	(list Messages
-				(object Message "PublishEvent(  )"
+				(object Message "PublishEvent(eventInfo, args)"
 				    quid       	"48DBA5E90000"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9487,7 +9487,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@30
-			location   	(1622, 378)
+			location   	(1622, 373)
 			fill_color 	13434879
 			nlines     	1
 			max_width  	526
@@ -9495,7 +9495,7 @@
 			label      	"RemotingServices")
 		    stereotype 	(object ItemLabel
 			Parent_View 	@30
-			location   	(1622, 328)
+			location   	(1622, 327)
 			fill_color 	13434879
 			anchor     	10
 			nlines     	1
@@ -10572,7 +10572,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@77
-			location   	(987, 675)
+			location   	(987, 670)
 			fill_color 	13434879
 			nlines     	1
 			max_width  	613
@@ -10580,7 +10580,7 @@
 			label      	"RemotingServices")
 		    stereotype 	(object ItemLabel
 			Parent_View 	@77
-			location   	(987, 625)
+			location   	(987, 624)
 			fill_color 	13434879
 			anchor     	10
 			nlines     	1
@@ -10593,7 +10593,7 @@
 		    quidu      	"40C5607E020E"
 		    compartment 	(object Compartment
 			Parent_View 	@77
-			location   	(987, 736)
+			location   	(987, 727)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -11538,7 +11538,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@118
-			location   	(2161, 576)
+			location   	(2161, 575)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	507
@@ -11565,7 +11565,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@119
-			location   	(1099, 994)
+			location   	(1099, 993)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	420
@@ -11644,7 +11644,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSession(   )"
+			label      	"GetSession(channelUri, create, remotingServices)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -11746,7 +11746,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddProxy(  )"
+			label      	"AddProxy(proxy, remotingServices)"
 			pctDist    	0.525000
 			height     	100
 			orientation 	0)
@@ -11862,7 +11862,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@134
-			location   	(1012, 508)
+			location   	(1012, 507)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	394
@@ -11921,7 +11921,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@136
-			location   	(3105, 517)
+			location   	(3105, 516)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	482
@@ -12091,7 +12091,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke( )"
+			label      	"Invoke(msg)"
 			pctDist    	0.650000
 			height     	115
 			orientation 	0)
@@ -12183,7 +12183,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerSubscription(  )"
+			label      	"EventConsumerSubscription(eventHandler, eventInfo)"
 			pctDist    	0.565266
 			height     	90
 			orientation 	0)
@@ -12234,7 +12234,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(  )"
+			label      	"Subscribe(eventPublisherUri, eventInfo)"
 			pctDist    	1.133333
 			height     	51
 			orientation 	0)
@@ -12359,7 +12359,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerProxy(    )"
+			label      	"EventConsumerProxy(eventPublisherUri, eventPublisherObject, eventInfo, clientSessionPart)"
 			pctDist    	-0.825000
 			height     	69
 			orientation 	0)
@@ -12408,7 +12408,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(  )"
+			label      	"Subscribe(proxy, eventInfo)"
 			pctDist    	1.168421
 			height     	263
 			orientation 	0)
@@ -12722,7 +12722,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke( )"
+			label      	"Invoke(msg)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -12764,7 +12764,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(  )"
+			label      	"Subscribe(eventPublisherUri, eventInfo)"
 			pctDist    	0.461756
 			height     	63
 			orientation 	0)
@@ -12806,7 +12806,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(  )"
+			label      	"Subscribe(proxy, eventInfo)"
 			pctDist    	0.552147
 			height     	45
 			orientation 	0)
@@ -12848,7 +12848,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerProxy(    )"
+			label      	"EventConsumerProxy(eventPublisherUri, eventPublisherObject, eventInfo, clientSessionPart)"
 			pctDist    	0.573604
 			height     	130
 			orientation 	0)
@@ -12890,7 +12890,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerSubscription(  )"
+			label      	"EventConsumerSubscription(eventHandler, eventInfo)"
 			pctDist    	0.214689
 			height     	57
 			orientation 	0)
@@ -12986,7 +12986,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@192
-			location   	(1012, 508)
+			location   	(1012, 507)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	394
@@ -13154,7 +13154,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke( )"
+			label      	"Invoke(msg)"
 			pctDist    	0.583333
 			height     	79
 			orientation 	0)
@@ -13246,7 +13246,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerUnsubscribe(  )"
+			label      	"EventConsumerUnsubscribe(removedEventHandler, eventInfo)"
 			pctDist    	0.509785
 			height     	45
 			orientation 	0)
@@ -13297,7 +13297,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"RemoveSubscription( )"
+			label      	"RemoveSubscription(eventPublisherObject)"
 			pctDist    	-0.158333
 			height     	45
 			orientation 	0)
@@ -13346,7 +13346,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Unsubscribe(  )"
+			label      	"Unsubscribe(eventPublisherUri, eventInfo)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13399,7 +13399,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70142"
 		    width      	300
-		    height     	7515
+		    height     	7575
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13438,7 +13438,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7013A"
 		    width      	300
-		    height     	7515
+		    height     	7575
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13483,7 +13483,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7012B"
 		    width      	618
-		    height     	7515
+		    height     	7575
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13521,7 +13521,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70128"
 		    width      	499
-		    height     	7415
+		    height     	7475
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13559,7 +13559,7 @@
 		    fill_color 	13434879
 		    quidu      	"5C121E330309"
 		    width      	662
-		    height     	7515
+		    height     	7575
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13601,7 +13601,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke( )"
+			label      	"Invoke(msg)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13643,7 +13643,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"RemoveSubscription( )"
+			label      	"RemoveSubscription(eventPublisherObject)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13657,7 +13657,7 @@
 		    ordinal    	3)
 		(object Destruction_Marker @228
 		    Parent_View 	@220
-		    location   	(2672, 7740)
+		    location   	(2672, 7800)
 		    line_color 	3342489
 		    fill_color 	13434879)
 		(object InterMessView "" @229
@@ -13690,7 +13690,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerUnsubscribe(  )"
+			label      	"EventConsumerUnsubscribe(removedEventHandler, eventInfo)"
 			pctDist    	0.862000
 			height     	52
 			orientation 	0)
@@ -13732,7 +13732,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Unsubscribe(  )"
+			label      	"Unsubscribe(eventPublisherUri, eventInfo)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13858,7 +13858,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@236
-			location   	(433, 1370)
+			location   	(433, 1369)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	420
@@ -13944,7 +13944,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(   )"
+			label      	"EventCallback(objectUri, eventInfo, args)"
 			pctDist    	-1.525424
 			height     	42
 			orientation 	1)
@@ -13969,7 +13969,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@241
-			location   	(543, 2142)
+			location   	(543, 2141)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	420
@@ -14290,7 +14290,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	2.512856
 			height     	216
 			orientation 	0)
@@ -14381,7 +14381,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	1.870025
 			height     	343
 			orientation 	0)
@@ -14472,7 +14472,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -14714,7 +14714,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Update(   )"
+			label      	"Update(jastCreatedProxies, collectedProxies, pendingEvents)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -14799,7 +14799,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15470,7 +15470,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15638,7 +15638,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(   )"
+			label      	"EventCallback(objectUri, eventInfo, args)"
 			pctDist    	0.520000
 			height     	86
 			orientation 	0)
@@ -15722,7 +15722,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15764,7 +15764,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Update(   )"
+			label      	"Update(jastCreatedProxies, collectedProxies, pendingEvents)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15806,7 +15806,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -15848,7 +15848,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -16058,7 +16058,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@356
-			location   	(465, 1299)
+			location   	(465, 1298)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	420
@@ -16089,7 +16089,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@357
-			location   	(873, 2450)
+			location   	(873, 2449)
 			fill_color 	13434879
 			nlines     	2
 			max_width  	420
@@ -16338,7 +16338,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	2.515261
 			height     	217
 			orientation 	0)
@@ -16387,7 +16387,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	-0.657182
 			height     	110
 			orientation 	1)
@@ -16487,7 +16487,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(   )"
+			label      	"EventCallback(objectUri, eventInfo, args)"
 			pctDist    	2.130416
 			height     	128
 			orientation 	0)
@@ -16536,7 +16536,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.853235
 			height     	199
 			orientation 	0)
@@ -16587,7 +16587,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(   )"
+			label      	"EventCallback(objectUri, eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -16636,7 +16636,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -17004,7 +17004,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17046,7 +17046,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(  )"
+			label      	"EventCallback(EventType, args)"
 			pctDist    	0.489914
 			height     	39
 			orientation 	1)
@@ -17088,7 +17088,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(   )"
+			label      	"EventCallback(objectUri, eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17130,7 +17130,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(   )"
+			label      	"EventCallback(objectUri, eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17172,7 +17172,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17214,7 +17214,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(  )"
+			label      	"PublishEvent(eventInfo, args)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17564,7 +17564,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddProxy(  )"
+			label      	"AddProxy(proxy, remotingServices)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -17606,7 +17606,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSession(   )"
+			label      	"GetSession(channelUri, create, remotingServices)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)

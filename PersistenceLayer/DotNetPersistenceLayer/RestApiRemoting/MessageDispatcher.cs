@@ -262,9 +262,12 @@ namespace OOAdvantech.Remoting.RestApi
                             {
                                 (retVal as Task).Wait();
                                 object value = null;
-                                var type = retVal.GetType().GetMetaData().GetGenericArguments()[0];
-                                ITaskResultGetter getter = Activator.CreateInstance(typeof(TaskResultGetter<>).MakeGenericType(new[] { type })) as ITaskResultGetter;
-                                value = getter.GetTaskResult((retVal as Task));
+                                if (retVal.GetType().GetMetaData().GetGenericArguments().Length > 0)
+                                {
+                                    var type = retVal.GetType().GetMetaData().GetGenericArguments()[0];
+                                    ITaskResultGetter getter = Activator.CreateInstance(typeof(TaskResultGetter<>).MakeGenericType(new[] { type })) as ITaskResultGetter;
+                                    value = getter.GetTaskResult((retVal as Task));
+                                }
                                 responseMessage.MethodInfo = methodInfo;
                                 responseMessage.OutArgs = methodCallMessage.GetOutArgs(args);
                                 responseMessage.RetVal = value;

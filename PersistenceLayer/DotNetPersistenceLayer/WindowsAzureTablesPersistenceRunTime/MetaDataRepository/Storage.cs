@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Microsoft.Azure.Cosmos.Table;
 
 using OOAdvantech.MetaDataRepository;
 using OOAdvantech.Transactions;
@@ -15,7 +14,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     [OOAdvantech.MetaDataRepository.Persistent()]
     public class Storage : RDBMSMetaDataRepository.Storage
     {
-
+        public const string DevelopmentStorage = "UseDevelopmentStorage=true";
         /// <MetaDataID>{b682ce60-ea0e-4d75-bd23-743af87b5546}</MetaDataID>
         protected Storage()
         {
@@ -561,16 +560,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             return false;
         }
-        private void EndSynchronous(CloudTable storagesMetadataTable)
-        {
-            AzureStorageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
-                                    where storageMetada.StorageName == StorageName && storageMetada.StorageIdentity == StorageIdentity
-                                    select storageMetada).FirstOrDefault();
-
-            AzureStorageMetadata.UnderConstruction = false;
-            TableOperation updateOperation = TableOperation.Replace(AzureStorageMetadata);
-            storagesMetadataTable.Execute(updateOperation);
-        }
+    
 
         private void EndSynchronous(Azure.Data.Tables.TableClient storagesMetadataTable)
         {
@@ -583,40 +573,6 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
 
-        private void BeginSynchronous(CloudTable storagesMetadataTable)
-        {
-            while (AzureStorageMetadata.UnderConstruction)
-            {
-                System.Threading.Thread.Sleep(100);
-                AzureStorageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
-                                        where storageMetada.StorageName == StorageName && storageMetada.StorageIdentity == StorageIdentity
-                                        select storageMetada).FirstOrDefault();
-            }
-            while (true)
-            {
-                try
-                {
-
-                    AzureStorageMetadata.UnderConstruction = true;
-                    TableOperation updateOperation = TableOperation.Replace(AzureStorageMetadata);
-                    storagesMetadataTable.Execute(updateOperation);
-                    break;
-                }
-                catch (Exception error)
-                {
-                    if (error.Message == "The remote server returned an error: (412) Precondition Failed.")
-                    {
-                        while (AzureStorageMetadata.UnderConstruction)
-                        {
-                            System.Threading.Thread.Sleep(100);
-                            AzureStorageMetadata = (from storageMetada in storagesMetadataTable.CreateQuery<StorageMetadata>()
-                                                    where storageMetada.StorageName == StorageName && storageMetada.StorageIdentity == StorageIdentity
-                                                    select storageMetada).FirstOrDefault();
-                        }
-                    }
-                }
-            }
-        }
 
 
         private void BeginSynchronous(Azure.Data.Tables.TableClient storagesMetadataTable)

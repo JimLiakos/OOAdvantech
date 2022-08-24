@@ -6,7 +6,6 @@ using ComparisonTermsType = OOAdvantech.MetaDataRepository.ObjectQueryLanguage.C
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
     using MetaDataRepository.ObjectQueryLanguage;
-    using Microsoft.Azure.Cosmos.Table;
 
     /// <MetaDataID>{3c5fcea1-64c0-4e20-9678-ed882188140b}</MetaDataID>
     public class FilterScriptBuilder
@@ -102,7 +101,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 sqlExpression = GetCriterionSQLExpression(searchFactor.Criterion, columnsNamesMap);
 
             if (searchFactor.IsNotExpression)
-                sqlExpression = TableOperators.Not + " (" + sqlExpression + ")";
+                sqlExpression = "not" + " (" + sqlExpression + ")"; //TableOperators.Not 
             return sqlExpression;
 
 
@@ -121,17 +120,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             //QueryComparisons azureComparisonOperator= QueryComparisons.;
             if (criterion.ComparisonOperator == Criterion.ComparisonType.Equal)
-                comparisonOperator = QueryComparisons.Equal;
+                comparisonOperator = "eq";
             if (criterion.ComparisonOperator == Criterion.ComparisonType.NotEqual)
-                comparisonOperator = QueryComparisons.NotEqual;
+                comparisonOperator = "ne";
             if (criterion.ComparisonOperator == Criterion.ComparisonType.GreaterThan)
-                comparisonOperator = QueryComparisons.GreaterThan;
+                comparisonOperator = "gt";
             if (criterion.ComparisonOperator == Criterion.ComparisonType.GreaterThanEqual)
-                comparisonOperator = QueryComparisons.GreaterThanOrEqual;
+                comparisonOperator = "ge";
             if (criterion.ComparisonOperator == Criterion.ComparisonType.LessThan)
-                comparisonOperator = QueryComparisons.LessThan;
+                comparisonOperator = "lt";
             if (criterion.ComparisonOperator == Criterion.ComparisonType.LessThanEqual)
-                comparisonOperator = QueryComparisons.LessThanOrEqual;
+                comparisonOperator = "le";
             if (criterion.ComparisonOperator == Criterion.ComparisonType.Like)
                 comparisonOperator += " LIKE ";
             if (criterion.IsNULL)
@@ -219,19 +218,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             compareExpression += propertyName;
 
                             if (type == typeof(bool))
-                                compareExpression = TableQuery.GenerateFilterConditionForBool(propertyName, comparisonOperator, (bool)literalComparisonTerm.Value);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (bool)literalComparisonTerm.Value);
                             else if (type == typeof(double))
-                                compareExpression = TableQuery.GenerateFilterConditionForDouble(propertyName, comparisonOperator, (double)literalComparisonTerm.Value);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (double)literalComparisonTerm.Value);
                             else if (type == typeof(double))
-                                compareExpression = TableQuery.GenerateFilterConditionForInt(propertyName, comparisonOperator, (int)literalComparisonTerm.Value);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (int)literalComparisonTerm.Value);
                             else if (type == typeof(long))
-                                compareExpression = TableQuery.GenerateFilterConditionForLong(propertyName, comparisonOperator, (long)literalComparisonTerm.Value);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (long)literalComparisonTerm.Value);
                             else if (type == typeof(DateTime))
-                                compareExpression = TableQuery.GenerateFilterConditionForDate(propertyName, comparisonOperator, (DateTime)literalComparisonTerm.Value);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (DateTime)literalComparisonTerm.Value);
                             else if (type == typeof(Guid))
-                                compareExpression = TableQuery.GenerateFilterConditionForGuid(propertyName, comparisonOperator, (Guid)literalComparisonTerm.Value);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (Guid)literalComparisonTerm.Value);
                             else
-                                compareExpression = TableQuery.GenerateFilterCondition(propertyName, comparisonOperator, literalValue);
+                                compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, literalValue);
 
                             return compareExpression;
                         }
@@ -268,19 +267,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             propertyName = mappedName;
 
                         if (type == typeof(bool))
-                            compareExpression = TableQuery.GenerateFilterConditionForBool(propertyName, comparisonOperator, (bool)parameterComparisonTerm.ParameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (bool)parameterComparisonTerm.ParameterValue);
                         else if (type == typeof(double))
-                            compareExpression = TableQuery.GenerateFilterConditionForDouble(propertyName, comparisonOperator, (double)parameterComparisonTerm.ParameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (double)parameterComparisonTerm.ParameterValue);
                         else if (type == typeof(int) || type.IsEnum)
-                            compareExpression = TableQuery.GenerateFilterConditionForInt(propertyName, comparisonOperator, (int)parameterComparisonTerm.ParameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (int)parameterComparisonTerm.ParameterValue);
                         else if (type == typeof(long))
-                            compareExpression = TableQuery.GenerateFilterConditionForLong(propertyName, comparisonOperator, (long)parameterComparisonTerm.ParameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (long)parameterComparisonTerm.ParameterValue);
                         else if (type == typeof(DateTime))
-                            compareExpression = TableQuery.GenerateFilterConditionForDate(propertyName, comparisonOperator, (DateTime)parameterComparisonTerm.ParameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (DateTime)parameterComparisonTerm.ParameterValue);
                         else if (type == typeof(Guid))
-                            compareExpression = TableQuery.GenerateFilterConditionForGuid(propertyName, comparisonOperator, (Guid)parameterComparisonTerm.ParameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, (Guid)parameterComparisonTerm.ParameterValue);
                         else
-                            compareExpression = TableQuery.GenerateFilterCondition(propertyName, comparisonOperator, parameterValue);
+                            compareExpression = TypeDictionary.GetFilterConditionFor(propertyName, comparisonOperator, parameterValue);
 
                         return compareExpression;
 
@@ -448,11 +447,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                             if (objectID != null)
                             {
-                                compareExpression = TableQuery.GenerateFilterCondition("RowKey", comparisonOperator, objectID.GetPartValue(0).ToString());
+                                compareExpression = TypeDictionary.GetFilterConditionFor("RowKey", comparisonOperator, objectID.GetPartValue(0).ToString());
                                 return compareExpression;
 
                             }
-                            else return TableQuery.GenerateFilterCondition("RowKey", comparisonOperator, Guid.Empty.ToString());
+                            else return TypeDictionary.GetFilterConditionFor("RowKey", comparisonOperator, Guid.Empty.ToString());
 
                             foreach (MetaDataRepository.ObjectIdentityType objectIdentityType in objectTermDataNode.DataSource.DataLoaders[DataLoader.DataLoaderMetadata.ObjectsContextIdentity].ObjectIdentityTypes)
                             {

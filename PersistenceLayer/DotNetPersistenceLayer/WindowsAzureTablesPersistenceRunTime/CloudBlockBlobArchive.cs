@@ -1,6 +1,5 @@
 
 
-using Microsoft.Azure.Cosmos.Table;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
@@ -10,13 +9,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-
-        CloudStorageAccount CloudStorageAccount;
+        Azure.Storage.Blobs.BlobServiceClient BlobsAccount;
+        //CloudStorageAccount CloudStorageAccount;
         string BlobUrl;
-        public CloudBlockBlobArchive(string blobUrl, CloudStorageAccount cloudStorageAccount)
+        public CloudBlockBlobArchive(string blobUrl, Azure.Storage.Blobs.BlobServiceClient blobsAccount)
         {
             BlobUrl = blobUrl;
-            CloudStorageAccount = cloudStorageAccount;
+            BlobsAccount = blobsAccount;
         }
         public CloudBlockBlobArchive(string localFileName)
         {

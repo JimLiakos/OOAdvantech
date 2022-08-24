@@ -8,7 +8,7 @@ using System.Text;
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
     /// <MetaDataID>{5987006d-6ce7-4702-9ba7-57d8c87add80}</MetaDataID>
-    public class ObjectBLOBData : Microsoft.Azure.Cosmos.Table.TableEntity,Azure.Data.Tables.ITableEntity
+    public class ObjectBLOBData : Azure.Data.Tables.ITableEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectBLOBData" /> class.
@@ -18,7 +18,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public ObjectBLOBData()
         {
         }
-
+        public string PartitionKey { get; set; }
+        public string RowKey { get; set; }
         public static List<RDBMSMetaDataRepository.Column> ListOfColumns = new List<RDBMSMetaDataRepository.Column>() { new RDBMSMetaDataRepository.Column("ObjectData", MetaDataRepository.Classifier.GetClassifier(typeof(byte[]))), new RDBMSMetaDataRepository.Column("ClassBLOBSID", MetaDataRepository.Classifier.GetClassifier(typeof(string))) };
 
 
@@ -30,7 +31,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <param name="partitionKey">The last name.</param>
         /// <param name="rowKey">The first name.</param>
         /// <MetaDataID>{e1595b35-af2b-497c-870a-3d0446384779}</MetaDataID>
-        public ObjectBLOBData(string partitionKey, string rowKey) : base(partitionKey, rowKey)
+        public ObjectBLOBData(string partitionKey, string rowKey) 
         {
             PartitionKey = partitionKey;
             RowKey = rowKey;

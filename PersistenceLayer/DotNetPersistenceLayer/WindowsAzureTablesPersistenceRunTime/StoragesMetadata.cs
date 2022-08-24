@@ -8,7 +8,7 @@ using System.Text;
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
     /// <MetaDataID>{ecdb7768-48a2-43e3-b21b-636f2b1ea537}</MetaDataID>
-    public class StorageMetadata : Microsoft.Azure.Cosmos.Table.TableEntity,Azure.Data.Tables.ITableEntity
+    public class StorageMetadata : Azure.Data.Tables.ITableEntity
     {
 
         /// <summary>
@@ -18,7 +18,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         public StorageMetadata()
         {
         }
-
+        public string PartitionKey { get; set; }
+        public string RowKey { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="StorageMetadata"/> class.
         /// Defines the PK and RK.

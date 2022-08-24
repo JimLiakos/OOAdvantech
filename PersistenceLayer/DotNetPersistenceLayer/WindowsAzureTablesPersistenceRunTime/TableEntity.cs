@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
-using Microsoft.Azure.Cosmos.Table;
 using OOAdvantech.MetaDataRepository.ObjectQueryLanguage;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime

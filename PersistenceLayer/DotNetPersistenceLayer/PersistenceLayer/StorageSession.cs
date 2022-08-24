@@ -27,6 +27,7 @@ namespace OOAdvantech.PersistenceLayer
     {
 
         //public static MetaDataRepository.IErrorLog ErrorLog;
+        /// <MetaDataID>{b096806d-ed23-4129-9792-a6deaf42fb8f}</MetaDataID>
         public virtual bool IsReadonly
         {
             get
@@ -418,6 +419,7 @@ namespace OOAdvantech.PersistenceLayer
             return PersistencyService.OpenStorage(StorageName, StorageLocation, storageType, userName, password);
         }
 
+        /// <MetaDataID>{92d67ee4-f8ed-4548-b696-accbb363d8da}</MetaDataID>
         public static void UpdateOperativeOperativeObjects(string storageIdentity)
         {
             PersistencyService.UpdateOperativeOperativeObjects(storageIdentity);
@@ -486,6 +488,7 @@ namespace OOAdvantech.PersistenceLayer
             return @object;
         }
 
+        /// <MetaDataID>{2c7035bf-37a9-4ef4-926f-8fe64a7656ed}</MetaDataID>
         public static T GetObjectFromUri<T>(string persistentUri) where T : class
         {
             object @object = null;
@@ -592,6 +595,7 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{924FEFB9-B8A0-46A6-AFCF-95A7B19D357F}</MetaDataID>
         protected static IPersistencyService _PersistencyService;
 
+        /// <MetaDataID>{e2f6ca57-f1e1-4658-bd48-72f162679617}</MetaDataID>
         static object PersistencyServiceLock = new object();
 
         /// <summary>Used from static method of storage session class to

@@ -1,5 +1,4 @@
-﻿using Microsoft.Azure.Cosmos.Table;
-using OOAdvantech.PersistenceLayerRunTime;
+﻿using OOAdvantech.PersistenceLayerRunTime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +35,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             foreach (OOAdvantech.PersistenceLayerRunTime.GroupIndexChange currentGroupIndexChange in groupIndexChanges)
             {
                 StorageInstanceRef collectionOwner = Collection.RelResolver.Owner as StorageInstanceRef;
-                var account = (collectionOwner.ObjectStorage as ObjectStorage).Account;
-                CloudTableClient tableClient = account.CreateCloudTableClient();
+                //var account = (collectionOwner.ObjectStorage as ObjectStorage).Account;
+                //CloudTableClient tableClient = account.CreateCloudTableClient();
 
                 foreach (RDBMSMetaDataRepository.StorageCellsLink storageCellsLink in (associationEnd.Association as RDBMSMetaDataRepository.Association).GetStorageCellsLinks((collectionOwner.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell), associationEnd.Role))
                 {
@@ -103,11 +102,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
 
 
-                    CloudTable azureTable = tableClient.GetTableReference(table.DataBaseTableName);
-                    if (azureTable.Exists())
+                    //CloudTable azureTable = tableClient.GetTableReference(table.DataBaseTableName);
+                    if((collectionOwner.ObjectStorage as ObjectStorage).TableExist(table.DataBaseTableName))
+                    //if (azureTable.Exists())
                     {
-                        var query = new TableQuery<ElasticTableEntity>();
-                        var entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+
+                        Azure.Data.Tables.TableClient azureTable_a = (collectionOwner.ObjectStorage as ObjectStorage).TablesAccount.GetTableClient(table.DataBaseTableName);
+                        
+                        //var query = new TableQuery<ElasticTableEntity>();
+                        //var entities = azureTable.ExecuteQuery(query.Select(selectionColumns).Where(filterScript)).ToList();
+                        var entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(filterScript,null ,selectionColumns).Select(x=>new ElasticTableEntity(x)).ToList();
                         foreach (ElasticTableEntity entity in entities)
                         {
                             int? sortIndex = null;
@@ -132,7 +136,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                             {
 
                                 entity[indexerColumn.DataBaseColumnName] = sortIndex;
-                                (collectionOwner.ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable).Replace(entity);
+
+                                var tableBatchOperation = (collectionOwner.ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable_a);
+                                tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpdateReplace, entity.Values));
+                                
+                                //(collectionOwner.ObjectStorage as ObjectStorage).GetTableBatchOperation(azureTable_a).Replace(entity);
                             }
 
                         }

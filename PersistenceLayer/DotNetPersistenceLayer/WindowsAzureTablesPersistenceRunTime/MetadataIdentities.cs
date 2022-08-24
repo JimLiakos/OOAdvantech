@@ -5,7 +5,7 @@ using System;
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
     /// <MetaDataID>{34f61f48-a15e-48ec-ab2a-68ee2409c94c}</MetaDataID>
-    public class MetadataIdentities : Microsoft.Azure.Cosmos.Table.TableEntity,Azure.Data.Tables.ITableEntity
+    public class MetadataIdentities :Azure.Data.Tables.ITableEntity
     {
 
         /// <MetaDataID>{ddc52708-cfe0-44e2-a0d2-d3879bdcb0e5}</MetaDataID>
@@ -13,9 +13,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         {
 
         }
-
+        public string PartitionKey { get; set; }
+        public string RowKey { get; set; }
         /// <MetaDataID>{404bfd82-36a9-4265-9cff-89d98f80d8e5}</MetaDataID>
-        public MetadataIdentities(string partitionKey, string rowKey) : base(partitionKey, rowKey)
+        public MetadataIdentities(string partitionKey, string rowKey) //: base(partitionKey, rowKey)
         {
             PartitionKey = partitionKey;
             RowKey = rowKey;

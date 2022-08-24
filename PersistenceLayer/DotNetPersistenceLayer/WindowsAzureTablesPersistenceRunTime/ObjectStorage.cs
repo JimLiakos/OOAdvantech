@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Microsoft.Azure.Cosmos.Table;
 using OOAdvantech.Collections;
 using OOAdvantech.DotNetMetaDataRepository;
 using OOAdvantech.MetaDataRepository;
@@ -38,16 +37,21 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-        public readonly CloudStorageAccount Account;
+        //public readonly CloudStorageAccount Account;
         public readonly Azure.Data.Tables.TableServiceClient TablesAccount;
         /// <MetaDataID>{3f203356-42c6-44fa-b0bc-cb8422f90cc2}</MetaDataID>
-        public ObjectStorage(Storage theStorageMetaData, CloudStorageAccount account,Azure.Data.Tables.TableServiceClient tablesAccount)
+        internal ObjectStorage(Storage theStorageMetaData,  Azure.Data.Tables.TableServiceClient tablesAccount,string userName,string pasword)
         {
-            Account = account;
+            //Account = account;
             TablesAccount = tablesAccount;
             SetObjectStorage(theStorageMetaData);
-
+            UserName = userName;
+            Pasword = pasword;
         }
+
+
+        string UserName;
+        string Pasword;
 
         /// <MetaDataID>{fa8859af-abc4-46ef-864b-be94f908bfa6}</MetaDataID>
         public override PersistenceLayer.Storage StorageMetaData
@@ -72,22 +76,23 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <MetaDataID>{deae242f-8ca7-4891-92e3-b5e3acaf536f}</MetaDataID>
         public override void AbortChanges(TransactionContext theTransaction)
         {
-            lock (TableBatchOperations)
+            lock (TableBatchOperations_a)
             {
-                TableBatchOperations.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
+                TableBatchOperations_a.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
             }
         }
 
         /// <MetaDataID>{2773b19e-7768-4762-9e2e-8166d2910565}</MetaDataID>
         public override void BeginChanges(TransactionContext theTransaction)
         {
-            lock (TableBatchOperations)
+            lock (TableBatchOperations_a)
             {
-                System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>> transactionTableBatchOperations = null;
-                if (!TableBatchOperations.TryGetValue(theTransaction.Transaction.LocalTransactionUri.ToLower(), out transactionTableBatchOperations))
+
+                Dictionary<Azure.Data.Tables.TableClient, List<List<Azure.Data.Tables.TableTransactionAction>>> transactionTableBatchOperations = null;
+                if (!TableBatchOperations_a.TryGetValue(theTransaction.Transaction.LocalTransactionUri.ToLower(), out transactionTableBatchOperations))
                 {
-                    transactionTableBatchOperations = new System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>();
-                    TableBatchOperations[theTransaction.Transaction.LocalTransactionUri.ToLower()] = transactionTableBatchOperations;
+                    transactionTableBatchOperations = new Dictionary<Azure.Data.Tables.TableClient, List<List<Azure.Data.Tables.TableTransactionAction>>>();
+                    TableBatchOperations_a[theTransaction.Transaction.LocalTransactionUri.ToLower()] = transactionTableBatchOperations;
                 }
             }
         }
@@ -95,9 +100,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <MetaDataID>{957ac9f6-3739-4a03-a926-31aa0a843c5e}</MetaDataID>
         public override void CommitChanges(TransactionContext theTransaction)
         {
-            lock (TableBatchOperations)
+            lock (TableBatchOperations_a)
             {
-                TableBatchOperations.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
+                TableBatchOperations_a.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
             }
         }
 
@@ -186,15 +191,22 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             string cloudTableName = table.DataBaseTableName;
 
 
-            CloudTableClient tableClient = Account.CreateCloudTableClient();
-            CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-            if (!azureTable.Exists())
-            {
-                azureTable = tableClient.GetTableReference(table.Name);
-                azureTable.CreateIfNotExists();
-                table.DataBaseTableName = azureTable.Name;
+            //CloudTableClient tableClient = Account.CreateCloudTableClient();
+            // CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+            Azure.Data.Tables.TableClient azureTable_a = TablesAccount.GetTableClient(cloudTableName);
+            //if (!azureTable.Exists())
+            //{
+            //    azureTable = tableClient.GetTableReference(table.Name);
+            //    azureTable.CreateIfNotExists();
+            //    table.DataBaseTableName = azureTable.Name;
 
+            //}
+            if (!TableExist(cloudTableName))
+            {
+                azureTable_a.CreateIfNotExistsAsync();
+                table.DataBaseTableName = azureTable_a.Name;
             }
+
 
             //TableBatchOperation tableBatchOperation = null;
 
@@ -206,7 +218,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 Guid OID = Guid.NewGuid();
                 if (storageCell != null)
                     OID = (Guid)row[table.ObjectIDColumns[0].Name];
-                ElasticTableEntity entity = new ElasticTableEntity();
+                ElasticTableEntity entity = new ElasticTableEntity(new Azure.Data.Tables.TableEntity());
                 entity.RowKey = OID.ToString().ToLower();
                 entity.PartitionKey = partitionKey;
 
@@ -241,7 +253,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         entity[column.ColumnName] = value;
                 }
 
-                GetTableBatchOperation(azureTable).Insert(entity);
+
+                //GetTableBatchOperation(azureTable).Insert(entity);
+                var tableBatchOperation = GetTableBatchOperation(azureTable_a);
+                tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Add, entity.Values));
 
             }
 
@@ -336,12 +351,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             if (dataTable.Rows.Count > 0)
             {
-                CloudTableClient tableClient = Account.CreateCloudTableClient();
+                //CloudTableClient tableClient = Account.CreateCloudTableClient();
                 string cloudTableName = dataTable.TableName;
 
-                CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-                if (!azureTable.Exists())
-                    azureTable.CreateIfNotExists();
+                Azure.Data.Tables.TableClient azureTable_a = TablesAccount.GetTableClient(cloudTableName);
+
+
+                //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                //if (!azureTable.Exists())
+                //    azureTable.CreateIfNotExists();
+
+                if (!TableExist(cloudTableName))
+                    azureTable_a.CreateIfNotExistsAsync();
 
                 string partitionKey = null;
 
@@ -392,30 +413,38 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             entity[column.ColumnName] = value;
 
                     }
-                    GetTableBatchOperation(azureTable).InsertOrReplace(entity);
+                    //GetTableBatchOperation(azureTable).InsertOrReplace(entity);
+                    var tableBatchOperation = GetTableBatchOperation(azureTable_a);
+                    tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpsertReplace, entity.Values));
+
                 }
             }
         }
 
         public void ClearTemporaryFiles()
         {
-            CloudTableClient tableClient = Account.CreateCloudTableClient();
-            CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
+            //CloudTableClient tableClient = Account.CreateCloudTableClient();
+            //CloudTable storagesMetadataTable = tableClient.GetTableReference("StoragesMetadata");
+            var storagesMetadataTable_a = TablesAccount.GetTableClient("StoragesMetadata");
 
             foreach (var cloudTableName in (StorageMetaData as Storage).AzureStorageMetadata.GetTemporaryTablesNames())
             {
                 if (string.IsNullOrWhiteSpace(cloudTableName))
                     continue;
 
-                CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-                azureTable.DeleteIfExists();
+                //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                //azureTable.DeleteIfExists();
+                Azure.Data.Tables.TableClient azureTable_a = TablesAccount.GetTableClient(cloudTableName);
+                azureTable_a.Delete();
+
             }
 
             (StorageMetaData as Storage).AzureStorageMetadata.RemoveTemporaryTables((StorageMetaData as Storage).AzureStorageMetadata.GetTemporaryTablesNames());
 
-            TableOperation updateOperation = TableOperation.Replace((StorageMetaData as Storage).AzureStorageMetadata);
-            
-            var result = storagesMetadataTable.Execute(updateOperation);
+            //TableOperation updateOperation = TableOperation.Replace((StorageMetaData as Storage).AzureStorageMetadata);
+            //var result = storagesMetadataTable.Execute(updateOperation);
+
+            var result = storagesMetadataTable_a.UpdateEntity((StorageMetaData as Storage).AzureStorageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
 
 
         }
@@ -458,9 +487,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
 
             List<string> azureStorageDataTables = new List<string>();
-            CloudTableClient tableClient = Account.CreateCloudTableClient();
+            //CloudTableClient tableClient = Account.CreateCloudTableClient();
+            string prefix = (this.StorageMetaData as WindowsAzureTablesPersistenceRunTime.Storage).TablePrefix;
+            string prefixFilter = Azure.Data.Tables.TableServiceClient.CreateQueryFilter(x => x.Name.CompareTo(prefix) >= 0
+                                     && x.Name.CompareTo(prefix + char.MaxValue) <= 0);
 
-            var dataTables = tableClient.ListTables((this.StorageMetaData as WindowsAzureTablesPersistenceRunTime.Storage).TablePrefix).ToList();
+            var dataTables = TablesAccount.Query(prefixFilter).ToList();
+
+            //var dataTables = tableClient.ListTables((this.StorageMetaData as WindowsAzureTablesPersistenceRunTime.Storage).TablePrefix).ToList();
             var tables = (from table in (StorageMetaData as MetaDataRepository.Namespace).OwnedElements.OfType<RDBMSMetaDataRepository.Table>()
                           select table).ToList();
 
@@ -483,12 +517,16 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (dataTable.Rows.Count > 0)
             {
 
-                CloudTableClient tableClient = Account.CreateCloudTableClient();
+                //CloudTableClient tableClient = Account.CreateCloudTableClient();
                 string cloudTableName = dataTable.TableName;
 
-                CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
-                if (!azureTable.Exists())
-                    azureTable.CreateIfNotExists();
+                //CloudTable azureTable = tableClient.GetTableReference(cloudTableName);
+                //if (!azureTable.Exists())
+                //    azureTable.CreateIfNotExists();
+
+                Azure.Data.Tables.TableClient azureTable_a = TablesAccount.GetTableClient(cloudTableName);
+                if (!TableExist(cloudTableName))
+                    azureTable_a.CreateIfNotExistsAsync();
 
                 string partitionKey = null;
 
@@ -498,7 +536,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                     RDBMSMetaDataRepository.StorageCell storageCell = storageInstanceRef.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell;
                     RDBMSMetaDataRepository.Table table = storageCell.MainTable;
-                    if(table!=null&& table.DataBaseTableName!=null&&table.DataBaseTableName.ToLower()== "TjimliakosgmailcomOptionChange".ToLower())
+                    if (table != null && table.DataBaseTableName != null && table.DataBaseTableName.ToLower() == "TjimliakosgmailcomOptionChange".ToLower())
                     {
 
                     }
@@ -510,23 +548,27 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     ElasticTableEntity entity = storageInstanceRef.TableEntity;
                     entity.RowKey = OID.ToString().ToLower();
                     entity.PartitionKey = partitionKey;
-                    //foreach (System.Data.DataColumn column in dataTable.Columns)
-                    //{
-                    //    if (column.ColumnName == "StorageInstanceRef_" + dataTable.GetHashCode().ToString())
-                    //        continue;
+                    ////foreach (System.Data.DataColumn column in dataTable.Columns)
+                    ////{
+                    ////    if (column.ColumnName == "StorageInstanceRef_" + dataTable.GetHashCode().ToString())
+                    ////        continue;
 
-                    //    if (column.ColumnName == "StorageInstanceRef")
-                    //        continue;
+                    ////    if (column.ColumnName == "StorageInstanceRef")
+                    ////        continue;
 
-                    //    if (table.ObjectIDColumns.Count > 0 && column.ColumnName == table.ObjectIDColumns[0].Name)
-                    //        continue;
-                    //    if (row[column.ColumnName] != DBNull.Value)
-                    //        entity[column.ColumnName] = row[column.ColumnName];
-                    //    else
-                    //        entity[column.ColumnName] = null;
+                    ////    if (table.ObjectIDColumns.Count > 0 && column.ColumnName == table.ObjectIDColumns[0].Name)
+                    ////        continue;
+                    ////    if (row[column.ColumnName] != DBNull.Value)
+                    ////        entity[column.ColumnName] = row[column.ColumnName];
+                    ////    else
+                    ////        entity[column.ColumnName] = null;
 
-                    //}
-                    GetTableBatchOperation(azureTable).Delete(entity);
+                    ////}
+
+                    //GetTableBatchOperation(azureTable).Delete(entity);
+                    var tableBatchOperation = GetTableBatchOperation(azureTable_a);
+                    tableBatchOperation.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.Delete, entity.Values));
+
                 }
             }
         }
@@ -570,87 +612,152 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         public override void MakeChangesDurable(TransactionContext theTransaction)
         {
 
-            lock (TableBatchOperations)
+            lock (TableBatchOperations_a)
             {
-                foreach (var transactionTableBatchOperationsEntry in TableBatchOperations[theTransaction.Transaction.LocalTransactionUri.ToLower()])
+                //foreach (var transactionTableBatchOperationsEntry in TableBatchOperations[theTransaction.Transaction.LocalTransactionUri.ToLower()])
+                //{
+                //    foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
+                //    {
+                //        try
+                //        {
+
+
+                //            transactionTableBatchOperationsEntry.Key.ExecuteBatch(tableBatchOperation);
+                //        }
+                //        catch (Microsoft.Azure.Cosmos.Table.StorageException storageException)
+                //        {
+                //            int? httpStatusCode = storageException.RequestInformation.HttpStatusCode;
+
+                //            if (httpStatusCode == 412)
+                //            {
+                //                int npos = storageException.RequestInformation.HttpStatusMessage.IndexOf(":");
+                //                if (npos != -1)
+                //                {
+                //                    int tableOparationindex = int.Parse(storageException.RequestInformation.HttpStatusMessage.Substring(0, npos));
+
+                //                    TableOperation tableOperation = tableBatchOperation[tableOparationindex];
+
+                //                    string partitionKey = tableOperation.Entity.PartitionKey;
+                //                    string rowKey = tableOperation.Entity.RowKey;
+                //                    tableBatchOperation.RemoveAt(tableOparationindex);
+                //                }
+                //            }
+
+                //            //TODO export critical error to log file
+                //            throw;
+
+
+                //            // Gives you the index of the failed operation in a azure table batch operation
+
+                //            // int failedOperationIndex = storageException..RequestInformation..GetFailedOperationIndex();
+
+                //        }
+                //    }
+                //}
+
+                //TableBatchOperations.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
+
+
+                if (TableBatchOperations_a.ContainsKey(theTransaction.Transaction.LocalTransactionUri.ToLower()))
                 {
-                    foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
+                    DateTime start = DateTime.Now;
+                    foreach (var transactionTableBatchOperationsEntry in TableBatchOperations_a[theTransaction.Transaction.LocalTransactionUri.ToLower()])
                     {
-                        try
+                        foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
                         {
-                            
-
-                            transactionTableBatchOperationsEntry.Key.ExecuteBatch(tableBatchOperation);
-                        }
-                        catch (Microsoft.Azure.Cosmos.Table.StorageException storageException)
-                        {
-                            int? httpStatusCode = storageException.RequestInformation.HttpStatusCode;
-
-                            if (httpStatusCode == 412)
+                            bool retry = false;
+                            try
                             {
-                                int npos = storageException.RequestInformation.HttpStatusMessage.IndexOf(":");
-                                if (npos != -1)
-                                {
-                                    int tableOparationindex = int.Parse(storageException.RequestInformation.HttpStatusMessage.Substring(0, npos));
 
-                                    TableOperation tableOperation = tableBatchOperation[tableOparationindex];
-
-                                    string partitionKey = tableOperation.Entity.PartitionKey;
-                                    string rowKey = tableOperation.Entity.RowKey;
-                                    tableBatchOperation.RemoveAt(tableOparationindex);
-                                }
+                                transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
                             }
-
-                            //TODO export critical error to log file
-                            throw;
-
-
-                            // Gives you the index of the failed operation in a azure table batch operation
-
-                            // int failedOperationIndex = storageException..RequestInformation..GetFailedOperationIndex();
+                            catch (Exception error)
+                            {
+                                if (!retry)
+                                    throw;
+                            }
 
                         }
                     }
+                    TimeSpan timeSpan = DateTime.Now - start;
+                    //System.Windows.Forms.MessageBox.Show(timeSpan.ToString());
+                    TableBatchOperations_a.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
                 }
 
-                TableBatchOperations.Remove(theTransaction.Transaction.LocalTransactionUri.ToLower());
             }
         }
 
-        System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>> TableBatchOperations = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>>();
-        internal TableBatchOperation GetTableBatchOperation(CloudTable azureTable)
+        //System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>> TableBatchOperations = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>>();
+
+        System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<Azure.Data.Tables.TableClient, System.Collections.Generic.List<System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction>>>> TableBatchOperations_a = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<Azure.Data.Tables.TableClient, System.Collections.Generic.List<System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction>>>>();
+        //TableBatchOperation GetTableBatchOperation(CloudTable azureTable)
+        //{
+        //    lock (TableBatchOperations)
+        //    {
+        //        string localTransactionUri = "null_transaction";
+
+        //        if (OOAdvantech.Transactions.Transaction.Current != null)
+        //            localTransactionUri = OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri.ToLower();
+
+        //        System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>> transactionTableBatchOperations = null;
+        //        if (!TableBatchOperations.TryGetValue(localTransactionUri, out transactionTableBatchOperations))
+        //        {
+        //            transactionTableBatchOperations = new System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>();
+        //            TableBatchOperations[localTransactionUri] = transactionTableBatchOperations;
+        //        }
+
+        //        System.Collections.Generic.List<TableBatchOperation> tableBatchOperations = null;
+
+        //        if (!transactionTableBatchOperations.TryGetValue(azureTable, out tableBatchOperations))
+        //        {
+        //            tableBatchOperations = new System.Collections.Generic.List<TableBatchOperation>();
+        //            transactionTableBatchOperations[azureTable] = tableBatchOperations;
+        //        }
+
+
+        //        if (tableBatchOperations.Count == 0 || tableBatchOperations.Last().Count == 100)
+        //            tableBatchOperations.Add(new TableBatchOperation());
+        //        return tableBatchOperations.Last();
+        //    }
+        //    //return tableBatchOperation;
+
+        //}
+
+
+        internal System.Collections.Generic.List<Azure.Data.Tables.TableTransactionAction> GetTableBatchOperation(Azure.Data.Tables.TableClient azureTable)
         {
-            lock (TableBatchOperations)
+            lock (TableBatchOperations_a)
             {
                 string localTransactionUri = "null_transaction";
 
                 if (OOAdvantech.Transactions.Transaction.Current != null)
                     localTransactionUri = OOAdvantech.Transactions.Transaction.Current.LocalTransactionUri.ToLower();
 
-                System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>> transactionTableBatchOperations = null;
-                if (!TableBatchOperations.TryGetValue(localTransactionUri, out transactionTableBatchOperations))
+                Dictionary<Azure.Data.Tables.TableClient, List<List<Azure.Data.Tables.TableTransactionAction>>> transactionTableBatchOperations = null;
+
+                if (!TableBatchOperations_a.TryGetValue(localTransactionUri, out transactionTableBatchOperations))
                 {
-                    transactionTableBatchOperations = new System.Collections.Generic.Dictionary<CloudTable, System.Collections.Generic.List<TableBatchOperation>>();
-                    TableBatchOperations[localTransactionUri] = transactionTableBatchOperations;
+                    transactionTableBatchOperations = new Dictionary<Azure.Data.Tables.TableClient, List<List<Azure.Data.Tables.TableTransactionAction>>>();
+                    TableBatchOperations_a[localTransactionUri] = transactionTableBatchOperations;
                 }
 
-                System.Collections.Generic.List<TableBatchOperation> tableBatchOperations = null;
+                List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations = null;
 
                 if (!transactionTableBatchOperations.TryGetValue(azureTable, out tableBatchOperations))
                 {
-                    tableBatchOperations = new System.Collections.Generic.List<TableBatchOperation>();
+                    tableBatchOperations = new List<List<Azure.Data.Tables.TableTransactionAction>>();
                     transactionTableBatchOperations[azureTable] = tableBatchOperations;
                 }
 
 
+
                 if (tableBatchOperations.Count == 0 || tableBatchOperations.Last().Count == 100)
-                    tableBatchOperations.Add(new TableBatchOperation());
+                    tableBatchOperations.Add(new List<Azure.Data.Tables.TableTransactionAction>());
                 return tableBatchOperations.Last();
             }
             //return tableBatchOperation;
 
         }
-
 
         /// <MetaDataID>{7cf92080-f2b8-4140-94ed-3b1589bce361}</MetaDataID>
         public override void PrepareForChanges(TransactionContext theTransaction)
@@ -963,23 +1070,24 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             try
             {
 
-                CloudTableClient tableClient = Account.CreateCloudTableClient();
+                //CloudTableClient tableClient = Account.CreateCloudTableClient();
                 AzureTableMetaDataPersistenceRunTime.Storage metaDataStorage = null;
-                if (Account.Credentials.AccountName== CloudStorageAccount.DevelopmentStorageAccount.Credentials.AccountName)
+                
+                if (TablesAccount.AccountName == "devstoreaccount1")
                     metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider").StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
                 else
-                    metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", Account.Credentials.AccountName, Account.Credentials.Key).StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
+                    metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", UserName, Pasword).StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
 
 
                 var classBLOBDataColumns = AzureTableMetaDataPersistenceRunTime.ClassBLOBData.ListOfColumns;
-                var classBLOBDataTable = tableClient.GetTableReference(metaDataStorage.ClassBLOBDataTableName);
+                var classBLOBDataTable = TablesAccount.GetTableClient(metaDataStorage.ClassBLOBDataTableName);
 
 
                 var objectBLOBDataColumns = AzureTableMetaDataPersistenceRunTime.ObjectBLOBData.ListOfColumns;
-                var objectBLOBDataTable = tableClient.GetTableReference(metaDataStorage.ObjectBLOBDataTableName);
+                var objectBLOBDataTable = TablesAccount.GetTableClient(metaDataStorage.ObjectBLOBDataTableName);
 
                 var metadataIdentitiesColumns = AzureTableMetaDataPersistenceRunTime.MetadataIdentities.ListOfColumns;
-                var metadataIdentitiesTable = tableClient.GetTableReference(metaDataStorage.MetadataIdentityTableName);
+                var metadataIdentitiesTable = TablesAccount.GetTableClient(metaDataStorage.MetadataIdentityTableName);
 
                 XDocument storageMetaDataDoc = XDocument.Parse("<StorageMetaData/>");
                 storageMetaDataDoc.Root.SetAttributeValue("StorageName", StorageMetaData.StorageName);
@@ -1009,8 +1117,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 SerializeTable(memoryStream, objectBLOBDataColumns, objectBLOBDataTable);
                 SerializeTable(memoryStream, metadataIdentitiesColumns, metadataIdentitiesTable);
 
+                string prefix = (this.StorageMetaData as WindowsAzureTablesPersistenceRunTime.Storage).TablePrefix;
+                string prefixFilter = Azure.Data.Tables.TableServiceClient.CreateQueryFilter(x => x.Name.CompareTo(prefix) >= 0
+                                         && x.Name.CompareTo(prefix + char.MaxValue) <= 0);
 
-                var dataTables = tableClient.ListTables((this.StorageMetaData as WindowsAzureTablesPersistenceRunTime.Storage).TablePrefix).ToList();
+                var dataTables = TablesAccount.Query(prefixFilter).ToList();
                 var tables = (from table in storage.GetObjectCollection<RDBMSMetaDataRepository.Table>()
                               select table).ToList();
 
@@ -1024,7 +1135,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         var columns = tableMetaData.ContainedColumns.Select(x => x.Name).ToArray();
                         List<Column> tableColumns = tableMetaData.ContainedColumns.ToList();
 
-                        SerializeTable(memoryStream, tableColumns, dataTable);
+                        SerializeTable(memoryStream, tableColumns, TablesAccount.GetTableClient(dataTable.Name));
 
                     }
                 }
@@ -1140,10 +1251,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
         }
 
-        private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, CloudTable classBLOBDataTable)
+        private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, Azure.Data.Tables.TableClient classBLOBDataTable)
         {
-            var query = new TableQuery<ElasticTableEntity>();
-            var tableEntities = classBLOBDataTable.ExecuteQuery(query.Select(columns.Select(x => x.DataBaseColumnName).ToList())).ToList();
+            //var query = new TableQuery<ElasticTableEntity>();
+            var tableEntities = classBLOBDataTable.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), columns.Select(x => x.DataBaseColumnName).ToList()).Select(x => new ElasticTableEntity(x)).ToList();
 
             Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member> tableMembersDictionary = new Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member>();
             List<AzureTableMetaDataPersistenceRunTime.Member> tableMembers = new List<AzureTableMetaDataPersistenceRunTime.Member>();
@@ -1232,7 +1343,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     else
                         return false;
 
-                } 
+                }
             }
         }
     }

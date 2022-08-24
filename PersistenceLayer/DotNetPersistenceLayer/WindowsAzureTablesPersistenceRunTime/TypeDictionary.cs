@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Azure.Cosmos.Table;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
@@ -26,37 +25,84 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             return "";
         }
 
+        class QuerableType
+        {
+            public byte[] M_Binary { get; set; }
+
+            public bool M_Bool { get; set; }
+            public DateTime M_Date { get; set; }
+
+            public double M_Double { get; set; }
+
+            public Guid M_Guid { get; set; }
+
+            public int M_Int { get; set; }
+
+            public System.Int64 M_Long { get; set; }
+            public String M_String { get; set; }
+        }
         public string GenerateFilterConditionFor(string propertyName, string operation, object givenValue)
         {
-
+            return GetFilterConditionFor(propertyName, operation, givenValue);
+        }
+        public static string GetFilterConditionFor(string propertyName, string operation, object givenValue)
+        {
+            string filter;
 
             if (givenValue is byte[])
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForBinary(propertyName, operation, (byte[])givenValue);
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Binary == (byte[])givenValue);
+                filter = string.Format(filter.Replace("M_Binary", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
             if (givenValue is bool)
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForBool(propertyName, operation, (bool)givenValue);
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Bool == (bool)givenValue);
+                filter = string.Format(filter.Replace("M_Bool", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
             if (givenValue is DateTime)
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForDate(propertyName, operation, (DateTime)givenValue);
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Date == (DateTime)givenValue);
+                filter = string.Format(filter.Replace("M_Date", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
             if (givenValue is double)
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForDouble(propertyName, operation, (double)givenValue);
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Double == (double)givenValue);
+                filter = string.Format(filter.Replace("M_Double", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
             if (givenValue is Guid)
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForGuid(propertyName, operation, (Guid)givenValue);
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Guid == (Guid)givenValue);
+                filter = string.Format(filter.Replace("M_Guid", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
             if (givenValue is int)
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForInt(propertyName, operation, (int)givenValue);
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Int == (int)givenValue);
+                filter = string.Format(filter.Replace("M_Int", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
             if (givenValue is long)
-                return Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterConditionForLong(propertyName, operation, (long)givenValue);
-
-            return  Microsoft.Azure.Cosmos.Table.TableQuery.GenerateFilterCondition(propertyName, operation,givenValue.ToString());
-
-
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_Long == (long)givenValue);
+                filter = string.Format(filter.Replace("M_Long", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
+            if (givenValue is string)
+            {
+                filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_String == (String)givenValue);
+                filter = string.Format(filter.Replace("M_String", propertyName).Replace(" eq ", " {0} "), operation);
+                return filter;
+            }
+            filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_String == givenValue.ToString());
+            filter = string.Format(filter.Replace("M_String", propertyName).Replace(" eq ", " {0} "), operation);
+            return filter;
         }
 
-        public static EdmType GetEdmType( Type type)
+        public static EdmType GetEdmType(Type type)
         {
 
             if (type == typeof(byte[])) return EdmType.Binary;
@@ -69,8 +115,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (type == typeof(long)) return EdmType.Int64;
             if (type == typeof(string)) return EdmType.String;
             if (type == typeof(decimal)) return EdmType.Double;
-            if(type!=null&&type.BaseType == typeof(System.Enum)) return EdmType.Int32;
-            throw new Exception("not supported type" + type.FullName );
+            if (type != null && type.BaseType == typeof(System.Enum)) return EdmType.Int32;
+            throw new Exception("not supported type" + type.FullName);
         }
     }
 }

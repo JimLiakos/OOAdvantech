@@ -8,7 +8,7 @@ using System.Text;
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime
 {
     /// <MetaDataID>{ecdb7768-48a2-43e3-b21b-636f2b1ea537}</MetaDataID>
-    public class ClassBLOBData :Microsoft.Azure.Cosmos.Table.TableEntity,Azure.Data.Tables.ITableEntity
+    public class ClassBLOBData :Azure.Data.Tables.ITableEntity
     {
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         /// <param name="partitionKey">The last name.</param>
         /// <param name="rowKey">The first name.</param>
         /// <MetaDataID>{d76811bf-b312-48fc-8966-9b8f4cae2918}</MetaDataID>
-        public ClassBLOBData(string partitionKey, string rowKey) : base(partitionKey, rowKey)
+        public ClassBLOBData(string partitionKey, string rowKey) 
         {
             PartitionKey = partitionKey;
             RowKey = rowKey;
@@ -46,5 +46,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public string MetaObjectIdentity { get; set; }
         DateTimeOffset? ITableEntity.Timestamp { get ; set; }
         ETag ITableEntity.ETag { get ; set ; }
-    }
+        public string PartitionKey { get; set; }
+        public string RowKey  { get; set; }
+}
 }
