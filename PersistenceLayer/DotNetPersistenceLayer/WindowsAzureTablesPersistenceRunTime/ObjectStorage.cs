@@ -661,19 +661,38 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 if (TableBatchOperations_a.ContainsKey(theTransaction.Transaction.LocalTransactionUri.ToLower()))
                 {
                     DateTime start = DateTime.Now;
+
                     foreach (var transactionTableBatchOperationsEntry in TableBatchOperations_a[theTransaction.Transaction.LocalTransactionUri.ToLower()])
                     {
                         foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
                         {
-                            bool retry = false;
+                            
+                            bool canRetry = false;
+                            int retryCount = 5;
+                            Retry:
+
                             try
                             {
 
+
                                 transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
+                            }
+                            catch (Azure.Data.Tables.TableTransactionFailedException  tableTransactionError)
+                            {
+                                if(tableTransactionError.ErrorCode== "InternalError"&&retryCount>0)
+                                {
+
+                                    retryCount--;
+                                    System.Threading.Thread.Sleep(100);
+                                    goto Retry;
+                                }
+
+                                if (!canRetry)
+                                    throw;
                             }
                             catch (Exception error)
                             {
-                                if (!retry)
+                                if (!canRetry)
                                     throw;
                             }
 
