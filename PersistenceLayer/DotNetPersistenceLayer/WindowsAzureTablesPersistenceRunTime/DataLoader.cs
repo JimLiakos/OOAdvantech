@@ -2191,35 +2191,33 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                             }
 
+
+
+                            if (dataColumn.Name != "StorageCellID")
+                            {
+                                if (dataColumn.MappedObject != null && column == null)
+                                {
+                                    var mappedAttribute = storageCell.Type.GetFeature(dataColumn.MappedObject.Identity.ToString(), true);
+                                    if (mappedAttribute == null)
+                                    {
+                                        var mappedAssociationEnd = storageCell.Type.GetRoles(true).Where(x => x.Identity == dataColumn.MappedObject.Identity).FirstOrDefault();
+                                        if (mappedAssociationEnd == null)
+                                            mappedAssociationEnd = storageCell.Type.GetAssociateRoles(true).Where(x => x.Identity == dataColumn.MappedObject.Identity).FirstOrDefault();
+                                        if (mappedAssociationEnd != null)
+                                            throw new System.Exception("Missing column for " + dataColumn.MappedObject.FullName);
+                                    }
+                                    else
+                                        throw new System.Exception("Missing column for " + dataColumn.MappedObject.FullName);
+                                }
+                                if (column == null)
+                                    continue;
+                                if(!azureTableEntitiesRetriever.SelectionColumns.Contains(column.DataBaseColumnName))
+                                    azureTableEntitiesRetriever.SelectionColumns.Add(column.DataBaseColumnName);
+                            }
+
+
                             if (!TemporaryDataTable.Columns.Contains(dataColumn.Name))
                             {
-
-                                if (dataColumn.Name != "StorageCellID")
-                                {
-                                    if (dataColumn.MappedObject != null && column == null)
-                                    {
-                                        var mappedAttribute = storageCell.Type.GetFeature(dataColumn.MappedObject.Identity.ToString(), true);
-                                        if (mappedAttribute == null)
-                                        {
-                                            var mappedAssociationEnd = storageCell.Type.GetRoles(true).Where(x => x.Identity == dataColumn.MappedObject.Identity).FirstOrDefault();
-                                            if (mappedAssociationEnd == null)
-                                                mappedAssociationEnd = storageCell.Type.GetAssociateRoles(true).Where(x => x.Identity == dataColumn.MappedObject.Identity).FirstOrDefault();
-                                            if (mappedAssociationEnd != null)
-                                                throw new System.Exception("Missing column for " + dataColumn.MappedObject.FullName);
-                                        }
-                                        else
-                                            throw new System.Exception("Missing column for " + dataColumn.MappedObject.FullName);
-
-
-                                    }
-                                    if (column == null)
-                                        continue;
-
-                                    azureTableEntitiesRetriever.SelectionColumns.Add(column.DataBaseColumnName);
-                                }
-
-
-
                                 if (string.IsNullOrWhiteSpace(dataColumn.Alias))
                                     TemporaryDataTable.Columns.Add(dataColumn.Name, dataColumn.Type);
                                 else
