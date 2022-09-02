@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace WebSocket4Net
 {
+    /// <MetaDataID>{87534211-148c-432e-90a9-a29d9004a192}</MetaDataID>
     public class WebSocket
     {
         private string Uri;
@@ -56,6 +57,8 @@ namespace WebSocket4Net
             await client.ConnectAsync(new Uri("ws://localhost:5000"), cts.Token);
 #else
                     await client.ConnectAsync(new Uri(Uri), cts.Token);
+                    if (client.State == WebSocketState.Open)
+                        Opened?.Invoke(this, EventArgs.Empty);
 #endif
                     await Task.Factory.StartNew(async () =>
                     {
