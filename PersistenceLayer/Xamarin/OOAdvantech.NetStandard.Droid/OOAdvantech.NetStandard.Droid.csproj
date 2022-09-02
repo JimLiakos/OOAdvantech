@@ -79,6 +79,9 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
     </PackageReference>
+    <PackageReference Include="System.Net.WebSockets.Client">
+      <Version>4.3.2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.6.1</Version>
     </PackageReference>
@@ -89,7 +92,7 @@
       <Version>71.1605.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2012</Version>
+      <Version>5.0.0.2196</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Auth">
       <Version>71.1600.4</Version>

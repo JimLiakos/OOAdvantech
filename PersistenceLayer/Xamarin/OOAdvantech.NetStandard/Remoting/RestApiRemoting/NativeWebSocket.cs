@@ -56,6 +56,7 @@ namespace WebSocket4Net
 #if __IOS__
             await client.ConnectAsync(new Uri("ws://localhost:5000"), cts.Token);
 #else
+                    Uri = "ws://10.0.0.13:5000";
                     await client.ConnectAsync(new Uri(Uri), cts.Token);
                     if (client.State == WebSocketState.Open)
                         Opened?.Invoke(this, EventArgs.Empty);
@@ -66,6 +67,7 @@ namespace WebSocket4Net
                         {
                             WebSocketReceiveResult result;
                             var message = new ArraySegment<byte>(new byte[4096]);
+                            System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
                             do
                             {
 
@@ -92,17 +94,24 @@ namespace WebSocket4Net
                                 }
                                 //result = taskResult.Result;
                                 var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
-                                string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                                memoryStream.Write(messageBytes, 0, messageBytes.Length);
+                                if (result.EndOfMessage)
+                                {
+                                    messageBytes = memoryStream.GetBuffer();
+                                    memoryStream.Dispose();
+                                    memoryStream = new System.IO.MemoryStream();
 
-                                try
-                                {
-                                    this.MessageReceived?.Invoke(this, new MessageReceivedEventArgs(serialisedMessae));
-                                    //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
-                                    //Messages.Add(msg);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine($"Invalide message format. {ex.Message}");
+                                    try
+                                    {
+                                        string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                                        this.MessageReceived?.Invoke(this, new MessageReceivedEventArgs(serialisedMessae));
+                                        //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
+                                        //Messages.Add(msg);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"Invalide message format. {ex.Message}");
+                                    }
                                 }
 
                             } while (!result.EndOfMessage);

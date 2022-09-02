@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AudioToolbox;
 
 namespace OOAdvantech.iOS
@@ -9,6 +10,7 @@ namespace OOAdvantech.iOS
     {
 
         static event MessageReceivedHandle internalMessageReceived;
+        public event KeyboardChangeStateHandle KeyboordChangeState;
 
         event MessageReceivedHandle IDeviceOOAdvantechCore.MessageReceived
         {
@@ -129,6 +131,8 @@ namespace OOAdvantech.iOS
         static bool _IsinSleepMode;
         public bool IsinSleepMode { get =>  _IsinSleepMode; set => _IsinSleepMode=value; }
 
+        public bool IsBackgroundServiceStarted => throw new NotImplementedException();
+
         public SIMCardData GetLinePhoneNumber(int lineIndex)
         {
             return _LinesPhoneNumbers[lineIndex];
@@ -191,6 +195,31 @@ namespace OOAdvantech.iOS
         {
             _FirebaseToken = firebaseToken;
             Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID);
+        }
+
+        Task<string> IDeviceOOAdvantechCore.EmailSignUp(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<string> IDeviceOOAdvantechCore.EmailSignIn(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendPasswordResetEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RunInBackground(Action action, BackgroundServiceState serviceState)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopBackgroundService()
+        {
+            throw new NotImplementedException();
         }
     }
     public class RemoteMessage : IRemoteMessage
