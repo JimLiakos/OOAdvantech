@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Gms.Extensions;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase.Auth;
 using Xamarin.Forms;
 
 namespace OOAdvantech.Authentication.Droid
@@ -37,8 +39,10 @@ namespace OOAdvantech.Authentication.Droid
         {
             if (FirebaseAuthentication.FirebaseAuth.CurrentUser != null)
             {
-                var er = await FirebaseAuthentication.FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
-                return er.Token;
+                var tokenResult = await (FirebaseAuth.Instance.CurrentUser.GetIdToken(false).AsAsync<GetTokenResult>());
+
+                //var tokenResult = await FirebaseAuthentication.FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
+                return tokenResult.Token;
             }
             else
                 return null;
@@ -116,7 +120,7 @@ namespace OOAdvantech.Authentication.Droid
                         PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
                         ProviderId = firebaseUser.ProviderId,
                         Uid = firebaseUser.Uid,
-                        Providers = firebaseUser.Providers.ToList()
+                        //Providers = firebaseUser.Providers.ToList()
                     };
 
                     currentUser.ProviderId = currentUser.Providers[0];
@@ -190,8 +194,7 @@ namespace OOAdvantech.Authentication.Droid
 
         public string ProviderId => currentUser.ProviderId;
 
-        public IList<string> Providers => currentUser.Providers;
-
+        public IList<string> Providers => currentUser.ProviderData.Select(x=>x.ProviderId).ToList();
         public string PhoneNumber => currentUser.PhoneNumber;
 
         public string Uid => currentUser.Uid;

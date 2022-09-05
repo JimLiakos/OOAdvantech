@@ -47,85 +47,107 @@ namespace WebSocket4Net
             //});
 
         }
+
+        Task OpenTask;
         public void Open()
         {
-            Task.Run(async () =>
+            Task openTask = null;
+            lock (this)
             {
-                try
+                if (OpenTask != null&&(OpenTask.Status == TaskStatus.Running || OpenTask.Status == TaskStatus.WaitingForActivation))
+                    openTask = OpenTask;
+                else OpenTask = null;
+
+                if (openTask == null)
                 {
+                    openTask = Task.Run(async () =>
+                    {
+                        try
+                        {
 #if __IOS__
             await client.ConnectAsync(new Uri("ws://localhost:5000"), cts.Token);
 #else
-                    Uri = "ws://10.0.0.13:5000";
-                    await client.ConnectAsync(new Uri(Uri), cts.Token);
-                    if (client.State == WebSocketState.Open)
-                        Opened?.Invoke(this, EventArgs.Empty);
-#endif
-                    await Task.Factory.StartNew(async () =>
-                    {
-                        while (true)
-                        {
-                            WebSocketReceiveResult result;
-                            var message = new ArraySegment<byte>(new byte[4096]);
-                            System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
-                            do
+
+                            await client.ConnectAsync(new Uri(Uri), cts.Token);
+                            if (client.State == WebSocketState.Open)
+                                Opened?.Invoke(this, EventArgs.Empty);
+                            else
                             {
 
-                                try
+                            }
+#endif
+                            await Task.Factory.StartNew(async () =>
+                            {
+                                while (true)
                                 {
-                                    result = await client.ReceiveAsync(message, cts.Token);
-                                    //while (!taskResult.Wait(1000))
-                                    //{
-                                    //    if (client.State != WebSocketState.Open)
-                                    //    {
-
-                                    //    }
-                                    //    else
-                                    //    {
-
-                                    //    }
-
-                                    //}
-                                }
-                                catch (Exception error)
-                                {
-                                    this.Error?.Invoke(this, new ErrorEventArgs(error));
-                                    throw;
-                                }
-                                //result = taskResult.Result;
-                                var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
-                                memoryStream.Write(messageBytes, 0, messageBytes.Length);
-                                if (result.EndOfMessage)
-                                {
-                                    messageBytes = memoryStream.GetBuffer();
-                                    memoryStream.Dispose();
-                                    memoryStream = new System.IO.MemoryStream();
-
-                                    try
+                                    WebSocketReceiveResult result;
+                                    var message = new ArraySegment<byte>(new byte[4096]);
+                                    System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
+                                    do
                                     {
-                                        string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
-                                        this.MessageReceived?.Invoke(this, new MessageReceivedEventArgs(serialisedMessae));
-                                        //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
-                                        //Messages.Add(msg);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"Invalide message format. {ex.Message}");
-                                    }
-                                }
 
-                            } while (!result.EndOfMessage);
+                                        try
+                                        {
+                                            result = await client.ReceiveAsync(message, cts.Token);
+                                            //while (!taskResult.Wait(1000))
+                                            //{
+                                            //    if (client.State != WebSocketState.Open)
+                                            //    {
+
+                                            //    }
+                                            //    else
+                                            //    {
+
+                                            //    }
+
+                                            //}
+                                        }
+                                        catch (Exception error)
+                                        {
+                                            this.Error?.Invoke(this, new ErrorEventArgs(error));
+                                            throw;
+                                        }
+                                        //result = taskResult.Result;
+                                        var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
+                                        memoryStream.Write(messageBytes, 0, messageBytes.Length);
+                                        if (result.EndOfMessage)
+                                        {
+                                            messageBytes = memoryStream.GetBuffer();
+                                            memoryStream.Dispose();
+                                            memoryStream = new System.IO.MemoryStream();
+
+                                            try
+                                            {
+                                                string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                                                this.MessageReceived?.Invoke(this, new MessageReceivedEventArgs(serialisedMessae));
+                                                //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
+                                                //Messages.Add(msg);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.WriteLine($"Invalide message format. {ex.Message}");
+                                            }
+                                        }
+
+                                    } while (!result.EndOfMessage);
+                                }
+                            }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+
                         }
-                    }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                        catch (Exception error)
+                        {
 
+                            this.Error?.Invoke(this, new ErrorEventArgs(error));
+                        }
+
+                    });
                 }
-                catch (Exception error)
-                {
 
-                    this.Error?.Invoke(this, new ErrorEventArgs(error));
-                }
-
-            }).Wait();
+                if (openTask != null && (openTask.Status == TaskStatus.Running || openTask.Status == TaskStatus.WaitingForActivation))
+                    OpenTask = openTask;
+                else OpenTask = null;
+            }
+            openTask.Wait();
         }
 
         public WebSocketState State { get => client.State; }

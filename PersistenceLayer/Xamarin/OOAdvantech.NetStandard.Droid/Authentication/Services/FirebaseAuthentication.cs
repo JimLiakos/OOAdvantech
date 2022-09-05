@@ -158,7 +158,9 @@ namespace OOAdvantech.Authentication.Droid
         {
             if (FirebaseAuth.CurrentUser != null)
             {
-                var token = await FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
+                var token = await (FirebaseAuth.Instance.CurrentUser.GetIdToken(false).AsAsync<GetTokenResult>());
+                
+                //var token = await FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
 
                 authTimestamp = OOAdvantech.Remoting.RestApi.DeviceAuthentication.FromUnixTime(token.AuthTimestamp);
                 issuedAtTimestamp = OOAdvantech.Remoting.RestApi.DeviceAuthentication.FromUnixTime(token.IssuedAtTimestamp);
@@ -181,7 +183,7 @@ namespace OOAdvantech.Authentication.Droid
                     PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
                     ProviderId = firebaseUser.ProviderId,
                     Uid = firebaseUser.Uid,
-                    Providers = firebaseUser.Providers.ToList()
+                    //Providers = firebaseUser.Providers.ToList()
                 };
 
                 Remoting.RestApi.DeviceAuthentication.Current.AuthIDTokenChanged(idToken, expirationTimestamp, authUser);
@@ -211,7 +213,8 @@ namespace OOAdvantech.Authentication.Droid
                     if (expirationTimestamp - DateTime.UtcNow < TimeSpan.FromMinutes(5))
                     {
 
-                        var tokenTask = FirebaseAuth.CurrentUser.GetIdTokenAsync(true);
+                        //var tokenTask = FirebaseAuth.CurrentUser.GetIdTokenAsync(true);
+                        var tokenTask = FirebaseAuth.Instance.CurrentUser.GetIdToken(false).AsAsync<GetTokenResult>();
                         if (tokenTask.Wait(TimeSpan.FromSeconds(30)))
                         {
                             var token = tokenTask.Result;
@@ -272,7 +275,8 @@ namespace OOAdvantech.Authentication.Droid
 
         private static async System.Threading.Tasks.Task FirebaseUserSignedIn()
         {
-            var token = await FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
+            //var token = await FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
+            var token = await (FirebaseAuth.Instance.CurrentUser.GetIdToken(false).AsAsync<GetTokenResult>());
             lock (AuthenticationTokenLock)
             {
                 CurrentUser = FirebaseAuth.CurrentUser;
@@ -282,6 +286,7 @@ namespace OOAdvantech.Authentication.Droid
                 expirationTimestamp = Remoting.RestApi.DeviceAuthentication.FromUnixTime(token.ExpirationTimestamp);
             }
             string authToken = token.Token;
+            System.Collections.Generic.List<string> providers  =FirebaseAuth.CurrentUser.ProviderData.Select(x => x.ProviderId).ToList();
 
             var authUser = new Remoting.RestApi.AuthUser()
             {
@@ -289,7 +294,7 @@ namespace OOAdvantech.Authentication.Droid
                 ExpirationTime = expirationTimestamp,
                 Email = FirebaseAuth.CurrentUser.Email,
                 Name = FirebaseAuth.CurrentUser.DisplayName,
-                Firebase_Sign_in_Provider = FirebaseAuth.CurrentUser.Providers[FirebaseAuth.CurrentUser.Providers.Count - 1],
+                Firebase_Sign_in_Provider = providers[providers.Count - 1],
                 User_ID = FirebaseAuth.CurrentUser.Uid,
                 Picture = FirebaseAuth.CurrentUser.PhotoUrl?.ToString()
             };
