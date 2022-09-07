@@ -42,7 +42,7 @@ namespace WebSocket4Net
             //Task.Run(async () =>
             //{
             client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cts.Token).Wait();
-            this.Closed?.Invoke(this, EventArgs.Empty);
+            
 
             //});
 
@@ -89,18 +89,6 @@ namespace WebSocket4Net
                                         try
                                         {
                                             result = await client.ReceiveAsync(message, cts.Token);
-                                            //while (!taskResult.Wait(1000))
-                                            //{
-                                            //    if (client.State != WebSocketState.Open)
-                                            //    {
-
-                                            //    }
-                                            //    else
-                                            //    {
-
-                                            //    }
-
-                                            //}
                                         }
                                         catch (Exception error)
                                         {
@@ -110,6 +98,15 @@ namespace WebSocket4Net
                                         //result = taskResult.Result;
                                         var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
                                         memoryStream.Write(messageBytes, 0, messageBytes.Length);
+                                        if (result.CloseStatus == WebSocketCloseStatus.NormalClosure)
+                                        {
+                                            this.Closed?.Invoke(this, EventArgs.Empty);
+                                            return;
+                                        }
+                                        if(result.CloseStatus!=null)
+                                        {
+
+                                        }
                                         if (result.EndOfMessage)
                                         {
                                             messageBytes = memoryStream.GetBuffer();

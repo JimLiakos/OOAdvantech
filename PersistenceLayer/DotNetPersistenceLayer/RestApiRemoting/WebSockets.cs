@@ -359,6 +359,10 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{aecaf65b-f30c-4840-9e9d-f99753b8bea8}</MetaDataID>
         private void OnMessageReceived(object sender, WebSocket4Net.MessageReceivedEventArgs e)
         {
+            if(string.IsNullOrEmpty(e.Message))
+            {
+
+            }
             Task.Run(() =>
             {
                 m_MessageRecieveTaskSrc?.SetResult(e.Message);
@@ -516,9 +520,10 @@ namespace OOAdvantech.Remoting.RestApi
                 openTaskSrc = m_OpenTaskSrc;
                 if (openTaskSrc != null)
                     return openTaskSrc.Task;
+                openTaskSrc = m_OpenTaskSrc = new TaskCompletionSource<bool>();
             }
 
-            openTaskSrc = m_OpenTaskSrc = new TaskCompletionSource<bool>();
+            
 #if DeviceDotNet
             if (NativeWebSocket.State == System.Net.WebSockets.WebSocketState.Closed)
 #else
@@ -560,7 +565,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{90c0e9f1-1374-4510-baf3-4ce293bee05d}</MetaDataID>
         int NextRequestID = 1;
         /// <MetaDataID>{52e89894-8243-47ed-8289-e90e6c16aed5}</MetaDataID>
-        System.Collections.Generic.Dictionary<int, System.Threading.Tasks.TaskCompletionSource<OOAdvantech.Remoting.RestApi.ResponseData>> RequestTasks = new Dictionary<int, TaskCompletionSource<ResponseData>>();
+       internal System.Collections.Generic.Dictionary<int, System.Threading.Tasks.TaskCompletionSource<OOAdvantech.Remoting.RestApi.ResponseData>> RequestTasks = new Dictionary<int, TaskCompletionSource<ResponseData>>();
 
         /// <MetaDataID>{5d5dd9c9-c27d-4ba1-bdbc-01defb500c20}</MetaDataID>
         internal System.Collections.Generic.Dictionary<int, System.Threading.Tasks.TaskCompletionSource<OOAdvantech.Remoting.RestApi.ResponseData>> GetRequestTasks()
@@ -949,8 +954,11 @@ namespace OOAdvantech.Remoting.RestApi
                     else
                     {
                     }
+                    var openTimeSpan = (DateTime.Now - startTime).ToString();
+                    System.Diagnostics.Debug.WriteLine(openTimeSpan);
                     if (webSocket.State != WebSocketState.Open)
                     {
+                        
                     }
 
                 }
@@ -958,99 +966,6 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
-            //            lock (WebSocketClient.WebSocketConnections)
-            //            {
-
-            //                if (!WebSocketClient.WebSocketConnections.TryGetValue(uri.ToLower(), out webSocket))
-            //                {
-            //                    webSocket = new WebSocketClient(uri, binding);
-            //                    WebSocketClient.WebSocketConnections[uri.ToLower()] = webSocket;
-            //                    Task<bool> openTask = null;
-            //                    bool openTaskCompleted = false;
-            //                    do
-            //                    {
-            //                        openTask = webSocket.OpenAsync();
-            //                        openTaskCompleted = openTask.Wait(binding.OpenTimeout);
-            //#if !DeviceDotNet
-            //                        System.Threading.Thread.Sleep(200);
-            //#else
-            //                        System.Threading.Tasks.Task.Delay(200).Wait();
-            //#endif
-            //                    }
-            //                    while ((!openTaskCompleted || !openTask.Result) && (DateTime.Now - startTime) < binding.OpenTimeout);
-
-            //                    if (!openTaskCompleted || !openTask.Result)
-            //                    {
-            //                        webSocket.SocketException = new System.TimeoutException(string.Format("OpenTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
-            //                        return webSocket;
-            //                    }
-            //                    else
-            //                    {
-
-            //                    }
-            //                    if (webSocket.State != WebSocketState.Open)
-            //                    {
-
-            //                    }
-            //                }
-            //                else if (webSocket.State != WebSocketState.Open)
-            //                {
-            //                    if (webSocket.State == WebSocketState.Connecting)
-            //                    {
-            //                        Task<bool> openTask = webSocket.OpenAsync();
-            //                        bool openTaskCompleted = openTask.Wait(binding.OpenTimeout);
-            //                        if (!openTaskCompleted || !openTask.Result)
-            //                        {
-            //                            webSocket.SocketException = new System.TimeoutException(string.Format("OpenTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
-            //                            return webSocket;
-            //                        }
-            //                        else
-            //                        {
-            //                        }
-            //                        if (webSocket.State != WebSocketState.Open)
-            //                        {
-            //                        }
-            //                    }
-            //                    else
-            //                    {
-            //                        Task<bool> openTask = null;
-            //                        webSocket = new WebSocketClient(uri, binding);
-            //                        WebSocketClient.WebSocketConnections[uri.ToLower()] = webSocket;
-            //                        bool openTaskCompleted = false;
-            //                        do
-            //                        {
-            //                            openTask = webSocket.OpenAsync();
-            //                            openTaskCompleted = openTask.Wait(binding.OpenTimeout);
-            //#if !DeviceDotNet
-            //                            System.Threading.Thread.Sleep(200);
-            //#else
-            //                            System.Threading.Tasks.Task.Delay(200).Wait();
-            //#endif
-            //                        }
-            //                        while ((!openTaskCompleted || !openTask.Result) && (DateTime.Now - startTime) < binding.OpenTimeout);
-
-            //                        if (!openTaskCompleted || !openTask.Result)
-            //                        {
-            //                            webSocket.SocketException = new System.TimeoutException(string.Format("OpenTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
-            //                            return webSocket;
-            //                        }
-            //                        else
-            //                        {
-            //                        }
-            //                        if (webSocket.State != WebSocketState.Open)
-            //                        {
-            //                        }
-
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if (webSocket.State == WebSocketState.Open)
-            //                    {
-
-            //                    }
-            //                }
-            //            }
             if (webSocket.State != WebSocketState.Open)
             {
 

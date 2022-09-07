@@ -426,7 +426,7 @@ namespace OOAdvantech.Remoting
 
                 try
                 {
-                    if (!task.Wait(System.TimeSpan.FromSeconds(5)))
+                    if (!task.Wait(System.TimeSpan.FromSeconds(10)))
                         if (!task.Wait(System.TimeSpan.FromMinutes(2.5)))
                         {
                             SessionsTasks.Remove(channelUri);

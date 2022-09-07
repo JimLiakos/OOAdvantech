@@ -572,7 +572,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{bac85bb7-de27-4314-b7cb-9d21be644d14}</MetaDataID>
-        public static ResponseData Invoke(string requestUri, RequestData requestData, string X_Auth_Token, string X_Access_Token, Binding binding = null)
+        static ResponseData SessionEstablishmentInvoke(string requestUri, RequestData requestData, string X_Auth_Token, string X_Access_Token, Binding binding = null)
         {
 
             if (binding == null)
@@ -587,6 +587,7 @@ namespace OOAdvantech.Remoting.RestApi
                 WebSocketClient webSocket = WebSocketClient.EnsureConnection(requestUri + "WebSocketMessages", binding);
                 if (webSocket.State != WebSocketState.Open)
                 {
+                    #region  creates open error exception response data
                     ReturnMessage responseMessage = new ReturnMessage(requestData.ChannelUri);
                     var restApiException = new RestApiExceptionData();
                     if (webSocket.SocketException != null)
@@ -601,13 +602,14 @@ namespace OOAdvantech.Remoting.RestApi
                         restApiException.ExceptionMessage = webSocket.LastError;
                         responseMessage.Exception = restApiException;
                     }
-                    return new ResponseData(requestData.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                    return new ResponseData(requestData.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) }; 
+                    #endregion
                 }
 
                 RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity };
 
                 var task = webSocket.SendRequestAsync(request);
-                if (!task.Wait(System.TimeSpan.FromSeconds(25)))
+                if (!task.Wait(System.TimeSpan.FromSeconds(9)))
                 {
                     if (!task.Wait(binding.SendTimeout))
                     {
@@ -700,7 +702,7 @@ namespace OOAdvantech.Remoting.RestApi
             Binding binding = CallContext.LogicalGetData("Binding") as Binding;
             binding = Binding.DefaultBinding;
 
-            var responseData = Invoke(requestData.PublicChannelUri, requestData, null, null, binding);
+            var responseData = SessionEstablishmentInvoke(requestData.PublicChannelUri, requestData, null, null, binding);
             if (responseData != null)
             {
 

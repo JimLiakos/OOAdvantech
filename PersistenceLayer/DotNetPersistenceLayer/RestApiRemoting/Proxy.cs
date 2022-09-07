@@ -70,12 +70,10 @@ namespace OOAdvantech.Remoting.RestApi
             ProxyType = objectRef.GetProxyType();
 
 
-
-            Type = System.Type.GetType(ProxyType.AssemblyQualifiedName);
-
-
-            if (Type == null)
+            if(type != null)
                 Type = type;
+            else
+                Type = System.Type.GetType(ProxyType.AssemblyQualifiedName);
         }
 
         public void ReconnectToServerObject(ObjRef objectRef)

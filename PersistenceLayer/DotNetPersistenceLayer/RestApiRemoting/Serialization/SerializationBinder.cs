@@ -98,30 +98,30 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     }
                     
                 }
-
-                Type type = assembly.GetType(typeName);
-                if (type == null)
+                Type type = null;
+                if (typeName.IndexOf('`') >= 0)
                 {
                     // if generic type, try manually parsing the type arguments for the case of dynamically loaded assemblies
                     // example generic typeName format: System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
-                    if (typeName.IndexOf('`') >= 0)
+                    try
                     {
-                        try
-                        {
-                            type = GetGenericTypeFromTypeName(typeName, assembly);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName), ex);
-                        }
+                        type = GetGenericTypeFromTypeName(typeName, assembly);
                     }
-
-                    if (type == null)
+                    catch (Exception ex)
                     {
-                        throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName));
+                        throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName), ex);
                     }
                 }
+                else
+                    type = assembly.GetType(typeName);
 
+
+                if (type == null)
+                {
+                    throw new JsonSerializationException("Could not find type '{0}' in assembly '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeName, assembly.FullName));
+                }
+
+                
                 return type;
             }
             else
@@ -223,6 +223,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             Type type = null;
             //if (assemblyName == null)
+            //if(typeName == "FlavourBusinessManager.RoomService.ItemPreparation")
+            //{
+
+            //}
             if (NamesTypesDictionary.TryGetValue(typeName, out type))
                 return type;
 

@@ -759,7 +759,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (endPoint != null)
             {
                 var task = endPoint.SendRequestAsync(requestData);
-                if (!task.Wait(System.TimeSpan.FromSeconds(25)))
+                if (!task.Wait(System.TimeSpan.FromSeconds(5)))
                 {
                     if (!task.Wait(binding.SendTimeout))
                     {
