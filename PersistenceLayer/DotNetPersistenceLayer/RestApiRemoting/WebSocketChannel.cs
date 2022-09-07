@@ -352,6 +352,8 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             if (_WebSocketClient != value)
                             {
+
+                                var clossingWebSocketClient = _WebSocketClient;
                                 var datetime = DateTime.Now;
                                 string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
                                 System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel replace WebSocketClient  {0} ", timestamp));
@@ -360,15 +362,15 @@ namespace OOAdvantech.Remoting.RestApi
                                 Dictionary<int, TaskCompletionSource<ResponseData>> requestTasks = _WebSocketClient.GetRequestTasks();
                                 if (requestTasks.Count > 0)
                                 {
-                                    foreach (var key in requestTasks.Keys)
-                                    {
-                                        TaskCompletionSource<ResponseData> task = null;
-                                        if (requestTasks.TryGetValue(key, out task))
-                                        {
-                                            if (!task.Task.Wait(System.TimeSpan.FromSeconds(25)))
-                                                task.Task.Wait(Binding.DefaultBinding.SendTimeout);
-                                        }
-                                    }
+                                    //foreach (var key in requestTasks.Keys)
+                                    //{
+                                    //    TaskCompletionSource<ResponseData> task = null;
+                                    //    if (requestTasks.TryGetValue(key, out task))
+                                    //    {
+                                    //        if (!task.Task.Wait(System.TimeSpan.FromSeconds(15)))
+                                    //            task.Task.Wait(Binding.DefaultBinding.SendTimeout);
+                                    //    }
+                                    //}
                                 }
                                 #endregion
 

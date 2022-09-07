@@ -930,14 +930,13 @@ namespace OOAdvantech.Remoting.RestApi
                         System.Threading.Thread.Sleep(200);
                         var state = webSocket.State;
                         if (state == WebSocketState.Closed)
-                        {
                             openTask = webSocket.OpenAsync();
-                        }
 #else
                         System.Threading.Tasks.Task.Delay(200).Wait();
                         var state = webSocket.State;
                         if (state == WebSocketState.Closed)
-                            break;
+                            openTask = webSocket.OpenAsync();
+
 #endif
                     }
                     while ((!openTaskCompleted || !openTask.Result) && (DateTime.Now - startTime) < binding.OpenTimeout);

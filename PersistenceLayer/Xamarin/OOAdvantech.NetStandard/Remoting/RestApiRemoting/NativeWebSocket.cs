@@ -144,7 +144,7 @@ namespace WebSocket4Net
                     OpenTask = openTask;
                 else OpenTask = null;
             }
-            openTask.Wait();
+            
         }
 
         public WebSocketState State { get => client.State; }

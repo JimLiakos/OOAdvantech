@@ -1,6 +1,7 @@
 using System;
 
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace OOAdvantech.Remoting
@@ -374,9 +375,12 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{af69898e-6c33-4253-b632-4b2e4e4b18de}</MetaDataID>
         internal static ClientSessionPart GetSession(string sessionIdentity)
         {
-            return (from clientSessionPart in Sessions.Values
-                    where clientSessionPart.SessionIdentity == sessionIdentity
-                    select clientSessionPart).FirstOrDefault();
+            lock (Sessions)
+            {
+                return (from clientSessionPart in Sessions.Values
+                        where clientSessionPart.SessionIdentity == sessionIdentity
+                        select clientSessionPart).FirstOrDefault();
+            }
         }
 
         /// <MetaDataID>{72f20427-0d16-4ebc-bb25-66f7aea8b44f}</MetaDataID>
@@ -398,23 +402,35 @@ namespace OOAdvantech.Remoting
                     {
                         task = Task.Factory.StartNew<ClientSessionPart>(() =>
                         {
-                            var serverSessionPartInfo = remotingServices.GetServerSession(channelUri, Remoting.RemotingServices.ProcessIdentity);
-                            var serverSessionPart = serverSessionPartInfo.ServerSessionPart;
-                            var proxyChannelUri = OOAdvantech.Remoting.RemotingServices.GetChannelUri(serverSessionPart);
-                            var serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
-                            var clientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
-                            bool bidirectionalChannel = false;
-                            if (serverSessionPartInfo.BidirectionalChannel.HasValue)
-                                bidirectionalChannel = serverSessionPartInfo.BidirectionalChannel.Value;
+                            try
+                            {
+                                var serverSessionPartInfo = remotingServices.GetServerSession(channelUri, Remoting.RemotingServices.ProcessIdentity);
+                                var serverSessionPart = serverSessionPartInfo.ServerSessionPart;
+                                var proxyChannelUri = OOAdvantech.Remoting.RemotingServices.GetChannelUri(serverSessionPart);
+                                var serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
+                                var clientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
+                                bool bidirectionalChannel = false;
+                                if (serverSessionPartInfo.BidirectionalChannel.HasValue)
+                                    bidirectionalChannel = serverSessionPartInfo.BidirectionalChannel.Value;
 
-                            //clientSessionPart = new ClientSessionPart(channelUri, clientProcessIdentity, serverProcessIdentity, serverSessionPart, remotingServices);
-                            clientSessionPart = remotingServices.CreateClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo);
-                            Sessions[channelUri] = clientSessionPart;
+                                //clientSessionPart = new ClientSessionPart(channelUri, clientProcessIdentity, serverProcessIdentity, serverSessionPart, remotingServices);
+                                clientSessionPart = remotingServices.CreateClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo);
+                                if (clientSessionPart == null)
+                                {
+                                    System.Diagnostics.Debug.Write("clientSessionPart==null");
+                                }
+                                Sessions[channelUri] = clientSessionPart;
 
-                            if(!string.IsNullOrEmpty(proxyChannelUri)&&channelUri!= proxyChannelUri)
-                                Sessions[proxyChannelUri] = clientSessionPart;
+                                if (!string.IsNullOrEmpty(proxyChannelUri) && channelUri != proxyChannelUri)
+                                    Sessions[proxyChannelUri] = clientSessionPart;
 
-                            return clientSessionPart;
+                                return clientSessionPart;
+                            }
+                            catch (Exception error)
+                            {
+
+                                throw;
+                            }
                         });
                         SessionsTasks[channelUri] = task;
                     }
