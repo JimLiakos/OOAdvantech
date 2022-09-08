@@ -359,7 +359,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{aecaf65b-f30c-4840-9e9d-f99753b8bea8}</MetaDataID>
         private void OnMessageReceived(object sender, WebSocket4Net.MessageReceivedEventArgs e)
         {
-            if(string.IsNullOrEmpty(e.Message))
+            if (string.IsNullOrEmpty(e.Message))
             {
 
             }
@@ -472,7 +472,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
 
 #else
-             switch (NativeWebSocket.State)
+                switch (NativeWebSocket.State)
                 {
                     case WebSocket4Net.WebSocketState.Open:
                         {
@@ -523,7 +523,7 @@ namespace OOAdvantech.Remoting.RestApi
                 openTaskSrc = m_OpenTaskSrc = new TaskCompletionSource<bool>();
             }
 
-            
+
 #if DeviceDotNet
             if (NativeWebSocket.State == System.Net.WebSockets.WebSocketState.Closed)
 #else
@@ -565,7 +565,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{90c0e9f1-1374-4510-baf3-4ce293bee05d}</MetaDataID>
         int NextRequestID = 1;
         /// <MetaDataID>{52e89894-8243-47ed-8289-e90e6c16aed5}</MetaDataID>
-       internal System.Collections.Generic.Dictionary<int, System.Threading.Tasks.TaskCompletionSource<OOAdvantech.Remoting.RestApi.ResponseData>> RequestTasks = new Dictionary<int, TaskCompletionSource<ResponseData>>();
+        internal System.Collections.Generic.Dictionary<int, System.Threading.Tasks.TaskCompletionSource<OOAdvantech.Remoting.RestApi.ResponseData>> RequestTasks = new Dictionary<int, TaskCompletionSource<ResponseData>>();
 
         /// <MetaDataID>{5d5dd9c9-c27d-4ba1-bdbc-01defb500c20}</MetaDataID>
         internal System.Collections.Generic.Dictionary<int, System.Threading.Tasks.TaskCompletionSource<OOAdvantech.Remoting.RestApi.ResponseData>> GetRequestTasks()
@@ -949,8 +949,12 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     while ((!openTaskCompleted || !openTask.Result) && (DateTime.Now - startTime) < binding.OpenTimeout);
 
+
                     if (!openTaskCompleted || !openTask.Result)
                     {
+                        if (webSocket.State == WebSocketState.Connecting)
+                            webSocket.CloseAsync();
+
                         lock (WebSocketClient.WebSocketConnections)
                         {
                             WebSocketClient.WebSocketConnections.Remove(uri.ToLower());
@@ -965,7 +969,7 @@ namespace OOAdvantech.Remoting.RestApi
                     System.Diagnostics.Debug.WriteLine(openTimeSpan);
                     if (webSocket.State != WebSocketState.Open)
                     {
-                        
+
                     }
 
                 }
@@ -1159,7 +1163,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
 
 
-#region Sends to all azure interconection which are intitalized from this webSocket server disconnect message.
+                #region Sends to all azure interconection which are intitalized from this webSocket server disconnect message.
                 foreach (var interConnection in (from interConnection in InterConnections
                                                  where interConnection.Public == this
                                                  select interConnection).ToList())
@@ -1190,12 +1194,12 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                     }
                 }
-#endregion
+                #endregion
 
 
 
             }
-#region Sends to all local conections disconnect message.
+            #region Sends to all local conections disconnect message.
 
             lock (RunContexts)
             {
@@ -1205,7 +1209,7 @@ namespace OOAdvantech.Remoting.RestApi
 #if !DeviceDotNet
                     runContextConnection.IsolatedContext.IsolatedContextUnloaded -= IsolatedContext_IsolatedContextUnloaded;
 
-#region Sends request message to server session part where it has physical connection through  this web socket server
+                    #region Sends request message to server session part where it has physical connection through  this web socket server
                     try
                     {
                         var datetime = DateTime.Now;
@@ -1231,7 +1235,7 @@ namespace OOAdvantech.Remoting.RestApi
                     catch (Exception error)
                     {
                     }
-#endregion
+                    #endregion
 #endif
 
                 }
@@ -1240,7 +1244,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             }
 
-#endregion
+            #endregion
         }
 
 
@@ -1396,17 +1400,17 @@ namespace OOAdvantech.Remoting.RestApi
                             }
                             catch (Exception error)
                             {
-#region Error response
+                                #region Error response
 
                                 ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                                 responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, error);
                                 responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-#endregion
+                                #endregion
                             }
                         }
                         else
                         {
-#region Forward request to target computational resource
+                            #region Forward request to target computational resource
                             string roleInstanceServerUrl = RemotingServices.InternalEndPointResolver.GetRoleInstanceServerUrl(request);
 
                             System.Diagnostics.Debug.WriteLine(request.ChannelUri + " , " + roleInstanceServerUrl, "Channel");
@@ -1426,12 +1430,13 @@ namespace OOAdvantech.Remoting.RestApi
                                     lock (_InterConnections)
                                     {
                                         logicalConnection = (from interConnection in InterConnections
-                                                             where interConnection.Internal == webSocket && interConnection.Public == this && interConnection.SessionIdentity == responseData.SessionIdentity
+                                                             where interConnection.Internal == webSocket && interConnection.Public == this && interConnection.SessionIdentity == forwordRequest.SessionIdentity
                                                              select interConnection).FirstOrDefault();
+
                                     }
                                 }
                                 var task = webSocket.SendRequestAsync(forwordRequest);
-                            
+
                                 if (!task.Wait(System.TimeSpan.FromSeconds(25)) && !task.Wait(webSocket.Binding.SendTimeout))
                                 {
                                     webSocket.RejectRequest(task);
@@ -1444,7 +1449,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
                                     responseData = task.Result;
                                     responseData.ChannelUri = forwordRequest.ChannelUri;
-                                    if (request.RequestType != RequestType.Disconnect&&logicalConnection==null)
+                                    if (request.RequestType != RequestType.Disconnect && logicalConnection == null)
                                         EnsureLogicalConnection(responseData, webSocket);
                                 }
                                 if (request.RequestType == RequestType.Disconnect)
@@ -1452,8 +1457,8 @@ namespace OOAdvantech.Remoting.RestApi
                                     lock (_InterConnections)
                                     {
                                         logicalConnection = (from interConnection in InterConnections
-                                                                 where interConnection.SessionIdentity == responseData.SessionIdentity
-                                                                 select interConnection).FirstOrDefault();
+                                                             where interConnection.SessionIdentity == responseData.SessionIdentity
+                                                             select interConnection).FirstOrDefault();
                                         if (logicalConnection != null)
                                         {
                                             RemoveInnterConnection(logicalConnection);
@@ -1465,19 +1470,19 @@ namespace OOAdvantech.Remoting.RestApi
                             }
                             else
                             {
-#region Error response
+                                #region Error response
 
                                 ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                                 responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, webSocket.SocketException);
                                 responseData = new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = forwordRequest.CallContextID, SessionIdentity = forwordRequest.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-#endregion
+                                #endregion
                             }
                             responseData.CallContextID = request.CallContextID;
                             responseData.DirectConnect = false;
 
                             //responseData.SessionIdentity = request.SessionIdentity;
 
-#endregion
+                            #endregion
                         }
 
 
@@ -1524,7 +1529,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             lock (RunContexts)
             {
-#region Add local connection with run context
+                #region Add local connection with run context
 
                 var localConnection = (from interConnection in RunContexts
                                        where interConnection.SessionIdentity == sessionIdentity
@@ -1545,7 +1550,7 @@ namespace OOAdvantech.Remoting.RestApi
                     RunContexts.Add(localConnection);
                 }
 
-#endregion
+                #endregion
             }
         }
 

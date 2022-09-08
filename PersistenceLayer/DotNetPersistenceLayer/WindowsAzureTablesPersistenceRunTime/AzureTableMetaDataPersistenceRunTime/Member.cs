@@ -85,7 +85,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                     entity[Name] = null;
                 else
                     entity[Name] = value;
-
+                 
             }
             else if (Type == typeof(bool))
             {

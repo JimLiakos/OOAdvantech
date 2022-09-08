@@ -417,7 +417,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "StoragesMetadata"));
                 bool storagesMetadataTable_exist = queryTableResults.Count() > 0;
 
-                if (storagesMetadataTable_exist)
+                if (!storagesMetadataTable_exist)
                     storagesMetadataTable_a.CreateIfNotExists();
 
 
@@ -612,7 +612,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "cloudTableName"));
                 bool azureTable_exist = queryTableResults.Count() > 0;
 
-                if (azureTable_exist)
+                if (!azureTable_exist)
                     azureTable_a.CreateIfNotExists();
 
 
