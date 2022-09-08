@@ -67,7 +67,7 @@ namespace WebSocket4Net
 #if __IOS__
             await client.ConnectAsync(new Uri("ws://localhost:5000"), cts.Token);
 #else
-
+                            throw new com
                             await client.ConnectAsync(new Uri(Uri), cts.Token);
                             if (client.State == WebSocketState.Open)
                                 Opened?.Invoke(this, EventArgs.Empty);

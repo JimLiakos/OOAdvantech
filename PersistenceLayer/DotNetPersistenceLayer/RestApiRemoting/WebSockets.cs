@@ -647,23 +647,31 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{3c2efc79-bab5-4a16-90b0-e5fcf15f8e9b}</MetaDataID>
         private bool EnsureConnection()
         {
-            var state = State;
-
-            if (State == WebSocketState.Closed || State == WebSocketState.Closing)
-                return false;
-
-
-            if (State == WebSocketState.Connecting)
+            try
             {
-                Task<bool> openTask = OpenAsync();
-                bool openTaskCompleted = openTask.Wait(Binding.RetryOpenTimeout);
-                if (!openTaskCompleted || !openTask.Result)
+                var state = State;
+
+                if (State == WebSocketState.Closed || State == WebSocketState.Closing)
+                    return false;
+
+
+                if (State == WebSocketState.Connecting)
+                {
+                    Task<bool> openTask = OpenAsync();
+                    bool openTaskCompleted = openTask.Wait(Binding.RetryOpenTimeout);
+                    if (!openTaskCompleted || !openTask.Result)
+                        return false;
+                }
+                if (State == WebSocketState.Open)
+                    return true;
+                else
                     return false;
             }
-            if (State == WebSocketState.Open)
-                return true;
-            else
-                return false;
+            catch (Exception error)
+            {
+
+                throw;
+            }
         }
 
         ///// <MetaDataID>{071605a8-72af-4a6b-a881-43a213a65036}</MetaDataID>
@@ -1018,20 +1026,29 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                return _InterConnections.AsReadOnly();
+                lock (_InterConnections)
+                {
+                    return _InterConnections.ToList();
+                }
             }
         }
 
         /// <MetaDataID>{44bb264a-e9a3-4bb9-b6de-fc201dd75f0c}</MetaDataID>
         public void AddInterConnection(InterConnection logicalConnection)
         {
-            _InterConnections.Add(logicalConnection);
+            lock (_InterConnections)
+            {
+                _InterConnections.Add(logicalConnection);
+            }
         }
 
         /// <MetaDataID>{d53b7a00-231c-423c-acb2-af9b1a237e3f}</MetaDataID>
         public void RemoveInnterConnection(InterConnection logicalConnection)
         {
-            _InterConnections.Remove(logicalConnection);
+            lock (_InterConnections)
+            {
+                _InterConnections.Remove(logicalConnection);
+            }
         }
 
         //private static WebSocketCollection connections = new WebSocketCollection();
@@ -1403,7 +1420,18 @@ namespace OOAdvantech.Remoting.RestApi
                             WebSocketClient webSocket = WebSocketClient.EnsureConnection(roleInstanceServerUrl + "WebSocketMessages", Binding.DefaultBinding);
                             if (webSocket.State == WebSocketState.Open)
                             {
+                                InterConnection logicalConnection = null;
+                                if (!string.IsNullOrWhiteSpace(forwordRequest.SessionIdentity))
+                                {
+                                    lock (_InterConnections)
+                                    {
+                                        logicalConnection = (from interConnection in InterConnections
+                                                             where interConnection.Internal == webSocket && interConnection.Public == this && interConnection.SessionIdentity == responseData.SessionIdentity
+                                                             select interConnection).FirstOrDefault();
+                                    }
+                                }
                                 var task = webSocket.SendRequestAsync(forwordRequest);
+                            
                                 if (!task.Wait(System.TimeSpan.FromSeconds(25)) && !task.Wait(webSocket.Binding.SendTimeout))
                                 {
                                     webSocket.RejectRequest(task);
@@ -1416,14 +1444,14 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
                                     responseData = task.Result;
                                     responseData.ChannelUri = forwordRequest.ChannelUri;
-                                    if (request.RequestType != RequestType.Disconnect)
+                                    if (request.RequestType != RequestType.Disconnect&&logicalConnection==null)
                                         EnsureLogicalConnection(responseData, webSocket);
                                 }
                                 if (request.RequestType == RequestType.Disconnect)
                                 {
                                     lock (_InterConnections)
                                     {
-                                        var logicalConnection = (from interConnection in InterConnections
+                                        logicalConnection = (from interConnection in InterConnections
                                                                  where interConnection.SessionIdentity == responseData.SessionIdentity
                                                                  select interConnection).FirstOrDefault();
                                         if (logicalConnection != null)
