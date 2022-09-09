@@ -605,6 +605,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 return TableEntity[Name];
                 //return Property?.Int32Value;
             }
+            set
+            {
+                TableEntity[Name] = value;
+            }
         }
         //
         // Summary:

@@ -33,50 +33,58 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{4feebecf-d4c3-4bba-8c6e-47b464a92b57}</MetaDataID>
         public object CreateInstance(string TypeFullName, string assemblyData, Type[] paramsTypes, params object[] ctorParams)
         {
-            bool isHttpCall = false;
-            Type type = null;
-            string typeUri = TypeFullName;
+            try
+            {
+                bool isHttpCall = false;
+                Type type = null;
+                string typeUri = TypeFullName;
 
 #if DeviceDotNet
             string[] typeUriParts = typeUri.Split('/');
 #else
-            string[] typeUriParts = typeUri.Split(Path.AltDirectorySeparatorChar);
+                string[] typeUriParts = typeUri.Split(Path.AltDirectorySeparatorChar);
 #endif
-            //string[] typeUriParts = typeUri.Split(Path.AltDirectorySeparatorChar);
-            if (typeUriParts.Length > 1)
-            {
-                type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
-                if(type==null)
-                    type = Type.GetType(typeUriParts[1]);
-                if (type == null)
-                    Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
-                isHttpCall = true;
-            }
-            else
-                type = ModulePublisher.ClassRepository.GetType(TypeFullName, assemblyData);
-
-
-            if (ctorParams != null && ctorParams.Length > 0)
-            {
-
-                object NewInstance = AccessorBuilder.CreateInstance(type, paramsTypes, ctorParams);
-                if (NewInstance != null && (NewInstance as MarshalByRefObject) == null)
-                    throw new Exception("The " + TypeFullName + " isn't type of System.MarshalByRefObject");
-                return NewInstance;
-            }
-            else
-            {
-                
-                if (Classifier.GetClassifier(type).IsA(Classifier.GetClassifier(typeof(MonoStateClass))))
+                //string[] typeUriParts = typeUri.Split(Path.AltDirectorySeparatorChar);
+                if (typeUriParts.Length > 1)
                 {
-                    MonoStateClass instance = MonoStateClass.GetInstance(type,true);
-                    return instance;
+                    type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
+                    if (type == null)
+                        type = Type.GetType(typeUriParts[1]);
+                    if (type == null)
+                        Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
+                    isHttpCall = true;
                 }
-                object NewInstance = AccessorBuilder.CreateInstance(type);
-                if (NewInstance != null && (NewInstance as MarshalByRefObject) == null)
-                    throw new Exception("The " + TypeFullName + " isn't type of System.MarshalByRefObject");
-                return NewInstance;
+                else
+                    type = ModulePublisher.ClassRepository.GetType(TypeFullName, assemblyData);
 
+
+                if (ctorParams != null && ctorParams.Length > 0)
+                {
+
+                    object NewInstance = AccessorBuilder.CreateInstance(type, paramsTypes, ctorParams);
+                    if (NewInstance != null && (NewInstance as MarshalByRefObject) == null)
+                        throw new Exception("The " + TypeFullName + " isn't type of System.MarshalByRefObject");
+                    return NewInstance;
+                }
+                else
+                {
+
+                    if (Classifier.GetClassifier(type).IsA(Classifier.GetClassifier(typeof(MonoStateClass))))
+                    {
+                        MonoStateClass instance = MonoStateClass.GetInstance(type, true);
+                        return instance;
+                    }
+                    object NewInstance = AccessorBuilder.CreateInstance(type);
+                    if (NewInstance != null && (NewInstance as MarshalByRefObject) == null)
+                        throw new Exception("The " + TypeFullName + " isn't type of System.MarshalByRefObject");
+                    return NewInstance;
+
+                }
+            }
+            catch (Exception error)
+            {
+
+                throw;
             }
 
         }

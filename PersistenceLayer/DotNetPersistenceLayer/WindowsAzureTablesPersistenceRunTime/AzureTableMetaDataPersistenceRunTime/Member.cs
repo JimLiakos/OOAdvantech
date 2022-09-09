@@ -704,6 +704,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             try
             {
+                if(entityProperty.PropertyAsObject!=null&& entityProperty.PropertyAsObject.GetType()!=Type)
+                {
+                    var value= System.Convert.ChangeType(entityProperty.PropertyAsObject, Type);
+                    entityProperty.PropertyAsObject = value;
+                }
+                
                 if (Type == typeof(string))
                 {
                     string value = entityProperty.StringValue;
