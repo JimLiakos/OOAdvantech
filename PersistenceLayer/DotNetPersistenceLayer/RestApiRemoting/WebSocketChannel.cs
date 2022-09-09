@@ -506,7 +506,7 @@ namespace OOAdvantech.Remoting.RestApi
                 bool lockTaken = false;
                 try
                 {
-                    Monitor.TryEnter(this, 25000, ref lockTaken);
+                    Monitor.TryEnter(this, 5000, ref lockTaken);
                     if (!lockTaken)
                         throw new TimeoutException(); // or compensate
 

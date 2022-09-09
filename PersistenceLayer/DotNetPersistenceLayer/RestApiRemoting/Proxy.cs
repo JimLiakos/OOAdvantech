@@ -43,6 +43,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{f98b2269-d219-491b-9276-a8613951733d}</MetaDataID>
         System.Type Type;
 
+        System.Type ServerObjectType;
+
         ///// <MetaDataID>{f950e8f9-b5f6-47e3-a4aa-7502a491ec67}</MetaDataID>
         //protected Proxy(string objectUri, string channelUri, string internalChannelUri, System.Type type)
         //          : base(typeof(MarshalByRefObject))
@@ -70,10 +72,18 @@ namespace OOAdvantech.Remoting.RestApi
             ProxyType = objectRef.GetProxyType();
 
 
-            if(type != null)
+            if (type != null)
+            {
                 Type = type;
+#if !DeviceDotNet
+                if (ProxyType != null && ProxyType.AssemblyQualifiedName != null)
+                    ServerObjectType = System.Type.GetType(ProxyType.AssemblyQualifiedName, false);
+#endif
+            }
             else
                 Type = System.Type.GetType(ProxyType.AssemblyQualifiedName);
+
+
         }
 
         public void ReconnectToServerObject(ObjRef objectRef)
@@ -270,7 +280,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-        #region Gets authentication data
+#region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -291,7 +301,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-        #endregion
+#endregion
 
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
 
@@ -392,7 +402,11 @@ namespace OOAdvantech.Remoting.RestApi
                     methodBase.Name == "GetType")
                 {
                     outArgs = new object[0];
-                    returnValue = Type;
+                    if (ServerObjectType == null)
+                        returnValue = Type;
+                    else
+                        returnValue = ServerObjectType;
+
                     localCall = true;
                 }
                 else if (methodBase.DeclaringType.FullName == typeof(object).FullName &&
@@ -551,7 +565,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-            #region Gets authentication data
+#region Gets authentication data
             if (authUser != null)
             {
                 if (authUser.AuthToken != clientSessionPart.X_Auth_Token)
@@ -571,7 +585,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-            #endregion
+#endregion
 
             requestData.RequestType = RequestType.MethodCall;
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
@@ -723,7 +737,11 @@ namespace OOAdvantech.Remoting.RestApi
                     methodBase.Name == "GetType")
                 {
                     outArgs = new object[0];
-                    returnValue = Type;
+                    if (ServerObjectType == null)
+                        returnValue = Type;
+                    else
+                        returnValue = ServerObjectType;
+
                     localCall = true;
                 }
                 else if (methodBase.DeclaringType.FullName == typeof(object).FullName &&

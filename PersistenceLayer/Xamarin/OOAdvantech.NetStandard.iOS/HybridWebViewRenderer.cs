@@ -111,7 +111,7 @@ namespace OOAdvantech.iOS
             {
                 e.NewElement.NativeWebBrowser = this;
                 string uri;
-                
+
                 NSUrl url;
                 if (Element.Uri.IndexOf(@"local://") == 0)
                 {
@@ -140,6 +140,9 @@ namespace OOAdvantech.iOS
 
         internal void OnNavigated(NavigatedEventArgs navigatedEventArgs)
         {
+
+            string javascriptStyle = "var css = '*{-webkit-touch-callout:none;-webkit-user-select:none}'; var head = document.head || document.getElementsByTagName('head')[0]; var style = document.createElement('style'); style.type = 'text/css'; style.appendChild(document.createTextNode(css)); head.appendChild(style);";
+            //Control.EvaluateJavaScriptAsync(javascriptStyle);
             try
             {
                 if (HybridWebView != null)

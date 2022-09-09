@@ -609,11 +609,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
                 var azureTable_a = tablesAccount.GetTableClient(cloudTableName);
-                Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "cloudTableName"));
+                Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", cloudTableName));
                 bool azureTable_exist = queryTableResults.Count() > 0;
 
                 if (!azureTable_exist)
+                {
                     azureTable_a.CreateIfNotExists();
+                }
+                else
+                {
+                    azureTable_a.Delete();
+                    azureTable_a.CreateIfNotExists();
+                }
 
 
                 List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations = new List<List<Azure.Data.Tables.TableTransactionAction>>();

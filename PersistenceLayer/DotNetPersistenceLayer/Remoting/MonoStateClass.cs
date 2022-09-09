@@ -81,7 +81,7 @@ namespace OOAdvantech.Remoting
 
 
     }
-    public class MonoStateClassException : Exception
+    public class MonoStateClassException :System.Exception
     {
         public MonoStateClassException()
         {
@@ -111,7 +111,7 @@ namespace OOAdvantech.Remoting
         //   innerException:
         //     The exception that is the cause of the current exception, or a null reference
         //     (Nothing in Visual Basic) if no inner exception is specified.
-        public MonoStateClassException(string message, Exception innerException) : base(message, innerException)
+        public MonoStateClassException(string message, System.Exception innerException) : base(message, innerException)
         {
 
         }
