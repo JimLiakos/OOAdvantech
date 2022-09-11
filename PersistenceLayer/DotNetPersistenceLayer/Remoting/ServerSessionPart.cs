@@ -306,7 +306,7 @@ namespace OOAdvantech.Remoting
         {
             lock (this)
             {
-                foreach (ClientSessionPart clientSessionPart in RenewalManager.Sessions.Values)
+                foreach (ClientSessionPart clientSessionPart in RenewalManager.GetSessions().Values)
                 {
                     if (clientSessionPart.ServerProcessIdentity == ClientProcessIdentity)
                     {

@@ -589,7 +589,7 @@ namespace OOAdvantech.Remoting.RestApi
             TaskCompletionSource<ResponseData> taskCompletionSource;
             if (!EnsureConnection())
             {
-                if (State == WebSocketState.Closed)
+                if (State == WebSocketState.Closed|| State == WebSocketState.None)
                     EnsureConnection(this.Uri, binding);
 
                 if (!EnsureConnection())
@@ -630,16 +630,37 @@ namespace OOAdvantech.Remoting.RestApi
 
             var task = SendRequestAsync(request);
 
-            if (!task.Wait(TimeSpan.FromSeconds(25)))
+
+#if DEBUG
+
+            TimeSpan debugSendTimeout = System.TimeSpan.FromSeconds(5);
+            TimeSpan sendTimeout = binding.SendTimeout - debugSendTimeout;
+            if (sendTimeout.TotalSeconds < 0)
+                debugSendTimeout = binding.SendTimeout;
+            if (!task.Wait(debugSendTimeout))
             {
-                if (task.Wait(binding.SendTimeout))
+                if (sendTimeout.TotalSeconds > 0)
+                {
+                    if (!task.Wait(sendTimeout))
+                    {
+                        RejectRequest(task);
+                        throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                    }
+                }
+                else
                 {
                     RejectRequest(task);
                     throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                 }
-
-
             }
+#else
+
+                if (!task.Wait(binding.SendTimeout))
+                {
+                    RejectRequest(task);
+                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                }
+#endif
             return task.Result;
 
         }
@@ -711,27 +732,24 @@ namespace OOAdvantech.Remoting.RestApi
         {
             var closeTaskSrc = m_CloseTaskSrc;
 
-            if (closeTaskSrc != null)
-                return closeTaskSrc.Task;
-
-            closeTaskSrc = m_CloseTaskSrc = new TaskCompletionSource<bool>();
-            _State = WebSocketState.Closing;
-            lock (RequestTasks)
+            if (State != WebSocketState.Closed&& State != WebSocketState.None)
             {
-                if (RequestTasks.Count == 0)
-                    NativeWebSocket.Close();
-                else
-                {
-                    Task.Run(() =>
-                    {
+                if (closeTaskSrc != null)
+                    return closeTaskSrc.Task;
 
-                        foreach (var taskCompletion in RequestTasks.Values.ToList())
-                            taskCompletion.Task.Wait(Binding.SendTimeout);
-                        NativeWebSocket.Close();
-                    });
-                }
+                closeTaskSrc = m_CloseTaskSrc = new TaskCompletionSource<bool>();
+                _State = WebSocketState.Closing;
+                Task.Run(() =>
+                {
+                    NativeWebSocket.Close();
+                });
+                return closeTaskSrc.Task;
             }
-            return closeTaskSrc.Task;
+            else
+               return Task<bool>.FromResult(true);
+
+     
+            
         }
 
         /// <MetaDataID>{079af359-a860-4a56-bfa8-a3d2797c0c02}</MetaDataID>

@@ -135,7 +135,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             catch (System.Exception error)
             {
-                   throw;
+                throw;
             }
         }
 
@@ -481,7 +481,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (responseData != null)
             {
                 var returnMessage = OOAdvantech.Json.JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
-                if(returnMessage.Exception!=null)
+                if (returnMessage.Exception != null)
                 {
                     if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                         throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
@@ -615,22 +615,45 @@ namespace OOAdvantech.Remoting.RestApi
                         restApiException.ExceptionMessage = webSocket.LastError;
                         responseMessage.Exception = restApiException;
                     }
-                    return new ResponseData(requestData.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) }; 
+                    return new ResponseData(requestData.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                     #endregion
                 }
 
                 RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity };
 
                 var task = webSocket.SendRequestAsync(request);
-                if (!task.Wait(System.TimeSpan.FromSeconds(9)))
+                var state = webSocket.State;
+
+#if DEBUG
+
+                TimeSpan debugSendTimeout = System.TimeSpan.FromSeconds(5);
+                TimeSpan sendTimeout = binding.SendTimeout - debugSendTimeout;
+                if (sendTimeout.TotalSeconds < 0)
+                    debugSendTimeout = binding.SendTimeout;
+                if (!task.Wait(debugSendTimeout))
                 {
-                    if (!task.Wait(binding.SendTimeout))
+                    if (sendTimeout.TotalSeconds > 0)
+                    {
+                        if (!task.Wait(sendTimeout))
+                        {
+                            webSocket.RejectRequest(task);
+                            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                        }
+                    }
+                    else
                     {
                         webSocket.RejectRequest(task);
                         throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                     }
-
                 }
+#else
+
+                if (!task.Wait(binding.SendTimeout))
+                {
+                    webSocket.RejectRequest(task);
+                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                }
+#endif
 
                 return task.Result;
                 #endregion

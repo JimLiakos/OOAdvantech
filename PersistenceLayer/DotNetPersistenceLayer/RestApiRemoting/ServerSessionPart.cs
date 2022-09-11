@@ -727,12 +727,12 @@ namespace OOAdvantech.Remoting.RestApi
             base.OnProcessExit(sender, e);
             SessionTerminated = true;
 
-            int openSessionsCount = (from clientSessionPart in RenewalManager.Sessions.Values.OfType<ClientSessionPart>()
+            int openSessionsCount = (from clientSessionPart in RenewalManager.GetSessions().Values.OfType<ClientSessionPart>()
                                      where !clientSessionPart.SessionTerminated
                                      select clientSessionPart).Count();
             if (openSessionsCount == 0)
             {
-                foreach (var clientSessionPart in (from clientSessionPart in RenewalManager.Sessions.Values.OfType<ClientSessionPart>()
+                foreach (var clientSessionPart in (from clientSessionPart in RenewalManager.GetSessions().Values.OfType<ClientSessionPart>()
                                                    where clientSessionPart.SessionTerminated
                                                    select clientSessionPart))
                 {

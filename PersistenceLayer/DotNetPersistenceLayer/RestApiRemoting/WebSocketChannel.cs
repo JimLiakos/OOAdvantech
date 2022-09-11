@@ -338,7 +338,7 @@ namespace OOAdvantech.Remoting.RestApi
                 bool lockTaken = false;
                 try
                 {
-                    Monitor.TryEnter(this, 25000, ref lockTaken);
+                    Monitor.TryEnter(this, 5000, ref lockTaken);
                     if (!lockTaken)
                         throw new TimeoutException(); // or compensate
 
@@ -371,13 +371,15 @@ namespace OOAdvantech.Remoting.RestApi
                                 }
                                 #endregion
 
-                                CloseWebSocket();
+                                
 
                                 if (_WebSocketClient.State == WebSocketState.Open)
                                     DropPhysicalConnection(_WebSocketClient);
                                 else
                                 {
                                 }
+                                CloseWebSocket(_WebSocketClient);
+
                                 _WebSocketClient.Closed -= WebSocketClient_Closed;
                                 _WebSocketClient = value;
                                 _WebSocketClient.Closed += WebSocketClient_Closed;
@@ -421,26 +423,26 @@ namespace OOAdvantech.Remoting.RestApi
         ///  
         /// </summary>
         /// <MetaDataID>{c246bfd9-e649-43e5-9c9d-15107cfcc9ff}</MetaDataID>
-        private void CloseWebSocket()
+        private void CloseWebSocket(WebSocketClient webSocketClient)
         {
-            _WebSocketClient.RemoveWebSocketChannel(this);
+            webSocketClient.RemoveWebSocketChannel(this);
 
-            if (_WebSocketClient.WebSocketChannels.Count == 0 && _WebSocketClient.State == WebSocketState.Open)
+            if (webSocketClient.WebSocketChannels.Count == 0 && webSocketClient.State == WebSocketState.Open)
             {
-                if (_WebSocketClient.PendingRequest > 0)
+                if (webSocketClient.PendingRequest > 0)
                 {
                     //Close web socket when all pending requests ended. 
-                    PendingClientSocketsToClose.Add(_WebSocketClient);
+                    PendingClientSocketsToClose.Add(webSocketClient);
                     CloseConnectionTimer.Start();
                 }
                 else
                 {
-                    _WebSocketClient.CloseAsync();
-#if !DeviceDotNet
-                    System.Threading.Thread.Sleep(1000);
-#else
-                    System.Threading.Tasks.Task.Delay(1000).Wait();
-#endif
+                    webSocketClient.CloseAsync();
+//#if !DeviceDotNet
+//                    System.Threading.Thread.Sleep(1000);
+//#else
+//                    System.Threading.Tasks.Task.Delay(1000).Wait();
+//#endif
                 }
             }
         }
@@ -593,10 +595,11 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
             var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
             requestData.ChannelUri = ClientSessionPart.ChannelUri;
+
             var task = webSocket.SendRequestAsync(requestData);
-            if (!task.Wait(System.TimeSpan.FromSeconds(2)))
-                if (!task.Wait(System.TimeSpan.FromSeconds(25)))
-                    task.Wait(Binding.DefaultBinding.SendTimeout);
+            //if (!task.Wait(System.TimeSpan.FromSeconds(3)))
+            //{
+            //}
         }
 
 
@@ -676,15 +679,42 @@ namespace OOAdvantech.Remoting.RestApi
             if (endPoint != null)
             {
                 var task = endPoint.SendRequestAsync(requestData);
-                if (!task.Wait(System.TimeSpan.FromSeconds(5)))
+                WebSocketState state = WebSocketState.None;
+
+                if (endPoint is WebSocketClient)
+                    state = (endPoint as WebSocketClient).State;
+
+
+#if DEBUG
+
+                TimeSpan debugSendTimeout = System.TimeSpan.FromSeconds(5);
+                TimeSpan sendTimeout = binding.SendTimeout - debugSendTimeout;
+                if (sendTimeout.TotalSeconds < 0)
+                    debugSendTimeout = binding.SendTimeout;
+                if (!task.Wait(debugSendTimeout))
                 {
-                    if (!task.Wait(binding.SendTimeout))
+                    if (sendTimeout.TotalSeconds > 0)
+                    {
+                        if (!task.Wait(sendTimeout))
+                        {
+                            endPoint.RejectRequest(task);
+                            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                        }
+                    }
+                    else
                     {
                         endPoint.RejectRequest(task);
                         throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                     }
-
                 }
+#else
+
+                if (!task.Wait(binding.SendTimeout))
+                {
+                    endPoint.RejectRequest(task);
+                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                }
+#endif
                 var responseData = task.Result;
                 if (!responseData.DirectConnect)
                 {
