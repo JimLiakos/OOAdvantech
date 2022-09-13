@@ -44,6 +44,14 @@ namespace OOAdvantech.iOS
             if (type == typeof(OOAdvantech.IFileSystem))
                 return new DeviceFileSystem();
 
+            if (type == typeof(Authentication.IAuth))
+                return new Authentication.iOS.Auth();
+
+            //if (type == typeof(OOAdvantech.IRingtoneService))
+            //    return new OOAdvantech.iOS.RingtoneService();
+
+
+
             if (type == typeof(OOAdvantech.RDBMSMetaDataPersistenceRunTime.IDataBaseConnection))
             {
                 var connection = new OOAdvantech.SQLitePersistenceRunTime.SQLiteDataBaseConnection();

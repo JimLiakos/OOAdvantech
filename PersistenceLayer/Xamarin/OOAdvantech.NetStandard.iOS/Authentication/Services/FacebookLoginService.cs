@@ -1,7 +1,7 @@
 ﻿using System;
 using Facebook.CoreKit;
 using Facebook.LoginKit;
-using Firebase.Auth;
+
 using Foundation;
 using UIKit;
 using System.Linq;
@@ -61,27 +61,31 @@ namespace OOAdvantech.Authentication.iOS
         //static GoogleApiClient googleApiClient;
 
 
-        static Auth _FirebaseAuth;
-        public static Auth FirebaseAuth
+        static Firebase.Auth.Auth _FirebaseAuth;
+        public static Firebase.Auth.Auth FirebaseAuth
         {
             get
             {
 
                 if (_FirebaseAuth == null)
                 {
-                    _FirebaseAuth = Auth.DefaultInstance;
-                    _FirebaseAuth.AddAuthStateDidChangeListener(new AuthStateDidChangeListenerHandler(AuthStateDidChangeListener));
+                    
+                    _FirebaseAuth = Firebase.Auth.Auth.DefaultInstance;
+                    if (_FirebaseAuth != null)
+                    {
+                        _FirebaseAuth.AddAuthStateDidChangeListener(new Firebase.Auth.AuthStateDidChangeListenerHandler(AuthStateDidChangeListener));
 
-                    _FirebaseAuth.AddIdTokenDidChangeListener(new IdTokenDidChangeListenerHandler(AuthStateDidChangeListener));
+                        _FirebaseAuth.AddIdTokenDidChangeListener(new Firebase.Auth.IdTokenDidChangeListenerHandler(AuthStateDidChangeListener));
+                    }
                 }
                 return _FirebaseAuth;
             }
         }
-        static async void IdTokenDidChangeListener(Auth auth, User user)
+        static async void IdTokenDidChangeListener(Firebase.Auth.Auth auth, Firebase.Auth.User user)
         {
 
         }
-        static async void AuthStateDidChangeListener(Auth auth, User user)
+        static async void AuthStateDidChangeListener(Firebase.Auth.Auth auth, Firebase.Auth.User user)
         {
             try
             {
@@ -194,7 +198,7 @@ namespace OOAdvantech.Authentication.iOS
             }
         }
 
-        static void OnAuthDataResult(AuthDataResult authResult, NSError error)
+        static void OnAuthDataResult(Firebase.Auth.AuthDataResult authResult, NSError error)
         {
 
         }
@@ -205,10 +209,10 @@ namespace OOAdvantech.Authentication.iOS
             if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
             {
                 var credentials = Firebase.Auth.FacebookAuthProvider.GetCredential(FacebookLoginService.CurrentFacebookLoginService.AccessToken);
-                FirebaseAuth.SignInWithCredential(credentials, new AuthDataResultHandler(OnAuthDataResult));
+                FirebaseAuth.SignInWithCredential(credentials, new Firebase.Auth.AuthDataResultHandler(OnAuthDataResult));
             }
 
-
+            
 
 
         }
