@@ -260,13 +260,11 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
 
-                    type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
+                    Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
+                    if(type== null)
+                        type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
                     if (type == null)
-                    {
                         type = Type.GetType(typeUriParts[1]);
-                        if (type == null)
-                            Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
-                    }
                     return type;
                 }
                 if (!string.IsNullOrWhiteSpace(TypeName))

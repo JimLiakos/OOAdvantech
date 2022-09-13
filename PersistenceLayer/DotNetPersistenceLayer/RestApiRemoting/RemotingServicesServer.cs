@@ -20,7 +20,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
         public MarshalByRefObject GetPersistentObject(string persistentUri)
         {
-           var  _object = OOAdvantech.PersistenceLayer.ObjectStorage.GetObjectFromUri(persistentUri);
+            var _object = OOAdvantech.PersistenceLayer.ObjectStorage.GetObjectFromUri(persistentUri);
             return _object as MarshalByRefObject;
         }
         /// <MetaDataID>{36fcbfd5-d7f8-4c53-854c-3e3e29e016c1}</MetaDataID>
@@ -40,18 +40,18 @@ namespace OOAdvantech.Remoting.RestApi
                 string typeUri = TypeFullName;
 
 #if DeviceDotNet
-            string[] typeUriParts = typeUri.Split('/');
+                string[] typeUriParts = typeUri.Split('/');
 #else
                 string[] typeUriParts = typeUri.Split(Path.AltDirectorySeparatorChar);
 #endif
                 //string[] typeUriParts = typeUri.Split(Path.AltDirectorySeparatorChar);
                 if (typeUriParts.Length > 1)
                 {
-                    type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
+                    Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
+                    if (type == null)
+                        type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
                     if (type == null)
                         type = Type.GetType(typeUriParts[1]);
-                    if (type == null)
-                        Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
                     isHttpCall = true;
                 }
                 else
@@ -94,46 +94,46 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{941102cb-0067-45a6-a00e-166497edf371}</MetaDataID>
         static OOAdvantech.Synchronization.ReaderWriterLock ReaderWriterLock = new OOAdvantech.Synchronization.ReaderWriterLock();
 
-//        /// <MetaDataID>{b5c2fa5c-9440-4730-b760-6880ecd7746e}</MetaDataID>
-//        public IServerSessionPart GetServerSession(Guid clientProcessIdentity)
-//        {
+        //        /// <MetaDataID>{b5c2fa5c-9440-4730-b760-6880ecd7746e}</MetaDataID>
+        //        public IServerSessionPart GetServerSession(Guid clientProcessIdentity)
+        //        {
 
-//            OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
-//            try
-//            {
-//                ServerSessionPart serverSessionPart = null;
-//                if (Sessions.ContainsKey(clientProcessIdentity))
-//                {
-//                    serverSessionPart = Sessions[clientProcessIdentity].Target as ServerSessionPart;
-//                    serverSessionPart = Sessions[clientProcessIdentity].Target as ServerSessionPart;
-//                    if (serverSessionPart == null)
-//                    {
-//                        serverSessionPart = new ServerSessionPart(clientProcessIdentity);
-//                        Sessions[clientProcessIdentity] = new WeakReference(serverSessionPart);
-//                    }
-//                }
-//                else
-//                {
-//                    serverSessionPart = new ServerSessionPart(clientProcessIdentity);
-//                    Sessions[clientProcessIdentity] = new WeakReference(serverSessionPart);
-//                }
+        //            OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
+        //            try
+        //            {
+        //                ServerSessionPart serverSessionPart = null;
+        //                if (Sessions.ContainsKey(clientProcessIdentity))
+        //                {
+        //                    serverSessionPart = Sessions[clientProcessIdentity].Target as ServerSessionPart;
+        //                    serverSessionPart = Sessions[clientProcessIdentity].Target as ServerSessionPart;
+        //                    if (serverSessionPart == null)
+        //                    {
+        //                        serverSessionPart = new ServerSessionPart(clientProcessIdentity);
+        //                        Sessions[clientProcessIdentity] = new WeakReference(serverSessionPart);
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    serverSessionPart = new ServerSessionPart(clientProcessIdentity);
+        //                    Sessions[clientProcessIdentity] = new WeakReference(serverSessionPart);
+        //                }
 
-//                System.Runtime.Remoting.RemotingServices.Marshal(serverSessionPart);
+        //                System.Runtime.Remoting.RemotingServices.Marshal(serverSessionPart);
 
-//#if !DeviceDotNet
-//                System.Runtime.Remoting.Lifetime.ILease lease = GetLifetimeService() as System.Runtime.Remoting.Lifetime.ILease;
-//                if (lease != null)
-//                    lease.Renew(System.TimeSpan.FromMinutes(0.5));
-//#endif
+        //#if !DeviceDotNet
+        //                System.Runtime.Remoting.Lifetime.ILease lease = GetLifetimeService() as System.Runtime.Remoting.Lifetime.ILease;
+        //                if (lease != null)
+        //                    lease.Renew(System.TimeSpan.FromMinutes(0.5));
+        //#endif
 
-//                return serverSessionPart;
-//            }
-//            finally
-//            {
-//                ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
-//            }
+        //                return serverSessionPart;
+        //            }
+        //            finally
+        //            {
+        //                ReaderWriterLock.DowngradeFromWriterLock(ref lockCookie);
+        //            }
 
 
-//        }
+        //        }
     }
 }
