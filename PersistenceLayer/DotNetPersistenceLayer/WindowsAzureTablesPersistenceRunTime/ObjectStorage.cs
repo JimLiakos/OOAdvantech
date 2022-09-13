@@ -40,7 +40,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         //public readonly CloudStorageAccount Account;
         public readonly Azure.Data.Tables.TableServiceClient TablesAccount;
         /// <MetaDataID>{3f203356-42c6-44fa-b0bc-cb8422f90cc2}</MetaDataID>
-        internal ObjectStorage(Storage theStorageMetaData,  Azure.Data.Tables.TableServiceClient tablesAccount,string userName,string pasword)
+        internal ObjectStorage(Storage theStorageMetaData, Azure.Data.Tables.TableServiceClient tablesAccount, string userName, string pasword)
         {
             //Account = account;
             TablesAccount = tablesAccount;
@@ -666,7 +666,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     {
                         foreach (var tableBatchOperation in transactionTableBatchOperationsEntry.Value)
                         {
-                            
+
                             bool canRetry = false;
                             int retryCount = 5;
                             Retry:
@@ -677,9 +677,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                                 transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
                             }
-                            catch (Azure.Data.Tables.TableTransactionFailedException  tableTransactionError)
+                            catch (Azure.Data.Tables.TableTransactionFailedException tableTransactionError)
                             {
-                                if(tableTransactionError.ErrorCode== "InternalError"&&retryCount>0)
+                                if (tableTransactionError.ErrorCode == "InternalError" && retryCount > 0)
                                 {
 
                                     retryCount--;
@@ -1091,7 +1091,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 //CloudTableClient tableClient = Account.CreateCloudTableClient();
                 AzureTableMetaDataPersistenceRunTime.Storage metaDataStorage = null;
-                
+
                 if (TablesAccount.AccountName == "devstoreaccount1")
                     metaDataStorage = PersistenceLayer.ObjectStorage.OpenStorage(this.StorageMetaData.StorageName, this.StorageMetaData.StorageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider").StorageMetaData as AzureTableMetaDataPersistenceRunTime.Storage;
                 else
@@ -1272,8 +1272,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, Azure.Data.Tables.TableClient classBLOBDataTable)
         {
+            var tableColumns = columns.Select(x => x.DataBaseColumnName).ToList();
+            if (!tableColumns.Contains("PartitionKey"))
+                tableColumns.Add("PartitionKey");
+            if (!tableColumns.Contains("RowKey"))
+                tableColumns.Add("RowKey");
             //var query = new TableQuery<ElasticTableEntity>();
-            var tableEntities = classBLOBDataTable.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), columns.Select(x => x.DataBaseColumnName).ToList()).Select(x => new ElasticTableEntity(x)).ToList();
+            var tableEntities = classBLOBDataTable.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), tableColumns).Select(x => new ElasticTableEntity(x)).ToList();
 
             Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member> tableMembersDictionary = new Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member>();
             List<AzureTableMetaDataPersistenceRunTime.Member> tableMembers = new List<AzureTableMetaDataPersistenceRunTime.Member>();
@@ -1315,9 +1320,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 offset = 0;
                 foreach (var aMember in tableMembers)
                 {
-                    if (aMember.Name == "PartitionKey")
+                    if (aMember.Name == "PartitionKey" && !string.IsNullOrWhiteSpace(entity.PartitionKey))
                         aMember.SaveMemberData(Buffer, entity.PartitionKey, offset, ref offset);
-                    else if (aMember.Name == "RowKey")
+                    else if (aMember.Name == "RowKey" && !string.IsNullOrWhiteSpace(entity.RowKey))
                         aMember.SaveMemberData(Buffer, entity.RowKey, offset, ref offset);
                     else
                     {

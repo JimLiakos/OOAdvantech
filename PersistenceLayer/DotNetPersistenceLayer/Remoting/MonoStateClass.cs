@@ -81,7 +81,8 @@ namespace OOAdvantech.Remoting
 
 
     }
-    public class MonoStateClassException :System.Exception
+    /// <MetaDataID>{ff8e3f9d-15f4-429d-b79f-2830c07e0436}</MetaDataID>
+    public class MonoStateClassException : System.Exception
     {
         public MonoStateClassException()
         {

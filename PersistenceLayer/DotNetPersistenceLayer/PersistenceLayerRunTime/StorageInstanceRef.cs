@@ -964,7 +964,16 @@ namespace OOAdvantech.PersistenceLayerRunTime
             }
         }
         /// <MetaDataID>{3f2d3149-1d92-4136-90d9-8eb9c14a2cef}</MetaDataID>
-        bool IsObjectActive;
+        bool _IsObjectActive;
+
+        public bool  IsObjectActive=>_IsObjectActive;
+
+        public void MarkAsReloadedObject()
+        {
+            _IsObjectActive = false;
+        }
+            
+
         /// <MetaDataID>{e49ebda2-836c-4a3b-9af5-5d9bd553fc59}</MetaDataID>
         public override void ObjectActived()
         {
@@ -976,7 +985,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
 
 
-            if (!IsObjectActive)
+            if (!_IsObjectActive)
             {
 
                 CreateMarshalByRefUri();
@@ -1010,7 +1019,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     (ObjectStateManagerLink as PersistenceLayer.IObjectStateEventsConsumer).OnActivate();
 
 
-                IsObjectActive = true;
+                _IsObjectActive = true;
             }
         }
 

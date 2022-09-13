@@ -35,34 +35,39 @@ namespace OOAdvantech.Linq
         bool QueryExecuted=false;
         IDynamicTypeDataRetrieve QueryResult;
 
+         static object masterLock=new object();
+
         /// <MetaDataID>{5449c451-f277-4729-8292-8d42ee516b06}</MetaDataID>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            if (context != null)
+            //lock (masterLock)
             {
-                if (!QueryExecuted)
+                if (context != null)
                 {
-                    QueryResult = (IDynamicTypeDataRetrieve)context.Provider.Execute(queryExpression);
-                    QueryExecuted = true;
+                    if (!QueryExecuted)
+                    {
+                        QueryResult = (IDynamicTypeDataRetrieve)context.Provider.Execute(queryExpression);
+                        QueryExecuted = true;
+                    }
+                    return (IEnumerator<T>)QueryResult.GetEnumarator();
                 }
-                return (IEnumerator<T>)QueryResult.GetEnumarator();
-            }
-            else
-            {
-                OOAdvantech.Collections.Generic.List<object> objects = new OOAdvantech.Collections.Generic.List<object>();
-                
-                foreach (var @object in RemoteObjectsCollection)
-                    objects.Add(@object);
+                else
+                {
+                    OOAdvantech.Collections.Generic.List<object> objects = new OOAdvantech.Collections.Generic.List<object>();
 
-                LINQStorageObjectQuery linqObjectQuery = new LINQStorageObjectQuery(queryExpression, objects, ObjectsCollectionType);
-                
+                    foreach (var @object in RemoteObjectsCollection)
+                        objects.Add(@object);
 
-                //queryOnRootObject.Execute();
-                linqObjectQuery.Execute();
+                    LINQStorageObjectQuery linqObjectQuery = new LINQStorageObjectQuery(queryExpression, objects, ObjectsCollectionType);
 
-                //(queryOnRootObject.QueryResult as IEnumerator).MoveNext();
-                //return (TResult)(queryOnRootObject.QueryResult as IEnumerator).Current;
-                return (IEnumerator<T>)linqObjectQuery.QueryResult; 
+
+                    //queryOnRootObject.Execute();
+                    linqObjectQuery.Execute();
+
+                    //(queryOnRootObject.QueryResult as IEnumerator).MoveNext();
+                    //return (TResult)(queryOnRootObject.QueryResult as IEnumerator).Current;
+                    return (IEnumerator<T>)linqObjectQuery.QueryResult;
+                } 
             }
         }
         /// <MetaDataID>{2a91bed8-d52e-4452-9fe5-91307660f94d}</MetaDataID>

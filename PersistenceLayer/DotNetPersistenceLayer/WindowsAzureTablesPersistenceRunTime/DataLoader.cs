@@ -664,7 +664,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                     else
                     {
+                        if(objectID.ToString() == "3607914b-85b4-4d0a-b751-18cb41628210")
+                        {
 
+                        }
                         StorageInstanceRef storageInstanceRef = (ObjectStorage as PersistenceLayerRunTime.ObjectStorage).OperativeObjectCollections[LastStorageCellType][objectID] as StorageInstanceRef;
                         if (storageInstanceRef != null)
                         {
@@ -675,20 +678,23 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             {
                                 storageInstanceRef.DbDataRecord = StorageInstance;
                                 storageInstanceRef.LoadObjectState(columnPrefix);
+                                storageInstanceRef.MarkAsReloadedObject();
                                 loadObjectLinks = true;
                             }
                             else
-                            {
-                                if (storageInstanceRef.InstantiateObjectQueryIdentity == DataNode.ObjectQuery.QueryIdentity)
-                                    loadObjectLinks = true;
-                                else
-                                {
-                                    if (storageInstanceRef.MemoryInstance.GetType().Name == "ItemPreparation")
-                                    {
-                                        //loadObjectLinks = true;
-                                    }
-                                }
-                            }
+                                loadObjectLinks = !storageInstanceRef.IsObjectActive;
+                            //else
+                            //{
+                            //    if (storageInstanceRef.InstantiateObjectQueryIdentity == DataNode.ObjectQuery.QueryIdentity)
+                            //        loadObjectLinks = true;
+                            //    else
+                            //    {
+                            //        if (storageInstanceRef.MemoryInstance.GetType().Name == "ItemPreparation")
+                            //        {
+                            //            //loadObjectLinks = true;
+                            //        }
+                            //    }
+                            //}
 
                         }
                         else

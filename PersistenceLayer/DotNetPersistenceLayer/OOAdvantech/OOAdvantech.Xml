@@ -5724,6 +5724,9 @@
         <member name="T:OOAdvantech.Remoting.MonoStateClass">
             <MetaDataID>{c7b3a5f5-e5fe-4269-aba1-54852689b08e}</MetaDataID>
         </member>
+        <member name="T:OOAdvantech.Remoting.MonoStateClassException">
+            <MetaDataID>{ff8e3f9d-15f4-429d-b79f-2830c07e0436}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.Remoting.PendingEvent">
             <MetaDataID>{2e21b219-9f55-410c-ac71-89ea12bc4375}</MetaDataID>
         </member>

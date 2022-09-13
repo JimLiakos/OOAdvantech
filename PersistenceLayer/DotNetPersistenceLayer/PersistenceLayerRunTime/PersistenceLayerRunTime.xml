@@ -1945,7 +1945,7 @@
         <member name="P:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ReferentialIntegrityCountHasChanged">
             <MetaDataID>{87C2E546-E13E-4FF9-B01E-D3A014C7192B}</MetaDataID>
         </member>
-        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.IsObjectActive">
+        <member name="F:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef._IsObjectActive">
             <MetaDataID>{3f2d3149-1d92-4136-90d9-8eb9c14a2cef}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayerRunTime.StorageInstanceRef.ObjectActived">
