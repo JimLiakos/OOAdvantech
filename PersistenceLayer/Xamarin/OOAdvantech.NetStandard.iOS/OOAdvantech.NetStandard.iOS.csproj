@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
-  
-  
+  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" />
+  <Import Project="..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" />
   <Import Project="..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" />
-  
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -57,12 +55,6 @@
     <Reference Include="Facebook.ShareKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Facebook.ShareKit.iOS.5.6.0\lib\xamarinios10\Facebook.ShareKit.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Firebase.Auth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Firebase.iOS.Auth.6.5.1\lib\xamarinios10\Firebase.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\lib\xamarinios10\Firebase.Core.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="SQLite-net, Version=1.5.231.0, Culture=neutral, processorArchitecture=MSIL">
@@ -175,10 +167,18 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" />
   <Import Project="..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets')" />
+  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\build\Xamarin.Forms.targets')" />
+  <Import Project="..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets'))" />
   </Target>
-  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\build\Xamarin.Forms.targets')" />
+  <Import Project="..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" />
+  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" />
 </Project>
