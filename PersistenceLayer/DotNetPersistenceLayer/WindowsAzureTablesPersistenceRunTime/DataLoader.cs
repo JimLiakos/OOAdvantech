@@ -681,20 +681,20 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                 storageInstanceRef.MarkAsReloadedObject();
                                 loadObjectLinks = true;
                             }
-                            else
-                                loadObjectLinks = !storageInstanceRef.IsObjectActive;
                             //else
-                            //{
-                            //    if (storageInstanceRef.InstantiateObjectQueryIdentity == DataNode.ObjectQuery.QueryIdentity)
-                            //        loadObjectLinks = true;
-                            //    else
-                            //    {
-                            //        if (storageInstanceRef.MemoryInstance.GetType().Name == "ItemPreparation")
-                            //        {
-                            //            //loadObjectLinks = true;
-                            //        }
-                            //    }
-                            //}
+                                //loadObjectLinks = !storageInstanceRef.IsObjectActive;
+                            else
+                            {
+                                if (storageInstanceRef.InstantiateObjectQueryIdentity == DataNode.ObjectQuery.QueryIdentity)
+                                    loadObjectLinks = true;
+                                else
+                                {
+                                    if (storageInstanceRef.MemoryInstance.GetType().Name == "ItemPreparation")
+                                    {
+                                        //loadObjectLinks = true;
+                                    }
+                                }
+                            }
 
                         }
                         else
