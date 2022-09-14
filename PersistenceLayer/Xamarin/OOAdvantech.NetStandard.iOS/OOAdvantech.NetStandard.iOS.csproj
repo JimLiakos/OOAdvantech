@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" />
-  <Import Project="..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" />
-  <Import Project="..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,92 +12,30 @@
     <RootNamespace>OOAdvantech.NetStandard.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>OOAdvantech.NetStandard.iOS</AssemblyName>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;__IOS__;__MOBILE__;__UNIFIED__;OOAdvantech;DeviceDotNet;NetStandard</DefineConstants>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Facebook.CoreKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Facebook.CoreKit.iOS.5.6.0\lib\xamarinios10\Facebook.CoreKit.dll</HintPath>
-    </Reference>
-    <Reference Include="Facebook.LoginKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Facebook.LoginKit.iOS.5.6.0\lib\xamarinios10\Facebook.LoginKit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Facebook.MarketingKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Facebook.MarketingKit.iOS.5.5.0\lib\xamarinios10\Facebook.MarketingKit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Facebook.PlacesKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Facebook.PlacesKit.iOS.5.6.0\lib\xamarinios10\Facebook.PlacesKit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Facebook.ShareKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Facebook.ShareKit.iOS.5.6.0\lib\xamarinios10\Facebook.ShareKit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="OpenTK-1.0" />
-    <Reference Include="SQLite-net, Version=1.5.231.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\sqlite-net-pcl.1.5.231\lib\netstandard1.1\SQLite-net.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.1.11.121, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.1.11.121, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.core, Version=1.1.11.121, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\SQLitePCLRaw.core.1.1.11\lib\Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.provider.sqlite3, Version=1.1.11.121, Culture=neutral, PublicKeyToken=62684c7b4f184e3f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\SQLitePCLRaw.provider.sqlite3.ios_unified.1.1.11\lib\Xamarin.iOS10\SQLitePCLRaw.provider.sqlite3.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform.iOS, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="ZXing.Net.Mobile.Core, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\DontWaitAppNS\packages\ZXing.Net.Mobile.2.4.1\lib\Xamarin.iOS10\ZXing.Net.Mobile.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Forms, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\ZXing.Net.Mobile.Forms.2.4.1\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Forms.iOS, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\ZXing.Net.Mobile.Forms.2.4.1\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="zxing.portable, Version=0.16.2.0, Culture=neutral, PublicKeyToken=830ae994e36ac27d, processorArchitecture=MSIL">
-      <HintPath>..\DontWaitAppNS\packages\ZXing.Net.Mobile.2.4.1\lib\Xamarin.iOS10\zxing.portable.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXingNetMobile, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\DontWaitAppNS\packages\ZXing.Net.Mobile.2.4.1\lib\Xamarin.iOS10\ZXingNetMobile.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -117,66 +52,63 @@
     <Compile Include="Authentication\Renderers\FacebookLoginButtonRenderer.cs" />
     <Compile Include="Authentication\Services\FacebookLoginService.cs" />
     <Compile Include="DeviceFileSystem.cs" />
-    <Compile Include="Localize.cs" />
     <Compile Include="DeviceInstantiator.cs" />
     <Compile Include="DeviceOOAdvantechCore.cs" />
     <Compile Include="HybridWebViewRenderer.cs" />
+    <Compile Include="Localize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextToSpeech_iOS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Facebook.iOS">
+      <Version>9.0.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.Auth">
+      <Version>6.9.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging">
+      <Version>8.10.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>5.0.0.2196</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj">
-      <Project>{df65186a-0e3d-4dc6-b4a7-95f0b3650e46}</Project>
+      <Project>{67be491b-1be9-4c34-ab51-0583744b7cde}</Project>
       <Name>DotNetMetaDataRepository.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\MetaDataLoadingSystem.NetStandard\MetaDataLoadingSystem.NetStandard.csproj">
-      <Project>{1d8a0e34-1539-4116-867e-51782d829894}</Project>
+      <Project>{1f57bb1d-e478-48f7-82b7-192d32d0f01f}</Project>
       <Name>MetaDataLoadingSystem.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj">
-      <Project>{3ef27717-75b9-45e2-99a0-16b54aa8e953}</Project>
+      <Project>{de7d22e0-c690-480e-a87a-8e0517403f3b}</Project>
       <Name>OOAdvantech.Json.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj">
-      <Project>{98c53533-8117-40c2-b9a6-bbe3d5dee050}</Project>
+      <Project>{f8df9b1a-1422-4870-8283-03a03d38e83d}</Project>
       <Name>OOAdvantech.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj">
-      <Project>{91c9ec4f-5a28-4792-ac01-384910576582}</Project>
+      <Project>{f62df117-1434-4962-82d4-79e128a940ba}</Project>
       <Name>PersistenceLayerRunTime.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj">
-      <Project>{f041cd9d-ab74-4561-8a73-8092d869d4ed}</Project>
+      <Project>{6e427e1f-4e78-4d10-8367-a33dbcc73043}</Project>
       <Name>RDBMSMetaDataRepository.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\RDBMSPersistenceRunTime.NetStandard\RDBMSPersistenceRunTime.NetStandard.csproj">
-      <Project>{7099B938-8E14-4F03-BE85-805B55026892}</Project>
+      <Project>{4b42e3ab-630c-4b20-8eb3-2ee57b2d9414}</Project>
       <Name>RDBMSPersistenceRunTime.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLitePersistenceRunTime.NetStardard\SQLitePersistenceRunTime.NetStardard.csproj">
-      <Project>{ca6365fb-0b12-4b0f-a425-3d059a026598}</Project>
+      <Project>{23c45ba8-d50f-4e70-88e5-b98477e8174d}</Project>
       <Name>SQLitePersistenceRunTime.NetStardard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" />
-  <Import Project="..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('..\..\..\FlavourBusiness\ServiceContextManagerApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets')" />
-  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Forms.5.0.0.2196\build\Xamarin.Forms.targets')" />
-  <Import Project="..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Firebase.iOS.Core.6.6.6\build\Xamarin.Firebase.iOS.Core.targets'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.props'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets'))" />
-  </Target>
-  <Import Project="..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\..\FlavourBusiness\WaiterApp\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" />
-  <Import Project="..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\..\FlavourBusiness\DontWaitAppNS\packages\Xamarin.Build.Download.0.10.0\build\Xamarin.Build.Download.targets')" />
 </Project>
