@@ -193,8 +193,10 @@ namespace OOAdvantech.iOS
         }
         public static void InitFirebase(string firebaseToken, string googleAuthWebClientID)
         {
+            bool tokenChange = _FirebaseToken != null;
             _FirebaseToken = firebaseToken;
-            Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID);
+            if(!tokenChange)
+                Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID);
         }
 
         //Task<string> IDeviceOOAdvantechCore.EmailSignUp(string email, string password)

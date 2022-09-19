@@ -52,8 +52,7 @@
     </Compile>
     <Compile Include="AppleAudioManager.cs" />
     <Compile Include="Authentication\Auth.cs" />
-    <Compile Include="Authentication\Renderers\FacebookLoginButtonRenderer.cs" />
-    <Compile Include="Authentication\Services\FacebookLoginService.cs" />
+    <Compile Include="Authentication\Services\FirebaseAuthentication.cs" />
     <Compile Include="DeviceFileSystem.cs" />
     <Compile Include="DeviceInstantiator.cs" />
     <Compile Include="DeviceOOAdvantechCore.cs" />
