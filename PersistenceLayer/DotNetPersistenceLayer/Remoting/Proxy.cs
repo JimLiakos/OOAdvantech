@@ -259,7 +259,7 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{25FE344B-B25C-4C9B-8082-9583343DDE98}</MetaDataID>
         public static object GetObject(IExtMarshalByRefObject theRealObject)
         {
-            lock (RenewalManager.Sessions)
+            //lock (RenewalManager.Sessions)
             {
                 ObjRef myObjRef = null;
                 System.Runtime.Remoting.Channels.IChannel[] Channels = System.Runtime.Remoting.Channels.ChannelServices.RegisteredChannels;

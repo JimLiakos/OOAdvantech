@@ -22,7 +22,7 @@ namespace RoseMetaDataRepository
         {
             // RealProxy uses the Type to generate a transparent proxy.
             _RoseObject = theRealObject;
-            //RoseObjects.Add(this);
+            //RoseObjects.Add(this); 
 
         }
         /// <MetaDataID>{B7A2F8F1-43D8-45AA-A3A8-F1879F70F2C4}</MetaDataID>

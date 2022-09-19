@@ -27,6 +27,7 @@ namespace OOAdvantech.iOS
 #if PORTABLE
             Websockets.Droid.WebsocketConnection.Link();
 #endif
+           
 
         }
         public object GetDeviceSpecific(System.Type type)

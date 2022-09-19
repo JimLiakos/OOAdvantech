@@ -18,12 +18,15 @@ namespace OOAdvantech.Remoting
         [MetaDataRepository.Association("", typeof(ClientSessionPart), MetaDataRepository.Roles.RoleA, "ebfbc14b-cd03-433c-ab3a-33dfe20024c3")]
         public static System.Collections.Generic.Dictionary<string, ClientSessionPart> Sessions = new System.Collections.Generic.Dictionary<string, ClientSessionPart>();
 
+
+        static object SessionsLock = new object();
+
         static System.Collections.Generic.Dictionary<string, Task<ClientSessionPart>> SessionsTasks = new System.Collections.Generic.Dictionary<string, Task<ClientSessionPart>>();
 
 
         public static System.Collections.Generic.Dictionary<string, ClientSessionPart> GetSessions()
         {
-            lock (Sessions)
+            lock (SessionsLock)
                 return new System.Collections.Generic.Dictionary<string, ClientSessionPart>(Sessions);
         }
 
@@ -49,10 +52,10 @@ namespace OOAdvantech.Remoting
         public static void RemoveProxy(IProxy proxy)
         {
             ClientSessionPart clientSessionPart = null;
-            string channelUri = null;
+            string channelUri = proxy.ChannelUri;
 
 
-            lock (Sessions)
+            lock (SessionsLock)
             {
                 Sessions.TryGetValue(channelUri, out clientSessionPart);
             }
@@ -68,11 +71,11 @@ namespace OOAdvantech.Remoting
         public static IProxy GetProxy(string channelUri, string objectUri)
         {
             ClientSessionPart clientSession = null;
-            lock (Sessions)
+            lock (SessionsLock)
             {
                 Sessions.TryGetValue(channelUri, out clientSession);
             }
-            if (clientSession != null)
+            if (clientSession == null)
                 return null;
             else
                 return clientSession.GetProxy(objectUri);
@@ -109,7 +112,7 @@ namespace OOAdvantech.Remoting
 
             //Task<ClientSessionPart> task = null;
             //ClientSessionPart clientSessionPart = null;
-            //lock (Sessions)
+            //lock (SessionsLock)
             //{
 
 
@@ -209,7 +212,7 @@ namespace OOAdvantech.Remoting
                 }
                 foreach (string channelUri in sessionsForRemove)
                 {
-                    lock (Sessions)
+                    lock (SessionsLock)
                         Sessions.Remove(channelUri);
                 }
             }
@@ -371,7 +374,7 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{af69898e-6c33-4253-b632-4b2e4e4b18de}</MetaDataID>
         internal static ClientSessionPart GetSession(string sessionIdentity)
         {
-            lock (Sessions)
+            lock (SessionsLock)
             {
                 return (from clientSessionPart in Sessions.Values
                         where clientSessionPart.SessionIdentity == sessionIdentity
@@ -417,15 +420,14 @@ namespace OOAdvantech.Remoting
                                     {
                                         System.Diagnostics.Debug.Write("clientSessionPart==null");
                                     }
-                                    lock (Sessions)
+                                    lock (SessionsLock)
                                         Sessions[channelUri] = clientSessionPart;
 
                                     if (!string.IsNullOrEmpty(proxyChannelUri) && channelUri != proxyChannelUri)
                                     {
-                                        lock (Sessions)
+                                        lock (SessionsLock)
                                             Sessions[proxyChannelUri] = clientSessionPart;
                                     }
-
                                     return clientSessionPart;
                                 }
                                 catch (Exception error)
