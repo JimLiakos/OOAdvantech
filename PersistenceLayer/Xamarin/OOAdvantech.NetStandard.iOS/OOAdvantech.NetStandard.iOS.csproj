@@ -19,9 +19,11 @@
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;DeviceDotNet;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
@@ -29,6 +31,7 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -67,48 +70,57 @@
       <Version>9.0.1.5</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.Auth">
-      <Version>6.9.2</Version>
+      <Version>8.10.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging">
-      <Version>8.10.0</Version>
+      <Version>8.10.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>5.0.0.2196</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.Core">
+      <Version>8.10.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Google.iOS.SignIn">
+      <Version>5.0.2.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj">
-      <Project>{67be491b-1be9-4c34-ab51-0583744b7cde}</Project>
+      <Project>{B8CCD4B1-0C5F-4BED-81EB-213B0C25FBDC}</Project>
       <Name>DotNetMetaDataRepository.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\MetaDataLoadingSystem.NetStandard\MetaDataLoadingSystem.NetStandard.csproj">
-      <Project>{1f57bb1d-e478-48f7-82b7-192d32d0f01f}</Project>
+      <Project>{D185E1C3-C91F-4556-B5D3-21C3D72E18FE}</Project>
       <Name>MetaDataLoadingSystem.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj">
-      <Project>{de7d22e0-c690-480e-a87a-8e0517403f3b}</Project>
+      <Project>{CE986AA7-409F-4863-85C0-AE3628C509CE}</Project>
       <Name>OOAdvantech.Json.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj">
-      <Project>{f8df9b1a-1422-4870-8283-03a03d38e83d}</Project>
+      <Project>{0B142E86-D9CD-4BB1-A17E-08A310AEC721}</Project>
       <Name>OOAdvantech.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj">
-      <Project>{f62df117-1434-4962-82d4-79e128a940ba}</Project>
+      <Project>{7524D0B9-81D4-44BB-BFF8-C59C1413A048}</Project>
       <Name>PersistenceLayerRunTime.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj">
-      <Project>{6e427e1f-4e78-4d10-8367-a33dbcc73043}</Project>
+      <Project>{04A92794-832E-4F11-99A7-C8099FD74020}</Project>
       <Name>RDBMSMetaDataRepository.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\RDBMSPersistenceRunTime.NetStandard\RDBMSPersistenceRunTime.NetStandard.csproj">
-      <Project>{4b42e3ab-630c-4b20-8eb3-2ee57b2d9414}</Project>
+      <Project>{120C19CF-9956-4CB1-8557-B521552B6EC6}</Project>
       <Name>RDBMSPersistenceRunTime.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLitePersistenceRunTime.NetStardard\SQLitePersistenceRunTime.NetStardard.csproj">
-      <Project>{23c45ba8-d50f-4e70-88e5-b98477e8174d}</Project>
+      <Project>{BADDDBEE-968A-415A-AC49-28833C5E96F1}</Project>
       <Name>SQLitePersistenceRunTime.NetStardard</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

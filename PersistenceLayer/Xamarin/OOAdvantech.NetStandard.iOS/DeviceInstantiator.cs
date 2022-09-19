@@ -19,6 +19,12 @@ namespace OOAdvantech.iOS
 
             OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider.Init();
             HybridWebViewRenderer.Init();
+
+            Firebase.Core.App.Configure();
+
+            var auth = Firebase.Auth.Auth.DefaultInstance;
+            var token = auth.ApnsToken;
+
 #if NetStandard
 
             SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
