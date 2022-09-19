@@ -13,8 +13,8 @@ namespace OOAdvantech
     public interface IDeviceOOAdvantechCore
     {
         
-        void Signin(AuthProvider provider);
-        void SignOut();
+        //void Signin(AuthProvider provider);
+        //void SignOut();
         
 
         bool IsinSleepMode { get; set; }
@@ -46,9 +46,9 @@ namespace OOAdvantech
 
 
         void PlaySound();
-        Task<string> EmailSignUp(string email, string password);
-        Task<string> EmailSignIn(string email, string password);
-        void SendPasswordResetEmail(string email);
+        //Task<string> EmailSignUp(string email, string password);
+        //Task<string> EmailSignIn(string email, string password);
+        //void SendPasswordResetEmail(string email);
 
         bool IsBackgroundServiceStarted { get; }
 

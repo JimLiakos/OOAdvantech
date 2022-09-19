@@ -11,35 +11,13 @@ namespace OOAdvantech.iOS
 
         public static void Init()
         {
-            
-
-
-            ThreadHelper.Initialize(System.Environment.CurrentManagedThreadId);
             OOAdvantech.SQLitePersistenceRunTime.StorageProvider.init();
-
-            OOAdvantech.MetaDataLoadingSystem.MetaDataStorageProvider.Init();
             HybridWebViewRenderer.Init();
-
-            Firebase.Core.App.Configure();
-
-            var auth = Firebase.Auth.Auth.DefaultInstance;
-            var token = auth.ApnsToken;
-
-#if NetStandard
-
-            SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
-#endif
-
-#if PORTABLE
-            Websockets.Droid.WebsocketConnection.Link();
-#endif
-           
-
+            WebSocket.io.WebsocketConnection.Link();
         }
         public object GetDeviceSpecific(System.Type type)
         {
-            if (type == typeof(OOAdvantech.IDeviceOOAdvantechCore))
-                return new DeviceOOAdvantechCore();
+
 
             if (type == typeof(OOAdvantech.Speech.ITextToSpeech))
                 return new TextToSpeechImplementation();
@@ -51,14 +29,6 @@ namespace OOAdvantech.iOS
             if (type == typeof(OOAdvantech.IFileSystem))
                 return new DeviceFileSystem();
 
-            if (type == typeof(Authentication.IAuth))
-                return new Authentication.iOS.Auth();
-
-            //if (type == typeof(OOAdvantech.IRingtoneService))
-            //    return new OOAdvantech.iOS.RingtoneService();
-
-
-
             if (type == typeof(OOAdvantech.RDBMSMetaDataPersistenceRunTime.IDataBaseConnection))
             {
                 var connection = new OOAdvantech.SQLitePersistenceRunTime.SQLiteDataBaseConnection();
@@ -67,16 +37,5 @@ namespace OOAdvantech.iOS
             }
             return null;
         }
-    }
-    public static class ThreadHelper
-    {
-        public static int MainThreadId { get; private set; }
-
-        public static void Initialize(int mainThreadId)
-        {
-            MainThreadId = mainThreadId;
-        }
-
-        public static bool IsOnMainThread => System.Environment.CurrentManagedThreadId == MainThreadId;
     }
 }

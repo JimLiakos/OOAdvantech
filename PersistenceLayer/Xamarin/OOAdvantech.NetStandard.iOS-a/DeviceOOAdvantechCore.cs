@@ -28,17 +28,17 @@ namespace OOAdvantech.iOS
         }
 
 
-        //public void Signin(AuthProvider provider)
-        //{
-        //    if (provider == AuthProvider.Google)
-        //        Authentication.iOS.FirebaseAuthentication.GoogleSignIn();
+        public void Signin(AuthProvider provider)
+        {
+            if (provider == AuthProvider.Google)
+                Authentication.iOS.FirebaseAuthentication.GoogleSignIn();
 
-        //    if (provider == AuthProvider.Facebook)
-        //        Authentication.iOS.FirebaseAuthentication.FacebookSignIn();
+            if (provider == AuthProvider.Facebook)
+                Authentication.iOS.FirebaseAuthentication.FacebookSignIn();
 
 
-        //    // Authentication.Droid.FirebaseAuthentication.GoogleSignIn();
-        //}
+            // Authentication.Droid.FirebaseAuthentication.GoogleSignIn();
+        }
 
         public void EmailSignUp(string email, string password)
         {
@@ -48,10 +48,10 @@ namespace OOAdvantech.iOS
         {
             Authentication.iOS.FirebaseAuthentication.EmailSignIn(email, password);
         }
-        //public void SignOut()
-        //{
-        //    Authentication.iOS.FirebaseAuthentication.SignOut();
-        //}
+        public void SignOut()
+        {
+            //Authentication.Droid.FirebaseAuthentication.SignOut();
+        }
 
         public static void MessageReceived(IRemoteMessage message)
         {
@@ -131,7 +131,7 @@ namespace OOAdvantech.iOS
         static bool _IsinSleepMode;
         public bool IsinSleepMode { get =>  _IsinSleepMode; set => _IsinSleepMode=value; }
 
-        public bool IsBackgroundServiceStarted => true;
+        public bool IsBackgroundServiceStarted => throw new NotImplementedException();
 
         public SIMCardData GetLinePhoneNumber(int lineIndex)
         {
@@ -197,20 +197,20 @@ namespace OOAdvantech.iOS
             Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID);
         }
 
-        //Task<string> IDeviceOOAdvantechCore.EmailSignUp(string email, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        Task<string> IDeviceOOAdvantechCore.EmailSignUp(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
 
-        //Task<string> IDeviceOOAdvantechCore.EmailSignIn(string email, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        Task<string> IDeviceOOAdvantechCore.EmailSignIn(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void SendPasswordResetEmail(string email)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void SendPasswordResetEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool RunInBackground(Action action, BackgroundServiceState serviceState)
         {

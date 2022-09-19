@@ -104,35 +104,27 @@ namespace OOAdvantech.Droid
             Authentication.Droid.FirebaseAuthentication.Init(context, googleAuthWebClientID);
         }
 
-        public void Signin(AuthProvider provider)
-        {
-            if (provider == AuthProvider.Google)
-                Authentication.Droid.FirebaseAuthentication.GoogleSignIn();
+  
+        //public System.Threading.Tasks.Task<string> EmailSignUp(string email, string password)
+        //{
+        //    return Authentication.Droid.FirebaseAuthentication.EmailSignUp(email, password);
+        //}
+        //public void SendPasswordResetEmail(string email)
+        //{
+        //    Authentication.Droid.FirebaseAuthentication.SendPasswordResetEmail(email);
+        //}
 
-            if (provider == AuthProvider.Facebook)
-                Authentication.Droid.FirebaseAuthentication.FacebookSignIn();
-
-        }
-        public System.Threading.Tasks.Task<string> EmailSignUp(string email, string password)
-        {
-            return Authentication.Droid.FirebaseAuthentication.EmailSignUp(email, password);
-        }
-        public void SendPasswordResetEmail(string email)
-        {
-            Authentication.Droid.FirebaseAuthentication.SendPasswordResetEmail(email);
-        }
-
-        public System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
-        {
+        //public System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
+        //{
 
 
-            return Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password);
+        //    return Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password);
 
-        }
-        public void SignOut()
-        {
-            Authentication.Droid.FirebaseAuthentication.SignOut();
-        }
+        //}
+        //public void SignOut()
+        //{
+        //    Authentication.Droid.FirebaseAuthentication.SignOut();
+        //}
 
         public static void PrintHashKey(ContextWrapper pContext)
         {

@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOAdvantech.NetStandard", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOAdvantech.NetStandard.Droid", "OOAdvantech.NetStandard.Droid\OOAdvantech.NetStandard.Droid.csproj", "{C654ADF4-39DE-4084-BC46-2A9268B0068C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOAdvantech.NetStandard.iOS", "OOAdvantech.NetStandard.iOS\OOAdvantech.NetStandard.iOS.csproj", "{97999F66-2CD1-4B6E-BBA2-41174367DF1E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parser.NetStandard", "Parser.NetStandard\Parser.NetStandard.csproj", "{8706A4AB-F000-4E98-8A53-02F5FEEA0162}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Linq.NetStandard", "Linq.NetStandard\Linq.NetStandard.csproj", "{93FC74DF-85D0-420A-ABF7-BF58E4EE7710}"
@@ -26,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDBMSPersistenceRunTime.NetStandard", "RDBMSPersistenceRunTime.NetStandard\RDBMSPersistenceRunTime.NetStandard.csproj", "{4B42E3AB-630C-4B20-8EB3-2EE57B2D9414}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLitePersistenceRunTime.NetStardard", "SQLitePersistenceRunTime.NetStardard\SQLitePersistenceRunTime.NetStardard.csproj", "{23C45BA8-D50F-4E70-88E5-B98477E8174D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOAdvantech.NetStandard.iOS", "OOAdvantech.NetStandard.iOS\OOAdvantech.NetStandard.iOS.csproj", "{52827A9B-F287-4EC6-A449-E9F76B4BEA6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,6 @@ Global
 		{C654ADF4-39DE-4084-BC46-2A9268B0068C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C654ADF4-39DE-4084-BC46-2A9268B0068C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C654ADF4-39DE-4084-BC46-2A9268B0068C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97999F66-2CD1-4B6E-BBA2-41174367DF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97999F66-2CD1-4B6E-BBA2-41174367DF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97999F66-2CD1-4B6E-BBA2-41174367DF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97999F66-2CD1-4B6E-BBA2-41174367DF1E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8706A4AB-F000-4E98-8A53-02F5FEEA0162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8706A4AB-F000-4E98-8A53-02F5FEEA0162}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8706A4AB-F000-4E98-8A53-02F5FEEA0162}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,6 +77,10 @@ Global
 		{23C45BA8-D50F-4E70-88E5-B98477E8174D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C45BA8-D50F-4E70-88E5-B98477E8174D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C45BA8-D50F-4E70-88E5-B98477E8174D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52827A9B-F287-4EC6-A449-E9F76B4BEA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52827A9B-F287-4EC6-A449-E9F76B4BEA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52827A9B-F287-4EC6-A449-E9F76B4BEA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52827A9B-F287-4EC6-A449-E9F76B4BEA6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

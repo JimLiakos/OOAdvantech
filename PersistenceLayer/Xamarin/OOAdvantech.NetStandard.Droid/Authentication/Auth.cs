@@ -53,16 +53,19 @@ namespace OOAdvantech.Authentication.Droid
 #if DeviceDotNet
             if (provider == SignInProvider.Google)
             {
-                OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-                device.Signin(OOAdvantech.AuthProvider.Google);
+                Authentication.Droid.FirebaseAuthentication.GoogleSignIn();
+                //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+                //device.Signin(OOAdvantech.AuthProvider.Google);
 
                 return true;
             }
 
             if (provider == SignInProvider.Facebook)
             {
-                OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-                device.Signin(OOAdvantech.AuthProvider.Facebook);
+                
+                Authentication.Droid.FirebaseAuthentication.FacebookSignIn();
+                //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+                //device.Signin(OOAdvantech.AuthProvider.Facebook);
 
                 return true;
             }
@@ -73,34 +76,43 @@ namespace OOAdvantech.Authentication.Droid
         }
 
 
-        public Task<string>  EmailSignIn(string email, string password)
+
+
+        public Task<string> EmailSignIn(string email, string password)
         {
-            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            return device.EmailSignIn(email, password);
-            
+            return Authentication.Droid.FirebaseAuthentication.EmailSignIn(email, password);
+
+            //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            //return device.EmailSignIn(email, password);
+
         }
 
         public Task<string> EmailSignUp(string email, string password)
         {
-            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            
-            return device.EmailSignUp( email, password);
+            //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+
+            //return device.EmailSignUp(email, password);
+            return Authentication.Droid.FirebaseAuthentication.EmailSignUp(email, password);
 
 
-            return null;
+            //return null;
         }
         public void SendPasswordResetEmail(string email)
         {
-            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            device.SendPasswordResetEmail(email);
+            Authentication.Droid.FirebaseAuthentication.SendPasswordResetEmail(email);
+
+            //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            //device.SendPasswordResetEmail(email);
         }
 
 
         public void SignOut()
         {
-            OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            
-            device.SignOut();
+            Authentication.Droid.FirebaseAuthentication.SignOut();
+            FirebaseAuthentication.FirebaseAuth.SignOut();
+
+            //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+            //device.SignOut();
         }
 
         public IAuthUser CurrentUser
@@ -123,7 +135,9 @@ namespace OOAdvantech.Authentication.Droid
                         //Providers = firebaseUser.Providers.ToList()
                     };
 
-                    currentUser.ProviderId = currentUser.Providers[0];
+                    if (currentUser.Providers != null && currentUser.Providers.Count > 0)
+                        currentUser.ProviderId = currentUser.Providers[0];
+
                     var cdcd = firebaseUser.ProviderData.ToList();
                     currentUser.ProviderData = firebaseUser.ProviderData.Select(x => new OOAdvantech.Authentication.UserInfo()
                     {
@@ -194,7 +208,7 @@ namespace OOAdvantech.Authentication.Droid
 
         public string ProviderId => currentUser.ProviderId;
 
-        public IList<string> Providers => currentUser.ProviderData.Select(x=>x.ProviderId).ToList();
+        public IList<string> Providers => currentUser.ProviderData.Select(x => x.ProviderId).ToList();
         public string PhoneNumber => currentUser.PhoneNumber;
 
         public string Uid => currentUser.Uid;
