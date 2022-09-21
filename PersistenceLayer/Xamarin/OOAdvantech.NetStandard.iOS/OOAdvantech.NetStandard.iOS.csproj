@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="AppleAudioManager.cs" />
     <Compile Include="Authentication\Auth.cs" />
+    <Compile Include="Authentication\Services\FacebookLoginService.cs" />
     <Compile Include="Authentication\Services\FirebaseAuthentication.cs" />
     <Compile Include="DeviceFileSystem.cs" />
     <Compile Include="DeviceInstantiator.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Localize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextToSpeech_iOS.cs" />
+    <Compile Include="Authentication\Services\AppleSignInService.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Essentials">

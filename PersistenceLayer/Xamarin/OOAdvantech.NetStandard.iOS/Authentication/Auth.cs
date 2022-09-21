@@ -62,6 +62,8 @@ namespace OOAdvantech.Authentication.iOS
         {
 #if DeviceDotNet
 
+            provider = SignInProvider.Apple;
+
             if (provider == SignInProvider.Google)
             {
                 Authentication.iOS.FirebaseAuthentication.GoogleSignIn();
@@ -74,6 +76,15 @@ namespace OOAdvantech.Authentication.iOS
             if (provider == SignInProvider.Facebook)
             {
                 Authentication.iOS.FirebaseAuthentication.FacebookSignIn();
+                //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+                //device.Signin(OOAdvantech.AuthProvider.Facebook);
+
+                return true;
+            }
+
+            if (provider == SignInProvider.Apple)
+            {
+                Authentication.iOS.FirebaseAuthentication.AppleSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Facebook);
 

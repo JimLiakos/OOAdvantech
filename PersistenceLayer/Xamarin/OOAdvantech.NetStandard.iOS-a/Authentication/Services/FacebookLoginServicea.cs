@@ -66,7 +66,7 @@ namespace OOAdvantech.Authentication.iOS
 
 
         static Firebase.Auth.Auth _FirebaseAuth;
-       // private static UIViewController _viewController;
+        private static UIViewController _viewController;
 
         public static Firebase.Auth.Auth FirebaseAuth
         {
@@ -99,15 +99,11 @@ namespace OOAdvantech.Authentication.iOS
                 {
                     string authToken = await user.GetIdTokenAsync(false);
 
-                    string providerId = "email";
+                    string providerId = null;
                     if (user.ProviderData.Where(x => x.ProviderId == "facebook.com").Count() > 0)
                         providerId = "facebook.com";
                     else if (user.ProviderData.Where(x => x.ProviderId == "google.com").Count() > 0)
                         providerId = "google.com";
-                    else if (user.ProviderData.Where(x => x.ProviderId == "apple.com").Count() > 0)
-                        providerId = "apple.com";
-
-                    
 
 
                     //Remoting.RestApi.DeviceAuthentication.AuthUser
@@ -120,7 +116,7 @@ namespace OOAdvantech.Authentication.iOS
                         Firebase_Sign_in_Provider = providerId,// user.Providers[FirebaseAuth.CurrentUser.Providers.Count - 1],
 
                         User_ID = FirebaseAuth.CurrentUser.Uid,
-                        Picture = FirebaseAuth.CurrentUser.PhotoUrl?.ToString()
+                        Picture = FirebaseAuth.CurrentUser.PhotoUrl.ToString()
                     };
                     Remoting.RestApi.DeviceAuthentication.SignedIn(authUser);
                 }
@@ -147,37 +143,12 @@ namespace OOAdvantech.Authentication.iOS
             {
 
             }
+            
+
+
             //Xamarin.Facebook.Login.LoginManager.Instance.LogIn(Xamarin.Essentials.Platform.CurrentActivity, new string[] { });
         }
 
-        internal static void AppleSignIn()
-        {
-            try
-            {
-                AppleSignInService appleSignInService = new AppleSignInService();
-                appleSignInService.SignInAsync();
-
-                //FacebookLoginService.CurrentFacebookLoginService.SignIn();
-            }
-            catch (Exception ex)
-            {
-
-            }
-            //Xamarin.Facebook.Login.LoginManager.Instance.LogIn(Xamarin.Essentials.Platform.CurrentActivity, new string[] { });
-        }
-
-        public static UIViewController GetTopViewController()
-        {
-            var window = UIApplication.SharedApplication.KeyWindow;
-            var vc = window.RootViewController;
-            while (vc.PresentedViewController != null)
-                vc = vc.PresentedViewController;
-
-            if (vc is UINavigationController navController)
-                vc = navController.ViewControllers.Last();
-
-            return vc;
-        }
 
 
         //private static async void AuthStateChanged(object sender, FirebaseAuth.AuthStateEventArgs e)
@@ -279,11 +250,7 @@ namespace OOAdvantech.Authentication.iOS
                     }
 
                 }
-                if (OOAdvantech.Remoting.RestApi.DeviceAuthentication.AuthUser.Firebase_Sign_in_Provider.ToLower() == "emal")
-                {
-                    NSError error;
-                    FirebaseAuth.SignOut(out error);
-                }
+
 
                 //FirebaseAuth.SignOut();
             }
@@ -295,51 +262,53 @@ namespace OOAdvantech.Authentication.iOS
         }
         public static void Init(string googleAuthWebClientID)
         {
-
-            #region Google provider initialze
-
             if (SignIn.SharedInstance != null)
             {
-                SignIn.SharedInstance.ClientId = googleAuthWebClientID;
-
+                var window = UIApplication.SharedApplication.KeyWindow;
+                var vc = window.RootViewController;
+                while (vc.PresentedViewController != null)
+                {
+                    vc = vc.PresentedViewController;
+                }
+                _viewController = vc;
                 var currentUser = SignIn.SharedInstance.CurrentUser;
-                SignIn.SharedInstance.PresentingViewController = FirebaseAuthentication.GetTopViewController();
-                Device.StartTimer(TimeSpan.FromSeconds(0.5), () =>
+                SignIn.SharedInstance.PresentingViewController = _viewController;
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
                     // called every 1 second
-                    if (currentUser != SignIn.SharedInstance.CurrentUser)
+                    if (currentUser!= SignIn.SharedInstance.CurrentUser)
                     {
                         currentUser = SignIn.SharedInstance.CurrentUser;
                         if (currentUser != null)
                         {
-                            if (currentUser.Authentication?.IdToken != null)
+                            if(currentUser.Authentication?.IdToken!=null)
                             {
                                 var credentials = Firebase.Auth.GoogleAuthProvider.GetCredential(currentUser.Authentication?.IdToken, currentUser.Authentication?.IdToken);
                                 FirebaseAuth.SignInWithCredential(credentials, new Firebase.Auth.AuthDataResultHandler(OnAuthDataResult));
+
                             }
                         }
+
                     }
+                    
                     // do stuff here
 
                     return true; // return true to repeat counting, false to stop timer
                 });
             }
-            #endregion
+            
 
 
-
-
-            #region  Facebook provider initialization
-
-            FacebookLoginService.Init();
+            SignIn.SharedInstance.ClientId = googleAuthWebClientID;
+            //FirebaseApp.InitializeApp(firebaseOptions);
+            FacebookLoginService.Init(/*FirebaseAuthEventsConsumer*/);
             if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
             {
                 var credentials = Firebase.Auth.FacebookAuthProvider.GetCredential(FacebookLoginService.CurrentFacebookLoginService.AccessToken);
                 FirebaseAuth.SignInWithCredential(credentials, new Firebase.Auth.AuthDataResultHandler(OnAuthDataResult));
             }
 
-            #endregion
-
+            
 
 
         }
@@ -376,7 +345,7 @@ namespace OOAdvantech.Authentication.iOS
             {
                 try
                 {
-                    AuthDataResult authDataResult= await FirebaseAuth.SignInWithPasswordAsync(email, password);
+                    await FirebaseAuth.SignInWithPasswordAsync(email, password);
                     return null;
                 }
                 catch (Exception err)
@@ -386,12 +355,239 @@ namespace OOAdvantech.Authentication.iOS
             });
 
         }
+        //public static bool OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
+        //{
+        //    if (requestCode == 1)
+        //    {
+        //        GoogleSignInResult result = Android.Gms.Auth.Api.Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
+        //        if (result.IsSuccess)
+        //        {
+        //            GoogleSignInAccount account = result.SignInAccount;
+        //            LoginWithFirebase(account);
+        //        }
+        //    }
+        //    else
+        //        FacebookCallbackManager.OnActivityResult(requestCode, Convert.ToInt32(resultCode), data);
+        //    return true;
+        //}
+
+        //private static void LoginWithFirebase(GoogleSignInAccount account)
+        //{
+        //    var credentials = GoogleAuthProvider.GetCredential(account.IdToken, null);
+        //    FirebaseAuth.SignInWithCredential(credentials).AddOnSuccessListener(FirebaseAuthEventsConsumer)
+        //        .AddOnFailureListener(FirebaseAuthEventsConsumer);
+        //}
+
+
+
 
     }
 
-  
-  
- 
+    /// <summary>
+    /// https://firebase.google.com/docs/auth/android/facebook-login
+    /// https://firebase.google.com/docs/android/setup/
+    /// https://evgenyzborovsky.com/2018/03/09/using-native-facebook-login-button-in-xamarin-forms/
+    /// </summary>
+    class FacebookLoginService : Facebook.Services.FacebookLoginService
+    {
+
+        public override string AccessToken => "";
+
+        public static void Init(/*FirebaseAuthEvents firebaseAuthEvents*/)
+        {
+
+            //FacebookLoginService.CallbackManager = CallbackManagerFactory.Create();
+
+            CurrentFacebookLoginService = new FacebookLoginService(/*firebaseAuthEvents*/);
+
+
+
+        }
+        //public static ICallbackManager CallbackManager;
+        //readonly MyAccessTokenTracker myAccessTokenTracker;
+        public override Action<string, string> AccessTokenChanged { get; set; }
+
+        public FacebookLoginService(/*FirebaseAuthEvents firebaseAuthEvents*/)
+        {
+            NSNotificationCenter.DefaultCenter.AddObserver(
+             new NSString(global::Facebook.CoreKit.AccessToken.DidChangeNotification),
+             async (n) =>
+             {
+                 string token = null;
+                 if(global::Facebook.CoreKit.AccessToken.CurrentAccessToken!=null)
+                  token= global::Facebook.CoreKit.AccessToken.CurrentAccessToken.TokenString;
+
+                 var oldToken = (n.UserInfo[global::Facebook.CoreKit.AccessToken.OldTokenKey] as global::Facebook.CoreKit.AccessToken)?.TokenString;
+                 var newToken = (n.UserInfo[global::Facebook.CoreKit.AccessToken.NewTokenKey] as global::Facebook.CoreKit.AccessToken)?.TokenString;
+                 if (newToken != null)
+                 {
+                     //var credentials = Firebase.Auth.FacebookAuthProvider.GetCredential(newToken);
+                     //await FirebaseAuthentication.FirebaseAuth.SignInWithCredentialAsync(credentials);
+                 }
+                 if (token != null)
+                 {
+                     AuthCredential credentials = Firebase.Auth.FacebookAuthProvider.GetCredential(token);
+                     if (credentials != null)
+                     {
+                         FirebaseAuthentication.FirebaseAuth.SignInWithCredential(credentials, null);
+                     }
+                 }
+
+
+                 AccessTokenChanged?.Invoke(oldToken,newToken);
+             });
+
+            //myAccessTokenTracker = new MyAccessTokenTracker(this, firebaseAuthEvents);
+            //// TODO: Stop tracking
+            //myAccessTokenTracker.StartTracking();
+
+            ////LoginManager.Instance.SetLoginBehavior(LoginBehavior.DeviceAuth)
+            //var ss = this.AccessToken;
+        }
+
+
+
+        //public override string AccessToken => Xamarin.Facebook.AccessToken.CurrentAccessToken?.Token;
+
+        public override void SignOut()
+        {
+            using (var loginManager = new LoginManager())
+            {
+                try
+                {
+                    string token = null;
+                    var to = global::Facebook.CoreKit.AccessToken.CurrentAccessToken;
+                    if (to != null)
+                    {
+                        token = to.TokenString;
+                    }
+                    loginManager.LogOut();
+
+                    to = global::Facebook.CoreKit.AccessToken.CurrentAccessToken;
+                   
+                    if(to!=null)
+                    {
+                        token = to.TokenString;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                
+            }
+
+        }
+
+        public override void SignIn()
+        {
+            using (var loginManager = new LoginManager())
+            {
+                try
+                {
+                    loginManager.LogIn(new string[] { }, GetTopViewController(), new global::Facebook.LoginKit.LoginManagerLoginResultBlockHandler(LoginManagerLoginResultBlock));
+                }
+                catch (Exception ex)
+                {
+
+                }
+                
+            }
+        }
+
+        public static UIViewController GetTopViewController()
+        {
+            var window = UIApplication.SharedApplication.KeyWindow;
+            var vc = window.RootViewController;
+            while (vc.PresentedViewController != null)
+                vc = vc.PresentedViewController;
+
+            if (vc is UINavigationController navController)
+                vc = navController.ViewControllers.Last();
+
+            return vc;
+        }
+
+
+        void LoginManagerLoginResultBlock(global::Facebook.LoginKit.LoginManagerLoginResult result, NSError error)
+        {
+
+            string oldToken = global::Facebook.CoreKit.AccessToken.OldTokenKey;
+            string newToken = global::Facebook.CoreKit.AccessToken.NewTokenKey;
+
+        }
+
+    }
+
+    //class MyAccessTokenTracker : AccessTokenTracker
+    //{
+    //    readonly Facebook.Services.FacebookLoginService facebookLoginService;
+    //    readonly FirebaseAuthEvents FirebaseAuthEvents;
+    //    public MyAccessTokenTracker(FacebookLoginService facebookLoginService, FirebaseAuthEvents firebaseAuthEvents)
+    //    {
+    //        this.facebookLoginService = facebookLoginService;
+    //        FirebaseAuthEvents = firebaseAuthEvents;
+    //    }
+
+    //    protected override void OnCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken)
+    //    {
+
+    //        if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
+    //        {
+    //            var credentials = Firebase.Auth.FacebookAuthProvider.GetCredential(FacebookLoginService.CurrentFacebookLoginService.AccessToken);
+    //            FirebaseAuthentication.FirebaseAuth.SignInWithCredential(credentials)
+    //                .AddOnCompleteListener(FirebaseAuthEvents)
+    //                .AddOnSuccessListener(FirebaseAuthEvents)
+    //                .AddOnFailureListener(FirebaseAuthEvents)
+    //                .AddOnCanceledListener(FirebaseAuthEvents);
+    //        }
+
+    //        if (oldAccessToken != null && currentAccessToken == null)
+    //            FirebaseAuthentication.FirebaseAuth.SignOut();
+
+
+    //        facebookLoginService.AccessTokenChanged?.Invoke(oldAccessToken?.Token, currentAccessToken?.Token);
+    //    }
+    //}
+
+    //class FirebaseAuthEvents : Java.Lang.Object, IOnSuccessListener, IOnCompleteListener, IOnFailureListener, IOnCanceledListener
+    //{
+    //    public void OnCanceled()
+    //    {
+    //        FirebaseAuthentication.OnCanceled();
+    //    }
+
+    //    public void OnComplete(Task task)
+    //    {
+    //        FirebaseAuthentication.OnComplete(task);
+    //    }
+
+    //    public void OnFailure(Java.Lang.Exception e)
+    //    {
+    //        FirebaseAuthentication.OnFailure(e);
+    //    }
+
+    //    public void OnSuccess(Java.Lang.Object result)
+    //    {
+    //        FirebaseAuthentication.OnSuccess(result);
+    //    }
+    //}
+
+    public class SignInDelegate : Google.SignIn.SignInDelegate
+    {
+        public SignInDelegate()
+        {
+
+        }
+        public override void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
+        {
+            
+        }
+        public override void DidDisconnect(SignIn signIn, GoogleUser user, NSError error)
+        {
+            base.DidDisconnect(signIn, user, error);
+        }
+    }
 
 
 }
