@@ -52,7 +52,8 @@ namespace OOAdvantech.Authentication
         Google = 0,
         Facebook = 1,
         Twitter = 2,
-        Email = 3
+        Email = 3,
+        Apple= 4
     }
     /// <MetaDataID>{e95f3c30-c154-43d9-9694-027c33114745}</MetaDataID>
     public class OOAdvantechAuth
