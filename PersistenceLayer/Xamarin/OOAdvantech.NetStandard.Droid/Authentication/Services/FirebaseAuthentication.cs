@@ -96,7 +96,7 @@ namespace OOAdvantech.Authentication.Droid
                     return err.Message;
                 }
             });
-            
+
         }
 
         public static System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
@@ -113,7 +113,7 @@ namespace OOAdvantech.Authentication.Droid
                     return err.Message;
                 }
             });
-            
+
 
         }
         internal static void SendPasswordResetEmail(string email)
@@ -141,11 +141,14 @@ namespace OOAdvantech.Authentication.Droid
         }
 
 
-
-        internal static void FacebookSignIn()
+        internal static System.Threading.Tasks.Task<bool> FacebookSignIn()
         {
+            FacebookCompletionSource = new System.Threading.Tasks.TaskCompletionSource<bool>();
+
 
             Xamarin.Facebook.Login.LoginManager.Instance.LogIn(Xamarin.Essentials.Platform.CurrentActivity, new string[] { });
+            return FacebookCompletionSource.Task;
+
         }
 
 
@@ -159,7 +162,7 @@ namespace OOAdvantech.Authentication.Droid
             if (FirebaseAuth.CurrentUser != null)
             {
                 var token = await (FirebaseAuth.Instance.CurrentUser.GetIdToken(false).AsAsync<GetTokenResult>());
-                
+
                 //var token = await FirebaseAuth.CurrentUser.GetIdTokenAsync(false);
 
                 authTimestamp = OOAdvantech.Remoting.RestApi.DeviceAuthentication.FromUnixTime(token.AuthTimestamp);
@@ -203,6 +206,8 @@ namespace OOAdvantech.Authentication.Droid
         }
 
         static object AuthenticationTokenLock = new object();
+        private static System.Threading.Tasks.TaskCompletionSource<bool> FacebookCompletionSource;
+
         private static void ValidateAuthenticationToken()
         {
             lock (AuthenticationTokenLock)
@@ -286,7 +291,7 @@ namespace OOAdvantech.Authentication.Droid
                 expirationTimestamp = Remoting.RestApi.DeviceAuthentication.FromUnixTime(token.ExpirationTimestamp);
             }
             string authToken = token.Token;
-            System.Collections.Generic.List<string> providers  =FirebaseAuth.CurrentUser.ProviderData.Select(x => x.ProviderId).ToList();
+            System.Collections.Generic.List<string> providers = FirebaseAuth.CurrentUser.ProviderData.Select(x => x.ProviderId).ToList();
 
             var authUser = new Remoting.RestApi.AuthUser()
             {
@@ -301,10 +306,15 @@ namespace OOAdvantech.Authentication.Droid
             Remoting.RestApi.DeviceAuthentication.SignedIn(authUser);
         }
 
-        internal static void GoogleSignIn()
+
+        internal static System.Threading.Tasks.Task<bool> GoogleSignIn()
         {
+            GoogleCompletionSource = new System.Threading.Tasks.TaskCompletionSource<bool>();
+
             var intent = Android.Gms.Auth.Api.Auth.GoogleSignInApi.GetSignInIntent(googleApiClient);
             Xamarin.Essentials.Platform.CurrentActivity.StartActivityForResult(intent, 1);
+
+            return GoogleCompletionSource.Task;
         }
 
         internal static void GoogleSignOut()
@@ -362,10 +372,27 @@ namespace OOAdvantech.Authentication.Droid
                 {
                     GoogleSignInAccount account = result.SignInAccount;
                     LoginWithFirebase(account);
+                    if (GoogleCompletionSource != null)
+                        GoogleCompletionSource.SetResult(true);
                 }
+                else if (GoogleCompletionSource != null)
+                    GoogleCompletionSource.SetResult(true);
+                GoogleCompletionSource = null;
+
             }
             else
+            {
                 FacebookCallbackManager.OnActivityResult(requestCode, Convert.ToInt32(resultCode), data);
+                if (FacebookCompletionSource != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
+                        FacebookCompletionSource.SetResult(true);
+                    else
+                        FacebookCompletionSource.SetResult(false);
+                }
+                FacebookCompletionSource = null;
+
+            }
             return true;
         }
 
@@ -385,7 +412,7 @@ namespace OOAdvantech.Authentication.Droid
             }
         }
 
-
+        public static System.Threading.Tasks.TaskCompletionSource<bool> GoogleCompletionSource { get; private set; }
     }
 
     /// <summary>

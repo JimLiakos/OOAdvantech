@@ -361,14 +361,14 @@ public event OOAdvantech.Authentication.IdTokenChangeHandler IdTokenChange
             return this.Proxy.GetValue<System.Threading.Tasks.Task<string>>(retValue);
         }
         
-        public bool SignInWith(OOAdvantech.Authentication.SignInProvider provider)
+        public System.Threading.Tasks.Task<bool> SignInWith(OOAdvantech.Authentication.SignInProvider provider)
         {
             object[] args = new object[1];
             System.Type[] argsTypes = new System.Type[1];
             args[0] = provider;
             argsTypes[0] = typeof(OOAdvantech.Authentication.SignInProvider);
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Authentication.IAuth), "SignInWith", args, argsTypes);
-            return this.Proxy.GetValue<bool>(retValue);
+            return this.Proxy.GetValue<System.Threading.Tasks.Task<bool>>(retValue);
         }
         
         public System.Threading.Tasks.Task<string> EmailSignIn(string email, string password)
