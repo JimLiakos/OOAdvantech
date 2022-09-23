@@ -333,6 +333,18 @@ public event OOAdvantech.Authentication.IdTokenChangeHandler IdTokenChange
             }
         }
         
+        // The Width property for the object.
+        public System.Collections.Generic.List<OOAdvantech.Authentication.SignInProvider> Providers
+        {
+            get
+            {
+                object[] args = new object[0];
+                System.Type[] argsTypes = new System.Type[0];
+                object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Authentication.IAuth), "get_Providers", args, argsTypes);
+                return this.Proxy.GetValue<System.Collections.Generic.List<OOAdvantech.Authentication.SignInProvider>>(retValue);
+            }
+        }
+        
         public OOAdvantech.Remoting.IProxy GetProxy()
         {
             object[] args = new object[0];

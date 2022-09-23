@@ -41,6 +41,7 @@ namespace OOAdvantech.Authentication
 
         void SendPasswordResetEmail(string email);
 
+        List<SignInProvider> Providers { get; }
 
 
         void SignOut();
@@ -82,6 +83,7 @@ namespace OOAdvantech.Authentication
         {
             Auth = auth;
         }
+
         IAuthUser CurrentUser { get; }
         public IAuth Auth { get; private set; }
     }

@@ -20,7 +20,6 @@ namespace OOAdvantech
         bool IsinSleepMode { get; set; }
 
       
-      
         event MessageReceivedHandle MessageReceived;
 
         event KeyboardChangeStateHandle KeyboordChangeState;
