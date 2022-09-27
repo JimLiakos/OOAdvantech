@@ -49,8 +49,17 @@ namespace OOAdvantech.Authentication.iOS
                      //Firebase sign in
                      AuthCredential credentials = Firebase.Auth.FacebookAuthProvider.GetCredential(token);
                      if (credentials != null)
+                     {
                          FirebaseAuthentication.FirebaseAuth.SignInWithCredential(credentials, null);
+                         FirebaseAuthentication.FacebookSignInCompletted(true);
+
+                     }
+                     else
+                         FirebaseAuthentication.FacebookSignInCompletted(false);
+
                  }
+                 else
+                     FirebaseAuthentication.FacebookSignInCompletted(false);
 
 
                  AccessTokenChanged?.Invoke(oldToken, newToken);

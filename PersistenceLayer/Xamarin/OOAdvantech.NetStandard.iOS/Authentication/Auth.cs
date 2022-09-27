@@ -17,7 +17,7 @@ namespace OOAdvantech.Authentication.iOS
 
         public Auth()
         {
-            FirebaseAuthentication.FirebaseAuth.AddAuthStateDidChangeListener((auth, user) => FirebaseAuth_AuthState(auth, user)); 
+            FirebaseAuthentication.FirebaseAuth.AddAuthStateDidChangeListener((auth, user) => FirebaseAuth_AuthState(auth, user));
             FirebaseAuthentication.FirebaseAuth.AddIdTokenDidChangeListener((auth, user) => FirebaseAuth_IdToken(auth, user));
         }
 
@@ -34,7 +34,7 @@ namespace OOAdvantech.Authentication.iOS
 
         private void FirebaseAuth_AuthState(Firebase.Auth.Auth auth, User user)
         {
-            if(auth?.CurrentUser!=null)
+            if (auth?.CurrentUser != null)
             {
                 string name = auth?.CurrentUser.DisplayName;
                 System.Diagnostics.Debug.WriteLine(name);
@@ -43,7 +43,7 @@ namespace OOAdvantech.Authentication.iOS
         }
 
 
-    
+
 
         public async Task<string> GetIdToken()
         {
@@ -58,37 +58,37 @@ namespace OOAdvantech.Authentication.iOS
                 return null;
         }
 
-        public bool SignInWith(SignInProvider provider)
+        public async Task<bool> SignInWith(SignInProvider provider)
         {
 #if DeviceDotNet
 
-            provider = SignInProvider.Apple;
+            //provider = SignInProvider.Apple;
 
             if (provider == SignInProvider.Google)
             {
-                Authentication.iOS.FirebaseAuthentication.GoogleSignIn();
+                var result = await FirebaseAuthentication.GoogleSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Google);
 
-                return true;
+                return result;
             }
 
             if (provider == SignInProvider.Facebook)
             {
-                Authentication.iOS.FirebaseAuthentication.FacebookSignIn();
+                var result = await Authentication.iOS.FirebaseAuthentication.FacebookSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Facebook);
 
-                return true;
+                return result;
             }
 
             if (provider == SignInProvider.Apple)
             {
-                Authentication.iOS.FirebaseAuthentication.AppleSignIn();
+                var result = await Authentication.iOS.FirebaseAuthentication.AppleSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Facebook);
 
-                return true;
+                return result;
             }
             return false;
 #else
@@ -97,7 +97,7 @@ namespace OOAdvantech.Authentication.iOS
         }
 
 
-        public Task<string>  EmailSignIn(string email, string password)
+        public Task<string> EmailSignIn(string email, string password)
         {
             //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
             //return device.EmailSignIn(email, password);
@@ -182,7 +182,7 @@ namespace OOAdvantech.Authentication.iOS
             }
         }
 
-        public List<SignInProvider> Providers { get; }=new List<SignInProvider>() { SignInProvider.Apple,SignInProvider.Facebook,SignInProvider.Google,SignInProvider.Twitter};
+        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Apple, SignInProvider.Facebook, SignInProvider.Google, SignInProvider.Twitter };
 
         event AuthStateChangeHandler _AuthStateChange;
 
@@ -235,7 +235,7 @@ namespace OOAdvantech.Authentication.iOS
 
         public string ProviderId => currentUser.ProviderId;
 
-        public IList<string> Providers => currentUser.ProviderData.Select(x=>x.ProviderId).ToList();
+        public IList<string> Providers => currentUser.ProviderData.Select(x => x.ProviderId).ToList();
         public string PhoneNumber => currentUser.PhoneNumber;
 
         public string Uid => currentUser.Uid;

@@ -66,7 +66,11 @@ namespace OOAdvantech.Authentication.iOS
 
 
         static Firebase.Auth.Auth _FirebaseAuth;
-       // private static UIViewController _viewController;
+        public static TaskCompletionSource<bool> GoogleCompletionSource;
+        public static TaskCompletionSource<bool> FacebookCompletionSource;
+        
+
+        // private static UIViewController _viewController;
 
         public static Firebase.Auth.Auth FirebaseAuth
         {
@@ -75,7 +79,7 @@ namespace OOAdvantech.Authentication.iOS
 
                 if (_FirebaseAuth == null)
                 {
-                    
+
                     _FirebaseAuth = Firebase.Auth.Auth.DefaultInstance;
                     if (_FirebaseAuth != null)
                     {
@@ -107,7 +111,7 @@ namespace OOAdvantech.Authentication.iOS
                     else if (user.ProviderData.Where(x => x.ProviderId == "apple.com").Count() > 0)
                         providerId = "apple.com";
 
-                    
+
 
 
                     //Remoting.RestApi.DeviceAuthentication.AuthUser
@@ -137,32 +141,35 @@ namespace OOAdvantech.Authentication.iOS
 
         }
 
-        internal static void FacebookSignIn()
+        internal static Task<bool> FacebookSignIn()
         {
+            FacebookCompletionSource = new TaskCompletionSource<bool>();
             try
             {
                 FacebookLoginService.CurrentFacebookLoginService.SignIn();
+                SignIn.SharedInstance.SignInUser();
+                return FacebookCompletionSource.Task;
             }
             catch (Exception ex)
             {
-
             }
+            return Task.FromResult(false);
             //Xamarin.Facebook.Login.LoginManager.Instance.LogIn(Xamarin.Essentials.Platform.CurrentActivity, new string[] { });
         }
 
-        internal static void AppleSignIn()
+        internal static async Task<bool> AppleSignIn()
         {
             try
             {
                 AppleSignInService appleSignInService = new AppleSignInService();
-                appleSignInService.SignInAsync();
-
-                //FacebookLoginService.CurrentFacebookLoginService.SignIn();
+                var appleAccount= await appleSignInService.SignInAsync();
+                return appleAccount!=null;
+                
             }
             catch (Exception ex)
             {
-
             }
+            return false;
             //Xamarin.Facebook.Login.LoginManager.Instance.LogIn(Xamarin.Essentials.Platform.CurrentActivity, new string[] { });
         }
 
@@ -216,32 +223,29 @@ namespace OOAdvantech.Authentication.iOS
 
         //}
 
-        internal static void GoogleSignIn()
+        internal static System.Threading.Tasks.Task<bool> GoogleSignIn()
         {
+            GoogleCompletionSource = new System.Threading.Tasks.TaskCompletionSource<bool>();
             try
             {
                 var user = SignIn.SharedInstance.CurrentUser;
-                
                 if (UIApplication.SharedApplication != null)
                 {
-                   
-                 
                     SignIn.SharedInstance.SignInUser();
+                    return GoogleCompletionSource.Task;
                 }
-
-                
-                
             }
             catch (Exception ex)
             {
-               
             }
+            return System.Threading.Tasks.Task<bool>.FromResult(false);
+
 
         }
 
         private static void DidSignIn(object value, GoogleUser user, NSError error)
         {
-            
+
         }
 
         internal static void GoogleSignOut()
@@ -316,6 +320,9 @@ namespace OOAdvantech.Authentication.iOS
                             {
                                 var credentials = Firebase.Auth.GoogleAuthProvider.GetCredential(currentUser.Authentication?.IdToken, currentUser.Authentication?.IdToken);
                                 FirebaseAuth.SignInWithCredential(credentials, new Firebase.Auth.AuthDataResultHandler(OnAuthDataResult));
+
+                                if (GoogleCompletionSource != null)
+                                    GoogleCompletionSource.SetResult(true);
                             }
                         }
                     }
@@ -351,7 +358,7 @@ namespace OOAdvantech.Authentication.iOS
 
         internal static void SendPasswordResetEmail(string email)
         {
-            FirebaseAuth.SendPasswordReset(email,null);
+            FirebaseAuth.SendPasswordReset(email, null);
         }
 
         internal static Task<string> EmailSignUp(string email, string password)
@@ -376,7 +383,7 @@ namespace OOAdvantech.Authentication.iOS
             {
                 try
                 {
-                    AuthDataResult authDataResult= await FirebaseAuth.SignInWithPasswordAsync(email, password);
+                    AuthDataResult authDataResult = await FirebaseAuth.SignInWithPasswordAsync(email, password);
                     return null;
                 }
                 catch (Exception err)
@@ -387,11 +394,20 @@ namespace OOAdvantech.Authentication.iOS
 
         }
 
+        internal static void FacebookSignInCompletted(bool signedIn)
+        {
+            if (FacebookCompletionSource != null)
+                FacebookCompletionSource.SetResult(signedIn);
+
+            FacebookCompletionSource = null;
+
+
+        }
     }
 
-  
-  
- 
+
+
+
 
 
 }

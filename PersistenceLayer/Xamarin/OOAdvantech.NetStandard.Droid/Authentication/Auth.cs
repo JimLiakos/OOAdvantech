@@ -48,26 +48,26 @@ namespace OOAdvantech.Authentication.Droid
                 return null;
         }
 
-        public bool SignInWith(SignInProvider provider)
+        public async System.Threading.Tasks.Task<bool> SignInWith(SignInProvider provider)
         {
 #if DeviceDotNet
             if (provider == SignInProvider.Google)
             {
-                Authentication.Droid.FirebaseAuthentication.GoogleSignIn();
+               var result=await FirebaseAuthentication.GoogleSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Google);
 
-                return true;
+                return result;
             }
 
             if (provider == SignInProvider.Facebook)
             {
-                
-                Authentication.Droid.FirebaseAuthentication.FacebookSignIn();
+
+                var result =await FirebaseAuthentication.FacebookSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Facebook);
 
-                return true;
+                return result;
             }
             return false;
 #else

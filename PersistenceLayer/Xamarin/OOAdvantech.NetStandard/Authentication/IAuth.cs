@@ -33,7 +33,7 @@ namespace OOAdvantech.Authentication
 
         Task<string> GetIdToken();
 
-        bool SignInWith(SignInProvider provider);
+        Task<bool> SignInWith(SignInProvider provider);
 
         Task<string> EmailSignIn(string email, string password);
 
