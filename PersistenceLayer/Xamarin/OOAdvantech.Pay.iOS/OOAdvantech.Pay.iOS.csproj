@@ -40,13 +40,28 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="PayService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.2.0.564</Version>
+    </PackageReference>
+    <PackageReference Include="Naxam.BraintreeApplePay.iOS">
+      <Version>4.37.0</Version>
+    </PackageReference>
     <PackageReference Include="Naxam.BraintreeCard.iOS">
       <Version>4.37.0</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>5.0.0.2196</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OOAdvantech.Pay\OOAdvantech.Pay.csproj">
+      <Project>{05a433ef-4f89-407a-a257-181557bf4c84}</Project>
+      <Name>OOAdvantech.Pay</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

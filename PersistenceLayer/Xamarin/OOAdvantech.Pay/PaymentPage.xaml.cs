@@ -15,6 +15,7 @@ namespace OOAdvantech.Pay
         public PaymentPage()
         {
             InitializeComponent();
+            this.BindingContext = new PaymentPageViewModel();
         }
     }
 }

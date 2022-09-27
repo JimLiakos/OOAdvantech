@@ -18,6 +18,7 @@ using Com.Braintreepayments.Api.Interfaces;
 using Com.Braintreepayments.Api.Models;
 //using Plugin.CurrentActivity;
 using Xamarin.Forms;
+using Android.Gms.Wallet;
 
 [assembly: Dependency(typeof(OOAdvantech.Pay.Droid.PayService))]
 
@@ -140,6 +141,45 @@ namespace OOAdvantech.Pay.Droid
             }
             return await initializeTcs.Task;
         }
+
+ 
+        
+
+   
+
+
+
+
+   
+
+      
+        public async Task<string> TokenizePlatform(double totalPrice, string merchantId)
+        {
+            payTcs = new TaskCompletionSource<string>();
+            if (isReady)
+            {
+                GooglePaymentRequest googlePaymentRequest = new GooglePaymentRequest();
+
+                googlePaymentRequest.InvokeTransactionInfo(TransactionInfo.NewBuilder()
+                                                           .SetTotalPrice($"{totalPrice}")
+                .SetTotalPriceStatus(WalletConstants.TotalPriceStatusFinal)
+                .SetCurrencyCode("USD")
+                .Build());
+
+                mBraintreeFragment.AddListener(this);
+                GooglePayment.RequestPayment(mBraintreeFragment, googlePaymentRequest);
+            }
+            else
+            {
+                OnTokenizationError?.Invoke(this, "Platform is not ready to accept payments");
+                payTcs.TrySetException(new System.Exception("Platform is not ready to accept payments"));
+
+            }
+
+            return await payTcs.Task;
+        }
+
+     
 
     }
 }

@@ -93,6 +93,7 @@ namespace OOAdvantech.Authentication.iOS
         }
         static async void IdTokenDidChangeListener(Firebase.Auth.Auth auth, Firebase.Auth.User user)
         {
+            
 
         }
         static async void AuthStateDidChangeListener(Firebase.Auth.Auth auth, Firebase.Auth.User user)
@@ -102,6 +103,7 @@ namespace OOAdvantech.Authentication.iOS
                 if (user != null)
                 {
                     string authToken = await user.GetIdTokenAsync(false);
+                    
 
                     string providerId = "email";
                     if (user.ProviderData.Where(x => x.ProviderId == "facebook.com").Count() > 0)
@@ -147,7 +149,7 @@ namespace OOAdvantech.Authentication.iOS
             try
             {
                 FacebookLoginService.CurrentFacebookLoginService.SignIn();
-                SignIn.SharedInstance.SignInUser();
+                //SignIn.SharedInstance.SignInUser();
                 return FacebookCompletionSource.Task;
             }
             catch (Exception ex)

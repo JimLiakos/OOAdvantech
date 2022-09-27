@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,21 +12,31 @@ namespace OOAdvantech.Pay
     public class PaymentPageViewModel
     {
         public ICommand PayCommand { get; set; }
+        public ICommand OnPaymentOptionSelected { get; set; }
+        public PaymentOptionEnum PaymentOptionEnum { get; set; }
+
         public CardInfo CardInfo { get; set; } = new CardInfo();
         IPayService _payService;
 
-        string paymentClientToken = "<Payment token returned by the API HERE>";
+        string paymentClientToken = "<<Add payment client token here>>";
+        const string MerchantId = "<<Add merchant ID here>>";
+        const double AmountToPay = 200;
 
         public PaymentPageViewModel()
         {
             _payService = Xamarin.Forms.DependencyService.Get<IPayService>();
             PayCommand = new Command(async () => await CreatePayment());
+            OnPaymentOptionSelected = new Command<PaymentOptionEnum>((data) => {
+                PaymentOptionEnum = data;
+
+                if (PaymentOptionEnum != PaymentOptionEnum.CreditCard)
+                    PayCommand.Execute(null);
+            });
             GetPaymentConfig();
         }
 
         async Task GetPaymentConfig()
         {
-
             await _payService.InitializeAsync(paymentClientToken);
 
         }
@@ -40,8 +51,18 @@ namespace OOAdvantech.Pay
                 {
                     _payService.OnTokenizationSuccessful += OnTokenizationSuccessful;
                     _payService.OnTokenizationError += OnTokenizationError;
-                    await _payService.TokenizeCard(CardInfo.CardNumber.Replace(" ", string.Empty), CardInfo.Expiry.Substring(0, 2), $"{DateTime.Now.ToString("yyyy").Substring(0, 2)}{CardInfo.Expiry.Substring(3, 2)}", CardInfo.Cvv);
 
+                    switch (PaymentOptionEnum)
+                    {
+                        case PaymentOptionEnum.Platform:
+                            await _payService.TokenizePlatform(AmountToPay, MerchantId);
+                            break;
+                        case PaymentOptionEnum.CreditCard:
+                            await _payService.TokenizeCard(CardInfo.CardNumber.Replace(" ", string.Empty), CardInfo.Expiry.Substring(0, 2), $"{DateTime.Now.ToString("yyyy").Substring(0, 2)}{CardInfo.Expiry.Substring(3, 2)}", CardInfo.Cvv);
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -76,8 +97,17 @@ namespace OOAdvantech.Pay
             System.Diagnostics.Debug.WriteLine(e);
             UserDialogs.Instance.HideLoading();
             await Application.Current.MainPage.DisplayAlert("Error", "Unable to process payment", "Ok");
-
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+
     }
+   
+        public enum PaymentOptionEnum
+        {
+            CreditCard, Platform, PayPal
+        }
+    
 }
