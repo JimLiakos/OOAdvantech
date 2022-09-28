@@ -20,12 +20,12 @@ namespace OOAdvantech.Pay
         IPayService _payService;
 
         string paymentClientToken = "<<Add payment client token here>>";
-        const string MerchantId = "<<Add merchant ID here>>";
+        string MerchantId = "<<Add merchant ID here>>";
         const double AmountToPay = 200;
 
         public PaymentPageViewModel()
         {
-            PaymentOptionEnum = PaymentOptionEnum.CreditCard;
+            //PaymentOptionEnum = PaymentOptionEnum.CreditCard;
             _payService = Xamarin.Forms.DependencyService.Get<IPayService>();
             PayCommand = new Command(async () => await CreatePayment());
             OnPaymentOptionSelected = new Command<PaymentOptionEnum>((data) =>
@@ -44,12 +44,14 @@ namespace OOAdvantech.Pay
             using (var httpClient = new HttpClient())
             {
 
-                Uri uri = new Uri("http://192.168.2.8:8090/api/Payment/BraintreeClientToken");
+                //Uri uri = new Uri("http://192.168.2.8:8090/api/Payment/BraintreeClientToken");
+                Uri uri = new Uri("http://10.0.0.13:8090/api/Payment/BraintreeClientToken");
                 //await getUserData();
                 System.Diagnostics.Debug.WriteLine("Uri = " + uri.AbsoluteUri);
 
                 var response = await httpClient.GetStringAsync(uri);
                 paymentClientToken = OOAdvantech.Json.JsonConvert.DeserializeObject<string>(response);
+                MerchantId = "nyqdtchc77jt6z52";
 
 
                 await _payService.InitializeAsync(paymentClientToken);
