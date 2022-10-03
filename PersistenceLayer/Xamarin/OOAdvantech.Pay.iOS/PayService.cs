@@ -31,7 +31,10 @@ namespace OOAdvantech.Pay.iOS
                 return isReady;
             }
         }
+        public static void Init()
+        {
 
+        }
         public async Task<bool> InitializeAsync(string clientToken)
         {
             var initializeTcs = new TaskCompletionSource<bool>();
