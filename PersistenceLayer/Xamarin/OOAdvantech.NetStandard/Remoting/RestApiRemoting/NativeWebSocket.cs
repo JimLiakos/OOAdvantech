@@ -42,7 +42,7 @@ namespace WebSocket4Net
             //Task.Run(async () =>
             //{
             client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cts.Token).Wait();
-            
+
 
             //});
 
@@ -54,7 +54,7 @@ namespace WebSocket4Net
             Task openTask = null;
             lock (this)
             {
-                if (OpenTask != null&&(OpenTask.Status == TaskStatus.Running || OpenTask.Status == TaskStatus.WaitingForActivation))
+                if (OpenTask != null && (OpenTask.Status == TaskStatus.Running || OpenTask.Status == TaskStatus.WaitingForActivation))
                     openTask = OpenTask;
                 else OpenTask = null;
 
@@ -67,7 +67,7 @@ namespace WebSocket4Net
 #if __IOS__
             await client.ConnectAsync(new Uri("ws://localhost:5000"), cts.Token);
 #else
-                            
+
                             await client.ConnectAsync(new Uri(Uri), cts.Token);
                             if (client.State == WebSocketState.Open)
                                 Opened?.Invoke(this, EventArgs.Empty);
@@ -83,6 +83,8 @@ namespace WebSocket4Net
                                     WebSocketReceiveResult result;
                                     var message = new ArraySegment<byte>(new byte[4096]);
                                     System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
+
+                                    var previousState = client.State;
                                     do
                                     {
 
@@ -93,6 +95,9 @@ namespace WebSocket4Net
                                         catch (Exception error)
                                         {
                                             this.Error?.Invoke(this, new ErrorEventArgs(error));
+
+                                            if (previousState == WebSocketState.Open && client.State != WebSocketState.Open)
+                                                this.Closed?.Invoke(this, EventArgs.Empty);
                                             throw;
                                         }
                                         //result = taskResult.Result;
@@ -103,7 +108,7 @@ namespace WebSocket4Net
                                             this.Closed?.Invoke(this, EventArgs.Empty);
                                             return;
                                         }
-                                        if(result.CloseStatus!=null)
+                                        if (result.CloseStatus != null)
                                         {
 
                                         }
@@ -144,7 +149,7 @@ namespace WebSocket4Net
                     OpenTask = openTask;
                 else OpenTask = null;
             }
-            
+
         }
 
         public WebSocketState State { get => client.State; }
