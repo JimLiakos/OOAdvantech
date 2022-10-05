@@ -50,7 +50,12 @@ namespace OOAdvantech.Web
         public string Uri
         {
             get { return (string)GetValue(UriProperty); }
-            set { SetValue(UriProperty, value); }
+            set
+            {
+                SetValue(UriProperty, value);
+                if (NativeWebBrowser != null)
+                    NativeWebBrowser.Navigate(Uri);
+            }
         }
 
 
@@ -89,9 +94,9 @@ namespace OOAdvantech.Web
         Task<string> InvockeJSMethod(string methodName, object[] args);
 
         void GoBack();
+        void Navigate(string url);
 
-        
-
+        string Url { get; }
     }
 
     /// <MetaDataID>{0d3b1cb2-e19e-4ce3-9f46-8660cc56ecf9}</MetaDataID>

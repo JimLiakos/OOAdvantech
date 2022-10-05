@@ -264,7 +264,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         public static T GetPersistentObject<T>(string serverUrl, string persistentUri) where T : class
         {
-            return GetPersistentObject(serverUrl, persistentUri) as T;
+            return RemotingServices.CastTransparentProxy<T>(GetPersistentObject(serverUrl, persistentUri));
         }
         public static object GetPersistentObject(string persistentUri)
         {

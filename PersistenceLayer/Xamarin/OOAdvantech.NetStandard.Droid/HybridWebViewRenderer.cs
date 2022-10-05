@@ -290,6 +290,23 @@ namespace OOAdvantech.Droid
         {
             throw new NotImplementedException();
         }
+
+        public void Navigate(string url)
+        {
+            if (Control != null && Control.Url != url)
+                Control.LoadUrl(url);
+        }
+
+        public string Url
+        {
+            get
+            {
+                if (Control != null)
+                    return Control.Url;
+                else
+                    return null;
+            }
+        }
     }
 
 
