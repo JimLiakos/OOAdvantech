@@ -674,8 +674,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                             try
                             {
 
+                                if(tableBatchOperation.Count>0)
+                                    transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
+                                else
+                                {
 
-                                transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
+                                }
                             }
                             catch (Azure.Data.Tables.TableTransactionFailedException tableTransactionError)
                             {
