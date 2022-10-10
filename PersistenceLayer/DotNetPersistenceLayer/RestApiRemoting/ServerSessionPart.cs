@@ -211,6 +211,7 @@ namespace OOAdvantech.Remoting.RestApi
                             Channel.ProcessRequest(requestData);
                         else
                         {
+                            requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
                             var task = Channel.AsyncProcessRequest(requestData);
                             if (task == null)
                             {

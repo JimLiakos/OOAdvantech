@@ -50,7 +50,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
         /// <exclude>Excluded</exclude>
-        TimeSpan _OpenTimeout = TimeSpan.FromMinutes(2);
+        TimeSpan _OpenTimeout = TimeSpan.FromMinutes(1);
 
         /// <MetaDataID>{a67b6cd5-034a-4f03-a59b-0543f26dd168}</MetaDataID>
         public TimeSpan OpenTimeout
@@ -97,7 +97,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
         /// <MetaDataID>{d8c92fbc-0f30-4f2a-98b6-3fef424e2c02}</MetaDataID>
-        TimeSpan _SendTimeout = TimeSpan.FromMinutes(2);
+        TimeSpan _SendTimeout = TimeSpan.FromMinutes(1);
         /// <MetaDataID>{a8fe77c6-9a57-4a2e-b045-cab6deccd9fd}</MetaDataID>
         public TimeSpan SendTimeout
         {

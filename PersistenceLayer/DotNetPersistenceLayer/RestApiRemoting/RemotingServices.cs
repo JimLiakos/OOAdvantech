@@ -620,7 +620,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
 
                 RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity };
-
+                request.SendTimeout = binding.SendTimeout.TotalMilliseconds;
                 var task = webSocket.SendRequestAsync(request);
                 var state = webSocket.State;
 

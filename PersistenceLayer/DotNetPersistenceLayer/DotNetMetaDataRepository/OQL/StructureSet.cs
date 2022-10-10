@@ -491,7 +491,7 @@ using System;
 
             MainDataReader.Clear();
             mOQLStatement = new ObjectsContextQuery(parameters);
-            lock (DotNetMetaDataRepository.Type.LoadDotnetMetadataLock)
+            //lock (DotNetMetaDataRepository.Type.LoadDotnetMetadataLock)
             {
                 (mOQLStatement as ObjectsContextQuery).Build(Query, SourceStorageSession as PersistenceLayer.ObjectStorage);
             }

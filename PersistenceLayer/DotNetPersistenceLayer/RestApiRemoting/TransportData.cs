@@ -183,6 +183,9 @@ namespace OOAdvantech.Remoting.RestApi
         [DataMember]
         public string details { get; set; }
 
+        [DataMember]
+        public double SendTimeout { get; set; }
+
 
         /// <MetaDataID>{e106b000-5aa2-4618-999d-d64d47656cb3}</MetaDataID>
         [DataMember]

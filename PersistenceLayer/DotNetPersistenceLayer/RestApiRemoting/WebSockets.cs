@@ -612,6 +612,10 @@ namespace OOAdvantech.Remoting.RestApi
                 taskCompletionSource = new TaskCompletionSource<ResponseData>();
                 lock (RequestTasks)
                 {
+                    if(request.RequestType==RequestType.Disconnect&& RequestTasks.Count>0)
+                    {
+
+                    }
                     RequestTasks[request.CallContextID] = taskCompletionSource;
                 }
             }
@@ -741,6 +745,9 @@ namespace OOAdvantech.Remoting.RestApi
                 _State = WebSocketState.Closing;
                 Task.Run(() =>
                 {
+
+                    while (PendingRequest > 0)
+                        System.Threading.Thread.Sleep(1000);
                     NativeWebSocket.Close();
                 });
                 return closeTaskSrc.Task;
