@@ -21,6 +21,10 @@ namespace OOAdvantech.Remoting
 
         static object SessionsLock = new object();
 
+        /// <summary>
+        /// Sessions task are a dictionary with task where the main role is to establish 
+        /// a communication session between client process and server process
+        /// </summary>
         static System.Collections.Generic.Dictionary<string, Task<ClientSessionPart>> SessionsTasks = new System.Collections.Generic.Dictionary<string, Task<ClientSessionPart>>();
 
 
@@ -391,65 +395,66 @@ namespace OOAdvantech.Remoting
             ClientSessionPart clientSessionPart = null;
 
             var sessions = GetSessions();
+
+
+            if (!sessions.TryGetValue(channelUri, out clientSessionPart))
             {
-
-                if (!sessions.TryGetValue(channelUri, out clientSessionPart))
+                if (!create)
+                    return null;
+                lock (SessionsTasks)
                 {
-                    if (!create)
-                        return null;
-                    lock (SessionsTasks)
+                    if (!SessionsTasks.TryGetValue(channelUri, out task) || task.Status == TaskStatus.Faulted)
                     {
-                        if (!SessionsTasks.TryGetValue(channelUri, out task))
+                        task = Task.Factory.StartNew<ClientSessionPart>(() =>
                         {
-                            task = Task.Factory.StartNew<ClientSessionPart>(() =>
+                            //double check active session for thread switch 
+                            sessions = GetSessions();
+                            if (sessions.TryGetValue(channelUri, out clientSessionPart))
+                                return clientSessionPart;
+
+                            try
                             {
-                                try
-                                {
-                                    var serverSessionPartInfo = remotingServices.GetServerSession(channelUri, Remoting.RemotingServices.ProcessIdentity);
-                                    var serverSessionPart = serverSessionPartInfo.ServerSessionPart;
-                                    var proxyChannelUri = OOAdvantech.Remoting.RemotingServices.GetChannelUri(serverSessionPart);
-                                    var serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
-                                    var clientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
-                                    bool bidirectionalChannel = false;
-                                    if (serverSessionPartInfo.BidirectionalChannel.HasValue)
-                                        bidirectionalChannel = serverSessionPartInfo.BidirectionalChannel.Value;
+                                var serverSessionPartInfo = remotingServices.GetServerSession(channelUri, Remoting.RemotingServices.ProcessIdentity);
+                                var serverSessionPart = serverSessionPartInfo.ServerSessionPart;
+                                var proxyChannelUri = OOAdvantech.Remoting.RemotingServices.GetChannelUri(serverSessionPart);
+                                var serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
+                                var clientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
+                                bool bidirectionalChannel = false;
+                                if (serverSessionPartInfo.BidirectionalChannel.HasValue)
+                                    bidirectionalChannel = serverSessionPartInfo.BidirectionalChannel.Value;
 
-                                    //clientSessionPart = new ClientSessionPart(channelUri, clientProcessIdentity, serverProcessIdentity, serverSessionPart, remotingServices);
-                                    clientSessionPart = remotingServices.CreateClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo);
-                                    if (clientSessionPart == null)
-                                    {
-                                        System.Diagnostics.Debug.Write("clientSessionPart==null");
-                                    }
+                                clientSessionPart = remotingServices.CreateClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo);
+                                if (clientSessionPart == null)
+                                    System.Diagnostics.Debug.Write("clientSessionPart==null");
+
+                                lock (SessionsLock)
+                                    Sessions[channelUri] = clientSessionPart;
+
+                                if (!string.IsNullOrEmpty(proxyChannelUri) && channelUri != proxyChannelUri)
+                                {
                                     lock (SessionsLock)
-                                        Sessions[channelUri] = clientSessionPart;
-
-                                    if (!string.IsNullOrEmpty(proxyChannelUri) && channelUri != proxyChannelUri)
-                                    {
-                                        lock (SessionsLock)
-                                            Sessions[proxyChannelUri] = clientSessionPart;
-                                    }
-                                    return clientSessionPart;
+                                        Sessions[proxyChannelUri] = clientSessionPart;
                                 }
-                                catch (Exception error)
-                                {
+                                return clientSessionPart;
+                            }
+                            catch (Exception error)
+                            {
 
-                                    throw;
-                                }
-                            });
+                                throw;
+                            }
+                        });
 
-                            SessionsTasks[channelUri] = task;
-                        }
+                        SessionsTasks[channelUri] = task;
                     }
-
                 }
+
             }
+
             if (task != null)
             {
 
                 try
                 {
-
-
                     if (!task.Wait(System.TimeSpan.FromSeconds(10)))
                         if (!task.Wait(System.TimeSpan.FromMinutes(2.5)))
                         {
@@ -459,6 +464,14 @@ namespace OOAdvantech.Remoting
                         }
 
                     clientSessionPart = task.Result;
+                }
+                catch (AggregateException error)
+                {
+                    throw error.InnerException;
+                }
+                catch (Exception error)
+                {
+                    throw error;
                 }
                 finally
                 {

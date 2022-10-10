@@ -6370,6 +6370,12 @@
             The job of renewal manager is make massive renew. This means one inter process call for all remote objects per channel.  The time interval between two massive renew is the half time of lesser time from the times RenewOnCallTime CurrentLeaseTime InitialLeaseTime.
             </summary>
         </member>
+        <member name="F:OOAdvantech.Remoting.RenewalManager.SessionsTasks">
+            <summary>
+            Sessions task are a dictionary with task where the main role is to establish 
+            a communication session between client process and server process
+            </summary>
+        </member>
         <member name="F:OOAdvantech.Remoting.RenewalManager.timer">
             <MetaDataID>{C600BEFA-66D4-4DE7-86F4-913156CD4EAC}</MetaDataID>
         </member>
