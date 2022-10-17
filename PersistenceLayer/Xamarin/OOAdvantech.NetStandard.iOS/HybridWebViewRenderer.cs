@@ -29,6 +29,18 @@ namespace OOAdvantech.iOS
         const string JavaScriptFunction = "function invokeCSharpAction(data){window.webkit.messageHandlers.invokeAction.postMessage(data);}";
         WKUserContentController userController;
         HybridWebView HybridWebView;
+
+        public string Url
+        {
+            get
+            {
+                if (Control != null)
+                    return Control.Url.ToString();
+                else
+                    return null;
+            }
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
         {
             base.OnElementChanged(e);
@@ -337,7 +349,24 @@ namespace OOAdvantech.iOS
 
         public ResponseData SendRequest(RequestData requestData)
         {
+
             throw new NotImplementedException();
+
+            
+        }
+
+        public void Navigate(string url)
+        {
+
+
+
+            var ns_url = new NSUrl(url);
+            if (Control != null && Control.Url != ns_url)
+            {
+                var request = new NSUrlRequest(ns_url);
+                Control.LoadRequest(request);
+            }
+
         }
     }
 
