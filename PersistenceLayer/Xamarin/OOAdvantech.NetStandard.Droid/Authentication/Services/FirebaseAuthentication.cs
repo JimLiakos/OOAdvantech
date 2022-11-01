@@ -89,7 +89,16 @@ namespace OOAdvantech.Authentication.Droid
                 try
                 {
                     await FirebaseAuth.CreateUserWithEmailAndPassword(email, password).AsAsync();
+                    await FirebaseAuth.SendSignInLinkToEmail()
+
+
                     return null;
+                }
+                catch (Firebase.Auth.FirebaseAuthInvalidCredentialsException err)
+                {
+                    var errorCode = err.ErrorCode;
+                    //"ERROR_WRONG_PASSWORD"
+                    return err.Message;
                 }
                 catch (Exception err)
                 {
@@ -107,6 +116,20 @@ namespace OOAdvantech.Authentication.Droid
                 {
                     await FirebaseAuth.SignInWithEmailAndPassword(email, password).AsAsync();
                     return null;
+                }
+                catch (Firebase.Auth.FirebaseAuthInvalidUserException err)
+                {
+                    var errorCode = err.ErrorCode;
+                    //"ERROR_USER_NOT_FOUND"
+                    return err.Message;
+                }
+                catch (Firebase.Auth.FirebaseAuthInvalidCredentialsException err)
+                {
+
+                    var errorCode = err.ErrorCode;
+                    //"ERROR_WRONG_PASSWORD"
+
+                    return err.Message;
                 }
                 catch (Exception err)
                 {

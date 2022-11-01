@@ -205,38 +205,49 @@ namespace OOAdvantech.Remoting.RestApi
                 requestData.details = json;
                 Task.Run(async () =>
                 {
-                    try
+                    bool retry = false;
+                    do
                     {
-                        if (invokeType == InvokeType.Sync)
-                            Channel.ProcessRequest(requestData);
-                        else
+                        try
                         {
-                            requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
-                            var task = Channel.AsyncProcessRequest(requestData);
-                            if (task == null)
+                            if (invokeType == InvokeType.Sync)
+                                Channel.ProcessRequest(requestData);
+                            else
                             {
+                                requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
+                                var task = Channel.AsyncProcessRequest(requestData);
+                                if (task == null)
+                                {
 
+                                }
+                                await task;
                             }
-                            await task;
-                        }
 
-                    }
-                    catch (Exception error)
-                    {
-                       
-                        System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
+                        }
+                        catch (Exception error)
+                        {
+
+                            if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
+                                retry = true;
+                            System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
 
 #if !DeviceDotNet
-                        System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
-                        myLog.Source = "Rest Api channel";
-                        if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
-                            myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
+                            
+                            if (!System.Diagnostics.EventLog.SourceExists("Rest Api channel", "."))
+                                System.Diagnostics.EventLog.CreateEventSource("Rest Api channel", "OOAdvance");
 
-                        myLog.WriteEntry("RestApi AsyncProcessRequest failed :"+Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
+                            System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
+                            myLog.Source = "Rest Api channel";
+
+                            if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
+                                myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
+
+                            myLog.WriteEntry("RestApi AsyncProcessRequest failed :" + Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
 #endif
 
 
-                    }
+                        } 
+                    } while (retry);
                 });
             }
             else

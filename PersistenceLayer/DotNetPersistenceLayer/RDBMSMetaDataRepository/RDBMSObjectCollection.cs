@@ -933,6 +933,13 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             {
 
             }
+
+            if (Type != null && Type.FullName == "FinanceFacade.Payment")
+            {
+
+            }
+
+
             using (OOAdvantech.Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
             {
                 bool ClassHierarchyMembers = false;

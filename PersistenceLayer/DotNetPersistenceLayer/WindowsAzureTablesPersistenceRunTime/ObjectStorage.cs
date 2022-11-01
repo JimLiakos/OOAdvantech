@@ -203,7 +203,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             //}
             if (!TableExist(cloudTableName))
             {
-                azureTable_a.CreateIfNotExistsAsync();
+                azureTable_a.CreateIfNotExists();
                 table.DataBaseTableName = azureTable_a.Name;
             }
 
@@ -362,7 +362,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 //    azureTable.CreateIfNotExists();
 
                 if (!TableExist(cloudTableName))
-                    azureTable_a.CreateIfNotExistsAsync();
+                    azureTable_a.CreateIfNotExists();
 
                 string partitionKey = null;
 
@@ -526,7 +526,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 Azure.Data.Tables.TableClient azureTable_a = TablesAccount.GetTableClient(cloudTableName);
                 if (!TableExist(cloudTableName))
-                    azureTable_a.CreateIfNotExistsAsync();
+                    azureTable_a.CreateIfNotExists();
 
                 string partitionKey = null;
 
