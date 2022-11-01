@@ -619,6 +619,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 else
                 {
                     azureTable_a.Delete();
+
+                    do
+                    {
+                        System.Threading.Thread.Sleep(100);
+                        queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", cloudTableName));
+                        azureTable_exist = queryTableResults.Count() > 0;
+
+                    } while (azureTable_exist);
                     azureTable_a.CreateIfNotExists();
                 }
 

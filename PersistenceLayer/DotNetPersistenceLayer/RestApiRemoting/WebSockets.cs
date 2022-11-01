@@ -139,7 +139,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{4ae3e486-c4e1-4aaf-9016-4e09ad92061c}</MetaDataID>
         public WebSocketClient(string uri, Binding binding)
         {
-
+            
             Binding = binding;
             Uri = uri;
 #if PORTABLE
