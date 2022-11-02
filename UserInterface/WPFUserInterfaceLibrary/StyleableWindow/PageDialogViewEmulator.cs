@@ -119,7 +119,7 @@ namespace StyleableWindow
             {
                 if (_SelectedCulturePresentation == null)
                 {
-                    _SelectedCulturePresentation = Cultures.Where(x => x.CultureInfo.Name == OOAdvantech.CultureContext.CurrentCultureInfo.Name).FirstOrDefault();
+                    _SelectedCulturePresentation = Cultures.Where(x => CultureContext.GetNeutralCultureInfo(x.CultureInfo.Name).Name == CultureContext.GetNeutralCultureInfo(OOAdvantech.CultureContext.CurrentCultureInfo.Name).Name).FirstOrDefault();
                     if (_SelectedCulturePresentation == null)
                         _SelectedCulturePresentation = Cultures.Where(x => x.CultureInfo.Name == OOAdvantech.CultureContext.CurrentCultureInfo.Parent.Name).FirstOrDefault();
 
