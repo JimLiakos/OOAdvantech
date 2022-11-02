@@ -130,6 +130,47 @@ namespace OOAdvantech.MetaDataRepository
             //return false;
         }
 
+        public static bool IsHttpVisible(this Classifier classifier, AssociationEnd associationEnd)
+        {
+
+            bool classifierIsHttpVisible = false;
+            var type = classifier.GetExtensionMetaObject<System.Type>();
+            var classifierAttributes = type.GetMetaData().GetCustomAttributes(typeof(HttpVisible), false);
+            classifierIsHttpVisible = classifierAttributes.Length > 0;
+
+            if (associationEnd == null)
+                return false;
+
+
+            System.Reflection.MemberInfo memberInfo = associationEnd.GetExtensionMetaObject<System.Reflection.FieldInfo>();
+            if (memberInfo == null)
+                memberInfo = associationEnd.GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+
+            if (memberInfo == null)
+                return false;
+            if (classifierIsHttpVisible)
+            {
+                var memberAttributes = memberInfo.GetCustomAttributes(typeof(HttpInVisible), false);
+                if (memberAttributes.Length > 0)
+                    return false;
+                else
+                    return true;
+            }
+            else
+            {
+                var memberAttributes = memberInfo.GetCustomAttributes(typeof(HttpVisible), false);
+                if (memberAttributes.Length > 0)
+                    return true;
+                else
+                    return false;
+            }
+
+
+
+
+
+        }
+
         /// <MetaDataID>{cfb07d94-0973-465c-98e8-e014b2f4e081}</MetaDataID>
         public static bool IsHttpCachedMember(this Classifier classifier, AssociationEnd associationEnd)
         {
@@ -293,10 +334,10 @@ namespace OOAdvantech.MetaDataRepository
 
             AssemblyQualifiedName = type.AssemblyQualifiedName;
 
-        
+
             _Name = type.Name;
             int i = 0;
-            if(_Name== "IServicesContextPresentation")
+            if (_Name == "IServicesContextPresentation")
             {
                 i = _Name.Length;
             }
@@ -312,6 +353,11 @@ namespace OOAdvantech.MetaDataRepository
                            classifier.IsHttpVisible(method)
                            select method.Name).Distinct().ToList();
 
+            _Properties.AddRange( (from method in classifier.GetAssociateRoles(false).OfType<AssociationEnd>()
+                           where method.Visibility == VisibilityKind.AccessPublic &&
+                           classifier.IsHttpVisible(method)
+                           select method.Name).Distinct().ToList());
+
             _Events = (from _event in classifier.GetExtensionMetaObject<Type>().GetMetaData().GetEvents()
                        where classifier.IsHttpVisible(_event)
                        select _event.Name).Distinct().ToList();
@@ -320,8 +366,9 @@ namespace OOAdvantech.MetaDataRepository
                                                where classifier.IsHttpVisible(_event) && _event.EventHandlerType == typeof(OOAdvantech.ObjectChangeStateHandle)
                                                select _event.Name).FirstOrDefault();
 
-            ObjectChangeState= (from _event in classifier.GetExtensionMetaObject<Type>().GetMetaData().GetEvents()
-             where _event.EventHandlerType == typeof(OOAdvantech.ObjectChangeStateHandle) select _event).FirstOrDefault();
+            ObjectChangeState = (from _event in classifier.GetExtensionMetaObject<Type>().GetMetaData().GetEvents()
+                                 where _event.EventHandlerType == typeof(OOAdvantech.ObjectChangeStateHandle)
+                                 select _event).FirstOrDefault();
 
             CachingClientSideAttributeProperties = (from attribute in classifier.GetFeatures(false).OfType<Attribute>()
                                                     where attribute.Visibility == VisibilityKind.AccessPublic &&
@@ -363,7 +410,7 @@ namespace OOAdvantech.MetaDataRepository
             else
                 _Interfaces = new List<ProxyType>();
 
-            if(_Interfaces.Where(x=>x.HasCachingClientSideProperties).FirstOrDefault()!=null)
+            if (_Interfaces.Where(x => x.HasCachingClientSideProperties).FirstOrDefault() != null)
                 HasCachingClientSideProperties = true;
 
         }
@@ -380,7 +427,7 @@ namespace OOAdvantech.MetaDataRepository
 
             if (BaseProxyType != null)
                 objectChangeState = BaseProxyType.GetObjectChangeState();
-            
+
             if (objectChangeState != null)
                 return objectChangeState;
 

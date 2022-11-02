@@ -573,6 +573,10 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
             }
+            if (@object is TypeScriptProxy)
+                @object = (@object as TypeScriptProxy).TransparentProxy;
+
+
             return @object;
         }
 

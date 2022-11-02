@@ -70,7 +70,7 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.ChannelUri = ChannelUri;
             requestData.SendTimeout = TimeSpan.FromSeconds(2).TotalMilliseconds;
             var task = WebSocketClient.SendRequestAsync(requestData);
-           
+
             if (!task.Wait(TimeSpan.FromSeconds(2)))
             {
 
@@ -117,7 +117,7 @@ namespace OOAdvantech.Remoting.RestApi
                     foreach (var clientSocket in PendingClientSocketsToClose.ToList())
                     {
                         if (clientSocket.PendingRequest == 0 &&
-                            clientSocket.WebSocketChannels.Where(x => x != this).Count() == 0  &&
+                            clientSocket.WebSocketChannels.Where(x => x != this).Count() == 0 &&
                             clientSocket.State == WebSocketState.Open)
                         {
                             PendingClientSocketsToClose.Remove(clientSocket);
@@ -159,7 +159,7 @@ namespace OOAdvantech.Remoting.RestApi
                     requestData.RequestType = RequestType.LagTest;
                     requestData.ChannelUri = ChannelUri;
                     DateTime dateTime = DateTime.Now;
-                    requestData.SendTimeout =5000;
+                    requestData.SendTimeout = 5000;
                     var task = endPoint.SendRequestAsync(requestData);
                     task.Wait(5000);
                     var timeSpan = DateTime.Now - dateTime;
@@ -177,7 +177,7 @@ namespace OOAdvantech.Remoting.RestApi
                 onLagTest = false;
             }
 
-        } 
+        }
         #endregion
 
 #endif
@@ -375,7 +375,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 }
                                 #endregion
 
-                                
+
 
                                 if (_WebSocketClient.State == WebSocketState.Open)
                                     DropPhysicalConnection(_WebSocketClient);
@@ -429,9 +429,9 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{c246bfd9-e649-43e5-9c9d-15107cfcc9ff}</MetaDataID>
         private void CloseWebSocket(WebSocketClient webSocketClient)
         {
-            
 
-            if (webSocketClient.WebSocketChannels.Where(x=>x!=this).Count() == 0 && webSocketClient.State == WebSocketState.Open)
+
+            if (webSocketClient.WebSocketChannels.Where(x => x != this).Count() == 0 && webSocketClient.State == WebSocketState.Open)
             {
                 if (webSocketClient.PendingRequest > 0)
                 {
@@ -443,11 +443,11 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     webSocketClient.RemoveWebSocketChannel(this);
                     webSocketClient.CloseAsync();
-//#if !DeviceDotNet
-//                    System.Threading.Thread.Sleep(1000);
-//#else
-//                    System.Threading.Tasks.Task.Delay(1000).Wait();
-//#endif
+                    //#if !DeviceDotNet
+                    //                    System.Threading.Thread.Sleep(1000);
+                    //#else
+                    //                    System.Threading.Tasks.Task.Delay(1000).Wait();
+                    //#endif
                 }
             }
             else
@@ -666,6 +666,23 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+
+        bool IOpen
+        {
+            get
+            {
+                return true;
+            }
+        }
+        bool ConnectionIsOpen { get
+            {
+                if (EndPoint == null)
+                    return false;
+                else
+                    return EndPoint.ConnectionIsOpen;
+            }
+            
+        }
         /// <MetaDataID>{cfb7fd00-d3cb-4edb-88c0-70b0cc072829}</MetaDataID>
         public ResponseData ProcessRequest(RequestData requestData)
         {

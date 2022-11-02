@@ -26,6 +26,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{7e411ece-e8fc-40c3-a23c-ba9569516de3}</MetaDataID>
         void DropPhysicalConnection();
 
+        
+
        
     }
 }

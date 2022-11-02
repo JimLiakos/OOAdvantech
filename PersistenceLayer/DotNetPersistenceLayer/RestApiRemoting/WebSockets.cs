@@ -502,6 +502,8 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
             }
         }
+
+        public bool ConnectionIsOpen { get => State == WebSocketState.Open; }
         /// <MetaDataID>{c7d67a57-65e9-45f3-9f6b-adfc3b1c4b2e}</MetaDataID>
         private System.Threading.Tasks.TaskCompletionSource<bool> m_OpenTaskSrc;
         /// <MetaDataID>{c20764b3-b586-4716-a9fa-dc43d94c8eb9}</MetaDataID>
@@ -1174,7 +1176,7 @@ namespace OOAdvantech.Remoting.RestApi
                 return _State;
             }
         }
-
+        public bool ConnectionIsOpen { get=>_State==WebSocketState.Open; }
 
 
 

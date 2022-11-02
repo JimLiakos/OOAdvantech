@@ -203,6 +203,7 @@ namespace OOAdvantech.Remoting.RestApi
                 requestData.ChannelUri = ChannelUri;
 
                 requestData.details = json;
+                var ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
                 Task.Run(async () =>
                 {
                     bool retry = false;

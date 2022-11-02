@@ -23,6 +23,8 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        
+
         public TCPChannel(string channelUri)
         {
             this.channelUri = channelUri;

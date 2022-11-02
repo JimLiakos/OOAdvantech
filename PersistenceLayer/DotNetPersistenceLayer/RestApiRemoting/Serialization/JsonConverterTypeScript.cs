@@ -915,36 +915,66 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         public ObjRef GetObjectRefValue(object _obj)
         {
             OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
+            string uri = null;
             if (_obj is ITransparentProxy)
             {
                 var proxy = (_obj as ITransparentProxy).GetProxy();
-                if (proxy is  Proxy)
+                if (proxy is Proxy)
                 {
-                    if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
+                    if (ServerSessionPart?.ChannelUri == "local-device")
                     {
-                        httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
-                        if (ServerSessionPart != null&& httpProxyType!=null)
-                            ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
-                        var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
+                        _obj = new TypeScriptProxy(_obj);
+                        uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
 
-                        objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
+                        if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
+                        {
+                            httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
+                            if (ServerSessionPart != null && httpProxyType != null)
+                                ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
 
-                        return objectRef;
+                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
+
+                            objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
+
+                            return objectRef;
+                        }
+                        else
+                        {
+                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
+                            return objectRef;
+                        }
+
                     }
                     else
                     {
-                        var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
-                        return objectRef;
+                        if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
+                        {
+                            httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
+                            if (ServerSessionPart != null && httpProxyType != null)
+                                ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
+                            var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
+
+
+
+                            objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
+
+                            return objectRef;
+                        }
+                        else
+                        {
+                            var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
+                            return objectRef;
+                        }
                     }
 
 
                 }
             }
-            string uri = System.Runtime.Remoting.RemotingServices.GetObjectUri(_obj as MarshalByRefObject);
+            uri = System.Runtime.Remoting.RemotingServices.GetObjectUri(_obj as MarshalByRefObject);
 
             if (uri == null)
             {
-   
+
                 var proxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(_obj as MarshalByRefObject) as OOAdvantech.Remoting.RestApi.Proxy;
                 if (proxy != null)
                 {
@@ -962,7 +992,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
             }
-            
+
             Type type = _obj.GetType();
             bool typeAlreadyMarshaled = false;
 
@@ -1189,7 +1219,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 WriteJsonType(writer, serializer, jsonType);
 
-#region Write values in array
+                #region Write values in array
                 JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
                 valueProperty.WritePropertyName(writer);
                 writer.WriteStartArray();
@@ -1199,7 +1229,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     serializer.Serialize(writer, itemValue);
                 }
                 writer.WriteEndArray();
-#endregion
+                #endregion
 
                 writer.WriteEndObject();
             }
@@ -1218,7 +1248,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 WriteJsonType(writer, serializer, jsonType);
 
-#region Write key value pair in array
+                #region Write key value pair in array
                 JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
                 valueProperty.WritePropertyName(writer);
 
@@ -1237,7 +1267,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArray();
-#endregion
+                #endregion
 
                 writer.WriteEndObject();
 
@@ -1336,6 +1366,16 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         public TypeMismatchException(string message, Exception innerException) : base(message, innerException)
         {
 
+        }
+    }
+
+    /// <MetaDataID>{bd100da9-c2b0-4ea1-9d8f-84a0cfdb7036}</MetaDataID>
+    internal class TypeScriptProxy : MarshalByRefObject, IExtMarshalByRefObject
+    {
+        public readonly object TransparentProxy;
+        public TypeScriptProxy(object transparentProxy)
+        {
+            TransparentProxy = transparentProxy;
         }
     }
 

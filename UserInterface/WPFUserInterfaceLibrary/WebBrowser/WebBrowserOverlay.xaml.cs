@@ -247,6 +247,9 @@ namespace GenWebBrowser
                 return _SuppressScriptErrors;
             }
         }
+
+        public bool ConnectionIsOpen => true;
+
         public object InvokeScript(string methodName, params object[] args)
         {
             if (ChromeBrowser != null)
