@@ -1267,6 +1267,7 @@ namespace OOAdvantech.Remoting
     /// <MetaDataID>{63f2e6e8-e8fa-4808-8814-7e8100f81a43}</MetaDataID>
     public interface IProxy
     {
+        /// <MetaDataID>{622d0ebd-8b9d-4a24-b51b-83114da9c724}</MetaDataID>
         string Uri { get; }
         /// <MetaDataID>{7de248c7-74a5-4fd0-8d45-1c98e415a8fd}</MetaDataID>
         EventConsumingResolver EventConsumingResolver { get; set; }

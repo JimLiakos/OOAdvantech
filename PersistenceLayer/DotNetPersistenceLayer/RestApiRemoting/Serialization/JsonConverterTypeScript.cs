@@ -17,7 +17,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     /// <MetaDataID>{8ce00d61-708f-405b-a565-a1769587a929}</MetaDataID>
     public class JsonConverterTypeScript : JsonConverter
     {
+        /// <MetaDataID>{d407cff3-6c38-430d-bc94-772aaf611154}</MetaDataID>
         JsonObjectContract ObjectContruct;
+        /// <MetaDataID>{110d65ec-6749-4bef-837c-6c8746c9d3bc}</MetaDataID>
         JsonArrayContract ArrayContruct;
         //[ThreadStatic]
         //static JsonReader JsonReader;
@@ -27,6 +29,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         //[ThreadStatic]
         //static JsonSerializer JsonSerializer;
 
+        /// <MetaDataID>{23cab944-b794-406a-b62f-965373646c50}</MetaDataID>
         JsonContract Contruct;
 
         ///// <summary>
@@ -40,10 +43,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <summary>
         /// Defines the server session part of communication channel 
         /// </summary>
+        /// <MetaDataID>{50619113-83f3-4f04-be37-10e6dc7cc473}</MetaDataID>
         private ServerSessionPart ServerSessionPart;// = new ServerSessionPart(Guid.NewGuid());
 
+        /// <MetaDataID>{0d6c10cf-3a91-4ef2-be9f-4c9077d254c3}</MetaDataID>
         object ServerSessionPartLock = new object();
 
+        /// <MetaDataID>{ddfbf0ee-c47c-4a37-ad98-5f8cc148516c}</MetaDataID>
         Type[] RootArgsTypes;
 
         /// <summary>
@@ -58,6 +64,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <param name="serverSessionPart">
         /// Defines the server session part of communication channel parameter
         /// </param>
+        /// <MetaDataID>{50d948e0-6274-4e96-b15b-2637248cf1cc}</MetaDataID>
         JsonConverterTypeScript(/*string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart)
         {
             //ChannelUri = channelUri;
@@ -74,6 +81,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             //    return properties;
             //};
         }
+        /// <MetaDataID>{3fd028b1-a31a-474b-ae93-47480c04b3d4}</MetaDataID>
         SerializeSession SerializeSession;
 
         /// <summary>
@@ -97,6 +105,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <param name="rootArgsTypes">
         /// defines the Types root array
         /// </param>
+        /// <MetaDataID>{72dab712-850e-493b-964d-46ed05c00e9b}</MetaDataID>
         public JsonConverterTypeScript(JsonObjectContract contract, Type objectType, /*string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
         {
@@ -134,6 +143,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <param name="rootArgsTypes">
         /// defines the Types root array
         /// </param>
+        /// <MetaDataID>{f68ee033-d1c0-49de-995d-138c71bcc77c}</MetaDataID>
         public JsonConverterTypeScript(JsonArrayContract arrayContruct,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
         {
@@ -165,6 +175,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <param name="rootArgsTypes">
         /// defines the Types root array
         /// </param>
+        /// <MetaDataID>{0b46ca43-605a-4429-9801-6e7d30a37aa9}</MetaDataID>
         public JsonConverterTypeScript(JsonPrimitiveContract jsonPrimitiveContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
         {
@@ -197,6 +208,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <param name="rootArgsTypes">
         /// defines the Types root array
         /// </param>
+        /// <MetaDataID>{2667fa29-7fcf-40b8-a034-74c38e98e3f8}</MetaDataID>
         public JsonConverterTypeScript(JsonDictionaryContract jsonDictionaryContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
              : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
         {
@@ -211,12 +223,16 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         //    this.TypeEx = typeEx;
         //}
 
+        /// <MetaDataID>{77f79c57-88d7-42fd-bf7a-33aa9c581923}</MetaDataID>
         Type ObjectType;
 
+        /// <MetaDataID>{92206a2a-f44c-4f3c-9211-276e1ae2dfcc}</MetaDataID>
         private JsonPrimitiveContract JsonPrimitiveContract;
 
+        /// <MetaDataID>{6dcd7ece-2bf8-436a-8231-5e2de7e14859}</MetaDataID>
         private JsonDictionaryContract DictionaryContract;
 
+        /// <MetaDataID>{7fd580f5-ef40-4053-8386-95aa00db8bc4}</MetaDataID>
         public override bool CanConvert(Type objectType)
         {
             ObjectType = objectType;
@@ -226,6 +242,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         }
 
+        /// <MetaDataID>{c3088a6b-4c27-4abf-bfb4-8838c1cdcd5e}</MetaDataID>
         internal object ObjectCreator(params object[] args)
         {
 
@@ -238,6 +255,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         //static JsonSerializer Serializer;
         //private bool TypeEx;
 
+        /// <MetaDataID>{15415828-2f21-4008-b7b3-b51b5c9dba7a}</MetaDataID>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
 
@@ -525,6 +543,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             return value;
         }
 
+        /// <MetaDataID>{c5ad1a13-ad53-46c0-8dbd-119e573ca91a}</MetaDataID>
         private object GetTrasparentProxy(ObjRef objRef, Type type)
         {
             object value;
@@ -565,6 +584,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             return value;
         }
 
+        /// <MetaDataID>{3ba26fdd-d1e0-4819-be56-337947568321}</MetaDataID>
         private string GetTypeFullName(JsonReader reader, JsonSerializer serializer)
         {
             string propertyName = reader.Value as string;
@@ -601,6 +621,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             //}
         }
 
+        /// <MetaDataID>{b0471beb-64b6-461f-b338-6a5fd63661ba}</MetaDataID>
         private bool IsTypeToken(JsonReader reader)
         {
             string value = reader.Value as string;
@@ -610,6 +631,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             return reader.TokenType == JsonToken.PropertyName && (value == "type_ref" || value == "__type");
         }
 
+        /// <MetaDataID>{c9465b91-32aa-4cac-8912-8de66aa2157d}</MetaDataID>
         private object GetValueFromReference(JsonReader reader, JsonSerializer serializer)
         {
             object value = null;
@@ -651,6 +673,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
         }
 
+        /// <MetaDataID>{1decc7ba-8a93-490c-ab67-e4a14978635a}</MetaDataID>
         private object GetPropertyValue(JsonReader reader, Type memberType, JsonSerializer serializer)
         {
 
@@ -746,10 +769,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             return _value;
         }
 
+        /// <MetaDataID>{fcfc9682-4570-4ea9-bf16-aabce0da0b69}</MetaDataID>
         private static bool CoerceEmptyStringToNull(Type objectType, JsonContract contract, string s)
         {
             return string.IsNullOrEmpty(s) && objectType != null && objectType != typeof(string) && objectType != typeof(object) && contract != null && contract.IsNullable;
         }
+        /// <MetaDataID>{51446941-6931-4268-a507-7f415ebde45f}</MetaDataID>
         private object EnsureType(JsonReader reader, object value, CultureInfo culture, JsonContract contract, Type targetType)
         {
 
@@ -848,6 +873,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         }
 
 
+        /// <MetaDataID>{7af9a7b7-00ac-4846-8caa-a7d90f80bf2a}</MetaDataID>
         public override bool CanRead
         {
             get
@@ -880,6 +906,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
         }
 
+        /// <MetaDataID>{70f8decb-87ee-48b1-bdd9-48514c0a0820}</MetaDataID>
         public override bool CanWrite
         {
             get
@@ -912,6 +939,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         }
 
 
+        /// <MetaDataID>{9f327915-9bc6-4a9f-9bac-96bdf29e6dd2}</MetaDataID>
         public ObjRef GetObjectRefValue(object _obj)
         {
             OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
@@ -1056,6 +1084,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         }
 
+        /// <MetaDataID>{c3cc64fd-449d-47a7-872e-65a06811ff46}</MetaDataID>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             if (value is IMultilingualMember)
@@ -1281,6 +1310,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         }
 
+        /// <MetaDataID>{1c911dd6-a829-4b5b-a5e5-d502f2d01d13}</MetaDataID>
         private static void WriteJsonType(JsonWriter writer, JsonSerializer serializer, JsonType jsonType)
         {
             IReferenceResolver referenceResolver = serializer.ReferenceResolver;
@@ -1301,6 +1331,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
         }
 
+        /// <MetaDataID>{bf599d0f-c643-4211-a7fa-526848e14795}</MetaDataID>
         private bool ShouldSerialize(JsonWriter writer, JsonProperty property, object target)
         {
             if (property.ShouldSerialize == null)
@@ -1317,6 +1348,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
             return shouldSerialize;
         }
+        /// <MetaDataID>{1d9a8c6e-7b59-42ac-a7e8-550079cf851d}</MetaDataID>
         private bool IsSpecified(JsonWriter writer, JsonProperty property, object target)
         {
             if (property.GetIsSpecified == null)
@@ -1359,10 +1391,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     /// <MetaDataID>{b6994935-c6aa-47d4-a796-6b94c309ceed}</MetaDataID>
     class TypeMismatchException : Exception
     {
+        /// <MetaDataID>{65428a89-be9b-41f1-acdf-6b4df6274c3f}</MetaDataID>
         public TypeMismatchException(string message) : base(message)
         {
 
         }
+        /// <MetaDataID>{f470a9c0-fd82-447d-99cc-8b9794be23d8}</MetaDataID>
         public TypeMismatchException(string message, Exception innerException) : base(message, innerException)
         {
 

@@ -417,7 +417,9 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
+        /// <MetaDataID>{7165299d-d854-4e44-82d2-e208e81c0fe2}</MetaDataID>
         System.Reflection.EventInfo ObjectChangeState;
+        /// <MetaDataID>{c14cf403-5ccd-4692-9d58-3ed11e3e3598}</MetaDataID>
         internal System.Reflection.EventInfo GetObjectChangeState()
         {
             if (ObjectChangeState != null)
@@ -538,6 +540,7 @@ namespace OOAdvantech.MetaDataRepository
             }
         }
 
+        /// <MetaDataID>{19138a51-3a18-4a6a-aad0-484022b7d401}</MetaDataID>
         public bool HasCachingClientSideProperties { get; internal set; }
 
         /// <MetaDataID>{3214f3f7-779a-4d2c-ba54-c1578ff71e1a}</MetaDataID>

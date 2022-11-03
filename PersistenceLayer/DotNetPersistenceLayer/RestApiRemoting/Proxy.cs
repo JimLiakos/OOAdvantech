@@ -43,6 +43,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{f98b2269-d219-491b-9276-a8613951733d}</MetaDataID>
         System.Type Type;
 
+        /// <MetaDataID>{00022c8a-af64-441a-8952-430fc0634a87}</MetaDataID>
         System.Type ServerObjectType;
 
         ///// <MetaDataID>{f950e8f9-b5f6-47e3-a4aa-7502a491ec67}</MetaDataID>
@@ -57,6 +58,7 @@ namespace OOAdvantech.Remoting.RestApi
         //}
 
 
+        /// <MetaDataID>{d4a593a6-00d4-41b2-ad64-e0a8322d57cb}</MetaDataID>
         public ObjRef ObjectRef;
 
         /// <MetaDataID>{cbed457e-a960-4e96-9cbe-04def95ff9df}</MetaDataID>
@@ -86,6 +88,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         }
 
+        /// <MetaDataID>{e7c8af5b-e697-4b57-8bfb-c9039c6a7c3b}</MetaDataID>
         public void ReconnectToServerObject(ObjRef objectRef)
         {
             if (ObjectRef.Uri != objectRef.Uri)
@@ -208,6 +211,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        /// <MetaDataID>{747cef73-2182-44f0-bf17-4dff10cd8424}</MetaDataID>
         public string TypeFullName
         {
             get
@@ -236,8 +240,10 @@ namespace OOAdvantech.Remoting.RestApi
 
         }
 
+        /// <MetaDataID>{b7429903-e63c-4a10-8943-8c36b7d25c73}</MetaDataID>
         public EventConsumingResolver EventConsumingResolver { get; set; }
 
+        /// <MetaDataID>{449d5173-3254-49e5-9077-efa18c6db7ee}</MetaDataID>
         string IProxy.Uri => Uri;
 
         //string IProxy.ChannelUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -280,7 +286,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-#region Gets authentication data
+        #region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -301,7 +307,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-#endregion
+        #endregion
 
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
 
@@ -355,6 +361,7 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 #endif
+        /// <MetaDataID>{17ea5e1f-d078-4dad-b2e3-ee1af7f5920a}</MetaDataID>
         private object TryInvokeLocal(Type type, string methodName, object[] args, Type[] argsTypes, out bool localCall)
         {
 
@@ -657,6 +664,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
 
+        /// <MetaDataID>{730ec44e-4050-4a5b-b924-7a95f1cb115c}</MetaDataID>
         internal static object CastRemoteObject(object returnValue, Type type)
         {
 #if DeviceDotNet
@@ -675,6 +683,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 #if !DeviceDotNet
+        /// <MetaDataID>{7daeb6f7-2e82-4df6-9f1b-94c94d1fd0d9}</MetaDataID>
         public System.Runtime.Remoting.Messaging.IMessage TryInvokeLocal(System.Runtime.Remoting.Messaging.IMessage msg, out bool localCall)
         {
             //string HostName=System.Net.Dns.GetHostName();
@@ -1011,6 +1020,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 #endif
 
+        /// <MetaDataID>{2848ceb3-ecf9-4d96-b804-470d4171998a}</MetaDataID>
         System.Collections.Generic.Dictionary<Type, object> TransaprentProxies = new System.Collections.Generic.Dictionary<Type, object>();
 
         public event ProxyRecconectedHandle Reconnected;
@@ -1018,6 +1028,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
+        /// <MetaDataID>{e8224819-2cd1-4055-8daa-a16cbfede6d5}</MetaDataID>
         public void RaiseReconnectEvent()
         {
 
@@ -1031,6 +1042,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 
+        /// <MetaDataID>{003d55d7-d4e4-4a4c-95bd-292272c6bb5c}</MetaDataID>
         internal object GetTransparentProxy(Type type)
         {
 
@@ -1090,6 +1102,7 @@ namespace OOAdvantech.Remoting.RestApi
             return canCastTo;
         }
 
+        /// <MetaDataID>{a8d708b5-4f7d-473a-ae31-b7665c0fa3bf}</MetaDataID>
         public IProxy GetProxy()
         {
             return this;
@@ -1111,6 +1124,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{476fb7cd-4f96-431e-9247-c9d292a9d2d4}</MetaDataID>
     public interface ITransparentProxy
     {
+        /// <MetaDataID>{869a67ea-bf5b-416b-810c-d1b8f5360cf7}</MetaDataID>
         IProxy GetProxy();
 
         event ProxyRecconectedHandle Reconnected;
@@ -1120,20 +1134,24 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{e67bcfdc-ddd5-4d65-8e84-ccf90b354f4d}</MetaDataID>
     public class TransparentProxy : ITransparentProxy
     {
+        /// <MetaDataID>{2bc641e5-fc86-4e9d-8e2e-d630e52c5827}</MetaDataID>
         public IProxy GetProxy()
         {
             return Proxy;
         }
 
+        /// <MetaDataID>{fc132962-481b-42c9-9429-332212dfb22b}</MetaDataID>
         private OOAdvantech.Remoting.RestApi.Proxy Proxy;
 
         public event ProxyRecconectedHandle Reconnected;
 
+        /// <MetaDataID>{d6187cfb-128a-4aeb-89ee-d32978f6a7c6}</MetaDataID>
         public void RaiseReConnectEvent()
         {
             Reconnected?.Invoke(this);
         }
 
+        /// <MetaDataID>{3355515c-4d4d-4e5b-a273-513b59531820}</MetaDataID>
         public TransparentProxy(OOAdvantech.Remoting.RestApi.Proxy proxy)
         {
             this.Proxy = proxy;
@@ -1160,6 +1178,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{b955d0ad-6a9e-4997-9fb2-d6cb1d615070}</MetaDataID>
     class ServerException : Exception
     {
+        /// <MetaDataID>{e9c8b835-f235-4465-91d5-179d858725af}</MetaDataID>
         public ServerException(string message, int hResult) : base(message)
         {
             this.HResult = hResult;
