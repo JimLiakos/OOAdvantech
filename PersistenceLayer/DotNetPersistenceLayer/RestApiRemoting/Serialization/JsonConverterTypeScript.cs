@@ -951,7 +951,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 {
                     if (ServerSessionPart?.ChannelUri == "local-device")
                     {
-                        _obj = new TypeScriptProxy(_obj);
+                        if ((proxy as Proxy).TypeScriptProxy == null)
+                            (proxy as Proxy).TypeScriptProxy = new TypeScriptProxy(_obj);
+
+                        _obj = (proxy as Proxy).TypeScriptProxy;
                         uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
 
                         if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))

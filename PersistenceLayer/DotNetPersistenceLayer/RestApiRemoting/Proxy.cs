@@ -24,6 +24,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{94715f0c-f788-4418-8591-f9a516149525}</MetaDataID>
         public string ChannelUri { get; set; }
 
+        internal TypeScriptProxy TypeScriptProxy;
+
         //public string PublicChannelUri
         //{
         //    get
