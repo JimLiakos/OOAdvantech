@@ -41,6 +41,8 @@ namespace OOAdvantech.iOS
             }
         }
 
+        public bool ConnectionIsOpen => true;
+
         protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
         {
             base.OnElementChanged(e);

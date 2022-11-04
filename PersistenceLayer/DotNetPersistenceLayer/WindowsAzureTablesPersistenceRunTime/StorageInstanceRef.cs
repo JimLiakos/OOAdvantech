@@ -162,7 +162,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
             // (StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).GetRelationshipColumns();
 
-            
+
 
             foreach (RDBMSMetaDataRepository.Table table in (StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MappedTables)
             {
@@ -173,7 +173,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                 foreach (RDBMSMetaDataRepository.Column column in table.ContainedColumns)
                 {
-                   
+
                     if (column is IdentityColumn && column.MappedAssociationEnd != null)
                     {
                         var objIdType = (column as RDBMSMetaDataRepository.IdentityColumn).ObjectIdentityType;
@@ -217,12 +217,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
                 value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
-                if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null&& value != DBNull.Value)
+                if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null && value != DBNull.Value)
                 {
                     var attributeType = valueOfAttribute.Attribute.Type.GetExtensionMetaObject<System.Type>();
                     var dictionaryType = typeof(Dictionary<,>).MakeGenericType(typeof(string), attributeType);
                     var multiligualDictionary = OOAdvantech.Json.JsonConvert.DeserializeObject(value as string, dictionaryType) as System.Collections.IDictionary;
-                
+
                     foreach (var entryKey in multiligualDictionary.Keys)
                     {
                         var culture = System.Globalization.CultureInfo.GetCultureInfo(entryKey as string);
@@ -249,12 +249,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         value = null;
                     if (value is DateTime)
                         value = ((DateTime)value).ToUniversalTime().ToLocalTime();
-                    else
-                    {
-                        SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
-                        SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
-
-                    }
+                    SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
+                    SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
                 }
 
 

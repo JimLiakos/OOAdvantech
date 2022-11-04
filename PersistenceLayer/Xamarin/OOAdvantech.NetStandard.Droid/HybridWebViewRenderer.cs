@@ -307,6 +307,8 @@ namespace OOAdvantech.Droid
                     return null;
             }
         }
+
+        public bool ConnectionIsOpen => true;
     }
 
 

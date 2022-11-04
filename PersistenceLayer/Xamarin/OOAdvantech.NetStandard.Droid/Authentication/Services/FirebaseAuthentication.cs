@@ -89,7 +89,7 @@ namespace OOAdvantech.Authentication.Droid
                 try
                 {
                     await FirebaseAuth.CreateUserWithEmailAndPassword(email, password).AsAsync();
-                    await FirebaseAuth.SendSignInLinkToEmail()
+                    //await FirebaseAuth.SendSignInLinkToEmail()
 
 
                     return null;
