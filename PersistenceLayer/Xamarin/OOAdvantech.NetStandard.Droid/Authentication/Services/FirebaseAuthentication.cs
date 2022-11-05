@@ -89,9 +89,6 @@ namespace OOAdvantech.Authentication.Droid
                 try
                 {
                     await FirebaseAuth.CreateUserWithEmailAndPassword(email, password).AsAsync();
-                    await FirebaseAuth.SendSignInLinkToEmail()
-
-
                     return null;
                 }
                 catch (Firebase.Auth.FirebaseAuthInvalidCredentialsException err)

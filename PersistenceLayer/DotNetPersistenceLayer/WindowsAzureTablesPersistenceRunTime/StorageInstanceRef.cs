@@ -249,12 +249,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         value = null;
                     if (value is DateTime)
                         value = ((DateTime)value).ToUniversalTime().ToLocalTime();
-                    else
-                    {
+                    
+                    
                         SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
                         SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
 
-                    }
+                    
                 }
 
 
