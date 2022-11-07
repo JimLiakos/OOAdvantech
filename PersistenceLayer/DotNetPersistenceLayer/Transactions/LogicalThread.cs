@@ -557,7 +557,7 @@ namespace OOAdvantech.Transactions
       WeakReference logicalThreadReference = null;
       if (LogicalThreads.TryGetValue(CurrentThreadID, out logicalThreadReference))
       {
-        LogicalThread logicalThread = logicalThreadReference.Target as LogicalThread;
+        LogicalThread logicalThread = logicalThreadReference?.Target as LogicalThread;
         if (logicalThread != null)
           return logicalThread;
       }

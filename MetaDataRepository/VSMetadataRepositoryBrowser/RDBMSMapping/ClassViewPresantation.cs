@@ -1405,14 +1405,14 @@ namespace VSMetadataRepositoryBrowser
                             OOAdvantech.RDBMSMetaDataRepository.Column column = _RDBMSClass.ActiveStorageCell.MainTable.GetColumn(value.Name);
                             if (column == null)
                             {
-                                column = attribute.AddColumnToTableOrUpdate(_RDBMSClass.ActiveStorageCell.MainTable, value.Name);
+                                column = attribute.AddColumnToTableOrUpdate(_RDBMSClass.ActiveStorageCell.MainTable, value.Name,false);
                                 
                             }
                             else if (column.MappedAttribute != attribute)
                             {
                                 if(column.MappedAttribute!=null)
                                     column.MappedAttribute.RemoveColumn(column);
-                                column = attribute.AddColumnToTableOrUpdate(_RDBMSClass.ActiveStorageCell.MainTable, value.Name);
+                                column = attribute.AddColumnToTableOrUpdate(_RDBMSClass.ActiveStorageCell.MainTable, value.Name, false);
                             }
 
 
