@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi;
 using OOAdvantech.Remoting.RestApi.EmbeddedBrowser;
+using Firebase.Core;
 
 [assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
 namespace OOAdvantech.iOS
@@ -101,6 +102,9 @@ namespace OOAdvantech.iOS
                     }
                     var request = new NSUrlRequest(url);
                     webView.LoadRequest(request);
+                    if (Application.Current?.MainPage != null)
+                     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
+
                     if (webView == Control)
                     {
 
@@ -142,6 +146,10 @@ namespace OOAdvantech.iOS
 
                 var request = new NSUrlRequest(url);
                 Control.LoadRequest(request);
+
+                if (Application.Current?.MainPage != null)
+                     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(),"OK");
+
 
                 //string url = null;
                 //if (Element.Uri.IndexOf(@"local://") == 0)
@@ -367,6 +375,8 @@ namespace OOAdvantech.iOS
             {
                 var request = new NSUrlRequest(ns_url);
                 Control.LoadRequest(request);
+                if (Application.Current?.MainPage != null)
+                     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
             }
 
         }

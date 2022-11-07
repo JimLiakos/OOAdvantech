@@ -203,7 +203,20 @@ namespace OOAdvantech.Remoting.RestApi
                 requestData.ChannelUri = ChannelUri;
 
                 requestData.details = json;
-                var ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
+
+                bool? ConnectionIsOpen = true;
+
+                try
+                {
+                    ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
+                    if(ConnectionIsOpen!=null&&!ConnectionIsOpen.Value)
+                    {
+
+                    }
+                }
+                catch (Exception error)
+                {
+                }
                 Task.Run(async () =>
                 {
                     bool retry = false;
@@ -228,8 +241,8 @@ namespace OOAdvantech.Remoting.RestApi
                         catch (Exception error)
                         {
 
-                            if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
-                                retry = true;
+                            //if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
+                            //    retry = true;
                             System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
 
 #if !DeviceDotNet
