@@ -94,7 +94,9 @@ namespace OOAppDevToolBox
             if (DTEConnection == null)
             {
                 DTEConnection = new DTEConnection();
+
                 EnvDTE.DTE dte = (EnvDTE.DTE)GetService(typeof(EnvDTE.DTE));
+                
                 DTEConnection.OnConnection(dte, this);
             }
 

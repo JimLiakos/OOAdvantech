@@ -1,6 +1,7 @@
 ﻿using Microneme.OOAppDevToolBox;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using OOAdvantech.MetaDataRepository;
 using System;
 using System.Runtime.InteropServices;
@@ -32,7 +33,7 @@ namespace OOAppDevToolBox
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
-    public sealed class OOAppDevToolBoxPackage : AsyncPackage
+    public sealed class OOAppDevToolBoxPackage : AsyncPackage, VSMetadataRepositoryBrowser.IVSPackage
     {
         /// <summary>
         /// OOAppDevToolBoxPackage GUID string.
@@ -106,25 +107,30 @@ namespace OOAppDevToolBox
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await ClassViewToolWindowCommand.InitializeAsync(this);
 
 
 
-            if (DTEConnection == null)
+            try
             {
-                DTEConnection = new DTEConnection();
-                EnvDTE.DTE dte = (EnvDTE.DTE)GetService(typeof(EnvDTE.DTE));
-                DTEConnection.OnConnection(dte, this);
+                await ClassViewToolWindowCommand.InitializeAsync(this);
+
+                if (DTEConnection == null)
+                {
+                    DTEConnection = new DTEConnection();
+                    EnvDTE.DTE dte = (EnvDTE.DTE)GetService(typeof(EnvDTE.DTE));
+                    DTEConnection.OnConnection(dte, this);
+                }
+
+
+                IVsSolution pSolution = await GetServiceAsync(typeof(SVsSolution)) as IVsSolution;
+                IDEManager = new OOAdvantech.CodeMetaDataRepository.IDEManager();
+                var solution = IDEManager.Solution;
+
             }
+            catch (Exception error)
+            {
 
-
-
-            IVsSolution pSolution = await GetServiceAsync(typeof(SVsSolution)) as IVsSolution;
-
-            IDEManager = new OOAdvantech.CodeMetaDataRepository.IDEManager();
-
-            //pSolution.AdviseSolutionEvents
-
+            }
         }
 
 

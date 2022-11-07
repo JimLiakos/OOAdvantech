@@ -13,8 +13,8 @@ namespace MsdevManager
     /// <MetaDataID>{e044af34-daf3-4a87-8bdf-dce50627f31e}</MetaDataID>
     public enum ROTFlags
     {
-        REGISTRATIONKEEPSALIVE =0x1,
-        ALLOWANYCLIENT =0x2
+        REGISTRATIONKEEPSALIVE = 0x1,
+        ALLOWANYCLIENT = 0x2
     }
     /// <summary>
     /// Utility class to get you a list of the running instances of the Microsoft Visual 
@@ -56,8 +56,8 @@ namespace MsdevManager
         #endregion
 
         /// <MetaDataID>{5d676014-1429-40e7-91e6-b45346ba5d65}</MetaDataID>
-       static System.Collections.Generic.Dictionary<EnvDTE.DTE, string> IDEsProcessIDs = new System.Collections.Generic.Dictionary<DTE, string>();
-       /// <MetaDataID>{53139546-c3e5-449b-b6fb-e1347dfbaa67}</MetaDataID>
+        static System.Collections.Generic.Dictionary<EnvDTE.DTE, string> IDEsProcessIDs = new System.Collections.Generic.Dictionary<DTE, string>();
+        /// <MetaDataID>{53139546-c3e5-449b-b6fb-e1347dfbaa67}</MetaDataID>
         public static string GetIDEProcessID(EnvDTE.DTE ide)
         {
             if (IDEsProcessIDs.ContainsKey(ide))
@@ -71,13 +71,53 @@ namespace MsdevManager
                 if (ide == currentIDE)
                 {
                     string description = enumerator.Key as string;
-                    string processId= description.Substring(description.IndexOf(":") + 1);
+                    string processId = description.Substring(description.IndexOf(":") + 1);
                     IDEsProcessIDs.Add(ide, processId);
                     return processId;
                 }
             }
             return null;
 
+        }
+
+        public static System.Collections.Generic.List<string> GetVS2022PIDS()
+        {
+
+            System.Collections.Generic.List<string> result = new System.Collections.Generic.List<string>();
+
+            int numFetched;
+            UCOMIRunningObjectTable runningObjectTable;
+            UCOMIEnumMoniker monikerEnumerator;
+            UCOMIMoniker[] monikers = new UCOMIMoniker[1];
+
+
+            GetRunningObjectTable(0, out runningObjectTable);
+
+            runningObjectTable.EnumRunning(out monikerEnumerator);
+            monikerEnumerator.Reset();
+
+            while (monikerEnumerator.Next(1, monikers, out numFetched) == 0)
+            {
+                try
+                {
+                    UCOMIBindCtx ctx;
+                    CreateBindCtx(0, out ctx);
+
+                    string runningObjectName;
+                    monikers[0].GetDisplayName(ctx, null, out runningObjectName);
+                    Guid clsid;
+
+                    if (runningObjectName.IndexOf("!Microsoft Visual Studio Telemetry:") == 0)
+                        result.Add(runningObjectName.Replace("!Microsoft Visual Studio Telemetry:", ""));
+                    
+                }
+                catch (System.Exception error)
+                {
+
+                }
+            }
+
+            return result;
         }
         /// <summary>
         /// Get the DTE object for the instance of Visual Studio IDE that has 
@@ -94,16 +134,16 @@ namespace MsdevManager
             string SolName = "tmp";
             while (enumerator.MoveNext())
             {
-                 
+
                 try
                 {
                     ide = (_DTE)enumerator.Value;
                     if (ide != null)
                     {
-                        SolName=ide.Solution.FullName;
+                        SolName = ide.Solution.FullName;
                         System.Diagnostics.Debug.WriteLine(SolName);
                         if (ide.Solution.FullName.Trim().ToLower() == solutionFile.Trim().ToLower())
-                        { 
+                        {
                             return (EnvDTE.DTE)ide;
                         }
                     }
@@ -115,17 +155,32 @@ namespace MsdevManager
             {
                 try
                 {
+                    var vs2022Pids = GetVS2022PIDS();
+                    foreach (string vs2022Pid in vs2022Pids)
+                    {
+                        try
+                        {
+                            var idManager = OOAdvantech.CodeMetaDataRepository.Project.GetIDEManager(vs2022Pid);
+                            var ss = idManager.Solution.FullName;
+
+                        }
+                        catch (Exception error)
+                        {
+
+                            
+                        }
+                    }
 
                     System.Diagnostics.Process process = System.Diagnostics.Process.Start(solutionFile);
                     int count = 60;
-                    while (count>0)
+                    while (count > 0)
                     {
                         System.Threading.Thread.Sleep(500);
                         count--;
 
                         runningInstances = GetIDEInstances(true);
                         enumerator = runningInstances.GetEnumerator();
-                        
+
                         while (enumerator.MoveNext())
                         {
 
@@ -243,34 +298,48 @@ namespace MsdevManager
             while (rotEnumerator.MoveNext())
             {
                 string candidateName = (string)rotEnumerator.Key;
-                if (!candidateName.StartsWith("!VisualStudio.DTE"))
-                    continue;
+                //if (!candidateName.StartsWith("!VisualStudio.DTE"))
+                //    continue;
 
                 _DTE ide = rotEnumerator.Value as _DTE;
-                if (ide == null)
+                _Solution solution = rotEnumerator.Value as _Solution;
+                if (ide == null && solution == null)
                     continue;
 
                 if (openSolutionsOnly)
                 {
                     try
                     {
-                        string solutionFile = ide.Solution.FullName;
+                        string solutionFile = null;
+                        if (ide != null)
+                            solutionFile = ide.Solution.FullName;
+
+                        if (solution != null)
+                            solutionFile = solution.FullName;
+
+
                         if (solutionFile != String.Empty)
                         {
-                            runningIDEInstances[candidateName] = ide;
+                            if (ide != null)
+                                runningIDEInstances[candidateName] = ide;
+                            if (solution != null)
+                                runningIDEInstances[candidateName] = solution.DTE;
                         }
                     }
                     catch { }
                 }
                 else
                 {
-                    runningIDEInstances[candidateName] = ide;
+                    if (ide != null)
+                        runningIDEInstances[candidateName] = ide;
+                    if (solution != null)
+                        runningIDEInstances[candidateName] = solution.DTE;
                 }
             }
             return runningIDEInstances;
         }
 
-     
+
 
         /// <summary>
         /// Get a snapshot of the running object table (ROT).
@@ -280,7 +349,7 @@ namespace MsdevManager
         [STAThread]
         public static Hashtable GetRunningObjectTable()
         {
-            
+
             Hashtable result = new Hashtable();
 
             int numFetched;
@@ -307,10 +376,13 @@ namespace MsdevManager
 
                     object runningObjectVal;
                     runningObjectTable.GetObject(monikers[0], out runningObjectVal);
-                    if (!(runningObjectVal is EnvDTE.DTE))
+                    if (runningObjectVal is EnvDTE.DTE || runningObjectVal is EnvDTE._Solution)
+                        result[runningObjectName] = runningObjectVal;
+                    else
+                    {
+                        var isSolution = runningObjectVal is EnvDTE._Solution;
                         Marshal.ReleaseComObject(runningObjectVal);
-
-                    result[runningObjectName] = runningObjectVal;
+                    }
                 }
                 catch (System.Exception error)
                 {

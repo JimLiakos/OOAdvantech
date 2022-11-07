@@ -1,4 +1,4 @@
-﻿using Microneme.ObjectOrientedAppsDevToolBox;
+﻿using Microneme.OOAppDevToolBox;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
@@ -21,7 +21,7 @@ namespace OOAppDevToolBox
         {
             this.InitializeComponent();
             MetadataBrowserHost = new MetadataBrowserHost();
-            MetadataBrowserHost.LoadMetadataRepositoryBrowser(ObjectOrientedAppDevToolBoxPackage.VSPackage);
+            MetadataBrowserHost.LoadMetadataRepositoryBrowser(OOAppDevToolBoxPackage.VSPackage);
             WinformHost.Child = MetadataBrowserHost;
         }
 

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Diagnostics;
 
+
 namespace OOAdvantech.CodeMetaDataRepository
 {
     /// <MetaDataID>{e2cb996e-a3b2-474a-8938-42e6a9cb8ba1}</MetaDataID>
@@ -205,6 +206,19 @@ namespace OOAdvantech.CodeMetaDataRepository
     /// <MetaDataID>{eb8c4f34-1643-4144-bd45-adec8cb2def0}</MetaDataID>
     public class IDEManager : MarshalByRefObject, OOAdvantech.Remoting.IExtMarshalByRefObject
     {
+        public IDEManager()
+        {
+
+            if (MonoStateObject == null)
+            {
+                MonoStateObject = this;
+                
+                _Solution = new Solution(VSStudio.Solution);
+            }
+
+
+
+        }
 
         /// <MetaDataID>{ff233a7f-a896-4ce9-a117-3e1d9107a51b}</MetaDataID>
         static System.Collections.Generic.Dictionary<string, IDEManager> IDEManagers = new System.Collections.Generic.Dictionary<string, IDEManager>();
@@ -545,21 +559,21 @@ namespace OOAdvantech.CodeMetaDataRepository
         }
 
         /// <MetaDataID>{30ea82a5-73af-469b-9333-ae75984c2dbf}</MetaDataID>
-        static IDEManager MonoStateObject = new IDEManager();
+        static IDEManager MonoStateObject ;
         /// <MetaDataID>{a5d4f1dc-8c9f-4e41-9666-562ab7d85c72}</MetaDataID>
         public static void Initialize()
         {
         }
 
         /// <MetaDataID>{32d64e70-0237-45c3-8cc8-b8b35ce8a3e0}</MetaDataID>
-        static EnvDTE.DTE VSStudio
+        static EnvDTE._DTE VSStudio
         {
             get
             {
 
-                if (VisualStudioEventBridge.VisualStudioEvents.DTEObject == null)
-                    VisualStudioEventBridge.VisualStudioEvents.DTEObject = GetCurrentDTE();
-                return VisualStudioEventBridge.VisualStudioEvents.DTEObject as EnvDTE.DTE;
+                //if (VisualStudioEventBridge.VisualStudioEvents.DTEObject == null)
+                //    VisualStudioEventBridge.VisualStudioEvents.DTEObject = GetCurrentDTE();
+                return VisualStudioEventBridge.VisualStudioEvents.DTEObject as EnvDTE._DTE;
             }
         }
 
@@ -626,17 +640,17 @@ namespace OOAdvantech.CodeMetaDataRepository
             {
                 ModulePublisher.ClassRepository.Init();
                 if (!OOAdvantech.Remoting.RemotingServices.IsIpcSeverChannelRegiter("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString()))
-                    OOAdvantech.Remoting.RemotingServices.RegisterSecureIpcChannel("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString(), true);
+                    OOAdvantech.Remoting.RemotingServices.RegisterAnonymousIpcChannel("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString(), true);
             }
             catch (System.Exception error)
             {
             }
-
+             
 
             // System.Object @object= ModulePublisher.ClassRepository.CreateInstance("Parser.Parser", "");
             _SynchroForm = new SynchroForm(MonoStateObject);
             //_SynchroForm.Show();
-            SolutionOpened();
+            //SolutionOpened();
             VisualStudioEventBridge.VisualStudioEvents.SolutionOpened += new VisualStudioEventBridge.SolutionOpenedEventHandler(SolutionOpened);
             VisualStudioEventBridge.VisualStudioEvents.SolutionClosed += new VisualStudioEventBridge.SolutionClosedEventHandler(SolutionClosed);
             string ConfigFileName = AppDomain.CurrentDomain.BaseDirectory + "DTERemoting.config";
@@ -673,35 +687,6 @@ namespace OOAdvantech.CodeMetaDataRepository
                     int projectCount = IDEManager.Solution.Projects.Count;
                 }
 
-                //SolutionProjects.Clear();
-                //foreach (EnvDTE.Project vsProject in VSStudio.Solution.Projects)
-                //{
-                //    try
-                //    {
-                //        System.Diagnostics.Debug.WriteLine(vsProject.FileName);
-                //        if (vsProject.Object == null)
-                //            continue;
-                //        OOAdvantech.CodeMetaDataRepository.Project project = OOAdvantech.CodeMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(vsProject) as OOAdvantech.CodeMetaDataRepository.Project;
-                //        if (project == null)
-                //            project = new OOAdvantech.CodeMetaDataRepository.Project(vsProject);
-
-
-                //        //foreach (OOAdvantech.MetaDataRepository.MetaObject metObejct in project.Residents)
-                //        //{
-                //        //    long count = 0;
-                //        //    if (metObejct is Class)
-                //        //        count = (metObejct as Class).Features.Count;
-
-                //        //}
-                //        //long counta = project.ClientDependencies.Count;
-                //    }
-                //    catch (System.Exception error)
-                //    {
-
-                //    }
-
-
-                //}
             }
             catch (Exception error)
             {

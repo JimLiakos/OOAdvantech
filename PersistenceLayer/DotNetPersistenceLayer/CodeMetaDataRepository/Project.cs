@@ -2117,7 +2117,22 @@ namespace OOAdvantech.CodeMetaDataRepository
             return classifiers;
         }
 
+        public static IDEManager GetIDEManager(string IDEProcessID)
+        {
 
+            IDEManager ideManager = null;
+            if (IDEManagers.ContainsKey(IDEProcessID))
+                return IDEManagers[IDEProcessID];
+
+
+            string channelUri = "ipc://PID" + IDEProcessID;
+            if (ideManager == null)
+            {
+                ideManager = OOAdvantech.Remoting.RemotingServices.CreateRemoteInstance(channelUri, typeof(IDEManager).FullName, typeof(IDEManager).Assembly.FullName) as IDEManager;
+                IDEManagers[IDEProcessID] = ideManager;
+            }
+            return IDEManagers[IDEProcessID];
+        }
         /// <MetaDataID>{456d00ca-63fa-4c25-bc1c-574942815fee}</MetaDataID>
         public IDEManager IDEManager
         {

@@ -448,6 +448,45 @@ namespace OOAdvantech.Remoting
 
         }
 
+        public static void RegisterAnonymousIpcChannel(string ipcPort, bool impersonate)
+        {
+            RegisterIpcClientChannel();
+
+
+
+            if (string.IsNullOrEmpty(ipcPort))
+                ipcPort = "PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString();
+
+            System.Collections.IDictionary props = new System.Collections.Hashtable();
+            props = new System.Collections.Hashtable();
+            props["name"] = "oorem ipc server";
+            props["portName"] = ipcPort.Trim();
+            props["secure"] = false;
+            //if (impersonate)
+            //{
+            //    props["impersonate"] = true;
+            //    props["tokenImpersonationLevel"] = "Impersonation";
+            //}
+            //SecurityIdentifier sid = new SecurityIdentifier(System.Security.Principal.WellKnownSidType.WorldSid, null);
+            //// Get the NT account related to the SID
+            //NTAccount account = sid.Translate(typeof(NTAccount)) as NTAccount;
+            //props["authorizedGroup"] = account.Value;
+
+            var ipcServerChannel = new System.Runtime.Remoting.Channels.Ipc.IpcServerChannel(props, CreateServerSinkChain(impersonate));//GetSecurityDescriptor()
+            ChannelServices.RegisterChannel(ipcServerChannel, true);
+            System.Runtime.Remoting.Channels.ChannelDataStore channelDataStore = ipcServerChannel.ChannelData as System.Runtime.Remoting.Channels.ChannelDataStore;
+            string channelUri = channelDataStore.ChannelUris[0];
+            OOAdvantech.Remoting.RemotingServices.AddServerChannelUri(channelUri);
+            ServerChannels.Add(ipcServerChannel);
+
+#endif
+#if DEBUG && !DeviceDotNet
+            SetLeaseTime();
+#endif
+#if !DeviceDotNet
+
+
+        }
 
         /// <summary>
         ///Registers secure client-server tcp channel
