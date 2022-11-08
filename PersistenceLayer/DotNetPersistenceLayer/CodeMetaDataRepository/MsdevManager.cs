@@ -71,9 +71,13 @@ namespace MsdevManager
                 if (ide == currentIDE)
                 {
                     string description = enumerator.Key as string;
-                    string processId = description.Substring(description.IndexOf(":") + 1);
-                    IDEsProcessIDs.Add(ide, processId);
-                    return processId;
+                    if (description.IndexOf(":") != -1)
+                    {
+                        string processId = description.Substring(description.IndexOf(":") + 1);
+                        IDEsProcessIDs.Add(ide, processId);
+                        return processId;
+                    }
+                    
                 }
             }
             return null;
@@ -186,7 +190,7 @@ namespace MsdevManager
 
                             try
                             {
-                                ide = (DTE)enumerator.Value;
+                                ide = (_DTE)enumerator.Value;
                                 if (ide != null)
                                 {
                                     if (ide.Solution.FullName == solutionFile)

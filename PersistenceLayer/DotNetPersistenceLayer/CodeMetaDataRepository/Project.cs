@@ -348,6 +348,7 @@ namespace OOAdvantech.CodeMetaDataRepository
         {
             get
             {
+                
                 try
                 {
                     if (VSProject.CodeModel != null)

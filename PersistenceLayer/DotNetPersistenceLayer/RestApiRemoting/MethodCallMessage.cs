@@ -26,7 +26,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{9ed60119-d232-457f-ab2f-0f0c3292e005}</MetaDataID>
     public class MethodCallMessage
     {
-
+        
 
         /// <MetaDataID>{a108a388-7c42-4986-8a2e-89ef83418ba9}</MetaDataID>
         internal Dictionary<string, object> CallContextDictionaryData;

@@ -212,7 +212,8 @@ namespace OOAdvantech.CodeMetaDataRepository
             if (MonoStateObject == null)
             {
                 MonoStateObject = this;
-                
+                _SynchroForm = new SynchroForm(MonoStateObject);
+
                 _Solution = new Solution(VSStudio.Solution);
             }
 
@@ -646,9 +647,8 @@ namespace OOAdvantech.CodeMetaDataRepository
             {
             }
              
-
             // System.Object @object= ModulePublisher.ClassRepository.CreateInstance("Parser.Parser", "");
-            _SynchroForm = new SynchroForm(MonoStateObject);
+            //_SynchroForm = new SynchroForm(MonoStateObject);
             //_SynchroForm.Show();
             //SolutionOpened();
             VisualStudioEventBridge.VisualStudioEvents.SolutionOpened += new VisualStudioEventBridge.SolutionOpenedEventHandler(SolutionOpened);

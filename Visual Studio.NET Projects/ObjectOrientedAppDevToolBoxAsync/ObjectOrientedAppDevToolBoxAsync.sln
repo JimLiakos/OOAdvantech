@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublishModuleService", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOAppDevToolBox", "OOAppDevToolBox\OOAppDevToolBox.csproj", "{2209C436-4EDA-4049-9B2C-87B0039F9AFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMetaDataRepository - VS10", "..\..\PersistenceLayer\DotNetPersistenceLayer\DotNetMetaDataRepository\DotNetMetaDataRepository - VS10.csproj", "{CFEA0A11-F583-4751-BE83-2EA0363B868B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -331,6 +333,30 @@ Global
 		{2209C436-4EDA-4049-9B2C-87B0039F9AFE}.Release|x64.Build.0 = Release|Any CPU
 		{2209C436-4EDA-4049-9B2C-87B0039F9AFE}.Release|x86.ActiveCfg = Release|x86
 		{2209C436-4EDA-4049-9B2C-87B0039F9AFE}.Release|x86.Build.0 = Release|x86
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Debug|x64.Build.0 = Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Debug|x86.Build.0 = Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Debug|Any CPU.ActiveCfg = Net4Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Debug|Any CPU.Build.0 = Net4Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Debug|x64.ActiveCfg = Net4Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Debug|x64.Build.0 = Net4Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Debug|x86.ActiveCfg = Net4Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Debug|x86.Build.0 = Net4Debug|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Release|Any CPU.ActiveCfg = Net4Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Release|Any CPU.Build.0 = Net4Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Release|x64.ActiveCfg = Net4Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Release|x64.Build.0 = Net4Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Release|x86.ActiveCfg = Net4Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Net4Release|x86.Build.0 = Net4Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Release|x64.ActiveCfg = Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Release|x64.Build.0 = Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Release|x86.ActiveCfg = Release|Any CPU
+		{CFEA0A11-F583-4751-BE83-2EA0363B868B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
