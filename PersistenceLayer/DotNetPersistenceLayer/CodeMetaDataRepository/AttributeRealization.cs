@@ -19,7 +19,7 @@ namespace OOAdvantech.CodeMetaDataRepository
                 base.PutPropertyValue(propertyNamespace, propertyName, PropertyValue);
             }
         }
-
+         
         public override object GetPropertyValue(System.Type propertyType, string propertyNamespace, string propertyName)
         {
             if (propertyNamespace.ToLower() == "MetaData".ToLower() && propertyName.ToLower() == "MetaObjectID".ToLower())

@@ -302,12 +302,12 @@ namespace MsdevManager
             while (rotEnumerator.MoveNext())
             {
                 string candidateName = (string)rotEnumerator.Key;
-                //if (!candidateName.StartsWith("!VisualStudio.DTE"))
-                //    continue;
+                if (!candidateName.StartsWith("!VisualStudio.DTE"))
+                    continue;
 
                 _DTE ide = rotEnumerator.Value as _DTE;
                 _Solution solution = rotEnumerator.Value as _Solution;
-                if (ide == null && solution == null)
+                if (ide == null)
                     continue;
 
                 if (openSolutionsOnly)

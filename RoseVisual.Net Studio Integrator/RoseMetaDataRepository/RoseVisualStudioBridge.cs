@@ -1094,7 +1094,7 @@ namespace RoseMetaDataRepository
                         memberIdentity = (roseItem as RationalRose.RoseRole).Association.GetPropertyValue("C#", "Identity");
 
 
-
+ 
 
 
                     EnvDTE.ProjectItem projectItem = (project.GetClassifier(classifier.Identity.ToString()) as OOAdvantech.CodeMetaDataRepository.CodeElementContainer).CodeElement.ProjectItem;
