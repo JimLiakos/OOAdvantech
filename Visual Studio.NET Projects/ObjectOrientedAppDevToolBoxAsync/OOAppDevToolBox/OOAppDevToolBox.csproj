@@ -61,6 +61,9 @@
     <Compile Include="OOAppDevToolBoxPackage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ObjectOrientedAppDevToolBoxSetting.reg" />
+    <None Include="ObjectOrientedAppDevToolBoxSetting64.reg" />
+    <None Include="OOAdvantech.reg" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
