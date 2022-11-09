@@ -43,7 +43,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         string BuildFilterString(Dictionary<string, string> columnsNamesMap)
         {
-            VisualStudioEventBridge.VisualStudioEvents sds;
+            
 
 
             //TableQuery.CombineFilters()

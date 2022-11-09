@@ -209,7 +209,7 @@ namespace OOAdvantech.Remoting.RestApi
                 try
                 {
                     ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
-                    if(ConnectionIsOpen!=null&&!ConnectionIsOpen.Value)
+                    if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
                     {
 
                     }
@@ -246,7 +246,7 @@ namespace OOAdvantech.Remoting.RestApi
                             System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
 
 #if !DeviceDotNet
-                            
+
                             if (!System.Diagnostics.EventLog.SourceExists("Rest Api channel", "."))
                                 System.Diagnostics.EventLog.CreateEventSource("Rest Api channel", "OOAdvance");
 
@@ -260,7 +260,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
 
-                        } 
+                        }
                     } while (retry);
                 });
             }
@@ -282,7 +282,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 lock (this)
                 {
-                    
+
                     foreach (string cachedType in methodCallMessage.CachedTypes)
                     {
                         ProxyType proxyType = null;
@@ -399,6 +399,19 @@ namespace OOAdvantech.Remoting.RestApi
             if (physicalConnectionID == null)
                 physicalConnectionID = "";//web view
 
+
+            try
+            {
+                var ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
+                if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
+                {
+
+                }
+            }
+            catch (Exception error)
+            {
+            }
+
             bool sessionConnected = false;
             lock (PhysicalConnections)
             {
@@ -409,13 +422,13 @@ namespace OOAdvantech.Remoting.RestApi
                     sessionConnected |= channelConnected;
             }
 
-#region Communication session completed when all physical connections are disconnected for a period of time
+            #region Communication session completed when all physical connections are disconnected for a period of time
             if (!sessionConnected && _Connected)
                 DisconnectTimer.Start();
 
             if (sessionConnected && !_Connected && DisconnectTimer.Enabled)
                 DisconnectTimer.Stop();
-#endregion
+            #endregion
 
             _Connected = sessionConnected;
         }
@@ -440,7 +453,7 @@ namespace OOAdvantech.Remoting.RestApi
                   {
                       //https://stackoverflow.com/questions/39938542/firebase-net-token-verification/48180173
 #if !DeviceDotNet
-                      
+
                       GetUserFromjwToken(authToken);
 #else
                       if (authToken == DeviceAuthentication.IDToken)
@@ -536,7 +549,7 @@ namespace OOAdvantech.Remoting.RestApi
                     authUser.Email = (from claim in tokenS.Claims where claim.Type == "email" select claim.Value).FirstOrDefault();
 
                     if ((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault() != null)
-                     authUser.Email_Verified = bool.Parse((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault());
+                        authUser.Email_Verified = bool.Parse((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault());
                     authUser.Iss = (from claim in tokenS.Claims where claim.Type == "iss" select claim.Value).FirstOrDefault();
                     authUser.Name = (from claim in tokenS.Claims where claim.Type == "name" select claim.Value).FirstOrDefault();
                     authUser.Picture = (from claim in tokenS.Claims where claim.Type == "picture" select claim.Value).FirstOrDefault();
@@ -581,8 +594,8 @@ namespace OOAdvantech.Remoting.RestApi
                     AuthUser = null;
                 }
 
-                double secs=  (System.DateTime.Now-startTime).TotalSeconds;
-                if(secs>05)
+                double secs = (System.DateTime.Now - startTime).TotalSeconds;
+                if (secs > 05)
                 {
 
                 }
@@ -716,7 +729,7 @@ namespace OOAdvantech.Remoting.RestApi
         internal ObjRef GetServerSesionObjectRef()
         {
 
-            
+
             ProxyType httpProxyType = null;
             Type instanceType = GetType();
             string uri = null;
@@ -742,7 +755,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
     }
 
-    
+
 
     /// <MetaDataID>{0382da57-d2e6-4834-b18b-1b7ef993d56a}</MetaDataID>
     public class ClientSessionPart : Remoting.ClientSessionPart
@@ -843,7 +856,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// Otherwise is false
         /// </param>
         /// <MetaDataID>{c84867b4-e737-4de4-9b51-360677d9fbae}</MetaDataID>
-        internal void Reconnect( bool disconnectedChannel)
+        internal void Reconnect(bool disconnectedChannel)
         {
             int tries = 5; //makes five tries to reconnect
             X_Access_Token = null;
@@ -859,7 +872,7 @@ namespace OOAdvantech.Remoting.RestApi
                     var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity);
                     var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
 
-                    if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity|| ServerSessionPartUri != serverSessionPartUri)
+                    if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
                     {
 
 
@@ -926,7 +939,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 }
                             }
                         }
-                        if (ServerSessionPartUri != serverSessionPartUri )
+                        if (ServerSessionPartUri != serverSessionPartUri)
                         {
 
                         }

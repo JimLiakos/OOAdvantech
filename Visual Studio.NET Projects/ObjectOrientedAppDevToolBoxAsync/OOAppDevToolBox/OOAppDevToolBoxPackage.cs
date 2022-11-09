@@ -9,6 +9,7 @@ using Microneme.OOAppDevToolBox;
 using OOAdvantech.MetaDataRepository;
 using Microsoft.VisualStudio;
 
+//vsixinstaller /u:OOAppDevToolBox.a4e460d5-76d4-4cb4-be99-5ea16cd863ac
 namespace OOAppDevToolBox
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
@@ -88,7 +89,7 @@ namespace OOAppDevToolBox
 
      
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            //System.Windows.Forms.MessageBox.Show("Hello");
+            System.Windows.Forms.MessageBox.Show("Hello");
 
             await this.RegisterCommandsAsync();
             this.RegisterToolWindows();
