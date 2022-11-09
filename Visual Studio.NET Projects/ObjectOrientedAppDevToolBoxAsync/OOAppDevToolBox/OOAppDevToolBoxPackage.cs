@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Microneme.OOAppDevToolBox;
 using OOAdvantech.MetaDataRepository;
+using Microsoft.VisualStudio;
 
 namespace OOAppDevToolBox
 {
@@ -15,6 +16,11 @@ namespace OOAppDevToolBox
     [ProvideToolWindow(typeof(MyToolWindow.Pane), Style = VsDockStyle.Tabbed, Window = WindowGuids.SolutionExplorer)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.OOAppDevToolBoxString)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.NoSolution_string, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
+
     public sealed class OOAppDevToolBoxPackage : ToolkitPackage, VSMetadataRepositoryBrowser.IVSPackage
     {
         /// <summary>
@@ -79,8 +85,14 @@ namespace OOAppDevToolBox
         /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+
+     
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            System.Windows.Forms.MessageBox.Show("Hello");
+            //System.Windows.Forms.MessageBox.Show("Hello");
+
+            await this.RegisterCommandsAsync();
+            this.RegisterToolWindows();
+
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             VSPackage = this;
 

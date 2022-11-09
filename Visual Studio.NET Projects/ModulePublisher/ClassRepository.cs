@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Reflection;
 //using System.ServiceModel;
 using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace ModulePublisher
 {
     /// <summary>Summary description for Class1.</summary>
@@ -306,11 +308,11 @@ namespace ModulePublisher
                     ClassesAssemblies.TryGetValue(assemblyData, out classAssembly);
                 if (classAssembly == null)
                     classAssembly = (from assem in System.AppDomain.CurrentDomain.GetAssemblies()
-                                     where assem.GetName().FullName == assemblyData
+                                     where ClassVersionDataMatchWithAssembly(assemblyData, assem.FullName)
                                      select assem).FirstOrDefault();
                 else
                 {
-
+                     
                 }
 
                 if (classAssembly == null && !string.IsNullOrEmpty(assemblyData))
@@ -747,6 +749,7 @@ namespace ModulePublisher
                             }
                             if (!assemblyLoaded)
                             {
+
                                 ErrorLoadingRefDll.Add(assemblyFullName);
                             }
                         }
@@ -1468,5 +1471,7 @@ namespace ModulePublisher
         {
         }
     }
+
+
 
 }

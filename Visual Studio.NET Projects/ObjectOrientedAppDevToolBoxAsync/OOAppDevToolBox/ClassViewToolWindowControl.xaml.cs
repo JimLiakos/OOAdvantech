@@ -23,6 +23,7 @@ namespace OOAppDevToolBox
             MetadataBrowserHost = new MetadataBrowserHost();
             MetadataBrowserHost.LoadMetadataRepositoryBrowser(OOAppDevToolBoxPackage.VSPackage);
             WinformHost.Child = MetadataBrowserHost;
+            MetadataBrowserHost.MetadataRepositoryBrowser.DTE = VisualStudioEventBridge.VisualStudioEvents.DTEObject as EnvDTE.DTE;
         }
 
 
