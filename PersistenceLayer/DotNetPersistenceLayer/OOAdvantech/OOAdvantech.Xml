@@ -6616,6 +6616,21 @@
         <member name="M:OOAdvantech.ProxyClassCodeBuilder.BuildProxyAssembly(System.String,System.Type)">
             <MetaDataID>{c8dce2c6-bd70-4c7a-a6c1-c8a3ca3a035c}</MetaDataID>
         </member>
+        <member name="T:OOAdvantech.SerializeTaskScheduler">
+            <MetaDataID>{09d102c4-69a8-4fb2-afb2-65e878048005}</MetaDataID>
+        </member>
+        <member name="F:OOAdvantech.SerializeTaskScheduler.Tasks">
+            <MetaDataID>{64e5f331-062a-4eb4-b473-46c5b67ccdbc}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.SerializeTaskScheduler.RunAsync">
+            <MetaDataID>{7582855a-67f6-414d-b930-e6e5d47a3198}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.SerializeTaskScheduler.Stop">
+            <MetaDataID>{d2b6a2c6-235f-440f-bb23-1e03b90e1d1d}</MetaDataID>
+        </member>
+        <member name="M:OOAdvantech.SerializeTaskScheduler.AddTask(System.Func{System.Threading.Tasks.Task{System.Boolean}})">
+            <MetaDataID>{a01a0261-97b0-43a0-9891-ecccf13eaffb}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.TypeInfo">
             <MetaDataID>{52cfdc3a-146d-4525-90a4-86fe357bfbbb}</MetaDataID>
         </member>
