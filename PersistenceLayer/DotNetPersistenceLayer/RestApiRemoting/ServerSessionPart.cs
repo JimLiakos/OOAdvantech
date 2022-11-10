@@ -57,6 +57,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 #endif
 
+        OOAdvantech.SerializeTaskScheduler SerializeTaskScheduler = new OOAdvantech.SerializeTaskScheduler();
 
         /// <MetaDataID>{177c1f59-af6c-4a1d-a477-0a4e23f38bc9}</MetaDataID>
         ElapsedEventHandler Elapsed;
@@ -65,12 +66,15 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
 
-
+            SerializeTaskScheduler.RunAsync();
             DisconnectTimer = new System.Timers.Timer();
             DisconnectTimer.Interval = TimeSpan.FromMinutes(0.5).TotalMilliseconds;
             Elapsed = (object Header, ElapsedEventArgs e) =>
             {
-                _Connected = false;
+                lock (SerializeTaskScheduler)
+                {
+                    _Connected = false;
+                }
                 DisconnectTimer.Elapsed -= Elapsed;
                 ClientProcessTerminates();
             };
@@ -222,32 +226,39 @@ namespace OOAdvantech.Remoting.RestApi
                 catch (Exception error)
                 {
                 }
-                Task.Run(async () =>
+
+                SerializeTaskScheduler.AddTask(async () =>
                 {
                     bool retry = false;
                     do
                     {
+                        retry = false;
                         try
                         {
-                            if (invokeType == InvokeType.Sync)
-                                Channel.ProcessRequest(requestData);
-                            else
+                            if (Connected)
                             {
-                                requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
-                                var task = Channel.AsyncProcessRequest(requestData);
-                                if (task == null)
+                                if (invokeType == InvokeType.Sync)
+                                    Channel.ProcessRequest(requestData);
+                                else
                                 {
+                                    requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
+                                    var task = Channel.AsyncProcessRequest(requestData);
+                                    if (task == null)
+                                    {
 
+                                    }
+                                    await task;
                                 }
-                                await task;
                             }
+                            else
+                                return false;
 
                         }
                         catch (Exception error)
                         {
 
-                            //if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
-                            //    retry = true;
+                            if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
+                                retry = true;
                             System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
 
 #if !DeviceDotNet
@@ -267,6 +278,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                         }
                     } while (retry);
+                    return true;
                 });
             }
             else
@@ -355,7 +367,10 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                return _Connected;
+                lock (SerializeTaskScheduler)
+                {
+                    return _Connected;
+                }
             }
 
             //internal set
@@ -428,14 +443,17 @@ namespace OOAdvantech.Remoting.RestApi
             }
 
             #region Communication session completed when all physical connections are disconnected for a period of time
-            if (!sessionConnected && _Connected)
+            if (!sessionConnected && Connected)
                 DisconnectTimer.Start();
 
-            if (sessionConnected && !_Connected && DisconnectTimer.Enabled)
+            if (sessionConnected && !Connected && DisconnectTimer.Enabled)
                 DisconnectTimer.Stop();
             #endregion
 
-            _Connected = sessionConnected;
+            lock (SerializeTaskScheduler)
+            {
+                _Connected = sessionConnected;
+            }
         }
 
 

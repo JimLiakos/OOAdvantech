@@ -278,7 +278,9 @@ namespace OOAdvantech.Remoting.RestApi
 
             RequestData requestData = new RequestData();
             requestData.ChannelUri = ChannelUri;
+            requestData.SessionIdentity= clientSessionPart.SessionIdentity;
             string myJson = null;
+
             //System.Net.Http.StringContent content = null;
 
             AuthUser authUser = System.Runtime.Remoting.Messaging.CallContext.GetData("AutUser") as AuthUser;

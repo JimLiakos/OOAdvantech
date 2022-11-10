@@ -523,6 +523,9 @@ namespace OOAdvantech.Remoting.RestApi
                         {
 
                         }
+                        if(response.SessionIdentity == null)
+                            response.SessionIdentity = serverSession.SessionIdentity;
+
                         return response;
                     }
                     catch (System.Reflection.TargetInvocationException error)
@@ -678,7 +681,7 @@ namespace OOAdvantech.Remoting.RestApi
                     }
 
                 }
-                serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                
                 responseMessage.Web = methodCallMessage.Web;
                 responseMessage.ReAuthenticate = methodCallMessage.ReAuthenticate;
                 responseMessage.ChannelUri = request.ChannelUri;
@@ -689,6 +692,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                     System.Diagnostics.Debug.WriteLine("RestApp Disconnected");
                     serverSession.SetConnectionState(request.PhysicalConnectionID, false);
+
+                    serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+
                     //serverSession.Connected = false;
                     //var dataContext = System.Runtime.Remoting.Messaging.CallContext.GetData("DataContext");
                     responseMessage.Web = methodCallMessage.Web;
@@ -701,10 +707,11 @@ namespace OOAdvantech.Remoting.RestApi
                     responseMessage.Marshal();
                     //responseMessage.ReturnObjectJson = JsonMarshal(dataContext, methodCallMessage.ChannelUri, serverSession);
                     responseMessage.ChannelUri = request.ChannelUri;
-                    //responseMessage.ReturnType = dataContextType.FullName;
+                    
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 }
-
+                
+                serverSession.WebSocketEndPoint = request.EventCallBackChannel;
 
                 //if (methodCallMessage.MethodName == StandardActions.ReconfigureChannel)
                 //{

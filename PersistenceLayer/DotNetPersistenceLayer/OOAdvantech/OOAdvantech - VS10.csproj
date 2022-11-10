@@ -315,6 +315,7 @@
     <Compile Include="Multilingual.cs" />
     <Compile Include="MultilingualMember.cs" />
     <Compile Include="ProxyClassCodeBuilder.cs" />
+    <Compile Include="TaskScheduler.cs" />
     <Compile Include="TypeInfo.cs" />
     <Compile Include="TypeLoader.cs" />
     <None Include="packages.config" />

@@ -11215,7 +11215,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@104
-			location   	(513, 1175)
+			location   	(513, 1174)
 			fill_color 	13434879
 			nlines     	1
 			max_width  	192
@@ -11226,11 +11226,11 @@
 		    fill_color 	13434879
 		    quidu      	"40D14AF30380"
 		    width      	210
-		    height     	124
+		    height     	126
 		    annotation 	8
 		    autoResize 	TRUE)
 		(object AssociationViewNew "SessionProxies" @105
-		    location   	(841, 907)
+		    location   	(842, 907)
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -11243,7 +11243,7 @@
 			default_color 	TRUE)
 		    label      	(object SegLabel @106
 			Parent_View 	@105
-			location   	(841, 848)
+			location   	(842, 848)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -11269,7 +11269,7 @@
 		    roleview_list 	(list RoleViews
 			(object RoleView "$UNNAMED$20" @107
 			    Parent_View 	@105
-			    location   	(420, -240)
+			    location   	(421, -240)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -11311,7 +11311,7 @@
 			    line_style 	0
 			    label      	(object SegLabel @109
 				Parent_View 	@107
-				location   	(1052, 712)
+				location   	(1053, 711)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -11333,7 +11333,7 @@
 				orientation 	1))
 			(object RoleView "Proxies" @110
 			    Parent_View 	@105
-			    location   	(420, -240)
+			    location   	(421, -240)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -11346,7 +11346,7 @@
 				default_color 	TRUE)
 			    label      	(object SegLabel @111
 				Parent_View 	@110
-				location   	(660, 1058)
+				location   	(661, 1058)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -11374,7 +11374,7 @@
 			    line_style 	0
 			    label      	(object SegLabel @112
 				Parent_View 	@110
-				location   	(738, 1128)
+				location   	(739, 1127)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -13399,7 +13399,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70142"
 		    width      	300
-		    height     	7695
+		    height     	7725
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13438,7 +13438,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7013A"
 		    width      	300
-		    height     	7695
+		    height     	7725
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13483,7 +13483,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7012B"
 		    width      	618
-		    height     	7695
+		    height     	7725
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13521,7 +13521,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70128"
 		    width      	499
-		    height     	7595
+		    height     	7625
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13559,7 +13559,7 @@
 		    fill_color 	13434879
 		    quidu      	"5C121E330309"
 		    width      	662
-		    height     	7695
+		    height     	7725
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13657,7 +13657,7 @@
 		    ordinal    	3)
 		(object Destruction_Marker @228
 		    Parent_View 	@220
-		    location   	(2672, 7920)
+		    location   	(2672, 7950)
 		    line_color 	3342489
 		    fill_color 	13434879)
 		(object InterMessView "" @229
