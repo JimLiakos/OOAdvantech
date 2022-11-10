@@ -168,6 +168,11 @@ namespace OOAdvantech.Remoting.RestApi
         {
             set
             {
+                var connectionIsOpen = value?.ConnectionIsOpen;
+                if (connectionIsOpen != null && !connectionIsOpen.Value)
+                {
+
+                }
                 if ((Channel is WebSocketChannel) && (Channel as WebSocketChannel).WebSocketEndPoint == value)
                     return;
                 if (Channel != null)
