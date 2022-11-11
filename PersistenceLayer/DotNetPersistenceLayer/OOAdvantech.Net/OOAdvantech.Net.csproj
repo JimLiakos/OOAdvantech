@@ -45,9 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Xamarin\OOAdvantech.NetStandard\TaskScheduler.cs">
+    <None Include="..\..\Xamarin\OOAdvantech.NetStandard\TaskScheduler.cs">
       <Link>TaskScheduler.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\OOAdvantech\CultureContext.cs">
       <Link>CultureContext.cs</Link>
     </None>

@@ -3,7 +3,7 @@ REGEDIT4
 [HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Rational Software\Rose\AddIns\UML TO VS]
 "Active"="Yes"
 "Copyright"="Copyright © 1997-2002 Hlemejouras Software Corp."
-"InstallDir"="F:\\X-Drive\\source\\OpenVersions\\RoseVisual.Net Studio Integrator\\RoseMetaDataRepository"
+"InstallDir"="C:\\Projects\\OpenVersions\\RoseVisual.Net Studio Integrator\\RoseMetaDataRepository"
 "LanguageAddIn"="Yes"
 "OLEServer"="RoseMetaDataRepository.VSCodeElementsSynchronizer"
 "PropertyFile"="VSPropPers.pty"
