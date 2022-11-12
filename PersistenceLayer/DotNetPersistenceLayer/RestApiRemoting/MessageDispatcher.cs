@@ -142,8 +142,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
-                    serverSession.SetConnectionState(request.PhysicalConnectionID, true);
                     serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    serverSession.SetConnectionState(request.PhysicalConnectionID, true);
+                    
 
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
@@ -408,8 +409,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
-                    serverSession.SetConnectionState(request.PhysicalConnectionID, true);
                     serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    serverSession.SetConnectionState(request.PhysicalConnectionID, true);
+                    
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
                     if (methodCallMessage.ChannelUri == "local-device" && !string.IsNullOrWhiteSpace(methodCallMessage.X_Auth_Token))

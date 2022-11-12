@@ -420,6 +420,17 @@ namespace OOAdvantech.Remoting.RestApi
                 physicalConnectionID = "";//web view
 
 
+       
+
+            bool sessionConnected = false;
+            lock (PhysicalConnections)
+            {
+                if (!PhysicalConnections.ContainsKey(physicalConnectionID) || PhysicalConnections[physicalConnectionID] != connected)
+                    PhysicalConnections[physicalConnectionID] = connected;
+
+                foreach (bool channelConnected in PhysicalConnections.Values)
+                    sessionConnected |= channelConnected;
+            }
             try
             {
                 var ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
@@ -430,16 +441,6 @@ namespace OOAdvantech.Remoting.RestApi
             }
             catch (Exception error)
             {
-            }
-
-            bool sessionConnected = false;
-            lock (PhysicalConnections)
-            {
-                if (!PhysicalConnections.ContainsKey(physicalConnectionID) || PhysicalConnections[physicalConnectionID] != connected)
-                    PhysicalConnections[physicalConnectionID] = connected;
-
-                foreach (bool channelConnected in PhysicalConnections.Values)
-                    sessionConnected |= channelConnected;
             }
 
             #region Communication session completed when all physical connections are disconnected for a period of time
