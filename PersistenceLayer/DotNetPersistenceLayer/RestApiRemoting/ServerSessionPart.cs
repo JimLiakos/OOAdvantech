@@ -24,6 +24,7 @@ using OOAdvantech.Json.Linq;
 using OOAdvantech.Remoting.RestApi.Serialization;
 
 
+
 namespace OOAdvantech.Remoting.RestApi
 {
     /// <MetaDataID>{9e696a9f-b75e-480a-814f-ca22f6d9b12c}</MetaDataID>
@@ -172,11 +173,13 @@ namespace OOAdvantech.Remoting.RestApi
         {
             set
             {
+#if DEBUG
                 var connectionIsOpen = value?.ConnectionIsOpen;
                 if (connectionIsOpen != null && !connectionIsOpen.Value)
                 {
 
                 }
+#endif
                 if ((Channel is WebSocketChannel) && (Channel as WebSocketChannel).WebSocketEndPoint == value)
                     return;
                 if (Channel != null)
@@ -215,9 +218,11 @@ namespace OOAdvantech.Remoting.RestApi
 
                 bool? ConnectionIsOpen = true;
 
+
+
                 try
                 {
-                    ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
+                    ConnectionIsOpen = GetActiveChannel()?.EndPoint?.ConnectionIsOpen;
                     if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
                     {
 
@@ -235,14 +240,31 @@ namespace OOAdvantech.Remoting.RestApi
                         retry = false;
                         try
                         {
-                            if (Connected)
+                            IChannel channel = GetActiveChannel();
+                            if(channel!=Channel)
                             {
+
+                            }
+                            if (channel != null)
+                            {
+                                try
+                                {
+                                    ConnectionIsOpen = channel.EndPoint?.ConnectionIsOpen;
+                                    if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
+                                    {
+
+                                    }
+                                }
+                                catch (Exception error)
+                                {
+                                }
+
                                 if (invokeType == InvokeType.Sync)
-                                    Channel.ProcessRequest(requestData);
+                                    channel.ProcessRequest(requestData);
                                 else
                                 {
                                     requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
-                                    var task = Channel.AsyncProcessRequest(requestData);
+                                    var task = channel.AsyncProcessRequest(requestData);
                                     if (task == null)
                                     {
 
@@ -285,6 +307,20 @@ namespace OOAdvantech.Remoting.RestApi
             {
             }
             return true;
+        }
+
+        private IChannel GetActiveChannel()
+        {
+            lock (PhysicalConnections)
+            {
+                foreach (var connectionID in PhysicalConnections.Where(x => x.Value).Select(x => x.Key))
+                {
+                    IChannel channel = null;
+                    if (Channels.TryGetValue(connectionID, out channel))
+                        return channel;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -404,6 +440,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{86865da1-058c-4466-8a43-c59e1521ff18}</MetaDataID>
         Dictionary<string, bool> PhysicalConnections = new Dictionary<string, bool>();
 
+        Dictionary<string, IChannel> Channels = new Dictionary<string, IChannel>();
+
         /// <summary>
         /// Sets state for physical connection
         /// </summary>
@@ -414,29 +452,79 @@ namespace OOAdvantech.Remoting.RestApi
         /// Defines the state connected true otherwise false
         /// </param>
         /// <MetaDataID>{a428e9ab-ef4c-455a-8d71-b0584d0f77de}</MetaDataID>
-        public void SetConnectionState(string physicalConnectionID, bool connected)
+        public void SetConnectionState(string physicalConnectionID, bool connected, IEndPoint endPoint = null)
         {
             if (physicalConnectionID == null)
                 physicalConnectionID = "";//web view
 
 
-       
 
+            bool thereIsphysicallConnection = false;
             bool sessionConnected = false;
+
+            Dictionary<string, bool> physicalConnections = null;
             lock (PhysicalConnections)
             {
                 if (!PhysicalConnections.ContainsKey(physicalConnectionID) || PhysicalConnections[physicalConnectionID] != connected)
+                {
                     PhysicalConnections[physicalConnectionID] = connected;
+                    if (connected && endPoint != null)
+                    {
+                        IChannel channel = null;
+                        Channels.TryGetValue(physicalConnectionID, out channel);
 
-                foreach (bool channelConnected in PhysicalConnections.Values)
+                        if (!(channel is WebSocketChannel) || (channel as WebSocketChannel).WebSocketEndPoint == endPoint)
+                        {
+                            channel = new WebSocketChannel(endPoint);
+                            Channels[physicalConnectionID] = channel;
+                        }
+                    }
+                    else
+                        Channels[physicalConnectionID] = null;
+                }
+
+                physicalConnections = PhysicalConnections.ToDictionary(entry => entry.Key,
+                                               entry => entry.Value);
+
+                foreach (var entry in PhysicalConnections)
+                {
+                    bool channelConnected = entry.Value;
                     sessionConnected |= channelConnected;
+                }
+
+                thereIsphysicallConnection = PhysicalConnections.Where(x => x.Value).Count() > 0;
+            }
+
+
+            foreach (var entry in physicalConnections.Where(x => x.Key != physicalConnectionID))
+            {
+                bool channelConnected = entry.Value;
+
+                IChannel channel = null;
+                lock (PhysicalConnections)
+                {
+                    if (channelConnected && Channels.ContainsKey(entry.Key))
+                        channel = Channels[entry.Key];
+                }
+
+                var connectionIsOpen = channel?.EndPoint?.ConnectionIsOpen;
+                if (connectionIsOpen != null && !connectionIsOpen.Value)
+                {
+                    lock (PhysicalConnections)
+                    {
+                        PhysicalConnections[entry.Key] = false;
+                    }
+                }
             }
             try
             {
                 var ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
                 if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
                 {
+                    if (thereIsphysicallConnection)
+                    {
 
+                    }
                 }
             }
             catch (Exception error)
