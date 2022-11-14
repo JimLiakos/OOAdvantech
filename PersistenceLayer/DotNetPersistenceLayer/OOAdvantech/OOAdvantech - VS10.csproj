@@ -42,7 +42,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <SignAssembly>true</SignAssembly>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -315,6 +315,7 @@
     <Compile Include="Multilingual.cs" />
     <Compile Include="MultilingualMember.cs" />
     <Compile Include="ProxyClassCodeBuilder.cs" />
+    <Compile Include="TaskScheduler.cs" />
     <Compile Include="TypeInfo.cs" />
     <Compile Include="TypeLoader.cs" />
     <None Include="packages.config" />

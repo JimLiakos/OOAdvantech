@@ -562,8 +562,36 @@ namespace OOAdvantech.CodeMetaDataRepository
         /// <MetaDataID>{30ea82a5-73af-469b-9333-ae75984c2dbf}</MetaDataID>
         static IDEManager MonoStateObject ;
         /// <MetaDataID>{a5d4f1dc-8c9f-4e41-9666-562ab7d85c72}</MetaDataID>
-        public static void Initialize()
+        public static void Initialize(bool secure=false)
         {
+
+            System.IO.Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            System.Runtime.Remoting.RemotingConfiguration.CustomErrorsEnabled(false);
+            try
+            {
+                ModulePublisher.ClassRepository.Init();
+                if (!OOAdvantech.Remoting.RemotingServices.IsIpcSeverChannelRegiter("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString()))
+                {
+                    if(secure)
+                        OOAdvantech.Remoting.RemotingServices.RegisterSecureIpcChannel("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString(), true);
+                    else
+                        OOAdvantech.Remoting.RemotingServices.RegisterAnonymousIpcChannel("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString(), true);
+
+                }
+            }
+            catch (System.Exception error)
+            {
+            }
+
+            // System.Object @object= ModulePublisher.ClassRepository.CreateInstance("Parser.Parser", "");
+            //_SynchroForm = new SynchroForm(MonoStateObject);
+            //_SynchroForm.Show();
+            //SolutionOpened();
+            VisualStudioEventBridge.VisualStudioEvents.SolutionOpened += new VisualStudioEventBridge.SolutionOpenedEventHandler(SolutionOpened);
+            VisualStudioEventBridge.VisualStudioEvents.SolutionClosed += new VisualStudioEventBridge.SolutionClosedEventHandler(SolutionClosed);
+            string ConfigFileName = AppDomain.CurrentDomain.BaseDirectory + "DTERemoting.config";
+
+
         }
 
         /// <MetaDataID>{32d64e70-0237-45c3-8cc8-b8b35ce8a3e0}</MetaDataID>
@@ -631,30 +659,12 @@ namespace OOAdvantech.CodeMetaDataRepository
             }
         }
 
+        
         /// <MetaDataID>{0f10e0cb-4558-44c6-af05-b0cc93486fd9}</MetaDataID>
         static IDEManager()
         {
 
-            System.IO.Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            System.Runtime.Remoting.RemotingConfiguration.CustomErrorsEnabled(false);
-            try
-            {
-                ModulePublisher.ClassRepository.Init();
-                if (!OOAdvantech.Remoting.RemotingServices.IsIpcSeverChannelRegiter("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString()))
-                    OOAdvantech.Remoting.RemotingServices.RegisterAnonymousIpcChannel("PID" + System.Diagnostics.Process.GetCurrentProcess().Id.ToString(), true);
-            }
-            catch (System.Exception error)
-            {
-            }
-             
-            // System.Object @object= ModulePublisher.ClassRepository.CreateInstance("Parser.Parser", "");
-            //_SynchroForm = new SynchroForm(MonoStateObject);
-            //_SynchroForm.Show();
-            //SolutionOpened();
-            VisualStudioEventBridge.VisualStudioEvents.SolutionOpened += new VisualStudioEventBridge.SolutionOpenedEventHandler(SolutionOpened);
-            VisualStudioEventBridge.VisualStudioEvents.SolutionClosed += new VisualStudioEventBridge.SolutionClosedEventHandler(SolutionClosed);
-            string ConfigFileName = AppDomain.CurrentDomain.BaseDirectory + "DTERemoting.config";
-            //if (!System.IO.File.Exists(ConfigFileName))
+               //if (!System.IO.File.Exists(ConfigFileName))
             //{
             //    System.Xml.XmlDocument XmlDocument = new System.Xml.XmlDocument();
             //    XmlDocument.LoadXml("<configuration><system.runtime.remoting><customErrors mode=\"off\"/></system.runtime.remoting></configuration>");
