@@ -90,7 +90,7 @@ namespace OOAppDevToolBox
 
      
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            System.Windows.Forms.MessageBox.Show("Hello");
+            //System.Windows.Forms.MessageBox.Show("Hello");
 
             await this.RegisterCommandsAsync();
             this.RegisterToolWindows();
