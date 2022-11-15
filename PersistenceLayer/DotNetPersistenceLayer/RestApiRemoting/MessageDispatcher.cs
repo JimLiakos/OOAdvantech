@@ -142,8 +142,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
-                    serverSession.SetConnectionState(request.PhysicalConnectionID, true);
                     serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
+                    
 
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
@@ -408,8 +409,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
-                    serverSession.SetConnectionState(request.PhysicalConnectionID, true);
                     serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
+                    
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
                     if (methodCallMessage.ChannelUri == "local-device" && !string.IsNullOrWhiteSpace(methodCallMessage.X_Auth_Token))
@@ -737,7 +739,7 @@ namespace OOAdvantech.Remoting.RestApi
                 //    //responseMessage.ReturnType = dataContextType.FullName;
                 //    return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 //}
-                serverSession.SetConnectionState(request.PhysicalConnectionID, true);
+                serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
                 //serverSession.Connected = true;
 
 

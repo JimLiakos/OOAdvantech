@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractionsAndPersistency - VS10", "..\AbstractionsAndPersistency\AbstractionsAndPersistency - VS10.csproj", "{CC669A8E-0854-4468-93D5-FD46873B5322}"
 EndProject
@@ -107,6 +107,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUIElementObjectBind-VS10", "..\..\..\UserInterface\WPFUserInterfaceLibrary\WPFUIElementObjectBind\WPFUIElementObjectBind-VS10.csproj", "{8DFEC0F3-C2EC-4D16-9E1D-09D33199E73F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsBaseEx", "..\..\..\UserInterface\WPFUserInterfaceLibrary\WindowsBaseEx\WindowsBaseEx.csproj", "{D83EAE0A-82CD-4496-8524-C734C6236B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoseAddinFacade - VS10", "..\..\..\RoseVisual.Net Studio Integrator\RoseAddinFacade\RoseAddinFacade - VS10.csproj", "{DC89C532-F995-42A0-A09C-4F23944DA00D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1893,6 +1895,46 @@ Global
 		{D83EAE0A-82CD-4496-8524-C734C6236B78}.Template|x64.Build.0 = Release|Any CPU
 		{D83EAE0A-82CD-4496-8524-C734C6236B78}.Template|x86.ActiveCfg = Release|Any CPU
 		{D83EAE0A-82CD-4496-8524-C734C6236B78}.Template|x86.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Debug|x86.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|x64.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Debug|x86.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|Any CPU.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|x64.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|x64.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|x86.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Net4Release|x86.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|x64.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Release|x86.Build.0 = Release|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|Any CPU.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|x64.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|x64.Build.0 = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|x86.ActiveCfg = Debug|Any CPU
+		{DC89C532-F995-42A0-A09C-4F23944DA00D}.Template|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
