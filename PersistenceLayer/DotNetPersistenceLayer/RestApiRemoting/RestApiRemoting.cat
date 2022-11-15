@@ -1270,9 +1270,9 @@
 		    quid       	"5ADD67EF0309"
 		    parameters 	(list Parameters
 			(object Parameter "methodCallMessage"
-			    quid       	"5DCCE5FD02F1"
+			    quid       	"63734D88004C"
 			    type       	"OOAdvantech.Remoting.RestApi.MethodCallMessage"))
-		    result     	"FlavourBusinessFacade.OOAdvantech.RestApiRemoting.AuthUser"
+		    result     	"OOAdvantech.RestApiRemoting.AuthUser"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Implementation"
 		    uid        	0)
@@ -1311,16 +1311,16 @@
 		    quid       	"5C7764330020"
 		    parameters 	(list Parameters
 			(object Parameter "eventInfo"
-			    quid       	"5C77643300B3"
+			    quid       	"63734D8703A6"
 			    type       	"System.Reflection.EventInfo")
 			(object Parameter "eventPublisherUri"
-			    quid       	"5C77643300CF"
+			    quid       	"63734D8703B1"
 			    type       	"OOAdvantech.Remoting.ExtObjectUri")
 			(object Parameter "args"
-			    quid       	"5C77643300E9"
+			    quid       	"63734D8703BA"
 			    type       	"System.Object[]")
 			(object Parameter "invokeType"
-			    quid       	"5C7764330102"
+			    quid       	"63734D8703C1"
 			    type       	"OOAdvantech.Remoting.InvokeType"))
 		    result     	"bool"
 		    concurrency 	"Sequential"
@@ -1339,7 +1339,7 @@
 		    quid       	"5C776433017A"
 		    parameters 	(list Parameters
 			(object Parameter "extObjectUri"
-			    quid       	"5C77643301A5"
+			    quid       	"63734D8703D8"
 			    type       	"OOAdvantech.Remoting.ExtObjectUri"))
 		    result     	"System.MarshalByRefObject"
 		    concurrency 	"Sequential"
@@ -1439,7 +1439,7 @@
 		    
 		    parameters 	(list Parameters
 			(object Parameter "physicalConnectionID"
-			    quid       	"5DCCE5FD0273"
+			    quid       	"63734C51034B"
 			    documentation 	
 |
 |Define the physical connection id
@@ -1447,13 +1447,16 @@
 			    
 			    type       	"string")
 			(object Parameter "connected"
-			    quid       	"5DCCE5FD0286"
+			    quid       	"63734C510356"
 			    documentation 	
 |
 |Defines the state connected true otherwise false
 |
 			    
-			    type       	"bool"))
+			    type       	"bool")
+			(object Parameter "endPoint"
+			    quid       	"63734C510364"
+			    type       	"OOAdvantech.Remoting.RestApi.IEndPoint"))
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
@@ -1472,6 +1475,99 @@
 		    result     	"OOAdvantech.Remoting.RestApi.ObjRef"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Implementation"
+		    uid        	0)
+		(object Operation "~ServerSessionPart"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{eaaf0dea-fc86-49ec-a9de-90d0febc8d10}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C5101CB"))
+		    quid       	"63734C5101CB"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
+		    uid        	0)
+		(object Operation "ClientProcessTerminates"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{74c529a3-c179-45e1-ad9b-3f86aaca30fa}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C5101E1"))
+		    quid       	"63734C5101E1"
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "GetServerSessionPart"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{eb1c27b6-bffe-4f4b-a010-354662b77d94}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C510256"))
+		    quid       	"63734C510256"
+		    parameters 	(list Parameters
+			(object Parameter "sessionIdentity"
+			    quid       	"63734C510262"
+			    type       	"string"))
+		    result     	"OOAdvantech.Remoting.RestApi.ServerSessionPart"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Implementation"
+		    uid        	0)
+		(object Operation "SessionTypesSync"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{12cd69ea-2195-4dd0-b35f-c98346a43e33}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C5102BE"))
+		    quid       	"63734C5102BE"
+		    documentation 	
+|
+|Marks all remote ref objects types which are successfully cached in client session part
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "methodCallMessage"
+			    quid       	"63734C5102C9"
+			    documentation 	
+|
+|Method call message keeps info for  cached types in client session part 
+|
+			    
+			    type       	"OOAdvantech.Remoting.RestApi.MethodCallMessage"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Implementation"
+		    uid        	0)
+		(object Operation "GetActiveChannel"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{f8646690-3231-4752-9ac3-9037fd0c01cf}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C51038A"))
+		    quid       	"63734C51038A"
+		    result     	"OOAdvantech.Remoting.RestApi.IChannel"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
 		    uid        	0))
 	    class_attributes 	(list class_attribute_list
 		(object ClassAttribute "X_Auth_Token"
@@ -1649,23 +1745,6 @@
 			    value      	FALSE))
 		    quid       	"5C776436033C"
 		    type       	"System.Timers.Timer")
-		(object ClassAttribute "Channel"
-		    attributes 	(list Attribute_Set
-			(object Attribute
-			    tool       	"MetaData"
-			    name       	"MetaObjectID"
-			    value      	"{c9d73168-d8bb-406b-a837-cada411fb29b}")
-			(object Attribute
-			    tool       	"MetaData"
-			    name       	"UniqueID"
-			    value      	"5C776437011E")
-			(object Attribute
-			    tool       	"C#"
-			    name       	"As Property"
-			    value      	FALSE))
-		    quid       	"5C776437011E"
-		    type       	"OOAdvantech.Remoting.RestApi.IChannel"
-		    exportControl 	"Public")
 		(object ClassAttribute "Elapsed"
 		    attributes 	(list Attribute_Set
 			(object Attribute
@@ -1805,7 +1884,60 @@
 |Directs and indirects.
 |
 		    
-		    type       	"System.Collections.Generic.Dictionary<string,bool>"))
+		    type       	"System.Collections.Generic.Dictionary<string,bool>")
+		(object ClassAttribute "UseNetRemotingChannel"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4bf34c49-72ec-4407-8aea-93454a5d64e0}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C5200F9")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"63734C5200F9"
+		    type       	"bool"
+		    exportControl 	"Public")
+		(object ClassAttribute "SerializeTaskScheduler"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{13c45163-6e38-493c-94b8-9e6db6845a65}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C5202BD")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"63734C5202BD"
+		    type       	"OOAdvantech.SerializeTaskScheduler")
+		(object ClassAttribute "Channels"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{0ea0710f-8a34-44bc-ab9f-f0ef4975d605}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734C5300F9")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"63734C5300F9"
+		    type       	"System.Collections.Generic.Dictionary<string,OOAdvantech.Remoting.RestApi.IChannel>"))
 	    module     	"Component View::OOAdvantech::RestApiRemoting::RestApiRemoting"
 	    quidu      	"5ABB408A0169"
 	    language   	"C#")
@@ -7267,7 +7399,7 @@
 			    supplier   	"$UNNAMED$20"
 			    quidu      	"5C781F540095"
 			    messages   	(list Messages
-				(object Message "SetConnectionState(  )"
+				(object Message "SetConnectionState(   )"
 				    quid       	"5C7820500215"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8331,7 +8463,7 @@
 			    supplier   	"$UNNAMED$35"
 			    quidu      	"5DCCE9CF030D"
 			    messages   	(list Messages
-				(object Message "SetConnectionState(  )"
+				(object Message "SetConnectionState(   )"
 				    quid       	"5DCCE9CF0308"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8438,7 +8570,7 @@
 				    ordinal    	5
 				    quidu      	"000000000000"
 				    creation   	FALSE)
-				(object Message "SetConnectionState(  )"
+				(object Message "SetConnectionState(   )"
 				    quid       	"5DCCE62203AD"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9189,24 +9321,6 @@
 		    line_color 	3342489
 		    fill_color 	12615808
 		    quidu      	"5C13DE3E0165"
-		    compartment 	(object Compartment
-			Parent_View 	@29
-			location   	(3471, 1434)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Decoration"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	3
-			max_width  	1146)
 		    width      	657
 		    height     	237
 		    annotation 	8)
@@ -9520,24 +9634,6 @@
 		    line_color 	3342489
 		    fill_color 	12615808
 		    quidu      	"5DAFE5690351"
-		    compartment 	(object Compartment
-			Parent_View 	@45
-			location   	(3227, 1042)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Decoration"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	3
-			max_width  	475)
 		    width      	462
 		    height     	231
 		    annotation 	8)
@@ -9585,24 +9681,6 @@
 		    line_color 	3342489
 		    fill_color 	12615808
 		    quidu      	"5DC657860273"
-		    compartment 	(object Compartment
-			Parent_View 	@48
-			location   	(2790, 1428)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Decoration"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	3
-			max_width  	1493)
 		    width      	613
 		    height     	237
 		    annotation 	8)
@@ -11288,7 +11366,7 @@
 			quidu      	"5C779B8D006C"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	445
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.016667
@@ -11375,7 +11453,7 @@
 			quidu      	"5C779CF6029A"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	445
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.508333
@@ -11462,7 +11540,7 @@
 			quidu      	"5C77A2100216"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	592
 			justify    	0
 			label      	"InternalDispatchMessage( )"
 			pctDist    	0.566667
@@ -11572,7 +11650,7 @@
 			quidu      	"5C77A38F02FE"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	416
 			justify    	0
 			label      	"SendResponce( )"
 			pctDist    	1.076271
@@ -11685,7 +11763,7 @@
 			quidu      	"5C77BF660206"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	419
 			justify    	0
 			label      	"SendResponce( )"
 			pctDist    	0.779661
@@ -11856,7 +11934,7 @@
 			quidu      	"5C7793BB002C"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	474
 			justify    	0
 			label      	"SendRequestAsync( )"
 			pctDist    	1.499723
@@ -11949,7 +12027,7 @@
 			quidu      	"5C779C3A00FD"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	474
 			justify    	0
 			label      	"SendRequestAsync( )"
 			pctDist    	4.032321
@@ -12078,7 +12156,7 @@
 			quidu      	"5C77A1640244"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	445
 			justify    	0
 			label      	"DispatchMessage( )"
 			pctDist    	3.367002
@@ -12206,7 +12284,7 @@
 			quidu      	"5C77A2850351"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	445
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	-0.898639
@@ -12328,7 +12406,7 @@
 			quidu      	"5C77916602DF"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	419
 			justify    	0
 			label      	"ProcessRequest( )"
 			pctDist    	2.546380
@@ -12856,7 +12934,7 @@
 			quidu      	"5C77916602DF"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	372
 			justify    	0
 			label      	"ProcessRequest( )"
 			pctDist    	0.762712
@@ -12898,7 +12976,7 @@
 			quidu      	"5C7793BB002C"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	428
 			justify    	0
 			label      	"SendRequestAsync( )"
 			pctDist    	0.500000
@@ -12940,7 +13018,7 @@
 			quidu      	"5C779B8D006C"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.580000
@@ -12982,7 +13060,7 @@
 			quidu      	"5C779C3A00FD"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	428
 			justify    	0
 			label      	"SendRequestAsync( )"
 			pctDist    	0.418782
@@ -13024,7 +13102,7 @@
 			quidu      	"5C779CF6029A"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.540000
@@ -13066,7 +13144,7 @@
 			quidu      	"5C77A1640244"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"DispatchMessage( )"
 			pctDist    	0.565724
@@ -13108,7 +13186,7 @@
 			quidu      	"5C77A2100216"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	522
 			justify    	0
 			label      	"InternalDispatchMessage( )"
 			pctDist    	0.500000
@@ -13150,7 +13228,7 @@
 			quidu      	"5C77A2850351"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.502913
@@ -13192,7 +13270,7 @@
 			quidu      	"5C77A38F02FE"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	366
 			justify    	0
 			label      	"SendResponce( )"
 			pctDist    	0.500000
@@ -13234,7 +13312,7 @@
 			quidu      	"5C77BF660206"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	369
 			justify    	0
 			label      	"SendResponce( )"
 			pctDist    	0.500000
@@ -15574,9 +15652,9 @@
 			quidu      	"5C7820500215"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	525
+			max_width  	10
 			justify    	0
-			label      	"SetConnectionState(  )"
+			label      	"SetConnectionState(   )"
 			pctDist    	-0.097446
 			height     	85
 			orientation 	0)
@@ -16193,7 +16271,7 @@
 			quidu      	"5DC9518B0267"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	411
 			justify    	0
 			label      	"GetServerSession(  )"
 			pctDist    	1.636518
@@ -16291,7 +16369,7 @@
 			quidu      	"5DC955BF02FF"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	428
 			justify    	0
 			label      	"SendRequestAsync( )"
 			pctDist    	1.616667
@@ -16419,7 +16497,7 @@
 			quidu      	"5DC985BF0148"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	451
 			justify    	0
 			label      	"ClientSessionPart(    )"
 			pctDist    	1.734677
@@ -16470,7 +16548,7 @@
 			quidu      	"5DC9565E0105"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	401
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.241667
@@ -16598,7 +16676,7 @@
 			quidu      	"5DC9553B00BF"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	401
 			justify    	0
 			label      	"DispatchMessage( )"
 			pctDist    	1.665103
@@ -16726,7 +16804,7 @@
 			quidu      	"5DC9553B00C5"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	424
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	-0.332177
@@ -16854,7 +16932,7 @@
 			quidu      	"5DC95D63028E"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	266
 			justify    	0
 			label      	"Subscribe(  )"
 			pctDist    	0.500000
@@ -16903,7 +16981,7 @@
 			quidu      	"5DC98A20036D"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	460
 			justify    	0
 			label      	"WebSocketChannel(  )"
 			pctDist    	0.500000
@@ -19814,8 +19892,8 @@
 	    zoom       	100
 	    max_height 	28350
 	    max_width  	21600
-	    origin_x   	2197
-	    origin_y   	459
+	    origin_x   	2219
+	    origin_y   	1331
 	    items      	(list diagram_item_list
 		(object ObjectView "DirectServerEndpointSessionA" @586
 		    location   	(1437, 878)
@@ -19910,7 +19988,7 @@
 			quidu      	"5DCCD7A40373"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	522
 			justify    	0
 			label      	"RemoveLocalConnection(  )"
 			pctDist    	0.475000
@@ -20087,7 +20165,7 @@
 			quidu      	"5DCCD7A40375"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"DispatchMessage( )"
 			pctDist    	0.681932
@@ -20173,7 +20251,7 @@
 			quidu      	"5DCCE9CF0300"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	1.375479
@@ -20245,7 +20323,7 @@
 		    line_color 	3342489
 		    label      	(object SegLabel @608
 			Parent_View 	@607
-			location   	(4647, 1936)
+			location   	(4643, 1933)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -20259,11 +20337,11 @@
 			quidu      	"5DCCE9CF0308"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	456
 			justify    	0
-			label      	"SetConnectionState(  )"
-			pctDist    	0.012329
-			height     	153
+			label      	"SetConnectionState(   )"
+			pctDist    	-0.023973
+			height     	150
 			orientation 	0)
 		    DataFlowView 	@609
 		    DataFlowView 	@610
@@ -20843,7 +20921,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"SetConnectionState(  )"
+			label      	"SetConnectionState(   )"
 			pctDist    	-0.040913
 			height     	81
 			orientation 	0)
@@ -21381,7 +21459,7 @@
 			quidu      	"5DCCD7A40373"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	522
 			justify    	0
 			label      	"RemoveLocalConnection(  )"
 			pctDist    	0.500000
@@ -21423,7 +21501,7 @@
 			quidu      	"5DCCD7A40375"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"DispatchMessage( )"
 			pctDist    	0.500000
@@ -21465,7 +21543,7 @@
 			quidu      	"5DCCE9CF0300"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	394
 			justify    	0
 			label      	"MessageDispatch( )"
 			pctDist    	0.500000
@@ -21507,9 +21585,9 @@
 			quidu      	"5DCCE9CF0308"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	456
 			justify    	0
-			label      	"SetConnectionState(  )"
+			label      	"SetConnectionState(   )"
 			pctDist    	0.501672
 			height     	50
 			orientation 	0)

@@ -135,7 +135,7 @@ namespace OOAdvantech.Remoting
         public ServerSessionPart(System.Guid clientProcessIdentity)
         {
             ClientProcessIdentity = clientProcessIdentity;
-            if(UseNetRemotingChamnel)
+            if(UseNetRemotingChannel)
                 new WeakReferenceEventPublisher(this, 5000);
 
             _SessionIdentity = clientProcessIdentity.ToString("N") + "." + ServerProcessIdentity.ToString("N");
@@ -150,7 +150,8 @@ namespace OOAdvantech.Remoting
             }
         }
 
-        public virtual bool  UseNetRemotingChamnel { get => true; }
+        /// <MetaDataID>{7c361bf7-f8a7-4427-9a97-463e8837f960}</MetaDataID>
+        public virtual bool UseNetRemotingChannel { get => true; }
 
         /// <MetaDataID>{150c32ae-b249-4174-a000-a4372d4a4cdc}</MetaDataID>
         ~ServerSessionPart()

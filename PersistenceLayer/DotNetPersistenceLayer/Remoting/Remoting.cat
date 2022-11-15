@@ -3626,14 +3626,14 @@
 		    quid       	"48D9DBDF01D4"
 		    parameters 	(list Parameters
 			(object Parameter "jastCreatedProxies"
-			    quid       	"48DB433A0280"
-			    type       	"ref System.Collections.Generic.List<ExtObjectUri>")
+			    quid       	"63734D5700F5"
+			    type       	"System.Collections.Generic.List<OOAdvantech.Remoting.ExtObjectUri>")
 			(object Parameter "collectedProxies"
-			    quid       	"48DB433A02AF"
-			    type       	" System.Collections.Generic.List<string> ")
+			    quid       	"63734D57010A"
+			    type       	"System.Collections.Generic.List<string>")
 			(object Parameter "pendingEvents"
-			    quid       	"48DB433A02BF"
-			    type       	"System.Collections.Generic.Dictionary<string,OOAdvantech.Collections.Generic.Dictionary<System.Reflection.EventInfo,OOAdvantech.Collections.ArrayList>>"))
+			    quid       	"63734D57011B"
+			    type       	"System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<OOAdvantech.Remoting.EventInfoData, System.Collections.Generic.List<object>>>"))
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
@@ -3708,6 +3708,113 @@
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "EventCallback"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b492e405-d195-4286-9823-17e4c2ed8427}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D57000F"))
+		    quid       	"63734D57000F"
+		    parameters 	(list Parameters
+			(object Parameter "eventInfo"
+			    quid       	"63734D57001D"
+			    type       	"System.Reflection.EventInfo")
+			(object Parameter "eventPublisherUri"
+			    quid       	"63734D57002A"
+			    type       	"OOAdvantech.Remoting.ExtObjectUri")
+			(object Parameter "args"
+			    quid       	"63734D570036"
+			    type       	"System.Object[]")
+			(object Parameter "invokeType"
+			    quid       	"63734D570047"
+			    type       	"OOAdvantech.Remoting.InvokeType"))
+		    result     	"bool"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Implementation"
+		    uid        	0)
+		(object Operation "GetObjectFromUri"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{de8d3d6d-75bf-4579-8e3c-57ee9ed708ef}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D570086"))
+		    quid       	"63734D570086"
+		    parameters 	(list Parameters
+			(object Parameter "extObjectUri"
+			    quid       	"63734D570090"
+			    type       	"OOAdvantech.Remoting.ExtObjectUri"))
+		    result     	"System.MarshalByRefObject"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Subscribe"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{a6d16c7b-e1c8-49ce-9f83-1c47b253baff}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D570149"))
+		    quid       	"63734D570149"
+		    parameters 	(list Parameters
+			(object Parameter "eventSubscriptions"
+			    quid       	"63734D570154"
+			    type       	"System.Collections.Generic.List`1[[OOAdvantech.Remoting.RemoteEventSubscription,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Subscribe"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{005af59a-1b0a-4db4-87b4-513153bf7e2c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D570169"))
+		    quid       	"63734D570169"
+		    parameters 	(list Parameters
+			(object Parameter "eventSubscriptions"
+			    quid       	"63734D570173"
+			    type       	"System.Collections.Generic.List`1[[OOAdvantech.Remoting.RemoteEventSubscription,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]")
+			(object Parameter "remoteEventHandler"
+			    quid       	"63734D570181"
+			    type       	"OOAdvantech.Remoting.IRemoteEventHandler"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "Unsubscribe"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{4714d5a5-da62-4c80-abc4-ee61a23ef961}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D570192"))
+		    quid       	"63734D570192"
+		    parameters 	(list Parameters
+			(object Parameter "eventSubscriptions"
+			    quid       	"63734D57019C"
+			    type       	"System.Collections.Generic.List`1[[OOAdvantech.Remoting.RemoteEventSubscription,{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}]]"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Public"
 		    uid        	0))
 	    class_attributes 	(list class_attribute_list
 		(object ClassAttribute "ServerProcessIdentity"
@@ -3779,7 +3886,69 @@
 			    name       	"As Property"
 			    value      	FALSE))
 		    quid       	"48D9DBE10242"
-		    type       	"System.DateTime"))
+		    type       	"System.DateTime")
+		(object ClassAttribute "SessionIdentity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{e4fc3a85-631e-4027-8050-1a48f95d27c1}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D5701E6")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"63734D5701E6"
+		    type       	"string"
+		    exportControl 	"Public")
+		(object ClassAttribute "IServerSessionPart.ServerProcessIdentity"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{849b5e87-e3b4-4e8d-967a-ef572c475ed6}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D570243")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"63734D570243"
+		    type       	"System.Guid")
+		(object ClassAttribute "UseNetRemotingChannel"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7c361bf7-f8a7-4427-9a97-463e8837f960}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"63734D5702A1")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"63734D5702A1"
+		    type       	"bool"
+		    exportControl 	"Public"))
 	    module     	"Component View::OOAdvantech::Remoting::Remoting"
 	    quidu      	"40EF96BC0123"
 	    language   	"C#")
@@ -5756,7 +5925,7 @@
 			(object Attribute
 			    tool       	"C#"
 			    name       	"ContainerClass"
-			    value      	(value Text "System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsumerProxy>>"))
+			    value      	(value Text "System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<System.Reflection.EventInfo, OOAdvantech.Remoting.EventConsumerProxy>>"))
 			(object Attribute
 			    tool       	"MetaData"
 			    name       	"UniqueID"
@@ -5764,7 +5933,15 @@
 			(object Attribute
 			    tool       	"MetaData"
 			    name       	"MetaObjectID"
-			    value      	"{cff33dab-40ec-4be1-8f51-4b11238ad6f3}"))
+			    value      	"{cff33dab-40ec-4be1-8f51-4b11238ad6f3}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Indexer"
+			    value      	FALSE))
 		    quid       	"48DB43B90271"
 		    label      	"EventConsumers"
 		    supplier   	"Logical View::OOAdvantech::Remoting::EventConsumerProxy"
@@ -5774,7 +5951,8 @@
 			    quid       	"48DB442D0242")
 			(object ClassAttribute "EventInfo"
 			    quid       	"48DB443F031C"))
-		    client_cardinality 	(value cardinality "1..n")
+		    client_cardinality 	(value cardinality "1..*")
+		    exportControl 	"Private"
 		    is_navigable 	TRUE)
 		(object Role "$UNNAMED$30"
 		    attributes 	(list Attribute_Set
@@ -5785,10 +5963,19 @@
 			(object Attribute
 			    tool       	"MetaData"
 			    name       	"MetaObjectID"
-			    value      	"{e3144093-7838-444a-ab61-4e4161328647}"))
+			    value      	"{e3144093-7838-444a-ab61-4e4161328647}")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"Indexer"
+			    value      	FALSE))
 		    quid       	"48DB43B90273"
 		    supplier   	"Logical View::OOAdvantech::Remoting::ServerSessionPart"
 		    quidu      	"48529943038A"
+		    client_cardinality 	(value cardinality "0..*")
 		    Containment 	"By Reference")))
 	(object Association "$UNNAMED$31"
 	    attributes 	(list Attribute_Set
@@ -5819,13 +6006,17 @@
 			(object Attribute
 			    tool       	"C#"
 			    name       	"Indexer"
-			    value      	FALSE))
+			    value      	FALSE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"ContainerClass"
+			    value      	"OOAdvantech.Remoting.IServerSessionPart"))
 		    quid       	"48DB4BE3009C"
 		    label      	"ServerSessionPart"
 		    supplier   	"Logical View::OOAdvantech::Remoting::ServerSessionPart"
 		    quidu      	"48529943038A"
 		    client_cardinality 	(value cardinality "1")
-		    exportControl 	"Private"
+		    exportControl 	"Implementation"
 		    is_navigable 	TRUE)
 		(object Role "$UNNAMED$32"
 		    attributes 	(list Attribute_Set
@@ -8770,7 +8961,7 @@
 			    supplier   	"RenewalManager"
 			    quidu      	"5AD2EE7303A1"
 			    messages   	(list Messages
-				(object Message "AddProxy(OOAdvantech.Remoting.IProxy, OOAdvantech.Remoting.IRemotingServices)"
+				(object Message "AddProxy(  )"
 				    quid       	"5AD2EF6A024C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8811,7 +9002,7 @@
 			    supplier   	"RenewalManager"
 			    quidu      	"5AD2EE7303A1"
 			    messages   	(list Messages
-				(object Message "GetSession(string, bool, OOAdvantech.Remoting.IRemotingServices)"
+				(object Message "GetSession(   )"
 				    quid       	"5AD36B130291"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8849,7 +9040,7 @@
 			    supplier   	"$UNNAMED$46"
 			    quidu      	"48DB4F620290"
 			    messages   	(list Messages
-				(object Message "Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+				(object Message "Invoke( )"
 				    quid       	"48DB4F8E0186"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8869,7 +9060,7 @@
 			    supplier   	"$UNNAMED$47"
 			    quidu      	"5C121BE601AF"
 			    messages   	(list Messages
-				(object Message "EventConsumerSubscription(System.Delegate, System.Reflection.EventInfo)"
+				(object Message "EventConsumerSubscription(  )"
 				    quid       	"5C121CBE0361"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8891,7 +9082,7 @@
 			    supplier   	"$UNNAMED$49"
 			    quidu      	"48DB58260290"
 			    messages   	(list Messages
-				(object Message "Subscribe(OOAdvantech.Remoting.ExtObjectUri, System.Reflection.EventInfo)"
+				(object Message "Subscribe(  )"
 				    quid       	"48DB5B67003E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8913,7 +9104,7 @@
 			    supplier   	"$UNNAMED$50"
 			    quidu      	"48DB5EDD033C"
 			    messages   	(list Messages
-				(object Message "EventConsumerProxy(OOAdvantech.Remoting.ExtObjectUri, System.MarshalByRefObject, System.Reflection.EventInfo, OOAdvantech.Remoting.ClientSessionPart)"
+				(object Message "EventConsumerProxy(    )"
 				    quid       	"48DB5F81000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8942,7 +9133,7 @@
 			    supplier   	"$UNNAMED$48"
 			    quidu      	"48DB51A3002E"
 			    messages   	(list Messages
-				(object Message "Subscribe(OOAdvantech.Remoting.Proxy, System.Reflection.EventInfo)"
+				(object Message "Subscribe(  )"
 				    quid       	"48DB639D02CE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8973,7 +9164,7 @@
 			    supplier   	"$UNNAMED$52"
 			    quidu      	"48DB67C7013A"
 			    messages   	(list Messages
-				(object Message "Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+				(object Message "Invoke( )"
 				    quid       	"48DB67C70143"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8993,7 +9184,7 @@
 			    supplier   	"$UNNAMED$53"
 			    quidu      	"5C121E330309"
 			    messages   	(list Messages
-				(object Message "EventConsumerUnsubscribe(System.Delegate, System.Reflection.EventInfo)"
+				(object Message "EventConsumerUnsubscribe(  )"
 				    quid       	"5C121EA601AF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9015,7 +9206,7 @@
 			    supplier   	"$UNNAMED$51"
 			    quidu      	"48DB67C70128"
 			    messages   	(list Messages
-				(object Message "RemoveSubscription(System.MarshalByRefObject)"
+				(object Message "RemoveSubscription( )"
 				    quid       	"48DB67C7012C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9037,7 +9228,7 @@
 			    supplier   	"$UNNAMED$54"
 			    quidu      	"48DB67C7012B"
 			    messages   	(list Messages
-				(object Message "Unsubscribe(OOAdvantech.Remoting.ExtObjectUri, OOAdvantech.Remoting.EventInfoData)"
+				(object Message "Unsubscribe(  )"
 				    quid       	"48DB67FF02EE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9061,7 +9252,7 @@
 			    supplier   	"$UNNAMED$55"
 			    quidu      	"48DB8EA90157"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB922B0148"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9084,7 +9275,7 @@
 			    supplier   	"$UNNAMED$56"
 			    quidu      	"48DB96A803C8"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB96C2000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9120,7 +9311,7 @@
 				    ordinal    	5
 				    quidu      	"48DB905B03D8"
 				    creation   	FALSE)
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBAA56034B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9179,7 +9370,7 @@
 			    supplier   	"$UNNAMED$58"
 			    quidu      	"48DB8F550203"
 			    messages   	(list Messages
-				(object Message "EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "EventCallback(   )"
 				    quid       	"48DB9436004E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9223,7 +9414,7 @@
 			    supplier   	"$UNNAMED$61"
 			    quidu      	"48DB975D000F"
 			    messages   	(list Messages
-				(object Message "Update(ref System.Collections.Generic.List<ExtObjectUri>,  System.Collections.Generic.List<string> , System.Collections.Generic.Dictionary<string,OOAdvantech.Collections.Generic.Dictionary<System.Reflection.EventInfo,OOAdvantech.Collections.ArrayList>>)"
+				(object Message "Update(   )"
 				    quid       	"48DB979300DA"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9237,7 +9428,7 @@
 			    supplier   	"$UNNAMED$62"
 			    quidu      	"48DBAB0E01B5"
 			    messages   	(list Messages
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBAB1C01E4"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9321,7 +9512,7 @@
 			    supplier   	"$UNNAMED$64"
 			    quidu      	"48DB9DC80224"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB9DC80205"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9335,7 +9526,7 @@
 			    supplier   	"$UNNAMED$65"
 			    quidu      	"48DB9DC80229"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB9DC80208"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9384,7 +9575,7 @@
 			    supplier   	"$UNNAMED$65"
 			    quidu      	"48DB9DC80229"
 			    messages   	(list Messages
-				(object Message "EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "EventCallback(   )"
 				    quid       	"48DBA0860177"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9398,7 +9589,7 @@
 			    supplier   	"$UNNAMED$66"
 			    quidu      	"48DB9DC8020B"
 			    messages   	(list Messages
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBA14E01B5"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9420,7 +9611,7 @@
 			    supplier   	"$UNNAMED$64"
 			    quidu      	"48DB9DC80224"
 			    messages   	(list Messages
-				(object Message "EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "EventCallback(   )"
 				    quid       	"48DBA082035B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9434,7 +9625,7 @@
 			    supplier   	"$UNNAMED$69"
 			    quidu      	"48DBA5A90261"
 			    messages   	(list Messages
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBA5E90000"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -10971,7 +11162,7 @@
 				nlines     	1
 				max_width  	331
 				justify    	0
-				label      	"+EventConsumers"
+				label      	"-EventConsumers"
 				pctDist    	0.604705
 				height     	23
 				orientation 	0)
@@ -10999,7 +11190,7 @@
 				nlines     	1
 				max_width  	15
 				justify    	0
-				label      	"1..n"
+				label      	"1..*"
 				pctDist    	0.900000
 				height     	54
 				orientation 	0))
@@ -11024,6 +11215,28 @@
 			    line_style 	0
 			    label      	(object SegLabel @96
 				Parent_View 	@95
+				location   	(2421, 621)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    charSet    	161
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				anchor     	2
+				anchor_loc 	1
+				nlines     	1
+				max_width  	15
+				justify    	0
+				label      	"0..*"
+				pctDist    	0.900000
+				height     	54
+				orientation 	1)
+			    label      	(object SegLabel @97
+				Parent_View 	@95
 				location   	(2352, 693)
 				font       	(object Font
 				    size       	10
@@ -11047,7 +11260,7 @@
 				pctDist    	0.900000
 				height     	12
 				orientation 	0))))
-		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::ClientSessionPart" @97
+		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::ClientSessionPart" @98
 		    ShowCompartmentStereotypes 	TRUE
 		    location   	(1113, 541)
 		    font       	(object Font
@@ -11061,7 +11274,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@97
+			Parent_View 	@98
 			location   	(863, 530)
 			fill_color 	13434879
 			nlines     	2
@@ -11076,7 +11289,7 @@
 		    width      	518
 		    height     	224
 		    annotation 	8)
-		(object AssociationViewNew "$UNNAMED$31" @98
+		(object AssociationViewNew "$UNNAMED$31" @99
 		    location   	(1712, 554)
 		    font       	(object Font
 			size       	10
@@ -11092,8 +11305,8 @@
 		    line_color 	3342489
 		    quidu      	"48DB4BE20119"
 		    roleview_list 	(list RoleViews
-			(object RoleView "ServerSessionPart" @99
-			    Parent_View 	@98
+			(object RoleView "ServerSessionPart" @100
+			    Parent_View 	@99
 			    location   	(1334, -5)
 			    font       	(object Font
 				size       	10
@@ -11105,8 +11318,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @100
-				Parent_View 	@99
+			    label      	(object SegLabel @101
+				Parent_View 	@100
 				location   	(1933, 402)
 				font       	(object Font
 				    size       	10
@@ -11123,20 +11336,20 @@
 				nlines     	1
 				max_width  	362
 				justify    	0
-				label      	"-ServerSessionPart"
+				label      	"ServerSessionPart"
 				pctDist    	0.651948
 				height     	153
 				orientation 	0)
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"48DB4BE3009C"
-			    client     	@98
+			    client     	@99
 			    supplier   	@90
 			    line_style 	3
 			    origin_attachment 	(1712, 554)
 			    terminal_attachment 	(2053, 554)
-			    label      	(object SegLabel @101
-				Parent_View 	@99
+			    label      	(object SegLabel @102
+				Parent_View 	@100
 				location   	(2018, 608)
 				font       	(object Font
 				    size       	10
@@ -11157,8 +11370,8 @@
 				pctDist    	0.900000
 				height     	54
 				orientation 	1))
-			(object RoleView "$UNNAMED$32" @102
-			    Parent_View 	@98
+			(object RoleView "$UNNAMED$32" @103
+			    Parent_View 	@99
 			    location   	(1334, -5)
 			    font       	(object Font
 				size       	10
@@ -11173,13 +11386,13 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"48DB4BE3009E"
-			    client     	@98
-			    supplier   	@97
+			    client     	@99
+			    supplier   	@98
 			    line_style 	3
 			    origin_attachment 	(1712, 554)
 			    terminal_attachment 	(1372, 554)
-			    label      	(object SegLabel @103
-				Parent_View 	@102
+			    label      	(object SegLabel @104
+				Parent_View 	@103
 				location   	(1407, 608)
 				font       	(object Font
 				    size       	10
@@ -11200,7 +11413,7 @@
 				pctDist    	0.900000
 				height     	54
 				orientation 	0))))
-		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::Proxy" @104
+		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::Proxy" @105
 		    ShowCompartmentStereotypes 	TRUE
 		    location   	(609, 1225)
 		    font       	(object Font
@@ -11214,7 +11427,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@104
+			Parent_View 	@105
 			location   	(513, 1174)
 			fill_color 	13434879
 			nlines     	1
@@ -11229,7 +11442,7 @@
 		    height     	126
 		    annotation 	8
 		    autoResize 	TRUE)
-		(object AssociationViewNew "SessionProxies" @105
+		(object AssociationViewNew "SessionProxies" @106
 		    location   	(842, 907)
 		    font       	(object Font
 			size       	10
@@ -11241,8 +11454,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @106
-			Parent_View 	@105
+		    label      	(object SegLabel @107
+			Parent_View 	@106
 			location   	(842, 848)
 			font       	(object Font
 			    size       	10
@@ -11267,8 +11480,8 @@
 		    line_color 	3342489
 		    quidu      	"485297B70148"
 		    roleview_list 	(list RoleViews
-			(object RoleView "$UNNAMED$20" @107
-			    Parent_View 	@105
+			(object RoleView "$UNNAMED$20" @108
+			    Parent_View 	@106
 			    location   	(421, -240)
 			    font       	(object Font
 				size       	10
@@ -11280,8 +11493,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @108
-				Parent_View 	@107
+			    label      	(object SegLabel @109
+				Parent_View 	@108
 				location   	(958, 680)
 				font       	(object Font
 				    size       	10
@@ -11306,11 +11519,11 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"485297B8006F"
-			    client     	@105
-			    supplier   	@97
+			    client     	@106
+			    supplier   	@98
 			    line_style 	0
-			    label      	(object SegLabel @109
-				Parent_View 	@107
+			    label      	(object SegLabel @110
+				Parent_View 	@108
 				location   	(1053, 711)
 				font       	(object Font
 				    size       	10
@@ -11331,8 +11544,8 @@
 				pctDist    	0.900000
 				height     	54
 				orientation 	1))
-			(object RoleView "Proxies" @110
-			    Parent_View 	@105
+			(object RoleView "Proxies" @111
+			    Parent_View 	@106
 			    location   	(421, -240)
 			    font       	(object Font
 				size       	10
@@ -11344,8 +11557,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @111
-				Parent_View 	@110
+			    label      	(object SegLabel @112
+				Parent_View 	@111
 				location   	(661, 1058)
 				font       	(object Font
 				    size       	10
@@ -11369,11 +11582,11 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"485297B8006D"
-			    client     	@105
-			    supplier   	@104
+			    client     	@106
+			    supplier   	@105
 			    line_style 	0
-			    label      	(object SegLabel @112
-				Parent_View 	@110
+			    label      	(object SegLabel @113
+				Parent_View 	@111
 				location   	(739, 1127)
 				font       	(object Font
 				    size       	10
@@ -11394,7 +11607,7 @@
 				pctDist    	0.756284
 				height     	47
 				orientation 	0))))
-		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::IProxy" @113
+		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::IProxy" @114
 		    ShowCompartmentStereotypes 	TRUE
 		    location   	(359, 500)
 		    font       	(object Font
@@ -11408,7 +11621,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@113
+			Parent_View 	@114
 			location   	(143, 478)
 			fill_color 	13434879
 			nlines     	2
@@ -11423,14 +11636,14 @@
 		    width      	450
 		    height     	244
 		    annotation 	8)
-		(object UsesView "" @114
+		(object UsesView "" @115
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5AD1B35501AD"
-		    client     	@104
-		    supplier   	@113
+		    client     	@105
+		    supplier   	@114
 		    line_style 	0)
-		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::EventConsumingResolver" @115
+		(object ClassView "Class" "Logical View::OOAdvantech::Remoting::EventConsumingResolver" @116
 		    ShowCompartmentStereotypes 	TRUE
 		    location   	(1865, 1240)
 		    font       	(object Font
@@ -11444,7 +11657,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@115
+			Parent_View 	@116
 			location   	(1533, 1121)
 			fill_color 	13434879
 			nlines     	2
@@ -11468,7 +11681,7 @@
 	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object ClassInstanceView "ProxyUtilities" @116
+		(object ClassInstanceView "ProxyUtilities" @117
 		    location   	(1318, 565)
 		    font       	(object Font
 			size       	10
@@ -11481,7 +11694,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@116
+			Parent_View 	@117
 			location   	(1083, 484)
 			fill_color 	13434879
 			nlines     	2
@@ -11494,7 +11707,7 @@
 		    quidu      	"5AD1B3F70010"
 		    width      	488
 		    height     	187)
-		(object ObjectView "CommunicationBus" @117
+		(object ObjectView "CommunicationBus" @118
 		    location   	(347, 544)
 		    font       	(object Font
 			size       	10
@@ -11507,7 +11720,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@117
+			Parent_View 	@118
 			location   	(150, 475)
 			fill_color 	13434879
 			nlines     	2
@@ -11524,7 +11737,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ClassInstanceView "RenewalManager" @118
+		(object ClassInstanceView "RenewalManager" @119
 		    location   	(2414, 575)
 		    font       	(object Font
 			size       	10
@@ -11537,7 +11750,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@118
+			Parent_View 	@119
 			location   	(2161, 576)
 			fill_color 	13434879
 			nlines     	2
@@ -11551,7 +11764,7 @@
 		    quidu      	"5AD2EE7303A1"
 		    width      	525
 		    height     	200)
-		(object ObjectView "Proxy" @119
+		(object ObjectView "Proxy" @120
 		    location   	(1309, 1053)
 		    font       	(object Font
 			size       	10
@@ -11564,7 +11777,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@119
+			Parent_View 	@120
 			location   	(1099, 994)
 			fill_color 	13434879
 			nlines     	2
@@ -11582,7 +11795,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$45" @120
+		(object ObjectView "$UNNAMED$45" @121
 		    location   	(3364, 559)
 		    font       	(object Font
 			size       	10
@@ -11605,15 +11818,15 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object LinkSelfView "" @121
+		(object LinkSelfView "" @122
 		    location   	(2414, 325)
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5AD36B0C03B7"
-		    client     	@118
-		    supplier   	@118
+		    client     	@119
+		    supplier   	@119
 		    line_style 	4)
-		(object MessView "" @122
+		(object MessView "" @123
 		    location   	(2414, 281)
 		    font       	(object Font
 			size       	10
@@ -11626,8 +11839,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @123
-			Parent_View 	@122
+		    label      	(object SegLabel @124
+			Parent_View 	@123
 			location   	(2414, 237)
 			font       	(object Font
 			    size       	10
@@ -11644,27 +11857,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSession(string, bool, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"GetSession(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@121
+		    object_arc 	@122
 		    pctDist    	0.500000
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(2354, 281)
 		    terminus   	(2474, 281))
-		(object LinkView "" @124
+		(object LinkView "" @125
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5AD2EF1F0382"
-		    client     	@116
-		    supplier   	@119
+		    client     	@117
+		    supplier   	@120
 		    line_style 	3
 		    origin_attachment 	(1309, 658)
 		    terminal_attachment 	(1309, 982))
-		(object MessView "" @125
+		(object MessView "" @126
 		    location   	(1354, 853)
 		    font       	(object Font
 			size       	10
@@ -11677,8 +11890,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @126
-			Parent_View 	@125
+		    label      	(object SegLabel @127
+			Parent_View 	@126
 			location   	(1420, 778)
 			font       	(object Font
 			    size       	10
@@ -11699,23 +11912,23 @@
 			pctDist    	-0.125000
 			height     	66
 			orientation 	0)
-		    object_arc 	@124
+		    object_arc 	@125
 		    pctDist    	0.601852
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(1354, 793)
 		    terminus   	(1354, 913))
-		(object LinkView "" @127
+		(object LinkView "" @128
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5AD2EF4D0193"
-		    client     	@116
-		    supplier   	@118
+		    client     	@117
+		    supplier   	@119
 		    line_style 	3
 		    origin_attachment 	(1562, 550)
 		    terminal_attachment 	(2152, 550))
-		(object MessView "" @128
+		(object MessView "" @129
 		    location   	(1866, 506)
 		    font       	(object Font
 			size       	10
@@ -11728,8 +11941,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @129
-			Parent_View 	@128
+		    label      	(object SegLabel @130
+			Parent_View 	@129
 			location   	(1869, 406)
 			font       	(object Font
 			    size       	10
@@ -11746,27 +11959,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddProxy(OOAdvantech.Remoting.IProxy, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"AddProxy(  )"
 			pctDist    	0.525000
 			height     	100
 			orientation 	0)
-		    object_arc 	@127
+		    object_arc 	@128
 		    pctDist    	0.514431
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(1806, 506)
 		    terminus   	(1926, 506))
-		(object LinkView "" @130
+		(object LinkView "" @131
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5AD1B4E502DE"
-		    client     	@117
-		    supplier   	@116
+		    client     	@118
+		    supplier   	@117
 		    line_style 	3
 		    origin_attachment 	(553, 550)
 		    terminal_attachment 	(1074, 550))
-		(object MessView "" @131
+		(object MessView "" @132
 		    location   	(778, 506)
 		    font       	(object Font
 			size       	10
@@ -11779,8 +11992,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @132
-			Parent_View 	@131
+		    label      	(object SegLabel @133
+			Parent_View 	@132
 			location   	(778, 462)
 			font       	(object Font
 			    size       	10
@@ -11801,7 +12014,7 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@130
+		    object_arc 	@131
 		    pctDist    	0.433612
 		    height     	45
 		    orientation 	0
@@ -11818,7 +12031,7 @@
 	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object ObjectView "ClientCode" @133
+		(object ObjectView "ClientCode" @134
 		    location   	(200, 586)
 		    font       	(object Font
 			size       	10
@@ -11831,7 +12044,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@133
+			Parent_View 	@134
 			location   	(56, 498)
 			fill_color 	13434879
 			nlines     	2
@@ -11848,7 +12061,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$46" @134
+		(object ObjectView "$UNNAMED$46" @135
 		    location   	(1209, 589)
 		    font       	(object Font
 			size       	10
@@ -11861,7 +12074,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@134
+			Parent_View 	@135
 			location   	(1012, 508)
 			fill_color 	13434879
 			nlines     	2
@@ -11879,7 +12092,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @135
+		(object NoteView @136
 		    location   	(531, 159)
 		    font       	(object Font
 			size       	10
@@ -11892,7 +12105,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@135
+			Parent_View 	@136
 			location   	(181, 50)
 			fill_color 	13434879
 			nlines     	4
@@ -11907,7 +12120,7 @@
 		    fill_color 	13434879
 		    width      	725
 		    height     	231)
-		(object ObjectView "$UNNAMED$48" @136
+		(object ObjectView "$UNNAMED$48" @137
 		    location   	(3346, 592)
 		    font       	(object Font
 			size       	10
@@ -11920,7 +12133,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@136
+			Parent_View 	@137
 			location   	(3105, 517)
 			fill_color 	13434879
 			nlines     	2
@@ -11938,7 +12151,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$49" @137
+		(object ObjectView "$UNNAMED$49" @138
 		    location   	(3342, 1252)
 		    font       	(object Font
 			size       	10
@@ -11951,7 +12164,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@137
+			Parent_View 	@138
 			location   	(3114, 1161)
 			fill_color 	13434879
 			nlines     	2
@@ -11968,7 +12181,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$50" @138
+		(object ObjectView "$UNNAMED$50" @139
 		    location   	(3344, 1832)
 		    font       	(object Font
 			size       	10
@@ -11981,7 +12194,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@138
+			Parent_View 	@139
 			location   	(3085, 1757)
 			fill_color 	13434879
 			nlines     	2
@@ -11998,7 +12211,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @139
+		(object NoteView @140
 		    location   	(2465, 187)
 		    font       	(object Font
 			size       	10
@@ -12011,7 +12224,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@139
+			Parent_View 	@140
 			location   	(2221, 106)
 			fill_color 	13434879
 			nlines     	3
@@ -12021,7 +12234,7 @@
 		    fill_color 	13434879
 		    width      	513
 		    height     	175)
-		(object ObjectView "$UNNAMED$47" @140
+		(object ObjectView "$UNNAMED$47" @141
 		    location   	(1994, 1006)
 		    font       	(object Font
 			size       	10
@@ -12034,7 +12247,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@140
+			Parent_View 	@141
 			location   	(1702, 955)
 			fill_color 	13434879
 			nlines     	2
@@ -12051,16 +12264,16 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object LinkView "" @141
+		(object LinkView "" @142
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB4F6D032C"
-		    client     	@133
-		    supplier   	@134
+		    client     	@134
+		    supplier   	@135
 		    line_style 	3
 		    origin_attachment 	(353, 588)
 		    terminal_attachment 	(1003, 588))
-		(object MessView "" @142
+		(object MessView "" @143
 		    location   	(746, 469)
 		    font       	(object Font
 			size       	10
@@ -12073,8 +12286,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @143
-			Parent_View 	@142
+		    label      	(object SegLabel @144
+			Parent_View 	@143
 			location   	(764, 354)
 			font       	(object Font
 			    size       	10
@@ -12091,25 +12304,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.650000
 			height     	115
 			orientation 	0)
-		    DataFlowView 	@144
-		    object_arc 	@141
+		    DataFlowView 	@145
+		    object_arc 	@142
 		    pctDist    	0.604041
 		    height     	120
 		    orientation 	0
 		    dir        	1
 		    origin     	(686, 469)
 		    terminus   	(806, 469))
-		(object AttachView "" @145
+		(object AttachView "" @146
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@142
-		    supplier   	@135
+		    client     	@143
+		    supplier   	@136
 		    line_style 	0)
-		(object DataFlowView "" @144
+		(object DataFlowView "" @145
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -12121,8 +12334,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @146
-			Parent_View 	@144
+		    label      	(object SegLabel @147
+			Parent_View 	@145
 			location   	(650, 529)
 			font       	(object Font
 			    size       	10
@@ -12144,15 +12357,15 @@
 			orientation 	1)
 		    dir        	1
 		    height     	60
-		    MessView   	@142)
-		(object LinkView "" @147
+		    MessView   	@143)
+		(object LinkView "" @148
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5C121B51017D"
-		    client     	@134
-		    supplier   	@140
+		    client     	@135
+		    supplier   	@141
 		    line_style 	0)
-		(object MessView "" @148
+		(object MessView "" @149
 		    location   	(1733, 805)
 		    font       	(object Font
 			size       	10
@@ -12165,8 +12378,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @149
-			Parent_View 	@148
+		    label      	(object SegLabel @150
+			Parent_View 	@149
 			location   	(1781, 729)
 			font       	(object Font
 			    size       	10
@@ -12183,27 +12396,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerSubscription(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerSubscription(  )"
 			pctDist    	0.565266
 			height     	90
 			orientation 	0)
-		    object_arc 	@147
+		    object_arc 	@148
 		    pctDist    	0.658735
 		    height     	55
 		    orientation 	0
 		    dir        	1
 		    origin     	(1680, 777)
 		    terminus   	(1786, 833))
-		(object LinkView "" @150
+		(object LinkView "" @151
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB585F034B"
-		    client     	@136
-		    supplier   	@137
+		    client     	@137
+		    supplier   	@138
 		    line_style 	3
 		    origin_attachment 	(3343, 679)
 		    terminal_attachment 	(3343, 1149))
-		(object MessView "" @151
+		(object MessView "" @152
 		    location   	(3523, 1005)
 		    font       	(object Font
 			size       	10
@@ -12216,8 +12429,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @152
-			Parent_View 	@151
+		    label      	(object SegLabel @153
+			Parent_View 	@152
 			location   	(3574, 1080)
 			font       	(object Font
 			    size       	10
@@ -12234,20 +12447,20 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.ExtObjectUri, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	1.133333
 			height     	51
 			orientation 	0)
-		    DataFlowView 	@153
 		    DataFlowView 	@154
-		    object_arc 	@150
+		    DataFlowView 	@155
+		    object_arc 	@151
 		    pctDist    	0.693617
 		    height     	180
 		    orientation 	0
 		    dir        	1
 		    origin     	(3523, 945)
 		    terminus   	(3523, 1065))
-		(object DataFlowView "" @154
+		(object DataFlowView "" @155
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -12259,8 +12472,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @155
-			Parent_View 	@154
+		    label      	(object SegLabel @156
+			Parent_View 	@155
 			location   	(3404, 856)
 			font       	(object Font
 			    size       	10
@@ -12282,8 +12495,8 @@
 			orientation 	1)
 		    dir        	1
 		    height     	120
-		    MessView   	@151)
-		(object DataFlowView "" @153
+		    MessView   	@152)
+		(object DataFlowView "" @154
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -12295,8 +12508,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @156
-			Parent_View 	@153
+		    label      	(object SegLabel @157
+			Parent_View 	@154
 			location   	(3416, 907)
 			font       	(object Font
 			    size       	10
@@ -12318,17 +12531,17 @@
 			orientation 	1)
 		    dir        	1
 		    height     	60
-		    MessView   	@151)
-		(object LinkView "" @157
+		    MessView   	@152)
+		(object LinkView "" @158
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB675E034B"
-		    client     	@137
-		    supplier   	@138
+		    client     	@138
+		    supplier   	@139
 		    line_style 	3
 		    origin_attachment 	(3327, 1354)
 		    terminal_attachment 	(3327, 1745))
-		(object MessView "" @158
+		(object MessView "" @159
 		    location   	(3380, 1622)
 		    font       	(object Font
 			size       	10
@@ -12341,8 +12554,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @159
-			Parent_View 	@158
+		    label      	(object SegLabel @160
+			Parent_View 	@159
 			location   	(3449, 1464)
 			font       	(object Font
 			    size       	10
@@ -12359,25 +12572,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerProxy(OOAdvantech.Remoting.ExtObjectUri, System.MarshalByRefObject, System.Reflection.EventInfo, OOAdvantech.Remoting.ClientSessionPart)"
+			label      	"EventConsumerProxy(    )"
 			pctDist    	-0.825000
 			height     	69
 			orientation 	0)
-		    object_arc 	@157
+		    object_arc 	@158
 		    pctDist    	0.687980
 		    height     	53
 		    orientation 	0
 		    dir        	1
 		    origin     	(3380, 1562)
 		    terminus   	(3380, 1682))
-		(object LinkView "" @160
+		(object LinkView "" @161
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB51AB037A"
-		    client     	@140
-		    supplier   	@136
+		    client     	@141
+		    supplier   	@137
 		    line_style 	0)
-		(object MessView "" @161
+		(object MessView "" @162
 		    location   	(2690, 745)
 		    font       	(object Font
 			size       	10
@@ -12390,8 +12603,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @162
-			Parent_View 	@161
+		    label      	(object SegLabel @163
+			Parent_View 	@162
 			location   	(2692, 471)
 			font       	(object Font
 			    size       	10
@@ -12408,22 +12621,22 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.Proxy, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	1.168421
 			height     	263
 			orientation 	0)
-		    object_arc 	@160
+		    object_arc 	@161
 		    pctDist    	0.563826
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(2633, 762)
 		    terminus   	(2747, 728))
-		(object AttachView "" @163
+		(object AttachView "" @164
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@161
-		    supplier   	@139
+		    client     	@162
+		    supplier   	@140
 		    line_style 	0)))
 	(object InteractionDiagram "Remote Event Subscription"
 	    mechanism_ref 	@26
@@ -12435,7 +12648,7 @@
 	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object InterObjView "ClientCode" @164
+		(object InterObjView "ClientCode" @165
 		    location   	(356, 225)
 		    font       	(object Font
 			size       	10
@@ -12448,7 +12661,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@164
+			Parent_View 	@165
 			location   	(356, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -12466,14 +12679,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @165
+		    Focus_Of_Control 	(object Focus_Of_Control "" @166
 			location   	(356, 398)
 			line_color 	3342489
-			InterObjView 	@164
+			InterObjView 	@165
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$46" @166
+		(object InterObjView "$UNNAMED$46" @167
 		    location   	(841, 225)
 		    font       	(object Font
 			size       	10
@@ -12486,7 +12699,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@166
+			Parent_View 	@167
 			location   	(841, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -12505,21 +12718,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @167
+		    Focus_Of_Control 	(object Focus_Of_Control "" @168
 			location   	(841, 398)
 			line_color 	3342489
-			InterObjView 	@166
+			InterObjView 	@167
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @168
+		    Focus_Of_Control 	(object Focus_Of_Control "" @169
 			location   	(841, 605)
 			line_color 	3342489
-			InterObjView 	@166
+			InterObjView 	@167
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$48" @169
+		(object InterObjView "$UNNAMED$48" @170
 		    location   	(1909, 225)
 		    font       	(object Font
 			size       	10
@@ -12532,7 +12745,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@169
+			Parent_View 	@170
 			location   	(1909, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -12551,14 +12764,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @170
+		    Focus_Of_Control 	(object Focus_Of_Control "" @171
 			location   	(1909, 767)
 			line_color 	3342489
-			InterObjView 	@169
+			InterObjView 	@170
 			height     	326
 			y_coord    	266
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$49" @171
+		(object InterObjView "$UNNAMED$49" @172
 		    location   	(2530, 225)
 		    font       	(object Font
 			size       	10
@@ -12571,7 +12784,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@171
+			Parent_View 	@172
 			location   	(2530, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -12589,21 +12802,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @172
+		    Focus_Of_Control 	(object Focus_Of_Control "" @173
 			location   	(2530, 973)
 			line_color 	3342489
-			InterObjView 	@171
+			InterObjView 	@172
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @173
+		    Focus_Of_Control 	(object Focus_Of_Control "" @174
 			location   	(2530, 1531)
 			line_color 	3342489
-			InterObjView 	@171
+			InterObjView 	@172
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$50" @174
+		(object InterObjView "$UNNAMED$50" @175
 		    location   	(2960, 1531)
 		    font       	(object Font
 			size       	10
@@ -12616,7 +12829,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@174
+			Parent_View 	@175
 			location   	(2960, 1531)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -12634,20 +12847,20 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @175
+		    Focus_Of_Control 	(object Focus_Of_Control "" @176
 			location   	(2960, 1531)
 			line_color 	3342489
-			InterObjView 	@174
+			InterObjView 	@175
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @176
+		    Focus_Of_Control 	(object Focus_Of_Control "" @177
 			location   	(2960, 1591)
-			InterObjView 	@174
+			InterObjView 	@175
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$47" @177
+		(object InterObjView "$UNNAMED$47" @178
 		    location   	(1341, 225)
 		    font       	(object Font
 			size       	10
@@ -12660,7 +12873,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@177
+			Parent_View 	@178
 			location   	(1341, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -12678,21 +12891,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @178
+		    Focus_Of_Control 	(object Focus_Of_Control "" @179
 			location   	(1341, 605)
 			line_color 	3342489
-			InterObjView 	@177
+			InterObjView 	@178
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @179
+		    Focus_Of_Control 	(object Focus_Of_Control "" @180
 			location   	(1341, 767)
 			line_color 	3342489
-			InterObjView 	@177
+			InterObjView 	@178
 			height     	386
 			y_coord    	326
 			Nested     	FALSE))
-		(object InterMessView "" @180
+		(object InterMessView "" @181
 		    location   	(611, 398)
 		    font       	(object Font
 			size       	10
@@ -12704,8 +12917,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @181
-			Parent_View 	@180
+		    label      	(object SegLabel @182
+			Parent_View 	@181
 			location   	(598, 354)
 			font       	(object Font
 			    size       	10
@@ -12722,19 +12935,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@164
-		    supplier   	@166
-		    Focus_Src  	@165
-		    Focus_Entry 	@167
+		    client     	@165
+		    supplier   	@167
+		    Focus_Src  	@166
+		    Focus_Entry 	@168
 		    origin     	(371, 398)
 		    terminus   	(825, 398)
 		    ordinal    	0)
-		(object InterMessView "" @182
+		(object InterMessView "" @183
 		    location   	(1241, 973)
 		    font       	(object Font
 			size       	10
@@ -12746,8 +12959,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @183
-			Parent_View 	@182
+		    label      	(object SegLabel @184
+			Parent_View 	@183
 			location   	(2196, 911)
 			font       	(object Font
 			    size       	10
@@ -12764,19 +12977,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.ExtObjectUri, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	0.461756
 			height     	63
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@169
-		    supplier   	@171
-		    Focus_Src  	@170
-		    Focus_Entry 	@172
+		    client     	@170
+		    supplier   	@172
+		    Focus_Src  	@171
+		    Focus_Entry 	@173
 		    origin     	(1924, 973)
 		    terminus   	(2514, 973)
 		    ordinal    	3)
-		(object InterMessView "" @184
+		(object InterMessView "" @185
 		    location   	(1629, 767)
 		    font       	(object Font
 			size       	10
@@ -12788,8 +13001,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @185
-			Parent_View 	@184
+		    label      	(object SegLabel @186
+			Parent_View 	@185
 			location   	(1652, 723)
 			font       	(object Font
 			    size       	10
@@ -12806,19 +13019,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.Proxy, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	0.552147
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@177
-		    supplier   	@169
-		    Focus_Src  	@179
-		    Focus_Entry 	@170
+		    client     	@178
+		    supplier   	@170
+		    Focus_Src  	@180
+		    Focus_Entry 	@171
 		    origin     	(1356, 767)
 		    terminus   	(1893, 767)
 		    ordinal    	2)
-		(object InterMessView "" @186
+		(object InterMessView "" @187
 		    location   	(0, 1531)
 		    font       	(object Font
 			size       	10
@@ -12830,8 +13043,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @187
-			Parent_View 	@186
+		    label      	(object SegLabel @188
+			Parent_View 	@187
 			location   	(2657, 1402)
 			font       	(object Font
 			    size       	10
@@ -12848,19 +13061,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerProxy(OOAdvantech.Remoting.ExtObjectUri, System.MarshalByRefObject, System.Reflection.EventInfo, OOAdvantech.Remoting.ClientSessionPart)"
+			label      	"EventConsumerProxy(    )"
 			pctDist    	0.573604
 			height     	130
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@171
-		    supplier   	@174
-		    Focus_Src  	@173
-		    Focus_Entry 	@175
+		    client     	@172
+		    supplier   	@175
+		    Focus_Src  	@174
+		    Focus_Entry 	@176
 		    origin     	(2545, 1531)
 		    terminus   	(2742, 1531)
 		    ordinal    	4)
-		(object InterMessView "" @188
+		(object InterMessView "" @189
 		    location   	(1084, 605)
 		    font       	(object Font
 			size       	10
@@ -12872,8 +13085,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @189
-			Parent_View 	@188
+		    label      	(object SegLabel @190
+			Parent_View 	@189
 			location   	(956, 549)
 			font       	(object Font
 			    size       	10
@@ -12890,15 +13103,15 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerSubscription(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerSubscription(  )"
 			pctDist    	0.214689
 			height     	57
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@166
-		    supplier   	@177
-		    Focus_Src  	@168
-		    Focus_Entry 	@178
+		    client     	@167
+		    supplier   	@178
+		    Focus_Src  	@169
+		    Focus_Entry 	@179
 		    origin     	(856, 605)
 		    terminus   	(1325, 605)
 		    ordinal    	1)))
@@ -12912,7 +13125,7 @@
 	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object ObjectView "$UNNAMED$51" @190
+		(object ObjectView "$UNNAMED$51" @191
 		    location   	(3354, 1853)
 		    font       	(object Font
 			size       	10
@@ -12925,7 +13138,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@190
+			Parent_View 	@191
 			location   	(3095, 1778)
 			fill_color 	13434879
 			nlines     	2
@@ -12942,7 +13155,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "ClientCode" @191
+		(object ObjectView "ClientCode" @192
 		    location   	(200, 586)
 		    font       	(object Font
 			size       	10
@@ -12955,7 +13168,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@191
+			Parent_View 	@192
 			location   	(56, 498)
 			fill_color 	13434879
 			nlines     	2
@@ -12972,7 +13185,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$52" @192
+		(object ObjectView "$UNNAMED$52" @193
 		    location   	(1209, 589)
 		    font       	(object Font
 			size       	10
@@ -12985,7 +13198,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@192
+			Parent_View 	@193
 			location   	(1012, 508)
 			fill_color 	13434879
 			nlines     	2
@@ -13003,7 +13216,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @193
+		(object NoteView @194
 		    location   	(531, 159)
 		    font       	(object Font
 			size       	10
@@ -13016,7 +13229,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@193
+			Parent_View 	@194
 			location   	(181, 50)
 			fill_color 	13434879
 			nlines     	4
@@ -13031,7 +13244,7 @@
 		    fill_color 	13434879
 		    width      	725
 		    height     	231)
-		(object ObjectView "$UNNAMED$54" @194
+		(object ObjectView "$UNNAMED$54" @195
 		    location   	(3352, 1273)
 		    font       	(object Font
 			size       	10
@@ -13044,7 +13257,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@194
+			Parent_View 	@195
 			location   	(3124, 1182)
 			fill_color 	13434879
 			nlines     	2
@@ -13061,7 +13274,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @195
+		(object NoteView @196
 		    location   	(2616, 190)
 		    font       	(object Font
 			size       	10
@@ -13074,7 +13287,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@195
+			Parent_View 	@196
 			location   	(2372, 109)
 			fill_color 	13434879
 			nlines     	3
@@ -13084,7 +13297,7 @@
 		    fill_color 	13434879
 		    width      	513
 		    height     	175)
-		(object ObjectView "$UNNAMED$53" @196
+		(object ObjectView "$UNNAMED$53" @197
 		    location   	(2213, 971)
 		    font       	(object Font
 			size       	10
@@ -13097,7 +13310,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@196
+			Parent_View 	@197
 			location   	(1921, 920)
 			fill_color 	13434879
 			nlines     	2
@@ -13114,16 +13327,16 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object LinkView "" @197
+		(object LinkView "" @198
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB67C70141"
-		    client     	@191
-		    supplier   	@192
+		    client     	@192
+		    supplier   	@193
 		    line_style 	3
 		    origin_attachment 	(353, 587)
 		    terminal_attachment 	(1003, 587))
-		(object MessView "" @198
+		(object MessView "" @199
 		    location   	(746, 468)
 		    font       	(object Font
 			size       	10
@@ -13136,8 +13349,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @199
-			Parent_View 	@198
+		    label      	(object SegLabel @200
+			Parent_View 	@199
 			location   	(756, 389)
 			font       	(object Font
 			    size       	10
@@ -13154,25 +13367,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.583333
 			height     	79
 			orientation 	0)
-		    DataFlowView 	@200
-		    object_arc 	@197
+		    DataFlowView 	@201
+		    object_arc 	@198
 		    pctDist    	0.604041
 		    height     	120
 		    orientation 	0
 		    dir        	1
 		    origin     	(686, 468)
 		    terminus   	(806, 468))
-		(object AttachView "" @201
+		(object AttachView "" @202
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@198
-		    supplier   	@193
+		    client     	@199
+		    supplier   	@194
 		    line_style 	0)
-		(object DataFlowView "" @200
+		(object DataFlowView "" @201
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -13184,8 +13397,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @202
-			Parent_View 	@200
+		    label      	(object SegLabel @203
+			Parent_View 	@201
 			location   	(650, 528)
 			font       	(object Font
 			    size       	10
@@ -13207,15 +13420,15 @@
 			orientation 	1)
 		    dir        	1
 		    height     	60
-		    MessView   	@198)
-		(object LinkView "" @203
+		    MessView   	@199)
+		(object LinkView "" @204
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5C121E4D0360"
-		    client     	@192
-		    supplier   	@196
+		    client     	@193
+		    supplier   	@197
 		    line_style 	0)
-		(object MessView "" @204
+		(object MessView "" @205
 		    location   	(1747, 746)
 		    font       	(object Font
 			size       	10
@@ -13228,8 +13441,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @205
-			Parent_View 	@204
+		    label      	(object SegLabel @206
+			Parent_View 	@205
 			location   	(1764, 704)
 			font       	(object Font
 			    size       	10
@@ -13246,27 +13459,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerUnsubscribe(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerUnsubscribe(  )"
 			pctDist    	0.509785
 			height     	45
 			orientation 	0)
-		    object_arc 	@203
+		    object_arc 	@204
 		    pctDist    	0.500000
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(1691, 725)
 		    terminus   	(1803, 767))
-		(object LinkView "" @206
+		(object LinkView "" @207
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB67C7012A"
-		    client     	@194
-		    supplier   	@190
+		    client     	@195
+		    supplier   	@191
 		    line_style 	3
 		    origin_attachment 	(3337, 1375)
 		    terminal_attachment 	(3337, 1765))
-		(object MessView "" @207
+		(object MessView "" @208
 		    location   	(3383, 1570)
 		    font       	(object Font
 			size       	10
@@ -13279,8 +13492,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @208
-			Parent_View 	@207
+		    label      	(object SegLabel @209
+			Parent_View 	@208
 			location   	(3428, 1492)
 			font       	(object Font
 			    size       	10
@@ -13297,25 +13510,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"RemoveSubscription(System.MarshalByRefObject)"
+			label      	"RemoveSubscription( )"
 			pctDist    	-0.158333
 			height     	45
 			orientation 	0)
-		    object_arc 	@206
+		    object_arc 	@207
 		    pctDist    	0.498721
 		    height     	46
 		    orientation 	0
 		    dir        	1
 		    origin     	(3383, 1510)
 		    terminus   	(3383, 1630))
-		(object LinkView "" @209
+		(object LinkView "" @210
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5C1244F500DC"
-		    client     	@196
-		    supplier   	@194
+		    client     	@197
+		    supplier   	@195
 		    line_style 	0)
-		(object MessView "" @210
+		(object MessView "" @211
 		    location   	(2797, 1078)
 		    font       	(object Font
 			size       	10
@@ -13328,8 +13541,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @211
-			Parent_View 	@210
+		    label      	(object SegLabel @212
+			Parent_View 	@211
 			location   	(2808, 1035)
 			font       	(object Font
 			    size       	10
@@ -13346,22 +13559,22 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Unsubscribe(OOAdvantech.Remoting.ExtObjectUri, OOAdvantech.Remoting.EventInfoData)"
+			label      	"Unsubscribe(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@209
+		    object_arc 	@210
 		    pctDist    	0.500000
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(2739, 1063)
 		    terminus   	(2855, 1093))
-		(object AttachView "" @212
+		(object AttachView "" @213
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@210
-		    supplier   	@195
+		    client     	@211
+		    supplier   	@196
 		    line_style 	0)))
 	(object InteractionDiagram "Remote Event UnSubscription"
 	    mechanism_ref 	@27
@@ -13373,7 +13586,7 @@
 	    origin_x   	225
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object InterObjView "ClientCode" @213
+		(object InterObjView "ClientCode" @214
 		    location   	(450, 225)
 		    font       	(object Font
 			size       	10
@@ -13386,7 +13599,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@213
+			Parent_View 	@214
 			location   	(450, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -13399,19 +13612,19 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70142"
 		    width      	300
-		    height     	7725
+		    height     	7755
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @214
+		    Focus_Of_Control 	(object Focus_Of_Control "" @215
 			location   	(450, 383)
 			line_color 	3342489
-			InterObjView 	@213
+			InterObjView 	@214
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$52" @215
+		(object InterObjView "$UNNAMED$52" @216
 		    location   	(780, 225)
 		    font       	(object Font
 			size       	10
@@ -13424,7 +13637,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@215
+			Parent_View 	@216
 			location   	(780, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -13438,26 +13651,26 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7013A"
 		    width      	300
-		    height     	7725
+		    height     	7755
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @216
+		    Focus_Of_Control 	(object Focus_Of_Control "" @217
 			location   	(780, 383)
 			line_color 	3342489
-			InterObjView 	@215
+			InterObjView 	@216
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @217
+		    Focus_Of_Control 	(object Focus_Of_Control "" @218
 			location   	(780, 553)
 			line_color 	3342489
-			InterObjView 	@215
+			InterObjView 	@216
 			height     	509
 			y_coord    	449
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$54" @218
+		(object InterObjView "$UNNAMED$54" @219
 		    location   	(2040, 225)
 		    font       	(object Font
 			size       	10
@@ -13470,7 +13683,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@218
+			Parent_View 	@219
 			location   	(2040, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -13483,19 +13696,19 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7012B"
 		    width      	618
-		    height     	7725
+		    height     	7755
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @219
+		    Focus_Of_Control 	(object Focus_Of_Control "" @220
 			location   	(2040, 695)
 			line_color 	3342489
-			InterObjView 	@218
+			InterObjView 	@219
 			height     	247
 			y_coord    	187
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$51" @220
+		(object InterObjView "$UNNAMED$51" @221
 		    location   	(2672, 225)
 		    font       	(object Font
 			size       	10
@@ -13508,7 +13721,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@220
+			Parent_View 	@221
 			location   	(2672, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -13521,19 +13734,19 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70128"
 		    width      	499
-		    height     	7625
+		    height     	7655
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @221
+		    Focus_Of_Control 	(object Focus_Of_Control "" @222
 			location   	(2672, 822)
 			line_color 	3342489
-			InterObjView 	@220
+			InterObjView 	@221
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$53" @222
+		(object InterObjView "$UNNAMED$53" @223
 		    location   	(1312, 225)
 		    font       	(object Font
 			size       	10
@@ -13546,7 +13759,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@222
+			Parent_View 	@223
 			location   	(1312, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -13559,19 +13772,19 @@
 		    fill_color 	13434879
 		    quidu      	"5C121E330309"
 		    width      	662
-		    height     	7725
+		    height     	7755
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @223
+		    Focus_Of_Control 	(object Focus_Of_Control "" @224
 			location   	(1312, 553)
 			line_color 	3342489
-			InterObjView 	@222
+			InterObjView 	@223
 			height     	449
 			y_coord    	389
 			Nested     	FALSE))
-		(object InterMessView "" @224
+		(object InterMessView "" @225
 		    location   	(592, 383)
 		    font       	(object Font
 			size       	10
@@ -13583,8 +13796,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @225
-			Parent_View 	@224
+		    label      	(object SegLabel @226
+			Parent_View 	@225
 			location   	(614, 339)
 			font       	(object Font
 			    size       	10
@@ -13601,19 +13814,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@213
-		    supplier   	@215
-		    Focus_Src  	@214
-		    Focus_Entry 	@216
+		    client     	@214
+		    supplier   	@216
+		    Focus_Src  	@215
+		    Focus_Entry 	@217
 		    origin     	(465, 383)
 		    terminus   	(764, 383)
 		    ordinal    	0)
-		(object InterMessView "" @226
+		(object InterMessView "" @227
 		    location   	(2375, 822)
 		    font       	(object Font
 			size       	10
@@ -13625,8 +13838,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @227
-			Parent_View 	@226
+		    label      	(object SegLabel @228
+			Parent_View 	@227
 			location   	(2355, 778)
 			font       	(object Font
 			    size       	10
@@ -13643,24 +13856,24 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"RemoveSubscription(System.MarshalByRefObject)"
+			label      	"RemoveSubscription( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@218
-		    supplier   	@220
-		    Focus_Src  	@219
-		    Focus_Entry 	@221
+		    client     	@219
+		    supplier   	@221
+		    Focus_Src  	@220
+		    Focus_Entry 	@222
 		    origin     	(2055, 822)
 		    terminus   	(2656, 822)
 		    ordinal    	3)
-		(object Destruction_Marker @228
-		    Parent_View 	@220
-		    location   	(2672, 7950)
+		(object Destruction_Marker @229
+		    Parent_View 	@221
+		    location   	(2672, 7980)
 		    line_color 	3342489
 		    fill_color 	13434879)
-		(object InterMessView "" @229
+		(object InterMessView "" @230
 		    location   	(0, 553)
 		    font       	(object Font
 			size       	10
@@ -13672,8 +13885,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @230
-			Parent_View 	@229
+		    label      	(object SegLabel @231
+			Parent_View 	@230
 			location   	(1226, 502)
 			font       	(object Font
 			    size       	10
@@ -13690,19 +13903,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerUnsubscribe(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerUnsubscribe(  )"
 			pctDist    	0.862000
 			height     	52
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@215
-		    supplier   	@222
-		    Focus_Src  	@217
-		    Focus_Entry 	@223
+		    client     	@216
+		    supplier   	@223
+		    Focus_Src  	@218
+		    Focus_Entry 	@224
 		    origin     	(795, 553)
 		    terminus   	(1296, 553)
 		    ordinal    	1)
-		(object InterMessView "" @231
+		(object InterMessView "" @232
 		    location   	(1681, 695)
 		    font       	(object Font
 			size       	10
@@ -13714,8 +13927,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @232
-			Parent_View 	@231
+		    label      	(object SegLabel @233
+			Parent_View 	@232
 			location   	(1675, 651)
 			font       	(object Font
 			    size       	10
@@ -13732,15 +13945,15 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Unsubscribe(OOAdvantech.Remoting.ExtObjectUri, OOAdvantech.Remoting.EventInfoData)"
+			label      	"Unsubscribe(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@222
-		    supplier   	@218
-		    Focus_Src  	@223
-		    Focus_Entry 	@219
+		    client     	@223
+		    supplier   	@219
+		    Focus_Src  	@224
+		    Focus_Entry 	@220
 		    origin     	(1327, 695)
 		    terminus   	(2024, 695)
 		    ordinal    	2)))
@@ -13754,7 +13967,7 @@
 	    origin_x   	0
 	    origin_y   	362
 	    items      	(list diagram_item_list
-		(object ObjectView "object" @233
+		(object ObjectView "object" @234
 		    location   	(1990, 665)
 		    font       	(object Font
 			size       	10
@@ -13767,7 +13980,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@233
+			Parent_View 	@234
 			location   	(1859, 590)
 			fill_color 	13434879
 			nlines     	2
@@ -13784,7 +13997,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$55" @234
+		(object ObjectView "$UNNAMED$55" @235
 		    location   	(2726, 1250)
 		    font       	(object Font
 			size       	10
@@ -13797,7 +14010,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@234
+			Parent_View 	@235
 			location   	(2480, 1199)
 			fill_color 	13434879
 			nlines     	2
@@ -13814,7 +14027,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$57" @235
+		(object ObjectView "$UNNAMED$57" @236
 		    location   	(365, 596)
 		    font       	(object Font
 			size       	10
@@ -13827,7 +14040,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@235
+			Parent_View 	@236
 			location   	(256, 524)
 			fill_color 	13434879
 			nlines     	2
@@ -13844,7 +14057,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$58" @236
+		(object ObjectView "$UNNAMED$58" @237
 		    location   	(643, 1421)
 		    font       	(object Font
 			size       	10
@@ -13857,7 +14070,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@236
+			Parent_View 	@237
 			location   	(433, 1370)
 			fill_color 	13434879
 			nlines     	2
@@ -13875,7 +14088,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$59" @237
+		(object ObjectView "$UNNAMED$59" @238
 		    location   	(1874, 1293)
 		    font       	(object Font
 			size       	10
@@ -13888,7 +14101,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@237
+			Parent_View 	@238
 			location   	(1665, 1237)
 			fill_color 	13434879
 			nlines     	2
@@ -13905,15 +14118,15 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object LinkSelfView "" @238
+		(object LinkSelfView "" @239
 		    location   	(643, 1208)
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB942E0177"
-		    client     	@236
-		    supplier   	@236
+		    client     	@237
+		    supplier   	@237
 		    line_style 	4)
-		(object MessView "" @239
+		(object MessView "" @240
 		    location   	(642, 1174)
 		    font       	(object Font
 			size       	10
@@ -13926,8 +14139,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @240
-			Parent_View 	@239
+		    label      	(object SegLabel @241
+			Parent_View 	@240
 			location   	(881, 1133)
 			font       	(object Font
 			    size       	10
@@ -13944,18 +14157,18 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	-1.525424
 			height     	42
 			orientation 	1)
-		    object_arc 	@238
+		    object_arc 	@239
 		    pctDist    	0.491667
 		    height     	35
 		    orientation 	0
 		    dir        	-1
 		    origin     	(701, 1174)
 		    terminus   	(583, 1174))
-		(object ObjectView "$UNNAMED$60" @241
+		(object ObjectView "$UNNAMED$60" @242
 		    location   	(753, 2193)
 		    font       	(object Font
 			size       	10
@@ -13968,7 +14181,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@241
+			Parent_View 	@242
 			location   	(543, 2142)
 			fill_color 	13434879
 			nlines     	2
@@ -13986,7 +14199,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @242
+		(object NoteView @243
 		    location   	(2669, 524)
 		    font       	(object Font
 			size       	10
@@ -13999,7 +14212,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@242
+			Parent_View 	@243
 			location   	(2531, 464)
 			fill_color 	13434879
 			nlines     	2
@@ -14009,25 +14222,25 @@
 		    fill_color 	65280
 		    width      	300
 		    height     	132)
-		(object AttachView "" @243
-		    stereotype 	TRUE
-		    line_color 	3342489
-		    client     	@233
-		    supplier   	@242
-		    line_style 	0)
 		(object AttachView "" @244
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    client     	@234
-		    supplier   	@242
+		    supplier   	@243
 		    line_style 	0)
 		(object AttachView "" @245
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@237
-		    supplier   	@242
+		    client     	@235
+		    supplier   	@243
 		    line_style 	0)
-		(object NoteView @246
+		(object AttachView "" @246
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    client     	@238
+		    supplier   	@243
+		    line_style 	0)
+		(object NoteView @247
 		    location   	(606, 306)
 		    font       	(object Font
 			size       	10
@@ -14040,7 +14253,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@246
+			Parent_View 	@247
 			location   	(468, 246)
 			fill_color 	13434879
 			nlines     	2
@@ -14050,19 +14263,19 @@
 		    fill_color 	4259584
 		    width      	300
 		    height     	132)
-		(object AttachView "" @247
-		    stereotype 	TRUE
-		    line_color 	3342489
-		    client     	@235
-		    supplier   	@246
-		    line_style 	0)
 		(object AttachView "" @248
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    client     	@236
-		    supplier   	@246
+		    supplier   	@247
 		    line_style 	0)
-		(object NoteView @249
+		(object AttachView "" @249
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    client     	@237
+		    supplier   	@247
+		    line_style 	0)
+		(object NoteView @250
 		    location   	(637, 1747)
 		    font       	(object Font
 			size       	10
@@ -14075,7 +14288,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@249
+			Parent_View 	@250
 			location   	(499, 1687)
 			fill_color 	13434879
 			nlines     	2
@@ -14085,13 +14298,13 @@
 		    fill_color 	4259584
 		    width      	300
 		    height     	132)
-		(object AttachView "" @250
+		(object AttachView "" @251
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@241
-		    supplier   	@249
+		    client     	@242
+		    supplier   	@250
 		    line_style 	0)
-		(object ObjectView "$UNNAMED$56" @251
+		(object ObjectView "$UNNAMED$56" @252
 		    location   	(2046, 1677)
 		    font       	(object Font
 			size       	10
@@ -14104,7 +14317,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@251
+			Parent_View 	@252
 			location   	(1789, 1633)
 			fill_color 	13434879
 			nlines     	2
@@ -14121,13 +14334,13 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object AttachView "" @252
+		(object AttachView "" @253
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@251
-		    supplier   	@242
+		    client     	@252
+		    supplier   	@243
 		    line_style 	0)
-		(object ObjectView "$UNNAMED$61" @253
+		(object ObjectView "$UNNAMED$61" @254
 		    location   	(2591, 2175)
 		    font       	(object Font
 			size       	10
@@ -14140,7 +14353,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@253
+			Parent_View 	@254
 			location   	(2376, 2124)
 			fill_color 	13434879
 			nlines     	2
@@ -14157,7 +14370,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @254
+		(object NoteView @255
 		    location   	(1490, 197)
 		    font       	(object Font
 			size       	12
@@ -14170,7 +14383,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@254
+			Parent_View 	@255
 			location   	(1155, 47)
 			fill_color 	13434879
 			nlines     	6
@@ -14180,13 +14393,13 @@
 		    fill_color 	13434879
 		    width      	694
 		    height     	313)
-		(object AttachView "" @255
+		(object AttachView "" @256
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@253
-		    supplier   	@242
+		    client     	@254
+		    supplier   	@243
 		    line_style 	0)
-		(object ObjectView "$UNNAMED$62" @256
+		(object ObjectView "$UNNAMED$62" @257
 		    location   	(189, 1837)
 		    font       	(object Font
 			size       	10
@@ -14199,7 +14412,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@256
+			Parent_View 	@257
 			location   	(93, 1786)
 			fill_color 	13434879
 			nlines     	2
@@ -14216,13 +14429,13 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object AttachView "" @257
+		(object AttachView "" @258
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@256
-		    supplier   	@249
+		    client     	@257
+		    supplier   	@250
 		    line_style 	0)
-		(object ObjectView "$UNNAMED$63" @258
+		(object ObjectView "$UNNAMED$63" @259
 		    location   	(72, 413)
 		    font       	(object Font
 			size       	10
@@ -14235,7 +14448,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@258
+			Parent_View 	@259
 			location   	(-24, 369)
 			fill_color 	13434879
 			nlines     	2
@@ -14252,14 +14465,14 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object LinkView "" @259
+		(object LinkView "" @260
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB9222035B"
-		    client     	@233
-		    supplier   	@234
+		    client     	@234
+		    supplier   	@235
 		    line_style 	0)
-		(object MessView "" @260
+		(object MessView "" @261
 		    location   	(2299, 853)
 		    font       	(object Font
 			size       	10
@@ -14272,8 +14485,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @261
-			Parent_View 	@260
+		    label      	(object SegLabel @262
+			Parent_View 	@261
 			location   	(2622, 832)
 			font       	(object Font
 			    size       	10
@@ -14290,18 +14503,18 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	2.512856
 			height     	216
 			orientation 	0)
-		    object_arc 	@259
+		    object_arc 	@260
 		    pctDist    	0.313140
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(2252, 816)
 		    terminus   	(2346, 890))
-		(object MessView "" @262
+		(object MessView "" @263
 		    location   	(2346, 1004)
 		    font       	(object Font
 			size       	10
@@ -14314,8 +14527,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @263
-			Parent_View 	@262
+		    label      	(object SegLabel @264
+			Parent_View 	@263
 			location   	(2319, 1039)
 			font       	(object Font
 			    size       	10
@@ -14336,21 +14549,21 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@259
+		    object_arc 	@260
 		    pctDist    	0.500000
 		    height     	45
 		    orientation 	1
 		    dir        	-1
 		    origin     	(2392, 1040)
 		    terminus   	(2300, 968))
-		(object LinkView "" @264
+		(object LinkView "" @265
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB96B102EE"
-		    client     	@233
-		    supplier   	@251
+		    client     	@234
+		    supplier   	@252
 		    line_style 	0)
-		(object MessView "" @265
+		(object MessView "" @266
 		    location   	(2057, 1449)
 		    font       	(object Font
 			size       	10
@@ -14363,8 +14576,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @266
-			Parent_View 	@265
+		    label      	(object SegLabel @267
+			Parent_View 	@266
 			location   	(2408, 1597)
 			font       	(object Font
 			    size       	10
@@ -14381,25 +14594,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	1.870025
 			height     	343
 			orientation 	0)
-		    object_arc 	@264
+		    object_arc 	@265
 		    pctDist    	0.803753
 		    height     	24
 		    orientation 	0
 		    dir        	1
 		    origin     	(2054, 1389)
 		    terminus   	(2060, 1509))
-		(object LinkView "" @267
+		(object LinkView "" @268
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB8F590000"
-		    client     	@235
-		    supplier   	@236
+		    client     	@236
+		    supplier   	@237
 		    line_style 	0)
-		(object MessView "" @268
+		(object MessView "" @269
 		    location   	(553, 1018)
 		    font       	(object Font
 			size       	10
@@ -14412,8 +14625,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @269
-			Parent_View 	@268
+		    label      	(object SegLabel @270
+			Parent_View 	@269
 			location   	(756, 885)
 			font       	(object Font
 			    size       	10
@@ -14434,14 +14647,14 @@
 			pctDist    	-0.031579
 			height     	235
 			orientation 	0)
-		    object_arc 	@267
+		    object_arc 	@268
 		    pctDist    	0.517971
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(534, 961)
 		    terminus   	(572, 1075))
-		(object MessView "" @270
+		(object MessView "" @271
 		    location   	(462, 1028)
 		    font       	(object Font
 			size       	10
@@ -14454,8 +14667,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @271
-			Parent_View 	@270
+		    label      	(object SegLabel @272
+			Parent_View 	@271
 			location   	(420, 1042)
 			font       	(object Font
 			    size       	10
@@ -14472,27 +14685,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@267
+		    object_arc 	@268
 		    pctDist    	0.492662
 		    height     	45
 		    orientation 	1
 		    dir        	-1
 		    origin     	(480, 1084)
 		    terminus   	(444, 972))
-		(object LinkView "" @272
+		(object LinkView "" @273
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB91B402DE"
-		    client     	@235
-		    supplier   	@233
+		    client     	@236
+		    supplier   	@234
 		    line_style 	3
 		    origin_attachment 	(483, 656)
 		    terminal_attachment 	(1850, 656))
-		(object MessView "" @273
+		(object MessView "" @274
 		    location   	(1077, 612)
 		    font       	(object Font
 			size       	10
@@ -14505,8 +14718,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @274
-			Parent_View 	@273
+		    label      	(object SegLabel @275
+			Parent_View 	@274
 			location   	(1077, 568)
 			font       	(object Font
 			    size       	10
@@ -14527,14 +14740,14 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@272
+		    object_arc 	@273
 		    pctDist    	0.434842
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(1017, 612)
 		    terminus   	(1137, 612))
-		(object MessView "" @275
+		(object MessView "" @276
 		    location   	(1167, 701)
 		    font       	(object Font
 			size       	10
@@ -14547,8 +14760,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @276
-			Parent_View 	@275
+		    label      	(object SegLabel @277
+			Parent_View 	@276
 			location   	(1167, 746)
 			font       	(object Font
 			    size       	10
@@ -14569,21 +14782,21 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@272
+		    object_arc 	@273
 		    pctDist    	0.500000
 		    height     	45
 		    orientation 	1
 		    dir        	-1
 		    origin     	(1226, 701)
 		    terminus   	(1108, 701))
-		(object LinkView "" @277
+		(object LinkView "" @278
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB93BB01D4"
-		    client     	@236
-		    supplier   	@237
+		    client     	@237
+		    supplier   	@238
 		    line_style 	0)
-		(object MessView "" @278
+		(object MessView "" @279
 		    location   	(1215, 1302)
 		    font       	(object Font
 			size       	10
@@ -14596,8 +14809,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @279
-			Parent_View 	@278
+		    label      	(object SegLabel @280
+			Parent_View 	@279
 			location   	(1212, 1258)
 			font       	(object Font
 			    size       	10
@@ -14618,21 +14831,21 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@277
+		    object_arc 	@278
 		    pctDist    	0.451981
 		    height     	60
 		    orientation 	0
 		    dir        	1
 		    origin     	(1155, 1307)
 		    terminus   	(1275, 1297))
-		(object LinkView "" @280
+		(object LinkView "" @281
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB94E0004E"
-		    client     	@237
-		    supplier   	@234
+		    client     	@238
+		    supplier   	@235
 		    line_style 	0)
-		(object MessView "" @281
+		(object MessView "" @282
 		    location   	(2298, 1226)
 		    font       	(object Font
 			size       	10
@@ -14645,8 +14858,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @282
-			Parent_View 	@281
+		    label      	(object SegLabel @283
+			Parent_View 	@282
 			location   	(2298, 1182)
 			font       	(object Font
 			    size       	10
@@ -14667,23 +14880,23 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@280
+		    object_arc 	@281
 		    pctDist    	0.546524
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(2238, 1228)
 		    terminus   	(2358, 1224))
-		(object LinkView "" @283
+		(object LinkView "" @284
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB979000CB"
-		    client     	@241
-		    supplier   	@253
+		    client     	@242
+		    supplier   	@254
 		    line_style 	3
 		    origin_attachment 	(972, 2194)
 		    terminal_attachment 	(2367, 2194))
-		(object MessView "" @284
+		(object MessView "" @285
 		    location   	(1505, 2075)
 		    font       	(object Font
 			size       	10
@@ -14696,8 +14909,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @285
-			Parent_View 	@284
+		    label      	(object SegLabel @286
+			Parent_View 	@285
 			location   	(1505, 2031)
 			font       	(object Font
 			    size       	10
@@ -14714,19 +14927,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Update(ref System.Collections.Generic.List<ExtObjectUri>,  System.Collections.Generic.List<string> , System.Collections.Generic.Dictionary<string,OOAdvantech.Collections.Generic.Dictionary<System.Reflection.EventInfo,OOAdvantech.Collections.ArrayList>>)"
+			label      	"Update(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    DataFlowView 	@286
-		    object_arc 	@283
+		    DataFlowView 	@287
+		    object_arc 	@284
 		    pctDist    	0.382392
 		    height     	120
 		    orientation 	0
 		    dir        	1
 		    origin     	(1445, 2075)
 		    terminus   	(1565, 2075))
-		(object DataFlowView "" @286
+		(object DataFlowView "" @287
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -14738,8 +14951,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @287
-			Parent_View 	@286
+		    label      	(object SegLabel @288
+			Parent_View 	@287
 			location   	(1599, 2135)
 			font       	(object Font
 			    size       	10
@@ -14760,15 +14973,15 @@
 			orientation 	1)
 		    dir        	-1
 		    height     	60
-		    MessView   	@284)
-		(object LinkView "" @288
+		    MessView   	@285)
+		(object LinkView "" @289
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DBAB12009C"
-		    client     	@241
-		    supplier   	@256
+		    client     	@242
+		    supplier   	@257
 		    line_style 	0)
-		(object MessView "" @289
+		(object MessView "" @290
 		    location   	(435, 2045)
 		    font       	(object Font
 			size       	10
@@ -14781,8 +14994,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @290
-			Parent_View 	@289
+		    label      	(object SegLabel @291
+			Parent_View 	@290
 			location   	(412, 2083)
 			font       	(object Font
 			    size       	10
@@ -14799,32 +15012,32 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@288
+		    object_arc 	@289
 		    pctDist    	0.534809
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(485, 2076)
 		    terminus   	(385, 2014))
-		(object LinkView "" @291
-		    stereotype 	TRUE
-		    line_color 	3342489
-		    quidu      	"48DBAFC702BF"
-		    client     	@253
-		    supplier   	@251
-		    line_style 	0)
 		(object LinkView "" @292
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DBAFC702BF"
-		    client     	@253
-		    supplier   	@251
+		    client     	@254
+		    supplier   	@252
 		    line_style 	0)
-		(object MessView "" @293
+		(object LinkView "" @293
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"48DBAFC702BF"
+		    client     	@254
+		    supplier   	@252
+		    line_style 	0)
+		(object MessView "" @294
 		    location   	(2284, 1955)
 		    font       	(object Font
 			size       	10
@@ -14837,8 +15050,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @294
-			Parent_View 	@293
+		    label      	(object SegLabel @295
+			Parent_View 	@294
 			location   	(2255, 1988)
 			font       	(object Font
 			    size       	10
@@ -14859,21 +15072,21 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@292
+		    object_arc 	@293
 		    pctDist    	0.500000
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(2327, 1994)
 		    terminus   	(2241, 1916))
-		(object LinkView "" @295
+		(object LinkView "" @296
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48E11F3C005D"
-		    client     	@258
-		    supplier   	@235
+		    client     	@259
+		    supplier   	@236
 		    line_style 	0)
-		(object MessView "" @296
+		(object MessView "" @297
 		    location   	(218, 452)
 		    font       	(object Font
 			size       	10
@@ -14886,8 +15099,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @297
-			Parent_View 	@296
+		    label      	(object SegLabel @298
+			Parent_View 	@297
 			location   	(311, 378)
 			font       	(object Font
 			    size       	10
@@ -14908,7 +15121,7 @@
 			pctDist    	0.827586
 			height     	112
 			orientation 	0)
-		    object_arc 	@295
+		    object_arc 	@296
 		    pctDist    	0.391952
 		    height     	45
 		    orientation 	0
@@ -14925,7 +15138,7 @@
 	    origin_x   	4454
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object InterObjView "$UNNAMED$57" @298
+		(object InterObjView "$UNNAMED$57" @299
 		    location   	(378, 225)
 		    font       	(object Font
 			size       	10
@@ -14938,7 +15151,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@298
+			Parent_View 	@299
 			location   	(378, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -14956,35 +15169,35 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @299
+		    Focus_Of_Control 	(object Focus_Of_Control "" @300
 			location   	(378, 397)
 			line_color 	3342489
-			InterObjView 	@298
+			InterObjView 	@299
 			height     	1594
 			y_coord    	1534
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @300
+		    Focus_Of_Control 	(object Focus_Of_Control "" @301
 			location   	(378, 1196)
 			line_color 	3342489
-			InterObjView 	@298
+			InterObjView 	@299
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @301
+		    Focus_Of_Control 	(object Focus_Of_Control "" @302
 			location   	(378, 1811)
 			line_color 	3342489
-			InterObjView 	@298
+			InterObjView 	@299
 			height     	60
 			y_coord    	0
 			Nested     	TRUE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @302
+		    Focus_Of_Control 	(object Focus_Of_Control "" @303
 			location   	(378, 2683)
 			line_color 	3342489
-			InterObjView 	@298
+			InterObjView 	@299
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$58" @303
+		(object InterObjView "$UNNAMED$58" @304
 		    location   	(841, 225)
 		    font       	(object Font
 			size       	10
@@ -14997,7 +15210,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@303
+			Parent_View 	@304
 			location   	(841, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15016,21 +15229,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @304
+		    Focus_Of_Control 	(object Focus_Of_Control "" @305
 			location   	(841, 1448)
 			line_color 	3342489
-			InterObjView 	@303
+			InterObjView 	@304
 			height     	483
 			y_coord    	423
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @305
+		    Focus_Of_Control 	(object Focus_Of_Control "" @306
 			location   	(841, 1678)
 			line_color 	3342489
-			InterObjView 	@303
+			InterObjView 	@304
 			height     	60
 			y_coord    	0
 			Nested     	TRUE))
-		(object InterObjView "$UNNAMED$62" @306
+		(object InterObjView "$UNNAMED$62" @307
 		    location   	(1456, 225)
 		    font       	(object Font
 			size       	10
@@ -15043,7 +15256,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@306
+			Parent_View 	@307
 			location   	(1456, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15061,14 +15274,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @307
+		    Focus_Of_Control 	(object Focus_Of_Control "" @308
 			location   	(1456, 2083)
 			line_color 	3342489
-			InterObjView 	@306
+			InterObjView 	@307
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$60" @308
+		(object InterObjView "$UNNAMED$60" @309
 		    location   	(1922, 225)
 		    font       	(object Font
 			size       	10
@@ -15081,7 +15294,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@308
+			Parent_View 	@309
 			location   	(1922, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15100,14 +15313,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @309
+		    Focus_Of_Control 	(object Focus_Of_Control "" @310
 			location   	(1922, 1935)
 			line_color 	3342489
-			InterObjView 	@308
+			InterObjView 	@309
 			height     	268
 			y_coord    	208
 			Nested     	FALSE))
-		(object InterObjView "object" @310
+		(object InterObjView "object" @311
 		    location   	(2498, 225)
 		    font       	(object Font
 			size       	10
@@ -15120,7 +15333,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@310
+			Parent_View 	@311
 			location   	(2498, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15138,21 +15351,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @311
+		    Focus_Of_Control 	(object Focus_Of_Control "" @312
 			location   	(2498, 397)
 			line_color 	3342489
-			InterObjView 	@310
+			InterObjView 	@311
 			height     	919
 			y_coord    	859
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @312
+		    Focus_Of_Control 	(object Focus_Of_Control "" @313
 			location   	(2498, 813)
 			line_color 	3342489
-			InterObjView 	@310
+			InterObjView 	@311
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$59" @313
+		(object InterObjView "$UNNAMED$59" @314
 		    location   	(2895, 225)
 		    font       	(object Font
 			size       	10
@@ -15165,7 +15378,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@313
+			Parent_View 	@314
 			location   	(2895, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15183,14 +15396,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @314
+		    Focus_Of_Control 	(object Focus_Of_Control "" @315
 			location   	(2895, 1505)
 			line_color 	3342489
-			InterObjView 	@313
+			InterObjView 	@314
 			height     	170
 			y_coord    	110
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$61" @315
+		(object InterObjView "$UNNAMED$61" @316
 		    location   	(3383, 225)
 		    font       	(object Font
 			size       	10
@@ -15203,7 +15416,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@315
+			Parent_View 	@316
 			location   	(3383, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15221,14 +15434,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @316
+		    Focus_Of_Control 	(object Focus_Of_Control "" @317
 			location   	(3383, 1935)
 			line_color 	3342489
-			InterObjView 	@315
+			InterObjView 	@316
 			height     	135
 			y_coord    	75
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$55" @317
+		(object InterObjView "$UNNAMED$55" @318
 		    location   	(3875, 225)
 		    font       	(object Font
 			size       	10
@@ -15241,7 +15454,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@317
+			Parent_View 	@318
 			location   	(3875, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15259,21 +15472,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @318
+		    Focus_Of_Control 	(object Focus_Of_Control "" @319
 			location   	(3875, 601)
 			line_color 	3342489
-			InterObjView 	@317
+			InterObjView 	@318
 			height     	332
 			y_coord    	272
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @319
+		    Focus_Of_Control 	(object Focus_Of_Control "" @320
 			location   	(3875, 1555)
 			line_color 	3342489
-			InterObjView 	@317
+			InterObjView 	@318
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$56" @320
+		(object InterObjView "$UNNAMED$56" @321
 		    location   	(4809, 225)
 		    font       	(object Font
 			size       	10
@@ -15286,7 +15499,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@320
+			Parent_View 	@321
 			location   	(4809, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15304,21 +15517,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @321
+		    Focus_Of_Control 	(object Focus_Of_Control "" @322
 			location   	(4809, 1061)
 			line_color 	3342489
-			InterObjView 	@320
+			InterObjView 	@321
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @322
+		    Focus_Of_Control 	(object Focus_Of_Control "" @323
 			location   	(4809, 1950)
 			line_color 	3342489
-			InterObjView 	@320
+			InterObjView 	@321
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$63" @323
+		(object InterObjView "$UNNAMED$63" @324
 		    location   	(4411, 225)
 		    font       	(object Font
 			size       	10
@@ -15331,7 +15544,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@323
+			Parent_View 	@324
 			location   	(4411, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -15349,14 +15562,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @324
+		    Focus_Of_Control 	(object Focus_Of_Control "" @325
 			location   	(4411, 2683)
 			line_color 	3342489
-			InterObjView 	@323
+			InterObjView 	@324
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterMessView "" @325
+		(object InterMessView "" @326
 		    location   	(620, 1448)
 		    font       	(object Font
 			size       	10
@@ -15368,8 +15581,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @326
-			Parent_View 	@325
+		    label      	(object SegLabel @327
+			Parent_View 	@326
 			location   	(609, 1404)
 			font       	(object Font
 			    size       	10
@@ -15391,14 +15604,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@298
-		    supplier   	@303
-		    Focus_Src  	@299
-		    Focus_Entry 	@304
+		    client     	@299
+		    supplier   	@304
+		    Focus_Src  	@300
+		    Focus_Entry 	@305
 		    origin     	(393, 1448)
 		    terminus   	(825, 1448)
 		    ordinal    	5)
-		(object InterMessView "" @327
+		(object InterMessView "" @328
 		    location   	(833, 397)
 		    font       	(object Font
 			size       	10
@@ -15410,8 +15623,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @328
-			Parent_View 	@327
+		    label      	(object SegLabel @329
+			Parent_View 	@328
 			location   	(1437, 353)
 			font       	(object Font
 			    size       	10
@@ -15433,14 +15646,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@298
-		    supplier   	@310
-		    Focus_Src  	@299
-		    Focus_Entry 	@311
+		    client     	@299
+		    supplier   	@311
+		    Focus_Src  	@300
+		    Focus_Entry 	@312
 		    origin     	(393, 397)
 		    terminus   	(2482, 397)
 		    ordinal    	0)
-		(object InterMessView "" @329
+		(object InterMessView "" @330
 		    location   	(1570, 601)
 		    font       	(object Font
 			size       	10
@@ -15452,8 +15665,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @330
-			Parent_View 	@329
+		    label      	(object SegLabel @331
+			Parent_View 	@330
 			location   	(3186, 557)
 			font       	(object Font
 			    size       	10
@@ -15470,19 +15683,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@310
-		    supplier   	@317
-		    Focus_Src  	@311
-		    Focus_Entry 	@318
+		    client     	@311
+		    supplier   	@318
+		    Focus_Src  	@312
+		    Focus_Entry 	@319
 		    origin     	(2513, 601)
 		    terminus   	(3859, 601)
 		    ordinal    	1)
-		(object InterMessView "" @331
+		(object InterMessView "" @332
 		    location   	(0, 813)
 		    font       	(object Font
 			size       	10
@@ -15494,8 +15707,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @332
-			Parent_View 	@331
+		    label      	(object SegLabel @333
+			Parent_View 	@332
 			location   	(3187, 769)
 			font       	(object Font
 			    size       	10
@@ -15517,14 +15730,14 @@
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@317
-		    supplier   	@310
-		    Focus_Src  	@318
-		    Focus_Entry 	@312
+		    client     	@318
+		    supplier   	@311
+		    Focus_Src  	@319
+		    Focus_Entry 	@313
 		    origin     	(3859, 813)
 		    terminus   	(2514, 813)
 		    ordinal    	2)
-		(object InterMessView "" @333
+		(object InterMessView "" @334
 		    location   	(0, 1196)
 		    font       	(object Font
 			size       	10
@@ -15536,8 +15749,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @334
-			Parent_View 	@333
+		    label      	(object SegLabel @335
+			Parent_View 	@334
 			location   	(1438, 1152)
 			font       	(object Font
 			    size       	10
@@ -15559,14 +15772,14 @@
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@310
-		    supplier   	@298
-		    Focus_Src  	@311
-		    Focus_Entry 	@300
+		    client     	@311
+		    supplier   	@299
+		    Focus_Src  	@312
+		    Focus_Entry 	@301
 		    origin     	(2482, 1196)
 		    terminus   	(394, 1196)
 		    ordinal    	4)
-		(object InterMessView "" @335
+		(object InterMessView "" @336
 		    location   	(1836, 1505)
 		    font       	(object Font
 			size       	10
@@ -15578,8 +15791,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @336
-			Parent_View 	@335
+		    label      	(object SegLabel @337
+			Parent_View 	@336
 			location   	(1867, 1461)
 			font       	(object Font
 			    size       	10
@@ -15601,14 +15814,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@303
-		    supplier   	@313
-		    Focus_Src  	@304
-		    Focus_Entry 	@314
+		    client     	@304
+		    supplier   	@314
+		    Focus_Src  	@305
+		    Focus_Entry 	@315
 		    origin     	(856, 1505)
 		    terminus   	(2879, 1505)
 		    ordinal    	6)
-		(object SelfMessView "" @337
+		(object SelfMessView "" @338
 		    location   	(0, 1678)
 		    font       	(object Font
 			size       	10
@@ -15620,8 +15833,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @338
-			Parent_View 	@337
+		    label      	(object SegLabel @339
+			Parent_View 	@338
 			location   	(934, 1593)
 			font       	(object Font
 			    size       	10
@@ -15638,19 +15851,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.520000
 			height     	86
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@303
-		    supplier   	@303
-		    Focus_Src  	@304
-		    Focus_Entry 	@305
+		    client     	@304
+		    supplier   	@304
+		    Focus_Src  	@305
+		    Focus_Entry 	@306
 		    origin     	(857, 1678)
 		    terminus   	(1007, 1678)
 		    ordinal    	8)
-		(object InterMessView "" @339
+		(object InterMessView "" @340
 		    location   	(3100, 1555)
 		    font       	(object Font
 			size       	10
@@ -15662,8 +15875,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @340
-			Parent_View 	@339
+		    label      	(object SegLabel @341
+			Parent_View 	@340
 			location   	(3384, 1600)
 			font       	(object Font
 			    size       	10
@@ -15685,14 +15898,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@313
-		    supplier   	@317
-		    Focus_Src  	@314
-		    Focus_Entry 	@319
+		    client     	@314
+		    supplier   	@318
+		    Focus_Src  	@315
+		    Focus_Entry 	@320
 		    origin     	(2910, 1555)
 		    terminus   	(3859, 1555)
 		    ordinal    	7)
-		(object InterMessView "" @341
+		(object InterMessView "" @342
 		    location   	(3459, 1061)
 		    font       	(object Font
 			size       	10
@@ -15704,8 +15917,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @342
-			Parent_View 	@341
+		    label      	(object SegLabel @343
+			Parent_View 	@342
 			location   	(3653, 1017)
 			font       	(object Font
 			    size       	10
@@ -15722,19 +15935,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@310
-		    supplier   	@320
-		    Focus_Src  	@311
-		    Focus_Entry 	@321
+		    client     	@311
+		    supplier   	@321
+		    Focus_Src  	@312
+		    Focus_Entry 	@322
 		    origin     	(2513, 1061)
 		    terminus   	(4793, 1061)
 		    ordinal    	3)
-		(object InterMessView "" @343
+		(object InterMessView "" @344
 		    location   	(2651, 1935)
 		    font       	(object Font
 			size       	10
@@ -15746,8 +15959,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @344
-			Parent_View 	@343
+		    label      	(object SegLabel @345
+			Parent_View 	@344
 			location   	(2652, 1891)
 			font       	(object Font
 			    size       	10
@@ -15764,19 +15977,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Update(ref System.Collections.Generic.List<ExtObjectUri>,  System.Collections.Generic.List<string> , System.Collections.Generic.Dictionary<string,OOAdvantech.Collections.Generic.Dictionary<System.Reflection.EventInfo,OOAdvantech.Collections.ArrayList>>)"
+			label      	"Update(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@308
-		    supplier   	@315
-		    Focus_Src  	@309
-		    Focus_Entry 	@316
+		    client     	@309
+		    supplier   	@316
+		    Focus_Src  	@310
+		    Focus_Entry 	@317
 		    origin     	(1937, 1935)
 		    terminus   	(3367, 1935)
 		    ordinal    	10)
-		(object InterMessView "" @345
+		(object InterMessView "" @346
 		    location   	(623, 1811)
 		    font       	(object Font
 			size       	10
@@ -15788,8 +16001,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @346
-			Parent_View 	@345
+		    label      	(object SegLabel @347
+			Parent_View 	@346
 			location   	(610, 1767)
 			font       	(object Font
 			    size       	10
@@ -15806,19 +16019,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@303
-		    supplier   	@298
-		    Focus_Src  	@304
-		    Focus_Entry 	@301
+		    client     	@304
+		    supplier   	@299
+		    Focus_Src  	@305
+		    Focus_Entry 	@302
 		    origin     	(825, 1811)
 		    terminus   	(394, 1811)
 		    ordinal    	9)
-		(object InterMessView "" @347
+		(object InterMessView "" @348
 		    location   	(1690, 2083)
 		    font       	(object Font
 			size       	10
@@ -15830,8 +16043,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @348
-			Parent_View 	@347
+		    label      	(object SegLabel @349
+			Parent_View 	@348
 			location   	(1689, 2128)
 			font       	(object Font
 			    size       	10
@@ -15848,19 +16061,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@308
-		    supplier   	@306
-		    Focus_Src  	@309
-		    Focus_Entry 	@307
+		    client     	@309
+		    supplier   	@307
+		    Focus_Src  	@310
+		    Focus_Entry 	@308
 		    origin     	(1906, 2083)
 		    terminus   	(1472, 2083)
 		    ordinal    	12)
-		(object InterMessView "" @349
+		(object InterMessView "" @350
 		    location   	(0, 1950)
 		    font       	(object Font
 			size       	10
@@ -15872,8 +16085,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @350
-			Parent_View 	@349
+		    label      	(object SegLabel @351
+			Parent_View 	@350
 			location   	(4095, 1906)
 			font       	(object Font
 			    size       	10
@@ -15895,14 +16108,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@315
-		    supplier   	@320
-		    Focus_Src  	@316
-		    Focus_Entry 	@322
+		    client     	@316
+		    supplier   	@321
+		    Focus_Src  	@317
+		    Focus_Entry 	@323
 		    origin     	(3398, 1950)
 		    terminus   	(4793, 1950)
 		    ordinal    	11)
-		(object InterMessView "" @351
+		(object InterMessView "" @352
 		    location   	(0, 2683)
 		    font       	(object Font
 			size       	10
@@ -15914,8 +16127,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @352
-			Parent_View 	@351
+		    label      	(object SegLabel @353
+			Parent_View 	@352
 			location   	(2395, 2639)
 			font       	(object Font
 			    size       	10
@@ -15937,10 +16150,10 @@
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@323
-		    supplier   	@298
-		    Focus_Src  	@324
-		    Focus_Entry 	@302
+		    client     	@324
+		    supplier   	@299
+		    Focus_Src  	@325
+		    Focus_Entry 	@303
 		    origin     	(4395, 2683)
 		    terminus   	(394, 2683)
 		    ordinal    	13)))
@@ -15954,7 +16167,7 @@
 	    origin_x   	975
 	    origin_y   	1115
 	    items      	(list diagram_item_list
-		(object ObjectView "object" @353
+		(object ObjectView "object" @354
 		    location   	(1948, 605)
 		    font       	(object Font
 			size       	10
@@ -15967,7 +16180,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@353
+			Parent_View 	@354
 			location   	(1817, 530)
 			fill_color 	13434879
 			nlines     	2
@@ -15984,7 +16197,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$64" @354
+		(object ObjectView "$UNNAMED$64" @355
 		    location   	(2992, 2515)
 		    font       	(object Font
 			size       	10
@@ -15997,7 +16210,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@354
+			Parent_View 	@355
 			location   	(2746, 2464)
 			fill_color 	13434879
 			nlines     	2
@@ -16014,7 +16227,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$66" @355
+		(object ObjectView "$UNNAMED$66" @356
 		    location   	(309, 603)
 		    font       	(object Font
 			size       	10
@@ -16027,7 +16240,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@355
+			Parent_View 	@356
 			location   	(200, 531)
 			fill_color 	13434879
 			nlines     	2
@@ -16044,7 +16257,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$67" @356
+		(object ObjectView "$UNNAMED$67" @357
 		    location   	(675, 1350)
 		    font       	(object Font
 			size       	10
@@ -16057,7 +16270,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@356
+			Parent_View 	@357
 			location   	(465, 1299)
 			fill_color 	13434879
 			nlines     	2
@@ -16075,7 +16288,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object ObjectView "$UNNAMED$68" @357
+		(object ObjectView "$UNNAMED$68" @358
 		    location   	(1083, 2501)
 		    font       	(object Font
 			size       	10
@@ -16088,7 +16301,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@357
+			Parent_View 	@358
 			location   	(873, 2450)
 			fill_color 	13434879
 			nlines     	2
@@ -16106,7 +16319,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @358
+		(object NoteView @359
 		    location   	(3089, 1173)
 		    font       	(object Font
 			size       	10
@@ -16119,7 +16332,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@358
+			Parent_View 	@359
 			location   	(2951, 1113)
 			fill_color 	13434879
 			nlines     	2
@@ -16129,7 +16342,7 @@
 		    fill_color 	65280
 		    width      	300
 		    height     	132)
-		(object NoteView @359
+		(object NoteView @360
 		    location   	(606, 306)
 		    font       	(object Font
 			size       	10
@@ -16142,7 +16355,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@359
+			Parent_View 	@360
 			location   	(468, 246)
 			fill_color 	13434879
 			nlines     	2
@@ -16152,7 +16365,7 @@
 		    fill_color 	4259584
 		    width      	300
 		    height     	132)
-		(object NoteView @360
+		(object NoteView @361
 		    location   	(987, 2009)
 		    font       	(object Font
 			size       	10
@@ -16165,7 +16378,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@360
+			Parent_View 	@361
 			location   	(849, 1949)
 			fill_color 	13434879
 			nlines     	2
@@ -16175,7 +16388,7 @@
 		    fill_color 	4259584
 		    width      	300
 		    height     	132)
-		(object ObjectView "$UNNAMED$65" @361
+		(object ObjectView "$UNNAMED$65" @362
 		    location   	(2247, 1658)
 		    font       	(object Font
 			size       	10
@@ -16188,7 +16401,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@361
+			Parent_View 	@362
 			location   	(1975, 1564)
 			fill_color 	13434879
 			nlines     	2
@@ -16205,7 +16418,7 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object NoteView @362
+		(object NoteView @363
 		    location   	(1490, 197)
 		    font       	(object Font
 			size       	12
@@ -16218,7 +16431,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@362
+			Parent_View 	@363
 			location   	(1155, 47)
 			fill_color 	13434879
 			nlines     	6
@@ -16228,17 +16441,11 @@
 		    fill_color 	13434879
 		    width      	694
 		    height     	313)
-		(object AttachView "" @363
-		    stereotype 	TRUE
-		    line_color 	3342489
-		    client     	@353
-		    supplier   	@358
-		    line_style 	0)
 		(object AttachView "" @364
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    client     	@354
-		    supplier   	@358
+		    supplier   	@359
 		    line_style 	0)
 		(object AttachView "" @365
 		    stereotype 	TRUE
@@ -16250,7 +16457,7 @@
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    client     	@356
-		    supplier   	@359
+		    supplier   	@360
 		    line_style 	0)
 		(object AttachView "" @367
 		    stereotype 	TRUE
@@ -16261,10 +16468,16 @@
 		(object AttachView "" @368
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@361
-		    supplier   	@358
+		    client     	@358
+		    supplier   	@361
 		    line_style 	0)
-		(object ObjectView "$UNNAMED$69" @369
+		(object AttachView "" @369
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    client     	@362
+		    supplier   	@359
+		    line_style 	0)
+		(object ObjectView "$UNNAMED$69" @370
 		    location   	(337, 2167)
 		    font       	(object Font
 			size       	10
@@ -16277,7 +16490,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@369
+			Parent_View 	@370
 			location   	(144, 2101)
 			fill_color 	13434879
 			nlines     	2
@@ -16294,20 +16507,20 @@
 		    subobjects 	0
 		    x_offset   	0.000000
 		    y_offset   	0.000000)
-		(object AttachView "" @370
+		(object AttachView "" @371
 		    stereotype 	TRUE
 		    line_color 	3342489
-		    client     	@369
-		    supplier   	@360
+		    client     	@370
+		    supplier   	@361
 		    line_style 	0)
-		(object LinkView "" @371
+		(object LinkView "" @372
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB9DC80204"
-		    client     	@353
-		    supplier   	@354
+		    client     	@354
+		    supplier   	@355
 		    line_style 	0)
-		(object MessView "" @372
+		(object MessView "" @373
 		    location   	(2346, 1149)
 		    font       	(object Font
 			size       	10
@@ -16320,8 +16533,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @373
-			Parent_View 	@372
+		    label      	(object SegLabel @374
+			Parent_View 	@373
 			location   	(2653, 1260)
 			font       	(object Font
 			    size       	10
@@ -16338,25 +16551,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	2.515261
 			height     	217
 			orientation 	0)
-		    object_arc 	@371
+		    object_arc 	@372
 		    pctDist    	0.283688
 		    height     	89
 		    orientation 	0
 		    dir        	1
 		    origin     	(2317, 1096)
 		    terminus   	(2375, 1202))
-		(object LinkView "" @374
+		(object LinkView "" @375
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB9DC80207"
-		    client     	@353
-		    supplier   	@361
+		    client     	@354
+		    supplier   	@362
 		    line_style 	0)
-		(object MessView "" @375
+		(object MessView "" @376
 		    location   	(2127, 1397)
 		    font       	(object Font
 			size       	10
@@ -16369,8 +16582,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @376
-			Parent_View 	@375
+		    label      	(object SegLabel @377
+			Parent_View 	@376
 			location   	(1984, 1292)
 			font       	(object Font
 			    size       	10
@@ -16387,27 +16600,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	-0.657182
 			height     	110
 			orientation 	1)
-		    object_arc 	@374
+		    object_arc 	@375
 		    pctDist    	0.806457
 		    height     	44
 		    orientation 	1
 		    dir        	1
 		    origin     	(2111, 1339)
 		    terminus   	(2143, 1455))
-		(object LinkView "" @377
+		(object LinkView "" @378
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DB9DC8020A"
-		    client     	@355
-		    supplier   	@353
+		    client     	@356
+		    supplier   	@354
 		    line_style 	3
 		    origin_attachment 	(427, 609)
 		    terminal_attachment 	(1808, 609))
-		(object MessView "" @378
+		(object MessView "" @379
 		    location   	(1028, 565)
 		    font       	(object Font
 			size       	10
@@ -16420,8 +16633,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @379
-			Parent_View 	@378
+		    label      	(object SegLabel @380
+			Parent_View 	@379
 			location   	(1028, 521)
 			font       	(object Font
 			    size       	10
@@ -16442,21 +16655,21 @@
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@377
+		    object_arc 	@378
 		    pctDist    	0.434842
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(968, 565)
 		    terminus   	(1088, 565))
-		(object LinkView "" @380
+		(object LinkView "" @381
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DBA024004E"
-		    client     	@356
-		    supplier   	@361
+		    client     	@357
+		    supplier   	@362
 		    line_style 	0)
-		(object MessView "" @381
+		(object MessView "" @382
 		    location   	(1365, 1529)
 		    font       	(object Font
 			size       	10
@@ -16469,8 +16682,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @382
-			Parent_View 	@381
+		    label      	(object SegLabel @383
+			Parent_View 	@382
 			location   	(1152, 1619)
 			font       	(object Font
 			    size       	10
@@ -16487,25 +16700,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	2.130416
 			height     	128
 			orientation 	0)
-		    object_arc 	@380
+		    object_arc 	@381
 		    pctDist    	0.448181
 		    height     	45
 		    orientation 	1
 		    dir        	-1
 		    origin     	(1423, 1540)
 		    terminus   	(1307, 1518))
-		(object LinkView "" @383
+		(object LinkView "" @384
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DBA1460109"
-		    client     	@356
-		    supplier   	@355
+		    client     	@357
+		    supplier   	@356
 		    line_style 	0)
-		(object MessView "" @384
+		(object MessView "" @385
 		    location   	(464, 1021)
 		    font       	(object Font
 			size       	10
@@ -16518,8 +16731,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @385
-			Parent_View 	@384
+		    label      	(object SegLabel @386
+			Parent_View 	@385
 			location   	(268, 1069)
 			font       	(object Font
 			    size       	10
@@ -16536,27 +16749,27 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.853235
 			height     	199
 			orientation 	0)
-		    object_arc 	@383
+		    object_arc 	@384
 		    pctDist    	0.475632
 		    height     	45
 		    orientation 	0
 		    dir        	1
 		    origin     	(489, 1074)
 		    terminus   	(439, 968))
-		(object LinkView "" @386
+		(object LinkView "" @387
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DBA0270148"
-		    client     	@357
-		    supplier   	@354
+		    client     	@358
+		    supplier   	@355
 		    line_style 	3
 		    origin_attachment 	(1302, 2504)
 		    terminal_attachment 	(2737, 2504))
-		(object MessView "" @387
+		(object MessView "" @388
 		    location   	(2250, 2549)
 		    font       	(object Font
 			size       	10
@@ -16569,8 +16782,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @388
-			Parent_View 	@387
+		    label      	(object SegLabel @389
+			Parent_View 	@388
 			location   	(2250, 2594)
 			font       	(object Font
 			    size       	10
@@ -16587,25 +16800,25 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@386
+		    object_arc 	@387
 		    pctDist    	0.661446
 		    height     	45
 		    orientation 	1
 		    dir        	-1
 		    origin     	(2309, 2549)
 		    terminus   	(2191, 2549))
-		(object LinkView "" @389
+		(object LinkView "" @390
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"48DBA5E5006D"
-		    client     	@357
-		    supplier   	@369
+		    client     	@358
+		    supplier   	@370
 		    line_style 	0)
-		(object MessView "" @390
+		(object MessView "" @391
 		    location   	(643, 2352)
 		    font       	(object Font
 			size       	10
@@ -16618,8 +16831,8 @@
 			color      	0
 			default_color 	TRUE)
 		    line_color 	3342489
-		    label      	(object SegLabel @391
-			Parent_View 	@390
+		    label      	(object SegLabel @392
+			Parent_View 	@391
 			location   	(626, 2393)
 			font       	(object Font
 			    size       	10
@@ -16636,11 +16849,11 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
-		    object_arc 	@389
+		    object_arc 	@390
 		    pctDist    	0.660824
 		    height     	45
 		    orientation 	0
@@ -16657,7 +16870,7 @@
 	    origin_x   	0
 	    origin_y   	2287
 	    items      	(list diagram_item_list
-		(object InterObjView "$UNNAMED$66" @392
+		(object InterObjView "$UNNAMED$66" @393
 		    location   	(278, 225)
 		    font       	(object Font
 			size       	10
@@ -16670,7 +16883,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@392
+			Parent_View 	@393
 			location   	(278, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16688,21 +16901,21 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @393
+		    Focus_Of_Control 	(object Focus_Of_Control "" @394
 			location   	(278, 395)
 			line_color 	3342489
-			InterObjView 	@392
+			InterObjView 	@393
 			height     	975
 			y_coord    	915
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @394
+		    Focus_Of_Control 	(object Focus_Of_Control "" @395
 			location   	(278, 674)
 			line_color 	3342489
-			InterObjView 	@392
+			InterObjView 	@393
 			height     	60
 			y_coord    	0
 			Nested     	TRUE))
-		(object InterObjView "$UNNAMED$69" @395
+		(object InterObjView "$UNNAMED$69" @396
 		    location   	(662, 225)
 		    font       	(object Font
 			size       	10
@@ -16715,7 +16928,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@395
+			Parent_View 	@396
 			location   	(662, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16733,14 +16946,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @396
+		    Focus_Of_Control 	(object Focus_Of_Control "" @397
 			location   	(662, 1070)
 			line_color 	3342489
-			InterObjView 	@395
+			InterObjView 	@396
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$67" @397
+		(object InterObjView "$UNNAMED$67" @398
 		    location   	(1075, 225)
 		    font       	(object Font
 			size       	10
@@ -16753,7 +16966,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@397
+			Parent_View 	@398
 			location   	(1075, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16772,14 +16985,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @398
+		    Focus_Of_Control 	(object Focus_Of_Control "" @399
 			location   	(1075, 625)
 			line_color 	3342489
-			InterObjView 	@397
+			InterObjView 	@398
 			height     	169
 			y_coord    	109
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$68" @399
+		(object InterObjView "$UNNAMED$68" @400
 		    location   	(1591, 225)
 		    font       	(object Font
 			size       	10
@@ -16792,7 +17005,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@399
+			Parent_View 	@400
 			location   	(1591, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16811,14 +17024,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @400
+		    Focus_Of_Control 	(object Focus_Of_Control "" @401
 			location   	(1591, 1002)
 			line_color 	3342489
-			InterObjView 	@399
+			InterObjView 	@400
 			height     	188
 			y_coord    	128
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$64" @401
+		(object InterObjView "$UNNAMED$64" @402
 		    location   	(2172, 225)
 		    font       	(object Font
 			size       	10
@@ -16831,7 +17044,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@401
+			Parent_View 	@402
 			location   	(2172, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16849,14 +17062,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @402
+		    Focus_Of_Control 	(object Focus_Of_Control "" @403
 			location   	(2172, 892)
 			line_color 	3342489
-			InterObjView 	@401
+			InterObjView 	@402
 			height     	358
 			y_coord    	298
 			Nested     	FALSE))
-		(object InterObjView "$UNNAMED$65" @403
+		(object InterObjView "$UNNAMED$65" @404
 		    location   	(2822, 225)
 		    font       	(object Font
 			size       	10
@@ -16869,7 +17082,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@403
+			Parent_View 	@404
 			location   	(2822, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16887,14 +17100,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @404
+		    Focus_Of_Control 	(object Focus_Of_Control "" @405
 			location   	(2822, 501)
 			line_color 	3342489
-			InterObjView 	@403
+			InterObjView 	@404
 			height     	353
 			y_coord    	293
 			Nested     	FALSE))
-		(object InterObjView "object" @405
+		(object InterObjView "object" @406
 		    location   	(3957, 225)
 		    font       	(object Font
 			size       	10
@@ -16907,7 +17120,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@405
+			Parent_View 	@406
 			location   	(3957, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -16925,14 +17138,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @406
+		    Focus_Of_Control 	(object Focus_Of_Control "" @407
 			location   	(3957, 395)
 			line_color 	3342489
-			InterObjView 	@405
+			InterObjView 	@406
 			height     	915
 			y_coord    	855
 			Nested     	FALSE))
-		(object InterMessView "" @407
+		(object InterMessView "" @408
 		    location   	(2116, 395)
 		    font       	(object Font
 			size       	10
@@ -16944,8 +17157,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @408
-			Parent_View 	@407
+		    label      	(object SegLabel @409
+			Parent_View 	@408
 			location   	(2117, 440)
 			font       	(object Font
 			    size       	10
@@ -16967,14 +17180,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@392
-		    supplier   	@405
-		    Focus_Src  	@393
-		    Focus_Entry 	@406
+		    client     	@393
+		    supplier   	@406
+		    Focus_Src  	@394
+		    Focus_Entry 	@407
 		    origin     	(293, 395)
 		    terminus   	(3941, 395)
 		    ordinal    	0)
-		(object InterMessView "" @409
+		(object InterMessView "" @410
 		    location   	(3063, 892)
 		    font       	(object Font
 			size       	10
@@ -16986,8 +17199,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @410
-			Parent_View 	@409
+		    label      	(object SegLabel @411
+			Parent_View 	@410
 			location   	(3065, 937)
 			font       	(object Font
 			    size       	10
@@ -17004,19 +17217,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@405
-		    supplier   	@401
-		    Focus_Src  	@406
-		    Focus_Entry 	@402
+		    client     	@406
+		    supplier   	@402
+		    Focus_Src  	@407
+		    Focus_Entry 	@403
 		    origin     	(3941, 892)
 		    terminus   	(2188, 892)
 		    ordinal    	4)
-		(object InterMessView "" @411
+		(object InterMessView "" @412
 		    location   	(3392, 501)
 		    font       	(object Font
 			size       	10
@@ -17028,8 +17241,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @412
-			Parent_View 	@411
+		    label      	(object SegLabel @413
+			Parent_View 	@412
 			location   	(3401, 463)
 			font       	(object Font
 			    size       	10
@@ -17046,19 +17259,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.489914
 			height     	39
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@405
-		    supplier   	@403
-		    Focus_Src  	@406
-		    Focus_Entry 	@404
+		    client     	@406
+		    supplier   	@404
+		    Focus_Src  	@407
+		    Focus_Entry 	@405
 		    origin     	(3941, 501)
 		    terminus   	(2838, 501)
 		    ordinal    	1)
-		(object InterMessView "" @413
+		(object InterMessView "" @414
 		    location   	(1863, 1002)
 		    font       	(object Font
 			size       	10
@@ -17070,8 +17283,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @414
-			Parent_View 	@413
+		    label      	(object SegLabel @415
+			Parent_View 	@414
 			location   	(1882, 1047)
 			font       	(object Font
 			    size       	10
@@ -17088,19 +17301,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@401
-		    supplier   	@399
-		    Focus_Src  	@402
-		    Focus_Entry 	@400
+		    client     	@402
+		    supplier   	@400
+		    Focus_Src  	@403
+		    Focus_Entry 	@401
 		    origin     	(2156, 1002)
 		    terminus   	(1607, 1002)
 		    ordinal    	5)
-		(object InterMessView "" @415
+		(object InterMessView "" @416
 		    location   	(1947, 625)
 		    font       	(object Font
 			size       	10
@@ -17112,8 +17325,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @416
-			Parent_View 	@415
+		    label      	(object SegLabel @417
+			Parent_View 	@416
 			location   	(1949, 581)
 			font       	(object Font
 			    size       	10
@@ -17130,19 +17343,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@403
-		    supplier   	@397
-		    Focus_Src  	@404
-		    Focus_Entry 	@398
+		    client     	@404
+		    supplier   	@398
+		    Focus_Src  	@405
+		    Focus_Entry 	@399
 		    origin     	(2806, 625)
 		    terminus   	(1091, 625)
 		    ordinal    	2)
-		(object InterMessView "" @417
+		(object InterMessView "" @418
 		    location   	(699, 674)
 		    font       	(object Font
 			size       	10
@@ -17154,8 +17367,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @418
-			Parent_View 	@417
+		    label      	(object SegLabel @419
+			Parent_View 	@418
 			location   	(677, 630)
 			font       	(object Font
 			    size       	10
@@ -17172,19 +17385,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@397
-		    supplier   	@392
-		    Focus_Src  	@398
-		    Focus_Entry 	@394
+		    client     	@398
+		    supplier   	@393
+		    Focus_Src  	@399
+		    Focus_Entry 	@395
 		    origin     	(1059, 674)
 		    terminus   	(294, 674)
 		    ordinal    	3)
-		(object InterMessView "" @419
+		(object InterMessView "" @420
 		    location   	(1125, 1070)
 		    font       	(object Font
 			size       	10
@@ -17196,8 +17409,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @420
-			Parent_View 	@419
+		    label      	(object SegLabel @421
+			Parent_View 	@420
 			location   	(1127, 1115)
 			font       	(object Font
 			    size       	10
@@ -17214,15 +17427,15 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
 		    line_color 	3342489
-		    client     	@399
-		    supplier   	@395
-		    Focus_Src  	@400
-		    Focus_Entry 	@396
+		    client     	@400
+		    supplier   	@396
+		    Focus_Src  	@401
+		    Focus_Entry 	@397
 		    origin     	(1575, 1070)
 		    terminus   	(678, 1070)
 		    ordinal    	6)))
@@ -17236,7 +17449,7 @@
 	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object InterObjView "CommunicationBus" @421
+		(object InterObjView "CommunicationBus" @422
 		    location   	(309, 225)
 		    font       	(object Font
 			size       	10
@@ -17249,7 +17462,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@421
+			Parent_View 	@422
 			location   	(309, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -17267,14 +17480,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @422
+		    Focus_Of_Control 	(object Focus_Of_Control "" @423
 			location   	(309, 345)
 			line_color 	3342489
-			InterObjView 	@421
+			InterObjView 	@422
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterObjView "ProxyUtilities" @423
+		(object InterObjView "ProxyUtilities" @424
 		    location   	(780, 225)
 		    font       	(object Font
 			size       	10
@@ -17287,7 +17500,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@423
+			Parent_View 	@424
 			location   	(780, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -17305,28 +17518,28 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @424
+		    Focus_Of_Control 	(object Focus_Of_Control "" @425
 			location   	(780, 345)
 			line_color 	3342489
-			InterObjView 	@423
+			InterObjView 	@424
 			height     	60
 			y_coord    	0
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @425
+		    Focus_Of_Control 	(object Focus_Of_Control "" @426
 			location   	(780, 675)
 			line_color 	3342489
-			InterObjView 	@423
+			InterObjView 	@424
 			height     	120
 			y_coord    	60
 			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @426
+		    Focus_Of_Control 	(object Focus_Of_Control "" @427
 			location   	(780, 1005)
 			line_color 	3342489
-			InterObjView 	@423
+			InterObjView 	@424
 			height     	120
 			y_coord    	60
 			Nested     	FALSE))
-		(object InterObjView "Proxy" @427
+		(object InterObjView "Proxy" @428
 		    location   	(1249, 225)
 		    font       	(object Font
 			size       	10
@@ -17339,7 +17552,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@427
+			Parent_View 	@428
 			location   	(1249, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -17358,14 +17571,14 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @428
+		    Focus_Of_Control 	(object Focus_Of_Control "" @429
 			location   	(1249, 675)
 			line_color 	3342489
-			InterObjView 	@427
+			InterObjView 	@428
 			height     	60
 			y_coord    	0
 			Nested     	FALSE))
-		(object InterObjView "RenewalManager" @429
+		(object InterObjView "RenewalManager" @430
 		    location   	(2370, 225)
 		    font       	(object Font
 			size       	10
@@ -17378,7 +17591,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@429
+			Parent_View 	@430
 			location   	(2370, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -17397,28 +17610,28 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1
-		    Focus_Of_Control 	(object Focus_Of_Control "" @430
+		    Focus_Of_Control 	(object Focus_Of_Control "" @431
 			location   	(2370, 1005)
 			line_color 	3342489
-			InterObjView 	@429
+			InterObjView 	@430
 			height     	60
 			y_coord    	0
-			Nested     	FALSE)
-		    Focus_Of_Control 	(object Focus_Of_Control "" @431
-			location   	(2370, 1357)
-			line_color 	3342489
-			InterObjView 	@429
-			height     	120
-			y_coord    	60
 			Nested     	FALSE)
 		    Focus_Of_Control 	(object Focus_Of_Control "" @432
 			location   	(2370, 1357)
 			line_color 	3342489
-			InterObjView 	@429
+			InterObjView 	@430
+			height     	120
+			y_coord    	60
+			Nested     	FALSE)
+		    Focus_Of_Control 	(object Focus_Of_Control "" @433
+			location   	(2370, 1357)
+			line_color 	3342489
+			InterObjView 	@430
 			height     	60
 			y_coord    	0
 			Nested     	TRUE))
-		(object InterObjView "$UNNAMED$45" @433
+		(object InterObjView "$UNNAMED$45" @434
 		    location   	(1909, 225)
 		    font       	(object Font
 			size       	10
@@ -17431,7 +17644,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@433
+			Parent_View 	@434
 			location   	(1909, 225)
 			fill_color 	13434879
 			anchor_loc 	1
@@ -17450,7 +17663,7 @@
 		    icon_width 	0
 		    icon_y_offset 	0
 		    annotation 	1)
-		(object InterMessView "" @434
+		(object InterMessView "" @435
 		    location   	(0, 345)
 		    font       	(object Font
 			size       	10
@@ -17462,8 +17675,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @435
-			Parent_View 	@434
+		    label      	(object SegLabel @436
+			Parent_View 	@435
 			location   	(544, 390)
 			font       	(object Font
 			    size       	10
@@ -17485,14 +17698,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@421
-		    supplier   	@423
-		    Focus_Src  	@422
-		    Focus_Entry 	@424
+		    client     	@422
+		    supplier   	@424
+		    Focus_Src  	@423
+		    Focus_Entry 	@425
 		    origin     	(324, 345)
 		    terminus   	(764, 345)
 		    ordinal    	0)
-		(object InterMessView "" @436
+		(object InterMessView "" @437
 		    location   	(0, 675)
 		    font       	(object Font
 			size       	10
@@ -17504,8 +17717,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @437
-			Parent_View 	@436
+		    label      	(object SegLabel @438
+			Parent_View 	@437
 			location   	(1014, 631)
 			font       	(object Font
 			    size       	10
@@ -17527,14 +17740,14 @@
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@423
-		    supplier   	@427
-		    Focus_Src  	@425
-		    Focus_Entry 	@428
+		    client     	@424
+		    supplier   	@428
+		    Focus_Src  	@426
+		    Focus_Entry 	@429
 		    origin     	(795, 675)
 		    terminus   	(1233, 675)
 		    ordinal    	1)
-		(object InterMessView "" @438
+		(object InterMessView "" @439
 		    location   	(1344, 1005)
 		    font       	(object Font
 			size       	10
@@ -17546,8 +17759,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @439
-			Parent_View 	@438
+		    label      	(object SegLabel @440
+			Parent_View 	@439
 			location   	(1574, 961)
 			font       	(object Font
 			    size       	10
@@ -17564,19 +17777,19 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddProxy(OOAdvantech.Remoting.IProxy, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"AddProxy(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@423
-		    supplier   	@429
-		    Focus_Src  	@426
-		    Focus_Entry 	@430
+		    client     	@424
+		    supplier   	@430
+		    Focus_Src  	@427
+		    Focus_Entry 	@431
 		    origin     	(795, 1005)
 		    terminus   	(2354, 1005)
 		    ordinal    	2)
-		(object SelfMessView "" @440
+		(object SelfMessView "" @441
 		    location   	(0, 1357)
 		    font       	(object Font
 			size       	10
@@ -17588,8 +17801,8 @@
 			strike     	FALSE
 			color      	0
 			default_color 	TRUE)
-		    label      	(object SegLabel @441
-			Parent_View 	@440
+		    label      	(object SegLabel @442
+			Parent_View 	@441
 			location   	(2461, 1313)
 			font       	(object Font
 			    size       	10
@@ -17606,15 +17819,15 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSession(string, bool, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"GetSession(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
 		    line_color 	3342489
-		    client     	@429
-		    supplier   	@429
-		    Focus_Src  	@431
-		    Focus_Entry 	@432
+		    client     	@430
+		    supplier   	@430
+		    Focus_Src  	@432
+		    Focus_Entry 	@433
 		    origin     	(2386, 1357)
 		    terminus   	(2536, 1357)
 		    ordinal    	3)))))

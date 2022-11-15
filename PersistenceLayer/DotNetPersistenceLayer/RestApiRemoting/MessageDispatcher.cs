@@ -410,7 +410,7 @@ namespace OOAdvantech.Remoting.RestApi
                     serverSession.SessionTypesSync(methodCallMessage);
 
                     //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
-                    serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
+                    //serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
                     
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
@@ -739,7 +739,7 @@ namespace OOAdvantech.Remoting.RestApi
                 //    //responseMessage.ReturnType = dataContextType.FullName;
                 //    return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 //}
-                serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
+                //serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
                 //serverSession.Connected = true;
 
 
@@ -794,6 +794,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                 if (methodCallMessage.MethodName == StandardActions.CreateCommunicationSession)
                 {
+                    serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
                     ObjRef byref = serverSession.GetServerSesionObjectRef();
                     responseMessage.ReturnType = typeof(IServerSessionPart).AssemblyQualifiedName;
                     //responseMessage.ReturnObjectJson = Newtonsoft.Json.JsonConvert.SerializeObject(byref);

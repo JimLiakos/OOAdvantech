@@ -48,7 +48,8 @@ namespace OOAdvantech.Remoting.RestApi
         //public IChannel Channel;
 
 
-        public override bool UseNetRemotingChamnel => false;
+        /// <MetaDataID>{4bf34c49-72ec-4407-8aea-93454a5d64e0}</MetaDataID>
+        public override bool UseNetRemotingChannel => false;
 
 #if DeviceDotNet
         static CRCTool CRCTool = new CRCTool();
@@ -59,6 +60,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 #endif
 
+        /// <MetaDataID>{13c45163-6e38-493c-94b8-9e6db6845a65}</MetaDataID>
         OOAdvantech.SerializeTaskScheduler SerializeTaskScheduler = new OOAdvantech.SerializeTaskScheduler();
 
         /// <MetaDataID>{177c1f59-af6c-4a1d-a477-0a4e23f38bc9}</MetaDataID>
@@ -108,6 +110,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 #endif
 
+        /// <MetaDataID>{eaaf0dea-fc86-49ec-a9de-90d0febc8d10}</MetaDataID>
         ~ServerSessionPart()
         {
 
@@ -118,6 +121,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
+        /// <MetaDataID>{74c529a3-c179-45e1-ad9b-3f86aaca30fa}</MetaDataID>
         public override void ClientProcessTerminates()
         {
             base.ClientProcessTerminates();
@@ -150,6 +154,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        /// <MetaDataID>{eb1c27b6-bffe-4f4b-a010-354662b77d94}</MetaDataID>
         internal static ServerSessionPart GetServerSessionPart(string sessionIdentity)
         {
             lock (ServerSessions)
@@ -310,7 +315,7 @@ namespace OOAdvantech.Remoting.RestApi
             return true;
         }
 
-  
+
 
         /// <summary>
         /// Marks all remote ref objects types which are successfully cached in client session part
@@ -318,6 +323,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <param name="methodCallMessage">
         /// Method call message keeps info for  cached types in client session part 
         /// </param>
+        /// <MetaDataID>{12cd69ea-2195-4dd0-b35f-c98346a43e33}</MetaDataID>
         internal void SessionTypesSync(MethodCallMessage methodCallMessage)
         {
             if (methodCallMessage.CachedTypes != null)
@@ -429,6 +435,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{86865da1-058c-4466-8a43-c59e1521ff18}</MetaDataID>
         Dictionary<string, bool> PhysicalConnections = new Dictionary<string, bool>();
 
+        /// <MetaDataID>{0ea0710f-8a34-44bc-ab9f-f0ef4975d605}</MetaDataID>
         Dictionary<string, IChannel> Channels = new Dictionary<string, IChannel>();
 
         /// <summary>
@@ -540,6 +547,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 
+        /// <MetaDataID>{f8646690-3231-4752-9ac3-9037fd0c01cf}</MetaDataID>
         private IChannel GetActiveChannel()
         {
             lock (PhysicalConnections)

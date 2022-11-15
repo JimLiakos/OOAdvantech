@@ -11,7 +11,7 @@
 	(object Attribute
 	    tool       	"MetaData"
 	    name       	"MetaObjectID"
-	    value      	"FlavourBusinessFacade.OOAdvantech")
+	    value      	"OOAdvantech")
 	(object Attribute
 	    tool       	"MetaData"
 	    name       	"FullName"
@@ -2665,6 +2665,8 @@
 				    line_color 	3342489
 				    fill_color 	13434879
 				    quidu      	"352F38180276"
+				    width      	222
+				    height     	117
 				    autoResize 	TRUE)
 				(object AssociationViewNew "$UNNAMED$0" @6
 				    location   	(813, 794)

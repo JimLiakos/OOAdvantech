@@ -6494,6 +6494,9 @@
         <member name="P:OOAdvantech.Remoting.ServerSessionPart.OOAdvantech#Remoting#IServerSessionPart#ServerProcessIdentity">
             <MetaDataID>{849b5e87-e3b4-4e8d-967a-ef572c475ed6}</MetaDataID>
         </member>
+        <member name="P:OOAdvantech.Remoting.ServerSessionPart.UseNetRemotingChannel">
+            <MetaDataID>{7c361bf7-f8a7-4427-9a97-463e8837f960}</MetaDataID>
+        </member>
         <member name="M:OOAdvantech.Remoting.ServerSessionPart.Finalize">
             <MetaDataID>{150c32ae-b249-4174-a000-a4372d4a4cdc}</MetaDataID>
         </member>
