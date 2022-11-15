@@ -1,4 +1,5 @@
-﻿using OOAdvantech.MetaDataRepository;
+﻿
+using OOAdvantech.MetaDataRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,8 +44,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{854e0860-1ae9-4a2b-837a-d51482c35f20}</MetaDataID>
         public Dictionary<string, ProxyType> MarshaledTypes = new Dictionary<string, ProxyType>();
 
-        /// <MetaDataID>{c9d73168-d8bb-406b-a837-cada411fb29b}</MetaDataID>
-        public IChannel Channel;
+        ///// <MetaDataID>{c9d73168-d8bb-406b-a837-cada411fb29b}</MetaDataID>
+        //public IChannel Channel;
 
 
         public override bool UseNetRemotingChamnel => false;
@@ -168,26 +169,26 @@ namespace OOAdvantech.Remoting.RestApi
         public readonly string InternalChannelUri;
 
 
-        /// <MetaDataID>{20b5ff2c-36d9-4dcc-8c88-e54f0f9e289a}</MetaDataID>
-        public IEndPoint WebSocketEndPoint
-        {
-            set
-            {
-#if DEBUG
-                var connectionIsOpen = value?.ConnectionIsOpen;
-                if (connectionIsOpen != null && !connectionIsOpen.Value)
-                {
+//        /// <MetaDataID>{20b5ff2c-36d9-4dcc-8c88-e54f0f9e289a}</MetaDataID>
+//        public IEndPoint WebSocketEndPoint
+//        {
+//            set
+//            {
+//#if DEBUG
+//                var connectionIsOpen = value?.ConnectionIsOpen;
+//                if (connectionIsOpen != null && !connectionIsOpen.Value)
+//                {
 
-                }
-#endif
-                if ((Channel is WebSocketChannel) && (Channel as WebSocketChannel).WebSocketEndPoint == value)
-                    return;
-                if (Channel != null)
-                {
-                }
-                Channel = new WebSocketChannel(value);
-            }
-        }
+//                }
+//#endif
+//                if ((Channel is WebSocketChannel) && (Channel as WebSocketChannel).WebSocketEndPoint == value)
+//                    return;
+//                if (Channel != null)
+//                {
+//                }
+//                Channel = new WebSocketChannel(value);
+//            }
+//        }
 
 
 
@@ -237,16 +238,36 @@ namespace OOAdvantech.Remoting.RestApi
                     bool retry = false;
                     do
                     {
+                        retry = false;
                         try
                         {
-                            if (invokeType == InvokeType.Sync)
-                                Channel.ProcessRequest(requestData);
-                            else
+                            IChannel channel = GetActiveChannel();
+                            //if (channel != Channel)
+                            //{
+
+                            //}
+                            if (channel != null)
                             {
-                                requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
-                                var task = Channel.AsyncProcessRequest(requestData);
-                                if (task == null)
+                                try
                                 {
+                                    ConnectionIsOpen = channel.EndPoint?.ConnectionIsOpen;
+                                    if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
+                                    {
+
+                                    }
+                                }
+                                catch (Exception error)
+                                {
+                                }
+
+                                if (invokeType == InvokeType.Sync)
+                                    channel.ProcessRequest(requestData);
+                                else
+                                {
+                                    requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
+                                    var task = channel.AsyncProcessRequest(requestData);
+                                    if (task == null)
+                                    {
 
                                     }
                                     await task;
@@ -289,19 +310,7 @@ namespace OOAdvantech.Remoting.RestApi
             return true;
         }
 
-        private IChannel GetActiveChannel()
-        {
-            lock (PhysicalConnections)
-            {
-                foreach (var connectionID in PhysicalConnections.Where(x => x.Value).Select(x => x.Key))
-                {
-                    IChannel channel = null;
-                    if (Channels.TryGetValue(connectionID, out channel))
-                        return channel;
-                }
-            }
-            return null;
-        }
+  
 
         /// <summary>
         /// Marks all remote ref objects types which are successfully cached in client session part
@@ -496,9 +505,13 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                 }
             }
+
+#if DEBUG
             try
             {
-                var ConnectionIsOpen = Channel?.EndPoint?.ConnectionIsOpen;
+
+                IChannel channel = GetActiveChannel();
+                var ConnectionIsOpen = channel?.EndPoint?.ConnectionIsOpen;
                 if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
                 {
                     if (thereIsphysicallConnection)
@@ -510,6 +523,7 @@ namespace OOAdvantech.Remoting.RestApi
             catch (Exception error)
             {
             }
+#endif
 
             #region Communication session completed when all physical connections are disconnected for a period of time
             if (!sessionConnected && Connected)
@@ -526,59 +540,74 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 
+        private IChannel GetActiveChannel()
+        {
+            lock (PhysicalConnections)
+            {
+                foreach (var connectionID in PhysicalConnections.Where(x => x.Value).Select(x => x.Key))
+                {
+                    IChannel channel = null;
+                    if (Channels.TryGetValue(connectionID, out channel))
+                        return channel;
+                }
+            }
+            return null;
+        }
+
+
         /// <MetaDataID>{93d22bfc-8cc4-4112-a858-9a7c006d5348}</MetaDataID>
         internal AuthUser GetAuthData(MethodCallMessage methodCallMessage)
         {
             int threadId = 0;
             var task = System.Threading.Tasks.Task<AuthUser>.Run(() =>
-              {
+            {
 #if !DeviceDotNet
-                  threadId = AppDomain.GetCurrentThreadId();
+                threadId = AppDomain.GetCurrentThreadId();
 #endif
-                  string authToken = methodCallMessage.X_Auth_Token;
-                  string x_Access_Token = methodCallMessage.X_Access_Token;
+                string authToken = methodCallMessage.X_Auth_Token;
+                string x_Access_Token = methodCallMessage.X_Access_Token;
 
-                  if (authToken == null && x_Access_Token == null)
-                      return null;
+                if (authToken == null && x_Access_Token == null)
+                    return null;
 
-                  if (!string.IsNullOrWhiteSpace(authToken) && (AuthUser == null || AuthUser.AuthToken != authToken))
-                  {
-                      //https://stackoverflow.com/questions/39938542/firebase-net-token-verification/48180173
+                if (!string.IsNullOrWhiteSpace(authToken) && (AuthUser == null || AuthUser.AuthToken != authToken))
+                {
+                    //https://stackoverflow.com/questions/39938542/firebase-net-token-verification/48180173
 #if !DeviceDotNet
 
-                      GetUserFromjwToken(authToken);
+                    GetUserFromjwToken(authToken);
 #else
                       if (authToken == DeviceAuthentication.IDToken)
                           AuthUser = DeviceAuthentication.AuthUser;
 #endif
 
-                      if (AuthUser == null)
-                      {
-                          X_Access_Token = null;
-                          methodCallMessage.ReAuthenticate = true;
-                      }
-                  }
-                  else if (string.IsNullOrWhiteSpace(x_Access_Token) || X_Access_Token != x_Access_Token)
-                  {
-                      if (!string.IsNullOrWhiteSpace(authToken) && AuthUser != null && AuthUser.AuthToken == authToken)
-                          return AuthUser;
+                    if (AuthUser == null)
+                    {
+                        X_Access_Token = null;
+                        methodCallMessage.ReAuthenticate = true;
+                    }
+                }
+                else if (string.IsNullOrWhiteSpace(x_Access_Token) || X_Access_Token != x_Access_Token)
+                {
+                    if (!string.IsNullOrWhiteSpace(authToken) && AuthUser != null && AuthUser.AuthToken == authToken)
+                        return AuthUser;
 
-                      if (X_Access_Token != null)
-                          methodCallMessage.ReAuthenticate = true;
-                      X_Access_Token = null;
-                      AuthUser = null;
-                  }
-                  else if (!string.IsNullOrWhiteSpace(x_Access_Token))
-                  {
-                      if (AuthUser.ExpirationTime < DateTime.Now)
-                      {
-                          methodCallMessage.ReAuthenticate = true;
-                          X_Access_Token = null;
-                          AuthUser = null;
-                      }
-                  }
-                  return AuthUser;
-              });
+                    if (X_Access_Token != null)
+                        methodCallMessage.ReAuthenticate = true;
+                    X_Access_Token = null;
+                    AuthUser = null;
+                }
+                else if (!string.IsNullOrWhiteSpace(x_Access_Token))
+                {
+                    if (AuthUser.ExpirationTime < DateTime.Now)
+                    {
+                        methodCallMessage.ReAuthenticate = true;
+                        X_Access_Token = null;
+                        AuthUser = null;
+                    }
+                }
+                return AuthUser;
+            });
 
             if (!task.Wait(System.TimeSpan.FromSeconds(9)))
             {
@@ -1139,4 +1168,3 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 }
-

@@ -304,15 +304,17 @@ namespace ModulePublisher
                 return type;
 #else
                 Assembly classAssembly = null;
-                if(assemblyData!=null)
-                    ClassesAssemblies.TryGetValue(assemblyData, out classAssembly);
-                if (classAssembly == null)
-                    classAssembly = (from assem in System.AppDomain.CurrentDomain.GetAssemblies()
-                                     where ClassVersionDataMatchWithAssembly(assemblyData, assem.FullName)
-                                     select assem).FirstOrDefault();
-                else
+                if (assemblyData != null)
                 {
-                     
+                    ClassesAssemblies.TryGetValue(assemblyData, out classAssembly);
+                    if (classAssembly == null)
+                        classAssembly = (from assem in System.AppDomain.CurrentDomain.GetAssemblies()
+                                         where ClassVersionDataMatchWithAssembly(assemblyData, assem.FullName)
+                                         select assem).FirstOrDefault();
+                    else
+                    {
+
+                    }
                 }
 
                 if (classAssembly == null && !string.IsNullOrEmpty(assemblyData))

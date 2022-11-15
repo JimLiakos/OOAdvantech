@@ -142,7 +142,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
-                    serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
                     serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
                     
 
@@ -409,7 +409,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
-                    serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
                     serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
                     
 
@@ -695,7 +695,7 @@ namespace OOAdvantech.Remoting.RestApi
                     System.Diagnostics.Debug.WriteLine("RestApp Disconnected");
                     serverSession.SetConnectionState(request.PhysicalConnectionID, false);
 
-                    serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
 
                     //serverSession.Connected = false;
                     //var dataContext = System.Runtime.Remoting.Messaging.CallContext.GetData("DataContext");
@@ -713,7 +713,7 @@ namespace OOAdvantech.Remoting.RestApi
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 }
                 
-                serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
 
                 //if (methodCallMessage.MethodName == StandardActions.ReconfigureChannel)
                 //{
@@ -891,7 +891,7 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                         bool dfd = typeClassifier.IsA(monoStateClass);
                     }
-                    serverSession.WebSocketEndPoint = request.EventCallBackChannel;
+                    //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
                 }
                 if (methodCallMessage.MethodName == StandardActions.GetAccessToken)
                 {

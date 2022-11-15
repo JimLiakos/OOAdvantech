@@ -97,7 +97,7 @@ namespace RoseMetaDataRepository
             this.Connection.SkipErrorCheck = false;
             this.Connection.TransactionObjectLockTimeOut = 0;
             this.Connection.TransactionOption = OOAdvantech.Transactions.TransactionOption.Suppress;
-            this.Connection.ViewControlObjectAssembly = null;
+            this.Connection.ViewControlObjectAssembly = "RoseMetadaRepository";
             this.Connection.ViewControlObjectType = "RoseMetaDataRepository.Component";
             // 
             // Solutions

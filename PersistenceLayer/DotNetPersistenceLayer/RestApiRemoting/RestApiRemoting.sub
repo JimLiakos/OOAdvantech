@@ -14,11 +14,11 @@
 		(object Attribute
 		    tool       	"DotNet"
 		    name       	"Solution"
-		    value      	"$dot Net Projects Path\\FlavourBusiness\\FlavourBusiness.sln")
+		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\PersistenceLayer\\OpenNetFramework - VS10.sln")
 		(object Attribute
 		    tool       	"DotNet"
 		    name       	"Project"
-		    value      	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\RestApiRemoting\\RestApiRemoting.csproj")
+		    value      	"$dot Net Projects Path\\RoseVisual.Net Studio Integrator\\RoseAddinFacade\\RoseAddinFacade - VS10.csproj")
 		(object Attribute
 		    tool       	"MetaData"
 		    name       	"MetaObjectID"

@@ -23,18 +23,29 @@ namespace ConnectableControls
             catch(System.Exception error)
             {
             }
+
+            try
+            {
+
 #if Net4
 
-            //System.Reflection.Assembly codeMetaDataRepositoryAssembly = System.Reflection.Assembly.Load("CodeMetaDataRepository, PublicKeyToken=9ce9f0a461f2c1a5");
-            System.Reflection.Assembly codeMetaDataRepositoryAssembly = ModulePublisher.ClassRepository.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager", "CodeMetaDataRepository, PublicKeyToken=9ce9f0a461f2c1a5").Assembly;
+                //System.Reflection.Assembly codeMetaDataRepositoryAssembly = System.Reflection.Assembly.Load("CodeMetaDataRepository, PublicKeyToken=9ce9f0a461f2c1a5");
+                System.Reflection.Assembly codeMetaDataRepositoryAssembly = ModulePublisher.ClassRepository.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager", "CodeMetaDataRepository, PublicKeyToken=9ce9f0a461f2c1a5").Assembly;
 #else
             System.Reflection.Assembly codeMetaDataRepositoryAssembly= System.Reflection.Assembly.Load("CodeMetaDataRepository, Version=1.0.2.0, Culture=neutral, PublicKeyToken=a849addb868b59ea");
 #endif
 
-            IDEManagerType =codeMetaDataRepositoryAssembly.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager");
-            IDEManagerType.GetMethod("Initialize").Invoke(null, new object[0]);
-            MetaDataRepositoryAssemblyType = ModulePublisher.ClassRepository.GetType("OOAdvantech.DotNetMetaDataRepository.Assembly", "");
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                //IDEManagerType = codeMetaDataRepositoryAssembly.GetType("OOAdvantech.CodeMetaDataRepository.IDEManager");
+                //IDEManagerType.GetMethod("Initialize").Invoke(null, new object[1] { false});//secure
+                MetaDataRepositoryAssemblyType = ModulePublisher.ClassRepository.GetType("OOAdvantech.DotNetMetaDataRepository.Assembly", "");
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            }
+            catch (Exception error)
+            {
+
+                System.Windows.Forms.MessageBox.Show(error.Message);
+                
+            }
       
             
         }
