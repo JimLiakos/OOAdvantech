@@ -23,7 +23,7 @@ namespace OOAdvantech.iOS
             Firebase.Core.App.Configure();
 
             var auth = Firebase.Auth.Auth.DefaultInstance;
-            var token = auth.ApnsToken;
+            var token = auth?.ApnsToken;
 
 #if NetStandard
 
