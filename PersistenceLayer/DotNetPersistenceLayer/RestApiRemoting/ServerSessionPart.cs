@@ -469,7 +469,7 @@ namespace OOAdvantech.Remoting.RestApi
                         IChannel channel = null;
                         Channels.TryGetValue(physicalConnectionID, out channel);
 
-                        if (!(channel is WebSocketChannel) || (channel as WebSocketChannel).WebSocketEndPoint == endPoint)
+                        if (!(channel is WebSocketChannel) || channel.EndPoint== endPoint)
                         {
                             channel = new WebSocketChannel(endPoint);
                             Channels[physicalConnectionID] = channel;
@@ -914,6 +914,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
+        /// <MetaDataID>{0fc8495c-0e16-47ae-bc33-409c3e1f3902}</MetaDataID>
         public override void Subscribe(IProxy proxy, EventInfoData eventInfoData, bool allowAsynchronous)
         {
             try
@@ -933,8 +934,10 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        /// <MetaDataID>{05b7d3d2-e10b-46de-a56c-cb478559908c}</MetaDataID>
         public override bool UseNetRemotingChamnel => false;
 
+        /// <MetaDataID>{4d45d2db-3b22-4204-8588-3c99a8c5acf5}</MetaDataID>
         public ServerSessionPartInfo GetServerSession(string channelUri, Guid processIdentity)
         {
             var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", "", "", StandardActions.CreateCommunicationSession, new object[0]);
@@ -1089,6 +1092,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        /// <MetaDataID>{fe5be312-2852-49ad-bed1-27db83c2a6af}</MetaDataID>
         public override void EventCallback(string objectUri, EventInfo eventInfo, List<object> args)
         {
             base.EventCallback(objectUri, eventInfo, args);
@@ -1103,11 +1107,13 @@ namespace OOAdvantech.Remoting.RestApi
             //}
         }
 
+        /// <MetaDataID>{384a9ce5-d1b1-4b0b-99bc-d458f961f05a}</MetaDataID>
         protected override Task SynchronizeSession()
         {
             return Task.FromResult(false);
         }
 
+        /// <MetaDataID>{fae4a4c0-229f-4bf5-a3d7-4b94376c7dac}</MetaDataID>
         internal void UpdateServerSessionPart(ObjRef serverSessionObjectRef)
         {
 

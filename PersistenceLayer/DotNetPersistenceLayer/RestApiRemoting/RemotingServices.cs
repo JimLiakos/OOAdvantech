@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using System.Runtime.Remoting.Messaging;
+#if DeviceDotNet
+using Xamarin.Forms;
+#endif
 
 namespace OOAdvantech.Remoting.RestApi
 {
@@ -108,7 +111,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 #if DeviceDotNet
-#endif 
+#endif
 
         /// <summary>
         /// Creates remote object
@@ -596,11 +599,11 @@ namespace OOAdvantech.Remoting.RestApi
 
             if (requestUri.Trim().IndexOf("ws://") == 0 || requestUri.Trim().IndexOf("wss://") == 0)
             {
-                #region Uses web socket request channel
+#region Uses web socket request channel
                 WebSocketClient webSocket = WebSocketClient.EnsureConnection(requestUri + "WebSocketMessages", binding);
                 if (webSocket.State != WebSocketState.Open)
                 {
-                    #region  creates open error exception response data
+#region  creates open error exception response data
                     ReturnMessage responseMessage = new ReturnMessage(requestData.ChannelUri);
                     var restApiException = new RestApiExceptionData();
                     if (webSocket.SocketException != null)
@@ -616,10 +619,10 @@ namespace OOAdvantech.Remoting.RestApi
                         responseMessage.Exception = restApiException;
                     }
                     return new ResponseData(requestData.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-                    #endregion
+#endregion
                 }
 
-                RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity };
+                RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity,  RequestOS=requestData.RequestOS };
                 request.SendTimeout = binding.SendTimeout.TotalMilliseconds;
                 var task = webSocket.SendRequestAsync(request);
                 var state = webSocket.State;
@@ -656,13 +659,13 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
                 return task.Result;
-                #endregion
+#endregion
             }
 
 
             if (requestUri.Trim().IndexOf("http://") == 0)
             {
-                #region Uses HTTP request channel
+#region Uses HTTP request channel
 
                 var methodCallMessage = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
                 var content = new StringContent(methodCallMessage, Encoding.UTF8, "application/json");
@@ -682,12 +685,12 @@ namespace OOAdvantech.Remoting.RestApi
                     return responseData;
                 }
 
-                #endregion
+#endregion
             }
 
 #if !DeviceDotNet
 
-            #region Uses tcp channel
+#region Uses tcp channel
             if (requestUri.Trim().IndexOf("net.tcp://") == 0)
             {
                 try
@@ -699,7 +702,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                 }
             }
-            #endregion
+#endregion
 #endif
             return null;
         }

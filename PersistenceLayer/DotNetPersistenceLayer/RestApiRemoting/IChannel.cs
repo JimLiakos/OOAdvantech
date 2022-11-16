@@ -24,10 +24,14 @@ namespace OOAdvantech.Remoting.RestApi
         void Close();
 
         /// <MetaDataID>{7e411ece-e8fc-40c3-a23c-ba9569516de3}</MetaDataID>
-        void DropPhysicalConnection();
+        /// <summary>
+        /// Inform client that physical connection has been dropped.
+        /// this happened because computing context which serve client has been moved from computing resources allocation mechanism.
+        /// </summary>
+        void PhysicalConnectionDropped();
 
-        
 
-       
+
+
     }
 }

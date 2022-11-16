@@ -12,6 +12,7 @@ REGEDIT4
 "ToolDisplayName"="C#" 
 "ToolName"="C#" 
 "ToolList"="C#"
+"VSPath"="C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\IDE\\devenv.exe"
 
 
 REGEDIT4

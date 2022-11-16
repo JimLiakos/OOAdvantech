@@ -16,6 +16,11 @@ using System.ServiceModel;
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using OOAdvantech.Transactions;
+
+#if DeviceDotNet
+using Xamarin.Forms;
+#endif
+
 #if !DeviceDotNet
 using System.Web;
 #endif
@@ -26,6 +31,27 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{30d646b7-5886-4ec2-8e1e-49026c836b6f}</MetaDataID>
     public class MessageDispatcher
     {
+        internal static string OSName
+        {
+            get
+            {
+                try
+                {
+#if DeviceDotNet
+                    var osName = Device.RuntimePlatform;
+                    return osName;
+#else
+                    var osName= System.Environment.OSVersion.ToString();
+                    return osName;
+#endif
+                }
+                catch (Exception error)
+                {
+                    return "Unknown";
+                }
+
+            }
+        }
         internal static string ProcessName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
         /// <MetaDataID>{a5db401d-2be2-44eb-9391-adc1b4ac6cb8}</MetaDataID>
         static MessageDispatcher()
@@ -123,7 +149,7 @@ namespace OOAdvantech.Remoting.RestApi
                     ServerSessionPart serverSession = null;
                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
 
-                    #region Get server session
+#region Get server session
                     lock (ServerSessionPart.ServerSessions)
                     {
                         if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
@@ -138,13 +164,13 @@ namespace OOAdvantech.Remoting.RestApi
 
                         }
                     }
-                    #endregion
+#endregion
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
                     //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
                     serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
-                    
+
 
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
@@ -215,7 +241,7 @@ namespace OOAdvantech.Remoting.RestApi
                         bool updateCachingClientSideProperties = false;
                         if (methodCallMessage.Object != null)// && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
-                            if(!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                            if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                             {
                                 proxyType = new ProxyType(methodCallMessage.Object.GetType());
                                 serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
@@ -336,19 +362,19 @@ namespace OOAdvantech.Remoting.RestApi
 
         }
 
-        public static Task<ResponseData> DesconnectAsync(string channelUri, string sessionIdentity, string clientProcessIdentity)
-        {
-            var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.Disconnected, new object[0]);
-            RequestData requestData = new RequestData();
-            requestData.RequestType = RequestType.Disconnect;
-            requestData.SessionIdentity = sessionIdentity;
-            requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
-            var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
-            requestData.ChannelUri = channelUri;
-            return MessageDispatchAsync(requestData);
+        //public static Task<ResponseData> DesconnectAsync(string channelUri, string sessionIdentity, string clientProcessIdentity)
+        //{
+        //    var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientProcessIdentity, "", StandardActions.Disconnected, new object[0]);
+        //    RequestData requestData = new RequestData();
+        //    requestData.RequestType = RequestType.Disconnect;
+        //    requestData.SessionIdentity = sessionIdentity;
+        //    requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
+        //    var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
+        //    requestData.ChannelUri = channelUri;
+        //    return MessageDispatchAsync(requestData);
 
 
-        }
+        //}
 
 
         /// <MetaDataID>{f7a8229c-5601-4996-a6b8-a55b250a917e}</MetaDataID>
@@ -391,7 +417,7 @@ namespace OOAdvantech.Remoting.RestApi
                     ServerSessionPart serverSession = null;
                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
 
-                    #region Get server session
+#region Get server session
                     lock (ServerSessionPart.ServerSessions)
                     {
                         if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
@@ -405,13 +431,13 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef();
                         }
                     }
-                    #endregion
+#endregion
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
                     //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
                     //serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
-                    
+
 
                     var authUser = serverSession.GetAuthData(methodCallMessage);
                     if (methodCallMessage.ChannelUri == "local-device" && !string.IsNullOrWhiteSpace(methodCallMessage.X_Auth_Token))
@@ -472,7 +498,7 @@ namespace OOAdvantech.Remoting.RestApi
                         if (proxyType != null && proxyType.HasCachingClientSideProperties)
                             objectChangeState = proxyType.GetObjectChangeState();
 
-                   
+
                         bool updateCachingClientSideProperties = false;
                         ObjectChangeStateHandle handler = (object _object, string member) =>
                          {
@@ -525,7 +551,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
 
                         }
-                        if(response.SessionIdentity == null)
+                        if (response.SessionIdentity == null)
                             response.SessionIdentity = serverSession.SessionIdentity;
 
                         return response;
@@ -560,7 +586,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
         //static internal ReferenceResolver ReferenceResolver = new OOAdvantech.Remoting.RestApi.ReferenceResolver();
 
-        #region deletede code ProcessRestApiManagerMethodCall
+#region deletede code ProcessRestApiManagerMethodCall
 
         ///// <MetaDataID>{a604830a-8da1-4ca7-a5fb-598f52831134}</MetaDataID>
         //private static ResponseData ProcessRestApiManagerMethodCall(MethodCallMessage methodCallMessage)
@@ -653,7 +679,7 @@ namespace OOAdvantech.Remoting.RestApi
         //    }
         //}
 
-        #endregion
+#endregion
 
         /// <MetaDataID>{a2f34a30-a6cd-406f-9aec-90b60f1dfba9}</MetaDataID>
         private static ResponseData ProcessRestApiManagerMethodCall(RequestData request, MethodCallMessage methodCallMessage)
@@ -683,7 +709,7 @@ namespace OOAdvantech.Remoting.RestApi
                     }
 
                 }
-                
+
                 responseMessage.Web = methodCallMessage.Web;
                 responseMessage.ReAuthenticate = methodCallMessage.ReAuthenticate;
                 responseMessage.ChannelUri = request.ChannelUri;
@@ -709,10 +735,10 @@ namespace OOAdvantech.Remoting.RestApi
                     responseMessage.Marshal();
                     //responseMessage.ReturnObjectJson = JsonMarshal(dataContext, methodCallMessage.ChannelUri, serverSession);
                     responseMessage.ChannelUri = request.ChannelUri;
-                    
+
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 }
-                
+
                 //serverSession.WebSocketEndPoint = request.EventCallBackChannel;
 
                 //if (methodCallMessage.MethodName == StandardActions.ReconfigureChannel)
@@ -1101,7 +1127,7 @@ namespace OOAdvantech.Remoting.RestApi
             //return false;
         }
 
-        #region deletede code JsonMarshal
+#region deletede code JsonMarshal
         ///// <MetaDataID>{f94aafc3-838a-4cd3-94b3-d98e380d0be2}</MetaDataID>
         //private static string JsonMarshal(object _obj, string channelUri, ServerSessionPart serverSessionPart)
         //{
@@ -1152,7 +1178,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         //}
 
-        #endregion
+#endregion
 
     }
 

@@ -7,6 +7,7 @@ using System.Threading;
 using EnvDTE;
 using Microsoft.Win32;
 using System.Security.Principal;
+using OOAdvantech.Security;
 
 namespace MsdevManager
 {
@@ -175,7 +176,23 @@ namespace MsdevManager
                         }
                     }
 
-                    System.Diagnostics.Process process = System.Diagnostics.Process.Start(solutionFile);
+
+                    RegistryKey devKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Rational Software\\Rose\\AddIns\\UML TO VS");
+
+                    string idePath = (string)devKey.GetValue("VSPath");
+                    System.Diagnostics.Process process = null;
+                    if (!string.IsNullOrWhiteSpace(idePath))
+                    {
+                        process = new System.Diagnostics.Process();
+                        process.StartInfo.RedirectStandardOutput = false;
+                        process.StartInfo.Arguments = solutionFile;
+                        process.StartInfo.FileName = idePath;
+                        process.StartInfo.UseShellExecute = true;
+                        process.StartInfo.Verb = "runas";
+                        process.Start();
+                    }
+                    else
+                        process = System.Diagnostics.Process.Start(solutionFile);
                     int count = 60;
                     while (count > 0)
                     {
@@ -265,8 +282,9 @@ namespace MsdevManager
                 // Instead we lookup the path to the IDE executable in the registry and
                 // just start another process.
 
-                RegistryKey devKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\VisualStudio\\7.1\\Setup\\VS");
-                string idePath = (string)devKey.GetValue("EnvironmentPath");
+                RegistryKey devKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Rational Software\\Rose\\AddIns\\UML TO VS");
+                
+                string idePath = (string)devKey.GetValue("VSPath");
 
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo.RedirectStandardOutput = false;

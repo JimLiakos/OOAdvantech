@@ -148,6 +148,7 @@ namespace OOAdvantech.Remoting
         }
 
 
+        /// <MetaDataID>{d66e0f6f-01ed-4258-8438-da4472165b76}</MetaDataID>
         protected System.Collections.Generic.Dictionary<ExtObjectUri, System.Collections.Generic.List<EventInfoData>> EventSubscriptions = new System.Collections.Generic.Dictionary<ExtObjectUri, System.Collections.Generic.List<EventInfoData>>();
 
         /// <MetaDataID>{33f4bd09-67f6-4a90-b559-11b495ab56ff}</MetaDataID>
@@ -334,6 +335,7 @@ namespace OOAdvantech.Remoting
         }
         /// <MetaDataID>{7dbc8940-de28-4aa3-88a4-d822983a99e3}</MetaDataID>
         protected string _SessionIdentity;
+        /// <MetaDataID>{477e2218-54eb-45af-b094-cc9a403f67e8}</MetaDataID>
         protected string ServerSessionPartUri;
 
 
@@ -369,6 +371,7 @@ namespace OOAdvantech.Remoting
 #endif
         }
 
+        /// <MetaDataID>{d8cc8c4d-1ac7-4a1b-9d86-327f769c6396}</MetaDataID>
         public virtual bool UseNetRemotingChamnel { get => true; }
 
 

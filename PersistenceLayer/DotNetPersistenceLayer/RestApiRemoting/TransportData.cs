@@ -174,6 +174,8 @@ namespace OOAdvantech.Remoting.RestApi
     public class TransportData
     {
 
+        [DataMember]
+        public string RequestOS { get; set; } = MessageDispatcher.OSName;
 
         /// <MetaDataID>{13136d94-a067-486c-aceb-374a21be83b2}</MetaDataID>
         [DataMember]
@@ -238,6 +240,9 @@ namespace OOAdvantech.Remoting.RestApi
     [Serializable]
     public class RequestData : TransportData
     {
+
+     
+
         [DataMember]
         public string RequestProcess { get; set; } = MessageDispatcher.ProcessName;
 

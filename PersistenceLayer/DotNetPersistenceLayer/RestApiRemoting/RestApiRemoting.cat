@@ -5367,7 +5367,7 @@
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
 		    uid        	0)
-		(object Operation "DropPhysicalConnection"
+		(object Operation "PhysicalConnectionDropped"
 		    attributes 	(list Attribute_Set
 			(object Attribute
 			    tool       	"MetaData"
@@ -5378,6 +5378,10 @@
 			    name       	"UniqueID"
 			    value      	"5DC656CE0056"))
 		    quid       	"5DC656CE0056"
+		    documentation 	
+|Inform client that physical connection has been dropped.
+|this happened because computing context which serve client has been moved from computing resources allocation mechanism.
+		    
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
@@ -5432,7 +5436,7 @@
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
 		    uid        	0)
-		(object Operation "CloseConnectionTimer_Elapsed"
+		(object Operation "CloseCanceledConnectionTimerTick"
 		    attributes 	(list Attribute_Set
 			(object Attribute
 			    tool       	"MetaData"
@@ -5443,18 +5447,25 @@
 			    name       	"UniqueID"
 			    value      	"5C76F96A01B5"))
 		    quid       	"5C76F96A01B5"
+		    documentation 	
+|
+|Direct connections mechanism close indirect web socket connections immediately when there aren't pending request that use the indirection connection
+|otherwise there is a timer to check the pending request periodically.
+|If there aren't no more pending request then closes the canceled connection web socket.
+|
+		    
 		    parameters 	(list Parameters
 			(object Parameter "sender"
-			    quid       	"5C76F96A01E5"
+			    quid       	"6374B73202C1"
 			    type       	"object")
 			(object Parameter "e"
-			    quid       	"5C76F96A0214"
+			    quid       	"6374B73202D5"
 			    type       	"System.Timers.ElapsedEventArgs"))
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Private"
 		    uid        	0)
-		(object Operation "DirectConnectionTimer_Elapsed"
+		(object Operation "TryDirectConnectionTimerTick"
 		    attributes 	(list Attribute_Set
 			(object Attribute
 			    tool       	"MetaData"
@@ -5467,10 +5478,10 @@
 		    quid       	"5C76F96A02A6"
 		    parameters 	(list Parameters
 			(object Parameter "sender"
-			    quid       	"5C76F96A02D6"
+			    quid       	"6374B732036E"
 			    type       	"object")
 			(object Parameter "e"
-			    quid       	"5C76F96A02F6"
+			    quid       	"6374B7320399"
 			    type       	"System.Timers.ElapsedEventArgs"))
 		    result     	"void"
 		    concurrency 	"Sequential"
@@ -5527,7 +5538,7 @@
 		    quid       	"5C76F96C01CE"
 		    parameters 	(list Parameters
 			(object Parameter "request"
-			    quid       	"5DCD0008015A"
+			    quid       	"6374B733009C"
 			    type       	"OOAdvantech.Remoting.RestApi.RequestData"))
 		    result     	"System.Threading.Tasks.Task`1[[OOAdvantech.Remoting.RestApi.ResponseData,{A2DB1DF7-3B99-4251-891D-0D7F40848C6C}]]"
 		    concurrency 	"Sequential"
@@ -5546,7 +5557,7 @@
 		    quid       	"5C76F96C0234"
 		    parameters 	(list Parameters
 			(object Parameter "request"
-			    quid       	"5DCD00080186"
+			    quid       	"6374B73300C2"
 			    type       	"OOAdvantech.Remoting.RestApi.RequestData"))
 		    result     	"OOAdvantech.Remoting.RestApi.ResponseData"
 		    concurrency 	"Sequential"
@@ -5599,6 +5610,10 @@
 | 
 |
 		    
+		    parameters 	(list Parameters
+			(object Parameter "webSocketClient"
+			    quid       	"6374B73203D9"
+			    type       	"OOAdvantech.Remoting.RestApi.WebSocketClient"))
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Private"
@@ -5614,11 +5629,18 @@
 			    name       	"UniqueID"
 			    value      	"5DCA4280034F"))
 		    quid       	"5DCA4280034F"
+		    parameters 	(list Parameters
+			(object Parameter "sender"
+			    quid       	"6374B733004E"
+			    type       	"object")
+			(object Parameter "e"
+			    quid       	"6374B7330062"
+			    type       	"System.EventArgs"))
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Private"
 		    uid        	0)
-		(object Operation "DropPhysicalConnection"
+		(object Operation "PhysicalConnectionDropped"
 		    attributes 	(list Attribute_Set
 			(object Attribute
 			    tool       	"MetaData"
@@ -5629,9 +5651,37 @@
 			    name       	"UniqueID"
 			    value      	"5DCA4282006B"))
 		    quid       	"5DCA4282006B"
+		    documentation 	
+|Inform client that physical connection has been dropped.
+|this happened because computing context which serve client has been moved from computing resources allocation mechanism.
+		    
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
+		    uid        	0)
+		(object Operation "OnWebSocketResponseTimeCheckTick"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{b77ad430-e2a0-426c-aff1-a389d240119b}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"6374B73202FF"))
+		    quid       	"6374B73202FF"
+		    documentation 	
+|
+|Checks periodicaly the websocket response time
+|
+		    
+		    parameters 	(list Parameters
+			(object Parameter "state"
+			    quid       	"6374B7320314"
+			    type       	"object"))
+		    result     	"void"
+		    concurrency 	"Sequential"
+		    opExportControl 	"Private"
 		    uid        	0))
 	    class_attributes 	(list class_attribute_list
 		(object ClassAttribute "ChannelUri"
@@ -5807,7 +5857,79 @@
 			    name       	"As Property"
 			    value      	FALSE))
 		    quid       	"5DCD00090185"
-		    type       	"OOAdvantech.Remoting.RestApi.WebSocketClient"))
+		    type       	"OOAdvantech.Remoting.RestApi.WebSocketClient")
+		(object ClassAttribute "IOpen"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{7f6c27b0-9b61-46eb-b114-6c2330c4ab6b}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"6374B7330187")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"6374B7330187"
+		    type       	"bool")
+		(object ClassAttribute "ConnectionIsOpen"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{31eafd3a-021e-4c4d-b5ed-f10e1d63b4aa}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"6374B734019E")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	TRUE)
+			(object Attribute
+			    tool       	"C#"
+			    name       	"GenerateGetOperation"
+			    value      	TRUE))
+		    quid       	"6374B734019E"
+		    type       	"bool")
+		(object ClassAttribute "WebSocketResponseTimeCheckTimer"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{37904b63-e2b9-43fd-9771-9580c685ced3}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"6374B734030B")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"6374B734030B"
+		    type       	"System.Threading.Timer")
+		(object ClassAttribute "onLagTest"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"MetaObjectID"
+			    value      	"{1949a48e-bb8b-4536-b31a-8b0c0b08790c}")
+			(object Attribute
+			    tool       	"MetaData"
+			    name       	"UniqueID"
+			    value      	"6374B7340387")
+			(object Attribute
+			    tool       	"C#"
+			    name       	"As Property"
+			    value      	FALSE))
+		    quid       	"6374B7340387"
+		    type       	"bool"))
 	    module     	"Component View::OOAdvantech::RestApiRemoting::RestApiRemoting"
 	    quidu      	"5ABB408A0169"
 	    language   	"C#")
@@ -8745,7 +8867,7 @@
 			    supplier   	"DirectConnectionWebocket"
 			    quidu      	"5DCCEF9D030C"
 			    messages   	(list Messages
-				(object Message "WebSocketClient_Closed( )"
+				(object Message "WebSocketClient_Closed(object, System.EventArgs)"
 				    quid       	"5DCCF0020342"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -8857,7 +8979,7 @@
 			    supplier   	"DirectConnectionWebocket"
 			    quidu      	"5DCCF12500BA"
 			    messages   	(list Messages
-				(object Message "DropPhysicalConnection( )"
+				(object Message "PhysicalConnectionDropped( )"
 				    quid       	"5DCD0105034A"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9058,7 +9180,7 @@
 	    zoom       	100
 	    max_height 	28350
 	    max_width  	21600
-	    origin_x   	1172
+	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
 		(object ClassView "Class" "Logical View::OOAdvantech::RestApiRemoting::ClientSessionPart" @19
@@ -9323,6 +9445,24 @@
 		    line_color 	3342489
 		    fill_color 	12615808
 		    quidu      	"5C13DE3E0165"
+		    compartment 	(object Compartment
+			Parent_View 	@29
+			location   	(3471, 1434)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	3
+			max_width  	1146)
 		    width      	657
 		    height     	237
 		    annotation 	8)
@@ -9636,6 +9776,24 @@
 		    line_color 	3342489
 		    fill_color 	12615808
 		    quidu      	"5DAFE5690351"
+		    compartment 	(object Compartment
+			Parent_View 	@45
+			location   	(3227, 1042)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	3
+			max_width  	475)
 		    width      	462
 		    height     	231
 		    annotation 	8)
@@ -9683,6 +9841,24 @@
 		    line_color 	3342489
 		    fill_color 	12615808
 		    quidu      	"5DC657860273"
+		    compartment 	(object Compartment
+			Parent_View 	@48
+			location   	(2790, 1428)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	161
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			icon_style 	"Decoration"
+			fill_color 	16777215
+			anchor     	2
+			nlines     	3
+			max_width  	1493)
 		    width      	613
 		    height     	237
 		    annotation 	8)
@@ -22034,9 +22210,9 @@
 			quidu      	"5DCCF0020342"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	538
+			max_width  	10
 			justify    	0
-			label      	"WebSocketClient_Closed( )"
+			label      	"WebSocketClient_Closed(object, System.EventArgs)"
 			pctDist    	-0.262349
 			height     	62
 			orientation 	0)
@@ -22270,7 +22446,7 @@
 			quidu      	"5DCCF84500D8"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	1231
 			justify    	0
 			label      	"SendRequestAsync(OOAdvantech.Remoting.RestApi.RequestData)"
 			pctDist    	0.500000
@@ -22292,7 +22468,7 @@
 			quidu      	"5DCD069002ED"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	712
 			justify    	0
 			label      	"RemoveLocalConnection(string, string)"
 			pctDist    	0.500000
@@ -22395,7 +22571,7 @@
 			quidu      	"5DCCF6DE01D5"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	1253
 			justify    	0
 			label      	"IsolatedContext_IsolatedContextUnloaded(object, System.EventArgs)"
 			pctDist    	-0.906780
@@ -22444,7 +22620,7 @@
 			quidu      	"5DCD006C015D"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	478
 			justify    	0
 			label      	"MessageDispatch(string)"
 			pctDist    	0.500000
@@ -22529,9 +22705,9 @@
 			quidu      	"5DCD0105034A"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	519
+			max_width  	582
 			justify    	0
-			label      	"DropPhysicalConnection( )"
+			label      	"PhysicalConnectionDropped( )"
 			pctDist    	0.237288
 			height     	89
 			orientation 	0)
@@ -22556,7 +22732,7 @@
 	    max_height 	28350
 	    max_width  	21600
 	    origin_x   	0
-	    origin_y   	0
+	    origin_y   	484
 	    items      	(list diagram_item_list
 		(object InterObjView "$UNNAMED$40" @727
 		    location   	(450, 225)
@@ -22836,7 +23012,7 @@
 			quidu      	"5DCCF6DE01D5"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	1253
 			justify    	0
 			label      	"IsolatedContext_IsolatedContextUnloaded(object, System.EventArgs)"
 			pctDist    	0.500000
@@ -22878,7 +23054,7 @@
 			quidu      	"5DCCF84500D8"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	1231
 			justify    	0
 			label      	"SendRequestAsync(OOAdvantech.Remoting.RestApi.RequestData)"
 			pctDist    	0.500000
@@ -22920,7 +23096,7 @@
 			quidu      	"5DCD006C015D"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	478
 			justify    	0
 			label      	"MessageDispatch(string)"
 			pctDist    	0.500000
@@ -22962,9 +23138,9 @@
 			quidu      	"5DCD0105034A"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	509
+			max_width  	582
 			justify    	0
-			label      	"DropPhysicalConnection( )"
+			label      	"PhysicalConnectionDropped( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -23004,7 +23180,7 @@
 			quidu      	"5DCD069002ED"
 			anchor_loc 	1
 			nlines     	1
-			max_width  	10
+			max_width  	713
 			justify    	0
 			label      	"RemoveLocalConnection(string, string)"
 			pctDist    	0.500000

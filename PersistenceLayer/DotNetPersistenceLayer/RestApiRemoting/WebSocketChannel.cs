@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -135,12 +136,15 @@ namespace OOAdvantech.Remoting.RestApi
 #if DEBUG
 
         #region websocket response time monitoring
+        /// <MetaDataID>{37904b63-e2b9-43fd-9771-9580c685ced3}</MetaDataID>
         Timer WebSocketResponseTimeCheckTimer;
+        /// <MetaDataID>{1949a48e-bb8b-4536-b31a-8b0c0b08790c}</MetaDataID>
         bool onLagTest = false;
         /// <summary>
         /// Checks periodicaly the websocket response time
         /// </summary>
         /// <param name="state"></param>
+        /// <MetaDataID>{b77ad430-e2a0-426c-aff1-a389d240119b}</MetaDataID>
         void OnWebSocketResponseTimeCheckTick(object state)
         {
 
@@ -281,7 +285,7 @@ namespace OOAdvantech.Remoting.RestApi
         public WebSocketChannel(IEndPoint webSocketEndPoint)
         {
 
-            WebSocketEndPoint = webSocketEndPoint;
+            EndPoint = webSocketEndPoint;
             if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(webSocketEndPoint as MarshalByRefObject))
             {
 
@@ -389,8 +393,8 @@ namespace OOAdvantech.Remoting.RestApi
                                 _WebSocketClient.Closed += WebSocketClient_Closed;
                                 _WebSocketClient.AddWebSocketChannel(this);
 
-                                WebSocketEndPoint = WebSocketClient;
-                                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(WebSocketEndPoint as MarshalByRefObject))
+                                _EndPoint = WebSocketClient;
+                                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
                                 {
 
                                 }
@@ -404,7 +408,7 @@ namespace OOAdvantech.Remoting.RestApi
                         else
                         {
                             _WebSocketClient = value;
-                            WebSocketEndPoint = WebSocketClient;
+                            _EndPoint = WebSocketClient;
                             _WebSocketClient.Closed += WebSocketClient_Closed;
                             _WebSocketClient.AddWebSocketChannel(this);
                         }
@@ -454,6 +458,7 @@ namespace OOAdvantech.Remoting.RestApi
                 webSocketClient.RemoveWebSocketChannel(this);
 
         }
+        Task WebsocketReconnectionTask;
 
         /// <MetaDataID>{df0db290-5ec8-4352-bfed-a48351ce44af}</MetaDataID>
         private void WebSocketClient_Closed(object sender, EventArgs e)
@@ -462,7 +467,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (!SusspendWebSocketClientChange)
             {
 
-                Task.Run(() =>
+                WebsocketReconnectionTask= Task.Run(() =>
                 {
                     while (true)
                     {
@@ -487,7 +492,7 @@ namespace OOAdvantech.Remoting.RestApi
                             if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
                             {
                                 WebSocketClient = webSocketClient;
-                                ClientSessionPart.Reconnect(true);
+                                //ClientSessionPart.Reconnect(true);
                             }
                             else
                             {
@@ -507,20 +512,24 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+
+        IEndPoint _EndPoint;
         /// <MetaDataID>{624c1f21-7502-42ce-b896-ad111b5d36a4}</MetaDataID>
         public IEndPoint EndPoint
         {
             get
             {
+                
 
                 bool lockTaken = false;
                 try
                 {
+                    
                     Monitor.TryEnter(this, 5000, ref lockTaken);
                     if (!lockTaken)
                         throw new TimeoutException(); // or compensate
 
-                    return WebSocketEndPoint;                                    // work here...
+                    return _EndPoint;                                    // work here...
                 }
                 finally
                 {
@@ -535,8 +544,8 @@ namespace OOAdvantech.Remoting.RestApi
 
             set
             {
-                WebSocketEndPoint = value;
-                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(WebSocketEndPoint as MarshalByRefObject))
+                _EndPoint = value;
+                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
                 {
 
                 }
@@ -611,8 +620,8 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 
-        /// <MetaDataID>{c30cb6c5-12be-49c3-8a19-07f1a2282082}</MetaDataID>
-        internal IEndPoint WebSocketEndPoint;
+        ///// <MetaDataID>{c30cb6c5-12be-49c3-8a19-07f1a2282082}</MetaDataID>
+        //internal IEndPoint WebSocketEndPoint;
 
         /// <MetaDataID>{89c008a5-539c-4a94-b983-49f0ff9d09ff}</MetaDataID>
         public Task<ResponseData> AsyncProcessRequest(RequestData requestData)
@@ -620,7 +629,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (EndPoint != null)
             {
 #if DeviceDotNet
-                var task = WebSocketEndPoint.SendRequestAsync(requestData);
+                var task = EndPoint.SendRequestAsync(requestData);
                 return task;
 
 #else
@@ -660,13 +669,14 @@ namespace OOAdvantech.Remoting.RestApi
                 //        return new ResponseData() { CallContextID = requestData.CallContextID, SessionIdentity = requestData.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                 //    });
                 //}
-                var task = WebSocketEndPoint.SendRequestAsync(requestData);
+                var task = _EndPoint.SendRequestAsync(requestData);
                 return task;
                 #endregion
             }
         }
 
 
+        /// <MetaDataID>{7f6c27b0-9b61-46eb-b114-6c2330c4ab6b}</MetaDataID>
         bool IOpen
         {
             get
@@ -674,14 +684,17 @@ namespace OOAdvantech.Remoting.RestApi
                 return true;
             }
         }
-        bool ConnectionIsOpen { get
+        /// <MetaDataID>{31eafd3a-021e-4c4d-b5ed-f10e1d63b4aa}</MetaDataID>
+        bool ConnectionIsOpen
+        {
+            get
             {
                 if (EndPoint == null)
                     return false;
                 else
                     return EndPoint.ConnectionIsOpen;
             }
-            
+
         }
         /// <MetaDataID>{cfb7fd00-d3cb-4edb-88c0-70b0cc072829}</MetaDataID>
         public ResponseData ProcessRequest(RequestData requestData)
@@ -703,11 +716,16 @@ namespace OOAdvantech.Remoting.RestApi
 
             if (endPoint != null)
             {
-                var task = endPoint.SendRequestAsync(requestData);
-                WebSocketState state = WebSocketState.None;
-
+                
                 if (endPoint is WebSocketClient)
-                    state = (endPoint as WebSocketClient).State;
+                {
+                    if( (endPoint as WebSocketClient).State!=WebSocketState.Open||(endPoint as WebSocketClient).State!=WebSocketState.Connecting)
+                    {
+                        if (WebsocketReconnectionTask!=null)
+                            WebsocketReconnectionTask.Wait(binding.OpenTimeout);
+                    }
+                }
+                var task = endPoint.SendRequestAsync(requestData);
 
 
 #if DEBUG
@@ -799,13 +817,19 @@ namespace OOAdvantech.Remoting.RestApi
 
         }
 
+
         /// <MetaDataID>{72be126e-7a66-4512-978b-cd813cc82b3f}</MetaDataID>
-        public void DropPhysicalConnection()
+        /// <summary>
+        /// Inform client that physical connection has been dropped.
+        /// this happened because computing context which serve client has been moved from computing resources allocation mechanism.
+        /// </summary>
+        public void PhysicalConnectionDropped()
         {
             string publicChannelUri = null;
             string internalchannelUri = null;
             ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
 
+           //Tries to connect with server side in new location again
             var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
 
             if (tryDirectConnectionSocketClient == null)

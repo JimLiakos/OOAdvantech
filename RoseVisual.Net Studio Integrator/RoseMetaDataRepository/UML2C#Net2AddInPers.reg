@@ -10,7 +10,7 @@ REGEDIT4
 "ToolDisplayName"="Net2" 
 "ToolName"="Net2" 
 "ToolList"="Net2"
-
+"VSPath"="C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\IDE\\devenv.exe"
 
 REGEDIT4
 [HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Rational Software\Rose\AddIns\UMLTO.Net2\Events]

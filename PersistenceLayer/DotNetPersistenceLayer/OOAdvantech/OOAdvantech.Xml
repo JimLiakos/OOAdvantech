@@ -5317,6 +5317,9 @@
         <member name="M:OOAdvantech.Remoting.ClientSessionPart.Unsubscribe(System.Collections.Generic.List{OOAdvantech.Remoting.RemoteEventSubscription})">
             <MetaDataID>{0387aad3-a419-4227-b50f-131be1dda44d}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.Remoting.ClientSessionPart.EventSubscriptions">
+            <MetaDataID>{d66e0f6f-01ed-4258-8438-da4472165b76}</MetaDataID>
+        </member>
         <member name="F:OOAdvantech.Remoting.ClientSessionPart.RemoteEventHandler">
             <MetaDataID>{33f4bd09-67f6-4a90-b559-11b495ab56ff}</MetaDataID>
         </member>
@@ -5362,6 +5365,9 @@
         <member name="F:OOAdvantech.Remoting.ClientSessionPart._SessionIdentity">
             <MetaDataID>{7dbc8940-de28-4aa3-88a4-d822983a99e3}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.Remoting.ClientSessionPart.ServerSessionPartUri">
+            <MetaDataID>{477e2218-54eb-45af-b094-cc9a403f67e8}</MetaDataID>
+        </member>
         <member name="F:OOAdvantech.Remoting.ClientSessionPart.ClientProcessIdentity">
             <MetaDataID>{5fa27d40-31de-48f9-a94d-80163f7839cd}</MetaDataID>
         </member>
@@ -5370,6 +5376,9 @@
         </member>
         <member name="M:OOAdvantech.Remoting.ClientSessionPart.AttatchToServerSessionPart">
             <MetaDataID>{6a552326-7d5f-43e2-b094-af9a70e34582}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.Remoting.ClientSessionPart.UseNetRemotingChamnel">
+            <MetaDataID>{d8cc8c4d-1ac7-4a1b-9d86-327f769c6396}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.Remoting.ClientSessionPart.#ctor(System.String,System.Guid,OOAdvantech.Remoting.ServerSessionPartInfo,OOAdvantech.Remoting.IRemotingServices)">
             <MetaDataID>{655625d4-85a9-402f-b43b-bbc06f430787}</MetaDataID>

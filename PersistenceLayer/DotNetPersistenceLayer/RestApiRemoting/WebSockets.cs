@@ -227,7 +227,7 @@ namespace OOAdvantech.Remoting.RestApi
                         var logicalConnection = (from interConnection in _PublicWebSockets
                                                  where interConnection.SessionIdentity == request.SessionIdentity
                                                  select interConnection).FirstOrDefault();
-                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType };
+                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType,RequestOS=request.RequestOS };
 
                         ResponseData responseData = null;
                         if (logicalConnection != null && logicalConnection.Public != null && logicalConnection.Public.State == WebSocketState.Open)
@@ -271,7 +271,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     var clientSessionPart = RenewalManager.GetSession(request.SessionIdentity) as ClientSessionPart;
                     if (clientSessionPart != null)
-                        clientSessionPart.Channel.DropPhysicalConnection();
+                        clientSessionPart.Channel.PhysicalConnectionDropped();
                 }
             }
             else if (header == MessageHeader.Response)
@@ -591,11 +591,8 @@ namespace OOAdvantech.Remoting.RestApi
             TaskCompletionSource<ResponseData> taskCompletionSource;
             if (!EnsureConnection())
             {
-                if (State == WebSocketState.Closed|| State == WebSocketState.None)
-                    EnsureConnection(this.Uri, binding);
-
-                if (!EnsureConnection())
-                {
+            
+                
                     if (this.SocketException != null)
                         throw this.SocketException;
                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
@@ -603,7 +600,7 @@ namespace OOAdvantech.Remoting.RestApi
                     taskCompletionSource = new TaskCompletionSource<ResponseData>();
                     taskCompletionSource.SetResult(new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) });
                     return taskCompletionSource.Task;
-                }
+                
             }
 
             WebSocket4Net.WebSocket nativeWebSocket;
@@ -1442,7 +1439,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                             System.Diagnostics.Debug.WriteLine(request.ChannelUri + " , " + roleInstanceServerUrl, "Channel");
 
-                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID };
+                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID , RequestOS=request.RequestOS };
 
                             if (roleInstanceServerUrl.Trim().IndexOf("http://") == 0)
                                 roleInstanceServerUrl = "ws://" + roleInstanceServerUrl.Substring("http://".Length);
