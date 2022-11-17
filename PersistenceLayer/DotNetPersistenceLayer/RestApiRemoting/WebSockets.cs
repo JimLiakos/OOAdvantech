@@ -552,6 +552,7 @@ namespace OOAdvantech.Remoting.RestApi
                 NativeWebSocket = new WebSocket4Net.WebSocket(Uri);
                 NativeWebSocket.Opened += OnOpened;
                 NativeWebSocket.Closed += OnClosed;
+                
                 NativeWebSocket.Error += OnError;
                 NativeWebSocket.MessageReceived += OnMessageReceived;
 #endif
