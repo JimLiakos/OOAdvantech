@@ -20,7 +20,7 @@ namespace OOAdvantech.Transactions
 
 #if DeviceDotNet
         /// <MetaDataID>{1D33D746-613E-4574-B222-1E9F692B9051}</MetaDataID>
-        private System.Timers.Timer Timer;
+        private System.Threading.Timer Timer;
 #else
         private System.Threading.Timer Timer;
 #endif 
@@ -43,8 +43,9 @@ namespace OOAdvantech.Transactions
             // ReaderWriterLock = new ReaderWriterLock(true);
             Timer = new System.Threading.Timer(new System.Threading.TimerCallback(OnTimer), null, 4000, 4000);
 #else
-            Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer), null, TimeSpan.FromSeconds(4));
-            Timer.Start();
+            //Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer), null, TimeSpan.FromSeconds(4));
+            //Timer.Start();
+            Timer = new System.Threading.Timer(new System.Threading.TimerCallback(OnTimer), null, 4000, 4000);
 #endif
 
             ExternalTransactionsEnlistmentsControllers = new OOAdvantech.Collections.Generic.Dictionary<string, IEnlistmentsController>();

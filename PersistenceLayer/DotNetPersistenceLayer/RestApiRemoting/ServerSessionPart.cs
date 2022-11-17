@@ -1035,7 +1035,11 @@ namespace OOAdvantech.Remoting.RestApi
                         System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
 
 
-                        foreach (System.WeakReference weakReference in Proxies.Values)
+                        Dictionary<string, System.WeakReference> proxies = null;
+                        lock (Proxies)
+                            proxies=Proxies.ToDictionary(x => x.Key, x => x.Value);
+
+                        foreach (System.WeakReference weakReference in proxies.Values)
                         {
                             try
                             {
@@ -1055,7 +1059,12 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                         if (disconnectedChannel)
                         {
-                            foreach (System.WeakReference weakReference in Proxies.Values)
+                            Dictionary<string, System.WeakReference> proxies = null;
+                            lock (Proxies)
+                                proxies=Proxies.ToDictionary(x=>x.Key,x=>x.Value);
+
+
+                            foreach (System.WeakReference weakReference in proxies.Values)
                             {
                                 try
                                 {

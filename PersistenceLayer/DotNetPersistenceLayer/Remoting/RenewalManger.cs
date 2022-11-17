@@ -36,7 +36,8 @@ namespace OOAdvantech.Remoting
 
 
 #if DeviceDotNet
-        private static System.Timers.Timer timer = new System.Timers.Timer(new System.Timers.TimerCallback(SessionsCheck), null, TimeSpan.FromSeconds(4));
+        private static System.Threading.Timer timer = new System.Threading.Timer(new System.Threading.TimerCallback(SessionsCheck), null, 4000, 4000);
+        //private static System.Timers.Timer timer = new System.Timers.Timer(new System.Timers.TimerCallback(SessionsCheck), null, TimeSpan.FromSeconds(4));
 #else
         /// <MetaDataID>{C600BEFA-66D4-4DE7-86F4-913156CD4EAC}</MetaDataID>
         private static System.Threading.Timer timer = new System.Threading.Timer(new System.Threading.TimerCallback(SessionsCheck), null, 4000, 4000);

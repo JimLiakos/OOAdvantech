@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using OOAdvantech.Json;
 using OOAdvantech.MetaDataRepository;
 
@@ -33,7 +34,7 @@ namespace OOAdvantech.Remoting.RestApi
         public WebSocketChannel(string channelUri, ClientSessionPart clientSessionPart)
         {
 #if DEBUG
-            this.WebSocketResponseTimeCheckTimer = new Timer(new TimerCallback(OnWebSocketResponseTimeCheckTick), null, 20000, 10000);
+            this.WebSocketResponseTimeCheckTimer = new System.Threading.Timer(new System.Threading.TimerCallback(OnWebSocketResponseTimeCheckTick), null, 20000, 10000);
 #endif
             this.ChannelUri = channelUri;
             ClientSessionPart = clientSessionPart;
@@ -66,38 +67,39 @@ namespace OOAdvantech.Remoting.RestApi
         {
             //DirectConnectionTimer.Start();
 
-            RequestData requestData = new RequestData();
-            requestData.RequestType = RequestType.ConnectionInfo;
-            requestData.ChannelUri = ChannelUri;
-            requestData.SendTimeout = TimeSpan.FromSeconds(2).TotalMilliseconds;
-            var task = WebSocketClient.SendRequestAsync(requestData);
 
-            if (!task.Wait(TimeSpan.FromSeconds(2)))
-            {
+            //RequestData requestData = new RequestData();
+            //requestData.RequestType = RequestType.ConnectionInfo;
+            //requestData.ChannelUri = ChannelUri;
+            //requestData.SendTimeout = TimeSpan.FromSeconds(2).TotalMilliseconds;
+            //var task = WebSocketClient.SendRequestAsync(requestData);
+
+            //if (!task.Wait(TimeSpan.FromSeconds(2)))
+            //{
 
 
 
-                _WebSocketClient.RemoveWebSocketChannel(this);
-                if (_WebSocketClient.WebSocketChannels.Count == 0 && _WebSocketClient.State == WebSocketState.Open)
-                {
-                    _WebSocketClient.CloseAsync();
-                    _WebSocketClient = null;
+            //    _WebSocketClient.RemoveWebSocketChannel(this);
+            //    if (_WebSocketClient.WebSocketChannels.Count == 0 && _WebSocketClient.State == WebSocketState.Open)
+            //    {
+            //        _WebSocketClient.CloseAsync();
+            //        _WebSocketClient = null;
 
-                }
-                string publicChannelUri = null;
-                string internalchannelUri = null;
-                ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+            //    }
+            //    string publicChannelUri = null;
+            //    string internalchannelUri = null;
+            //    ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
 
-                Binding binding = new Binding() { OpenTimeout = TimeSpan.FromSeconds(2) };
-                WebSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);// WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
+            //    Binding binding = new Binding() { OpenTimeout = TimeSpan.FromSeconds(2) };
+            //    WebSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);// WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
 
-                requestData = new RequestData();
-                requestData.RequestType = RequestType.ConnectionInfo;
-                requestData.ChannelUri = ChannelUri;
-                var responseData = this.ProcessRequest(requestData);
-                if (!responseData.DirectConnect)
-                    DirectConnectionTimer.Start();
-            }
+            //    requestData = new RequestData();
+            //    requestData.RequestType = RequestType.ConnectionInfo;
+            //    requestData.ChannelUri = ChannelUri;
+            //    var responseData = this.ProcessRequest(requestData);
+            //    if (!responseData.DirectConnect)
+            //        DirectConnectionTimer.Start();
+            //}
         }
 
         /// <summary>
@@ -137,7 +139,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         #region websocket response time monitoring
         /// <MetaDataID>{37904b63-e2b9-43fd-9771-9580c685ced3}</MetaDataID>
-        Timer WebSocketResponseTimeCheckTimer;
+        System.Threading.Timer WebSocketResponseTimeCheckTimer;
         /// <MetaDataID>{1949a48e-bb8b-4536-b31a-8b0c0b08790c}</MetaDataID>
         bool onLagTest = false;
         /// <summary>
@@ -155,6 +157,19 @@ namespace OOAdvantech.Remoting.RestApi
 
                 onLagTest = true;
                 var endPoint = EndPoint;
+
+#if DEBUG
+    #if DeviceDotNet
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    var socketState = (endPoint as WebSocketClient)?.State;
+
+                    if (socketState!=null)
+                        System.Diagnostics.Debug.WriteLine(socketState.ToString());
+                }
+    #endif
+#endif
+
                 if (endPoint != null &&
                     endPoint is WebSocketClient &&
                         (endPoint as WebSocketClient).State == WebSocketState.Open)
@@ -195,87 +210,107 @@ namespace OOAdvantech.Remoting.RestApi
         List<WebSocketClient> PendingClientSocketsToClose = new List<WebSocketClient>();
 
         /// <MetaDataID>{4a724d9e-8273-46ec-b041-58e9d4551c64}</MetaDataID>
-        private void TryDirectConnectionTimerTick(object sender, System.Timers.ElapsedEventArgs e)
+        private void TryDirectConnectionTimerTick(object sender, ElapsedEventArgs e)
         {
-
+            lock (this)
+            {
+                if (DirectConnectionCheck)
+                    return;
+            }
             Task.Run(() =>
              {
                  try
                  {
                      lock (this)
                      {
+                         if (DirectConnectionCheck)
+                             return;
                          DirectConnectionCheck = true;
                      }
-                     DirectConnectionTimer.Stop();
-                     lock (DirectConnectionTimer)
+
+
+                     var datetime = DateTime.Now;
+                     string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
+
+                     System.Diagnostics.Debug.WriteLine(string.Format("RestApp {0}  {1} DirectConnectionTimer Check ConnectionInfo ", timestamp, ChannelUri));
+
+                     string publicChannelUri = null;
+                     string internalchannelUri = null;
+                     ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+
+                     if (WebSocketClient.WebSocketConnections.ContainsKey((publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()))
                      {
-
-                         var datetime = DateTime.Now;
-                         string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
-
-
-                         System.Diagnostics.Debug.WriteLine(string.Format("RestApp {0}  {1} DirectConnectionTimer Check ConnectionInfo ", timestamp, ChannelUri));
-
-                         string publicChannelUri = null;
-                         string internalchannelUri = null;
-                         ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-
-                         if (WebSocketClient.WebSocketConnections.ContainsKey((publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()))
+                         if (WebSocketClient.WebSocketConnections[(publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()].State == WebSocketState.Open)
                          {
-                             if (WebSocketClient.WebSocketConnections[(publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()].State == WebSocketState.Open)
-                             {
-                                 var requests = WebSocketClient.WebSocketConnections[(publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()].GetRequestTasks().Count;
-                                 var dire = WebSocketClient.WebSocketConnections[(publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()].DirectConnect;
-                             }
+                             var requests = WebSocketClient.WebSocketConnections[(publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()].GetRequestTasks().Count;
+                             var dire = WebSocketClient.WebSocketConnections[(publicChannelUri + "WebSocketMessages" + internalchannelUri).ToLower()].DirectConnect;
                          }
-
-                         var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
-
-                         if (tryDirectConnectionSocketClient == null)
-                             return;
-
-                         //WebSocketEndPoint = WebSocketClient;
+                     }
+                     Task<ResponseData> task = null;
+                     RequestData requestData = null;
+                     #region Check current socket for direct connection
 
 
-                         RequestData requestData = new RequestData();
+                     var currentWebSocketClient = WebSocketClient;
+                     if (currentWebSocketClient?.State==WebSocketState.Open)
+                     {
+                         requestData = new RequestData();
                          requestData.RequestType = RequestType.ConnectionInfo;
                          requestData.ChannelUri = ChannelUri;
                          requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
-                         var task = tryDirectConnectionSocketClient.SendRequestAsync(requestData);
+                         task = currentWebSocketClient.SendRequestAsync(requestData);
                          if (task.Wait(Binding.DefaultBinding.SendTimeout))
                          {
-
                              var responseData = task.Result; ;
                              if (responseData.DirectConnect)
                              {
-                                 WebSocketClient = tryDirectConnectionSocketClient;
-                                 WebSocketClient.ReplaceConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, tryDirectConnectionSocketClient);
-                                 // WebSocketEndPoint = WebSocketClient;
+                                 DirectConnectionTimer.Stop();
+                                 return;
                              }
-                             else
-                             {
-                                 DirectConnectionTries++;
-                                 tryDirectConnectionSocketClient.CloseAsync();
-                                 DirectConnectionTimer.Interval = 3000;
-                                 DirectConnectionTimer.Start();
-                             }
+                         }
+
+
+                     }
+                     #endregion
+
+                     var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
+                     if (tryDirectConnectionSocketClient == null)
+                         return;
+
+
+                     requestData = new RequestData();
+                     requestData.RequestType = RequestType.ConnectionInfo;
+                     requestData.ChannelUri = ChannelUri;
+                     requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
+                     task = tryDirectConnectionSocketClient.SendRequestAsync(requestData);
+                     if (task.Wait(Binding.DefaultBinding.SendTimeout))
+                     {
+
+                         var responseData = task.Result; ;
+                         if (responseData.DirectConnect)
+                         {
+
+                             WebSocketClient = tryDirectConnectionSocketClient;
+                             WebSocketClient.ReplaceConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, tryDirectConnectionSocketClient);
+                             DirectConnectionTimer.Stop();
                          }
                          else
                          {
-                             tryDirectConnectionSocketClient.RejectRequest(task);
-                             DirectConnectionTimer.Interval = 3000;
-                             DirectConnectionTimer.Start();
+                             DirectConnectionTries++;
+                             tryDirectConnectionSocketClient.CloseAsync();
                          }
-
                      }
+                     else
+                     {
+                         tryDirectConnectionSocketClient.RejectRequest(task);
+                     }
+
+
                  }
                  finally
                  {
                      lock (this)
-                     {
                          DirectConnectionCheck = false;
-                     }
-
                  }
              });
 
@@ -291,7 +326,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             }
 #if DEBUG
-            this.WebSocketResponseTimeCheckTimer = new Timer(new System.Threading.TimerCallback(OnWebSocketResponseTimeCheckTick), null, 20000, 1000);
+            this.WebSocketResponseTimeCheckTimer = new System.Threading.Timer(new System.Threading.TimerCallback(OnWebSocketResponseTimeCheckTick), null, 20000, 1000);
 #endif
             //this.ChannelIsOpenEvent.Set();
         }
@@ -326,8 +361,8 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
-        /// <MetaDataID>{e8caaa80-4c5e-40fe-837f-794da0159790}</MetaDataID>
-        bool SusspendWebSocketClientChange;
+        ///// <MetaDataID>{e8caaa80-4c5e-40fe-837f-794da0159790}</MetaDataID>
+        //bool SusspendWebSocketClientChange;
 
         /// <exclude>Excluded</exclude>
         WebSocketClient _WebSocketClient;
@@ -350,50 +385,31 @@ namespace OOAdvantech.Remoting.RestApi
                     if (!lockTaken)
                         throw new TimeoutException(); // or compensate
 
-                    SusspendWebSocketClientChange = true;
+
                     try
                     {
                         if (_WebSocketClient != null)
                         {
                             if (_WebSocketClient != value)
                             {
-
                                 var clossingWebSocketClient = _WebSocketClient;
+                                clossingWebSocketClient.Closed -= WebSocketClient_Closed;
+                                _WebSocketClient = value;
+                                _WebSocketClient.Closed += WebSocketClient_Closed;
+                                _WebSocketClient.AddWebSocketChannel(this);
+                                _EndPoint = WebSocketClient;
+
                                 var datetime = DateTime.Now;
                                 string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
                                 System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel replace WebSocketClient  {0} ", timestamp));
 
-                                #region Wait pending requests to complete  
-                                Dictionary<int, TaskCompletionSource<ResponseData>> requestTasks = _WebSocketClient.GetRequestTasks();
-                                if (requestTasks.Count > 0)
-                                {
-                                    //foreach (var key in requestTasks.Keys)
-                                    //{
-                                    //    TaskCompletionSource<ResponseData> task = null;
-                                    //    if (requestTasks.TryGetValue(key, out task))
-                                    //    {
-                                    //        if (!task.Task.Wait(System.TimeSpan.FromSeconds(15)))
-                                    //            task.Task.Wait(Binding.DefaultBinding.SendTimeout);
-                                    //    }
-                                    //}
-                                }
-                                #endregion
-
-
-
-                                if (_WebSocketClient.State == WebSocketState.Open)
-                                    DropPhysicalConnection(_WebSocketClient);
+                                if (clossingWebSocketClient.State == WebSocketState.Open)
+                                    DropPhysicalConnection(clossingWebSocketClient);
                                 else
                                 {
                                 }
-                                CloseWebSocket(_WebSocketClient);
+                                CloseWebSocket(clossingWebSocketClient);
 
-                                _WebSocketClient.Closed -= WebSocketClient_Closed;
-                                _WebSocketClient = value;
-                                _WebSocketClient.Closed += WebSocketClient_Closed;
-                                _WebSocketClient.AddWebSocketChannel(this);
-
-                                _EndPoint = WebSocketClient;
                                 if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
                                 {
 
@@ -415,7 +431,7 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     finally
                     {
-                        SusspendWebSocketClientChange = false;
+
                     }                                   // work here...
                 }
                 finally
@@ -464,13 +480,15 @@ namespace OOAdvantech.Remoting.RestApi
         private void WebSocketClient_Closed(object sender, EventArgs e)
         {
             WebSocketClient closedWebSocketClient = (WebSocketClient)sender;
-            if (!SusspendWebSocketClientChange)
+            //if (!SusspendWebSocketClientChange)
             {
 
                 WebsocketReconnectionTask= Task.Run(() =>
                 {
+                    int count = 0;
                     while (true)
                     {
+
 
 #if DeviceDotNet
                         if (Connectivity.NetworkAccess != NetworkAccess.Internet)
@@ -479,6 +497,12 @@ namespace OOAdvantech.Remoting.RestApi
                             continue;
                         }
 #endif
+                        count++;
+                        if (count>20)
+                        {
+                            count=0;
+                            System.Diagnostics.Debug.WriteLine("WebsocketReconnectionTask");
+                        }
 
                         try
                         {
@@ -519,12 +543,12 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                
+
 
                 bool lockTaken = false;
                 try
                 {
-                    
+
                     Monitor.TryEnter(this, 5000, ref lockTaken);
                     if (!lockTaken)
                         throw new TimeoutException(); // or compensate
@@ -716,13 +740,14 @@ namespace OOAdvantech.Remoting.RestApi
 
             if (endPoint != null)
             {
-                
+
                 if (endPoint is WebSocketClient)
                 {
-                    if( (endPoint as WebSocketClient).State!=WebSocketState.Open||(endPoint as WebSocketClient).State!=WebSocketState.Connecting)
+                    if ((endPoint as WebSocketClient).State!=WebSocketState.Open&&(endPoint as WebSocketClient).State!=WebSocketState.Connecting)
                     {
                         if (WebsocketReconnectionTask!=null)
-                            WebsocketReconnectionTask.Wait(binding.OpenTimeout);
+                            if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
+                                throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                     }
                 }
                 var task = endPoint.SendRequestAsync(requestData);
@@ -767,6 +792,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             if (!DirectConnectionTimer.Enabled)
                                 DirectConnectionTimer.Start();
+
                         }
                     }
                 }
@@ -825,26 +851,29 @@ namespace OOAdvantech.Remoting.RestApi
         /// </summary>
         public void PhysicalConnectionDropped()
         {
-            string publicChannelUri = null;
-            string internalchannelUri = null;
-            ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+            ClientSessionPart.Reconnect(true);
 
-           //Tries to connect with server side in new location again
-            var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
+            //string publicChannelUri = null;
+            //string internalchannelUri = null;
+            //ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
 
-            if (tryDirectConnectionSocketClient == null)
-            {
-                lock (this)
-                {
-                    if (!DirectConnectionCheck)
-                    {
-                        if (!DirectConnectionTimer.Enabled)
-                            DirectConnectionTimer.Start();
-                    }
-                }
-            }
-            else
-                WebSocketClient = tryDirectConnectionSocketClient;
+
+            ////Tries to connect with server side in new location again
+            //var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
+
+            //if (tryDirectConnectionSocketClient == null)
+            //{
+            //    lock (this)
+            //    {
+            //        if (!DirectConnectionCheck)
+            //        {
+            //            if (!DirectConnectionTimer.Enabled)
+            //                DirectConnectionTimer.Start();
+            //        }
+            //    }
+            //}
+            //else
+            //    WebSocketClient = tryDirectConnectionSocketClient;
 
         }
     }

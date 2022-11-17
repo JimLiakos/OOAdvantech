@@ -20,13 +20,13 @@ namespace System.Timers
     //
     //   e:
     //     An System.Timers.ElapsedEventArgs object that contains the event data.
-    public delegate void ElapsedEventHandler(object sender, ElapsedEventArgs e);
+    public delegate void ElapsedEventHandlerA(object sender, ElapsedEventArgsA e);
 
     //
     // Summary:
     //     Provides data for the System.Timers.Timer.Elapsed event.
     /// <MetaDataID>{e865d77b-4cf5-4d0b-a84f-1deb2700f711}</MetaDataID>
-    public class ElapsedEventArgs : EventArgs
+    public class ElapsedEventArgsA : EventArgs
     {
         //
         // Summary:
@@ -40,17 +40,17 @@ namespace System.Timers
 
     public delegate void TimerCallback(object state);
     /// <MetaDataID>{8740f6a2-c054-49f2-a01b-2f18179e68cd}</MetaDataID>
-    public class Timer:IDisposable
+    public class TimerA:IDisposable
     {
 
-        public event ElapsedEventHandler Elapsed;
+        public event ElapsedEventHandlerA Elapsed;
         private TimeSpan Timespan;
         private readonly TimerCallback Callback;
         private readonly object State;
         
         private CancellationTokenSource cancellation= new CancellationTokenSource();
 
-        public Timer(TimerCallback callback, object state, TimeSpan timespan)
+        public TimerA(TimerCallback callback, object state, TimeSpan timespan)
         {
             this.Timespan = timespan;
             this.Callback = callback;
@@ -58,7 +58,7 @@ namespace System.Timers
             
         }
 
-        public Timer()
+        public TimerA()
         {
 
         }
@@ -87,7 +87,7 @@ namespace System.Timers
                     if (cts.IsCancellationRequested) return false;
                     
                     Callback?.Invoke(State);
-                    Elapsed?.Invoke(this, new ElapsedEventArgs() { SignalTime = System.DateTime.Now });
+                    Elapsed?.Invoke(this, new ElapsedEventArgsA() { SignalTime = System.DateTime.Now });
                     return true; // or true for periodic behavior
                 });
         }

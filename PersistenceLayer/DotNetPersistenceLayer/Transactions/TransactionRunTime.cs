@@ -367,7 +367,7 @@ namespace OOAdvantech.Transactions
 
 #if DeviceDotNet
         /// <MetaDataID>{B31BB057-C4B1-4CB2-98D8-B3F9BBD68961}</MetaDataID>
-        private System.Timers.Timer Timer;
+        private System.Threading.Timer Timer=null;
 #else
         /// <MetaDataID>{B31BB057-C4B1-4CB2-98D8-B3F9BBD68961}</MetaDataID>
         private System.Threading.Timer Timer = null;
@@ -632,8 +632,10 @@ namespace OOAdvantech.Transactions
 #if !DeviceDotNet
             Timer = new System.Threading.Timer(new System.Threading.TimerCallback(OnTimer), null, 4000, 4000);
 #else
-            Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer),null, TimeSpan.FromSeconds(4));
-            Timer.Start();
+            //Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer),null, TimeSpan.FromSeconds(4));
+            //Timer.Start();
+            Timer = new System.Threading.Timer(new System.Threading.TimerCallback(OnTimer), null, 4000, 4000);
+            
 
 #endif
 
@@ -652,8 +654,9 @@ namespace OOAdvantech.Transactions
 #if !DeviceDotNet
             Timer = new System.Threading.Timer(new System.Threading.TimerCallback(OnTimer), null, 4000, 4000);
 #else
-            Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer), null, TimeSpan.FromSeconds(4));
-            Timer.Start();
+            //Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer), null, TimeSpan.FromSeconds(4));
+            //Timer.Start();
+            Timer = new System.Threading.Timer(new System.Threading.TimerCallback(OnTimer), null, 4000, 4000);
 
 #endif
         }

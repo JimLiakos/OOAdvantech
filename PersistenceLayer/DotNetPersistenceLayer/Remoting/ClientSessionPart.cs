@@ -3,6 +3,7 @@ namespace OOAdvantech.Remoting
     using System;
     using System.Threading.Tasks;
     using System.Linq;
+    using OOAdvantech.Collections.Generic;
 #if !DeviceDotNet
     using System.Net.Sockets;
     using System.Runtime.Remoting;
@@ -44,6 +45,16 @@ namespace OOAdvantech.Remoting
         [MetaDataRepository.IgnoreErrorCheck]
         protected System.Collections.Generic.Dictionary<string, System.WeakReference> Proxies = new System.Collections.Generic.Dictionary<string, System.WeakReference>();
 
+        int ProxiesCount
+        {
+            get
+            {
+                lock(Proxies)
+                {
+                    return Proxies.Count;
+                }
+            }
+        }
 
 
         /// <MetaDataID>{77c5cd09-c91d-4a87-93ef-803d35098ce8}</MetaDataID>
@@ -436,7 +447,7 @@ namespace OOAdvantech.Remoting
         internal void AddProxy(IProxy proxy)
         {
 
-            lock (this)
+            lock (Proxies)
             {
                 if (Proxies.ContainsKey(proxy.ObjectUri.Uri))
                 {
@@ -468,7 +479,7 @@ namespace OOAdvantech.Remoting
         internal void ProxyFinalized(IProxy proxy)
         {
 
-            lock (this)
+            lock (Proxies)
             {
                 if (Proxies.ContainsKey(proxy.ObjectUri.Uri))
                     Proxies.Remove(proxy.ObjectUri.Uri);
@@ -504,7 +515,8 @@ namespace OOAdvantech.Remoting
                   System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<System.Reflection.EventInfo, System.Collections.Generic.List<object>>> pendingEvents = null;
                   try
                   {
-                      if (!ServerProcessTerminate && ServerSessionPart != null && (justCreatedProxies.Count != 0 || collectedProxies.Count != 0 || Proxies.Count != 0))
+                      
+                      if (!ServerProcessTerminate && ServerSessionPart != null && (justCreatedProxies.Count != 0 || collectedProxies.Count != 0 || ProxiesCount != 0))
                       {
                           lock (this)
                           {
@@ -579,10 +591,13 @@ namespace OOAdvantech.Remoting
                       {
                           if (extObjectUri.Disconnected)
                           {
-                              if (Proxies.ContainsKey(extObjectUri.Uri))
-                                  Proxies.Remove(extObjectUri.Uri);
-                              if (CollectedProxies.Contains(extObjectUri.TransientUri))
-                                  CollectedProxies.Remove(extObjectUri.TransientUri);
+                              lock (Proxies)
+                              {
+                                  if (Proxies.ContainsKey(extObjectUri.Uri))
+                                      Proxies.Remove(extObjectUri.Uri);
+                                  if (CollectedProxies.Contains(extObjectUri.TransientUri))
+                                      CollectedProxies.Remove(extObjectUri.TransientUri);
+                              }
                           }
                           JustCreatedProxies.Remove(extObjectUri.TransientUri);
                       }
@@ -627,7 +642,7 @@ namespace OOAdvantech.Remoting
         public virtual void EventCallback(string objectUri, System.Reflection.EventInfo eventInfo, System.Collections.Generic.List<object> args)
         {
             IProxy proxy = null;
-            lock (this)
+            lock (Proxies)
             {
                 if (Proxies.ContainsKey(objectUri))
                 {
@@ -722,7 +737,11 @@ namespace OOAdvantech.Remoting
             Timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
 
 #else
-            Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer), null, TimeSpan.FromMilliseconds(interval));
+            Timer = new System.Timers.Timer(interval);
+            Timer.Enabled = true;
+            Timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
+
+            //Timer = new System.Timers.Timer(new System.Timers.TimerCallback(OnTimer), null, TimeSpan.FromMilliseconds(interval));
             //Timer.Start();
 
 #endif
@@ -754,7 +773,7 @@ namespace OOAdvantech.Remoting
             }
         }
 #else
-        void OnTimer(object state)
+        void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             IWeakRefernceEventHandler weakEventRefernceHandler = WeakRefernceEventHandler.Target as IWeakRefernceEventHandler;
             if (weakEventRefernceHandler != null)
