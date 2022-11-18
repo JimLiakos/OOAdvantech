@@ -49,6 +49,11 @@ namespace OOAdvantech
 
         public void Log(List<string> lines)
         {
+            foreach(var line in lines.ToList())
+            {
+                var index = lines.IndexOf(line);
+                lines[index]=DateTime.Now.ToString()+" : "+line;
+            }
             const string errorFileName = "Common.log";
             var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
             var errorFilePath = Path.Combine(libraryPath, errorFileName);

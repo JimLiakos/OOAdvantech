@@ -159,7 +159,7 @@ namespace OOAdvantech.Droid
             }
             base.Dispose(disposing);
             string channelUri = "local-device";
-            MessageDispatcher.DesconnectAsync(channelUri, SessionIdentity, ServerSessionPart.ServerProcessIdentity.ToString());
+           // MessageDispatcher.DesconnectAsync(channelUri, SessionIdentity, ServerSessionPart.ServerProcessIdentity.ToString());
 
         }
         static List<Android.Webkit.WebView> WebViews = new List<Android.Webkit.WebView>();

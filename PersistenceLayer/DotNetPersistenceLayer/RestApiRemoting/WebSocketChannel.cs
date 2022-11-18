@@ -36,6 +36,12 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
 #if DeviceDotNet
+            if (Application.Current is IAppLifeTime)
+            {
+                (Application.Current as IAppLifeTime).ApplicationResuming +=ApplicationResuming;
+                (Application.Current as IAppLifeTime).ApplicationSleeping +=ApplicationSleeping;
+            }
+
             OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "Opens : "+channelUri });
 #endif
 
@@ -66,8 +72,29 @@ namespace OOAdvantech.Remoting.RestApi
             OOAdvantech.DeviceApplication.Current.Resumed += Apllication_Resumed;
 
 #endif
+        }
 
+        object AppLifeTimeLock = new object();
+        bool Sleeping = false;
 
+        private void ApplicationSleeping(object sender, EventArgs e)
+        {
+            lock (AppLifeTimeLock)
+                Sleeping=true;
+
+#if DeviceDotNet
+            OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketChannel : ApplicationSleeping" });
+#endif
+        }
+
+        private void ApplicationResuming(object sender, EventArgs e)
+        {
+            lock (AppLifeTimeLock)
+                Sleeping=false;
+
+#if DeviceDotNet
+            OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketChannel : ApplicationResuming" });
+#endif
         }
 
         static DateTime? OffLineDatetime;
@@ -231,6 +258,9 @@ namespace OOAdvantech.Remoting.RestApi
                     var timeSpan = DateTime.Now - dateTime;
 
                     System.Diagnostics.Debug.WriteLine("timeout for " + endPoint.GetHashCode().ToString() + " : " + ChannelUri + "  " + timeSpan.ToString());
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "timeout for " + endPoint.GetHashCode().ToString() + " : " + ChannelUri + "  " + timeSpan.ToString() });
+#endif
 
                 }
             }
@@ -373,7 +403,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             }
 #if DEBUG
-            this.WebSocketResponseTimeCheckTimer = new System.Threading.Timer(new System.Threading.TimerCallback(OnWebSocketResponseTimeCheckTick), null, 20000, 1000);
+            this.WebSocketResponseTimeCheckTimer = new System.Threading.Timer(new System.Threading.TimerCallback(OnWebSocketResponseTimeCheckTick), null, 20000, 3000);
 #endif
             //this.ChannelIsOpenEvent.Set();
         }
@@ -438,10 +468,9 @@ namespace OOAdvantech.Remoting.RestApi
                 try
                 {
 
-
                     set_WebSocketClientCount++;
 #if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "WebSocketClient  in :"+ set_WebSocketClientCount });
+                    DeviceApplication.Current.Log(new List<string>() { "WebSocketClient  in :"+ set_WebSocketClientCount });
 #endif
 
                     try
@@ -458,9 +487,8 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
 
 #if DeviceDotNet
-                                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  time out in second :"+ (Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout).TotalSeconds.ToString()});
+                                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  time out in second :"+ (Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout).TotalSeconds.ToString() });
 #endif
-
                                     lock (ReplaceWebSocketClientLock)
                                     {
                                         if (_WebSocketClient ==value)
@@ -480,10 +508,16 @@ namespace OOAdvantech.Remoting.RestApi
                         }
                         else
                         {
-                            _WebSocketClient = value;
-                            _EndPoint = WebSocketClient;
-                            _WebSocketClient.Closed += WebSocketClient_Closed;
-                            _WebSocketClient.AddWebSocketChannel(this);
+                            lock (ReplaceWebSocketClientLock)
+                            {
+                                _WebSocketClient = value;
+                                _EndPoint = WebSocketClient;
+                                if (_WebSocketClient!=null)
+                                {
+                                    _WebSocketClient.Closed += WebSocketClient_Closed;
+                                    _WebSocketClient.AddWebSocketChannel(this);
+                                }
+                            }
                         }
                     }
                     finally
@@ -518,9 +552,12 @@ namespace OOAdvantech.Remoting.RestApi
                     lock (ReplaceWebSocketClientLock)
                     {
                         _WebSocketClient=webSocket;
-                        _WebSocketClient.Closed += WebSocketClient_Closed;
-                        _WebSocketClient.AddWebSocketChannel(this);
-                        _EndPoint = WebSocketClient;
+                        if (_WebSocketClient!=null)
+                        {
+                            _WebSocketClient.Closed += WebSocketClient_Closed;
+                            _WebSocketClient.AddWebSocketChannel(this);
+                            _EndPoint = WebSocketClient;
+                        }
                     }
 
                     var datetime = DateTime.Now;
@@ -537,7 +574,8 @@ namespace OOAdvantech.Remoting.RestApi
                     if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
                     {
                     }
-                    ClientSessionPart.Reconnect(false, webSocket);
+                    if (_WebSocketClient!=null)
+                        ClientSessionPart.Reconnect(false, webSocket);
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  out :"+ set_WebSocketClientCount });
 #endif
@@ -593,6 +631,11 @@ namespace OOAdvantech.Remoting.RestApi
             OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketClient_Closed : " });
 #endif
 
+            if (Sleeping)
+            {
+                WebSocketClient=null;
+
+            }
             WebSocketClient closedWebSocketClient = (WebSocketClient)sender;
             WebSocketReconnect();
         }
@@ -602,7 +645,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 #if DeviceDotNet
             OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : "+DateTime.Now.ToString()+" - " +ChannelUri });
-            
+
 #endif
             //if (!SusspendWebSocketClientChange)
             {
@@ -876,7 +919,13 @@ namespace OOAdvantech.Remoting.RestApi
                             OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "ProcessRequest : " });
 #endif
                             WebSocketReconnect();
+                            if (WebsocketReconnectionTask!=null)
+                            {
+                                if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
+                                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                            }
                         }
+                        endPoint = EndPoint;
                     }
                 }
                 var task = endPoint.SendRequestAsync(requestData);
@@ -938,7 +987,23 @@ namespace OOAdvantech.Remoting.RestApi
             }
             else
             {
+
+
+
                 #region Uses web socket request channel
+
+
+#if DeviceDotNet
+                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "endpoint = null : " });
+#endif
+                WebSocketReconnect();
+                if (WebsocketReconnectionTask!=null)
+                {
+                    if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
+                        throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                }
+                endPoint = EndPoint;
+
                 //string publicChannelUri = null;
                 //string internalchannelUri = null;
                 //ByRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);

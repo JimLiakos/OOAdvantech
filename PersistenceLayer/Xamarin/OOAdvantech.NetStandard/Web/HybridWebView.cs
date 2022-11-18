@@ -54,7 +54,13 @@ namespace OOAdvantech.Web
             {
                 SetValue(UriProperty, value);
                 if (NativeWebBrowser != null)
+                {
                     NativeWebBrowser.Navigate(Uri);
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new System.Collections.Generic.List<string>() { "NativeWebBrowser Navigate" });
+
+#endif
+                }
             }
         }
 
