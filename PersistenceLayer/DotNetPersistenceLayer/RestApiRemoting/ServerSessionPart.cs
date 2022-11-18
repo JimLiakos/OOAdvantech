@@ -466,6 +466,8 @@ namespace OOAdvantech.Remoting.RestApi
                     PhysicalConnections[physicalConnectionID] = connected;
                     if (connected && endPoint != null)
                     {
+                        System.Diagnostics.Debug.WriteLine(System.DateTime.Now.ToString());
+
                         IChannel channel = null;
                         Channels.TryGetValue(physicalConnectionID, out channel);
 
@@ -923,7 +925,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             catch (MissingServerObjectException error)
             {
-                Reconnect(false);
+                Reconnect(false,Channel.EndPoint);
                 base.Subscribe(proxy, eventInfoData, allowAsynchronous);
 
             }
@@ -938,7 +940,7 @@ namespace OOAdvantech.Remoting.RestApi
         public override bool UseNetRemotingChamnel => false;
 
         /// <MetaDataID>{4d45d2db-3b22-4204-8588-3c99a8c5acf5}</MetaDataID>
-        public ServerSessionPartInfo GetServerSession(string channelUri, Guid processIdentity)
+        public static ServerSessionPartInfo GetServerSession(string channelUri, Guid processIdentity,IEndPoint endPoint)
         {
             var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", "", "", StandardActions.CreateCommunicationSession, new object[0]);
             methodCallMessage.ClientProcessIdentity = processIdentity.ToString("N");
@@ -950,8 +952,14 @@ namespace OOAdvantech.Remoting.RestApi
             var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
             requestData.ChannelUri = channelUri;
 
-
-            var responseData = Channel.ProcessRequest(requestData); //Invoke(requestData.PublicChannelUri, requestData, null, null, Binding.DefaultBinding);
+            var task = endPoint.SendRequestAsync(requestData);
+            if (!task.Wait(Binding.DefaultBinding.SendTimeout))
+            {
+                endPoint.RejectRequest(task);
+                throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+            }
+            var responseData = task.Result;
+            
             if (responseData != null)
             {
                 var returnMessage = OOAdvantech.Json.JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
@@ -988,7 +996,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// Otherwise is false
         /// </param>
         /// <MetaDataID>{c84867b4-e737-4de4-9b51-360677d9fbae}</MetaDataID>
-        internal void Reconnect(bool disconnectedChannel)
+        internal void Reconnect(bool disconnectedChannel, IEndPoint endPoint)
         {
             int tries = 5; //makes five tries to reconnect
             X_Access_Token = null;
@@ -1001,7 +1009,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
 
 
-                    var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity);
+                    var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity, endPoint);
                     var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
 
                     if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
@@ -1127,7 +1135,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
             if ((System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ObjectRef.Uri != serverSessionObjectRef.Uri)
-                Reconnect(true);
+                Reconnect(true,Channel.EndPoint);
             //(System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ReconnectToServerObject(serverSessionObjectRef);
 
         }

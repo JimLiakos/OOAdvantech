@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,33 @@ namespace OOAdvantech
         {
             Resumed?.Invoke();
             // Handle when your app resumes
+        }
+
+        public void Log(List<string> lines)
+        {
+            const string errorFileName = "Common.log";
+            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+            var errorFilePath = Path.Combine(libraryPath, errorFileName);
+            File.AppendAllLines(errorFilePath, lines);
+        }
+
+        public string ReadLog()
+        {
+            const string errorFileName = "Common.log";
+            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+            var errorFilePath = Path.Combine(libraryPath, errorFileName);
+            if (File.Exists(errorFilePath))
+                return File.ReadAllText(errorFilePath);
+            else
+                return "";
+        }
+
+        public void ClearLog()
+        {
+            const string errorFileName = "Common.log";
+            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+            var errorFilePath = Path.Combine(libraryPath, errorFileName);
+            File.Delete(errorFilePath);
         }
 
     }
