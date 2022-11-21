@@ -79,8 +79,9 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     _Connected = false;
                 }
-                DisconnectTimer.Elapsed -= Elapsed;
+                
                 ClientProcessTerminates();
+                DisconnectTimer.Elapsed -= Elapsed;
             };
             DisconnectTimer.Elapsed += Elapsed;
 
@@ -124,9 +125,10 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{74c529a3-c179-45e1-ad9b-3f86aaca30fa}</MetaDataID>
         public override void ClientProcessTerminates()
         {
-            base.ClientProcessTerminates();
+            
             lock (ServerSessions)
             {
+                base.ClientProcessTerminates();
                 ServerSessions.Remove(_SessionIdentity);
 
                 //ILease lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
