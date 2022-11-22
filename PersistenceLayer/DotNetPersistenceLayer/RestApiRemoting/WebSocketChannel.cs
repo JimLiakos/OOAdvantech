@@ -545,6 +545,11 @@ namespace OOAdvantech.Remoting.RestApi
                 {
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  in :"+ set_WebSocketClientCount });
+                    if(_WebSocketClient==null)
+                    {
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "WebSocketClient == null"+ set_WebSocketClientCount });
+                    }
+                    
 #endif
 
                     var clossingWebSocketClient = _WebSocketClient;
@@ -564,18 +569,33 @@ namespace OOAdvantech.Remoting.RestApi
                     string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
                     System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel replace WebSocketClient  {0} ", timestamp));
 
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "RestApp channel replace WebSocketClient :"+ set_WebSocketClientCount });
+#endif
+
+
                     if (clossingWebSocketClient.State == WebSocketState.Open)
                         DropPhysicalConnection(clossingWebSocketClient);
                     else
                     {
                     }
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "CloseWebSocket :"+ set_WebSocketClientCount });
+#endif
                     CloseWebSocket(clossingWebSocketClient);
 
                     if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
                     {
                     }
                     if (_WebSocketClient!=null)
+                    {
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ClientSessionPart.Reconnect :"+ set_WebSocketClientCount });
+#endif
+
+
                         ClientSessionPart.Reconnect(false, webSocket);
+                    }
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  out :"+ set_WebSocketClientCount });
 #endif

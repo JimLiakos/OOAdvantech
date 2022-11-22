@@ -1034,7 +1034,9 @@ namespace OOAdvantech.Remoting.RestApi
                         }
                         //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel reSubscribe for process {0}", System.Diagnostics.Process.GetCurrentProcess().Id));
                         serverSessionPartInfo.ServerSessionPart.Subscribe(channelSubscriptions);
-
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
+#endif
 
                         ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
                         _SessionIdentity = serverSessionPartInfo.SessionIdentity;
@@ -1067,6 +1069,10 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     else
                     {
+
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions " });
+#endif
                         if (disconnectedChannel)
                         {
                             Dictionary<string, System.WeakReference> proxies = null;

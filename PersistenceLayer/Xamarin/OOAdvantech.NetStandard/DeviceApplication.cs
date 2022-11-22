@@ -49,34 +49,58 @@ namespace OOAdvantech
 
         public void Log(List<string> lines)
         {
-            foreach(var line in lines.ToList())
+            foreach (var line in lines.ToList())
             {
                 var index = lines.IndexOf(line);
                 lines[index]=DateTime.Now.ToString()+" : "+line;
             }
-            const string errorFileName = "Common.log";
-            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
-            var errorFilePath = Path.Combine(libraryPath, errorFileName);
-            File.AppendAllLines(errorFilePath, lines);
+            lock (this)
+            {
+                int count = 5;
+                do
+                {
+                    try
+                    {
+
+                        const string errorFileName = "Common.log";
+                        var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                        var errorFilePath = Path.Combine(libraryPath, errorFileName);
+                        File.AppendAllLines(errorFilePath, lines);
+                        return;
+                    }
+                    catch (Exception error)
+                    {
+                        System.Threading.Thread.Sleep(200);
+                        
+                    }
+                    count--;
+                } while (count>0);     
+            }
         }
 
         public string ReadLog()
         {
-            const string errorFileName = "Common.log";
-            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
-            var errorFilePath = Path.Combine(libraryPath, errorFileName);
-            if (File.Exists(errorFilePath))
-                return File.ReadAllText(errorFilePath);
-            else
-                return "";
+            lock (this)
+            {
+                const string errorFileName = "Common.log";
+                var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                var errorFilePath = Path.Combine(libraryPath, errorFileName);
+                if (File.Exists(errorFilePath))
+                    return File.ReadAllText(errorFilePath);
+                else
+                    return "";
+            }
         }
 
         public void ClearLog()
         {
-            const string errorFileName = "Common.log";
-            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
-            var errorFilePath = Path.Combine(libraryPath, errorFileName);
-            File.Delete(errorFilePath);
+            lock (this)
+            {
+                const string errorFileName = "Common.log";
+                var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                var errorFilePath = Path.Combine(libraryPath, errorFileName);
+                File.Delete(errorFilePath);
+            }
         }
 
     }
