@@ -13,17 +13,24 @@ namespace OOAdvantech
         Queue<Func<Task<bool>>> Tasks = new Queue<Func<Task<bool>>>();
         bool _Runs = true;
 
-        bool Runs
+        public bool Runs
         {
             get
             {
                 lock (this)
                     return _Runs;
             }
-            set
+            private set
             {
                 lock (this)
                     _Runs=value;
+            }
+        }
+        public int RemainingTasks
+        {
+            get
+            {
+                return Tasks.Count;
             }
         }
 

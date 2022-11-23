@@ -84,6 +84,7 @@ namespace OOAdvantech.Droid
         {
             get
             {
+
                 return _FirebaseToken;
             }
         }

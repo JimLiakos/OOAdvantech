@@ -76,7 +76,17 @@ namespace OOAdvantech.Droid
 
         public static Stream Open(string filePath)
         {
+            
             var path = CreatePathToFile(filePath);
+
+            //try
+            //{
+            //    string var = System.IO.File.ReadAllText(path);
+            //}
+            //catch (Exception error)
+            //{
+            //}
+
             Stream sw = File.Open(path,FileMode.OpenOrCreate,FileAccess.ReadWrite);
             return sw;
 
