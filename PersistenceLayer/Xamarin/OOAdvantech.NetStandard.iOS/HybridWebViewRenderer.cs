@@ -328,7 +328,11 @@ namespace OOAdvantech.iOS
 
             //return callback.Task;
         }
+        public void RefreshPage()
+        {
+            Control?.ReloadFromOrigin();
 
+        }
         public void GoBack()
         {
             if (Control != null)

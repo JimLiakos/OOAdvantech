@@ -1107,6 +1107,10 @@ namespace OOAdvantech.Remoting.RestApi
                 }
                 catch (Exception error)
                 {
+
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :"+ error.Message, error.StackTrace });
+#endif
                 }
                 tries--;
 #if !DeviceDotNet

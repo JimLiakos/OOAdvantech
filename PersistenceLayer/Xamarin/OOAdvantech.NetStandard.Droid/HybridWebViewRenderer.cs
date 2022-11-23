@@ -141,6 +141,13 @@ namespace OOAdvantech.Droid
             if (Control != null)
                 Control.GoBack();
         }
+        public void RefreshPage()
+        {
+            if (Control != null)
+                Control.Reload();
+
+        }
+
 
         public static void Init()
         {
@@ -159,7 +166,7 @@ namespace OOAdvantech.Droid
             }
             base.Dispose(disposing);
             string channelUri = "local-device";
-           // MessageDispatcher.DesconnectAsync(channelUri, SessionIdentity, ServerSessionPart.ServerProcessIdentity.ToString());
+            // MessageDispatcher.DesconnectAsync(channelUri, SessionIdentity, ServerSessionPart.ServerProcessIdentity.ToString());
 
         }
         static List<Android.Webkit.WebView> WebViews = new List<Android.Webkit.WebView>();

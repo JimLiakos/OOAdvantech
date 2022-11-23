@@ -90,6 +90,10 @@ namespace OOAdvantech.Web
         {
             NativeWebBrowser.GoBack();
         }
+        public virtual void RefreshPage()
+        {
+            NativeWebBrowser.RefreshPage();
+        }
     }
 
 
@@ -102,7 +106,11 @@ namespace OOAdvantech.Web
         void GoBack();
         void Navigate(string url);
 
+        void RefreshPage();
+
+
         string Url { get; }
+
     }
 
     /// <MetaDataID>{0d3b1cb2-e19e-4ce3-9f46-8660cc56ecf9}</MetaDataID>
