@@ -912,6 +912,7 @@ namespace OOAdvantech.Remoting.RestApi
                 binding = Binding.DefaultBinding;
             IEndPoint endPoint = null;
 
+            ResendRequest:
             try
             {
                 endPoint = EndPoint;
@@ -953,6 +954,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 #if DEBUG
 
+                #region Wait for response
                 TimeSpan debugSendTimeout = System.TimeSpan.FromSeconds(5);
                 TimeSpan sendTimeout = binding.SendTimeout - debugSendTimeout;
                 if (sendTimeout.TotalSeconds < 0)
@@ -973,15 +975,37 @@ namespace OOAdvantech.Remoting.RestApi
                         throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                     }
                 }
+                #endregion
 #else
 
-                if (!task.Wait(binding.SendTimeout))
+                #region Wait for response
+		     if (!task.Wait(binding.SendTimeout))
                 {
                     endPoint.RejectRequest(task);
                     throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
-                }
+                } 
+                #endregion
 #endif
                 var responseData = task.Result;
+
+                if(responseData.BrokenSession&&requestData.RequestType== RequestType.MethodCall)
+                {
+#if DeviceDotNet
+                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "Broken Session " });
+#endif
+                    if (WebsocketReconnectionTask!=null)
+                    {
+                        if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
+                            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                    }
+                    else
+                    {
+                        WebSocketClient=null;
+                        WebSocketReconnect();
+                        goto ResendRequest;
+                    }
+                }
+                
                 if (!responseData.DirectConnect)
                 {
                     lock (this)

@@ -55,7 +55,8 @@ namespace OOAdvantech.Remoting.RestApi
         AccessTokenExpired = 12,
         ConnectionError = 2,
         MissingCollectedFromGC=4,
-        MissingDeletedFromStorage=8
+        MissingDeletedFromStorage=8,
+        BrokenSession=14
 
     }
 

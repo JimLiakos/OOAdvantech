@@ -41,7 +41,7 @@ namespace OOAdvantech.Remoting.RestApi
                     var osName = Device.RuntimePlatform;
                     return osName;
 #else
-                    var osName= System.Environment.OSVersion.ToString();
+                    var osName = System.Environment.OSVersion.ToString();
                     return osName;
 #endif
                 }
@@ -149,7 +149,7 @@ namespace OOAdvantech.Remoting.RestApi
                     ServerSessionPart serverSession = null;
                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
 
-#region Get server session
+                    #region Get server session
                     lock (ServerSessionPart.ServerSessions)
                     {
                         if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
@@ -163,8 +163,22 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef();
 
                         }
+                        if (request.RequestOS=="iOS")
+                        {
+
+                        }
+                        if (!serverSession.Connected&&request.ChannelUri!="local-device")
+                        {
+
+                            //Broken session error
+                            responseMessage.Exception = new RestApiExceptionData();
+                            responseMessage.Exception.ExceptionMessage = "Broken session";
+                            responseMessage.Exception.ExceptionCode = ExceptionCode.BrokenSession;
+                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), BrokenSession=true }; });
+                        }
+
                     }
-#endregion
+                    #endregion
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
@@ -417,7 +431,7 @@ namespace OOAdvantech.Remoting.RestApi
                     ServerSessionPart serverSession = null;
                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
 
-#region Get server session
+                    #region Get server session
                     lock (ServerSessionPart.ServerSessions)
                     {
                         if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
@@ -430,8 +444,21 @@ namespace OOAdvantech.Remoting.RestApi
                             serverSession = new ServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri, request.InternalChannelUri, methodCallMessage.Web);
                             responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef();
                         }
+
+                        if (request.RequestOS=="iOS")
+                        {
+
+                        }
+                        if (!serverSession.Connected&&request.ChannelUri!="local-device")
+                        {
+
+                            responseMessage.Exception = new RestApiExceptionData();
+                            responseMessage.Exception.ExceptionMessage = "Broken session";
+                            responseMessage.Exception.ExceptionCode = ExceptionCode.BrokenSession;
+                            return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), BrokenSession=true };
+                        }
                     }
-#endregion
+                    #endregion
 
                     serverSession.SessionTypesSync(methodCallMessage);
 
@@ -586,7 +613,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
         //static internal ReferenceResolver ReferenceResolver = new OOAdvantech.Remoting.RestApi.ReferenceResolver();
 
-#region deletede code ProcessRestApiManagerMethodCall
+        #region deletede code ProcessRestApiManagerMethodCall
 
         ///// <MetaDataID>{a604830a-8da1-4ca7-a5fb-598f52831134}</MetaDataID>
         //private static ResponseData ProcessRestApiManagerMethodCall(MethodCallMessage methodCallMessage)
@@ -679,7 +706,7 @@ namespace OOAdvantech.Remoting.RestApi
         //    }
         //}
 
-#endregion
+        #endregion
 
         /// <MetaDataID>{a2f34a30-a6cd-406f-9aec-90b60f1dfba9}</MetaDataID>
         private static ResponseData ProcessRestApiManagerMethodCall(RequestData request, MethodCallMessage methodCallMessage)
@@ -1127,7 +1154,7 @@ namespace OOAdvantech.Remoting.RestApi
             //return false;
         }
 
-#region deletede code JsonMarshal
+        #region deletede code JsonMarshal
         ///// <MetaDataID>{f94aafc3-838a-4cd3-94b3-d98e380d0be2}</MetaDataID>
         //private static string JsonMarshal(object _obj, string channelUri, ServerSessionPart serverSessionPart)
         //{
@@ -1178,7 +1205,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         //}
 
-#endregion
+        #endregion
 
     }
 

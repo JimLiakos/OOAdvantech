@@ -47,6 +47,9 @@ namespace OOAdvantech
             // Handle when your app resumes
         }
 
+        List<string> CachedLines = new List<string>();
+        
+
         public void Log(List<string> lines)
         {
             foreach (var line in lines.ToList())
@@ -56,25 +59,28 @@ namespace OOAdvantech
             }
             lock (this)
             {
+
+                CachedLines.AddRange(lines);
                 int count = 5;
-                do
-                {
+                //do
+                //{
                     try
                     {
 
                         const string errorFileName = "Common.log";
                         var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
                         var errorFilePath = Path.Combine(libraryPath, errorFileName);
-                        File.AppendAllLines(errorFilePath, lines);
+                        File.AppendAllLines(errorFilePath, CachedLines);
+                        CachedLines.Clear();
                         return;
                     }
                     catch (Exception error)
                     {
-                        System.Threading.Thread.Sleep(200);
+                       // System.Threading.Thread.Sleep(200);
                         
                     }
-                    count--;
-                } while (count>0);     
+                //    count--;
+                //} while (count>0);     
             }
         }
 

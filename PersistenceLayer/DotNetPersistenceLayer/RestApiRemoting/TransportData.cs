@@ -347,6 +347,9 @@ namespace OOAdvantech.Remoting.RestApi
         public bool InitCommunicationSession { get; internal set; }
 
         [DataMember]
+        public bool BrokenSession { get; internal set; }
+
+        [DataMember]
         public bool UpdateCaching { get; set; }
     }
 
