@@ -377,6 +377,10 @@ namespace OOAdvantech.Remoting
                 new WeakReferenceEventPublisher(this, 5000);
 
 
+#if DeviceDotNet
+            OOAdvantech.DeviceApplication.Current.Log(new List<string> { "ctor ServerSessionPartUri  : "+ServerSessionPartUri });
+#endif
+
 #if !DeviceDotNet
             System.AppDomain.CurrentDomain.ProcessExit += new System.EventHandler(OnProcessExit);
 #endif
@@ -397,6 +401,10 @@ namespace OOAdvantech.Remoting
             ServerSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
 
 
+
+#if DeviceDotNet
+            OOAdvantech.DeviceApplication.Current.Log(new List<string> { "ctor ServerSessionPartUri  : "+ServerSessionPartUri });
+#endif
 
 
             ChannelUri = channelUri;

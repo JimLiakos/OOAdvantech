@@ -20,7 +20,7 @@ namespace OOAdvantech
         public event AppLifeCycleHandler Resumed;
 
 
-        static DeviceApplication _Current=new DeviceApplication();
+        static DeviceApplication _Current = new DeviceApplication();
         public static DeviceApplication Current
         {
             get
@@ -48,7 +48,7 @@ namespace OOAdvantech
         }
 
         List<string> CachedLines = new List<string>();
-        
+
 
         public void Log(List<string> lines)
         {
@@ -64,21 +64,23 @@ namespace OOAdvantech
                 int count = 5;
                 //do
                 //{
-                    try
-                    {
+                try
+                {
 
-                        const string errorFileName = "Common.log";
-                        var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
-                        var errorFilePath = Path.Combine(libraryPath, errorFileName);
-                        File.AppendAllLines(errorFilePath, CachedLines);
-                        CachedLines.Clear();
-                        return;
-                    }
-                    catch (Exception error)
-                    {
-                       // System.Threading.Thread.Sleep(200);
-                        
-                    }
+                    const string errorFileName = "Common.log";
+                    var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                    var errorFilePath = Path.Combine(libraryPath, errorFileName);
+                    File.AppendAllLines(errorFilePath, CachedLines);
+
+                    var liness= File.ReadAllLines(errorFilePath);
+                    CachedLines.Clear();
+                    return;
+                }
+                catch (Exception error)
+                {
+                    // System.Threading.Thread.Sleep(200);
+
+                }
                 //    count--;
                 //} while (count>0);     
             }

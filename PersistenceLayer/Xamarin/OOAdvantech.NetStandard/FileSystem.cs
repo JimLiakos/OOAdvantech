@@ -81,6 +81,7 @@ namespace OOAdvantech
                 stream.Read(buffer, 0, buffer.Length);
                 contents=Encoding.Unicode.GetString(buffer);
             }
+            System.Diagnostics.Debug.WriteLine(contents);
             return contents;
 
         }

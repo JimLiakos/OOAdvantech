@@ -343,7 +343,7 @@ namespace OOAdvantech.Remoting.RestApi
         [DataMember]
         public bool DirectConnect;
 
-        [JsonIgnore]
+        
         public bool InitCommunicationSession { get; internal set; }
 
         [DataMember]

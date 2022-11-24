@@ -79,7 +79,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     _Connected = false;
                 }
-                
+
                 ClientProcessTerminates();
                 DisconnectTimer.Elapsed -= Elapsed;
             };
@@ -125,7 +125,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{74c529a3-c179-45e1-ad9b-3f86aaca30fa}</MetaDataID>
         public override void ClientProcessTerminates()
         {
-            
+
             lock (ServerSessions)
             {
                 base.ClientProcessTerminates();
@@ -176,26 +176,26 @@ namespace OOAdvantech.Remoting.RestApi
         public readonly string InternalChannelUri;
 
 
-//        /// <MetaDataID>{20b5ff2c-36d9-4dcc-8c88-e54f0f9e289a}</MetaDataID>
-//        public IEndPoint WebSocketEndPoint
-//        {
-//            set
-//            {
-//#if DEBUG
-//                var connectionIsOpen = value?.ConnectionIsOpen;
-//                if (connectionIsOpen != null && !connectionIsOpen.Value)
-//                {
+        //        /// <MetaDataID>{20b5ff2c-36d9-4dcc-8c88-e54f0f9e289a}</MetaDataID>
+        //        public IEndPoint WebSocketEndPoint
+        //        {
+        //            set
+        //            {
+        //#if DEBUG
+        //                var connectionIsOpen = value?.ConnectionIsOpen;
+        //                if (connectionIsOpen != null && !connectionIsOpen.Value)
+        //                {
 
-//                }
-//#endif
-//                if ((Channel is WebSocketChannel) && (Channel as WebSocketChannel).WebSocketEndPoint == value)
-//                    return;
-//                if (Channel != null)
-//                {
-//                }
-//                Channel = new WebSocketChannel(value);
-//            }
-//        }
+        //                }
+        //#endif
+        //                if ((Channel is WebSocketChannel) && (Channel as WebSocketChannel).WebSocketEndPoint == value)
+        //                    return;
+        //                if (Channel != null)
+        //                {
+        //                }
+        //                Channel = new WebSocketChannel(value);
+        //            }
+        //        }
 
 
 
@@ -589,8 +589,8 @@ namespace OOAdvantech.Remoting.RestApi
 
                     GetUserFromjwToken(authToken);
 #else
-                      if (authToken == DeviceAuthentication.IDToken)
-                          AuthUser = DeviceAuthentication.AuthUser;
+                    if (authToken == DeviceAuthentication.IDToken)
+                        AuthUser = DeviceAuthentication.AuthUser;
 #endif
 
                     if (AuthUser == null)
@@ -927,7 +927,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             catch (MissingServerObjectException error)
             {
-                Reconnect(false,Channel.EndPoint);
+                Reconnect(false, Channel.EndPoint);
                 base.Subscribe(proxy, eventInfoData, allowAsynchronous);
 
             }
@@ -942,7 +942,7 @@ namespace OOAdvantech.Remoting.RestApi
         public override bool UseNetRemotingChamnel => false;
 
         /// <MetaDataID>{4d45d2db-3b22-4204-8588-3c99a8c5acf5}</MetaDataID>
-        public static ServerSessionPartInfo GetServerSession(string channelUri, Guid processIdentity,IEndPoint endPoint)
+        public static ServerSessionPartInfo GetServerSession(string channelUri, Guid processIdentity, IEndPoint endPoint)
         {
             var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", "", "", StandardActions.CreateCommunicationSession, new object[0]);
             methodCallMessage.ClientProcessIdentity = processIdentity.ToString("N");
@@ -961,7 +961,7 @@ namespace OOAdvantech.Remoting.RestApi
                 throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
             }
             var responseData = task.Result;
-            
+
             if (responseData != null)
             {
                 var returnMessage = OOAdvantech.Json.JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
@@ -1013,7 +1013,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                     var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity, endPoint);
                     var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
-
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string> { "serverSessionPartUri  : "+serverSessionPartUri });
+#endif
                     if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
                     {
 
@@ -1077,7 +1079,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             Dictionary<string, System.WeakReference> proxies = null;
                             lock (Proxies)
-                                proxies=Proxies.ToDictionary(x=>x.Key,x=>x.Value);
+                                proxies=Proxies.ToDictionary(x => x.Key, x => x.Value);
 
 
                             foreach (System.WeakReference weakReference in proxies.Values)
@@ -1147,7 +1149,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
             if ((System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ObjectRef.Uri != serverSessionObjectRef.Uri)
-                Reconnect(true,Channel.EndPoint);
+                Reconnect(true, Channel.EndPoint);
             //(System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ReconnectToServerObject(serverSessionObjectRef);
 
         }

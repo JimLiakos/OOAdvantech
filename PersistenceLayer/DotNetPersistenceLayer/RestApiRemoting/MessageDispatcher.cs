@@ -731,7 +731,7 @@ namespace OOAdvantech.Remoting.RestApi
                     if (serverSession == null)
                     {
                         serverSession = new ServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri, request.InternalChannelUri, methodCallMessage.Web);
-                        responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef(); ;
+                        responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef(); 
                         initCommunicationSession = true;
                     }
 
