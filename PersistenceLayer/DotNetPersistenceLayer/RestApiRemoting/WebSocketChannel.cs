@@ -21,16 +21,24 @@ namespace OOAdvantech.Remoting.RestApi
     public class WebSocketChannel : IChannel
     {
 
-
+        /// <summary>
+        /// Defines the channeluri
+        /// </summary>
         /// <MetaDataID>{3bfe5a41-8777-4aa9-b67a-768f64927eae}</MetaDataID>
         private string ChannelUri;
-        /// <MetaDataID>{7960b443-53b0-4b91-b21b-b398549e8d24}</MetaDataID>
+
+        /// <summary>
+        /// Defiens the client side session part 
+        /// The Webshocket 
+        /// </summary>
+        // <MetaDataID>{7960b443-53b0-4b91-b21b-b398549e8d24}</MetaDataID>
         ClientSessionPart ClientSessionPart;
         /// <MetaDataID>{dc7a9429-8523-448b-9849-a743bf657471}</MetaDataID>
         System.Timers.Timer DirectConnectionTimer = new System.Timers.Timer();
 
         /// <MetaDataID>{4e08166e-6f56-4e4b-a753-0ce330005b32}</MetaDataID>
         System.Timers.Timer CloseConnectionTimer = new System.Timers.Timer();
+
         /// <MetaDataID>{5017efc1-c665-4e98-95e3-b6d7a2bb22e1}</MetaDataID>
         public WebSocketChannel(string channelUri, ClientSessionPart clientSessionPart)
         {
