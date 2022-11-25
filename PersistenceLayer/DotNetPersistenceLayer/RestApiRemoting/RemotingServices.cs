@@ -40,7 +40,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         public const string Disconnected = "29c7fa4c167e4aeda0dd4c7af1fc2c17";
 
-
+        public const string SetSubscriptions = "cc743c9193b241b28e26105d2b6e9491";
         //public const string ReconfigureChannel = "dd4c6fc00f77493594ae84f25d4c1531";
 
 

@@ -643,7 +643,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         }
 
-        public string WebsocketReconnectionTaskID { get; private set; }
+        // public string WebsocketReconnectionTaskID { get; private set; }
 
         Task WebsocketReconnectionTask;
 
@@ -675,76 +675,65 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 if (WebsocketReconnectionTask!=null&&WebsocketReconnectionTask.Status==TaskStatus.Running)
                     return;
-                string websocketReconnectionTaskID = Guid.NewGuid().ToString("N");
-                WebsocketReconnectionTaskID=websocketReconnectionTaskID;
 
                 WebsocketReconnectionTask = Task.Run(() =>
                 {
-                    CallContext.SetData("websocketReconnectionTaskID", websocketReconnectionTaskID);
-
-                    try
+                    int count = 0;
+                    while (true)
                     {
-                        int count = 0;
-                        while (true)
+
+
+
+#if DeviceDotNet
+                        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                         {
-
-
-
-#if DeviceDotNet
-                            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                            {
-                                System.Threading.Thread.Sleep(100);
-                                continue;
-                            }
+                            System.Threading.Thread.Sleep(100);
+                            continue;
+                        }
 #endif
-                            count++;
-                            if (count>20)
-                            {
-                                count=0;
-                                System.Diagnostics.Debug.WriteLine("WebsocketReconnectionTask");
-                            }
+                        count++;
+                        if (count>20)
+                        {
+                            count=0;
+                            System.Diagnostics.Debug.WriteLine("WebsocketReconnectionTask");
+                        }
 
-                            try
-                            {
-                                string publicChannelUri = null;
-                                string internalchannelUri = null;
-                                ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-                                var binding = new Binding();
-                                binding.OpenTimeout = TimeSpan.FromSeconds(3);
+                        try
+                        {
+                            string publicChannelUri = null;
+                            string internalchannelUri = null;
+                            ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+                            var binding = new Binding();
+                            binding.OpenTimeout = TimeSpan.FromSeconds(3);
 
-                                var webSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
-                                if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
-                                {
+                            var webSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
+                            if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
+                            {
 #if DeviceDotNet
-                                    OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : replace webSocketClient" });
+                                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : replace webSocketClient" });
 
 #endif
 
-                                    WebSocketClient = webSocketClient;
-                                    //ClientSessionPart.Reconnect(true);
-                                }
-                                else
-                                {
-                                }
+                                WebSocketClient = webSocketClient;
+                                //ClientSessionPart.Reconnect(true);
                             }
-                            catch (Exception error)
-                            {
-
-#if DeviceDotNet
-                                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : "+DateTime.Now.ToString()+" - " +ChannelUri });
-
-#endif
-                            }
-                            if (WebSocketClient != null && WebSocketClient.State == WebSocketState.Open)
-                                break;
                             else
                             {
                             }
                         }
-                    }
-                    finally
-                    {
-                        CallContext.FreeNamedDataSlot("websocketReconnectionTaskID");
+                        catch (Exception error)
+                        {
+
+#if DeviceDotNet
+                            OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : "+DateTime.Now.ToString()+" - " +ChannelUri });
+
+#endif
+                        }
+                        if (WebSocketClient != null && WebSocketClient.State == WebSocketState.Open)
+                            break;
+                        else
+                        {
+                        }
                     }
 
                 });
@@ -959,13 +948,8 @@ namespace OOAdvantech.Remoting.RestApi
 
                         if (WebsocketReconnectionTask!=null&&WebsocketReconnectionTask.Status==TaskStatus.Running)
                         {
-                            string websocketReconnectionTaskID = CallContext.GetData("websocketReconnectionTaskID") as string;
-                            if (!string.IsNullOrWhiteSpace(websocketReconnectionTaskID) &&WebsocketReconnectionTaskID!=websocketReconnectionTaskID)
-                            {
-
-                                if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
-                                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
-                            }
+                            if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
+                                throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
                         }
                         else
                         {
@@ -1026,21 +1010,25 @@ namespace OOAdvantech.Remoting.RestApi
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "Broken Session " });
 #endif
-                    if (WebsocketReconnectionTask!=null&&WebsocketReconnectionTask.Status==TaskStatus.Running)
-                    {
-                        string websocketReconnectionTaskID = CallContext.GetData("websocketReconnectionTaskID") as string;
-                        if (!string.IsNullOrWhiteSpace(websocketReconnectionTaskID) &&WebsocketReconnectionTaskID!=websocketReconnectionTaskID)
-                        {
-                            if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
-                                throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
-                        }
-                    }
-                    else
-                    {
-                        WebSocketClient=null;
-                        WebSocketReconnect();
-                        goto ResendRequest;
-                    }
+                    ClientSessionPart.Reconnect(true);
+
+
+                    goto ResendRequest;
+                    //if (WebsocketReconnectionTask!=null&&WebsocketReconnectionTask.Status==TaskStatus.Running)
+                    //{
+                    //    string websocketReconnectionTaskID = CallContext.GetData("websocketReconnectionTaskID") as string;
+                    //    if (!string.IsNullOrWhiteSpace(websocketReconnectionTaskID) &&WebsocketReconnectionTaskID!=websocketReconnectionTaskID)
+                    //    {
+                    //        if (!WebsocketReconnectionTask.Wait(binding.SendTimeout))
+                    //            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", binding.SendTimeout));
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    WebSocketClient=null;
+                    //    WebSocketReconnect();
+                    //    goto ResendRequest;
+                    //}
                 }
 
                 if (!responseData.DirectConnect)
@@ -1133,7 +1121,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// </summary>
         public void PhysicalConnectionDropped()
         {
-            ClientSessionPart.Reconnect(true, EndPoint);
+            ClientSessionPart.Reconnect(true);
 
             //string publicChannelUri = null;
             //string internalchannelUri = null;

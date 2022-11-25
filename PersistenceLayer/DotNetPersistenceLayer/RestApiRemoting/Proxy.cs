@@ -290,7 +290,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-        #region Gets authentication data
+            #region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -311,7 +311,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-        #endregion
+            #endregion
 
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
 
@@ -576,7 +576,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-#region Gets authentication data
+        #region Gets authentication data
             if (authUser != null)
             {
                 if (authUser.AuthToken != clientSessionPart.X_Auth_Token)
@@ -596,7 +596,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-#endregion
+        #endregion
 
             requestData.RequestType = RequestType.MethodCall;
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
@@ -676,7 +676,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 return ((returnValue as ITransparentProxy).GetProxy() as Proxy).GetTransparentProxy(type);
 
-                
+
             }
             else
                 return returnValue;

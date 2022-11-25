@@ -13,7 +13,7 @@ namespace OOAdvantech
         Queue<Func<Task<bool>>> Tasks = new Queue<Func<Task<bool>>>();
         bool _Runs = true;
 
-        bool Runs
+        public bool Runs
         {
             get
             {

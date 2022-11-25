@@ -927,7 +927,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             catch (MissingServerObjectException error)
             {
-                Reconnect(false, Channel.EndPoint);
+                Reconnect(false);
                 base.Subscribe(proxy, eventInfoData, allowAsynchronous);
 
             }
@@ -989,6 +989,53 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 
+
+
+        void SetSubscriptions(System.Collections.Generic.List<RemoteEventSubscription> channelSubscriptions, string sessionIdentity, string serverSessionPartUri ,IEndPoint endPoint)
+        {
+            string channelUri = ChannelUri;
+
+            var methodCallMessage = new MethodCallMessage(channelUri, serverSessionPartUri, ClientProcessIdentity.ToString(), "", StandardActions.SetSubscriptions, new object[1] { channelSubscriptions });
+            methodCallMessage.Marshal();
+
+            RequestData requestData = new RequestData();
+
+            requestData.ChannelUri = channelUri;
+            requestData.SessionIdentity = sessionIdentity;
+
+            requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
+            requestData.RequestType = RequestType.MethodCall;
+
+            var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
+            requestData.ChannelUri = channelUri;
+
+
+            var task = endPoint.SendRequestAsync(requestData);
+            if (!task.Wait(Binding.DefaultBinding.SendTimeout))
+            {
+                endPoint.RejectRequest(task);
+                throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+            }
+            var responseData = task.Result;
+
+            if (responseData != null)
+            {
+                var returnMessage = OOAdvantech.Json.JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
+                if (returnMessage.Exception != null)
+                {
+                    if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
+                        throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
+#if DeviceDotNet
+                    if (returnMessage.Exception.ExceptionCode == ExceptionCode.AccessTokenExpired)
+                        throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.RequestCanceled);
+#else
+                    if (returnMessage.Exception.ExceptionCode == ExceptionCode.AccessTokenExpired)
+                        throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.TrustFailure);
+#endif
+                    throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.UnknownError);
+                }
+            }
+        }
         /// <summary>
         /// This method reconnect client session part with the server
         /// 
@@ -998,8 +1045,15 @@ namespace OOAdvantech.Remoting.RestApi
         /// Otherwise is false
         /// </param>
         /// <MetaDataID>{c84867b4-e737-4de4-9b51-360677d9fbae}</MetaDataID>
-        internal void Reconnect(bool disconnectedChannel, IEndPoint endPoint)
+        internal void Reconnect(bool disconnectedChannel, IEndPoint endPoint=null)
         {
+            bool dedicatedEndPoint = true;
+            if (endPoint == null)
+            {
+                endPoint = Channel.EndPoint;
+                dedicatedEndPoint = false;
+            }
+
             int tries = 5; //makes five tries to reconnect
             X_Access_Token = null;
             while (tries > 0)
@@ -1008,8 +1062,6 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     var datetime = DateTime.Now;
                     string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
-                    //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
-
 
                     var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity, endPoint);
                     var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
@@ -1034,16 +1086,20 @@ namespace OOAdvantech.Remoting.RestApi
                                 channelSubscriptions.Add(remoteEventSubscription);
                             }
                         }
-                        //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel reSubscribe for process {0}", System.Diagnostics.Process.GetCurrentProcess().Id));
-                        serverSessionPartInfo.ServerSessionPart.Subscribe(channelSubscriptions);
-#if DeviceDotNet
-                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
-#endif
+
+                        //serverSessionPartInfo.ServerSessionPart.Subscribe(channelSubscriptions);
+
+                        SetSubscriptions(channelSubscriptions, serverSessionPartInfo.SessionIdentity, serverSessionPartUri,endPoint);
 
                         ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
                         _SessionIdentity = serverSessionPartInfo.SessionIdentity;
                         ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
                         ServerSessionPartUri = serverSessionPartUri;
+
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
+#endif
+
                         SynchronizeSession();
 
                         System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
@@ -1107,6 +1163,26 @@ namespace OOAdvantech.Remoting.RestApi
 
                     return;
                 }
+                catch(System.Net.WebException connectionError)
+                {
+                    if (connectionError.Status != System.Net.WebExceptionStatus.ConnectFailure)
+                    {
+
+                        if (dedicatedEndPoint)
+                        {
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Dedicated EndPoint connection  error :" + connectionError.Message, connectionError.StackTrace });
+#endif
+                            throw connectionError;
+                        }
+                        else
+                        {
+#if DeviceDotNet
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :"+ connectionError.Message, connectionError.StackTrace });
+#endif
+                        }
+                    }
+                }
                 catch (Exception error)
                 {
 
@@ -1149,7 +1225,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
             if ((System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ObjectRef.Uri != serverSessionObjectRef.Uri)
-                Reconnect(true, Channel.EndPoint);
+                Reconnect(true);
             //(System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy).ReconnectToServerObject(serverSessionObjectRef);
 
         }

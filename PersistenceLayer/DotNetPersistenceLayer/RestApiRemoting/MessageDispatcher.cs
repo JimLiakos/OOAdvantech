@@ -822,11 +822,8 @@ namespace OOAdvantech.Remoting.RestApi
                 }
                 if (methodCallMessage.MethodName == StandardActions.GetTypesMetadata)
                 {
-                    //Marshal ato 
-                    var dataContext = System.Runtime.Remoting.Messaging.CallContext.GetData("DataContext");
 
                     responseMessage.Web = methodCallMessage.Web;
-
                     responseMessage.ChannelUri = request.ChannelUri;
                     responseMessage.InternalChannelUri = request.InternalChannelUri;
                     responseMessage.ServerSession = serverSession;
@@ -843,6 +840,22 @@ namespace OOAdvantech.Remoting.RestApi
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 }
 
+                if (methodCallMessage.MethodName == StandardActions.SetSubscriptions)
+                {
+                    
+                    methodCallMessage.UnMarshal();
+                    
+                    var channelSubscriptions = methodCallMessage.Args[0] as System.Collections.Generic.List<RemoteEventSubscription>;
+                    (methodCallMessage.Object as ServerSessionPart).Subscribe(channelSubscriptions);
+
+                    responseMessage.ChannelUri = request.ChannelUri;
+                    responseMessage.InternalChannelUri = request.InternalChannelUri;
+                    responseMessage.ServerSession = serverSession;
+                    responseMessage.Web = methodCallMessage.Web;
+                    responseMessage.ReAuthenticate = methodCallMessage.ReAuthenticate;
+                    responseMessage.Marshal();
+                    return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
+                }
 
 
                 if (methodCallMessage.MethodName == StandardActions.CreateCommunicationSession)

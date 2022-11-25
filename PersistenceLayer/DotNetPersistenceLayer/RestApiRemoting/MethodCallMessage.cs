@@ -26,7 +26,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{9ed60119-d232-457f-ab2f-0f0c3292e005}</MetaDataID>
     public class MethodCallMessage
     {
-        
+
 
         /// <MetaDataID>{a108a388-7c42-4986-8a2e-89ef83418ba9}</MetaDataID>
         internal Dictionary<string, object> CallContextDictionaryData;
@@ -163,6 +163,16 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 MethodInfo methodInfo = null;
 
+                if (MethodName == StandardActions.SetSubscriptions)
+                {
+                    methodInfo=typeof(ServerSessionPart).GetMethod("Subscribe", new Type[1] { typeof(System.Collections.Generic.List<RemoteEventSubscription>) });
+                    return methodInfo;
+                }
+
+                if (MethodName == "0f385a2523a040a7afb8ff8549ada905")
+                {
+                }
+
                 if (MethodName == "0f385a2523a040a7afb8ff8549ada905")
                     return null;
                 else
@@ -261,7 +271,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
                     Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(typeUriParts[1], out type);
-                    if(type== null)
+                    if (type== null)
                         type = Type.GetType(typeUriParts[1] + "," + typeUriParts[0]);
                     if (type == null)
                         type = Type.GetType(typeUriParts[1]);
@@ -289,6 +299,7 @@ namespace OOAdvantech.Remoting.RestApi
                     || MethodName == StandardActions.GetTypesMetadata
                     || MethodName == StandardActions.GetCommunicationSessionWithTypesMetadata
                     || MethodName == StandardActions.GetAccessToken
+                    || MethodName == StandardActions.SetSubscriptions
                     || MethodName == StandardActions.Disconnected)
                     //|| MethodName == StandardActions.ReconfigureChannel)
                     return true;
@@ -377,10 +388,7 @@ namespace OOAdvantech.Remoting.RestApi
             ServerSessionPart serverSessionPart = null;
             try
             {
-                if (MethodName == "Subscribe")
-                {
 
-                }
                 serverSessionPart = ServerSessionPart.GetServerSessionPart(Guid.Parse(ClientProcessIdentity), ChannelUri);
                 if (serverSessionPart == null)
                 {
@@ -410,23 +418,23 @@ namespace OOAdvantech.Remoting.RestApi
                 //System.IO.File.AppendAllLines("/storage/emulated/0/test.txt", new string[] { "Exception 1 :  " + error.Message });
                 throw;
             }
-            
+
             if (this.Object == null)
                 throw new MissingServerObjectException("The object with ObjUri '" + ExtObjectUri.TransientUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
-            
 
 
-            
+
+
             if (MethodInfo == null)
             {
                 throw new System.Exception(string.Format("method '{0}' isn't implemented ", MethodName));
             }
             try
             {
-                
+
                 var methodInfo = MethodInfo;
                 var jsonArgs = JsonArgs;
-                object[] args = UnMarshalArguments( jsonArgs, methodInfo, serverSessionPart,Web);
+                object[] args = UnMarshalArguments(jsonArgs, methodInfo, serverSessionPart, Web);
                 Args = args;
                 ArgCount = Args.Length;
             }
@@ -457,7 +465,7 @@ namespace OOAdvantech.Remoting.RestApi
             //Args = unmarshalledArgs;
         }
 
-        internal static object[] UnMarshalArguments(string jsonArgs, MethodInfo methodInfo,  ServerSessionPart serverSessionPart,bool web)
+        internal static object[] UnMarshalArguments(string jsonArgs, MethodInfo methodInfo, ServerSessionPart serverSessionPart, bool web)
         {
             int i = 0;
             var parameters = methodInfo.GetParameters();
@@ -546,13 +554,13 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     var objectStorage = PersistenceLayer.ObjectStorage.OpenStorage(storageMetaData.StorageName, storageMetaData.StorageLocation, storageMetaData.StorageType);
                     @object = objectStorage.GetObject(extObjectUri.PersistentUri);
-                    
 
-                    
+
+
 
                     if (@object == null)
-                        throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.PersistentUri + "' has been disconnected or does not exist at the server.",MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
-                        
+                        throw new MissingServerObjectException("The object with ObjUri '" + extObjectUri.PersistentUri + "' has been disconnected or does not exist at the server.", MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
+
                     var objRef = System.Runtime.Remoting.RemotingServices.Marshal(@object as MarshalByRefObject);
                     Remoting.Tracker.WeakReferenceOnMarshaledObjects[extObjectUri.TransientUri] = new WeakReference(@object);
 
