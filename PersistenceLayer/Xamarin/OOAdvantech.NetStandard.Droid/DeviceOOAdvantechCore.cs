@@ -46,6 +46,9 @@ namespace OOAdvantech.Droid
         public static void MessageReceived(IRemoteMessage message)
         {
             internalMessageReceived?.Invoke(message);
+
+
+
         }
 
         static event KeyboardChangeStateHandle internalKeyboordChangeState;

@@ -12,7 +12,7 @@ namespace OOAdvantech.Remoting.RestApi
     {
         [Association("", Roles.RoleA, "28ed4671-9e0a-41ba-8f59-b4becfe469eb")]
         [RoleAMultiplicityRange(1, 1)]
-        IEndPoint EndPoint { get; set; }
+        IEndPoint EndPoint { get;  }
 
         /// <MetaDataID>{b198c192-6fc4-4bea-aeea-84bf480b3f2e}</MetaDataID>
         ResponseData ProcessRequest(RequestData request);

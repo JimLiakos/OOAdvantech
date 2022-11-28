@@ -405,7 +405,7 @@ namespace OOAdvantech.Remoting.RestApi
         public WebSocketChannel(IEndPoint webSocketEndPoint)
         {
 
-            EndPoint = webSocketEndPoint;
+            _EndPoint = webSocketEndPoint;
             if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(webSocketEndPoint as MarshalByRefObject))
             {
 
@@ -770,14 +770,14 @@ namespace OOAdvantech.Remoting.RestApi
                 //}
             }
 
-            set
-            {
-                _EndPoint = value;
-                if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
-                {
+            //set
+            //{
+            //    _EndPoint = value;
+            //    if (OOAdvantech.Remoting.RemotingServices.IsOutOfProcess(_EndPoint as MarshalByRefObject))
+            //    {
 
-                }
-            }
+            //    }
+            //}
         }
 
 

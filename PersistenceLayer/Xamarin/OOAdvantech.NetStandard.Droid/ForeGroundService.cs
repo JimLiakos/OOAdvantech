@@ -163,7 +163,7 @@ namespace OOAdvantech.Droid
             handler.RemoveCallbacks(State.Runnable);
 
             // Remove the notification from the status bar.
-            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            var notificationManager = (Android.App.NotificationManager)GetSystemService(NotificationService);
             notificationManager.Cancel(State.ServiceRunningNotificationID);
             isStarted = false;
             base.OnDestroy();
@@ -193,7 +193,7 @@ namespace OOAdvantech.Droid
             string NOTIFICATION_CHANNEL_ID = "com.Your.project.id";
             NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Your Channel Name", Android.App.NotificationImportance.High);
 
-            NotificationManager manager = (NotificationManager)GetSystemService(Context.NotificationService);
+            Android.App.NotificationManager manager = (Android.App.NotificationManager)GetSystemService(Context.NotificationService);
 
             manager.CreateNotificationChannel(chan);
 
