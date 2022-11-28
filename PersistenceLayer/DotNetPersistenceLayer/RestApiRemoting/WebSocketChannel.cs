@@ -449,8 +449,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         static int set_WebSocketClientCount;
 
-        ///// <MetaDataID>{e8caaa80-4c5e-40fe-837f-794da0159790}</MetaDataID>
-        //bool SusspendWebSocketClientChange;
+
 
         /// <exclude>Excluded</exclude>
         WebSocketClient _WebSocketClient;
@@ -466,11 +465,12 @@ namespace OOAdvantech.Remoting.RestApi
             }
             set
             {
+                //wait the previous socketClient replacement task to complete
                 Task replaceWebSocketClientLockTask = null;
                 lock (ReplaceWebSocketClientLock)
                     replaceWebSocketClientLockTask= ReplaceWebSocketClientLockTask;
                 if (replaceWebSocketClientLockTask!=null)
-                    if (!replaceWebSocketClientLockTask.Wait(10000))
+                    if (!replaceWebSocketClientLockTask.Wait(Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout))
                         throw new TimeoutException(); // or compensate
 
                 try
@@ -480,7 +480,6 @@ namespace OOAdvantech.Remoting.RestApi
 #if DeviceDotNet
                     DeviceApplication.Current.Log(new List<string>() { "WebSocketClient  in :"+ set_WebSocketClientCount });
 #endif
-
                     try
                     {
                         if (_WebSocketClient != null)
@@ -506,7 +505,6 @@ namespace OOAdvantech.Remoting.RestApi
                                             _WebSocketClient.RemoveWebSocketChannel(this);
                                             _WebSocketClient=null;
                                         }
-
                                     }
                                 }
                             }
@@ -544,7 +542,18 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
-        private Task ReplaceWebSocketClient(WebSocketClient webSocket)
+        /// <summary>
+        /// This method replace current webSocketClient with a new
+        /// 
+        /// </summary>
+        /// <param name="newWebSocketClient">
+        /// Defines the new WbSocketClient
+        /// </param>
+        /// <returns>
+        /// Method returns the replace task
+        ///The replacement is done asynchronously
+        /// </returns>
+        private Task ReplaceWebSocketClient(WebSocketClient newWebSocketClient)
         {
 
             return Task.Run(() =>
@@ -554,17 +563,14 @@ namespace OOAdvantech.Remoting.RestApi
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  in :"+ set_WebSocketClientCount });
                     if (_WebSocketClient==null)
-                    {
                         OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "WebSocketClient == null"+ set_WebSocketClientCount });
-                    }
-
 #endif
 
                     var clossingWebSocketClient = _WebSocketClient;
                     clossingWebSocketClient.Closed -= WebSocketClient_Closed;
                     lock (ReplaceWebSocketClientLock)
                     {
-                        _WebSocketClient=webSocket;
+                        _WebSocketClient=newWebSocketClient;
                         if (_WebSocketClient!=null)
                         {
                             _WebSocketClient.Closed += WebSocketClient_Closed;
@@ -602,7 +608,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
 
-                        ClientSessionPart.Reconnect(false, webSocket);
+                        ClientSessionPart.Reconnect(false, newWebSocketClient);
                     }
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  out :"+ set_WebSocketClientCount });
@@ -671,81 +677,81 @@ namespace OOAdvantech.Remoting.RestApi
             WebSocketReconnect();
         }
 
+        /// <summary>
+        /// This method starts a task, if not already exist, to reconnect with the server. 
+        /// the reconnect procedure runs in loop until channel Has an open WebsSocket Connection 
+        /// 
+        /// </summary>
         private void WebSocketReconnect()
         {
 
 #if DeviceDotNet
             OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : "+DateTime.Now.ToString()+" - " +ChannelUri });
-
 #endif
 
-            //if (!SusspendWebSocketClientChange)
+
+            if (WebsocketReconnectionTask!=null&&WebsocketReconnectionTask.Status==TaskStatus.Running)
+                return;
+
+            WebsocketReconnectionTask = Task.Run(() =>
             {
-                if (WebsocketReconnectionTask!=null&&WebsocketReconnectionTask.Status==TaskStatus.Running)
-                    return;
-
-                WebsocketReconnectionTask = Task.Run(() =>
+                int count = 0;
+                while (true)
                 {
-                    int count = 0;
-                    while (true)
+#if DeviceDotNet
+                    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                     {
-
-
-
-#if DeviceDotNet
-                        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                        {
-                            System.Threading.Thread.Sleep(100);
-                            continue;
-                        }
+                        System.Threading.Thread.Sleep(100);
+                        continue;
+                    }
 #endif
-                        count++;
-                        if (count>20)
-                        {
-                            count=0;
-                            System.Diagnostics.Debug.WriteLine("WebsocketReconnectionTask");
-                        }
+                    count++;
+                    if (count>20)
+                    {
+                        count=0;
+                        System.Diagnostics.Debug.WriteLine("WebsocketReconnectionTask");
+                    }
 
-                        try
-                        {
-                            string publicChannelUri = null;
-                            string internalchannelUri = null;
-                            ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
-                            var binding = new Binding();
-                            binding.OpenTimeout = TimeSpan.FromSeconds(3);
+                    try
+                    {
+                        string publicChannelUri = null;
+                        string internalchannelUri = null;
+                        ObjRef.GetChannelUriParts(ChannelUri, out publicChannelUri, out internalchannelUri);
+                        var binding = new Binding();
+                        binding.OpenTimeout = TimeSpan.FromSeconds(3);
 
-                            var webSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
-                            if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
-                            {
+                        var webSocketClient = WebSocketClient.EnsureConnection(publicChannelUri + "WebSocketMessages", binding);
+                        if (webSocketClient != null && webSocketClient.State == WebSocketState.Open)
+                        {
 #if DeviceDotNet
-                                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : replace webSocketClient" });
+                            OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : replace webSocketClient" });
 
 #endif
 
-                                WebSocketClient = webSocketClient;
-                                //ClientSessionPart.Reconnect(true);
-                            }
-                            else
-                            {
-                            }
+                            WebSocketClient = webSocketClient;
+                            //ClientSessionPart.Reconnect(true);
                         }
-                        catch (Exception error)
-                        {
-
-#if DeviceDotNet
-                            OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : "+DateTime.Now.ToString()+" - " +ChannelUri });
-
-#endif
-                        }
-                        if (WebSocketClient != null && WebSocketClient.State == WebSocketState.Open)
-                            break;
                         else
                         {
                         }
                     }
+                    catch (Exception error)
+                    {
 
-                });
-            }
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "WebSocketReconnect : "+DateTime.Now.ToString()+" - " +ChannelUri });
+
+#endif
+                    }
+                    if (WebSocketClient != null && WebSocketClient.State == WebSocketState.Open)
+                        break;
+                    else
+                    {
+                    }
+                }
+
+            });
+
         }
 
         IEndPoint _EndPoint;

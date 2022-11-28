@@ -1047,6 +1047,9 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{c84867b4-e737-4de4-9b51-360677d9fbae}</MetaDataID>
         internal void Reconnect(bool disconnectedChannel, IEndPoint endPoint=null)
         {
+
+            //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
+
             bool dedicatedEndPoint = true;
             if (endPoint == null)
             {
@@ -1071,9 +1074,6 @@ namespace OOAdvantech.Remoting.RestApi
                     if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
                     {
 
-
-                        //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel SessionId {0}", SessionIdentity));
-
                         System.Collections.Generic.List<RemoteEventSubscription> channelSubscriptions = new List<RemoteEventSubscription>();
                         foreach (var entry in EventSubscriptions)
                         {
@@ -1096,69 +1096,38 @@ namespace OOAdvantech.Remoting.RestApi
                         ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
                         ServerSessionPartUri = serverSessionPartUri;
 
-#if DeviceDotNet
-                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
-#endif
+//#if DeviceDotNet
+//                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
+//#endif
 
                         SynchronizeSession();
 
                         System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
 
-
-                        Dictionary<string, System.WeakReference> proxies = null;
-                        lock (Proxies)
-                            proxies=Proxies.ToDictionary(x => x.Key, x => x.Value);
-
-                        foreach (System.WeakReference weakReference in proxies.Values)
+                        //The reconnection process must have completed when the client code attempts to call a remote object
+                        //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
+                        Task.Run(() =>
                         {
-                            try
-                            {
-                                if (weakReference.IsAlive)
-                                {
-                                    var proxy = weakReference.Target as Proxy;
-                                    proxy.RaiseReconnectEvent();
-                                }
-                            }
-                            catch (System.Exception error)
-                            {
 
-                            }
-                        }
+                            RaiseReconnectEvent();
+                        });
                     }
                     else
                     {
 
-#if DeviceDotNet
-                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions " });
-#endif
+//#if DeviceDotNet
+//                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions " });
+//#endif
                         if (disconnectedChannel)
                         {
-                            Dictionary<string, System.WeakReference> proxies = null;
-                            lock (Proxies)
-                                proxies=Proxies.ToDictionary(x => x.Key, x => x.Value);
-
-
-                            foreach (System.WeakReference weakReference in proxies.Values)
+                            //The reconnection process must have completed when the client code attempts to call a remote object
+                            //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
+                            Task.Run(() =>
                             {
-                                try
-                                {
-                                    if (weakReference.IsAlive)
-                                    {
-                                        var proxy = weakReference.Target as Proxy;
-                                        proxy.RaiseReconnectEvent();
-                                    }
-                                }
-                                catch (System.Exception error)
-                                {
-
-                                }
-                            }
-                        }
-                        if (ServerSessionPartUri != serverSessionPartUri)
-                        {
+                                RaiseReconnectEvent();
+                            });
 
                         }
-                        //?System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel same ServerProcessIdentity {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
                     }
 
                     return;
@@ -1199,19 +1168,25 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
-        /// <MetaDataID>{fe5be312-2852-49ad-bed1-27db83c2a6af}</MetaDataID>
-        public override void EventCallback(string objectUri, EventInfo eventInfo, List<object> args)
+        private void RaiseReconnectEvent()
         {
-            base.EventCallback(objectUri, eventInfo, args);
-
-            //IProxy proxy = null;
-            //lock (this)
-            //{
-            //    if (Proxies.ContainsKey(objectUri))
-            //    {
-            //        proxy = Proxies[objectUri].Target as IProxy;
-            //    }
-            //}
+            Dictionary<string, System.WeakReference> proxies = null;
+            lock (Proxies)
+                proxies=Proxies.ToDictionary(x => x.Key, x => x.Value);
+            foreach (System.WeakReference weakReference in proxies.Values)
+            {
+                try
+                {
+                    if (weakReference.IsAlive)
+                    {
+                        var proxy = weakReference.Target as Proxy;
+                        proxy.RaiseReconnectEvent();
+                    }
+                }
+                catch (System.Exception error)
+                {
+                }
+            }
         }
 
         /// <MetaDataID>{384a9ce5-d1b1-4b0b-99bc-d458f961f05a}</MetaDataID>
