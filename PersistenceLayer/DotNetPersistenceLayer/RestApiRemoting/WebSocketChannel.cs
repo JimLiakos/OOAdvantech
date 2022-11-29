@@ -251,26 +251,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
 #endif
 #endif
-
-                if (endPoint != null &&
-                    endPoint is WebSocketClient &&
-                        (endPoint as WebSocketClient).State == WebSocketState.Open)
-                {
-                    RequestData requestData = new RequestData();
-                    requestData.RequestType = RequestType.LagTest;
-                    requestData.ChannelUri = ChannelUri;
-                    DateTime dateTime = DateTime.Now;
-                    requestData.SendTimeout = 5000;
-                    var task = endPoint.SendRequestAsync(requestData);
-                    task.Wait(5000);
-                    var timeSpan = DateTime.Now - dateTime;
-
-                    System.Diagnostics.Debug.WriteLine("timeout for " + endPoint.GetHashCode().ToString() + " : " + ChannelUri + "  " + timeSpan.ToString());
-#if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "timeout for " + endPoint.GetHashCode().ToString() + " : " + ChannelUri + "  " + timeSpan.ToString() });
-#endif
-
-                }
+                ResponseTimeCheck(endPoint);
             }
             catch (Exception error)
             {
@@ -281,6 +262,34 @@ namespace OOAdvantech.Remoting.RestApi
                 onLagTest = false;
             }
 
+        }
+
+        private void ResponseTimeCheck(IEndPoint endPoint)
+        {
+            if (endPoint != null &&
+                endPoint is WebSocketClient &&
+                    (endPoint as WebSocketClient).State == WebSocketState.Open)
+            {
+                RequestData requestData = new RequestData();
+                requestData.RequestType = RequestType.LagTest;
+                requestData.ChannelUri = ChannelUri;
+                DateTime dateTime = DateTime.Now;
+                requestData.SendTimeout = 5000;
+                var task = endPoint.SendRequestAsync(requestData);
+                task.Wait(5000);
+                var timeSpan = DateTime.Now - dateTime;
+
+                string directPrompt = "direct connection false";
+                if ((endPoint as WebSocketClient)?.DirectConnect==true)
+                    directPrompt = "direct connection true";
+
+
+                System.Diagnostics.Debug.WriteLine($"timeout for {endPoint.GetHashCode().ToString()}  :  {ChannelUri}  {timeSpan.ToString()} / {directPrompt}");
+#if DeviceDotNet
+                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string>() { $"timeout for {endPoint.GetHashCode().ToString()}  :  {ChannelUri}  {timeSpan.ToString()} / {directPrompt}" });
+#endif
+
+            }
         }
         #endregion
 
@@ -357,6 +366,8 @@ namespace OOAdvantech.Remoting.RestApi
 
                      }
                      #endregion
+
+                     //ResponseTimeCheck(endPoint);
 
                      var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
                      if (tryDirectConnectionSocketClient == null)
