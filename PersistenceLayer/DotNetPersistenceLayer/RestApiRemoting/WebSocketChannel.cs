@@ -276,12 +276,17 @@ namespace OOAdvantech.Remoting.RestApi
                 DateTime dateTime = DateTime.Now;
                 requestData.SendTimeout = 5000;
                 var task = endPoint.SendRequestAsync(requestData);
-                task.Wait(5000);
+                string directPrompt = "";
+                if (task.Wait(5000))
+                {
+                    if (task.Result.DirectConnect==true)
+                        directPrompt = "direct connection true";
+                    else
+                        directPrompt = "direct connection false";
+                }
                 var timeSpan = DateTime.Now - dateTime;
 
-                string directPrompt = "direct connection false";
-                if ((endPoint as WebSocketClient)?.DirectConnect==true)
-                    directPrompt = "direct connection true";
+                
 
 
                 System.Diagnostics.Debug.WriteLine($"timeout for {endPoint.GetHashCode().ToString()}  :  {ChannelUri}  {timeSpan.ToString()} / {directPrompt}");
@@ -367,7 +372,7 @@ namespace OOAdvantech.Remoting.RestApi
                      }
                      #endregion
 
-                     //ResponseTimeCheck(endPoint);
+                     ResponseTimeCheck(currentWebSocketClient);
 
                      var tryDirectConnectionSocketClient = WebSocketClient.OpenNewConnection(publicChannelUri + "WebSocketMessages", internalchannelUri, Binding.DefaultBinding);
                      if (tryDirectConnectionSocketClient == null)

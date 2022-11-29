@@ -1335,6 +1335,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{9afcde9f-6b5f-4ac3-a8db-8c1f5a62a3e6}</MetaDataID>
         Dictionary<int, RequestData> callsPair = new Dictionary<int, RequestData>();
 
+        static bool overrideDirectconnect = true;
         /// <MetaDataID>{b75d2cc3-bdb6-4e3e-9790-96c794f1d0bc}</MetaDataID>
         public void MessageDispatch(string messageData)
         {
@@ -1361,7 +1362,8 @@ namespace OOAdvantech.Remoting.RestApi
                     responseData.ChannelUri = request.ChannelUri;
                     responseData.CallContextID = request.CallContextID;
                     responseData.DirectConnect = RemotingServices.InternalEndPointResolver.CanBeResolvedLocal(request);
-
+                    if (overrideDirectconnect)
+                        responseData.DirectConnect=false;
                     var datetime = DateTime.Now;
                     string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
                     System.Diagnostics.Debug.WriteLine(string.Format("RestApp {3} {0} call ID {1}  Check ConnectionInfo DirectConnect : {2}", request.ChannelUri, request.CallContextID, responseData.DirectConnect, timestamp));
@@ -1371,15 +1373,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //    string id = Microsoft.WindowsAzure.ServiceRuntime.RoleEnvironment.CurrentRoleInstance.Id;
                     //}
                 }
-                else if (request.RequestType == RequestType.LagTest)
-                {
-                    responseData = new ResponseData(request.ChannelUri);
-                    responseData.ChannelUri = request.ChannelUri;
-                    responseData.CallContextID = request.CallContextID;
-
-
-                    SendResponce(responseData);
-                }
+         
                 else
                 {
                     //if (request.SessionIdentity != null)
@@ -1400,37 +1394,59 @@ namespace OOAdvantech.Remoting.RestApi
 
                         if (localResolveRequest)
                         {
-                            try
+
+                            if (request.RequestType == RequestType.LagTest)
                             {
-                                System.Runtime.Remoting.Messaging.CallContext.SetData("internalChannelUri", request.InternalChannelUri);
-                                System.Runtime.Remoting.Messaging.CallContext.SetData("PublicChannelUri", request.PublicChannelUri);
+
+
+                                responseData = new ResponseData(request.ChannelUri);
+                                responseData.ChannelUri = request.ChannelUri;
+                                responseData.CallContextID = request.CallContextID;
+
+                                if (request.PhysicalConnectionID.IndexOf("=>")==-1)
+                                    responseData.DirectConnect=true;
+                                else
+                                    responseData.DirectConnect=false;
+
+
+
+                                SendResponce(responseData);
+                            }
+                            else
+                            {
+
                                 try
                                 {
-                                    //this.clo
-                                    request.EventCallBackChannel = this;
-                                    responseData = IsolatedContext.DispatchMessage(request);
-                                    responseData.DirectConnect = true;
+                                    System.Runtime.Remoting.Messaging.CallContext.SetData("internalChannelUri", request.InternalChannelUri);
+                                    System.Runtime.Remoting.Messaging.CallContext.SetData("PublicChannelUri", request.PublicChannelUri);
+                                    try
+                                    {
+                                        //this.clo
+                                        request.EventCallBackChannel = this;
+                                        responseData = IsolatedContext.DispatchMessage(request);
+                                        responseData.DirectConnect = true;
 #if !DeviceDotNet
-                                    if (request.RequestType == RequestType.Disconnect)
-                                        RemoveLocalConnection(request.InternalChannelUri, responseData.SessionIdentity);
-                                    else
-                                        AddLocalConnection(request.InternalChannelUri, responseData.SessionIdentity, responseData.ChannelUri);
+                                        if (request.RequestType == RequestType.Disconnect)
+                                            RemoveLocalConnection(request.InternalChannelUri, responseData.SessionIdentity);
+                                        else
+                                            AddLocalConnection(request.InternalChannelUri, responseData.SessionIdentity, responseData.ChannelUri);
 #endif
+                                    }
+                                    finally
+                                    {
+                                        System.Runtime.Remoting.Messaging.CallContext.SetData("internalChannelUri", null);
+                                        System.Runtime.Remoting.Messaging.CallContext.SetData("PublicChannelUri", null);
+                                    }
                                 }
-                                finally
+                                catch (Exception error)
                                 {
-                                    System.Runtime.Remoting.Messaging.CallContext.SetData("internalChannelUri", null);
-                                    System.Runtime.Remoting.Messaging.CallContext.SetData("PublicChannelUri", null);
-                                }
-                            }
-                            catch (Exception error)
-                            {
-                                #region Error response
+                                    #region Error response
 
-                                ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
-                                responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, error);
-                                responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
-                                #endregion
+                                    ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
+                                    responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, error);
+                                    responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                                    #endregion
+                                }
                             }
                         }
                         else
