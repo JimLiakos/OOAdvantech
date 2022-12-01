@@ -934,11 +934,16 @@ namespace OOAdvantech.RDBMSMetaDataRepository
 
             }
 
-            if (Type != null && Type.FullName == "FinanceFacade.Payment")
+            if (Type != null && Type.FullName == "FlavourBusinessManager.ServicesContextResources.ServicePoint")
+            {
+
+            }
+            if (Type != null && Type.FullName == "FlavourBusinessManager.ServicesContextResources.HallServicePoint")
             {
 
             }
 
+            
 
             using (OOAdvantech.Transactions.ObjectStateTransition StateTransition = new OOAdvantech.Transactions.ObjectStateTransition(this))
             {

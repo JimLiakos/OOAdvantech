@@ -579,8 +579,6 @@ namespace OOAdvantech.RDBMSMetaDataRepository
                         
                     }
                 }
-
-
             }
             finally
             {

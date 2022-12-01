@@ -1274,7 +1274,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
         }
 
-        private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, Azure.Data.Tables.TableClient classBLOBDataTable)
+        private static void SerializeTable(System.IO.Stream memoryStream, List<RDBMSMetaDataRepository.Column> columns, Azure.Data.Tables.TableClient cloudTable)
         {
             var tableColumns = columns.Select(x => x.DataBaseColumnName).ToList();
             if (!tableColumns.Contains("PartitionKey"))
@@ -1282,7 +1282,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (!tableColumns.Contains("RowKey"))
                 tableColumns.Add("RowKey");
             //var query = new TableQuery<ElasticTableEntity>();
-            var tableEntities = classBLOBDataTable.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), tableColumns).Select(x => new ElasticTableEntity(x)).ToList();
+            var tableEntities = cloudTable.Query<Azure.Data.Tables.TableEntity>(default(string), default(int?), tableColumns).Select(x => new ElasticTableEntity(x)).ToList();
 
             Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member> tableMembersDictionary = new Dictionary<string, AzureTableMetaDataPersistenceRunTime.Member>();
             List<AzureTableMetaDataPersistenceRunTime.Member> tableMembers = new List<AzureTableMetaDataPersistenceRunTime.Member>();
@@ -1301,7 +1301,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
 
             int offset = 0;
-            BinaryFormatter.BinaryFormatter.Serialize(classBLOBDataTable.Name, MembersBuffer, offset, ref offset);
+            BinaryFormatter.BinaryFormatter.Serialize(cloudTable.Name, MembersBuffer, offset, ref offset);
 
             foreach (var aMember in tableMembers)
             {
