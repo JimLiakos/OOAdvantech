@@ -8,6 +8,7 @@ using OOAdvantech.MetaDataRepository;
 namespace OOAdvantech
 {
 
+    delegate void BackPressedandle();
 
     /// <MetaDataID>{cfa63701-40aa-4507-824c-30b1d5bc0383}</MetaDataID>
     public interface IDeviceOOAdvantechCore

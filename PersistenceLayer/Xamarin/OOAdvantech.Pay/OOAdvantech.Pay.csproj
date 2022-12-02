@@ -8,6 +8,7 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FlavourBusiness\DontWaitAppNS\FinanceFacade\FinanceFacade.csproj" />
     <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj" />
   </ItemGroup>
   <ItemGroup>

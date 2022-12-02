@@ -78,7 +78,14 @@ namespace OOAdvantech.Droid
         }
 
 
+        
 
+        
+        public static void BackPressed()
+        {
+            OOAdvantech.DeviceApplication.Current.OnBackPressed();
+            HybridWebViewRenderer.BackPressed();
+        }
 
 
         static string _FirebaseToken;

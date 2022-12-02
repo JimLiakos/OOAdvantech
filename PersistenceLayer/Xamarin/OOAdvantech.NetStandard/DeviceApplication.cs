@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace OOAdvantech
 {
 
-
+    public delegate void BackPressedHandle();
     public delegate void AppLifeCycleHandler();
     /// <MetaDataID>{bab82937-4d36-4198-864b-d3e78f853e8b}</MetaDataID>
     public class DeviceApplication
@@ -18,6 +18,9 @@ namespace OOAdvantech
         public event AppLifeCycleHandler Started;
         public event AppLifeCycleHandler Sleeping;
         public event AppLifeCycleHandler Resumed;
+
+        public event BackPressedHandle BackPressed;
+
 
 
         static DeviceApplication _Current = new DeviceApplication();
@@ -33,6 +36,11 @@ namespace OOAdvantech
         {
             Started?.Invoke();
             // Handle when your app starts
+        }
+
+        public void OnBackPressed()
+        {
+            BackPressed?.Invoke();
         }
 
         public void OnSleep()
