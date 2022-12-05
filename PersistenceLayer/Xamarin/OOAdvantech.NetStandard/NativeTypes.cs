@@ -308,7 +308,7 @@ namespace System.Data
 namespace OOAdvantech.Remoting
 {
 
-    /// <MetaDataID>{364d8cfa-4615-4f77-9bca-6f0c07600332}</MetaDataID>
+    /// <MetaDataID>{364d8cfa-4615-4f77-9bca-6f0c07600332}</MetaDataID>t
     public class MarshalByRefObject:System.MarshalByRefObject, IExtMarshalByRefObject,ITransparentProxy
     {
         IProxy Proxy;

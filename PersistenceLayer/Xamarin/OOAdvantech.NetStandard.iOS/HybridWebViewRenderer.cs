@@ -48,7 +48,7 @@ namespace OOAdvantech.iOS
         {
             base.OnElementChanged(e);
 
-            if (Control == null)
+            if (Control == null&&e.NewElement!=null)
             {
                 try
                 {

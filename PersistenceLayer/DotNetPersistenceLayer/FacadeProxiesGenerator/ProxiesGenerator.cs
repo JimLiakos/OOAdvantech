@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOAdvantech.Remoting;
+using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -139,7 +140,9 @@ namespace FacadeProxiesGenerator
                 targetClass.Members.Add(proxyField);
 
                 CodeClass.AddProxyConstructor(targetClass);
+                
 
+                CodeClass.AddBaseType(targetClass, typeof(OOAdvantech.Remoting.MarshalByRefObject));
                 CodeClass.AddBaseType(targetClass, interaface);
                 CodeClass.AddBaseType(targetClass, typeof(OOAdvantech.Remoting.RestApi.ITransparentProxy));
 
@@ -239,6 +242,14 @@ namespace FacadeProxiesGenerator
             //CodeClass.GenerateCSharpCode(@"C:\Sera.cs",targetUnit);
         }
 
+
+    }
+}
+
+namespace OOAdvantech.Remoting
+{
+    public class MarshalByRefObject : System.MarshalByRefObject, IExtMarshalByRefObject
+    {
 
     }
 }

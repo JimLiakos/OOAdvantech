@@ -41,22 +41,22 @@ namespace OOAdvantech.Pay
         async Task GetPaymentConfig()
         {
 
-            using (var httpClient = new HttpClient())
-            {
+            //using (var httpClient = new HttpClient())
+            //{
 
-                //Uri uri = new Uri("http://192.168.2.8:8090/api/Payment/BraintreeClientToken");
-                Uri uri = new Uri("http://10.0.0.13:8090/api/Payment/BraintreeClientToken");
-                //await getUserData();
-                System.Diagnostics.Debug.WriteLine("Uri = " + uri.AbsoluteUri);
+            //    //Uri uri = new Uri("http://192.168.2.8:8090/api/Payment/BraintreeClientToken");
+            //    Uri uri = new Uri("http://10.0.0.13:8090/api/Payment/BraintreeClientToken");
+            //    //await getUserData();
+            //    System.Diagnostics.Debug.WriteLine("Uri = " + uri.AbsoluteUri);
 
-                var response = await httpClient.GetStringAsync(uri);
-                paymentClientToken = OOAdvantech.Json.JsonConvert.DeserializeObject<string>(response);
-                MerchantId = "nyqdtchc77jt6z52";
+            //    var response = await httpClient.GetStringAsync(uri);
+            //    paymentClientToken = OOAdvantech.Json.JsonConvert.DeserializeObject<string>(response);
+            //    MerchantId = "nyqdtchc77jt6z52";
 
 
-                await _payService.InitializeAsync(paymentClientToken);
+            //    await _payService.InitializeAsync(paymentClientToken);
 
-            }
+            //}
         }
 
         async Task CreatePayment()

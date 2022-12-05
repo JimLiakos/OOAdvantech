@@ -62,6 +62,10 @@
       <Project>{8d4656bc-51d1-4e2d-ae5b-6f530df69333}</Project>
       <Name>ModulePublisher - VS10</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
+      <Project>{09083b37-96ef-4867-aa51-4d698ad34344}</Project>
+      <Name>OOAdvantechFacade -VS10</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOAdvantech\OOAdvantech - VS10.csproj">
       <Project>{83492998-8e8b-44a9-bcc8-9a6e979e3eb6}</Project>
       <Name>OOAdvantech - VS10</Name>

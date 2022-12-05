@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.440" />
+    <PackageReference Include="RestSharp" Version="106.15.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
   </ItemGroup>
   <ItemGroup>

@@ -37,7 +37,15 @@ namespace OOAdvantech.Droid
 
         private void HybridWebViewRenderer_OnBackPressed()
         {
-            InvockeJSMethod("BackButtonPress", new object[] { });
+            try
+            {
+                InvockeJSMethod("BackButtonPress", new object[] { });
+            }
+            catch (ObjectDisposedException e)
+            {
+                OnBackPressed -= HybridWebViewRenderer_OnBackPressed;
+                // now I know object has been disposed
+            }
         }
         internal void OnNavigated(NavigatedEventArgs navigatedEventArgs)
         {
@@ -69,6 +77,8 @@ namespace OOAdvantech.Droid
             if (ThreadHelper.IsOnMainThread)
             {
                 InternalInvokeJS(methodName, args, callback);
+                if (callback?.Task?.Exception?.GetBaseException()!=null)
+                    throw callback.Task.Exception.GetBaseException();
             }
             else
             {
