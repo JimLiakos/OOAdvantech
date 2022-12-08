@@ -972,6 +972,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         else
                         {
                             var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
+                            objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
                             return objectRef;
                         }
 
