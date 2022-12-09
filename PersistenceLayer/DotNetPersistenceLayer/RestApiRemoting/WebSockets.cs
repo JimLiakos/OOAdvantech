@@ -1335,7 +1335,10 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{9afcde9f-6b5f-4ac3-a8db-8c1f5a62a3e6}</MetaDataID>
         Dictionary<int, RequestData> callsPair = new Dictionary<int, RequestData>();
 
-        static bool overrideDirectconnect = true;
+#if DEBUG
+        static bool overrideDirectconnect = false;
+#endif
+
         /// <MetaDataID>{b75d2cc3-bdb6-4e3e-9790-96c794f1d0bc}</MetaDataID>
         public void MessageDispatch(string messageData)
         {
@@ -1362,8 +1365,10 @@ namespace OOAdvantech.Remoting.RestApi
                     responseData.ChannelUri = request.ChannelUri;
                     responseData.CallContextID = request.CallContextID;
                     responseData.DirectConnect = RemotingServices.InternalEndPointResolver.CanBeResolvedLocal(request);
+#if DEBUG
                     if (overrideDirectconnect)
                         responseData.DirectConnect=false;
+#endif
                     var datetime = DateTime.Now;
                     string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
                     System.Diagnostics.Debug.WriteLine(string.Format("RestApp {3} {0} call ID {1}  Check ConnectionInfo DirectConnect : {2}", request.ChannelUri, request.CallContextID, responseData.DirectConnect, timestamp));
