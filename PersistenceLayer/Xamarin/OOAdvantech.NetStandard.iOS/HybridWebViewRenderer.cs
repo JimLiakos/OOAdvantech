@@ -82,7 +82,7 @@ namespace OOAdvantech.iOS
                     };
                     SetNativeControl(webView);
                     webView.ScrollView.PanGestureRecognizer.Enabled=false;
-                    webView.ScrollView.PinchGestureRecognizer.Enabled=false;
+                   // webView.ScrollView.PinchGestureRecognizer.Enabled=false;
 
                     NSUrl url = null;
                     if (e.NewElement != null)
