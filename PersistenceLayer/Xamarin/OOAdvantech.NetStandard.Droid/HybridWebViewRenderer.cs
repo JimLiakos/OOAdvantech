@@ -203,13 +203,14 @@ namespace OOAdvantech.Droid
 
 
                 var webView = new Android.Webkit.WebView(Context);
-                webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
-                webView.Settings.CacheMode = CacheModes.CacheElseNetwork;
+                //webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
+                webView.Settings.CacheMode = CacheModes.Default;
                 webView.Settings.DomStorageEnabled = true;
                 webView.Settings.AllowFileAccess = true;
                 webView.Settings.AllowFileAccessFromFileURLs = true;
                 var ss = webView.Settings.UserAgentString;
                 webView.Settings.UserAgentString = USER_AGENT;
+
                 // webView.Settings.CacheMode =CacheModes.NoCache;//.CacheMode(WebSettings.lo.LOAD_NO_CACHE);
                 //webView.SetWebViewClient(new CustomWebViewClient(this));
                 webView.Settings.JavaScriptEnabled = true;
