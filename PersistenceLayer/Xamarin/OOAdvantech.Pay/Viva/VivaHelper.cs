@@ -33,7 +33,8 @@ namespace OOAdvantech.Pay.Viva
                         var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK", DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc };
                         string json = OOAdvantech.Json.JsonConvert.SerializeObject(vivaEvent, jSetttings);
 
-                        var client = new RestClient($"http://{server}:8090/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                        //var client = new RestClient($"http://{server}:8090/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                        var client = new RestClient($"http://{server}/DevicesServer/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("Content-Type", "application/json");
