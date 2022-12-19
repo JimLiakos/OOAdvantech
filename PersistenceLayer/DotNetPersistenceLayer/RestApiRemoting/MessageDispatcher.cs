@@ -270,9 +270,20 @@ namespace OOAdvantech.Remoting.RestApi
                             updateCachingClientSideProperties = true;
                         };
 
-                        if (objectChangeState != null && methodCallMessage.Object != null)
-                            objectChangeState.AddEventHandler(methodCallMessage.Object, handler);
+                        try
+                        {
+                            if (objectChangeState != null && methodCallMessage.Object != null)
+                            {
+                                //objectChangeState.AddEventHandler(methodCallMessage.Object, handler);
+                                objectChangeState.GetAddMethod(true).Invoke(methodCallMessage.Object, new[] { handler });
+                            }
 
+                        }
+                        catch (Exception error)
+                        {
+
+                            throw;
+                        }
                         object retVal = null;
                         if (request.GetCallContextData("Transaction") != null)
                         {
@@ -283,7 +294,10 @@ namespace OOAdvantech.Remoting.RestApi
                                 stateTransition.Consistent = true;
                             }
                             if (objectChangeState != null && methodCallMessage.Object != null)
-                                objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+                            {
+                                //objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+                                objectChangeState.GetRemoveMethod(true).Invoke(methodCallMessage.Object, new[] { handler });
+                            }
 
                         }
                         else
@@ -318,8 +332,10 @@ namespace OOAdvantech.Remoting.RestApi
                                 string json = JsonConvert.SerializeObject(responseMessage);
 
                                 if (objectChangeState != null && methodCallMessage.Object != null)
-                                    objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
-
+                                {
+                                    //objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+                                    objectChangeState.GetRemoveMethod(true).Invoke(methodCallMessage.Object, new[] { handler });
+                                }
                                 return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties };
                             });
                         }
@@ -333,7 +349,10 @@ namespace OOAdvantech.Remoting.RestApi
                             string json = JsonConvert.SerializeObject(responseMessage);
 
                             if (objectChangeState != null && methodCallMessage.Object != null)
-                                objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+                            {
+                                //objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
+                                objectChangeState.GetRemoveMethod(true).Invoke(methodCallMessage.Object, new[] { handler });
+                            }
 
                             return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties }; });
                         }
@@ -731,7 +750,7 @@ namespace OOAdvantech.Remoting.RestApi
                     if (serverSession == null)
                     {
                         serverSession = new ServerSessionPart(Guid.Parse(methodCallMessage.ClientProcessIdentity), request.ChannelUri, request.InternalChannelUri, methodCallMessage.Web);
-                        responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef(); 
+                        responseMessage.ServerSessionObjectRef = serverSession.GetServerSesionObjectRef();
                         initCommunicationSession = true;
                     }
 
@@ -842,9 +861,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                 if (methodCallMessage.MethodName == StandardActions.SetSubscriptions)
                 {
-                    
+
                     methodCallMessage.UnMarshal();
-                    
+
                     var channelSubscriptions = methodCallMessage.Args[0] as System.Collections.Generic.List<RemoteEventSubscription>;
                     (methodCallMessage.Object as ServerSessionPart).Subscribe(channelSubscriptions);
 
