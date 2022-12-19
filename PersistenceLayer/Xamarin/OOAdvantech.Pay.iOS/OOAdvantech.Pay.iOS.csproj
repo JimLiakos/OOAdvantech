@@ -54,7 +54,7 @@
       <Version>5.0.0.2196</Version>
     </PackageReference>
     <PackageReference Include="Acr.UserDialogs">
-      <Version>7.1.0.440</Version>
+      <Version>7.2.0.564</Version>
     </PackageReference>
     <PackageReference Include="Naxam.BrainTreeCore.iOS">
       <Version>4.37.0</Version>
