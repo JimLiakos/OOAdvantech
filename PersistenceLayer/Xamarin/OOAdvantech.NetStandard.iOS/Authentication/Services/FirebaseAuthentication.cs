@@ -276,7 +276,6 @@ namespace OOAdvantech.Authentication.iOS
                 {
                     try
                     {
-
                         FacebookLoginService.CurrentFacebookLoginService.SignOut();
                     }
                     catch (Exception ex)
