@@ -53,7 +53,7 @@ namespace OOAdvantech.Authentication.Droid
 #if DeviceDotNet
             if (provider == SignInProvider.Google)
             {
-               var result=await FirebaseAuthentication.GoogleSignIn();
+                var result = await FirebaseAuthentication.GoogleSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Google);
 
@@ -63,7 +63,7 @@ namespace OOAdvantech.Authentication.Droid
             if (provider == SignInProvider.Facebook)
             {
 
-                var result =await FirebaseAuthentication.FacebookSignIn();
+                var result = await FirebaseAuthentication.FacebookSignIn();
                 //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
                 //device.Signin(OOAdvantech.AuthProvider.Facebook);
 
@@ -76,7 +76,7 @@ namespace OOAdvantech.Authentication.Droid
         }
 
 
-        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook,  SignInProvider.Twitter };
+        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter };
 
         public Task<string> EmailSignIn(string email, string password)
         {
@@ -122,6 +122,13 @@ namespace OOAdvantech.Authentication.Droid
                 if (FirebaseAuthentication.FirebaseAuth.CurrentUser != null)
                 {
                     var firebaseUser = FirebaseAuthentication.FirebaseAuth.CurrentUser;
+                    string providerId = firebaseUser.ProviderData?.Where(x => x.ProviderId!="firebase").Select(x => x.ProviderId).FirstOrDefault();
+                    if (providerId == null)
+                    {
+                        providerId=firebaseUser.ProviderId;
+                    }
+
+
                     var currentUser = new OOAdvantech.Authentication.AuthUser()
                     {
                         DisplayName = firebaseUser.DisplayName,
@@ -130,7 +137,7 @@ namespace OOAdvantech.Authentication.Droid
                         IsEmailVerified = firebaseUser.IsEmailVerified,
                         PhoneNumber = firebaseUser.PhoneNumber,
                         PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
-                        ProviderId = firebaseUser.ProviderId,
+                        ProviderId = providerId,
                         Uid = firebaseUser.Uid,
                         //Providers = firebaseUser.Providers.ToList()
                     };

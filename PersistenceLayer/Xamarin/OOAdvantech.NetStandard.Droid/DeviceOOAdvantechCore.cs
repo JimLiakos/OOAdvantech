@@ -151,6 +151,16 @@ namespace OOAdvantech.Droid
                     MessageDigest sha256 = MessageDigest.GetInstance("SHA256");
 
                     sha.Update(signature.ToByteArray());
+                    var shaDisc = sha.ToString();
+
+                    string sha1Fingerprint = null;
+                    sha1Fingerprint=BitConverter.ToString(sha.Digest()).Replace("-", ":");
+                    //foreach (byte _byte in sha.Digest())
+                    //{
+                    //    if (sha1Fingerprint!=null)
+                    //        sha1Fingerprint=":";
+                    //    sha1Fingerprint+=_byte.ToString();
+                    //}
                     //Log.Debug("KeyHash:", Base64.EncodeToString(md.Digest(), Base64.Default));
                     var s = Base64.EncodeToString(sha.Digest(), Base64Flags.Default);
                 }
