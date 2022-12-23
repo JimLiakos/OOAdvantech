@@ -139,7 +139,7 @@ namespace OOAdvantech.Authentication.iOS
         {
             get
             {
-                var googleUser = SignIn.SharedInstance.CurrentUser;
+                var googleUser = SignIn.SharedInstance?.CurrentUser;
 
                 if (FirebaseAuthentication.FirebaseAuth.CurrentUser != null)
                 {
