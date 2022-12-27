@@ -199,18 +199,15 @@ namespace OOAdvantech.Droid
         public DeviceOOAdvantechCore()
         {
             _LinesPhoneNumbers = new List<SIMCardData>();
-            List<string> args = new List<string>() { "SIM Card 6972992632;73488bc19e444f51a031fe2b72bdee38", "SIM Card  6972992635;39a84c60bbf2460cb7e3d1f6b579d75b", "SIM Card 6972992638;2d40cc3a6b4b4626b18ade71132e19a3" };
-            foreach (var arg in args)
-            {
-                string simDescription = arg.Substring(0, arg.IndexOf(";"));
-                string simIdentity = arg.Substring(arg.IndexOf(";") + 1);
-                _LinesPhoneNumbers.Add(new OOAdvantech.SIMCardData() { SIMCardIdentity = simIdentity, SIMCardDescription = simDescription });
-            }
-
-            //foreach (var simCard in GetSimCards())
+            //List<string> args = new List<string>() { "SIM Card 6972992632;73488bc19e444f51a031fe2b72bdee38", "SIM Card  6972992635;39a84c60bbf2460cb7e3d1f6b579d75b", "SIM Card 6972992638;2d40cc3a6b4b4626b18ade71132e19a3" };
+            //foreach (var arg in args)
             //{
-            //    _LinesPhoneNumbers.Add(new OOAdvantech.SIMCardData() { SIMCardIdentity = simCard.ICCID,SIMCardDescription = simCard.NetworkOperatorName+" "+simCard.PhoneNumber+" "+simCard.ICCID });
+            //    string simDescription = arg.Substring(0, arg.IndexOf(";"));
+            //    string simIdentity = arg.Substring(arg.IndexOf(";") + 1);
+            //    _LinesPhoneNumbers.Add(new OOAdvantech.SIMCardData() { SIMCardIdentity = simIdentity, SIMCardDescription = simDescription });
             //}
+
+            
         }
 
         public static void OnDestroy()
