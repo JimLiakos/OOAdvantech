@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.props" Condition="Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.props')" />
-  <Import Project="..\..\..\FlavourBusiness\packages\cef.redist.x86.92.0.26\build\cef.redist.x86.props" Condition="Exists('..\..\..\FlavourBusiness\packages\cef.redist.x86.92.0.26\build\cef.redist.x86.props')" />
-  <Import Project="..\..\..\FlavourBusiness\packages\cef.redist.x64.92.0.26\build\cef.redist.x64.props" Condition="Exists('..\..\..\FlavourBusiness\packages\cef.redist.x64.92.0.26\build\cef.redist.x64.props')" />
+  <Import Project="..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.props" Condition="Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.props')" />
+  <Import Project="..\..\..\FlavourBusiness\packages\cef.redist.x86.108.4.13\build\cef.redist.x86.props" Condition="Exists('..\..\..\FlavourBusiness\packages\cef.redist.x86.108.4.13\build\cef.redist.x86.props')" />
+  <Import Project="..\..\..\FlavourBusiness\packages\cef.redist.x64.108.4.13\build\cef.redist.x64.props" Condition="Exists('..\..\..\FlavourBusiness\packages\cef.redist.x64.108.4.13\build\cef.redist.x64.props')" />
   <Import Project="..\packages\CefSharp.Wpf.63.0.3\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.63.0.3\build\CefSharp.Wpf.props')" />
   <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" />
   <Import Project="..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" />
@@ -66,14 +66,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CefSharp, Version=92.0.260.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\lib\net452\CefSharp.dll</HintPath>
+    <Reference Include="CefSharp, Version=108.4.130.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\lib\net452\CefSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp.Core, Version=92.0.260.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\lib\net452\CefSharp.Core.dll</HintPath>
+    <Reference Include="CefSharp.Core, Version=108.4.130.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\lib\net452\CefSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp.Wpf, Version=92.0.260.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
-      <HintPath>..\..\..\FlavourBusiness\packages\CefSharp.Wpf.92.0.260\lib\net452\CefSharp.Wpf.dll</HintPath>
+    <Reference Include="CefSharp.Wpf, Version=108.4.130.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\..\..\FlavourBusiness\packages\CefSharp.Wpf.108.4.130\lib\net462\CefSharp.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Toolkit.Win32.UI.Controls, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\FlavourBusiness\Azure FlavourBusiness\packages\Microsoft.Toolkit.Win32.UI.Controls.3.0.0\lib\net462\Microsoft.Toolkit.Win32.UI.Controls.dll</HintPath>
@@ -169,12 +169,12 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\cef.redist.x64.92.0.26\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\cef.redist.x64.92.0.26\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\cef.redist.x86.92.0.26\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\cef.redist.x86.92.0.26\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\cef.redist.x64.108.4.13\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\cef.redist.x64.108.4.13\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\cef.redist.x86.108.4.13\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\cef.redist.x86.108.4.13\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.targets'))" />
   </Target>
-  <Import Project="..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.targets" Condition="Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.92.0.260\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.targets" Condition="Exists('..\..\..\FlavourBusiness\packages\CefSharp.Common.108.4.130\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
