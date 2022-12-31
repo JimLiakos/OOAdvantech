@@ -207,10 +207,7 @@ namespace OOAdvantech.Droid
             //    _LinesPhoneNumbers.Add(new OOAdvantech.SIMCardData() { SIMCardIdentity = simIdentity, SIMCardDescription = simDescription });
             //}
 
-            //foreach (var simCard in GetSimCards())
-            //{
-            //    _LinesPhoneNumbers.Add(new OOAdvantech.SIMCardData() { SIMCardIdentity = simCard.ICCID,SIMCardDescription = simCard.NetworkOperatorName+" "+simCard.PhoneNumber+" "+simCard.ICCID });
-            //}
+            
         }
 
         public static void OnDestroy()
