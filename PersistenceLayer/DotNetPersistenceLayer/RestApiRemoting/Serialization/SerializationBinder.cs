@@ -273,7 +273,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
             }
             else
+            {
+                //if (TypesNamesDictionary.TryGetValue(serializedType, out typeName))
+                //    assemblyName = null;
                 base.BindToName(serializedType, out assemblyName, out typeName);
+            }
         }
 
     }
