@@ -150,7 +150,6 @@ namespace OOAdvantech.Authentication.iOS
                         providerId=firebaseUser.ProviderId;
                     }
 
-
                     var currentUser = new OOAdvantech.Authentication.AuthUser()
                     {
                         DisplayName = firebaseUser.DisplayName,
