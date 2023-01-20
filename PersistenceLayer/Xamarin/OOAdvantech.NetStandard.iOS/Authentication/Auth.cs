@@ -144,6 +144,13 @@ namespace OOAdvantech.Authentication.iOS
                 if (FirebaseAuthentication.FirebaseAuth.CurrentUser != null)
                 {
                     var firebaseUser = FirebaseAuthentication.FirebaseAuth.CurrentUser;
+                    string providerId = firebaseUser.ProviderData?.Where(x => x.ProviderId!="firebase").Select(x => x.ProviderId).FirstOrDefault();
+                    if (providerId == null)
+                    {
+                        providerId=firebaseUser.ProviderId;
+                    }
+
+
                     var currentUser = new OOAdvantech.Authentication.AuthUser()
                     {
                         DisplayName = firebaseUser.DisplayName,
@@ -152,7 +159,7 @@ namespace OOAdvantech.Authentication.iOS
                         IsEmailVerified = firebaseUser.IsEmailVerified,
                         PhoneNumber = firebaseUser.PhoneNumber,
                         PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
-                        ProviderId = firebaseUser.ProviderId,
+                        ProviderId = providerId,
                         Uid = firebaseUser.Uid,
                         //Providers = firebaseUser.Providers.ToList()
                     };
