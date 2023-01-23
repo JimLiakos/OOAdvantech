@@ -1495,7 +1495,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
                                     responseData = task.Result;
                                     responseData.ChannelUri = forwordRequest.ChannelUri;
-                                    if (request.RequestType != RequestType.Disconnect && logicalConnection == null)
+                                    if (request.RequestType != RequestType.Disconnect&&request.RequestType != RequestType.LagTest && logicalConnection == null)
                                         EnsureLogicalConnection(responseData, webSocket);
                                 }
                                 if (request.RequestType == RequestType.Disconnect)

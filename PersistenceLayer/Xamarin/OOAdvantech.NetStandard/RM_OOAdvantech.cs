@@ -13,7 +13,7 @@ namespace OOAdvantech.Remoting.Proxies
     using System;
     
     
-    public sealed class Pr_IServerSessionPart : OOAdvantech.Remoting.MarshalByRefObject, OOAdvantech.Remoting.IServerSessionPart, OOAdvantech.Remoting.RestApi.ITransparentProxy
+    public sealed class Pr_IServerSessionPart : OOAdvantech.Remoting.IServerSessionPart, OOAdvantech.Remoting.RestApi.ITransparentProxy
     {
         
         private OOAdvantech.Remoting.RestApi.Proxy Proxy;
@@ -176,7 +176,7 @@ namespace OOAdvantech.Remoting.RestApi.Proxies
     using System;
     
     
-    public sealed class Pr_IRemotingServer : OOAdvantech.Remoting.MarshalByRefObject, OOAdvantech.Remoting.RestApi.IRemotingServer, OOAdvantech.Remoting.RestApi.ITransparentProxy
+    public sealed class Pr_IRemotingServer : OOAdvantech.Remoting.RestApi.IRemotingServer, OOAdvantech.Remoting.RestApi.ITransparentProxy
     {
         
         private OOAdvantech.Remoting.RestApi.Proxy Proxy;
@@ -275,7 +275,7 @@ namespace OOAdvantech.Authentication.Proxies
     using System;
     
     
-    public sealed class Pr_IAuth : OOAdvantech.Remoting.MarshalByRefObject, OOAdvantech.Authentication.IAuth, OOAdvantech.Remoting.RestApi.ITransparentProxy
+    public sealed class Pr_IAuth : OOAdvantech.Authentication.IAuth, OOAdvantech.Remoting.RestApi.ITransparentProxy
     {
         
         private OOAdvantech.Remoting.RestApi.Proxy Proxy;
