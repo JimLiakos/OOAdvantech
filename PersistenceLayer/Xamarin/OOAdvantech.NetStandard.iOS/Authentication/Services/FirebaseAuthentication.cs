@@ -227,6 +227,19 @@ namespace OOAdvantech.Authentication.iOS
 
         internal static System.Threading.Tasks.Task<bool> GoogleSignIn()
         {
+
+            //https://developers.google.com/identity/sign-in/ios/start-integrating
+            //add GoogleService-Info.plist with build action BundleResource
+            //Add in info.plist
+            //<key>CFBundleURLTypes</key>
+            //<array>
+            //	<dict>
+            //		<key>CFBundleURLSchemes</key>
+            //		<array>
+            //			<string>com.googleusercontent.apps.XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
+            //		</array>
+            //	</dict>
+            //</array>
             GoogleCompletionSource = new System.Threading.Tasks.TaskCompletionSource<bool>();
             try
             {

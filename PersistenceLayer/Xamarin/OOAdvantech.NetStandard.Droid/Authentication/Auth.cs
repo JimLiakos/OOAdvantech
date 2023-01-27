@@ -124,9 +124,7 @@ namespace OOAdvantech.Authentication.Droid
                     var firebaseUser = FirebaseAuthentication.FirebaseAuth.CurrentUser;
                     string providerId = firebaseUser.ProviderData?.Where(x => x.ProviderId!="firebase").Select(x => x.ProviderId).FirstOrDefault();
                     if (providerId == null)
-                    {
                         providerId=firebaseUser.ProviderId;
-                    }
 
 
                     var currentUser = new OOAdvantech.Authentication.AuthUser()

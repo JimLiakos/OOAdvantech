@@ -50,11 +50,12 @@ namespace OOAdvantech.Authentication
     /// <MetaDataID>{179d71b7-2a40-4525-bd1d-cef724192522}</MetaDataID>
     public enum SignInProvider
     {
-        Google = 0,
-        Facebook = 1,
-        Twitter = 2,
-        Email = 3,
-        Apple= 4
+        None = 0,
+        Google = 1,
+        Facebook = 2,
+        Twitter = 3,
+        Email = 4,
+        Apple = 5
     }
     /// <MetaDataID>{e95f3c30-c154-43d9-9694-027c33114745}</MetaDataID>
     public class OOAdvantechAuth
