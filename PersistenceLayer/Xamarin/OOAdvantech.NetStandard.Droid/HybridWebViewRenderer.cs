@@ -17,6 +17,7 @@ using Android.Runtime;
 using Android.Net.Http;
 using Android.App;
 using Android.Content;
+using Android.Views;
 
 [assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
 namespace OOAdvantech.Droid
@@ -37,9 +38,34 @@ namespace OOAdvantech.Droid
 
         private void HybridWebViewRenderer_OnBackPressed()
         {
+
+
             try
             {
-                InvockeJSMethod("BackButtonPress", new object[] { });
+
+                IVisualElementRenderer parent = Parent as IVisualElementRenderer;
+
+
+                bool HostPageIsVisible = false;
+                var page = Xamarin.Forms.Application.Current.MainPage;
+                if (page is NavigationPage)
+                    page=(page as NavigationPage).CurrentPage;
+
+                while (parent!=null)
+                {
+                    if (parent.Element==page)
+                    {
+                        HostPageIsVisible=true;
+                        break;
+                    }
+                    parent=(parent as IViewParent)?.Parent as IVisualElementRenderer;
+                }
+
+
+
+
+                if (HostPageIsVisible)
+                    InvockeJSMethod("BackButtonPress", new object[] { });
             }
             catch (ObjectDisposedException e)
             {
