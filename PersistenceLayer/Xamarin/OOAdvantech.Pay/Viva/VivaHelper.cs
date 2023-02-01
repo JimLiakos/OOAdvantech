@@ -5,11 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static OOAdvantech.Pay.PaymentPage;
+using FlavourBusinessManager.PaymentProviders;
+using System.Numerics;
 
 namespace OOAdvantech.Pay.Viva
 {
     internal class VivaHelper
     {
+
         public static bool VivaResponseUrl(string url, IPayment payment, string server)
         {
             int queryStartPos = url.IndexOf("?");
@@ -28,6 +31,7 @@ namespace OOAdvantech.Pay.Viva
                         vivaEvent.MessageId= parameters.Get("eventId");
                         vivaEvent.Created = DateTime.UtcNow;
                         vivaEvent.EventData.OrderCode= long.Parse(parameters.Get("s"));
+                        string transactionId = parameters.Get("t");
                         vivaEvent.EventData.TransactionId=parameters.Get("t");
                         vivaEvent.EventData.ElectronicCommerceIndicator = parameters.Get("eci");
                         var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK", DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc };
@@ -40,8 +44,20 @@ namespace OOAdvantech.Pay.Viva
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("Content-Type", "application/json");
                         request.AddParameter("application/json", json, ParameterType.RequestBody);
-                        IRestResponse response = client.Execute(request);
-                        Console.WriteLine(response.Content);
+                        
+                        PaymentOrder paymentOrder =payment.GetPaymentOrder();
+                        if(string.IsNullOrWhiteSpace(paymentOrder.TransactionId)&&!string.IsNullOrWhiteSpace(transactionId))
+                            payment.SetPaymentOrder(paymentOrder);
+
+                        do
+                        {
+                            
+                            payment.CheckForPaymentComplete()
+
+                        } while (true);
+
+
+
 
 
                         return true;

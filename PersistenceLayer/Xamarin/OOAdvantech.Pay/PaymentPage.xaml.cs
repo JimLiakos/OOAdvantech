@@ -46,6 +46,7 @@ namespace OOAdvantech.Pay
 
             if (url.IndexOf("vivapayments.com/web/checkout/result") != -1)
             {
+                //https://demo.vivapayments.com/web2/success
                 if (VivaHelper.VivaResponseUrl(url, payment, Server))
                 {
                     PaySucceeded = true;
