@@ -13612,7 +13612,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70142"
 		    width      	300
-		    height     	8025
+		    height     	8055
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13651,7 +13651,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7013A"
 		    width      	300
-		    height     	8025
+		    height     	8055
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13696,7 +13696,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7012B"
 		    width      	618
-		    height     	8025
+		    height     	8055
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13734,7 +13734,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70128"
 		    width      	499
-		    height     	7925
+		    height     	7955
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13772,7 +13772,7 @@
 		    fill_color 	13434879
 		    quidu      	"5C121E330309"
 		    width      	662
-		    height     	8025
+		    height     	8055
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13870,7 +13870,7 @@
 		    ordinal    	3)
 		(object Destruction_Marker @229
 		    Parent_View 	@221
-		    location   	(2672, 8250)
+		    location   	(2672, 8280)
 		    line_color 	3342489
 		    fill_color 	13434879)
 		(object InterMessView "" @230

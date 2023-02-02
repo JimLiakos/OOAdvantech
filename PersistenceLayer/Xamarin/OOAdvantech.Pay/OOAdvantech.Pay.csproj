@@ -10,7 +10,7 @@
     <DefineConstants>$(DefineConstants)TRACE;DeviceDotNet</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\FlavourBusiness\FlavourBusinessManager\PaymentProviders\VivaIPaymentExtMethods.cs" Link="Viva\VivaIPaymentExtMethods.cs" />
+    <Compile Include="..\..\..\FlavourBusiness\PaymentProviders\VivaWallet\VivaIPaymentExtMethods.cs" Link="Viva\VivaIPaymentExtMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.2.0.564" />

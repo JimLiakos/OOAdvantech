@@ -176,7 +176,17 @@ namespace OOAdvantech.Remoting.RestApi
             string computingContextID = null;
             System.Runtime.Remoting.Proxies.RealProxy RealProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(marshalByRefObject);
             if (RealProxy == null)
-                return null;
+            {
+
+                string persistentUri = OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(marshalByRefObject)?.GetPersistentObjectUri(marshalByRefObject);
+#if !DeviceDotNet
+                if (RemotingServices.InternalEndPointResolver!=null)
+                    return ContextMessageDispatcher.Current.ContextID+";"+persistentUri;
+                else
+                    return persistentUri;
+#endif
+
+            }
 #if DeviceDotNet
             if (RealProxy is IProxy)
             {

@@ -14,7 +14,7 @@ namespace OOAdvantech.Remoting.RestApi
     public sealed class IsolatedContext : IDisposable
     {
 
-
+        public static string CurrentContextID;
         /// <MetaDataID>{31673c74-735b-4633-a21b-aafa1700f523}</MetaDataID>
         static Dictionary<string, IsolatedContext> IsoletedContexts = new Dictionary<string, IsolatedContext>();
 

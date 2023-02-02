@@ -5,9 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static OOAdvantech.Pay.PaymentPage;
-using FlavourBusinessManager.PaymentProviders;
+
 using System.Numerics;
 using System.Threading.Tasks;
+using PaymentProviders;
 
 namespace OOAdvantech.Pay.Viva
 {
