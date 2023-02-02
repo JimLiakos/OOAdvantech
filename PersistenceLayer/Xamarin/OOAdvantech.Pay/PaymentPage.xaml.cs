@@ -36,7 +36,7 @@ namespace OOAdvantech.Pay
             }
         }
 
-        private void PayWebView_Navigated(object sender, Web.NavigatedEventArgs e)
+        private async void PayWebView_Navigated(object sender, Web.NavigatedEventArgs e)
         {
             string url = e.Address;
 
@@ -47,7 +47,7 @@ namespace OOAdvantech.Pay
             if (url.IndexOf("vivapayments.com/web/checkout/result") != -1)
             {
                 //https://demo.vivapayments.com/web2/success
-                if (VivaHelper.VivaResponseUrl(url, payment, Server))
+                if (await VivaHelper.VivaResponseUrl(url, payment, Server))
                 {
                     PaySucceeded = true;
                     DeviceApplication.Current.OnBackPressed();

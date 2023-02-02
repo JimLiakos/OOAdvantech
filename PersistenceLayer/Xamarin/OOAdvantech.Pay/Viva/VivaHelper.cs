@@ -7,13 +7,14 @@ using System.Text;
 using static OOAdvantech.Pay.PaymentPage;
 using FlavourBusinessManager.PaymentProviders;
 using System.Numerics;
+using System.Threading.Tasks;
 
 namespace OOAdvantech.Pay.Viva
 {
     internal class VivaHelper
     {
 
-        public static bool VivaResponseUrl(string url, IPayment payment, string server)
+        public static async Task<bool> VivaResponseUrl(string url, IPayment payment, string server)
         {
             int queryStartPos = url.IndexOf("?");
             if (queryStartPos != -1)
@@ -24,48 +25,73 @@ namespace OOAdvantech.Pay.Viva
                     var parameters = System.Web.HttpUtility.ParseQueryString(query);
                     if (parameters.Get("t") != null)
                     {
-
-                        VivaEvent vivaEvent = new VivaEvent();
-                        vivaEvent.EventTypeId = 1796;//Transaction Payment Created
-                        vivaEvent.MessageTypeId = 512;//
-                        vivaEvent.MessageId= parameters.Get("eventId");
-                        vivaEvent.Created = DateTime.UtcNow;
-                        vivaEvent.EventData.OrderCode= long.Parse(parameters.Get("s"));
                         string transactionId = parameters.Get("t");
-                        vivaEvent.EventData.TransactionId=parameters.Get("t");
-                        vivaEvent.EventData.ElectronicCommerceIndicator = parameters.Get("eci");
-                        var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK", DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc };
-                        string json = OOAdvantech.Json.JsonConvert.SerializeObject(vivaEvent, jSetttings);
-
-                        var client = new RestClient($"https://meridiandevicesserver.azurewebsites.net/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
-                        //var client = new RestClient($"http://{server}:8090/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
-                        //var client = new RestClient($"http://{server}/DevicesServer/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
-                        client.Timeout = -1;
-                        var request = new RestRequest(Method.POST);
-                        request.AddHeader("Content-Type", "application/json");
-                        request.AddParameter("application/json", json, ParameterType.RequestBody);
+                        //VivaEvent vivaEvent = new VivaEvent();
+                        //vivaEvent.EventTypeId = 1796;//Transaction Payment Created
+                        //vivaEvent.MessageTypeId = 512;//
+                        //vivaEvent.MessageId= parameters.Get("eventId");
+                        //vivaEvent.Created = DateTime.UtcNow;
+                        //vivaEvent.EventData.OrderCode= long.Parse(parameters.Get("s"));
                         
-                        PaymentOrder paymentOrder =payment.GetPaymentOrder();
-                        if(string.IsNullOrWhiteSpace(paymentOrder.TransactionId)&&!string.IsNullOrWhiteSpace(transactionId))
-                            payment.SetPaymentOrder(paymentOrder);
+                        //vivaEvent.EventData.TransactionId=parameters.Get("t");
+                        //vivaEvent.EventData.ElectronicCommerceIndicator = parameters.Get("eci");
+                        //var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK", DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc };
+                        //string json = OOAdvantech.Json.JsonConvert.SerializeObject(vivaEvent, jSetttings);
 
-                        do
+                        //var client = new RestClient($"https://meridiandevicesserver.azurewebsites.net/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                        ////var client = new RestClient($"http://{server}:8090/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                        ////var client = new RestClient($"http://{server}/DevicesServer/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                        //client.Timeout = -1;
+                        //var request = new RestRequest(Method.POST);
+                        //request.AddHeader("Content-Type", "application/json");
+                        //request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+                        int tries = 30;
+                        while (tries > 0)
                         {
-                            
-                            payment.CheckForPaymentComplete()
-
-                        } while (true);
-
-
-
-
-
-                        return true;
-
+                            try
+                            {
+                                PaymentOrder paymentOrder = payment.GetPaymentOrder();
+                                if (string.IsNullOrWhiteSpace(paymentOrder.TransactionId)&&!string.IsNullOrWhiteSpace(transactionId))
+                                {
+                                    paymentOrder.TransactionId=transactionId;
+                                    payment.SetPaymentOrder(paymentOrder);
+                                }
+                                if (payment.CheckForPaymentComplete())
+                                    return true;
+                                else
+                                {
+                                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                                }
+                            }
+                            catch (System.Net.WebException commError)
+                            {
+                                await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                            }
+                            catch(Exception commError)
+                            {
+                                await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                            }
+                            tries--;
+                        }
+                        return false;
                     }
                 }
+                return false;
             }
             return false;
+        }
+        public static OOAdvantech.SerializeTaskScheduler SerializeTaskScheduler
+        {
+            get
+            {
+#if DeviceDotNet
+                return (Xamarin.Forms.Application.Current as IAppLifeTime).SerializeTaskScheduler;
+#else
+                return (System.Windows.Application.Current as IAppLifeTime).SerializeTaskScheduler;
+
+#endif
+            }
         }
     }
 

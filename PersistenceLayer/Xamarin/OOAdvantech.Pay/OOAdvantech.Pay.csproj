@@ -3,6 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <UserSecretsId>7e9f12cc-f71c-40cf-ba85-b4beb0cad6a9</UserSecretsId>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;DeviceDotNet</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;DeviceDotNet</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\..\FlavourBusiness\FlavourBusinessManager\PaymentProviders\VivaIPaymentExtMethods.cs" Link="Viva\VivaIPaymentExtMethods.cs" />
   </ItemGroup>
