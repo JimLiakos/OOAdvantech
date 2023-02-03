@@ -180,7 +180,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                 string persistentUri = OOAdvantech.PersistenceLayer.ObjectStorage.GetStorageOfObject(marshalByRefObject)?.GetPersistentObjectUri(marshalByRefObject);
 #if !DeviceDotNet
-                if (RemotingServices.InternalEndPointResolver!=null)
+                if (ContextMessageDispatcher.Current != null)
                     return ContextMessageDispatcher.Current.ContextID+";"+persistentUri;
                 else
                     return persistentUri;
@@ -304,6 +304,11 @@ namespace OOAdvantech.Remoting.RestApi
                 if (parts.Length == 2)
                 {
                     string computingContextID = parts[0];
+#if !DeviceDotNet
+                    if (ContextMessageDispatcher.Current != null&&ContextMessageDispatcher.Current.ContextID?.ToLower()==computingContextID?.ToLower())
+                        return OOAdvantech.PersistenceLayer.ObjectStorage.GetObjectFromUri(parts[1]);
+#endif
+
                     string objectUri = parts[1];
                     string channelUri = string.Format("{0}({1})", serverUrl, computingContextID);
                     var roleObject = RemotingServices.GetPersistentObject(channelUri, objectUri);

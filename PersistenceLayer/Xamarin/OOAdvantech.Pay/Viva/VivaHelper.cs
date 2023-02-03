@@ -62,7 +62,7 @@ namespace OOAdvantech.Pay.Viva
                                 {
 
                                 }
-                                if (payment.CheckForPaymentComplete())
+                                if (payment.IsCompleted())
                                     return true;
                                 else
                                 {
