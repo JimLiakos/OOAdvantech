@@ -58,6 +58,10 @@ namespace OOAdvantech.Pay.Viva
                                     paymentOrder.TransactionId=transactionId;
                                     payment.SetPaymentOrder(paymentOrder);
                                 }
+                                else
+                                {
+
+                                }
                                 if (payment.CheckForPaymentComplete())
                                     return true;
                                 else

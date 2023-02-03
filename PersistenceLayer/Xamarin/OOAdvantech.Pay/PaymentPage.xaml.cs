@@ -20,7 +20,18 @@ namespace OOAdvantech.Pay
             InitializeComponent();
             this.BindingContext = new PaymentPageViewModel();
         }
-        public bool PaySucceeded;
+        bool _PaySucceeded;
+        public async Task<bool> IsPaySucceeded()
+        {
+            
+            {
+                var responseTask = ResponseTask;
+                if (responseTask != null)
+                    await responseTask;
+
+                return _PaySucceeded;
+            }
+        }
         IPayment Payment;
         internal void LoadPayment(IPayment payment)
         {
@@ -35,23 +46,44 @@ namespace OOAdvantech.Pay
                 this.PayWebView.Navigated += PayWebView_Navigated;
             }
         }
+        object ResponseLock = new object();
+        Task<bool> _ResponseTask;
+
+        public Task<bool> ResponseTask
+        {
+            get
+            {
+                lock (ResponseLock) { return _ResponseTask; }
+            }
+        }
+
 
         private async void PayWebView_Navigated(object sender, Web.NavigatedEventArgs e)
         {
             string url = e.Address;
-
             var payment = Payment;
-
             // url="https://demo.vivapayments.com/web/checkout/result?t=051e0d67-d54e-4f7c-8bad-23180a41757b&s=3288397036572604&lang=en-GB&eventId=0&eci=1";
-
             if (url.IndexOf("vivapayments.com/web/checkout/result") != -1)
             {
                 //https://demo.vivapayments.com/web2/success
-                if (await VivaHelper.VivaResponseUrl(url, payment, Server))
+
+                lock (ResponseLock)
+                    _ResponseTask = VivaHelper.VivaResponseUrl(url, payment, Server);
+                if (await _ResponseTask)
                 {
-                    PaySucceeded = true;
+                    lock (ResponseLock)
+                    {
+                        _ResponseTask = null;
+                        _PaySucceeded = true;
+                    }
                     DeviceApplication.Current.OnBackPressed();
                 }
+                lock (ResponseLock)
+                {
+                    _ResponseTask = null;
+                    _PaySucceeded = true;
+                }
+
             }
         }
 
@@ -67,15 +99,8 @@ namespace OOAdvantech.Pay
         TaskCompletionSource<bool> PayServiceTask;
         public Task<bool> Pay(FinanceFacade.IPayment payment, string server, bool hasNavigationBar = true)
         {
-
             if (string.IsNullOrWhiteSpace(payment?.PaymentProviderJson))
                 return Task<bool>.FromResult(false);
-
-            //string url = "https://demo.vivapayments.com/web/checkout/result?t=873170f9-0b87-4124-86e8-0def66ac12ef&s=7138070025172605&lang=en-GB&eventId=0&eci=1";
-            //if (VivaHelper.VivaResponseUrl(url, payment, server))
-            //{
-            //}
-            //return Task<bool>.FromResult(true);
 
             if (!(Xamarin.Forms.Application.Current.MainPage is NavigationPage))
             {
@@ -83,10 +108,8 @@ namespace OOAdvantech.Pay
             }
             lock (this)
             {
-
                 if (OnPay && PayServiceTask != null)
                     return PayServiceTask.Task;
-
                 OnPay = true;
                 Payment = payment;
                 PayServiceTask = new TaskCompletionSource<bool>();
@@ -101,8 +124,6 @@ namespace OOAdvantech.Pay
                 (Xamarin.Forms.Application.Current.MainPage as NavigationPage).Popped += NavigationBack;
                 await (Xamarin.Forms.Application.Current.MainPage as NavigationPage).CurrentPage.Navigation.PushAsync(PaymentPage);
             });
-
-
             return PayServiceTask.Task;
 
 
@@ -113,13 +134,13 @@ namespace OOAdvantech.Pay
             BackPressed();
         }
 
-        private void BackPressed()
+        private async void BackPressed()
         {
             (Xamarin.Forms.Application.Current.MainPage as NavigationPage).Popped -= NavigationBack;
             OnPay = false;
 
             if (this.PayServiceTask != null)
-                this.PayServiceTask.SetResult(PaymentPage.PaySucceeded);
+                this.PayServiceTask.SetResult(await PaymentPage.IsPaySucceeded());
             DeviceApplication.Current.BackPressed -= BackPressed;
 
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
@@ -134,8 +155,6 @@ namespace OOAdvantech.Pay
         public PaymentService()
         {
             OnPay = false;
-
-
         }
     }
 
