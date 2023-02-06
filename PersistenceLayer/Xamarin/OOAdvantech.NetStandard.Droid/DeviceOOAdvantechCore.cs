@@ -81,9 +81,9 @@ namespace OOAdvantech.Droid
         
 
         
-        public static void BackPressed()
+        public static void BackPressed(BackPressedArgs eventArgs)
         {
-            OOAdvantech.DeviceApplication.Current.OnBackPressed();
+            OOAdvantech.DeviceApplication.Current.OnBackPressed(eventArgs);
             HybridWebViewRenderer.BackPressed();
         }
 

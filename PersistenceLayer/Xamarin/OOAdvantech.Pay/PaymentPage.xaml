@@ -6,7 +6,7 @@
     <!--xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"-->
     <ContentPage.Content>
         <Grid>
-            <OOAdvantechWeb:HybridWebView x:Name="PayWebView">
+            <OOAdvantechWeb:HybridWebView x:Name="PayWebView" x:FieldModifier="public">
                 
             </OOAdvantechWeb:HybridWebView>
         </Grid>

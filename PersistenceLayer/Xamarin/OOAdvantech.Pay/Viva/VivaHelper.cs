@@ -15,76 +15,84 @@ namespace OOAdvantech.Pay.Viva
     internal class VivaHelper
     {
 
-        public static async Task<bool> VivaResponseUrl(string url, IPayment payment, string server)
+        public static string GetPaymentGatewayUrl(IPayment payment)
         {
-            int queryStartPos = url.IndexOf("?");
-            if (queryStartPos != -1)
+            return payment.GetPaymentOrder()?.PaymentOrderUrl;
+        }
+
+        public static Task<bool> VivaResponseUrl(string url, IPayment payment, string server)
+        {
+            return Task<bool>.Run(async () =>
             {
-                string query = url.Substring(queryStartPos + 1);
-                if (!string.IsNullOrWhiteSpace(query))
+                int queryStartPos = url.IndexOf("?");
+                if (queryStartPos != -1)
                 {
-                    var parameters = System.Web.HttpUtility.ParseQueryString(query);
-                    if (parameters.Get("t") != null)
+                    string query = url.Substring(queryStartPos + 1);
+                    if (!string.IsNullOrWhiteSpace(query))
                     {
-                        string transactionId = parameters.Get("t");
-                        //VivaEvent vivaEvent = new VivaEvent();
-                        //vivaEvent.EventTypeId = 1796;//Transaction Payment Created
-                        //vivaEvent.MessageTypeId = 512;//
-                        //vivaEvent.MessageId= parameters.Get("eventId");
-                        //vivaEvent.Created = DateTime.UtcNow;
-                        //vivaEvent.EventData.OrderCode= long.Parse(parameters.Get("s"));
-                        
-                        //vivaEvent.EventData.TransactionId=parameters.Get("t");
-                        //vivaEvent.EventData.ElectronicCommerceIndicator = parameters.Get("eci");
-                        //var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK", DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc };
-                        //string json = OOAdvantech.Json.JsonConvert.SerializeObject(vivaEvent, jSetttings);
-
-                        //var client = new RestClient($"https://meridiandevicesserver.azurewebsites.net/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
-                        ////var client = new RestClient($"http://{server}:8090/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
-                        ////var client = new RestClient($"http://{server}/DevicesServer/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
-                        //client.Timeout = -1;
-                        //var request = new RestRequest(Method.POST);
-                        //request.AddHeader("Content-Type", "application/json");
-                        //request.AddParameter("application/json", json, ParameterType.RequestBody);
-
-                        int tries = 30;
-                        while (tries > 0)
+                        var parameters = System.Web.HttpUtility.ParseQueryString(query);
+                        if (parameters.Get("t") != null)
                         {
-                            try
-                            {
-                                PaymentOrder paymentOrder = payment.GetPaymentOrder();
-                                if (string.IsNullOrWhiteSpace(paymentOrder.TransactionId)&&!string.IsNullOrWhiteSpace(transactionId))
-                                {
-                                    paymentOrder.TransactionId=transactionId;
-                                    payment.SetPaymentOrder(paymentOrder);
-                                }
-                                else
-                                {
+                            string transactionId = parameters.Get("t");
+                            //VivaEvent vivaEvent = new VivaEvent();
+                            //vivaEvent.EventTypeId = 1796;//Transaction Payment Created
+                            //vivaEvent.MessageTypeId = 512;//
+                            //vivaEvent.MessageId= parameters.Get("eventId");
+                            //vivaEvent.Created = DateTime.UtcNow;
+                            //vivaEvent.EventData.OrderCode= long.Parse(parameters.Get("s"));
 
+                            //vivaEvent.EventData.TransactionId=parameters.Get("t");
+                            //vivaEvent.EventData.ElectronicCommerceIndicator = parameters.Get("eci");
+                            //var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK", DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc };
+                            //string json = OOAdvantech.Json.JsonConvert.SerializeObject(vivaEvent, jSetttings);
+
+                            //var client = new RestClient($"https://meridiandevicesserver.azurewebsites.net/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                            ////var client = new RestClient($"http://{server}:8090/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                            ////var client = new RestClient($"http://{server}/DevicesServer/api/WebHook/VivaPayment/7f9bde62e6da45dc8c5661ee2220a7b0");
+                            //client.Timeout = -1;
+                            //var request = new RestRequest(Method.POST);
+                            //request.AddHeader("Content-Type", "application/json");
+                            //request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+                            int tries = 30;
+                            while (tries > 0)
+                            {
+                                try
+                                {
+                                    PaymentOrder paymentOrder = payment.GetPaymentOrder();
+                                    if (string.IsNullOrWhiteSpace(paymentOrder.TransactionId)&&!string.IsNullOrWhiteSpace(transactionId))
+                                    {
+                                        paymentOrder.TransactionId=transactionId;
+                                        payment.SetPaymentOrder(paymentOrder);
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                    if (payment.IsCompleted())
+                                        return true;
+                                    else
+                                    {
+                                        await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                                    }
                                 }
-                                if (payment.IsCompleted())
-                                    return true;
-                                else
+                                catch (System.Net.WebException commError)
                                 {
                                     await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
                                 }
+                                catch (Exception commError)
+                                {
+                                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                                }
+                                tries--;
                             }
-                            catch (System.Net.WebException commError)
-                            {
-                                await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
-                            }
-                            catch(Exception commError)
-                            {
-                                await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
-                            }
-                            tries--;
+                            return false;
                         }
-                        return false;
                     }
+                    return false;
                 }
                 return false;
-            }
-            return false;
+            });
         }
         public static OOAdvantech.SerializeTaskScheduler SerializeTaskScheduler
         {
