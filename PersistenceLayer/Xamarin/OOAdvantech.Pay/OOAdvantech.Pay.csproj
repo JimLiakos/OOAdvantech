@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.2.0.564" />
     <PackageReference Include="RestSharp" Version="106.15.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FlavourBusiness\DontWaitAppNS\FinanceFacade\FinanceFacade.csproj" />

@@ -231,7 +231,7 @@ namespace OOAdvantech.Droid
             notificationIntent.PutExtra(State.ServiceStartedKey, true);
 
 
-            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent|PendingIntentFlags.Immutable);
             return pendingIntent;
         }
 
@@ -247,7 +247,7 @@ namespace OOAdvantech.Droid
 
             var stopServiceIntent = new Intent(this, GetType());
             stopServiceIntent.SetAction(serviceState.StopActionID);
-            var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);
+            var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, PendingIntentFlags.Immutable);
 
             var builder = new NotificationCompat.Action.Builder(serviceState.StopServiceCommandIcon,
                                                         serviceState.StopServiceCommandTitle,
