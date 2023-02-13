@@ -8,6 +8,7 @@ using OOAdvantech.Json.Linq;
 using System.Runtime.Remoting.Messaging;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using System.Collections.Generic;
+using System.Linq;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -654,6 +655,18 @@ namespace OOAdvantech.Remoting.RestApi
                     catch (Exception error)
                     {
                     }
+                    if(TypeScriptProxy!=null)
+                    {
+                        
+
+                        if (this.EventConsumingResolver.EventsInvocationLists!=null)
+                        {
+                            EventInfo eventInfo = this.EventConsumingResolver.EventsInvocationLists.Where(x => x.Key.EventHandlerType==typeof(OOAdvantech.ObjectChangeStateHandle)).Select(x => x.Key).FirstOrDefault();
+                            if (eventInfo!=null)
+                                EventConsumingResolver.PublishEvent(eventInfo, new List<object>() {GetTransparentProxy(), null });
+
+                        }
+                    }
                 }
                 return message;
             }
@@ -1011,11 +1024,11 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 
-        /// <MetaDataID>{3e47e9ab-82cb-4baf-9692-480a815f5b67}</MetaDataID>
-        public void PublishEvent(EventInfo eventInfo, System.Collections.Generic.List<object> args)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <MetaDataID>{3e47e9ab-82cb-4baf-9692-480a815f5b67}</MetaDataID>
+        //public void PublishEvent(EventInfo eventInfo, System.Collections.Generic.List<object> args)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 #if DeviceDotNet
         public object GetTransparentProxy()

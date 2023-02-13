@@ -49,6 +49,8 @@ namespace OOAdvantech.Pay
         TaskCompletionSource<bool> PayServiceTask;
         public Task<bool> Pay(FinanceFacade.IPayment payment, string server, bool hasNavigationBar = true)
         {
+            if (payment?.State==PaymentState.Completed)
+                return Task<bool>.FromResult(true);
             if (string.IsNullOrWhiteSpace(payment?.PaymentProviderJson))
                 return Task<bool>.FromResult(false);
 
