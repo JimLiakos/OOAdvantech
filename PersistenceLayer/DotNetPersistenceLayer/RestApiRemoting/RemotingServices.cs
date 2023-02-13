@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using System.Runtime.Remoting.Messaging;
+using System.Reflection;
 #if DeviceDotNet
 using Xamarin.Forms;
 #endif
@@ -272,6 +273,15 @@ namespace OOAdvantech.Remoting.RestApi
                 return remotingServices.RefreshCacheData(obj);
             }
 
+            if ((RealProxy as Proxy).TypeScriptProxy!=null)
+            {
+                if ((RealProxy as Proxy).EventConsumingResolver.EventsInvocationLists!=null)
+                {
+                    EventInfo eventInfo = (RealProxy as Proxy).EventConsumingResolver.EventsInvocationLists.Where(x => x.Key.EventHandlerType==typeof(OOAdvantech.ObjectChangeStateHandle)).Select(x => x.Key).FirstOrDefault();
+                    if (eventInfo!=null)
+                        (RealProxy as Proxy).EventConsumingResolver.PublishEvent(eventInfo, new List<object>() { (RealProxy as Proxy).GetTransparentProxy(), null });
+                }
+            }
             return obj;
         }
 

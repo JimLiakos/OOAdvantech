@@ -650,23 +650,12 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     try
                     {
-                        RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
+                    OOAdvantech.Remoting.RestApi.RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
                     }
                     catch (Exception error)
                     {
                     }
-                    if(TypeScriptProxy!=null)
-                    {
-                        
-
-                        if (this.EventConsumingResolver.EventsInvocationLists!=null)
-                        {
-                            EventInfo eventInfo = this.EventConsumingResolver.EventsInvocationLists.Where(x => x.Key.EventHandlerType==typeof(OOAdvantech.ObjectChangeStateHandle)).Select(x => x.Key).FirstOrDefault();
-                            if (eventInfo!=null)
-                                EventConsumingResolver.PublishEvent(eventInfo, new List<object>() {GetTransparentProxy(), null });
-
-                        }
-                    }
+                    
                 }
                 return message;
             }

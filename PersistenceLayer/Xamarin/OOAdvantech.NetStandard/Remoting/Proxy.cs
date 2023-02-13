@@ -61,7 +61,7 @@ namespace OOAdvantech.Remoting
             RemotingServices = remotingServices;
         }
         /// <MetaDataID>{96e428c2-cfd9-4a31-84ac-16e3b52804b9}</MetaDataID>
-        System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming> EventsInvocationLists = null;
+        internal System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming> EventsInvocationLists = null;
 
         /// <MetaDataID>{def51759-90a7-4b0a-92bc-a3c02395f933}</MetaDataID>
         public void PublishEvent(System.Reflection.EventInfo eventInfo, System.Collections.Generic.List<object> args)
