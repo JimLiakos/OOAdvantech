@@ -387,7 +387,8 @@ namespace OOAdvantech.Remoting.RestApi
                     if (ObjectRef.InvalidMembersValues)
                     {
                         var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
-                        remotingServices.RefreshCacheData(GetTransparentProxy() as MarshalByRefObject);
+                        var _object = GetTransparentProxy(Type);
+                        remotingServices.RefreshCacheData(_object  as MarshalByRefObject);
                         ObjectRef.InvalidMembersValues=false;
                         ObjectRef.MembersValues.TryGetValue(propertyName, out value);
                     }

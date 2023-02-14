@@ -89,11 +89,21 @@ namespace OOAdvantech.Web
         public virtual void GoBack()
         {
             NativeWebBrowser.GoBack();
+
         }
         public virtual void RefreshPage()
         {
             NativeWebBrowser.RefreshPage();
         }
+
+        public bool CanGoBack
+        {
+            get
+            {
+                return NativeWebBrowser.CanGoBack;
+            }
+        }
+
     }
 
 
@@ -110,6 +120,8 @@ namespace OOAdvantech.Web
 
 
         string Url { get; }
+
+        bool CanGoBack { get; }
 
     }
 

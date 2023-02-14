@@ -133,7 +133,8 @@ namespace OOAdvantech.Pay
                         _ResponseTask = null;
                         _PaySucceeded = true;
                     }
-                    DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
+                   await Close();
+                    //DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
                 }
                 else if (paymentState==PaymentActionState.Canceled)
                 {
@@ -142,7 +143,8 @@ namespace OOAdvantech.Pay
                         _ResponseTask = null;
                         _PaySucceeded = false;
                     }
-                    DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
+                   await Close();
+                    //DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
                 }
                 else
                 {
@@ -196,25 +198,35 @@ namespace OOAdvantech.Pay
 
         private async void BackPressed(BackPressedArgs eventArgs)
         {
+            
 
             if (!SuspendGoBackEvent)
             {
-                eventArgs.Handled=true;
-                (Xamarin.Forms.Application.Current.MainPage as NavigationPage).Popped -= NavigationBack;
-                OnPay = false;
-
-                if (this.PayServiceTask != null)
-                    this.PayServiceTask.SetResult(await IsPaySucceeded());
-                DeviceApplication.Current.BackPressed -= BackPressed;
-
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                if (this.PaymentPage.PayWebView.CanGoBack)
+                    this.PaymentPage.PayWebView.GoBack();
+                else
                 {
-                    await (Xamarin.Forms.Application.Current.MainPage as NavigationPage).CurrentPage.Navigation.PopAsync();
-                    PaymentPage = null;
-                });
+
+                    eventArgs.Handled=true;
+                    await Close();
+                }
             }
 
 
+        }
+
+        private async Task Close()
+        {
+            (Xamarin.Forms.Application.Current.MainPage as NavigationPage).Popped -= NavigationBack;
+            OnPay = false;
+            if (this.PayServiceTask != null)
+                this.PayServiceTask.SetResult(await IsPaySucceeded());
+            DeviceApplication.Current.BackPressed -= BackPressed;
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+            {
+                await (Xamarin.Forms.Application.Current.MainPage as NavigationPage).CurrentPage.Navigation.PopAsync();
+                PaymentPage = null;
+            });
         }
 
         public PaymentService()
