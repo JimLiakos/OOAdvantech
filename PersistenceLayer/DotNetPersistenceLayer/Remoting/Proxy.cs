@@ -901,6 +901,11 @@ namespace OOAdvantech.Remoting
         {
             throw new NotImplementedException();
         }
+
+        public void InvalidateCachedData()
+        {
+            
+        }
     }
 
 
@@ -1279,6 +1284,7 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{6c477cf5-e0f2-4c79-b313-2a5e318e6e68}</MetaDataID>
         IMessage Invoke(IMessage msg);
 
+        void InvalidateCachedData();
 
 
     }

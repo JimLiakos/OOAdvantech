@@ -153,6 +153,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{7d7d326b-5a70-4394-8f10-5f6f6b06ae43}</MetaDataID>
         [JsonProperty(Order = 6)]
         public Dictionary<string, object> MembersValues = new Dictionary<string, object>();
+
+        public bool InvalidMembersValues = false;
     }
 
     /// <MetaDataID>{df5548b8-f2c3-4228-9d1f-f0b238c9fcff}</MetaDataID>
@@ -241,7 +243,7 @@ namespace OOAdvantech.Remoting.RestApi
     public class RequestData : TransportData
     {
 
-     
+
 
         [DataMember]
         public string RequestProcess { get; set; } = MessageDispatcher.ProcessName;
@@ -257,7 +259,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// </summary>
         [DataMember]
         public string PhysicalConnectionID { get; set; }
-        
+
 
 
         /// <MetaDataID>{8dcafe1d-afcf-43f3-90c3-5a4e39a90391}</MetaDataID>
@@ -343,7 +345,7 @@ namespace OOAdvantech.Remoting.RestApi
         [DataMember]
         public bool DirectConnect;
 
-        
+
         public bool InitCommunicationSession { get; internal set; }
 
         [DataMember]
@@ -360,6 +362,6 @@ namespace OOAdvantech.Remoting.RestApi
         Event = 1,
         ConnectionInfo = 2,
         Disconnect = 3,
-        LagTest=4
+        LagTest = 4
     }
 }

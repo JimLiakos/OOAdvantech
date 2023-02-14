@@ -31,6 +31,8 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{7de248c7-74a5-4fd0-8d45-1c98e415a8fd}</MetaDataID>
         EventConsumingResolver EventConsumingResolver { get; set; }
 
+        void InvalidateCachedData();
+
 
         ///// <MetaDataID>{c89837de-4066-4a8d-b244-afc8bd0f41ef}</MetaDataID>
         //void PublishEvent(EventInfo eventInfo, System.Collections.Generic.List<object> args);

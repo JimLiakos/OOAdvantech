@@ -9,6 +9,7 @@ using System.Runtime.Remoting.Messaging;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Proxies;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -383,6 +384,14 @@ namespace OOAdvantech.Remoting.RestApi
                 object value = null;
                 if (propInfo != null && ObjectRef.MembersValues != null && ObjectRef.MembersValues.TryGetValue(propertyName, out value))
                 {
+                    if (ObjectRef.InvalidMembersValues)
+                    {
+                        var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
+                        remotingServices.RefreshCacheData(GetTransparentProxy() as MarshalByRefObject);
+                        ObjectRef.InvalidMembersValues=false;
+                        ObjectRef.MembersValues.TryGetValue(propertyName, out value);
+                    }
+
                     outArgs = new object[0];
 
                     if (value != null && !propInfo.PropertyType.IsInstanceOfType(value))
@@ -1112,6 +1121,12 @@ namespace OOAdvantech.Remoting.RestApi
         public IProxy GetProxy()
         {
             return this;
+        }
+
+        public void InvalidateCachedData()
+        {
+            
+            ObjectRef.InvalidMembersValues=true;
         }
 
         //IMessage IProxy.Invoke(IMessage msg)

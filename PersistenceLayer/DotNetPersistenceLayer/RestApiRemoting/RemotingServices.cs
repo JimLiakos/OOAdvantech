@@ -261,6 +261,16 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 
+        public static void InvalidateCacheData(MarshalByRefObject obj)
+        {
+
+            System.Runtime.Remoting.Proxies.RealProxy RealProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(obj);
+            if (RealProxy == null)
+                return;
+            if (RealProxy is IProxy)
+                (RealProxy as IProxy).InvalidateCachedData();
+
+        }
         public static MarshalByRefObject RefreshCacheData(MarshalByRefObject obj)
         {
 
