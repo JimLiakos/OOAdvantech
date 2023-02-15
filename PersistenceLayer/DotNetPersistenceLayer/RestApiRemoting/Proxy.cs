@@ -966,7 +966,7 @@ namespace OOAdvantech.Remoting.RestApi
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                     throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
                 else
-                    throw new Exception(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace);
+                    throw new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
 
             }
 
