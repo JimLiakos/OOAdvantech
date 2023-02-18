@@ -15,7 +15,9 @@ using AndroidX.Core.App;
 using Java.Lang;
 using Java.Sql;
 using Xamarin.Essentials;
+using static Android.Icu.Text.CaseMap;
 //using Exception = System.Exception;
+using AndroidApp = Android.App.Application;
 
 namespace OOAdvantech.Droid
 {
@@ -30,7 +32,8 @@ namespace OOAdvantech.Droid
     {
         static readonly string TAG = typeof(ForegroundService).FullName;
 
-
+        public const string TitleKey = "title";
+        public const string MessageKey = "message";
 
         public static bool isStarted;
         Handler handler;
@@ -224,14 +227,21 @@ namespace OOAdvantech.Droid
         /// <returns>The content intent.</returns>
         PendingIntent BuildIntentToShowMainActivity()
         {
+            Intent intent = new Intent(AndroidApp.Context, Xamarin.Essentials.Platform.CurrentActivity.GetType());
+            intent.PutExtra(TitleKey, "title");
+            intent.PutExtra(MessageKey, "message");
+            intent.PutExtra(State.ServiceStartedKey, true);
 
-            var notificationIntent = new Intent(this, Xamarin.Essentials.Platform.CurrentActivity.GetType());
-            notificationIntent.SetAction(State.ActionsMainActivity);// Constants.ACTION_MAIN_ACTIVITY);
-            notificationIntent.SetFlags(ActivityFlags.SingleTop | ActivityFlags.ClearTask);
-            notificationIntent.PutExtra(State.ServiceStartedKey, true);
+            PendingIntent pendingIntent = PendingIntent.GetActivity(AndroidApp.Context, 0, intent, PendingIntentFlags.UpdateCurrent|PendingIntentFlags.Immutable);
 
 
-            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            //var notificationIntent = new Intent(this, Xamarin.Essentials.Platform.CurrentActivity.GetType());
+            //notificationIntent.SetAction(State.ActionsMainActivity);// Constants.ACTION_MAIN_ACTIVITY);
+            //notificationIntent.SetFlags(ActivityFlags.SingleTop | ActivityFlags.ClearTask);
+            //notificationIntent.PutExtra(State.ServiceStartedKey, true);
+
+
+            //var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent|PendingIntentFlags.Immutable);
             return pendingIntent;
         }
 
