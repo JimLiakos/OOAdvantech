@@ -337,6 +337,15 @@ namespace OOAdvantech.iOS
             Control?.ReloadFromOrigin();
 
         }
+
+        public bool CanGoBack
+        {
+            get
+            {
+                return Control?.CanGoBack==true;
+            }
+        }
+
         public void GoBack()
         {
             if (Control != null)

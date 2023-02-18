@@ -171,7 +171,13 @@ namespace OOAdvantech.Droid
                 callback.SetTaskException(error);
             }
         }
-
+        public bool CanGoBack
+        {
+            get
+            {
+                return Control?.CanGoBack()==true;
+            }
+        }
         public void GoBack()
         {
             if (Control != null)

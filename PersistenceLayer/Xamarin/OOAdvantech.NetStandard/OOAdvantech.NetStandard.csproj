@@ -9,6 +9,7 @@
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>OOAdvantech</AssemblyName>
+    <UserSecretsId>5f8486e7-5a47-48a2-8be1-12b36b495585</UserSecretsId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;OOAdvantech; DeviceDotNet; NetStandard</DefineConstants>
@@ -213,8 +214,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Net.WebSockets.Client" Version="4.3.2" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
   </ItemGroup>

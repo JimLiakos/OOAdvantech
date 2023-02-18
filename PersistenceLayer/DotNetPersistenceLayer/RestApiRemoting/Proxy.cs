@@ -8,6 +8,8 @@ using OOAdvantech.Json.Linq;
 using System.Runtime.Remoting.Messaging;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Proxies;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -382,6 +384,15 @@ namespace OOAdvantech.Remoting.RestApi
                 object value = null;
                 if (propInfo != null && ObjectRef.MembersValues != null && ObjectRef.MembersValues.TryGetValue(propertyName, out value))
                 {
+                    if (ObjectRef.InvalidMembersValues)
+                    {
+                        var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
+                        var _object = GetTransparentProxy(Type);
+                        remotingServices.RefreshCacheData(_object  as MarshalByRefObject);
+                        ObjectRef.InvalidMembersValues=false;
+                        ObjectRef.MembersValues.TryGetValue(propertyName, out value);
+                    }
+
                     outArgs = new object[0];
 
                     if (value != null && !propInfo.PropertyType.IsInstanceOfType(value))
@@ -649,11 +660,12 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     try
                     {
-                        RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
+                    OOAdvantech.Remoting.RestApi.RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
                     }
                     catch (Exception error)
                     {
                     }
+                    
                 }
                 return message;
             }
@@ -954,7 +966,7 @@ namespace OOAdvantech.Remoting.RestApi
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                     throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
                 else
-                    throw new Exception(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace);
+                    throw new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
 
             }
 
@@ -1011,11 +1023,11 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 
-        /// <MetaDataID>{3e47e9ab-82cb-4baf-9692-480a815f5b67}</MetaDataID>
-        public void PublishEvent(EventInfo eventInfo, System.Collections.Generic.List<object> args)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <MetaDataID>{3e47e9ab-82cb-4baf-9692-480a815f5b67}</MetaDataID>
+        //public void PublishEvent(EventInfo eventInfo, System.Collections.Generic.List<object> args)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 #if DeviceDotNet
         public object GetTransparentProxy()
@@ -1110,6 +1122,12 @@ namespace OOAdvantech.Remoting.RestApi
         public IProxy GetProxy()
         {
             return this;
+        }
+
+        public void InvalidateCachedData()
+        {
+            
+            ObjectRef.InvalidMembersValues=true;
         }
 
         //IMessage IProxy.Invoke(IMessage msg)

@@ -1,5 +1,5 @@
 ﻿using FinanceFacade;
-using OOAdvantech.Pay.Viva;
+//using OOAdvantech.Pay.Viva;
 using OOAdvantech.Web;
 using System;
 using System.Collections.Generic;
@@ -49,6 +49,8 @@ namespace OOAdvantech.Pay
         TaskCompletionSource<bool> PayServiceTask;
         public Task<bool> Pay(FinanceFacade.IPayment payment, string server, bool hasNavigationBar = true)
         {
+            if (payment?.State==PaymentState.Completed)
+                return Task<bool>.FromResult(true);
             if (string.IsNullOrWhiteSpace(payment?.PaymentProviderJson))
                 return Task<bool>.FromResult(false);
 
@@ -83,21 +85,9 @@ namespace OOAdvantech.Pay
         internal void LoadPayment(IPayment payment)
         {
             Payment = payment;
-            PaymentGatewayUrl = VivaHelper.GetPaymentGatewayUrl(payment);
-            this.PaymentPage.PayWebView.Uri =PaymentGatewayUrl;// $"https://demo.vivapayments.com/web/checkout?ref={orderCode}&color={colorCode}";
+            PaymentGatewayUrl =payment.PaymentOrderUrl;// VivaHelper.GetPaymentGatewayUrl(payment);
+            this.PaymentPage.PayWebView.Uri =PaymentGatewayUrl;
             this.PaymentPage.PayWebView.Navigated += PayWebView_Navigated;
-
-            //// var providerJson = payment.PaymentProviderJson;
-            //if (!string.IsNullOrWhiteSpace(providerJson))
-            //{
-            //    // OOAdvantech.Json.JsonConvert.DeserializeObject<PaymentOrderResponse>(providerJson)?.p
-            //    //this.PaymentPage.PayWebView.Uri=
-            //    // var orderCode = OOAdvantech.Json.JsonConvert.DeserializeObject<PaymentOrderResponse>(providerJson)?.orderCode;
-            //    // string colorCode = "607d8b";
-            //    this.PaymentPage.PayWebView.Uri =VivaHelper.GetPaymentGatewayUrl(payment);// $"https://demo.vivapayments.com/web/checkout?ref={orderCode}&color={colorCode}";
-
-            //    this.PaymentPage.PayWebView.Navigated += PayWebView_Navigated;
-            //}
         }
         private async void PayWebView_Navigated(object sender, Web.NavigatedEventArgs e)
         {
@@ -105,70 +95,63 @@ namespace OOAdvantech.Pay
             var payment = Payment;
             if (PaymentGatewayUrl!=url)
             {
-                // url="https://demo.vivapayments.com/web/checkout/result?t=051e0d67-d54e-4f7c-8bad-23180a41757b&s=3288397036572604&lang=en-GB&eventId=0&eci=1";
-               // if (url.IndexOf("vivapayments.com/web/checkout/result") != -1)
+                lock (ResponseLock)
                 {
-                    //https://demo.vivapayments.com/web2/success
-
-
-
-                    lock (ResponseLock)
+                    //_ResponseTask = VivaHelper.VivaResponseUrl(url, payment, Server);
+                    _ResponseTask= Task<PaymentActionState>.Run(async () =>
                     {
-                        //_ResponseTask = VivaHelper.VivaResponseUrl(url, payment, Server);
-                        _ResponseTask= Task<PaymentActionState>.Run(async () =>
+                        int tries = 30;
+                        while (tries > 0)
                         {
-                            int tries = 30;
-                            while (tries > 0)
-                            {
 
-                                try
-                                {
-                                    var response = payment.ParseResponse(url);
-                                    return response;
-                                    
-                                }
-                                catch (System.Net.WebException commError)
-                                {
-                                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
-                                }
-                                catch (Exception commError)
-                                {
-                                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
-                                }
-                                tries--;
+                            try
+                            {
+                                var response = payment.ParseResponse(url);
+                                return response;
 
                             }
-                            return PaymentActionState.Continue;
-                        });
-                    }
+                            catch (System.Net.WebException commError)
+                            {
+                                await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                            }
+                            catch (Exception commError)
+                            {
+                                await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+                            }
+                            tries--;
 
-                    var paymentState = await _ResponseTask;
-                    if (paymentState==PaymentActionState.Succeeded)
-                    {
-                        lock (ResponseLock)
-                        {
-                            _ResponseTask = null;
-                            _PaySucceeded = true;
                         }
-                        DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
-                    }
-                    else if (paymentState==PaymentActionState.Canceled)
-                    {
-                        lock (ResponseLock)
-                        {
-                            _ResponseTask = null;
-                            _PaySucceeded = false;
-                        }
-                        DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
-                    }
-                    else
-                    {
-                        lock (ResponseLock)
-                        {
-                            _ResponseTask = null;
-                        }
-                    }
+                        return PaymentActionState.Continue;
+                    });
+                }
 
+                var paymentState = await _ResponseTask;
+                if (paymentState==PaymentActionState.Succeeded)
+                {
+                    lock (ResponseLock)
+                    {
+                        _ResponseTask = null;
+                        _PaySucceeded = true;
+                    }
+                   await Close();
+                    //DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
+                }
+                else if (paymentState==PaymentActionState.Canceled)
+                {
+                    lock (ResponseLock)
+                    {
+                        _ResponseTask = null;
+                        _PaySucceeded = false;
+                    }
+                   await Close();
+                    //DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
+                }
+                else
+                {
+                    lock (ResponseLock)
+                    {
+                        _ResponseTask = null;
+                    }
                 }
             }
         }
@@ -215,25 +198,35 @@ namespace OOAdvantech.Pay
 
         private async void BackPressed(BackPressedArgs eventArgs)
         {
+            
 
             if (!SuspendGoBackEvent)
             {
-                eventArgs.Handled=true;
-                (Xamarin.Forms.Application.Current.MainPage as NavigationPage).Popped -= NavigationBack;
-                OnPay = false;
-
-                if (this.PayServiceTask != null)
-                    this.PayServiceTask.SetResult(await IsPaySucceeded());
-                DeviceApplication.Current.BackPressed -= BackPressed;
-
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                if (this.PaymentPage.PayWebView.CanGoBack)
+                    this.PaymentPage.PayWebView.GoBack();
+                else
                 {
-                    await (Xamarin.Forms.Application.Current.MainPage as NavigationPage).CurrentPage.Navigation.PopAsync();
-                    PaymentPage = null;
-                });
+
+                    eventArgs.Handled=true;
+                    await Close();
+                }
             }
 
 
+        }
+
+        private async Task Close()
+        {
+            (Xamarin.Forms.Application.Current.MainPage as NavigationPage).Popped -= NavigationBack;
+            OnPay = false;
+            if (this.PayServiceTask != null)
+                this.PayServiceTask.SetResult(await IsPaySucceeded());
+            DeviceApplication.Current.BackPressed -= BackPressed;
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+            {
+                await (Xamarin.Forms.Application.Current.MainPage as NavigationPage).CurrentPage.Navigation.PopAsync();
+                PaymentPage = null;
+            });
         }
 
         public PaymentService()

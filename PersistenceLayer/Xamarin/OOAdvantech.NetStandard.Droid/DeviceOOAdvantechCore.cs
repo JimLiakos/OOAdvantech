@@ -143,7 +143,7 @@ namespace OOAdvantech.Droid
             try
             {
 
-                PackageInfo info = pContext.PackageManager.GetPackageInfo(pContext.PackageName, PackageInfoFlags.Signatures);
+                PackageInfo info = pContext.PackageManager.GetPackageInfo(pContext.PackageName, Android.Content.PM.PackageInfoFlags.Signatures);
                 foreach (var signature in info.Signatures)
                 {
                     MessageDigest md5 = MessageDigest.GetInstance("MD5");
