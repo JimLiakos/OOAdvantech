@@ -97,8 +97,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                 if (!clientSessionPart.ProxyTypes.TryGetValue(TypeName, out _TypeMetaData))
                 {
-                    OOAdvantech.Remoting.RestApi.RemotingServices.GetServerSessionPartMarshaledTypes(clientSessionPart);
+                    RemotingServices.GetServerSessionPartMarshaledTypes(clientSessionPart, TypeName);
                     clientSessionPart.ProxyTypes.TryGetValue(TypeName, out _TypeMetaData);
+                   
                 }
             }
             else

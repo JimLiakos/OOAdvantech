@@ -842,6 +842,34 @@ namespace OOAdvantech.Remoting.RestApi
                 if (methodCallMessage.MethodName == StandardActions.GetTypesMetadata)
                 {
 
+                    try
+                    {
+                        Type[] argsTypes = new Type[1] { typeof(string) };
+#if DeviceDotNet
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);
+#else
+                        var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
+#endif
+
+                        var args = JsonConvert.DeserializeObject<object[]>(methodCallMessage.JsonArgs, jSetttings);
+
+
+                        if (args?.Length==1)
+                        {
+                            string typeName = args[0] as string;
+
+                            ProxyType httpProxyType = null;
+                            if (!serverSession.MarshaledTypes.TryGetValue(typeName, out httpProxyType))
+                            {
+                                var theType = System.Type.GetType(typeName);
+                                httpProxyType = new OOAdvantech.MetaDataRepository.ProxyType(theType);
+                                serverSession.MarshaledTypes[theType.AssemblyQualifiedName] = httpProxyType;
+                            }
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                    }
                     responseMessage.Web = methodCallMessage.Web;
                     responseMessage.ChannelUri = request.ChannelUri;
                     responseMessage.InternalChannelUri = request.InternalChannelUri;
