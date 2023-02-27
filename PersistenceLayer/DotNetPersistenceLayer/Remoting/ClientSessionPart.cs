@@ -183,28 +183,34 @@ namespace OOAdvantech.Remoting
                     ServerSessionPart.Subscribe(proxy.ObjectUri, eventInfoData, this);
 
                     System.Collections.Generic.List<EventInfoData> subscriptions = null;
-                    if (!EventSubscriptions.TryGetValue(proxy.ObjectUri, out subscriptions))
+                    lock (EventSubscriptions)
                     {
-                        subscriptions = new System.Collections.Generic.List<EventInfoData>();
-                        subscriptions = new System.Collections.Generic.List<EventInfoData>();
-                        EventSubscriptions[proxy.ObjectUri] = subscriptions;
+                        if (!EventSubscriptions.TryGetValue(proxy.ObjectUri, out subscriptions))
+                        {
+                            subscriptions = new System.Collections.Generic.List<EventInfoData>();
+                            subscriptions = new System.Collections.Generic.List<EventInfoData>();
+                            EventSubscriptions[proxy.ObjectUri] = subscriptions;
+                        }
+                        if (EventSubscriptions[proxy.ObjectUri].Where(x => x.EventInfo == eventInfoData.EventInfo).FirstOrDefault() == null)
+                            subscriptions.Add(eventInfoData);
                     }
-                    if (EventSubscriptions[proxy.ObjectUri].Where(x => x.EventInfo == eventInfoData.EventInfo).FirstOrDefault() == null)
-                        subscriptions.Add(eventInfoData);
                 }
                 else if (AllowedBidirectionalCall)
                 {
                     ServerSessionPart.Subscribe(proxy.ObjectUri, eventInfoData);
 
                     System.Collections.Generic.List<EventInfoData> subscriptions = null;
-                    if (!EventSubscriptions.TryGetValue(proxy.ObjectUri, out subscriptions))
+                    lock (EventSubscriptions)
                     {
-                        subscriptions = new System.Collections.Generic.List<EventInfoData>();
-                        subscriptions = new System.Collections.Generic.List<EventInfoData>();
-                        EventSubscriptions[proxy.ObjectUri] = subscriptions;
+                        if (!EventSubscriptions.TryGetValue(proxy.ObjectUri, out subscriptions))
+                        {
+                            subscriptions = new System.Collections.Generic.List<EventInfoData>();
+                            subscriptions = new System.Collections.Generic.List<EventInfoData>();
+                            EventSubscriptions[proxy.ObjectUri] = subscriptions;
+                        }
+                        if (EventSubscriptions[proxy.ObjectUri].Where(x => x.EventInfo == eventInfoData.EventInfo).FirstOrDefault() == null)
+                            subscriptions.Add(eventInfoData);
                     }
-                    if (EventSubscriptions[proxy.ObjectUri].Where(x => x.EventInfo == eventInfoData.EventInfo).FirstOrDefault() == null)
-                        subscriptions.Add(eventInfoData);
 
 
                 }
@@ -215,14 +221,17 @@ namespace OOAdvantech.Remoting
                         ServerSessionPart.Subscribe(proxy.ObjectUri, eventInfoData);
 
                         System.Collections.Generic.List<EventInfoData> subscriptions = null;
-                        if (!EventSubscriptions.TryGetValue(proxy.ObjectUri, out subscriptions))
+                        lock (EventSubscriptions)
                         {
-                            subscriptions = new System.Collections.Generic.List<EventInfoData>();
-                            subscriptions = new System.Collections.Generic.List<EventInfoData>();
-                            EventSubscriptions[proxy.ObjectUri] = subscriptions;
+                            if (!EventSubscriptions.TryGetValue(proxy.ObjectUri, out subscriptions))
+                            {
+                                subscriptions = new System.Collections.Generic.List<EventInfoData>();
+                                subscriptions = new System.Collections.Generic.List<EventInfoData>();
+                                EventSubscriptions[proxy.ObjectUri] = subscriptions;
+                            }
+                            if (EventSubscriptions[proxy.ObjectUri].Where(x => x.EventInfo == eventInfoData.EventInfo).FirstOrDefault() == null)
+                                subscriptions.Add(eventInfoData);
                         }
-                        if (EventSubscriptions[proxy.ObjectUri].Where(x => x.EventInfo == eventInfoData.EventInfo).FirstOrDefault() == null)
-                            subscriptions.Add(eventInfoData);
 
 
                     }
