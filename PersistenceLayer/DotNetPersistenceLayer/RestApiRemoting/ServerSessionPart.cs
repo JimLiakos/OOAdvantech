@@ -263,6 +263,10 @@ namespace OOAdvantech.Remoting.RestApi
 
                                     }
                                 }
+                                catch (System.Runtime.Remoting.RemotingException error)
+                                {
+
+                                }
                                 catch (Exception error)
                                 {
                                 }
