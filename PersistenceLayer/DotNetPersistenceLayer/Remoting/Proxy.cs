@@ -1020,40 +1020,44 @@ namespace OOAdvantech.Remoting
         {
             proceedToSessionSubscription = false;
             allowAsynchronous = false;
-
-            if (EventsInvocationLists == null)
-                EventsInvocationLists = new System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming>();
-            if (!EventsInvocationLists.ContainsKey(eventInfo) || EventsInvocationLists[eventInfo].EventConsumers.Count == 0)
+            lock (this)
             {
-                if (!EventsInvocationLists.ContainsKey(eventInfo))
-                    EventsInvocationLists[eventInfo] = new EventConsuming();
-                proceedToSessionSubscription = true;
-                if (Remoting.RemotingServices.HasHostProcessNetworkAccess)
-                    allowAsynchronous = false;
-                else
+
+                if (EventsInvocationLists == null)
+                    EventsInvocationLists = new System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming>();
+                if (!EventsInvocationLists.ContainsKey(eventInfo) || EventsInvocationLists[eventInfo].EventConsumers.Count == 0)
                 {
-                    if (eventHandler.Method.GetCustomAttributes(typeof(MetaDataRepository.AllowEventCallAsynchronousAttribute), true).Length > 0)
+                    if (!EventsInvocationLists.ContainsKey(eventInfo))
+                        EventsInvocationLists[eventInfo] = new EventConsuming();
+                    proceedToSessionSubscription = true;
+                    if (Remoting.RemotingServices.HasHostProcessNetworkAccess)
+                        allowAsynchronous = false;
+                    else
                     {
-                        if (EventsInvocationLists[eventInfo].AllAsynchronousCounsumers)
-                            allowAsynchronous = true;
+                        if (eventHandler.Method.GetCustomAttributes(typeof(MetaDataRepository.AllowEventCallAsynchronousAttribute), true).Length > 0)
+                        {
+                            if (EventsInvocationLists[eventInfo].AllAsynchronousCounsumers)
+                                allowAsynchronous = true;
+                            else
+                                allowAsynchronous = false;
+
+                        }
                         else
                             allowAsynchronous = false;
-
                     }
-                    else
-                        allowAsynchronous = false;
                 }
+                else
+                {
+                    if (eventHandler.Method.GetCustomAttributes(typeof(MetaDataRepository.AllowEventCallAsynchronousAttribute), true).Length == 0)
+                        if (EventsInvocationLists[eventInfo].AllAsynchronousCounsumers)
+                        {
+                            proceedToSessionSubscription = true;
+                            EventsInvocationLists[eventInfo].AllAsynchronousCounsumers = false;
+                            allowAsynchronous = false;
+                        }
+                } 
             }
-            else
-            {
-                if (eventHandler.Method.GetCustomAttributes(typeof(MetaDataRepository.AllowEventCallAsynchronousAttribute), true).Length == 0)
-                    if (EventsInvocationLists[eventInfo].AllAsynchronousCounsumers)
-                    {
-                        proceedToSessionSubscription = true;
-                        EventsInvocationLists[eventInfo].AllAsynchronousCounsumers = false;
-                        allowAsynchronous = false;
-                    }
-            }
+
             EventsInvocationLists[eventInfo].EventConsumers.Add(eventHandler);
         }
     }
