@@ -407,11 +407,17 @@ namespace OOAdvantech.Remoting.RestApi
             return GetRemotingServices(serverUrl).CreateInstance(typeFullName, assemblyData, ctorParamsTypes, ctorParamsValues);
         }
 
-        public static void GetServerSessionPartMarshaledTypes(ClientSessionPart clientSessionPart)
+        public static void GetServerSessionPartMarshaledTypes(ClientSessionPart clientSessionPart, string typeName=null)
         {
             string channelUri = clientSessionPart.ChannelUri;
 
             var methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientSessionPart.ClientProcessIdentity.ToString(), "", StandardActions.GetTypesMetadata, new object[0]);
+            if (typeName!=null)
+            {
+                methodCallMessage = new MethodCallMessage(channelUri, "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", clientSessionPart.ClientProcessIdentity.ToString(), "", StandardActions.GetTypesMetadata, new object[1] { typeName });
+                methodCallMessage.Marshal();
+                
+            }
 
             RequestData requestData = new RequestData();
 

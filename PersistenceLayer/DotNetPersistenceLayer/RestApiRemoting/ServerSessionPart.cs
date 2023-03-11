@@ -263,6 +263,12 @@ namespace OOAdvantech.Remoting.RestApi
 
                                     }
                                 }
+#if !DeviceDotNet
+                                catch (System.Runtime.Remoting.RemotingException error)
+                                {
+
+                                }
+#endif
                                 catch (Exception error)
                                 {
                                 }
@@ -991,7 +997,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
-        void SetSubscriptions(System.Collections.Generic.List<RemoteEventSubscription> channelSubscriptions, string sessionIdentity, string serverSessionPartUri ,IEndPoint endPoint)
+        void SetSubscriptions(System.Collections.Generic.List<RemoteEventSubscription> channelSubscriptions, string sessionIdentity, string serverSessionPartUri, IEndPoint endPoint)
         {
             string channelUri = ChannelUri;
 
@@ -1045,7 +1051,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// Otherwise is false
         /// </param>
         /// <MetaDataID>{c84867b4-e737-4de4-9b51-360677d9fbae}</MetaDataID>
-        internal void Reconnect(bool disconnectedChannel, IEndPoint endPoint=null)
+        internal void Reconnect(bool disconnectedChannel, IEndPoint endPoint = null)
         {
 
             //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
@@ -1089,16 +1095,16 @@ namespace OOAdvantech.Remoting.RestApi
 
                         //serverSessionPartInfo.ServerSessionPart.Subscribe(channelSubscriptions);
 
-                        SetSubscriptions(channelSubscriptions, serverSessionPartInfo.SessionIdentity, serverSessionPartUri,endPoint);
+                        SetSubscriptions(channelSubscriptions, serverSessionPartInfo.SessionIdentity, serverSessionPartUri, endPoint);
 
                         ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
                         _SessionIdentity = serverSessionPartInfo.SessionIdentity;
                         ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
                         ServerSessionPartUri = serverSessionPartUri;
 
-//#if DeviceDotNet
-//                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
-//#endif
+                        //#if DeviceDotNet
+                        //                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
+                        //#endif
 
                         SynchronizeSession();
 
@@ -1115,9 +1121,9 @@ namespace OOAdvantech.Remoting.RestApi
                     else
                     {
 
-//#if DeviceDotNet
-//                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions " });
-//#endif
+                        //#if DeviceDotNet
+                        //                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions " });
+                        //#endif
                         if (disconnectedChannel)
                         {
                             //The reconnection process must have completed when the client code attempts to call a remote object
@@ -1132,7 +1138,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                     return;
                 }
-                catch(System.Net.WebException connectionError)
+                catch (System.Net.WebException connectionError)
                 {
                     if (connectionError.Status != System.Net.WebExceptionStatus.ConnectFailure)
                     {
@@ -1140,14 +1146,14 @@ namespace OOAdvantech.Remoting.RestApi
                         if (dedicatedEndPoint)
                         {
 #if DeviceDotNet
-                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Dedicated EndPoint connection  error :" + connectionError.Message, connectionError.StackTrace });
+                            OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Dedicated EndPoint connection  error :" + connectionError.Message, connectionError.StackTrace });
 #endif
                             throw connectionError;
                         }
                         else
                         {
 #if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :"+ connectionError.Message, connectionError.StackTrace });
+                            OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :"+ connectionError.Message, connectionError.StackTrace });
 #endif
                         }
                     }

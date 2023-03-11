@@ -241,7 +241,7 @@ namespace OOAdvantech.Droid
             //notificationIntent.PutExtra(State.ServiceStartedKey, true);
 
 
-            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent|PendingIntentFlags.Immutable);
+            //var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent|PendingIntentFlags.Immutable);
             return pendingIntent;
         }
 

@@ -625,7 +625,34 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         if (objectActivationData.DataLoader.DataNode.ValueTypePath.Count == 0)
                         {
                             if (loadObjectLinks)
-                                PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.ObjectActived();
+                            {
+                                try
+                                {
+                                    PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.ObjectActived();
+                                }
+                                catch (Exception error)
+                                {
+                                    try
+                                    {
+#if !DeviceDotNet
+                                        //Error prone γεμισει με message το log file τοτε παράγει exception
+                                        if (!System.Diagnostics.EventLog.SourceExists("PersistencySystem", "."))
+                                            System.Diagnostics.EventLog.CreateEventSource("PersistencySystem", "OOAdvance");
+                                        System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
+                                        myLog.Source = "PersistencySystem";
+                                        System.Diagnostics.Debug.WriteLine(
+                                            error.Message + error.StackTrace);
+                                        myLog.WriteEntry(error.Message + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
+#endif
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                        
+                                    }
+
+                                }
+                            }
                             //else
                             //    PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(_object)?.WaitUntilObjectIsActive();
                         }
