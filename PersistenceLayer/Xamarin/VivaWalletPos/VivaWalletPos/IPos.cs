@@ -7,7 +7,7 @@ namespace VivaWalletPos
 {
     public interface IPos
     {
-        Task<PaymentData> Sale(double total,double tips);
+        Task<PaymentData> Sale(decimal total,decimal tips);
     }
 
     public class PaymentData

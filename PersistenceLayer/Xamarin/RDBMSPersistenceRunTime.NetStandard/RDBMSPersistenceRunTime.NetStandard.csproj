@@ -71,7 +71,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
-    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
     <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj" />
     <ProjectReference Include="..\RDBMSMetaDataRepository.NetStandard\RDBMSMetaDataRepository.NetStandard.csproj" />
   </ItemGroup>

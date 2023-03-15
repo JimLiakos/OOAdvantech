@@ -63,6 +63,5 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetMetaDataRepository.NetStandard\DotNetMetaDataRepository.NetStandard.csproj" />
     <ProjectReference Include="..\Linq.NetStandard\Linq.NetStandard.csproj" />
-    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj" />
   </ItemGroup>
 </Project>

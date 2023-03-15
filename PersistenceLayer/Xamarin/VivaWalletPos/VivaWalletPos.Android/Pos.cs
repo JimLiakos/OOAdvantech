@@ -25,7 +25,7 @@ namespace VivaWalletPos.Android
         public static String callback = "mycallbackscheme://result";
 
         static int TransactionID = 000000000001019781;
-        public Task<PaymentData> Sale(double total, double tips)
+        public Task<PaymentData> Sale(decimal total, decimal tips)
         {
 
 
@@ -45,9 +45,9 @@ namespace VivaWalletPos.Android
 
 
 #if DEBUG
-            total = 0.01;
-            if (tips > 0)
-                tips = 0.01;
+            total = 0.01M;
+            if (tips > 0M)
+                tips = 0.01M;
 #endif
             string req = string.Format("vivapayclient://pay/v1?merchantKey=SG23323424EXS3&appId={0}&action=sale&clientTransactionId={1}&amount={2}&tipAmount={3}&withInstallments=false&preferredInstallments=0&callback={4}", packageName, transactionID, (int)(total * 100), (int)(tips * 100), callback);
 
