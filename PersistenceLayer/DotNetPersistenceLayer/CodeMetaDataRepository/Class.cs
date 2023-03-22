@@ -1308,6 +1308,7 @@ namespace OOAdvantech.CodeMetaDataRepository
                 CodeClassifier.LoadFeatures(this, _Features, members);
 
                 MetaObjectMapper.RemoveMetaObject(this);
+                MetaObjectMapper.RemoveType(_VSClass);
 
                 MetaObjectMapper.AddTypeMap(_VSClass, this);
                 Visibility = VSAccessTypeConverter.GetVisibilityKind(_VSClass.Access);

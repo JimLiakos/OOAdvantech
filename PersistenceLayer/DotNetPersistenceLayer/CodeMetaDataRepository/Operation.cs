@@ -912,7 +912,7 @@ namespace OOAdvantech.CodeMetaDataRepository
             {
                 try
                 {
-                    (Owner as CodeElementContainer).RefreshCodeElement((Owner as CodeElementContainer).CodeElement);
+                    //(Owner as CodeElementContainer).RefreshCodeElement((Owner as CodeElementContainer).CodeElement);
                 }
                 catch (System.Exception exp)
                 {
