@@ -989,6 +989,13 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
         /// <MetaDataID>{0e288fea-d4d5-4ad5-8c18-9c1d6d456c26}</MetaDataID>
         bool ExecuteCondition(object leftValue, object rightValue)
         {
+            if (rightValue is DateTime)
+                rightValue=((DateTime)rightValue).ToUniversalTime();
+
+            if (leftValue is DateTime)
+                leftValue=((DateTime)leftValue).ToUniversalTime();
+
+
             if (ComparisonOperator == ComparisonType.Like)
                 return Like(leftValue as string, rightValue as string);
 
