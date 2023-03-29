@@ -302,6 +302,21 @@ namespace OOAdvantech.Remoting.RestApi
                         }
                         else
                         {
+                            if (methodInfo.DeclaringType!=methodCallMessage.MethodDeclaringType)
+                            {
+                                if (methodCallMessage.Object is ITransparentProxy)
+                                {
+
+                                    if (methodCallMessage.Object!=null && 
+                                        (methodCallMessage.Object.GetType().IsSubclassOf(methodInfo.DeclaringType)!=true&&!(methodCallMessage.Object.GetType().GetInterfaces().Contains(methodInfo.DeclaringType))))
+                                    {
+
+                                        object obj = ((methodCallMessage.Object as ITransparentProxy)?.GetProxy() as Proxy)?.GetTransparentProxy(methodInfo.DeclaringType);
+                                        if (obj != null)
+                                            methodCallMessage.Object=obj;
+                                    }
+                                }
+                            }
                             retVal = methodInfo.Invoke(methodCallMessage.Object, args);
 
                         }

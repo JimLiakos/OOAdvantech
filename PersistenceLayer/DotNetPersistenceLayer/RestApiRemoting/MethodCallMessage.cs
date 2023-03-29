@@ -177,81 +177,122 @@ namespace OOAdvantech.Remoting.RestApi
                     return null;
                 else
                 {
+                    methodInfo=GetMethod(MethodDeclaringType);
+                    
+                    if (methodInfo != null)
+                        return methodInfo;
 
-                    var classifier = Classifier.GetClassifier(MethodDeclaringType);
-
-                    var operations = classifier.GetOperations(MethodName);
-                    if (operations.Count > 0)
+                    if (Web&&Object is ITransparentProxy)
                     {
-                        foreach (var operation in operations)
+
+                        Proxy proxy = (Object as ITransparentProxy).GetProxy() as Proxy;
+                        if (proxy!=null)
                         {
-                            if (ArgCount == operation.Parameters.Count)
+                            var methods = proxy.ObjectRef.GetProxyType().Methods;
+
+                            if (methods.Contains(MethodName))
                             {
-                                methodInfo = operation.GetExtensionMetaObject<MethodInfo>();
-                                return methodInfo;
+
                             }
-                            var paramsWithoutDefaultValue = operation.Parameters.Select(x => x.GetExtensionMetaObject<ParameterInfo>()).Where(x => x.DefaultValue == System.DBNull.Value).ToList().Count;
-                            if (ArgCount>=paramsWithoutDefaultValue&& ArgCount <operation.Parameters.Count)
+                            else
                             {
-                                methodInfo = operation.GetExtensionMetaObject<MethodInfo>();
-                                return methodInfo;
+                                var interfacesMethods = (from _interface in proxy.ObjectRef.GetProxyType().Interfaces
+                                                         where _interface.GetNativeType()!=null
+                                                         from method in _interface.GetNativeType().GetMethods()
+                                                         where method.Name==MethodName
+                                                         select new { _interface, method }).ToList();
+                                foreach (var interfacesMethod in interfacesMethods)
+                                {
+                                    methodInfo=GetMethod(interfacesMethod._interface.GetNativeType());
+                                    if (methodInfo!=null)
+                                        return methodInfo;
+                                }
                             }
                         }
                     }
-                    else
-                    {
-                        foreach (var attribute in classifier.GetAttributes(true))
-                        {
-                            var propertyInfo = attribute.GetExtensionMetaObject<PropertyInfo>();
-                            if (propertyInfo != null && propertyInfo.GetGetMethod() != null)
-                            {
-                                string getterMethodName = propertyInfo.GetGetMethod().Name;
-                                if (getterMethodName == MethodName)
-                                {
-                                    methodInfo = propertyInfo.GetGetMethod();
-                                }
-                            }
-                            if (propertyInfo != null && propertyInfo.GetSetMethod() != null)
-                            {
-                                string setterMethodName = propertyInfo.GetSetMethod().Name;
-                                if (setterMethodName == MethodName)
-                                {
-                                    methodInfo = propertyInfo.GetSetMethod();
-                                }
-                            }
-
-                        }
-                        if (methodInfo == null)
-                        {
-                            foreach (var associatioEnd in classifier.GetAssociateRoles(true))
-                            {
-                                var propertyInfo = associatioEnd.GetExtensionMetaObject<PropertyInfo>();
-                                if (propertyInfo != null && propertyInfo.GetGetMethod() != null)
-                                {
-                                    string getterMethodName = propertyInfo.GetGetMethod().Name;
-                                    if (getterMethodName == MethodName)
-                                    {
-                                        methodInfo = propertyInfo.GetGetMethod();
-                                    }
-                                }
-                                if (propertyInfo != null && propertyInfo.GetSetMethod() != null)
-                                {
-                                    string setterMethodName = propertyInfo.GetSetMethod().Name;
-                                    if (setterMethodName == MethodName)
-                                    {
-                                        methodInfo = propertyInfo.GetSetMethod();
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-                    return methodInfo;
 
                 }
+                return null;
             }
         }
+
+        private MethodInfo GetMethod(Type methodDeclaringType)
+        {
+            MethodInfo methodInfo = null;
+            var classifier = Classifier.GetClassifier(methodDeclaringType);
+
+            var operations = classifier.GetOperations(MethodName);
+            if (operations.Count > 0)
+            {
+                foreach (var operation in operations)
+                {
+                    if (ArgCount == operation.Parameters.Count)
+                    {
+                        methodInfo = operation.GetExtensionMetaObject<MethodInfo>();
+                        return methodInfo;
+                    }
+                    var paramsWithoutDefaultValue = operation.Parameters.Select(x => x.GetExtensionMetaObject<ParameterInfo>()).Where(x => x.DefaultValue == System.DBNull.Value).ToList().Count;
+                    if (ArgCount>=paramsWithoutDefaultValue&& ArgCount <operation.Parameters.Count)
+                    {
+                        methodInfo = operation.GetExtensionMetaObject<MethodInfo>();
+                        return methodInfo;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var attribute in classifier.GetAttributes(true))
+                {
+                    var propertyInfo = attribute.GetExtensionMetaObject<PropertyInfo>();
+                    if (propertyInfo != null && propertyInfo.GetGetMethod() != null)
+                    {
+                        string getterMethodName = propertyInfo.GetGetMethod().Name;
+                        if (getterMethodName == MethodName)
+                        {
+                            methodInfo = propertyInfo.GetGetMethod();
+                        }
+                    }
+                    if (propertyInfo != null && propertyInfo.GetSetMethod() != null)
+                    {
+                        string setterMethodName = propertyInfo.GetSetMethod().Name;
+                        if (setterMethodName == MethodName)
+                        {
+                            methodInfo = propertyInfo.GetSetMethod();
+                        }
+                    }
+
+                }
+                if (methodInfo == null)
+                {
+                    foreach (var associatioEnd in classifier.GetAssociateRoles(true))
+                    {
+                        var propertyInfo = associatioEnd.GetExtensionMetaObject<PropertyInfo>();
+                        if (propertyInfo != null && propertyInfo.GetGetMethod() != null)
+                        {
+                            string getterMethodName = propertyInfo.GetGetMethod().Name;
+                            if (getterMethodName == MethodName)
+                            {
+                                methodInfo = propertyInfo.GetGetMethod();
+                            }
+                        }
+                        if (propertyInfo != null && propertyInfo.GetSetMethod() != null)
+                        {
+                            string setterMethodName = propertyInfo.GetSetMethod().Name;
+                            if (setterMethodName == MethodName)
+                            {
+                                methodInfo = propertyInfo.GetSetMethod();
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+            return methodInfo;
+
+        }
+
         /// <MetaDataID>{dd240920-d312-4cad-ba8d-81d8811a0f5a}</MetaDataID>
         [JsonIgnore]
         public System.Type MethodDeclaringType
@@ -471,8 +512,8 @@ namespace OOAdvantech.Remoting.RestApi
             var parameters = methodInfo.GetParameters();
             Type[] argsTypes = (from parameter in parameters select parameter.ParameterType).ToArray();
 #if DeviceDotNet
-                //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);
+            //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);
 #else
             var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
 #endif
@@ -543,6 +584,10 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 WeakReference WeakReferenceOnMarshaledObject = Remoting.Tracker.WeakReferenceOnMarshaledObjects[extObjectUri.TransientUri] as WeakReference;
                 @object = WeakReferenceOnMarshaledObject.Target;
+                if(@object==null)
+                {
+
+                }
             }
 
             if (@object == null && extObjectUri.PersistentUri != null)

@@ -353,10 +353,10 @@ namespace OOAdvantech.MetaDataRepository
                            classifier.IsHttpVisible(method)
                            select method.Name).Distinct().ToList();
 
-            _Properties.AddRange( (from method in classifier.GetAssociateRoles(false).OfType<AssociationEnd>()
-                           where method.Visibility == VisibilityKind.AccessPublic &&
-                           classifier.IsHttpVisible(method)
-                           select method.Name).Distinct().ToList());
+            _Properties.AddRange((from method in classifier.GetAssociateRoles(false).OfType<AssociationEnd>()
+                                  where method.Visibility == VisibilityKind.AccessPublic &&
+                                  classifier.IsHttpVisible(method)
+                                  select method.Name).Distinct().ToList());
 
             _Events = (from _event in classifier.GetExtensionMetaObject<Type>().GetMetaData().GetEvents()
                        where classifier.IsHttpVisible(_event)
@@ -560,5 +560,38 @@ namespace OOAdvantech.MetaDataRepository
             return false;
 
         }
+    }
+
+
+
+    public static class ProxyTypeExtension
+    {
+        static Dictionary<string, Type> NativeTypes = new Dictionary<string, Type>();
+        public static Type GetNativeType(this ProxyType proxyType)
+        {
+            Type type = null;
+            if (!string.IsNullOrWhiteSpace(proxyType.AssemblyQualifiedName)&&NativeTypes.TryGetValue(proxyType.AssemblyQualifiedName, out type))
+                return type;
+
+            if (!string.IsNullOrWhiteSpace(proxyType.FullName)&&NativeTypes.TryGetValue(proxyType.FullName, out type))
+                return type;
+         
+
+            type = Type.GetType(proxyType.AssemblyQualifiedName);
+            if (type==null)
+            {
+                if (!Remoting.RestApi.Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(proxyType.FullName, out type))
+                    type = Type.GetType(proxyType.FullName);
+            }
+            if (type!=null)
+            {
+                if (!string.IsNullOrWhiteSpace(proxyType.AssemblyQualifiedName))
+                    NativeTypes[proxyType.AssemblyQualifiedName]=type;
+                else if (!string.IsNullOrWhiteSpace(proxyType.FullName))
+                    NativeTypes[proxyType.FullName]=type;
+            }
+            return type;
+        }
+
     }
 }
