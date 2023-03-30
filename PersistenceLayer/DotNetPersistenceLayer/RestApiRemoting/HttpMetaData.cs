@@ -564,6 +564,7 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
+    /// <MetaDataID>{89b4541c-9b5c-4fd4-8769-537fdfc1970c}</MetaDataID>
     public static class ProxyTypeExtension
     {
         static Dictionary<string, Type> NativeTypes = new Dictionary<string, Type>();
@@ -575,7 +576,7 @@ namespace OOAdvantech.MetaDataRepository
 
             if (!string.IsNullOrWhiteSpace(proxyType.FullName)&&NativeTypes.TryGetValue(proxyType.FullName, out type))
                 return type;
-         
+
 
             type = Type.GetType(proxyType.AssemblyQualifiedName);
             if (type==null)
