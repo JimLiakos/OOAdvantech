@@ -519,8 +519,20 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                 throw new System.Exception("Syntax error");
             }
             int trt = 0;
+            Parser.ParserNode Select_expression = null;
+            try
+            {
+                if(OQLParser?.theRoot==null||OQLParser.theRoot["Start"]==null)
+                {
 
-            Parser.ParserNode Select_expression = OQLParser.theRoot["Start"]["OQLStatament"]["Select_Expression"] as Parser.ParserNode;
+                }
+                Select_expression = OQLParser.theRoot["Start"]["OQLStatament"]["Select_Expression"] as Parser.ParserNode;
+            }
+            catch (Exception error)
+            {
+
+                
+            }
             string ErrorOutput = null;
             GetParserSyntaxErrors(Select_expression, ref ErrorOutput);
 
