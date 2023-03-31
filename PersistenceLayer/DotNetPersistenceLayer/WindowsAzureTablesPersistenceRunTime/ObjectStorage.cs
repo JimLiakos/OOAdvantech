@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using OOAdvantech.Collections;
 using OOAdvantech.DotNetMetaDataRepository;
@@ -1047,20 +1048,28 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         public override MetaDataRepository.StorageCell GetStorageCell(int storageCellSerialNumber)
         {
 
-            PersistenceLayer.ObjectStorage ObjectStorage = PersistenceLayer.ObjectStorage.OpenStorage(StorageMetaData.StorageName, StorageMetaData.StorageLocation, StorageMetaData.StorageType);
-            string Query = "SELECT StorageCell FROM " + typeof(RDBMSMetaDataRepository.StorageCell).FullName + " StorageCell WHERE StorageCell.SerialNumber = " + storageCellSerialNumber.ToString();
-
-            Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorage(ObjectStorage.StorageMetaData).Execute(Query);
-            foreach (Collections.StructureSet Rowset in aStructureSet)
+            try
             {
-                //TODO: να τσεκαριστή εάν υπάρχει συμβατότητα μεταξύ της class που τρέχει τοπικά
-                //και αυτής που τρέχει remotely
-                //WHERE oid = "+StorageCellID.ToString();
-                RDBMSMetaDataRepository.StorageCell storageCell = (RDBMSMetaDataRepository.StorageCell)Rowset["StorageCell"];
-                return storageCell;
-            }
+                PersistenceLayer.ObjectStorage ObjectStorage = PersistenceLayer.ObjectStorage.OpenStorage(StorageMetaData.StorageName, StorageMetaData.StorageLocation, StorageMetaData.StorageType);
+                string Query = "SELECT StorageCell FROM " + typeof(RDBMSMetaDataRepository.StorageCell).FullName + " StorageCell WHERE StorageCell.SerialNumber = " + storageCellSerialNumber.ToString();
 
-            return null;
+                Collections.StructureSet aStructureSet = PersistenceLayer.ObjectStorage.GetStorage(ObjectStorage.StorageMetaData).Execute(Query);
+                foreach (Collections.StructureSet Rowset in aStructureSet)
+                {
+                    //TODO: να τσεκαριστή εάν υπάρχει συμβατότητα μεταξύ της class που τρέχει τοπικά
+                    //και αυτής που τρέχει remotely
+                    //WHERE oid = "+StorageCellID.ToString();
+                    RDBMSMetaDataRepository.StorageCell storageCell = (RDBMSMetaDataRepository.StorageCell)Rowset["StorageCell"];
+                    return storageCell;
+                }
+                
+                return null;
+            }
+            catch (Exception error)
+            {
+
+                throw;
+            }
 
             //throw new NotImplementedException();
         }

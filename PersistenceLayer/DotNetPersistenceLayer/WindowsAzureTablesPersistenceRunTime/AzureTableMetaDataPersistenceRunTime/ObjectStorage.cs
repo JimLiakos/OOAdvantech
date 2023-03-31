@@ -60,6 +60,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         public ObjectStorage(string storageName, string storageLocation, bool newStorage,  Azure.Data.Tables.TableServiceClient tablesAccount, OOAdvantech.WindowsAzureTablesPersistenceRunTime.StorageMetadata storageMetadataEntry)
         {
+            string identity = storageMetadataEntry.StorageIdentity+"__"+ AppDomain.CurrentDomain.Id.ToString()+"__"+System.Diagnostics.Process.GetCurrentProcess().Id;
+
+            System.Diagnostics.Debug.WriteLine("##ObjectStorage "+identity);
             //Account = account;
             TablesAccount = tablesAccount;
             _StorageMetaData = new Storage(storageName, storageLocation, "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", newStorage,  tablesAccount, storageMetadataEntry);

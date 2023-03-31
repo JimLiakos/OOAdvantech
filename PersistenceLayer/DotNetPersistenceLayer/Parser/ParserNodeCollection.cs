@@ -78,11 +78,23 @@ namespace Parser
         /// <MetaDataID>{C8EDFE35-13D3-4C77-AA14-21F3F0F59F07}</MetaDataID>
         public ParserNode GetAt(int Index)
         {
-            return (ParserNode)Nodes[Index-1];
+            try
+            {
+                return (ParserNode)Nodes[Index-1];
+            }
+            catch (System.Exception error)
+            {
+
+                throw;
+            }
         }
         /// <MetaDataID>{EB583E06-27C2-4425-B974-9B1F207334EE}</MetaDataID>
         public void Add(ParserNode NewParserNode)
         {
+            if(NewParserNode==null)
+            {
+
+            }
             Nodes.Add(NewParserNode);
             if (!SameType)
             {

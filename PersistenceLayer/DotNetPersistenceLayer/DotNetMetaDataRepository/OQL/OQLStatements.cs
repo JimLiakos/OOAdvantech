@@ -308,24 +308,32 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
         public void GetParserSyntaxErrors(Parser.ParserNode ParserNode, ref string ErrorOutput)
         {
 
-            if (ParserNode.Name == "Data_Selection_Syntax_Error")
+            try
             {
-                ErrorOutput += "\nOQL Syntax Error in SELECT Clause at line (" + ParserNode.ChildNodes.GetFirst().ChildNodes.GetAt(5).Value + "): " + ParserNode.ParentNode.Value;
-                return;
+                if (ParserNode.Name == "Data_Selection_Syntax_Error")
+                {
+                    ErrorOutput += "\nOQL Syntax Error in SELECT Clause at line (" + ParserNode.ChildNodes.GetFirst().ChildNodes.GetAt(5).Value + "): " + ParserNode.ParentNode.Value;
+                    return;
 
+                }
+                if (ParserNode.Name == "Data_Path_Syntax_Error")
+                {
+                    ErrorOutput += "\nOQL Syntax Error in FROM Clause at line (" + ParserNode.ChildNodes.GetFirst().ChildNodes.GetAt(5).Value + "): " + ParserNode.ParentNode.Value;
+                    return;
+                }
+                if (ParserNode.Name == "Critiria_Exp_Syntax_Error")
+                {
+                    ErrorOutput += "\nOQL Syntax Error in WHERE Clause at line (" + ParserNode.ChildNodes.GetFirst().ChildNodes.GetAt(5).Value + "): " + ParserNode.ParentNode.ParentNode.Value;
+                    return;
+                }
+                for (short i = 0; i != ParserNode.ChildNodes.Count; i++)
+                    GetParserSyntaxErrors(ParserNode.ChildNodes.GetAt(i + 1), ref ErrorOutput);
             }
-            if (ParserNode.Name == "Data_Path_Syntax_Error")
+            catch (Exception error)
             {
-                ErrorOutput += "\nOQL Syntax Error in FROM Clause at line (" + ParserNode.ChildNodes.GetFirst().ChildNodes.GetAt(5).Value + "): " + ParserNode.ParentNode.Value;
-                return;
+
+                throw;
             }
-            if (ParserNode.Name == "Critiria_Exp_Syntax_Error")
-            {
-                ErrorOutput += "\nOQL Syntax Error in WHERE Clause at line (" + ParserNode.ChildNodes.GetFirst().ChildNodes.GetAt(5).Value + "): " + ParserNode.ParentNode.ParentNode.Value;
-                return;
-            }
-            for (short i = 0; i != ParserNode.ChildNodes.Count; i++)
-                GetParserSyntaxErrors(ParserNode.ChildNodes.GetAt(i + 1), ref ErrorOutput);
         }
 
         /// <MetaDataID>{E4AA8EA4-1E29-49EA-8E0D-2235B43C1CEB}</MetaDataID>
@@ -410,14 +418,15 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 
             bool HasSyntaxError = false;
             string CatchesErrorDescription = null;
+            Parser.OQLParserResults oQLParserResults = new Parser.OQLParserResults();
             try
             {
-                OQLParser.Parse(OQLExpretion);
+                OQLParser.Parse(OQLExpretion,out oQLParserResults);
                 int trt = 0;
             }
             catch (System.Exception Error)
             {
-                foreach (Parser.SyntaxError syntaxError in OQLParser.SyntaxErrors)
+                foreach (Parser.SyntaxError syntaxError in oQLParserResults.SyntaxErrors)
                 {
                     if (syntaxError.Token == "Select_List")
                     {
@@ -438,7 +447,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             {
                 try
                 {
-                    Select_expression = OQLParser.theRoot["Start"]["OQLStatament"]["Select_Expression"] as Parser.ParserNode;
+                    Select_expression = oQLParserResults.theRoot["Start"]["OQLStatament"]["Select_Expression"] as Parser.ParserNode;
                 }
                 catch
                 {
@@ -499,18 +508,19 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                 oqlExpretion = oqlExpretion.Substring(5, oqlExpretion.Length - 5);
             if (oqlExpretion.LastIndexOf("#") == oqlExpretion.Length - 1)
                 oqlExpretion = oqlExpretion.Substring(0, oqlExpretion.Length - 1);
-
+            Object OQLStatament = null;
 
             bool hasSyntaxError = false;
             string CatchesErrorDescription = null;
             ObjectsContext = objectStorage;
+            Parser.OQLParserResults oQLParserResults = new Parser.OQLParserResults();
             try
             {
-                OQLParser.Parse(oqlExpretion);
+                OQLParser.Parse(oqlExpretion, out oQLParserResults);
             }
             catch (System.Exception error)
             {
-                foreach (Parser.SyntaxError syntaxError in OQLParser.SyntaxErrors)
+                foreach (Parser.SyntaxError syntaxError in oQLParserResults.SyntaxErrors)
                 {
                     if (syntaxError.Token == "Select_List")
                         throw new System.Exception(string.Format("{0} at Line {1} and Position {2}", "Error in SELECT list (" + syntaxError.ErrorMessage + ").  ", syntaxError.Line, syntaxError.LinePosition));
@@ -522,11 +532,12 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             Parser.ParserNode Select_expression = null;
             try
             {
-                if(OQLParser?.theRoot==null||OQLParser.theRoot["Start"]==null)
+                if(oQLParserResults?.theRoot==null||oQLParserResults.theRoot["Start"]==null)
                 {
 
                 }
-                Select_expression = OQLParser.theRoot["Start"]["OQLStatament"]["Select_Expression"] as Parser.ParserNode;
+                OQLStatament =oQLParserResults.theRoot["Start"]["OQLStatament"];
+                Select_expression = oQLParserResults.theRoot["Start"]["OQLStatament"]["Select_Expression"] as Parser.ParserNode;
             }
             catch (Exception error)
             {

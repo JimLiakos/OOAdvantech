@@ -1,3 +1,5 @@
+using System;
+
 namespace Parser
 {
     /// <MetaDataID>{ade451c5-9f46-498d-bfa6-f869d303cb9e}</MetaDataID>
@@ -20,8 +22,10 @@ namespace Parser
         }
           
     }
-	/// <MetaDataID>{869340B0-F55F-4C6B-823F-3D1E17E83A0C}</MetaDataID>
-	public class Parser
+
+ 
+    /// <MetaDataID>{869340B0-F55F-4C6B-823F-3D1E17E83A0C}</MetaDataID>
+    public class Parser
 	{
         /// <MetaDataID>{41307037-d97b-4357-af41-70b6add9d1ac}</MetaDataID>
         GoldParser.Grammar GoldGrammar;
@@ -32,33 +36,50 @@ namespace Parser
            
 		}
         /// <MetaDataID>{6459ea76-ca40-4b78-88b1-bd429c43a75b}</MetaDataID>
-        public System.Collections.Generic.List<SyntaxError> SyntaxErrors=new System.Collections.Generic.List<SyntaxError>();
+        //public System.Collections.Generic.List<SyntaxError> SyntaxErrors=new System.Collections.Generic.List<SyntaxError>();
 
         ///// <MetaDataID>{07B205B0-ECBA-4626-B548-4C015CE54493}</MetaDataID>
         //private ParserWr.Parser theWrParser;
 		/// <MetaDataID>{F7D3FBF4-BD75-47D3-9333-B75E35092878}</MetaDataID>
-		public ParserNode theRoot;
+		//public ParserNode theRoot;
 		/// <MetaDataID>{D87FA618-F554-413D-8090-5C44860E866F}</MetaDataID>
-		public void Parse(string OQLStatament)
+		public void Parse(string OQLStatament, out OQLParserResults oQLParserResults)
 		{
+            oQLParserResults=new OQLParserResults();
             GoldParser.TreeParser treeParser=new GoldParser.TreeParser(GoldGrammar);
             treeParser.ParseAction += new GoldParser.ParseActionDelegate(OnParseAction);
-            theRoot = treeParser.Parse(OQLStatament) as ParserNode;
+            oQLParserResults.theRoot = treeParser.Parse(OQLStatament) as ParserNode;
 
-            if (theRoot == null)
+            if (oQLParserResults.theRoot == null)
             {
                 SyntaxError syntaxError =new SyntaxError(treeParser.LineNumber, treeParser.LinePosition, null, treeParser.ErrorMessage);
-                SyntaxErrors.Add(syntaxError);
+                //SyntaxErrors.Add(syntaxError);
+                oQLParserResults.SyntaxErrors.Add(syntaxError);
                 throw new System.Exception(syntaxError.ToString());
             }
+            else
+            {
 
-            System.Collections.Generic.List<GoldParser.NonTerminalNode> errorNodes = (theRoot as GoldParser.NonTerminalNode).GetErrorStatements();
+
+                try
+                {
+                    RecursiveLoad(oQLParserResults.theRoot);
+                }
+                catch (Exception error)
+                {
+
+                    
+                }
+            }
+
+            System.Collections.Generic.List<GoldParser.NonTerminalNode> errorNodes = (oQLParserResults.theRoot as GoldParser.NonTerminalNode).GetErrorStatements();
             if (errorNodes.Count > 0)
             { 
                 foreach (GoldParser.NonTerminalNode errorNode in errorNodes)
                 {
                     SyntaxError syntaxError =new SyntaxError(errorNode.Line, errorNode.LinePosition, errorNode.Name, errorNode.Value);
-                    SyntaxErrors.Add(syntaxError);
+                    oQLParserResults.SyntaxErrors.Add(syntaxError);
+                    //oQLParserResults.SyntaxErrors.Add(syntaxError);
                 } 
                 throw new System.Exception("Syntax error");
             }
@@ -75,6 +96,19 @@ namespace Parser
             //    throw new System.Exception("Syntax error");
 			//IsErrorFree
 		}
+
+        private void RecursiveLoad(ParserNode theRoot)
+        {
+            if (theRoot!=null)
+            {
+                foreach (ParserNode chlldNode in theRoot.ChildNodes)
+                    RecursiveLoad(chlldNode);
+            }
+            else
+            {
+
+            }
+        }
 
         /// <MetaDataID>{041d7798-dcdf-4a81-9d68-49ca2951db59}</MetaDataID>
         System.Collections.Generic.List<string> SyntaxErrorsMessage = new System.Collections.Generic.List<string>();
@@ -112,4 +146,9 @@ namespace Parser
 		}
 	
 	}
+    public class OQLParserResults
+    {
+        public ParserNode theRoot;
+        public System.Collections.Generic.List<SyntaxError> SyntaxErrors = new System.Collections.Generic.List<SyntaxError>();
+    }
 }
