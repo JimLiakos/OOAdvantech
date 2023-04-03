@@ -43,9 +43,9 @@ namespace Parser
 		/// <MetaDataID>{F7D3FBF4-BD75-47D3-9333-B75E35092878}</MetaDataID>
 		//public ParserNode theRoot;
 		/// <MetaDataID>{D87FA618-F554-413D-8090-5C44860E866F}</MetaDataID>
-		public void Parse(string OQLStatament, out OQLParserResults oQLParserResults)
+		public void Parse(string OQLStatament, out ParserResults oQLParserResults)
 		{
-            oQLParserResults=new OQLParserResults();
+            oQLParserResults=new ParserResults();
             GoldParser.TreeParser treeParser=new GoldParser.TreeParser(GoldGrammar);
             treeParser.ParseAction += new GoldParser.ParseActionDelegate(OnParseAction);
             oQLParserResults.theRoot = treeParser.Parse(OQLStatament) as ParserNode;
@@ -146,7 +146,7 @@ namespace Parser
 		}
 	
 	}
-    public class OQLParserResults
+    public class ParserResults
     {
         public ParserNode theRoot;
         public System.Collections.Generic.List<SyntaxError> SyntaxErrors = new System.Collections.Generic.List<SyntaxError>();

@@ -418,7 +418,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 
             bool HasSyntaxError = false;
             string CatchesErrorDescription = null;
-            Parser.OQLParserResults oQLParserResults = new Parser.OQLParserResults();
+            Parser.ParserResults oQLParserResults = new Parser.ParserResults();
             try
             {
                 OQLParser.Parse(OQLExpretion,out oQLParserResults);
@@ -513,7 +513,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             bool hasSyntaxError = false;
             string CatchesErrorDescription = null;
             ObjectsContext = objectStorage;
-            Parser.OQLParserResults oQLParserResults = new Parser.OQLParserResults();
+            Parser.ParserResults oQLParserResults = new Parser.ParserResults();
             try
             {
                 OQLParser.Parse(oqlExpretion, out oQLParserResults);

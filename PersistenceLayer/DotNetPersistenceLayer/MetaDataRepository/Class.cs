@@ -1697,72 +1697,78 @@ namespace OOAdvantech.MetaDataRepository
                     return new OOAdvantech.Collections.Generic.Set<Feature>(features);
 
                 foreach (Generalization generalization in Generalizations)
-                    features.AddRange(generalization.Parent.GetFeatures(Inherit));
+                {
+                    if (generalization.Parent!=null)
+                        features.AddRange(generalization.Parent.GetFeatures(Inherit));
+                }
 
                 foreach (Realization realization in Realizations)
-                    features.AddRange(realization.Abstarction.GetFeatures(Inherit));
+                {
+                    if (realization.Abstarction!=null)
+                        features.AddRange(realization.Abstarction.GetFeatures(Inherit));
 
-            }
-            lock (ClassHierarchyLock)
-            {
-                if (ClassHierarchyFeatures == null)
-                    ClassHierarchyFeatures = new OOAdvantech.Collections.Generic.Set<Feature>(features);
-                return ClassHierarchyFeatures.AsReadOnly();
+                }
+                lock (ClassHierarchyLock)
+                {
+                    if (ClassHierarchyFeatures == null)
+                        ClassHierarchyFeatures = new OOAdvantech.Collections.Generic.Set<Feature>(features);
+                    return ClassHierarchyFeatures.AsReadOnly();
+                }
             }
         }
 
 
-        /// <MetaDataID>{bc6f5d42-f273-4954-92f7-ce466abe33d6}</MetaDataID>
-        System.Collections.Generic.List<AssociationEnd> PersistentAssociateRoles;
-        /// <MetaDataID>{5b60f960-b19a-418b-ab07-caa7a2bdeaaf}</MetaDataID>
-        public System.Collections.Generic.List<AssociationEnd> GetPersistentAssociateRoles()
-        {
-            lock (MembersSpecializationPropertiesLock)
+            /// <MetaDataID>{bc6f5d42-f273-4954-92f7-ce466abe33d6}</MetaDataID>
+            System.Collections.Generic.List<AssociationEnd> PersistentAssociateRoles;
+            /// <MetaDataID>{5b60f960-b19a-418b-ab07-caa7a2bdeaaf}</MetaDataID>
+            public System.Collections.Generic.List<AssociationEnd> GetPersistentAssociateRoles()
             {
-                if (PersistentAssociateRoles != null)
+                lock (MembersSpecializationPropertiesLock)
+                {
+                    if (PersistentAssociateRoles != null)
+                        return PersistentAssociateRoles;
+                }
+                var persistentAssociateRoles = new System.Collections.Generic.List<AssociationEnd>();
+                foreach (AssociationEnd associationEnd in GetAssociateRoles(true))
+                {
+                    if (!IsPersistent(associationEnd))
+                        continue;
+                    persistentAssociateRoles.Add(associationEnd);
+                }
+                lock (MembersSpecializationPropertiesLock)
+                {
+                    PersistentAssociateRoles = persistentAssociateRoles;
                     return PersistentAssociateRoles;
-            }
-            var persistentAssociateRoles = new System.Collections.Generic.List<AssociationEnd>();
-            foreach (AssociationEnd associationEnd in GetAssociateRoles(true))
-            {
-                if (!IsPersistent(associationEnd))
-                    continue;
-                persistentAssociateRoles.Add(associationEnd);
-            }
-            lock (MembersSpecializationPropertiesLock)
-            {
-                PersistentAssociateRoles = persistentAssociateRoles;
-                return PersistentAssociateRoles;
+                }
+
             }
 
-        }
 
+            /// <MetaDataID>{34a591cb-fa29-4020-8b6a-aabf75c3765e}</MetaDataID>
+            System.Collections.Generic.List<Attribute> PersistentAttributes;
 
-        /// <MetaDataID>{34a591cb-fa29-4020-8b6a-aabf75c3765e}</MetaDataID>
-        System.Collections.Generic.List<Attribute> PersistentAttributes;
-
-        /// <MetaDataID>{0f22fb60-b626-4e55-8c77-4b3fe4609080}</MetaDataID>
-        public System.Collections.Generic.List<Attribute> GetPersistentAttributes()
-        {
-            lock (MembersSpecializationPropertiesLock)
+            /// <MetaDataID>{0f22fb60-b626-4e55-8c77-4b3fe4609080}</MetaDataID>
+            public System.Collections.Generic.List<Attribute> GetPersistentAttributes()
             {
-                if (PersistentAttributes != null)
+                lock (MembersSpecializationPropertiesLock)
+                {
+                    if (PersistentAttributes != null)
+                        return PersistentAttributes;
+                }
+                var persistentAttributes = new System.Collections.Generic.List<Attribute>();
+                foreach (Attribute attribute in GetAttributes(true))
+                {
+                    if (!IsPersistent(attribute))
+                        continue;
+                    persistentAttributes.Add(attribute);
+                }
+
+                lock (MembersSpecializationPropertiesLock)
+                {
+                    PersistentAttributes = persistentAttributes;
                     return PersistentAttributes;
+                }
             }
-            var persistentAttributes = new System.Collections.Generic.List<Attribute>();
-            foreach (Attribute attribute in GetAttributes(true))
-            {
-                if (!IsPersistent(attribute))
-                    continue;
-                persistentAttributes.Add(attribute);
-            }
-
-            lock (MembersSpecializationPropertiesLock)
-            {
-                PersistentAttributes = persistentAttributes;
-                return PersistentAttributes;
-            }
-        }
 
 
         /// <MetaDataID>{927C80F2-9E9A-4B31-A581-849CBFF969EE}</MetaDataID>

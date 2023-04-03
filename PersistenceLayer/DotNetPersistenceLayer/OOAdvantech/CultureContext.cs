@@ -15,11 +15,11 @@ namespace OOAdvantech
         bool PreviousUseDefaultCultureWhenValueMissing;
         System.Globalization.CultureInfo CultureInfo;
         System.Globalization.CultureInfo PreviousCultureInfo;
-        public CultureContext(System.Globalization.CultureInfo cultureInfo,bool useDefaultCultureWhenValueMissing)
+        public CultureContext(System.Globalization.CultureInfo cultureInfo, bool useDefaultCultureWhenValueMissing)
         {
-            
+
             PreviousCultureInfo = CallContext.GetData("Culture") as System.Globalization.CultureInfo;
-            if(CallContext.GetData("UseDefaultCultureWhenValueMissing")!=null)
+            if (CallContext.GetData("UseDefaultCultureWhenValueMissing")!=null)
                 PreviousUseDefaultCultureWhenValueMissing = (bool)CallContext.GetData("UseDefaultCultureWhenValueMissing");
             UseDefaultCultureWhenValueMissing = useDefaultCultureWhenValueMissing;
             CultureInfo = cultureInfo;
@@ -29,14 +29,14 @@ namespace OOAdvantech
             //using
         }
 
-      
 
-       static System.Globalization.CultureInfo _CurrentCultureInfo;
-       public static System.Globalization.CultureInfo CurrentCultureInfo
+
+        static System.Globalization.CultureInfo _CurrentCultureInfo;
+        public static System.Globalization.CultureInfo CurrentCultureInfo
         {
             get
             {
-                var currentCultureInfo= CallContext.GetData("Culture") as System.Globalization.CultureInfo;
+                var currentCultureInfo = CallContext.GetData("Culture") as System.Globalization.CultureInfo;
                 if (currentCultureInfo == null)
                     currentCultureInfo = _CurrentCultureInfo;
                 if (currentCultureInfo == null)
@@ -53,7 +53,9 @@ namespace OOAdvantech
 
         public static CultureInfo GetNeutralCultureInfo(string culture)
         {
-            var currentCultureInfo =  System.Globalization.CultureInfo.GetCultureInfo(culture);
+            var currentCultureInfo = CultureInfo.GetCultureInfo(culture);
+            if (string.IsNullOrWhiteSpace(currentCultureInfo?.Name))
+                return null;
             if (NeutralCultures.ContainsKey(currentCultureInfo.Name))
                 return NeutralCultures[currentCultureInfo.Name];
 
@@ -64,7 +66,7 @@ namespace OOAdvantech
 
         }
 
-    
+
         static Dictionary<string, System.Globalization.CultureInfo> NeutralCultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.NeutralCultures).ToDictionary(x => x.Name);
         public static System.Globalization.CultureInfo CurrentNeutralCultureInfo
         {
@@ -76,7 +78,7 @@ namespace OOAdvantech
                 if (currentCultureInfo == null)
                     currentCultureInfo = System.Globalization.CultureInfo.CurrentCulture;
 
-                if(NeutralCultures.ContainsKey(currentCultureInfo.Name))
+                if (NeutralCultures.ContainsKey(currentCultureInfo.Name))
                     return NeutralCultures[currentCultureInfo.Name];
 
                 if (currentCultureInfo.Parent != null && NeutralCultures.ContainsKey(currentCultureInfo.Parent.Name))
@@ -84,7 +86,7 @@ namespace OOAdvantech
                 else
                     return null;
 
-                
+
             }
             set
             {

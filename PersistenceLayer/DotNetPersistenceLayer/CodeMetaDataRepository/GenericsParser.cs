@@ -177,10 +177,12 @@ namespace OOAdvantech.CodeMetaDataRepository
             {
                 if (parameters == null)
                     parameters = new List<string>();
-                CSharpGenericsParser.Parse(fullName);
-                foreach (Parser.ParserNode parserNode in (CSharpGenericsParser.theRoot["Program"]["Generic_spec"]["Generic_type"]["Generic_parameters"] as Parser.ParserNode).ChildNodes)
+                Parser.ParserResults parserResults = new Parser.ParserResults();
+
+                CSharpGenericsParser.Parse(fullName,out parserResults);
+                foreach (Parser.ParserNode parserNode in (parserResults.theRoot["Program"]["Generic_spec"]["Generic_type"]["Generic_parameters"] as Parser.ParserNode).ChildNodes)
                     parameters.Add(parserNode.Value);
-                typeFullName = (CSharpGenericsParser.theRoot["Program"]["Generic_spec"]["Generic_type"]["FullName"] as Parser.ParserNode).Value;
+                typeFullName = (parserResults.theRoot["Program"]["Generic_spec"]["Generic_type"]["FullName"] as Parser.ParserNode).Value;
             }
             catch (Exception error)
             {

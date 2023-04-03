@@ -56,27 +56,28 @@ namespace RoseMetaDataRepository
             {
                 if(string.IsNullOrEmpty(multilicityString))
                     return new OOAdvantech.MetaDataRepository.MultiplicityRange();
-                MultiplicityParser.Parse(multilicityString);
-                if(MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["Exactly"]!=null)
+                Parser.ParserResults parserResults = new Parser.ParserResults();
+                MultiplicityParser.Parse(multilicityString,out parserResults);
+                if(parserResults.theRoot["Program"]["MultiplicityStatament"]["Exactly"]!=null)
                 {
-                    string value = (MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["Exactly"] as Parser.ParserNode).Value;
+                    string value = (parserResults.theRoot["Program"]["MultiplicityStatament"]["Exactly"] as Parser.ParserNode).Value;
                     return new OOAdvantech.MetaDataRepository.MultiplicityRange(ulong.Parse(value), ulong.Parse(value));
                 }
-                else if (MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["Unspecified"] != null)
+                else if (parserResults.theRoot["Program"]["MultiplicityStatament"]["Unspecified"] != null)
                 {
                     return new OOAdvantech.MetaDataRepository.MultiplicityRange(0);
                     int adsasd = 0;
                 }
-                else if (MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["LowLimit"] != null)
+                else if (parserResults.theRoot["Program"]["MultiplicityStatament"]["LowLimit"] != null)
                 {
-                    string value = (MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["LowLimit"] as Parser.ParserNode).Value;
-                    if (MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["TillStatament"]["UpLimit"]["Many"] != null)
+                    string value = (parserResults.theRoot["Program"]["MultiplicityStatament"]["LowLimit"] as Parser.ParserNode).Value;
+                    if (parserResults.theRoot["Program"]["MultiplicityStatament"]["TillStatament"]["UpLimit"]["Many"] != null)
                     {
                         return new OOAdvantech.MetaDataRepository.MultiplicityRange(ulong.Parse(value));
                     }
                     else
                     {
-                        string upValue = (MultiplicityParser.theRoot["Program"]["MultiplicityStatament"]["TillStatament"]["UpLimit"] as Parser.ParserNode).Value;
+                        string upValue = (parserResults.theRoot["Program"]["MultiplicityStatament"]["TillStatament"]["UpLimit"] as Parser.ParserNode).Value;
 
                         return new OOAdvantech.MetaDataRepository.MultiplicityRange(ulong.Parse(value), ulong.Parse(upValue));
                     }
