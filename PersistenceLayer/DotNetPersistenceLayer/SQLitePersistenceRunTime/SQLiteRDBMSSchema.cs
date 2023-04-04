@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OOAdvantech.RDBMSDataObjects;
+using Parser;
 
 namespace OOAdvantech.SQLitePersistenceRunTime
 {
@@ -1028,11 +1029,11 @@ namespace OOAdvantech.SQLitePersistenceRunTime
             while (dataReader.Read())
             {
                 string sql = dataReader["sql"] as string;
-
-                Parser.Parse(sql);
+                ParserResults parserResults = new ParserResults();
+                Parser.Parse(sql,out parserResults);
                // Parser.theRoot.
                 int i = 0;
-                foreach (Parser.ParserNode tableDefinition in (Parser.theRoot["CreateTableStatement"]["TableDefinitionGroup"] as Parser.ParserNode).ChildNodes)
+                foreach (Parser.ParserNode tableDefinition in (parserResults.theRoot["CreateTableStatement"]["TableDefinitionGroup"] as Parser.ParserNode).ChildNodes)
                 {
                     var tableConstraint = tableDefinition["TableConstraint"];
 

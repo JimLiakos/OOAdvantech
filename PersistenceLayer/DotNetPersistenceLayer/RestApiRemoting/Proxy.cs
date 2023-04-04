@@ -66,7 +66,7 @@ namespace OOAdvantech.Remoting.RestApi
         public ObjRef ObjectRef;
 
         /// <MetaDataID>{cbed457e-a960-4e96-9cbe-04def95ff9df}</MetaDataID>
-        ProxyType ProxyType;
+        internal ProxyType ProxyType;
         /// <MetaDataID>{d3eb0a29-f618-46ad-a29e-e65ff00a3190}</MetaDataID>
         public Proxy(ObjRef objectRef, Type type = null) : base(typeof(MarshalByRefObject))
         {

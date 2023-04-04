@@ -255,10 +255,16 @@ namespace OOAdvantech.Remoting.RestApi
                         bool updateCachingClientSideProperties = false;
                         if (methodCallMessage.Object != null)// && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
-                            if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                            if (methodCallMessage.Object is ITransparentProxy)
+                                proxyType=((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy)?.ProxyType;
+
+                            if (proxyType == null)
                             {
-                                proxyType = new ProxyType(methodCallMessage.Object.GetType());
-                                serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
+                                if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
+                                {
+                                    proxyType = new ProxyType(methodCallMessage.Object.GetType());
+                                    serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
+                                }
                             }
 
                             if (proxyType != null && proxyType.HasCachingClientSideProperties)
@@ -274,8 +280,9 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             if (objectChangeState != null && methodCallMessage.Object != null)
                             {
+                                var @object = OOAdvantech.Remoting.RestApi.Proxy.CastRemoteObject(methodCallMessage.Object, objectChangeState.GetRemoveMethod(true).DeclaringType);
                                 //objectChangeState.AddEventHandler(methodCallMessage.Object, handler);
-                                objectChangeState.GetAddMethod(true).Invoke(methodCallMessage.Object, new[] { handler });
+                                objectChangeState.GetAddMethod(true).Invoke(@object, new[] { handler });
                             }
 
                         }
@@ -365,8 +372,11 @@ namespace OOAdvantech.Remoting.RestApi
 
                             if (objectChangeState != null && methodCallMessage.Object != null)
                             {
+                                
                                 //objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
-                                objectChangeState.GetRemoveMethod(true).Invoke(methodCallMessage.Object, new[] { handler });
+                                var @object= OOAdvantech.Remoting.RestApi.Proxy.CastRemoteObject(methodCallMessage.Object, objectChangeState.GetRemoveMethod(true).DeclaringType);
+                                //CastRemoteObject
+                                objectChangeState.GetRemoveMethod(true).Invoke(@object, new[] { handler });
                             }
 
                             return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = json, UpdateCaching = updateCachingClientSideProperties }; });
@@ -552,8 +562,13 @@ namespace OOAdvantech.Remoting.RestApi
                         System.Reflection.EventInfo objectChangeState = null;
                         if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
-                            proxyType = new ProxyType(methodCallMessage.Object.GetType());
-                            serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
+                            if (methodCallMessage.Object is ITransparentProxy)
+                                proxyType=((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy).ProxyType;
+                            if (proxyType==null)
+                            {
+                                proxyType = new ProxyType(methodCallMessage.Object.GetType());
+                                serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
+                            }
                         }
 
                         if (proxyType != null && proxyType.HasCachingClientSideProperties)
