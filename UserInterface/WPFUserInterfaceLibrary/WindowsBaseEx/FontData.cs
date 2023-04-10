@@ -20,7 +20,24 @@ namespace UIBaseEx
     public struct FontData
     {
 
+        /// <exclude>Excluded</exclude>
+        string _Uri;
+        /// <MetaDataID>{b34aaa7a-87d2-44ef-82a7-c886b5987515}</MetaDataID>
+        [PersistentMember(nameof(_Uri))]
+        [BackwardCompatibilityID("+19")]
+        public string Uri
+        {
+            get => _Uri;
+            set
+            {
+                if (_Uri != value)
+                    _Uri = value;
+            }
+        }
+
+
 #if !DeviceDotNet
+        /// <MetaDataID>{76a657d0-547d-46a5-9f23-1606cf7c7f46}</MetaDataID>
         public static IHtmlView HtmlView;
 #endif
 
@@ -41,9 +58,7 @@ namespace UIBaseEx
             {
 
                 if (_Underline != value)
-                {
                     _Underline = value;
-                }
 
             }
         }
@@ -357,6 +372,7 @@ namespace UIBaseEx
         }
 
 
+        /// <MetaDataID>{a1232e9e-aae9-4cca-9f0c-676fb191be1e}</MetaDataID>
         public override int GetHashCode()
         {
             int num = -1162279000;
@@ -457,6 +473,7 @@ namespace UIBaseEx
             return y_caps + ((y_descent - y_caps) / 2);
         }
 
+        /// <MetaDataID>{b314b70f-4b95-41e6-a498-8f442137c60c}</MetaDataID>
         public double GetTextCapsLine(string text)
         {
             if (text == null)
@@ -491,6 +508,7 @@ namespace UIBaseEx
             return y_caps;
         }
 
+        /// <MetaDataID>{f318eb47-58e6-47e3-afee-0dd9ee14a22c}</MetaDataID>
         public double GetTextDescenLine(string text)
         {
             if (text == null)
@@ -606,6 +624,7 @@ namespace UIBaseEx
             return 0;
         }
 
+        /// <MetaDataID>{47fa28b4-def8-44bd-8971-c5cc27581534}</MetaDataID>
         public double GetTextBaseLine(string text)
         {
             if (text == null)
@@ -627,9 +646,12 @@ namespace UIBaseEx
             return ft.Baseline;
         }
 
+        /// <MetaDataID>{80a4948d-38c1-44e2-8a28-789112a2d91b}</MetaDataID>
         static Dictionary<string, bool> htmlFontFamilies = new Dictionary<string, bool>();
 
+        /// <MetaDataID>{470441e9-75fc-4243-ac40-e54c2a89060c}</MetaDataID>
         static Dictionary<string, bool> htmlLetterSpaceFontFamilies = new Dictionary<string, bool>();
+        /// <MetaDataID>{1763464f-7908-40ed-aa3d-904b3b8ef711}</MetaDataID>
         public double Html5GetFontSpacingCorrection(string text, double textWidth)
         {
             if (text == null)
@@ -664,6 +686,7 @@ namespace UIBaseEx
 
         }
 
+        /// <MetaDataID>{deeddd19-81e1-4c02-aa5e-c098bdae7921}</MetaDataID>
         public Size Html5MeasureText(string text)
         {
             if (text == null)

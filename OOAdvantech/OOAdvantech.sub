@@ -417,7 +417,61 @@
 	    is_unit    	TRUE
 	    is_loaded  	FALSE
 	    file_name  	"$dot Net Projects Path\\PersistenceLayer\\DotNetPersistenceLayer\\RestApiRemoting\\RestApiRemoting.sub"
-	    quid       	"5ABB40620022"))
+	    quid       	"5ABB40620022")
+	(object SubSystem "WindowsBaseEx"
+	    quid       	"642FA86901BF"
+	    physical_models 	(list unit_reference_list
+		(object module "WindowsBaseEx" "NotAModuleType" "NotAModulePart"
+		    attributes 	(list Attribute_Set
+			(object Attribute
+			    tool       	"DotNet"
+			    name       	"Solution"
+			    value      	"$dot Net Projects Path\\FlavourBusiness\\FlavourBusiness.sln")
+			(object Attribute
+			    tool       	"DotNet"
+			    name       	"Project"
+			    value      	"$dot Net Projects Path\\UserInterface\\WPFUserInterfaceLibrary\\WindowsBaseEx\\WindowsBaseEx.csproj"))
+		    quid       	"642FA8A10121"
+		    stereotype 	""
+		    language   	"C#"))
+	    physical_presentations 	(list unit_reference_list
+		(object Module_Diagram "Main"
+		    quid       	"642FA873037B"
+		    title      	"Main"
+		    zoom       	100
+		    max_height 	28350
+		    max_width  	21600
+		    origin_x   	0
+		    origin_y   	0
+		    items      	(list diagram_item_list
+			(object ModView "Component View::OOAdvantech::WindowsBaseEx::WindowsBaseEx" "NotAModuleType" "NotAModulePart" @6
+			    location   	(1131, 706)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	161
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    label      	(object ItemLabel
+				Parent_View 	@6
+				location   	(1040, 666)
+				fill_color 	13434879
+				anchor_loc 	3
+				nlines     	2
+				max_width  	342
+				label      	"WindowsBaseEx")
+			    icon_style 	"Decoration"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"642FA8A10121"
+			    width      	619
+			    height     	269
+			    width      	619
+			    height     	269))))))
     physical_presentations 	(list unit_reference_list
 	(object Module_Diagram "Main"
 	    quid       	"41B2149000BB"
@@ -428,7 +482,7 @@
 	    origin_x   	0
 	    origin_y   	0
 	    items      	(list diagram_item_list
-		(object SubSysView "Component View::OOAdvantech::UserInterface" @6
+		(object SubSysView "Component View::OOAdvantech::UserInterface" @7
 		    location   	(931, 703)
 		    font       	(object Font
 			size       	10
@@ -441,7 +495,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@6
+			Parent_View 	@7
 			location   	(787, 634)
 			fill_color 	13434879
 			nlines     	2
@@ -454,7 +508,7 @@
 		    quidu      	"41B232D800D6"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::Family" @7
+		(object SubSysView "Component View::OOAdvantech::Family" @8
 		    location   	(1426, 1043)
 		    font       	(object Font
 			size       	10
@@ -467,7 +521,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@7
+			Parent_View 	@8
 			location   	(1282, 974)
 			fill_color 	13434879
 			nlines     	2
@@ -480,7 +534,7 @@
 		    quidu      	"41EBEC9E02AF"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::RDBMSMetaDataRepository" @8
+		(object SubSysView "Component View::OOAdvantech::RDBMSMetaDataRepository" @9
 		    location   	(738, 1166)
 		    font       	(object Font
 			size       	10
@@ -493,7 +547,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@8
+			Parent_View 	@9
 			location   	(594, 1097)
 			fill_color 	13434879
 			nlines     	2
@@ -506,7 +560,7 @@
 		    quidu      	"3F2A302E001C"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::MSSQLFastPersistenceRunTime" @9
+		(object SubSysView "Component View::OOAdvantech::MSSQLFastPersistenceRunTime" @10
 		    location   	(363, 1456)
 		    font       	(object Font
 			size       	10
@@ -519,7 +573,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@9
+			Parent_View 	@10
 			location   	(219, 1387)
 			fill_color 	13434879
 			nlines     	2
@@ -532,7 +586,7 @@
 		    quidu      	"4242B4130222"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::AbstractClassPersistency" @10
+		(object SubSysView "Component View::OOAdvantech::AbstractClassPersistency" @11
 		    location   	(1672, 1397)
 		    font       	(object Font
 			size       	10
@@ -545,7 +599,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@10
+			Parent_View 	@11
 			location   	(1528, 1328)
 			fill_color 	13434879
 			nlines     	2
@@ -558,7 +612,7 @@
 		    quidu      	"4358FBE901C9"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::CSharpOQLParser" @11
+		(object SubSysView "Component View::OOAdvantech::CSharpOQLParser" @12
 		    location   	(197, 1747)
 		    font       	(object Font
 			size       	10
@@ -571,7 +625,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@11
+			Parent_View 	@12
 			location   	(53, 1678)
 			fill_color 	13434879
 			nlines     	2
@@ -584,7 +638,7 @@
 		    quidu      	"43672956004E"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::CodeMetaDataRepository" @12
+		(object SubSysView "Component View::OOAdvantech::CodeMetaDataRepository" @13
 		    location   	(909, 1706)
 		    font       	(object Font
 			size       	10
@@ -597,7 +651,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@12
+			Parent_View 	@13
 			location   	(631, 1569)
 			fill_color 	13434879
 			nlines     	2
@@ -610,7 +664,7 @@
 		    quidu      	"45DCD62E0232"
 		    width      	569
 		    height     	287)
-		(object ModView "Component View::OOAdvantech::OOAdvantech" "NotAModuleType" "NotAModulePart" @13
+		(object ModView "Component View::OOAdvantech::OOAdvantech" "NotAModuleType" "NotAModulePart" @14
 		    location   	(593, 350)
 		    font       	(object Font
 			size       	10
@@ -623,7 +677,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@13
+			Parent_View 	@14
 			location   	(553, 325)
 			fill_color 	13434879
 			anchor_loc 	3
@@ -637,7 +691,7 @@
 		    width      	264
 		    width      	264
 		    height     	162)
-		(object SubSysView "Component View::OOAdvantech::Linq" @14
+		(object SubSysView "Component View::OOAdvantech::Linq" @15
 		    location   	(272, 756)
 		    font       	(object Font
 			size       	10
@@ -650,7 +704,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@14
+			Parent_View 	@15
 			location   	(128, 687)
 			fill_color 	13434879
 			nlines     	2
@@ -663,7 +717,7 @@
 		    quidu      	"4AD967A20290"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::RDBMSPersistenceRunTime" @15
+		(object SubSysView "Component View::OOAdvantech::RDBMSPersistenceRunTime" @16
 		    location   	(281, 1159)
 		    font       	(object Font
 			size       	10
@@ -676,7 +730,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@15
+			Parent_View 	@16
 			location   	(137, 1090)
 			fill_color 	13434879
 			nlines     	2
@@ -689,7 +743,7 @@
 		    quidu      	"4D7DC8B90238"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::StorageManagmentStudio" @16
+		(object SubSysView "Component View::OOAdvantech::StorageManagmentStudio" @17
 		    location   	(2286, 1253)
 		    font       	(object Font
 			size       	10
@@ -702,7 +756,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@16
+			Parent_View 	@17
 			location   	(2027, 1128)
 			fill_color 	13434879
 			nlines     	2
@@ -715,7 +769,7 @@
 		    quidu      	"53DF491C003E"
 		    width      	531
 		    height     	262)
-		(object SubSysView "Component View::OOAdvantech::VSUMLMetaDataRepository" @17
+		(object SubSysView "Component View::OOAdvantech::VSUMLMetaDataRepository" @18
 		    location   	(2275, 1734)
 		    font       	(object Font
 			size       	10
@@ -728,7 +782,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@17
+			Parent_View 	@18
 			location   	(2012, 1606)
 			fill_color 	13434879
 			nlines     	2
@@ -741,7 +795,7 @@
 		    quidu      	"5627636400E8"
 		    width      	538
 		    height     	269)
-		(object SubSysView "Component View::OOAdvantech::DontWait" @18
+		(object SubSysView "Component View::OOAdvantech::DontWait" @19
 		    location   	(618, 2056)
 		    font       	(object Font
 			size       	10
@@ -754,7 +808,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@18
+			Parent_View 	@19
 			location   	(474, 1987)
 			fill_color 	13434879
 			nlines     	2
@@ -767,7 +821,7 @@
 		    quidu      	"5760E0E6005A"
 		    width      	300
 		    height     	150)
-		(object SubSysView "Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime" @19
+		(object SubSysView "Component View::OOAdvantech::WindowsAzureTablesPersistenceRunTime" @20
 		    location   	(1648, 2203)
 		    font       	(object Font
 			size       	10
@@ -780,7 +834,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@19
+			Parent_View 	@20
 			location   	(1229, 1997)
 			fill_color 	13434879
 			nlines     	2
@@ -793,7 +847,7 @@
 		    quidu      	"5857C7F30238"
 		    width      	850
 		    height     	425)
-		(object SubSysView "Component View::OOAdvantech::RestApiRemoting" @20
+		(object SubSysView "Component View::OOAdvantech::RestApiRemoting" @21
 		    location   	(1802, 459)
 		    font       	(object Font
 			size       	10
@@ -806,7 +860,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@20
+			Parent_View 	@21
 			location   	(1562, 340)
 			fill_color 	13434879
 			nlines     	2
@@ -819,7 +873,7 @@
 		    quidu      	"5ABB40620022"
 		    width      	493
 		    height     	250)
-		(object InterfaceView "Logical View::OOAdvantech::Remoting::IObjectValuesCollectorService" @21
+		(object InterfaceView "Logical View::OOAdvantech::Remoting::IObjectValuesCollectorService" @22
 		    location   	(1109, 213)
 		    font       	(object Font
 			size       	10
@@ -832,7 +886,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@21
+			Parent_View 	@22
 			location   	(1108, 321)
 			anchor_loc 	1
 			nlines     	2
@@ -846,14 +900,14 @@
 		    quidu      	"471F569C0213"
 		    width      	180
 		    height     	60)
-		(object RealizeView "" @22
+		(object RealizeView "" @23
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5E2FC07202D8"
-		    client     	@13
-		    supplier   	@21
+		    client     	@14
+		    supplier   	@22
 		    line_style 	0)
-		(object InterfaceView "Logical View::OOAdvantech::IMember" @23
+		(object InterfaceView "Logical View::OOAdvantech::IMember" @24
 		    location   	(2369, 393)
 		    font       	(object Font
 			size       	10
@@ -866,7 +920,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@23
+			Parent_View 	@24
 			location   	(2367, 502)
 			anchor_loc 	1
 			nlines     	2
@@ -880,14 +934,14 @@
 		    quidu      	"5E2FC04402D1"
 		    width      	180
 		    height     	60)
-		(object RealizeView "" @24
+		(object RealizeView "" @25
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5E2FC07202D6"
-		    client     	@13
-		    supplier   	@23
+		    client     	@14
+		    supplier   	@24
 		    line_style 	0)
-		(object InterfaceView "Logical View::OOAdvantech::ICollectionMember" @25
+		(object InterfaceView "Logical View::OOAdvantech::ICollectionMember" @26
 		    location   	(659, 2373)
 		    font       	(object Font
 			size       	10
@@ -900,7 +954,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@25
+			Parent_View 	@26
 			location   	(657, 2482)
 			anchor_loc 	1
 			nlines     	2
@@ -914,14 +968,14 @@
 		    quidu      	"5E2FC0A503C0"
 		    width      	180
 		    height     	60)
-		(object RealizeView "" @26
+		(object RealizeView "" @27
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5E2FC0A9031F"
-		    client     	@13
-		    supplier   	@25
+		    client     	@14
+		    supplier   	@26
 		    line_style 	0)
-		(object InterfaceView "Logical View::OOAdvantech::IMemberInitialization" @27
+		(object InterfaceView "Logical View::OOAdvantech::IMemberInitialization" @28
 		    location   	(299, 2373)
 		    font       	(object Font
 			size       	10
@@ -934,7 +988,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@27
+			Parent_View 	@28
 			location   	(298, 2481)
 			anchor_loc 	1
 			nlines     	2
@@ -945,15 +999,17 @@
 		    icon_style 	"Icon"
 		    line_color 	3342489
 		    fill_color 	13434879
-		    quidu      	"5E2FCDD300D4")
-		(object RealizeView "" @28
+		    quidu      	"5E2FCDD300D4"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @29
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5E2FCDE10323"
-		    client     	@13
-		    supplier   	@27
+		    client     	@14
+		    supplier   	@28
 		    line_style 	0)
-		(object InterfaceView "Logical View::OOAdvantech::IObjectState" @29
+		(object InterfaceView "Logical View::OOAdvantech::IObjectState" @30
 		    location   	(2819, 393)
 		    font       	(object Font
 			size       	10
@@ -966,7 +1022,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@29
+			Parent_View 	@30
 			location   	(2818, 501)
 			anchor_loc 	1
 			nlines     	2
@@ -977,15 +1033,17 @@
 		    icon_style 	"Icon"
 		    line_color 	3342489
 		    fill_color 	13434879
-		    quidu      	"5E2FCE0A0396")
-		(object RealizeView "" @30
+		    quidu      	"5E2FCE0A0396"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @31
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5E2FCE1603C7"
-		    client     	@13
-		    supplier   	@29
+		    client     	@14
+		    supplier   	@30
 		    line_style 	0)
-		(object InterfaceView "Logical View::OOAdvantech::IAccount" @31
+		(object InterfaceView "Logical View::OOAdvantech::IAccount" @32
 		    location   	(1559, 123)
 		    font       	(object Font
 			size       	10
@@ -998,7 +1056,7 @@
 			color      	0
 			default_color 	TRUE)
 		    label      	(object ItemLabel
-			Parent_View 	@31
+			Parent_View 	@32
 			location   	(1558, 231)
 			anchor_loc 	1
 			nlines     	2
@@ -1009,11 +1067,39 @@
 		    icon_style 	"Icon"
 		    line_color 	3342489
 		    fill_color 	13434879
-		    quidu      	"5E2FCE9A0263")
-		(object RealizeView "" @32
+		    quidu      	"5E2FCE9A0263"
+		    width      	180
+		    height     	60)
+		(object RealizeView "" @33
 		    stereotype 	TRUE
 		    line_color 	3342489
 		    quidu      	"5E2FCEC4002E"
-		    client     	@13
-		    supplier   	@31
-		    line_style 	0)))))
+		    client     	@14
+		    supplier   	@32
+		    line_style 	0)
+		(object SubSysView "Component View::OOAdvantech::WindowsBaseEx" @34
+		    location   	(3182, 1760)
+		    font       	(object Font
+			size       	10
+			face       	"Arial"
+			charSet    	161
+			bold       	FALSE
+			italics    	FALSE
+			underline  	FALSE
+			strike     	FALSE
+			color      	0
+			default_color 	TRUE)
+		    label      	(object ItemLabel
+			Parent_View 	@34
+			location   	(3038, 1691)
+			fill_color 	13434879
+			nlines     	2
+			max_width  	288
+			justify    	0
+			label      	"WindowsBaseEx")
+		    icon_style 	"Decoration"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"642FA86901BF"
+		    width      	300
+		    height     	150)))))
