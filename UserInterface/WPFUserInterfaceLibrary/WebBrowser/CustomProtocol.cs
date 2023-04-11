@@ -21,7 +21,7 @@ namespace GenWebBrowser
             WebBrowserOverlay = webBrowserOverlay;
             frontendFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./bundle/");
         }
-
+         
         // Process request and craft response.
         public override CefReturnValue ProcessRequestAsync(IRequest request, ICallback callback)
         {
