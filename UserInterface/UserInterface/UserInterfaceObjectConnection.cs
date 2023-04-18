@@ -447,7 +447,7 @@ namespace OOAdvantech.UserInterface.Runtime
                 return;
 
             try
-            {
+            { 
                 UserInterfaceSession.StartControlValuesUpdate();
                 if (State == ViewControlObjectState.Passive)
                     return;
