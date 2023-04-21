@@ -478,9 +478,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         if (((DateTime)dataRow[column.DataBaseColumnName]).ToUniversalTime() != ((DateTime)attributeValue.Value).ToUniversalTime())
                             dataRow[column.DataBaseColumnName] = ((DateTime)attributeValue.Value).ToUniversalTime();
                     }
-
-
                 }
+                else
+                    dataRow[column.DataBaseColumnName] = DBNull.Value;
 
             }
             if (StorageInstanceRefsRows[storageInstance][(storageInstance.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable].Table.Columns.IndexOf("TypeID") != -1)

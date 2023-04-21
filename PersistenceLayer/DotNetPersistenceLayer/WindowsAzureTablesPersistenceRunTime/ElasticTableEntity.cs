@@ -65,7 +65,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
 
             //EntityProperty property = new EntityProperty(key, null, Values);
-          
+            Values[key]=null;
 
             if (type == typeof(string)) return new EntityProperty(key,EdmType.String,Values);
             if (type == typeof(byte[])) return new EntityProperty(key, EdmType.Binary, Values);
