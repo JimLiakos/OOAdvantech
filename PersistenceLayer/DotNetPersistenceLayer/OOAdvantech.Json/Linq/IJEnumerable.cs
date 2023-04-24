@@ -39,9 +39,10 @@ namespace OOAdvantech.Json.Linq
             T> : IEnumerable<T> where T : JToken
     {
         /// <summary>
-        /// Gets the <see cref="IJEnumerable{T}"/> of <see cref="JToken"/> with the specified key.
+        /// Gets the <see cref="IJEnumerable{T}" /> of <see cref="JToken" /> with the specified key.
         /// </summary>
         /// <value></value>
+        /// <MetaDataID>{e13a8d9a-c353-4ea4-bf97-b29ed89aa1e3}</MetaDataID>
         IJEnumerable<JToken> this[object key] { get; }
     }
 }

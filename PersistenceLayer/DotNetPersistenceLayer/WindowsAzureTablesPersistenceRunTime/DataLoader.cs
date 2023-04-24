@@ -14,6 +14,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
     using OOAdvantech.MetaDataRepository;
     using OOAdvantech.RDBMSMetaDataRepository;
+    using System.Web;
 
 
     /// <MetaDataID>{8386fdac-845d-46c8-9ba8-2ab540b704e4}</MetaDataID>
@@ -2315,6 +2316,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                         //List<Azure.Data.Tables.TableEntity> entities = null;
                         //entities = azureTable.ExecuteQuery(query.Select(azureTableEntitiesRetriever.SelectionColumns).Where(azureTableEntitiesRetriever.FilterScript)).ToList();
+                         string rtt=HttpUtility.UrlEncode(azureTableEntitiesRetriever.FilterScript);
                         entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(azureTableEntitiesRetriever.FilterScript, null, azureTableEntitiesRetriever.SelectionColumns).Select(x => new ElasticTableEntity(x)).ToList();
                         int storageIdentity = QueryStorageIdentities.IndexOf(storageCell.StorageIdentity);
                         foreach (var entity in entities)

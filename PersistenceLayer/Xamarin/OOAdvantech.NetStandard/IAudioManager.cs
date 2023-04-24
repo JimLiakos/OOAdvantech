@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace OOAdvantech.AudioManager
 {
+    /// <MetaDataID>{979f4bf2-2513-4a26-a91f-afea80299b2b}</MetaDataID>
     public interface IAudioManager
     {
         #region Computed Properties

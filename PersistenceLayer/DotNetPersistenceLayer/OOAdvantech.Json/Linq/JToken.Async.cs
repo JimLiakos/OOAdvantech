@@ -37,59 +37,63 @@ namespace OOAdvantech.Json.Linq
     public abstract partial class JToken
     {
         /// <summary>
-        /// Writes this token to a <see cref="JsonWriter"/> asynchronously.
+        /// Writes this token to a <see cref="JsonWriter" /> asynchronously.
         /// </summary>
-        /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
+        /// <param name="writer">A <see cref="JsonWriter" /> into which this method will write.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
+        /// <param name="converters">A collection of <see cref="JsonConverter" /> which will be used when writing the token.</param>
+        /// <returns>A <see cref="Task" /> that represents the asynchronous write operation.</returns>
+        /// <MetaDataID>{90169520-f679-4b73-8c26-658e271a0a59}</MetaDataID>
         public virtual Task WriteToAsync(JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Writes this token to a <see cref="JsonWriter"/> asynchronously.
+        /// Writes this token to a <see cref="JsonWriter" /> asynchronously.
         /// </summary>
-        /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
-        /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
+        /// <param name="writer">A <see cref="JsonWriter" /> into which this method will write.</param>
+        /// <param name="converters">A collection of <see cref="JsonConverter" /> which will be used when writing the token.</param>
+        /// <returns>A <see cref="Task" /> that represents the asynchronous write operation.</returns>
+        /// <MetaDataID>{81ec587d-d74c-43bc-8023-9a239189d5a5}</MetaDataID>
         public Task WriteToAsync(JsonWriter writer, params JsonConverter[] converters)
         {
             return WriteToAsync(writer, default, converters);
         }
 
         /// <summary>
-        /// Asynchronously creates a <see cref="JToken"/> from a <see cref="JsonReader"/>.
+        /// Asynchronously creates a <see cref="JToken" /> from a <see cref="JsonReader" />.
         /// </summary>
-        /// <param name="reader">An <see cref="JsonReader"/> positioned at the token to read into this <see cref="JToken"/>.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <param name="reader">An <see cref="JsonReader" /> positioned at the token to read into this <see cref="JToken" />.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
         /// <returns>
-        /// A <see cref="Task{TResult}"/> that represents the asynchronous creation. The
-        /// <see cref="Task{TResult}.Result"/> property returns a <see cref="JToken"/> that contains 
+        /// A <see cref="Task{TResult}" /> that represents the asynchronous creation. The
+        /// <see cref="Task{TResult}.Result" /> property returns a <see cref="JToken" /> that contains 
         /// the token and its descendant tokens
         /// that were read from the reader. The runtime type of the token is determined
         /// by the token type of the first token encountered in the reader.
         /// </returns>
+        /// <MetaDataID>{47e710f7-2342-43fa-b2e2-5d9c33cd3a06}</MetaDataID>
         public static Task<JToken> ReadFromAsync(JsonReader reader, CancellationToken cancellationToken = default)
         {
             return ReadFromAsync(reader, null, cancellationToken);
         }
 
         /// <summary>
-        /// Asynchronously creates a <see cref="JToken"/> from a <see cref="JsonReader"/>.
+        /// Asynchronously creates a <see cref="JToken" /> from a <see cref="JsonReader" />.
         /// </summary>
-        /// <param name="reader">An <see cref="JsonReader"/> positioned at the token to read into this <see cref="JToken"/>.</param>
-        /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
+        /// <param name="reader">An <see cref="JsonReader" /> positioned at the token to read into this <see cref="JToken" />.</param>
+        /// <param name="settings">The <see cref="JsonLoadSettings" /> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
         /// <returns>
-        /// A <see cref="Task{TResult}"/> that represents the asynchronous creation. The
-        /// <see cref="Task{TResult}.Result"/> property returns a <see cref="JToken"/> that contains 
+        /// A <see cref="Task{TResult}" /> that represents the asynchronous creation. The
+        /// <see cref="Task{TResult}.Result" /> property returns a <see cref="JToken" /> that contains 
         /// the token and its descendant tokens
         /// that were read from the reader. The runtime type of the token is determined
         /// by the token type of the first token encountered in the reader.
         /// </returns>
+        /// <MetaDataID>{cec11971-f7a4-43a9-87a2-3598f2bd1e80}</MetaDataID>
         public static async Task<JToken> ReadFromAsync(JsonReader reader, JsonLoadSettings settings, CancellationToken cancellationToken = default)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -141,34 +145,36 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Asynchronously creates a <see cref="JToken"/> from a <see cref="JsonReader"/>.
+        /// Asynchronously creates a <see cref="JToken" /> from a <see cref="JsonReader" />.
         /// </summary>
-        /// <param name="reader">A <see cref="JsonReader"/> positioned at the token to read into this <see cref="JToken"/>.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <param name="reader">A <see cref="JsonReader" /> positioned at the token to read into this <see cref="JToken" />.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
         /// <returns>
-        /// A <see cref="Task{TResult}"/> that represents the asynchronous creation. The <see cref="Task{TResult}.Result"/>
-        /// property returns a <see cref="JToken"/> that contains the token and its descendant tokens
+        /// A <see cref="Task{TResult}" /> that represents the asynchronous creation. The <see cref="Task{TResult}.Result" />
+        /// property returns a <see cref="JToken" /> that contains the token and its descendant tokens
         /// that were read from the reader. The runtime type of the token is determined
         /// by the token type of the first token encountered in the reader.
         /// </returns>
+        /// <MetaDataID>{ea373370-ec77-4cf2-8e32-b1f904dfd39f}</MetaDataID>
         public static Task<JToken> LoadAsync(JsonReader reader, CancellationToken cancellationToken = default)
         {
             return LoadAsync(reader, null, cancellationToken);
         }
 
         /// <summary>
-        /// Asynchronously creates a <see cref="JToken"/> from a <see cref="JsonReader"/>.
+        /// Asynchronously creates a <see cref="JToken" /> from a <see cref="JsonReader" />.
         /// </summary>
-        /// <param name="reader">A <see cref="JsonReader"/> positioned at the token to read into this <see cref="JToken"/>.</param>
-        /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
+        /// <param name="reader">A <see cref="JsonReader" /> positioned at the token to read into this <see cref="JToken" />.</param>
+        /// <param name="settings">The <see cref="JsonLoadSettings" /> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
         /// <returns>
-        /// A <see cref="Task{TResult}"/> that represents the asynchronous creation. The <see cref="Task{TResult}.Result"/>
-        /// property returns a <see cref="JToken"/> that contains the token and its descendant tokens
+        /// A <see cref="Task{TResult}" /> that represents the asynchronous creation. The <see cref="Task{TResult}.Result" />
+        /// property returns a <see cref="JToken" /> that contains the token and its descendant tokens
         /// that were read from the reader. The runtime type of the token is determined
         /// by the token type of the first token encountered in the reader.
         /// </returns>
+        /// <MetaDataID>{f20f773f-f622-45d6-b0e7-a6b23bc0d1d4}</MetaDataID>
         public static Task<JToken> LoadAsync(JsonReader reader, JsonLoadSettings settings, CancellationToken cancellationToken = default)
         {
             return ReadFromAsync(reader, settings, cancellationToken);

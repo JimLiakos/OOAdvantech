@@ -42,7 +42,7 @@ namespace OOAdvantech.MetaDataRepository
                         }
                     }
                 }
-                //TODO Προυποθέτει ότι έχει φορτοθεί η class πλήρος για την περίπτωση .Net
+                //TODO Προυποθέτει ότι έχει φορτοθεί η class πλήρως για την περίπτωση .Net
 
                 foreach (AttributeRealization attributeRealization in Features.OfType<AttributeRealization>())
                     attributeMultilingualism[attributeRealization.Specification] = attributeRealization.Multilingual;

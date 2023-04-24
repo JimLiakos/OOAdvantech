@@ -35,20 +35,23 @@ namespace OOAdvantech.Json
         /// Gets a value indicating whether the class can return line information.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if <see cref="LineNumber"/> and <see cref="LinePosition"/> can be provided; otherwise, <c>false</c>.
+        ///   <c>true</c> if <see cref="LineNumber" /> and <see cref="LinePosition" /> can be provided; otherwise, <c>false</c>.
         /// </returns>
+        /// <MetaDataID>{28ee6099-9a14-4ef9-bb6e-923f0882a450}</MetaDataID>
         bool HasLineInfo();
 
         /// <summary>
         /// Gets the current line number.
         /// </summary>
-        /// <value>The current line number or 0 if no line information is available (for example, when <see cref="HasLineInfo"/> returns <c>false</c>).</value>
+        /// <value>The current line number or 0 if no line information is available (for example, when <see cref="HasLineInfo" /> returns <c>false</c>).</value>
+        /// <MetaDataID>{0450c97a-4068-4fe6-a338-53ebadcce211}</MetaDataID>
         int LineNumber { get; }
 
         /// <summary>
         /// Gets the current line position.
         /// </summary>
-        /// <value>The current line position or 0 if no line information is available (for example, when <see cref="HasLineInfo"/> returns <c>false</c>).</value>
+        /// <value>The current line position or 0 if no line information is available (for example, when <see cref="HasLineInfo" /> returns <c>false</c>).</value>
+        /// <MetaDataID>{55fe8b6a-deb7-45e2-be00-6d764f8da534}</MetaDataID>
         int LinePosition { get; }
     }
 }

@@ -32,6 +32,7 @@ using System.Threading.Tasks;
 
 namespace OOAdvantech.Json.Utilities
 {
+    /// <MetaDataID>{ed3b8155-ee88-48f3-914d-6d713fbf161d}</MetaDataID>
     internal static class AsyncUtils
     {
         // Pre-allocate to avoid wasted allocations.
@@ -55,7 +56,7 @@ namespace OOAdvantech.Json.Utilities
         public static Task FromCanceled(this CancellationToken cancellationToken)
         {
             Debug.Assert(cancellationToken.IsCancellationRequested);
-            return new Task(() => {}, cancellationToken);
+            return new Task(() => { }, cancellationToken);
         }
 
         public static Task<T> FromCanceled<T>(this CancellationToken cancellationToken)

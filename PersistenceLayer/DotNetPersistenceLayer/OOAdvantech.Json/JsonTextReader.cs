@@ -57,31 +57,45 @@ namespace OOAdvantech.Json
     /// <MetaDataID>OOAdvantech.Json.JsonTextReader</MetaDataID>
     public partial class JsonTextReader : JsonReader, IJsonLineInfo
     {
+        /// <MetaDataID>{2c4f757f-f04e-4a59-b039-3bed2a55da9b}</MetaDataID>
         private const char UnicodeReplacementChar = '\uFFFD';
 #if HAVE_BIG_INTEGER
+        /// <MetaDataID>{150446da-5c87-4fd7-bfe9-fd2bccd3cdec}</MetaDataID>
         private const int MaximumJavascriptIntegerCharacterLength = 380;
 #endif
 #if DEBUG
+        /// <MetaDataID>{6ff2197a-80fb-45a7-9e91-6fbf80fdef00}</MetaDataID>
         internal int LargeBufferLength { get; set; } = int.MaxValue / 2;
 #else
         private const int LargeBufferLength = int.MaxValue / 2;
 #endif
 
+        /// <MetaDataID>{f1135d0b-8c9d-4f25-a311-5ac6834d4017}</MetaDataID>
         private readonly TextReader _reader;
+        /// <MetaDataID>{c1703638-ce6d-49ba-97b0-6e5fd9357893}</MetaDataID>
         private char[] _chars;
+        /// <MetaDataID>{2ecad13b-a6cc-4715-9742-52bb21bd3e2c}</MetaDataID>
         private int _charsUsed;
+        /// <MetaDataID>{1f5c5189-c0cd-428a-8c20-4fc3ec0da36f}</MetaDataID>
         private int _charPos;
+        /// <MetaDataID>{0b804d7c-fb67-45c9-99e9-a0111c3d995e}</MetaDataID>
         private int _lineStartPos;
+        /// <MetaDataID>{a4e9c31b-2cb7-4cf1-937c-728e883d7966}</MetaDataID>
         private int _lineNumber;
+        /// <MetaDataID>{4f4c6390-26e3-456f-8a2c-f4754938121e}</MetaDataID>
         private bool _isEndOfFile;
+        /// <MetaDataID>{b48ce31c-39b8-4455-8362-6216b7d7eb4f}</MetaDataID>
         private StringBuffer _stringBuffer;
+        /// <MetaDataID>{0c160323-abe6-4ffe-b8b4-16f0815d7707}</MetaDataID>
         private StringReference _stringReference;
+        /// <MetaDataID>{10599be0-822c-4398-ba74-f3fadf00bd06}</MetaDataID>
         private IArrayPool<char> _arrayPool;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonTextReader"/> class with the specified <see cref="TextReader"/>.
+        /// Initializes a new instance of the <see cref="JsonTextReader" /> class with the specified <see cref="TextReader" />.
         /// </summary>
-        /// <param name="reader">The <see cref="TextReader"/> containing the JSON data to read.</param>
+        /// <param name="reader">The <see cref="TextReader" /> containing the JSON data to read.</param>
+        /// <MetaDataID>{012cde1a-2c82-4301-b5aa-959b50e53e9a}</MetaDataID>
         public JsonTextReader(TextReader reader)
         {
             if (reader == null)
@@ -98,23 +112,27 @@ namespace OOAdvantech.Json
         }
 
 #if DEBUG
+        /// <MetaDataID>{0aeb7781-aedc-4b10-86bb-dd70a955278f}</MetaDataID>
         internal char[] CharBuffer
         {
             get => _chars;
             set => _chars = value;
         }
 
+        /// <MetaDataID>{7dd02866-49e5-490b-b0a8-9cb246c9ab18}</MetaDataID>
         internal int CharPos => _charPos;
 #endif
 
         /// <summary>
         /// Gets or sets the reader's property name table.
         /// </summary>
+        /// <MetaDataID>{78f49bc8-6777-490b-904b-9beac684234c}</MetaDataID>
         public JsonNameTable PropertyNameTable { get; set; }
 
         /// <summary>
         /// Gets or sets the reader's character buffer pool.
         /// </summary>
+        /// <MetaDataID>{bb1e155e-29fb-4ad1-8c0c-7ccf39b7b091}</MetaDataID>
         public IArrayPool<char> ArrayPool
         {
             get => _arrayPool;
@@ -129,6 +147,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{c087885a-6cec-4acc-a707-f8296a085224}</MetaDataID>
         private void EnsureBufferNotEmpty()
         {
             if (_stringBuffer.IsEmpty)
@@ -137,6 +156,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{522d8a98-00e9-403a-be5d-6365947e2cf1}</MetaDataID>
         private void SetNewLine(bool hasNextChar)
         {
             if (hasNextChar && _chars[_charPos] == StringUtils.LineFeed)
@@ -147,12 +167,14 @@ namespace OOAdvantech.Json
             OnNewLine(_charPos);
         }
 
+        /// <MetaDataID>{d8b6c6aa-3f9a-4b7a-ace3-55c49c7a125c}</MetaDataID>
         private void OnNewLine(int pos)
         {
             _lineNumber++;
             _lineStartPos = pos;
         }
 
+        /// <MetaDataID>{3d0c44c3-426e-4fd8-a6dc-abd92bcd3538}</MetaDataID>
         private void ParseString(char quote, ReadType readType)
         {
             _charPos++;
@@ -162,6 +184,7 @@ namespace OOAdvantech.Json
             ParseReadString(quote, readType);
         }
 
+        /// <MetaDataID>{1f41e74f-0b1c-43fb-9477-1a29db481baf}</MetaDataID>
         private void ParseReadString(char quote, ReadType readType)
         {
             SetPostValueState(true);
@@ -242,6 +265,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{4162c835-689a-4c91-a87a-41118d9acd07}</MetaDataID>
         private static void BlockCopyChars(char[] src, int srcOffset, char[] dst, int dstOffset, int count)
         {
             const int charByteCount = 2;
@@ -249,6 +273,7 @@ namespace OOAdvantech.Json
             Buffer.BlockCopy(src, srcOffset * charByteCount, dst, dstOffset * charByteCount, count * charByteCount);
         }
 
+        /// <MetaDataID>{73f978d6-1348-43ba-bd44-1f25778b6403}</MetaDataID>
         private void ShiftBufferIfNeeded()
         {
             // once in the last 10% of the buffer, or buffer is already very large then
@@ -270,11 +295,13 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{9fd2e5fa-41ae-4d1a-a8e6-6de3c5a75c16}</MetaDataID>
         private int ReadData(bool append)
         {
             return ReadData(append, 0);
         }
 
+        /// <MetaDataID>{327c2007-821d-4a41-81a9-54b3169c251b}</MetaDataID>
         private void PrepareBufferForReadData(bool append, int charsRequired)
         {
             // char buffer is full
@@ -332,6 +359,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{d559c43c-240f-415a-b19c-8311b57e4efa}</MetaDataID>
         private int ReadData(bool append, int charsRequired)
         {
             if (_isEndOfFile)
@@ -356,6 +384,7 @@ namespace OOAdvantech.Json
             return charsRead;
         }
 
+        /// <MetaDataID>{b2a8d9c5-cf16-4fb4-b44f-3b72fb5cd110}</MetaDataID>
         private bool EnsureChars(int relativePosition, bool append)
         {
             if (_charPos + relativePosition >= _charsUsed)
@@ -366,6 +395,7 @@ namespace OOAdvantech.Json
             return true;
         }
 
+        /// <MetaDataID>{79859489-5b23-4ce6-8da6-792c5e7bec0d}</MetaDataID>
         private bool ReadChars(int relativePosition, bool append)
         {
             if (_isEndOfFile)
@@ -400,11 +430,12 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" />.
         /// </summary>
         /// <returns>
-        /// <c>true</c> if the next token was read successfully; <c>false</c> if there are no more tokens to read.
+        ///   <c>true</c> if the next token was read successfully; <c>false</c> if there are no more tokens to read.
         /// </returns>
+        /// <MetaDataID>{f6333019-6c1a-43e9-8b4a-5c0295a15c88}</MetaDataID>
         public override bool Read()
         {
             EnsureBuffer();
@@ -457,36 +488,40 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="Int32"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Nullable{T}" /> of <see cref="Int32" />.
         /// </summary>
-        /// <returns>A <see cref="Nullable{T}"/> of <see cref="Int32"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Nullable{T}" /> of <see cref="Int32" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{50b086fc-5dea-4b32-b477-0d8893211923}</MetaDataID>
         public override int? ReadAsInt32()
         {
             return (int?)ReadNumberValue(ReadType.ReadAsInt32);
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="DateTime"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Nullable{T}" /> of <see cref="DateTime" />.
         /// </summary>
-        /// <returns>A <see cref="Nullable{T}"/> of <see cref="DateTime"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Nullable{T}" /> of <see cref="DateTime" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{ec3248bc-3127-4723-a72a-57f41b6136a0}</MetaDataID>
         public override DateTime? ReadAsDateTime()
         {
             return (DateTime?)ReadStringValue(ReadType.ReadAsDateTime);
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="String"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="String" />.
         /// </summary>
-        /// <returns>A <see cref="String"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="String" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{c19a5c7d-c3b5-44ad-a784-2677d57336c4}</MetaDataID>
         public override string ReadAsString()
         {
             return (string)ReadStringValue(ReadType.ReadAsString);
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Byte"/>[].
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Byte" />[].
         /// </summary>
-        /// <returns>A <see cref="Byte"/>[] or <c>null</c> if the next JSON token is null. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Byte" />[] or <c>null</c> if the next JSON token is null. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{eb619ce9-6069-4e5c-a711-b00774d62b79}</MetaDataID>
         public override byte[] ReadAsBytes()
         {
             EnsureBuffer();
@@ -591,6 +626,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{3ea0c837-3c1b-4e37-b2ea-83e595d68c4b}</MetaDataID>
         private object ReadStringValue(ReadType readType)
         {
             EnsureBuffer();
@@ -720,6 +756,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{aee40593-bd99-4ee2-a8f1-8a7105142984}</MetaDataID>
         private object FinishReadQuotedStringValue(ReadType readType)
         {
             switch (readType)
@@ -748,15 +785,17 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{f5b1426b-1cd6-4bf5-bc91-4339e8187eed}</MetaDataID>
         private JsonReaderException CreateUnexpectedCharacterException(char c)
         {
             return JsonReaderException.Create(this, "Unexpected character encountered while parsing value: {0}.".FormatWith(CultureInfo.InvariantCulture, c));
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="Boolean"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Nullable{T}" /> of <see cref="Boolean" />.
         /// </summary>
-        /// <returns>A <see cref="Nullable{T}"/> of <see cref="Boolean"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Nullable{T}" /> of <see cref="Boolean" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{72137413-845c-473e-b0fa-56481a3b17e7}</MetaDataID>
         public override bool? ReadAsBoolean()
         {
             EnsureBuffer();
@@ -877,6 +916,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{abccd150-7740-4356-99aa-dd18adc3d2d4}</MetaDataID>
         private void ProcessValueComma()
         {
             _charPos++;
@@ -894,6 +934,7 @@ namespace OOAdvantech.Json
             SetStateBasedOnCurrent();
         }
 
+        /// <MetaDataID>{5d2194d2-c09f-4c01-83b8-5cc10a66b22d}</MetaDataID>
         private object ReadNumberValue(ReadType readType)
         {
             EnsureBuffer();
@@ -1004,6 +1045,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{acc5f8cb-cba2-406d-9daf-67fc53db72e7}</MetaDataID>
         private object FinishReadQuotedNumber(ReadType readType)
         {
             switch (readType)
@@ -1021,9 +1063,10 @@ namespace OOAdvantech.Json
 
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Nullable{T}" /> of <see cref="DateTimeOffset" />.
         /// </summary>
-        /// <returns>A <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Nullable{T}" /> of <see cref="DateTimeOffset" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{58c76141-0bd8-443a-8584-85548cbb6846}</MetaDataID>
         public override DateTimeOffset? ReadAsDateTimeOffset()
         {
             return (DateTimeOffset?)ReadStringValue(ReadType.ReadAsDateTimeOffset);
@@ -1031,23 +1074,26 @@ namespace OOAdvantech.Json
 #endif
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="Decimal"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Nullable{T}" /> of <see cref="Decimal" />.
         /// </summary>
-        /// <returns>A <see cref="Nullable{T}"/> of <see cref="Decimal"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Nullable{T}" /> of <see cref="Decimal" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{7fe47ff6-3ff5-47fc-a463-1880b1940cee}</MetaDataID>
         public override decimal? ReadAsDecimal()
         {
             return (decimal?)ReadNumberValue(ReadType.ReadAsDecimal);
         }
 
         /// <summary>
-        /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="Double"/>.
+        /// Reads the next JSON token from the underlying <see cref="TextReader" /> as a <see cref="Nullable{T}" /> of <see cref="Double" />.
         /// </summary>
-        /// <returns>A <see cref="Nullable{T}"/> of <see cref="Double"/>. This method will return <c>null</c> at the end of an array.</returns>
+        /// <returns>A <see cref="Nullable{T}" /> of <see cref="Double" />. This method will return <c>null</c> at the end of an array.</returns>
+        /// <MetaDataID>{34c73acd-0d27-44b1-98cf-3c6e097f3f9d}</MetaDataID>
         public override double? ReadAsDouble()
         {
             return (double?)ReadNumberValue(ReadType.ReadAsDouble);
         }
 
+        /// <MetaDataID>{429db97b-69e0-4922-a505-a1f9c46a80be}</MetaDataID>
         private void HandleNull()
         {
             if (EnsureChars(1, true))
@@ -1068,6 +1114,7 @@ namespace OOAdvantech.Json
             throw CreateUnexpectedEndException();
         }
 
+        /// <MetaDataID>{37f517f3-a722-44c5-93c2-91a41d80b628}</MetaDataID>
         private void ReadFinished()
         {
             if (EnsureChars(0, false))
@@ -1090,6 +1137,7 @@ namespace OOAdvantech.Json
             SetToken(JsonToken.None);
         }
 
+        /// <MetaDataID>{f731fb24-dea2-4dc2-87cf-e552f58caa4e}</MetaDataID>
         private bool ReadNullChar()
         {
             if (_charsUsed == _charPos)
@@ -1108,6 +1156,7 @@ namespace OOAdvantech.Json
             return false;
         }
 
+        /// <MetaDataID>{795f0b18-fac8-4455-b367-bf097d1db993}</MetaDataID>
         private void EnsureBuffer()
         {
             if (_chars == null)
@@ -1117,6 +1166,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{9d4366da-4254-4b6c-8174-5c881106bab1}</MetaDataID>
         private void ReadStringIntoBuffer(char quote)
         {
             int charPos = _charPos;
@@ -1270,6 +1320,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{123ea0c3-eab4-408c-9e98-927db056afde}</MetaDataID>
         private void FinishReadStringIntoBuffer(int charPos, int initialPosition, int lastWritePosition)
         {
             if (initialPosition == lastWritePosition)
@@ -1291,6 +1342,7 @@ namespace OOAdvantech.Json
             _charPos = charPos + 1;
         }
 
+        /// <MetaDataID>{1addf50a-4a20-4cde-957c-484eed05bd54}</MetaDataID>
         private void WriteCharToBuffer(char writeChar, int lastWritePosition, int writeToPosition)
         {
             if (writeToPosition > lastWritePosition)
@@ -1301,6 +1353,7 @@ namespace OOAdvantech.Json
             _stringBuffer.Append(_arrayPool, writeChar);
         }
 
+        /// <MetaDataID>{874e4a67-056f-4566-a0d7-413dd8b1888b}</MetaDataID>
         private char ConvertUnicode(bool enoughChars)
         {
             if (enoughChars)
@@ -1322,11 +1375,13 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{4b5ebf72-f0e3-4ec8-aa6b-8a8d999077d0}</MetaDataID>
         private char ParseUnicode()
         {
             return ConvertUnicode(EnsureChars(4, true));
         }
 
+        /// <MetaDataID>{974c2bdd-94b6-4b89-8ffc-926c9ac6f8b8}</MetaDataID>
         private void ReadNumberIntoBuffer()
         {
             int charPos = _charPos;
@@ -1361,6 +1416,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{ad1856fd-4d6a-4ac5-b257-700ad81ecb00}</MetaDataID>
         private bool ReadNumberCharIntoBuffer(char currentChar, int charPos)
         {
             switch (currentChar)
@@ -1405,12 +1461,14 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{d6399985-5df7-4a1f-a50e-777170e57121}</MetaDataID>
         private void ClearRecentString()
         {
             _stringBuffer.Position = 0;
             _stringReference = new StringReference();
         }
 
+        /// <MetaDataID>{05eb9a2d-5130-4b0b-b1cb-6cd72481ce5d}</MetaDataID>
         private bool ParsePostValue(bool ignoreComments)
         {
             while (true)
@@ -1491,6 +1549,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{425d9bcf-4e75-4654-b342-5d3b581d989f}</MetaDataID>
         private bool ParseObject()
         {
             while (true)
@@ -1545,6 +1604,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{9408a4a8-d84e-4483-bcd5-795bde0ad147}</MetaDataID>
         private bool ParseProperty()
         {
             char firstChar = _chars[_charPos];
@@ -1601,11 +1661,13 @@ namespace OOAdvantech.Json
             return true;
         }
 
+        /// <MetaDataID>{9bc7c217-45fb-42dd-a927-fa9f351bae31}</MetaDataID>
         private bool ValidIdentifierChar(char value)
         {
             return (char.IsLetterOrDigit(value) || value == '_' || value == '$');
         }
 
+        /// <MetaDataID>{b8a79d71-70bb-461e-9b8b-ec5ca7b9231a}</MetaDataID>
         private void ParseUnquotedProperty()
         {
             int initialPosition = _charPos;
@@ -1637,6 +1699,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{4242856f-c9f8-4634-be2f-6bae6707a6e9}</MetaDataID>
         private bool ReadUnquotedPropertyReportIfDone(char currentChar, int initialPosition)
         {
             if (ValidIdentifierChar(currentChar))
@@ -1654,6 +1717,7 @@ namespace OOAdvantech.Json
             throw JsonReaderException.Create(this, "Invalid JavaScript property identifier character: {0}.".FormatWith(CultureInfo.InvariantCulture, currentChar));
         }
 
+        /// <MetaDataID>{00054e94-b62b-4751-8123-ec635eeaa81c}</MetaDataID>
         private bool ParseValue()
         {
             while (true)
@@ -1781,12 +1845,14 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{e35669c6-f63f-4a8e-a935-dba359c3df73}</MetaDataID>
         private void ProcessLineFeed()
         {
             _charPos++;
             OnNewLine(_charPos);
         }
 
+        /// <MetaDataID>{2e7b6040-5d78-4f14-a6a9-6e0ced26a8dc}</MetaDataID>
         private void ProcessCarriageReturn(bool append)
         {
             _charPos++;
@@ -1794,6 +1860,7 @@ namespace OOAdvantech.Json
             SetNewLine(EnsureChars(1, append));
         }
 
+        /// <MetaDataID>{0c8d6883-ca93-462a-bf8d-9e3b397bae10}</MetaDataID>
         private void EatWhitespace()
         {
             while (true)
@@ -1835,6 +1902,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{6ed1695a-109c-4230-b3af-d22d3721580a}</MetaDataID>
         private void ParseConstructor()
         {
             if (MatchValueWithTrailingSeparator("new"))
@@ -1918,6 +1986,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{3d064c72-6efa-4d4e-bd38-b2dfa7ee3995}</MetaDataID>
         private void ParseNumber(ReadType readType)
         {
             ShiftBufferIfNeeded();
@@ -1930,6 +1999,7 @@ namespace OOAdvantech.Json
             ParseReadNumber(readType, firstChar, initialPosition);
         }
 
+        /// <MetaDataID>{66ef3a09-85c2-4cd1-8c5e-63e3172d1f92}</MetaDataID>
         private void ParseReadNumber(ReadType readType, char firstChar, int initialPosition)
         {
             // set state to PostValue now so that if there is an error parsing the number then the reader can continue
@@ -2192,6 +2262,7 @@ namespace OOAdvantech.Json
             SetToken(numberType, numberValue, false);
         }
 
+        /// <MetaDataID>{a4a6a3c8-8f99-4284-811a-bea38fec6197}</MetaDataID>
         private JsonReaderException ThrowReaderError(string message, Exception ex = null)
         {
             SetToken(JsonToken.Undefined, null, false);
@@ -2203,6 +2274,7 @@ namespace OOAdvantech.Json
         // the runtime can execute the ParseNumber even if 
         // the System.Numerics.BigInteger.Parse method is
         // missing, which happens in some versions of Mono
+        /// <MetaDataID>{5a6c3149-1c31-41ca-b08c-33937eb3c1d2}</MetaDataID>
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static object BigIntegerParse(string number, CultureInfo culture)
         {
@@ -2210,6 +2282,7 @@ namespace OOAdvantech.Json
         }
 #endif
 
+        /// <MetaDataID>{2b6e11fd-1476-4f9a-8a61-9ae46fe6ec53}</MetaDataID>
         private void ParseComment(bool setToken)
         {
             // should have already parsed / character before reaching this method
@@ -2302,6 +2375,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{c1d3b333-8b1e-4dc2-8e0f-be605e6f8aec}</MetaDataID>
         private void EndComment(bool setToken, int initialPosition, int endPosition)
         {
             if (setToken)
@@ -2310,11 +2384,13 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{efae2145-6db0-4054-ae90-d1d3f078a64f}</MetaDataID>
         private bool MatchValue(string value)
         {
             return MatchValue(EnsureChars(value.Length - 1, true), value);
         }
 
+        /// <MetaDataID>{fa004364-9803-4bca-89cf-460af20d75b3}</MetaDataID>
         private bool MatchValue(bool enoughChars, string value)
         {
             if (!enoughChars)
@@ -2337,6 +2413,7 @@ namespace OOAdvantech.Json
             return true;
         }
 
+        /// <MetaDataID>{4779f06e-0969-4db3-bba2-80c662ea6fdd}</MetaDataID>
         private bool MatchValueWithTrailingSeparator(string value)
         {
             // will match value and then move to the next character, checking that it is a separator character
@@ -2355,6 +2432,7 @@ namespace OOAdvantech.Json
             return IsSeparator(_chars[_charPos]) || _chars[_charPos] == '\0';
         }
 
+        /// <MetaDataID>{7dcfaaec-0da3-4c16-8b84-a586ae49dec9}</MetaDataID>
         private bool IsSeparator(char c)
         {
             switch (c)
@@ -2395,6 +2473,7 @@ namespace OOAdvantech.Json
             return false;
         }
 
+        /// <MetaDataID>{e570a00c-0dfe-4099-b85c-53a8f3429098}</MetaDataID>
         private void ParseTrue()
         {
             // check characters equal 'true'
@@ -2410,6 +2489,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{3050b39b-12f2-4020-8f73-9501baa8889a}</MetaDataID>
         private void ParseNull()
         {
             if (MatchValueWithTrailingSeparator(JsonConvert.Null))
@@ -2422,6 +2502,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{141e4fca-6bb4-4cd2-816c-d9c928587bee}</MetaDataID>
         private void ParseUndefined()
         {
             if (MatchValueWithTrailingSeparator(JsonConvert.Undefined))
@@ -2434,6 +2515,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{32d9f8d8-62b0-40ed-b1a4-7a5107a2048a}</MetaDataID>
         private void ParseFalse()
         {
             if (MatchValueWithTrailingSeparator(JsonConvert.False))
@@ -2446,11 +2528,13 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{7c58b386-2e64-43c0-80fe-78e8eab4fa10}</MetaDataID>
         private object ParseNumberNegativeInfinity(ReadType readType)
         {
             return ParseNumberNegativeInfinity(readType, MatchValueWithTrailingSeparator(JsonConvert.NegativeInfinity));
         }
 
+        /// <MetaDataID>{ca847fca-a80f-4b75-b49b-064c29ad3bda}</MetaDataID>
         private object ParseNumberNegativeInfinity(ReadType readType, bool matched)
         {
             if (matched)
@@ -2476,10 +2560,12 @@ namespace OOAdvantech.Json
             throw JsonReaderException.Create(this, "Error parsing -Infinity value.");
         }
 
+        /// <MetaDataID>{9b500ab7-21f8-4b89-a966-ae0bd990c800}</MetaDataID>
         private object ParseNumberPositiveInfinity(ReadType readType)
         {
             return ParseNumberPositiveInfinity(readType, MatchValueWithTrailingSeparator(JsonConvert.PositiveInfinity));
         }
+        /// <MetaDataID>{9a5a2078-bbdc-4c15-bb29-bc169f061ae0}</MetaDataID>
         private object ParseNumberPositiveInfinity(ReadType readType, bool matched)
         {
             if (matched)
@@ -2505,11 +2591,13 @@ namespace OOAdvantech.Json
             throw JsonReaderException.Create(this, "Error parsing Infinity value.");
         }
 
+        /// <MetaDataID>{3f1d81bf-b747-43b2-92bb-427a3ea5e341}</MetaDataID>
         private object ParseNumberNaN(ReadType readType)
         {
             return ParseNumberNaN(readType, MatchValueWithTrailingSeparator(JsonConvert.NaN));
         }
 
+        /// <MetaDataID>{fe592326-d804-42e2-abea-157e36b8eca7}</MetaDataID>
         private object ParseNumberNaN(ReadType readType, bool matched)
         {
             if (matched)
@@ -2536,9 +2624,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Changes the reader's state to <see cref="JsonReader.State.Closed"/>.
-        /// If <see cref="JsonReader.CloseInput"/> is set to <c>true</c>, the underlying <see cref="TextReader"/> is also closed.
+        /// Changes the reader's state to <see cref="JsonReader.State.Closed" />.
+        /// If <see cref="JsonReader.CloseInput" /> is set to <c>true</c>, the underlying <see cref="TextReader" /> is also closed.
         /// </summary>
+        /// <MetaDataID>{e1429616-2405-4219-8b5a-c9f797c146bb}</MetaDataID>
         public override void Close()
         {
             base.Close();
@@ -2565,8 +2654,9 @@ namespace OOAdvantech.Json
         /// Gets a value indicating whether the class can return line information.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if <see cref="JsonTextReader.LineNumber"/> and <see cref="JsonTextReader.LinePosition"/> can be provided; otherwise, <c>false</c>.
+        ///   <c>true</c> if <see cref="JsonTextReader.LineNumber" /> and <see cref="JsonTextReader.LinePosition" /> can be provided; otherwise, <c>false</c>.
         /// </returns>
+        /// <MetaDataID>{fe2e637b-c1fb-445b-b673-f13594b8ea61}</MetaDataID>
         public bool HasLineInfo()
         {
             return true;
@@ -2576,8 +2666,9 @@ namespace OOAdvantech.Json
         /// Gets the current line number.
         /// </summary>
         /// <value>
-        /// The current line number or 0 if no line information is available (for example, <see cref="JsonTextReader.HasLineInfo"/> returns <c>false</c>).
+        /// The current line number or 0 if no line information is available (for example, <see cref="JsonTextReader.HasLineInfo" /> returns <c>false</c>).
         /// </value>
+        /// <MetaDataID>{387a154f-2bf1-4172-91b3-ac36018c77e6}</MetaDataID>
         public int LineNumber
         {
             get
@@ -2595,8 +2686,9 @@ namespace OOAdvantech.Json
         /// Gets the current line position.
         /// </summary>
         /// <value>
-        /// The current line position or 0 if no line information is available (for example, <see cref="JsonTextReader.HasLineInfo"/> returns <c>false</c>).
+        /// The current line position or 0 if no line information is available (for example, <see cref="JsonTextReader.HasLineInfo" /> returns <c>false</c>).
         /// </value>
+        /// <MetaDataID>{73004804-72d8-4f3e-9ca0-15c09be4fe90}</MetaDataID>
         public int LinePosition => _charPos - _lineStartPos;
     }
 }

@@ -56,7 +56,9 @@ namespace OOAdvantech.Json.Linq
 #endif
     {
 #if HAVE_COMPONENT_MODEL
+        /// <MetaDataID>{7685bbd0-7fc5-41e6-9240-a1cd113fa21e}</MetaDataID>
         internal ListChangedEventHandler _listChanged;
+        /// <MetaDataID>{73c7c748-13f0-4363-bcc9-03c1bf7c5012}</MetaDataID>
         internal AddingNewEventHandler _addingNew;
 
         /// <summary>
@@ -78,6 +80,7 @@ namespace OOAdvantech.Json.Linq
         }
 #endif
 #if HAVE_INOTIFY_COLLECTION_CHANGED
+        /// <MetaDataID>{0b826c36-9281-457d-b4ff-c2fd2d6d8af5}</MetaDataID>
         internal NotifyCollectionChangedEventHandler _collectionChanged;
 
         /// <summary>
@@ -94,19 +97,24 @@ namespace OOAdvantech.Json.Linq
         /// Gets the container's children tokens.
         /// </summary>
         /// <value>The container's children tokens.</value>
+        /// <MetaDataID>{3bdee8b3-9369-4eea-a818-fde295e009d6}</MetaDataID>
         protected abstract IList<JToken> ChildrenTokens { get; }
 
+        /// <MetaDataID>{9d9a89e4-1977-43b8-869b-c0d355ce1df6}</MetaDataID>
         private object _syncRoot;
 #if (HAVE_COMPONENT_MODEL || HAVE_INOTIFY_COLLECTION_CHANGED)
+        /// <MetaDataID>{a0717b8c-70a0-4a0d-88f9-32338c3264ea}</MetaDataID>
         private bool _busy;
 #endif
 
+        /// <MetaDataID>{9d238deb-2a77-4ec7-91f4-efbfb5a49aad}</MetaDataID>
         internal JContainer()
         {
         }
 
+        /// <MetaDataID>{d35be380-c78e-42ee-94a5-0f356dd8fca5}</MetaDataID>
         internal JContainer(JContainer other)
-            : this()
+                    : this()
         {
             ValidationUtils.ArgumentNotNull(other, nameof(other));
 
@@ -118,6 +126,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{d23b1cdf-678c-432c-9988-2f5d5e5ebf97}</MetaDataID>
         internal void CheckReentrancy()
         {
 #if (HAVE_COMPONENT_MODEL || HAVE_INOTIFY_COLLECTION_CHANGED)
@@ -128,6 +137,7 @@ namespace OOAdvantech.Json.Linq
 #endif
         }
 
+        /// <MetaDataID>{458d0508-69b0-4f82-a0b8-cda867156797}</MetaDataID>
         internal virtual IList<JToken> CreateChildrenCollection()
         {
             return new List<JToken>();
@@ -135,18 +145,20 @@ namespace OOAdvantech.Json.Linq
 
 #if HAVE_COMPONENT_MODEL
         /// <summary>
-        /// Raises the <see cref="AddingNew"/> event.
+        /// Raises the <see cref="AddingNew" /> event.
         /// </summary>
-        /// <param name="e">The <see cref="AddingNewEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="AddingNewEventArgs" /> instance containing the event data.</param>
+        /// <MetaDataID>{b0f38abf-6be7-48e8-a1e1-7a995e31fbfd}</MetaDataID>
         protected virtual void OnAddingNew(AddingNewEventArgs e)
         {
             _addingNew?.Invoke(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="ListChanged"/> event.
+        /// Raises the <see cref="ListChanged" /> event.
         /// </summary>
-        /// <param name="e">The <see cref="ListChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="ListChangedEventArgs" /> instance containing the event data.</param>
+        /// <MetaDataID>{ad3ec7a3-30e3-4184-ae85-e633100c4a89}</MetaDataID>
         protected virtual void OnListChanged(ListChangedEventArgs e)
         {
             ListChangedEventHandler handler = _listChanged;
@@ -167,9 +179,10 @@ namespace OOAdvantech.Json.Linq
 #endif
 #if HAVE_INOTIFY_COLLECTION_CHANGED
         /// <summary>
-        /// Raises the <see cref="CollectionChanged"/> event.
+        /// Raises the <see cref="CollectionChanged" /> event.
         /// </summary>
-        /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs" /> instance containing the event data.</param>
+        /// <MetaDataID>{7f42f5c9-aa15-4753-a95b-be9762316f8b}</MetaDataID>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler handler = _collectionChanged;
@@ -193,10 +206,12 @@ namespace OOAdvantech.Json.Linq
         /// Gets a value indicating whether this token has child tokens.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this token has child values; otherwise, <c>false</c>.
+        ///   <c>true</c> if this token has child values; otherwise, <c>false</c>.
         /// </value>
+        /// <MetaDataID>{ad447a29-c2db-4715-b3c1-8938aaad0124}</MetaDataID>
         public override bool HasValues => ChildrenTokens.Count > 0;
 
+        /// <MetaDataID>{81afea54-8ec8-4722-bb2f-8bf48d7512c6}</MetaDataID>
         internal bool ContentsEqual(JContainer container)
         {
             if (container == this)
@@ -227,8 +242,9 @@ namespace OOAdvantech.Json.Linq
         /// Get the first child token of this token.
         /// </summary>
         /// <value>
-        /// A <see cref="JToken"/> containing the first child token of the <see cref="JToken"/>.
+        /// A <see cref="JToken" /> containing the first child token of the <see cref="JToken" />.
         /// </value>
+        /// <MetaDataID>{0107a036-af7e-45b5-b3c0-2b768a062750}</MetaDataID>
         public override JToken First
         {
             get
@@ -242,8 +258,9 @@ namespace OOAdvantech.Json.Linq
         /// Get the last child token of this token.
         /// </summary>
         /// <value>
-        /// A <see cref="JToken"/> containing the last child token of the <see cref="JToken"/>.
+        /// A <see cref="JToken" /> containing the last child token of the <see cref="JToken" />.
         /// </value>
+        /// <MetaDataID>{3b0e1a64-92a0-4c4f-94ed-ccec3452b6bd}</MetaDataID>
         public override JToken Last
         {
             get
@@ -258,8 +275,9 @@ namespace OOAdvantech.Json.Linq
         /// Returns a collection of the child tokens of this token, in document order.
         /// </summary>
         /// <returns>
-        /// An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing the child tokens of this <see cref="JToken"/>, in document order.
+        /// An <see cref="IEnumerable{T}" /> of <see cref="JToken" /> containing the child tokens of this <see cref="JToken" />, in document order.
         /// </returns>
+        /// <MetaDataID>{1744843a-8f53-4b31-9e42-d232ba9da62a}</MetaDataID>
         public override JEnumerable<JToken> Children()
         {
             return new JEnumerable<JToken>(ChildrenTokens);
@@ -270,8 +288,9 @@ namespace OOAdvantech.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type to convert the values to.</typeparam>
         /// <returns>
-        /// A <see cref="IEnumerable{T}"/> containing the child values of this <see cref="JToken"/>, in document order.
+        /// A <see cref="IEnumerable{T}" /> containing the child values of this <see cref="JToken" />, in document order.
         /// </returns>
+        /// <MetaDataID>{84f9ae56-4cf6-4dac-bb23-bf9baddb2b24}</MetaDataID>
         public override IEnumerable<T> Values<T>()
         {
             return ChildrenTokens.Convert<JToken, T>();
@@ -280,7 +299,8 @@ namespace OOAdvantech.Json.Linq
         /// <summary>
         /// Returns a collection of the descendant tokens for this token in document order.
         /// </summary>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing the descendant tokens of the <see cref="JToken"/>.</returns>
+        /// <returns>An <see cref="IEnumerable{T}" /> of <see cref="JToken" /> containing the descendant tokens of the <see cref="JToken" />.</returns>
+        /// <MetaDataID>{b47cec38-4abe-4d01-97ff-c986de1ae76d}</MetaDataID>
         public IEnumerable<JToken> Descendants()
         {
             return GetDescendants(false);
@@ -289,12 +309,14 @@ namespace OOAdvantech.Json.Linq
         /// <summary>
         /// Returns a collection of the tokens that contain this token, and all descendant tokens of this token, in document order.
         /// </summary>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing this token, and all the descendant tokens of the <see cref="JToken"/>.</returns>
+        /// <returns>An <see cref="IEnumerable{T}" /> of <see cref="JToken" /> containing this token, and all the descendant tokens of the <see cref="JToken" />.</returns>
+        /// <MetaDataID>{5ad9ea7f-d47c-473b-b2e1-4e185e298ed3}</MetaDataID>
         public IEnumerable<JToken> DescendantsAndSelf()
         {
             return GetDescendants(true);
         }
 
+        /// <MetaDataID>{ff203a53-dddd-4ad7-b97b-e6cdf01da9a5}</MetaDataID>
         internal IEnumerable<JToken> GetDescendants(bool self)
         {
             if (self)
@@ -315,11 +337,13 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{2336f53a-1009-4ae8-9b45-8820584a5640}</MetaDataID>
         internal bool IsMultiContent(object content)
         {
             return (content is IEnumerable && !(content is string) && !(content is JToken) && !(content is byte[]));
         }
 
+        /// <MetaDataID>{bd7b27f4-bc82-454d-a3f8-427944e0e83b}</MetaDataID>
         internal JToken EnsureParentToken(JToken item, bool skipParentCheck)
         {
             if (item == null)
@@ -344,8 +368,10 @@ namespace OOAdvantech.Json.Linq
             return item;
         }
 
+        /// <MetaDataID>{23c6fe41-9a9c-41a5-8d1b-a5ad8338fa8f}</MetaDataID>
         internal abstract int IndexOfItem(JToken item);
 
+        /// <MetaDataID>{cafb7db7-0b30-4a80-b479-49fe187e1707}</MetaDataID>
         internal virtual void InsertItem(int index, JToken item, bool skipParentCheck)
         {
             IList<JToken> children = ChildrenTokens;
@@ -395,6 +421,7 @@ namespace OOAdvantech.Json.Linq
 #endif
         }
 
+        /// <MetaDataID>{393dee86-6c83-4ed2-8d77-df912a2fee01}</MetaDataID>
         internal virtual void RemoveItemAt(int index)
         {
             IList<JToken> children = ChildrenTokens;
@@ -443,6 +470,7 @@ namespace OOAdvantech.Json.Linq
 #endif
         }
 
+        /// <MetaDataID>{12fd9be8-e610-4983-a268-1a048cb2a0b2}</MetaDataID>
         internal virtual bool RemoveItem(JToken item)
         {
             int index = IndexOfItem(item);
@@ -455,11 +483,13 @@ namespace OOAdvantech.Json.Linq
             return false;
         }
 
+        /// <MetaDataID>{d13fe73c-b610-4c02-946f-ed3f7d55e5fd}</MetaDataID>
         internal virtual JToken GetItem(int index)
         {
             return ChildrenTokens[index];
         }
 
+        /// <MetaDataID>{44c5e873-94e2-4b06-83ca-cb25ece72e6d}</MetaDataID>
         internal virtual void SetItem(int index, JToken item)
         {
             IList<JToken> children = ChildrenTokens;
@@ -523,6 +553,7 @@ namespace OOAdvantech.Json.Linq
 #endif
         }
 
+        /// <MetaDataID>{6090bd78-49e4-436f-b1ce-0a5671fbf0aa}</MetaDataID>
         internal virtual void ClearItems()
         {
             CheckReentrancy();
@@ -552,6 +583,7 @@ namespace OOAdvantech.Json.Linq
 #endif
         }
 
+        /// <MetaDataID>{a9e0ac67-3cc8-40fe-91a5-72b4f728ef63}</MetaDataID>
         internal virtual void ReplaceItem(JToken existing, JToken replacement)
         {
             if (existing == null || existing.Parent != this)
@@ -563,11 +595,13 @@ namespace OOAdvantech.Json.Linq
             SetItem(index, replacement);
         }
 
+        /// <MetaDataID>{3b3cd08b-76d5-4981-bf58-ceca8048344f}</MetaDataID>
         internal virtual bool ContainsItem(JToken item)
         {
             return (IndexOfItem(item) != -1);
         }
 
+        /// <MetaDataID>{2a665c0a-4ed9-451b-95c1-b5cdc3fc19c4}</MetaDataID>
         internal virtual void CopyItemsTo(Array array, int arrayIndex)
         {
             if (array == null)
@@ -595,6 +629,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{723538a1-ca38-4b26-8fa4-c28a54d8c2da}</MetaDataID>
         internal static bool IsTokenUnchanged(JToken currentValue, JToken newValue)
         {
             if (currentValue is JValue v1)
@@ -611,6 +646,7 @@ namespace OOAdvantech.Json.Linq
             return false;
         }
 
+        /// <MetaDataID>{3095ed56-08d2-4fe3-abea-93a90ca91596}</MetaDataID>
         internal virtual void ValidateToken(JToken o, JToken existing)
         {
             ValidationUtils.ArgumentNotNull(o, nameof(o));
@@ -622,28 +658,32 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Adds the specified content as children of this <see cref="JToken"/>.
+        /// Adds the specified content as children of this <see cref="JToken" />.
         /// </summary>
         /// <param name="content">The content to be added.</param>
+        /// <MetaDataID>{1e775cf6-8973-4936-8654-780b6d7f34e8}</MetaDataID>
         public virtual void Add(object content)
         {
             AddInternal(ChildrenTokens.Count, content, false);
         }
 
+        /// <MetaDataID>{96c3480e-87bc-4809-8123-bdba46e93002}</MetaDataID>
         internal void AddAndSkipParentCheck(JToken token)
         {
             AddInternal(ChildrenTokens.Count, token, true);
         }
 
         /// <summary>
-        /// Adds the specified content as the first children of this <see cref="JToken"/>.
+        /// Adds the specified content as the first children of this <see cref="JToken" />.
         /// </summary>
         /// <param name="content">The content to be added.</param>
+        /// <MetaDataID>{7016bfbe-0cbf-47ff-8e6d-d74fab1fccf2}</MetaDataID>
         public void AddFirst(object content)
         {
             AddInternal(0, content, false);
         }
 
+        /// <MetaDataID>{3406d30d-b21a-4a42-898e-54335a48894a}</MetaDataID>
         internal void AddInternal(int index, object content, bool skipParentCheck)
         {
             if (IsMultiContent(content))
@@ -665,6 +705,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{c208f708-4cf9-4e14-bec4-dc5a2d927938}</MetaDataID>
         internal static JToken CreateFromContent(object content)
         {
             if (content is JToken token)
@@ -676,9 +717,10 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Creates a <see cref="JsonWriter"/> that can be used to add tokens to the <see cref="JToken"/>.
+        /// Creates a <see cref="JsonWriter" /> that can be used to add tokens to the <see cref="JToken" />.
         /// </summary>
-        /// <returns>A <see cref="JsonWriter"/> that is ready to have content written to it.</returns>
+        /// <returns>A <see cref="JsonWriter" /> that is ready to have content written to it.</returns>
+        /// <MetaDataID>{2a38a12b-58ff-49de-8921-fd700df35f9f}</MetaDataID>
         public JsonWriter CreateWriter()
         {
             return new JTokenWriter(this);
@@ -688,6 +730,7 @@ namespace OOAdvantech.Json.Linq
         /// Replaces the child nodes of this token with the specified content.
         /// </summary>
         /// <param name="content">The content.</param>
+        /// <MetaDataID>{67d955e8-6930-4c78-a0c2-2899e147739d}</MetaDataID>
         public void ReplaceAll(object content)
         {
             ClearItems();
@@ -697,32 +740,37 @@ namespace OOAdvantech.Json.Linq
         /// <summary>
         /// Removes the child nodes from this token.
         /// </summary>
+        /// <MetaDataID>{c376e6af-5c74-4db9-9161-e13195df1ea9}</MetaDataID>
         public void RemoveAll()
         {
             ClearItems();
         }
 
+        /// <MetaDataID>{db688bf1-8f2a-4b5c-888c-c15424aa7bed}</MetaDataID>
         internal abstract void MergeItem(object content, JsonMergeSettings settings);
 
         /// <summary>
-        /// Merge the specified content into this <see cref="JToken"/>.
+        /// Merge the specified content into this <see cref="JToken" />.
         /// </summary>
         /// <param name="content">The content to be merged.</param>
+        /// <MetaDataID>{3bc5f1da-aae1-42b8-a5a9-1800b71f0dac}</MetaDataID>
         public void Merge(object content)
         {
             MergeItem(content, new JsonMergeSettings());
         }
 
         /// <summary>
-        /// Merge the specified content into this <see cref="JToken"/> using <see cref="JsonMergeSettings"/>.
+        /// Merge the specified content into this <see cref="JToken" /> using <see cref="JsonMergeSettings" />.
         /// </summary>
         /// <param name="content">The content to be merged.</param>
-        /// <param name="settings">The <see cref="JsonMergeSettings"/> used to merge the content.</param>
+        /// <param name="settings">The <see cref="JsonMergeSettings" /> used to merge the content.</param>
+        /// <MetaDataID>{0b2d297c-9539-45d6-9e84-76ccdc409be0}</MetaDataID>
         public void Merge(object content, JsonMergeSettings settings)
         {
             MergeItem(content, settings);
         }
 
+        /// <MetaDataID>{73d703c6-55f5-47d3-8db9-f910344c2efb}</MetaDataID>
         internal void ReadTokenFrom(JsonReader reader, JsonLoadSettings options)
         {
             int startDepth = reader.Depth;
@@ -742,6 +790,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{85e54570-0ffe-4466-8dc1-ff0c9c91c0f9}</MetaDataID>
         internal void ReadContentFrom(JsonReader r, JsonLoadSettings settings)
         {
             ValidationUtils.ArgumentNotNull(r, nameof(r));
@@ -854,6 +903,7 @@ namespace OOAdvantech.Json.Linq
             } while (r.Read());
         }
 
+        /// <MetaDataID>{7bd9d1ee-7844-4dd5-b64c-6be21f804063}</MetaDataID>
         private static JProperty ReadProperty(JsonReader r, JsonLoadSettings settings, IJsonLineInfo lineInfo, JContainer parent)
         {
             DuplicatePropertyNameHandling duplicatePropertyNameHandling = settings?.DuplicatePropertyNameHandling ?? DuplicatePropertyNameHandling.Replace;
@@ -888,6 +938,7 @@ namespace OOAdvantech.Json.Linq
             return property;
         }
 
+        /// <MetaDataID>{a0542f1c-8f0d-4d70-85d5-d8dc16022464}</MetaDataID>
         internal int ContentsHashCode()
         {
             int hashCode = 0;
@@ -899,11 +950,13 @@ namespace OOAdvantech.Json.Linq
         }
 
 #if HAVE_COMPONENT_MODEL
+        /// <MetaDataID>{a907681f-bb13-4a72-b73a-73f5c3188293}</MetaDataID>
         string ITypedList.GetListName(PropertyDescriptor[] listAccessors)
         {
             return string.Empty;
         }
 
+        /// <MetaDataID>{18980371-5e99-4132-8e58-afd83d2c5a58}</MetaDataID>
         PropertyDescriptorCollection ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
         {
             ICustomTypeDescriptor d = First as ICustomTypeDescriptor;
@@ -912,21 +965,25 @@ namespace OOAdvantech.Json.Linq
 #endif
 
         #region IList<JToken> Members
+        /// <MetaDataID>{e5452a7f-6e8a-4db8-b9f1-11bc7a409eba}</MetaDataID>
         int IList<JToken>.IndexOf(JToken item)
         {
             return IndexOfItem(item);
         }
 
+        /// <MetaDataID>{3c1f0733-af2d-49b2-bb55-58e207d5c640}</MetaDataID>
         void IList<JToken>.Insert(int index, JToken item)
         {
             InsertItem(index, item, false);
         }
 
+        /// <MetaDataID>{f8f6b424-d586-418f-a948-a3318b3fedab}</MetaDataID>
         void IList<JToken>.RemoveAt(int index)
         {
             RemoveItemAt(index);
         }
 
+        /// <MetaDataID>{8b8a52da-cccc-4895-973c-be32a302f892}</MetaDataID>
         JToken IList<JToken>.this[int index]
         {
             get => GetItem(index);
@@ -935,34 +992,41 @@ namespace OOAdvantech.Json.Linq
         #endregion
 
         #region ICollection<JToken> Members
+        /// <MetaDataID>{7240d7d1-945a-4fa3-b771-a39ac9b19256}</MetaDataID>
         void ICollection<JToken>.Add(JToken item)
         {
             Add(item);
         }
 
+        /// <MetaDataID>{41616cd1-1548-467c-a39d-4f0c7b6e3573}</MetaDataID>
         void ICollection<JToken>.Clear()
         {
             ClearItems();
         }
 
+        /// <MetaDataID>{ed7d4c8f-8262-4c8c-8395-8df8f9373451}</MetaDataID>
         bool ICollection<JToken>.Contains(JToken item)
         {
             return ContainsItem(item);
         }
 
+        /// <MetaDataID>{5503e6a7-bb9c-42a9-94e0-fe0f260e663e}</MetaDataID>
         void ICollection<JToken>.CopyTo(JToken[] array, int arrayIndex)
         {
             CopyItemsTo(array, arrayIndex);
         }
 
+        /// <MetaDataID>{c91d2abf-8eef-4586-bf05-6768cb1270f1}</MetaDataID>
         bool ICollection<JToken>.IsReadOnly => false;
 
+        /// <MetaDataID>{850b4b6e-bf5c-423a-918c-a2a62107925f}</MetaDataID>
         bool ICollection<JToken>.Remove(JToken item)
         {
             return RemoveItem(item);
         }
         #endregion
 
+        /// <MetaDataID>{06a37af4-1e19-4eff-b722-12ab28a28adf}</MetaDataID>
         private JToken EnsureValue(object value)
         {
             if (value == null)
@@ -979,46 +1043,56 @@ namespace OOAdvantech.Json.Linq
         }
 
         #region IList Members
+        /// <MetaDataID>{94328299-7e5d-4edb-be58-1426aba8211e}</MetaDataID>
         int IList.Add(object value)
         {
             Add(EnsureValue(value));
             return Count - 1;
         }
 
+        /// <MetaDataID>{1425a70f-3306-4988-882f-d023a2d96055}</MetaDataID>
         void IList.Clear()
         {
             ClearItems();
         }
 
+        /// <MetaDataID>{f9829147-5829-4111-bbb4-ed943c21a28b}</MetaDataID>
         bool IList.Contains(object value)
         {
             return ContainsItem(EnsureValue(value));
         }
 
+        /// <MetaDataID>{a827a4cc-52d8-499e-81ec-2b8ddf71d726}</MetaDataID>
         int IList.IndexOf(object value)
         {
             return IndexOfItem(EnsureValue(value));
         }
 
+        /// <MetaDataID>{f35e8690-50d5-4125-9d4e-346876dc7ada}</MetaDataID>
         void IList.Insert(int index, object value)
         {
             InsertItem(index, EnsureValue(value), false);
         }
 
+        /// <MetaDataID>{6429b540-e78c-4b05-bda6-c7b9083893b8}</MetaDataID>
         bool IList.IsFixedSize => false;
 
+        /// <MetaDataID>{eb7f3786-a29c-47d0-9d04-f085752e414d}</MetaDataID>
         bool IList.IsReadOnly => false;
 
+        /// <MetaDataID>{be275857-fe2f-409b-b247-9123b9f39d8c}</MetaDataID>
         void IList.Remove(object value)
         {
             RemoveItem(EnsureValue(value));
         }
 
+        /// <MetaDataID>{3b6f8f4a-8bc7-4138-9961-129a5041e697}</MetaDataID>
         void IList.RemoveAt(int index)
         {
             RemoveItemAt(index);
         }
 
+        /// <MetaDataID>{50702bc2-fec4-44b1-bf55-79a7ef028fac}</MetaDataID>
         object IList.this[int index]
         {
             get => GetItem(index);
@@ -1027,6 +1101,7 @@ namespace OOAdvantech.Json.Linq
         #endregion
 
         #region ICollection Members
+        /// <MetaDataID>{f0371684-6b3a-4053-a57a-030c83f76797}</MetaDataID>
         void ICollection.CopyTo(Array array, int index)
         {
             CopyItemsTo(array, index);
@@ -1036,10 +1111,13 @@ namespace OOAdvantech.Json.Linq
         /// Gets the count of child JSON tokens.
         /// </summary>
         /// <value>The count of child JSON tokens.</value>
+        /// <MetaDataID>{279a9b99-b350-4513-a2bc-504b18e61789}</MetaDataID>
         public int Count => ChildrenTokens.Count;
 
+        /// <MetaDataID>{b9e465c0-c226-44a4-a6ac-a0f407fe821d}</MetaDataID>
         bool ICollection.IsSynchronized => false;
 
+        /// <MetaDataID>{58bf24bb-9059-4fc3-a5d6-dd5a113dc4cb}</MetaDataID>
         object ICollection.SyncRoot
         {
             get
@@ -1056,10 +1134,12 @@ namespace OOAdvantech.Json.Linq
 
         #region IBindingList Members
 #if HAVE_COMPONENT_MODEL
+        /// <MetaDataID>{672d2ea5-5161-40ce-be18-a19b4602fc60}</MetaDataID>
         void IBindingList.AddIndex(PropertyDescriptor property)
         {
         }
 
+        /// <MetaDataID>{a4f6983f-21e8-4b96-8df8-61f2583ac97c}</MetaDataID>
         object IBindingList.AddNew()
         {
             AddingNewEventArgs args = new AddingNewEventArgs();
@@ -1080,45 +1160,59 @@ namespace OOAdvantech.Json.Linq
             return newItem;
         }
 
+        /// <MetaDataID>{2fde1e43-8f8b-4482-bb83-9ba94a9f65e3}</MetaDataID>
         bool IBindingList.AllowEdit => true;
 
+        /// <MetaDataID>{f1a7875b-c0bb-4562-a62a-b0cd232ad7ee}</MetaDataID>
         bool IBindingList.AllowNew => true;
 
+        /// <MetaDataID>{e4bdda23-d6f1-4d90-844c-0d600abe8b17}</MetaDataID>
         bool IBindingList.AllowRemove => true;
 
+        /// <MetaDataID>{da740f6f-de9e-429d-b2fb-d7ba3afeb593}</MetaDataID>
         void IBindingList.ApplySort(PropertyDescriptor property, ListSortDirection direction)
         {
             throw new NotSupportedException();
         }
 
+        /// <MetaDataID>{01688589-aaa8-41c0-bb78-250b73923cd6}</MetaDataID>
         int IBindingList.Find(PropertyDescriptor property, object key)
         {
             throw new NotSupportedException();
         }
 
+        /// <MetaDataID>{909f5f30-6b2c-4409-8370-ab71b4d3c401}</MetaDataID>
         bool IBindingList.IsSorted => false;
 
+        /// <MetaDataID>{c682d3a3-a780-426e-9ba3-701aa86d62f0}</MetaDataID>
         void IBindingList.RemoveIndex(PropertyDescriptor property)
         {
         }
 
+        /// <MetaDataID>{5b97d1c0-97e6-4af5-a3e0-9ac6a85ab424}</MetaDataID>
         void IBindingList.RemoveSort()
         {
             throw new NotSupportedException();
         }
 
+        /// <MetaDataID>{427d558f-695f-4987-8a67-289f78f443f4}</MetaDataID>
         ListSortDirection IBindingList.SortDirection => ListSortDirection.Ascending;
 
+        /// <MetaDataID>{55f15ab0-946c-4edd-b4d9-3265b80ca6a0}</MetaDataID>
         PropertyDescriptor IBindingList.SortProperty => null;
 
+        /// <MetaDataID>{883c667c-b0d2-43d4-ac22-2fd1e4f16fb1}</MetaDataID>
         bool IBindingList.SupportsChangeNotification => true;
 
+        /// <MetaDataID>{24ffba9e-ed29-4a5c-a05d-dd0d60ac64fd}</MetaDataID>
         bool IBindingList.SupportsSearching => false;
 
+        /// <MetaDataID>{6cbce4c4-dbc2-40da-abd5-d85853594c07}</MetaDataID>
         bool IBindingList.SupportsSorting => false;
 #endif
         #endregion
 
+        /// <MetaDataID>{236710c2-4ead-45c3-97eb-c05b57b6a458}</MetaDataID>
         internal static void MergeEnumerableContent(JContainer target, IEnumerable content, JsonMergeSettings settings)
         {
             switch (settings.MergeArrayHandling)

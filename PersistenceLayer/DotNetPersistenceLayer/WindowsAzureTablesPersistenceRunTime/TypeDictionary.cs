@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
@@ -93,6 +94,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
             if (givenValue is string)
             {
+                givenValue= HttpUtility.UrlEncode((String)givenValue);
                 filter = Azure.Data.Tables.TableClient.CreateQueryFilter<QuerableType>(x => x.M_String == (String)givenValue);
                 filter = string.Format(filter.Replace("M_String", propertyName).Replace(" eq ", " {0} "), operation);
                 return filter;

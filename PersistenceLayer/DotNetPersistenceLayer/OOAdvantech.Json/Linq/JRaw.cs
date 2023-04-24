@@ -35,28 +35,31 @@ namespace OOAdvantech.Json.Linq
     public partial class JRaw : JValue
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="JRaw"/> class from another <see cref="JRaw"/> object.
+        /// Initializes a new instance of the <see cref="JRaw" /> class from another <see cref="JRaw" /> object.
         /// </summary>
-        /// <param name="other">A <see cref="JRaw"/> object to copy from.</param>
+        /// <param name="other">A <see cref="JRaw" /> object to copy from.</param>
+        /// <MetaDataID>{9613b8e3-ca45-4ff2-8f2c-fa54ea0da87d}</MetaDataID>
         public JRaw(JRaw other)
             : base(other)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JRaw"/> class.
+        /// Initializes a new instance of the <see cref="JRaw" /> class.
         /// </summary>
         /// <param name="rawJson">The raw json.</param>
+        /// <MetaDataID>{89cdbc0a-ca2b-4ac9-a6d0-f4c6cf366baf}</MetaDataID>
         public JRaw(object rawJson)
             : base(rawJson, JTokenType.Raw)
         {
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="JRaw"/> with the content of the reader's current token.
+        /// Creates an instance of <see cref="JRaw" /> with the content of the reader's current token.
         /// </summary>
         /// <param name="reader">The reader.</param>
-        /// <returns>An instance of <see cref="JRaw"/> with the content of the reader's current token.</returns>
+        /// <returns>An instance of <see cref="JRaw" /> with the content of the reader's current token.</returns>
+        /// <MetaDataID>{855a4cd5-c12b-4add-9064-881a72af1f09}</MetaDataID>
         public static JRaw Create(JsonReader reader)
         {
             using (StringWriter sw = new StringWriter(CultureInfo.InvariantCulture))
@@ -68,6 +71,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{b547f781-4d23-4108-ab71-a74193440e68}</MetaDataID>
         internal override JToken CloneToken()
         {
             return new JRaw(this);

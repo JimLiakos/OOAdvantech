@@ -43,22 +43,25 @@ namespace OOAdvantech.Json
         // It's not safe to perform the async methods here in a derived class as if the synchronous equivalent
         // has been overriden then the asychronous method will no longer be doing the same operation
 #if HAVE_ASYNC // Double-check this isn't included inappropriately.
+        /// <MetaDataID>{19b49937-b6fd-4078-a1b5-f90fbdec74d9}</MetaDataID>
         private readonly bool _safeAsync;
 #endif
 
         /// <summary>
         /// Asynchronously reads the next JSON token from the source.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
         /// property returns <c>true</c> if the next token was read successfully; <c>false</c> if there are no more tokens to read.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{a3343f1a-8b29-4dca-902f-1e5a54142724}</MetaDataID>
         public override Task<bool> ReadAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsync(cancellationToken) : base.ReadAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{173c99ca-a1b6-4616-b13d-561e8a172081}</MetaDataID>
         internal Task<bool> DoReadAsync(CancellationToken cancellationToken)
         {
             EnsureBuffer();
@@ -99,6 +102,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{abd070e7-11dc-47a3-86e5-2ccc23f2e12b}</MetaDataID>
         private async Task<bool> DoReadAsync(Task<bool> task, CancellationToken cancellationToken)
         {
             bool result = await task.ConfigureAwait(false);
@@ -109,6 +113,7 @@ namespace OOAdvantech.Json
             return await DoReadAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <MetaDataID>{cd42ca5f-7d20-4e60-8064-0255d8c04af5}</MetaDataID>
         private async Task<bool> ParsePostValueAsync(bool ignoreComments, CancellationToken cancellationToken)
         {
             while (true)
@@ -192,6 +197,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{951ecf68-5e90-4275-ab39-119e290d4a8f}</MetaDataID>
         private async Task<bool> ReadFromFinishedAsync(CancellationToken cancellationToken)
         {
             if (await EnsureCharsAsync(0, false, cancellationToken).ConfigureAwait(false))
@@ -216,11 +222,13 @@ namespace OOAdvantech.Json
             return false;
         }
 
+        /// <MetaDataID>{9b618cd8-5aad-484e-9ce6-6be7afa927a4}</MetaDataID>
         private Task<int> ReadDataAsync(bool append, CancellationToken cancellationToken)
         {
             return ReadDataAsync(append, 0, cancellationToken);
         }
 
+        /// <MetaDataID>{295b8ef4-6c11-4b62-ac64-0134f94c778e}</MetaDataID>
         private async Task<int> ReadDataAsync(bool append, int charsRequired, CancellationToken cancellationToken)
         {
             if (_isEndOfFile)
@@ -243,6 +251,7 @@ namespace OOAdvantech.Json
             return charsRead;
         }
 
+        /// <MetaDataID>{99cfab81-1066-4405-b75e-c320847480e4}</MetaDataID>
         private async Task<bool> ParseValueAsync(CancellationToken cancellationToken)
         {
             while (true)
@@ -372,6 +381,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{faf0f9c8-5ff9-4e53-8784-bb653eab6ed1}</MetaDataID>
         private async Task ReadStringIntoBufferAsync(char quote, CancellationToken cancellationToken)
         {
             int charPos = _charPos;
@@ -527,6 +537,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{b55caf62-dd22-4e61-b6fd-7e88993eab1a}</MetaDataID>
         private Task ProcessCarriageReturnAsync(bool append, CancellationToken cancellationToken)
         {
             _charPos++;
@@ -541,16 +552,19 @@ namespace OOAdvantech.Json
             return ProcessCarriageReturnAsync(task);
         }
 
+        /// <MetaDataID>{3b05d497-829f-4e9f-9732-746c9279d4de}</MetaDataID>
         private async Task ProcessCarriageReturnAsync(Task<bool> task)
         {
             SetNewLine(await task.ConfigureAwait(false));
         }
 
+        /// <MetaDataID>{c83636d8-adc6-4ea8-841f-02cd59f94498}</MetaDataID>
         private async Task<char> ParseUnicodeAsync(CancellationToken cancellationToken)
         {
             return ConvertUnicode(await EnsureCharsAsync(4, true, cancellationToken).ConfigureAwait(false));
         }
 
+        /// <MetaDataID>{cb9cc671-1208-4899-9f90-a5ad2522f30f}</MetaDataID>
         private Task<bool> EnsureCharsAsync(int relativePosition, bool append, CancellationToken cancellationToken)
         {
             if (_charPos + relativePosition < _charsUsed)
@@ -566,6 +580,7 @@ namespace OOAdvantech.Json
             return ReadCharsAsync(relativePosition, append, cancellationToken);
         }
 
+        /// <MetaDataID>{61c34e2a-398d-48ec-82e8-5ec585e2d6b6}</MetaDataID>
         private async Task<bool> ReadCharsAsync(int relativePosition, bool append, CancellationToken cancellationToken)
         {
             int charsRequired = _charPos + relativePosition - _charsUsed + 1;
@@ -588,6 +603,7 @@ namespace OOAdvantech.Json
             return true;
         }
 
+        /// <MetaDataID>{413d7969-899f-4916-81fa-04fef3f46ef8}</MetaDataID>
         private async Task<bool> ParseObjectAsync(CancellationToken cancellationToken)
         {
             while (true)
@@ -645,6 +661,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{0bfd9524-a3b0-4a26-bf68-67ff18681125}</MetaDataID>
         private async Task ParseCommentAsync(bool setToken, CancellationToken cancellationToken)
         {
             // should have already parsed / character before reaching this method
@@ -741,6 +758,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{e2630ad8-d739-41e2-8e1f-dc18086c0d6a}</MetaDataID>
         private async Task EatWhitespaceAsync(CancellationToken cancellationToken)
         {
             while (true)
@@ -782,6 +800,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{7b6f6106-d746-4881-9e38-624ecf4ed384}</MetaDataID>
         private async Task ParseStringAsync(char quote, ReadType readType, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -792,11 +811,13 @@ namespace OOAdvantech.Json
             ParseReadString(quote, readType);
         }
 
+        /// <MetaDataID>{3139ecc9-86b7-4ec9-bbb8-a72fe4f00935}</MetaDataID>
         private async Task<bool> MatchValueAsync(string value, CancellationToken cancellationToken)
         {
             return MatchValue(await EnsureCharsAsync(value.Length - 1, true, cancellationToken).ConfigureAwait(false), value);
         }
 
+        /// <MetaDataID>{68451c92-3bb6-42a9-b027-b2c9f107992a}</MetaDataID>
         private async Task<bool> MatchValueWithTrailingSeparatorAsync(string value, CancellationToken cancellationToken)
         {
             // will match value and then move to the next character, checking that it is a separator character
@@ -813,6 +834,7 @@ namespace OOAdvantech.Json
             return IsSeparator(_chars[_charPos]) || _chars[_charPos] == '\0';
         }
 
+        /// <MetaDataID>{c7f46336-72f2-45d5-a166-8d2f358e5765}</MetaDataID>
         private async Task MatchAndSetAsync(string value, JsonToken newToken, object tokenValue, CancellationToken cancellationToken)
         {
             if (await MatchValueWithTrailingSeparatorAsync(value, cancellationToken).ConfigureAwait(false))
@@ -825,21 +847,25 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{63725795-220a-4a07-902b-c7e4a801b5a5}</MetaDataID>
         private Task ParseTrueAsync(CancellationToken cancellationToken)
         {
             return MatchAndSetAsync(JsonConvert.True, JsonToken.Boolean, true, cancellationToken);
         }
 
+        /// <MetaDataID>{2404714c-66cf-487f-adbd-90ad5b608382}</MetaDataID>
         private Task ParseFalseAsync(CancellationToken cancellationToken)
         {
             return MatchAndSetAsync(JsonConvert.False, JsonToken.Boolean, false, cancellationToken);
         }
 
+        /// <MetaDataID>{d613af62-ca9a-467a-8a6c-c72e6cd2fb40}</MetaDataID>
         private Task ParseNullAsync(CancellationToken cancellationToken)
         {
             return MatchAndSetAsync(JsonConvert.Null, JsonToken.Null, null, cancellationToken);
         }
 
+        /// <MetaDataID>{0528f2c1-8ac0-4c52-a60f-adfa8fcd33e2}</MetaDataID>
         private async Task ParseConstructorAsync(CancellationToken cancellationToken)
         {
             if (await MatchValueWithTrailingSeparatorAsync("new", cancellationToken).ConfigureAwait(false))
@@ -923,21 +949,25 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{323aefc5-d945-4df7-abe2-76668ed4c870}</MetaDataID>
         private async Task<object> ParseNumberNaNAsync(ReadType readType, CancellationToken cancellationToken)
         {
             return ParseNumberNaN(readType, await MatchValueWithTrailingSeparatorAsync(JsonConvert.NaN, cancellationToken).ConfigureAwait(false));
         }
 
+        /// <MetaDataID>{fc3c1473-1fae-417a-969b-c0431de7ed73}</MetaDataID>
         private async Task<object> ParseNumberPositiveInfinityAsync(ReadType readType, CancellationToken cancellationToken)
         {
             return ParseNumberPositiveInfinity(readType, await MatchValueWithTrailingSeparatorAsync(JsonConvert.PositiveInfinity, cancellationToken).ConfigureAwait(false));
         }
 
+        /// <MetaDataID>{54bed2a0-3fa3-4e14-9e1c-0939daaff883}</MetaDataID>
         private async Task<object> ParseNumberNegativeInfinityAsync(ReadType readType, CancellationToken cancellationToken)
         {
             return ParseNumberNegativeInfinity(readType, await MatchValueWithTrailingSeparatorAsync(JsonConvert.NegativeInfinity, cancellationToken).ConfigureAwait(false));
         }
 
+        /// <MetaDataID>{7e94842a-817b-44aa-8682-ba155b248b28}</MetaDataID>
         private async Task ParseNumberAsync(ReadType readType, CancellationToken cancellationToken)
         {
             ShiftBufferIfNeeded();
@@ -950,11 +980,13 @@ namespace OOAdvantech.Json
             ParseReadNumber(readType, firstChar, initialPosition);
         }
 
+        /// <MetaDataID>{40c9f201-af45-4d7a-8126-4e4e0d359825}</MetaDataID>
         private Task ParseUndefinedAsync(CancellationToken cancellationToken)
         {
             return MatchAndSetAsync(JsonConvert.Undefined, JsonToken.Undefined, null, cancellationToken);
         }
 
+        /// <MetaDataID>{f85cf88e-af41-4c27-8a27-3922e832a378}</MetaDataID>
         private async Task<bool> ParsePropertyAsync(CancellationToken cancellationToken)
         {
             char firstChar = _chars[_charPos];
@@ -1007,6 +1039,7 @@ namespace OOAdvantech.Json
             return true;
         }
 
+        /// <MetaDataID>{7d3c4afe-c864-4ec2-bac2-ece709968e49}</MetaDataID>
         private async Task ReadNumberIntoBufferAsync(CancellationToken cancellationToken)
         {
             int charPos = _charPos;
@@ -1041,6 +1074,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{5badf2f5-591c-41dc-aa89-6cd376d3fa97}</MetaDataID>
         private async Task ParseUnquotedPropertyAsync(CancellationToken cancellationToken)
         {
             int initialPosition = _charPos;
@@ -1072,6 +1106,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{d0e83169-2eb7-4f50-89ca-f1f255da3589}</MetaDataID>
         private async Task<bool> ReadNullCharAsync(CancellationToken cancellationToken)
         {
             if (_charsUsed == _charPos)
@@ -1090,6 +1125,7 @@ namespace OOAdvantech.Json
             return false;
         }
 
+        /// <MetaDataID>{6fc3e16b-51d1-4aff-bae1-41cd898cd20f}</MetaDataID>
         private async Task HandleNullAsync(CancellationToken cancellationToken)
         {
             if (await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false))
@@ -1108,6 +1144,7 @@ namespace OOAdvantech.Json
             throw CreateUnexpectedEndException();
         }
 
+        /// <MetaDataID>{0ee5877a-3e4c-4359-97d4-5fca87623231}</MetaDataID>
         private async Task ReadFinishedAsync(CancellationToken cancellationToken)
         {
             if (await EnsureCharsAsync(0, false, cancellationToken).ConfigureAwait(false))
@@ -1132,6 +1169,7 @@ namespace OOAdvantech.Json
             SetToken(JsonToken.None);
         }
 
+        /// <MetaDataID>{7b8e21c5-5860-4c29-a1d0-69b6e2852a46}</MetaDataID>
         private async Task<object> ReadStringValueAsync(ReadType readType, CancellationToken cancellationToken)
         {
             EnsureBuffer();
@@ -1267,6 +1305,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{281190fa-9ac9-4db5-953d-e9e3ef7e4e28}</MetaDataID>
         private async Task<object> ReadNumberValueAsync(ReadType readType, CancellationToken cancellationToken)
         {
             EnsureBuffer();
@@ -1381,18 +1420,20 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}"/> of <see cref="bool"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}" /> of <see cref="bool" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="Nullable{T}"/> of <see cref="bool"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="Nullable{T}" /> of <see cref="bool" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{c95d5067-a408-48c3-aa0a-64607961c157}</MetaDataID>
         public override Task<bool?> ReadAsBooleanAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsBooleanAsync(cancellationToken) : base.ReadAsBooleanAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{3ca22f3d-bab3-496f-ba4e-843364c59718}</MetaDataID>
         internal async Task<bool?> DoReadAsBooleanAsync(CancellationToken cancellationToken)
         {
             EnsureBuffer();
@@ -1516,18 +1557,20 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="byte"/>[].
+        /// Asynchronously reads the next JSON token from the source as a <see cref="byte" />[].
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="byte"/>[]. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="byte" />[]. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{aaea15b9-151e-48a7-97ca-3ca7a2a1cd38}</MetaDataID>
         public override Task<byte[]> ReadAsBytesAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsBytesAsync(cancellationToken) : base.ReadAsBytesAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{75371594-090d-4124-86a5-8b6dd705d8f1}</MetaDataID>
         internal async Task<byte[]> DoReadAsBytesAsync(CancellationToken cancellationToken)
         {
             EnsureBuffer();
@@ -1637,6 +1680,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{b6371d48-b585-4445-8fcc-190680221461}</MetaDataID>
         private async Task ReadIntoWrappedTypeObjectAsync(CancellationToken cancellationToken)
         {
             await ReaderReadAndAssertAsync(cancellationToken).ConfigureAwait(false);
@@ -1657,108 +1701,120 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}"/> of <see cref="DateTime"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}" /> of <see cref="DateTime" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="Nullable{T}"/> of <see cref="DateTime"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="Nullable{T}" /> of <see cref="DateTime" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{6e4f8307-150e-4884-b709-4e189e8ceed6}</MetaDataID>
         public override Task<DateTime?> ReadAsDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsDateTimeAsync(cancellationToken) : base.ReadAsDateTimeAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{742a506d-33c0-47ff-b30a-b8dec4cb1e02}</MetaDataID>
         internal async Task<DateTime?> DoReadAsDateTimeAsync(CancellationToken cancellationToken)
         {
             return (DateTime?)await ReadStringValueAsync(ReadType.ReadAsDateTime, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}" /> of <see cref="DateTimeOffset" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="Nullable{T}" /> of <see cref="DateTimeOffset" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{6c941fa9-0f2d-423f-8072-387179d046ba}</MetaDataID>
         public override Task<DateTimeOffset?> ReadAsDateTimeOffsetAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsDateTimeOffsetAsync(cancellationToken) : base.ReadAsDateTimeOffsetAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{705622cf-ba3d-4705-bf88-b6fd4f0e6942}</MetaDataID>
         internal async Task<DateTimeOffset?> DoReadAsDateTimeOffsetAsync(CancellationToken cancellationToken)
         {
             return (DateTimeOffset?)await ReadStringValueAsync(ReadType.ReadAsDateTimeOffset, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}"/> of <see cref="decimal"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}" /> of <see cref="decimal" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="Nullable{T}"/> of <see cref="decimal"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="Nullable{T}" /> of <see cref="decimal" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{20e3ee3f-0fe3-4592-9657-9495c83c2cd6}</MetaDataID>
         public override Task<decimal?> ReadAsDecimalAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsDecimalAsync(cancellationToken) : base.ReadAsDecimalAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{9d9a82ed-03ce-4b68-9baf-087ba548cce5}</MetaDataID>
         internal async Task<decimal?> DoReadAsDecimalAsync(CancellationToken cancellationToken)
         {
             return (decimal?)await ReadNumberValueAsync(ReadType.ReadAsDecimal, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}"/> of <see cref="double"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}" /> of <see cref="double" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="Nullable{T}"/> of <see cref="double"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="Nullable{T}" /> of <see cref="double" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{d06a586c-a4e8-46cf-ba73-9a404964984c}</MetaDataID>
         public override Task<double?> ReadAsDoubleAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsDoubleAsync(cancellationToken) : base.ReadAsDoubleAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{0b880b8b-42d8-42a4-abcd-9f621c6bf72d}</MetaDataID>
         internal async Task<double?> DoReadAsDoubleAsync(CancellationToken cancellationToken)
         {
             return (double?)await ReadNumberValueAsync(ReadType.ReadAsDouble, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}"/> of <see cref="int"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="Nullable{T}" /> of <see cref="int" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="Nullable{T}"/> of <see cref="int"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="Nullable{T}" /> of <see cref="int" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{2c4b9b15-e94b-4355-a480-4e85d36929f5}</MetaDataID>
         public override Task<int?> ReadAsInt32Async(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsInt32Async(cancellationToken) : base.ReadAsInt32Async(cancellationToken);
         }
 
+        /// <MetaDataID>{8f028d59-2a4a-4b22-8d8a-4a0ea1286185}</MetaDataID>
         internal async Task<int?> DoReadAsInt32Async(CancellationToken cancellationToken)
         {
             return (int?)await ReadNumberValueAsync(ReadType.ReadAsInt32, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Asynchronously reads the next JSON token from the source as a <see cref="string"/>.
+        /// Asynchronously reads the next JSON token from the source as a <see cref="string" />.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous read. The <see cref="Task{TResult}.Result"/>
-        /// property returns the <see cref="string"/>. This result will be <c>null</c> at the end of an array.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous read. The <see cref="Task{TResult}.Result" />
+        /// property returns the <see cref="string" />. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
+        /// <MetaDataID>{3b157eec-abb9-46ac-ab39-eecf60906b6c}</MetaDataID>
         public override Task<string> ReadAsStringAsync(CancellationToken cancellationToken = default)
         {
             return _safeAsync ? DoReadAsStringAsync(cancellationToken) : base.ReadAsStringAsync(cancellationToken);
         }
 
+        /// <MetaDataID>{d2bbf425-eb24-41db-98d8-f055e1af2e5e}</MetaDataID>
         internal async Task<string> DoReadAsStringAsync(CancellationToken cancellationToken)
         {
             return (string)await ReadStringValueAsync(ReadType.ReadAsString, cancellationToken).ConfigureAwait(false);

@@ -61,10 +61,12 @@ namespace OOAdvantech.Json
         }
 
         // array that gives a new state based on the current state an the token being written
+        /// <MetaDataID>{a1ad21f7-a5c7-461f-9b06-af2aa007ef16}</MetaDataID>
         private static readonly State[][] StateArray;
 
+        /// <MetaDataID>{618621e6-557b-4de1-ad9a-e1b83744702e}</MetaDataID>
         internal static readonly State[][] StateArrayTempate = new[]
-        {
+                {
             //                                      Start                    PropertyName            ObjectStart         Object            ArrayStart              Array                   ConstructorStart        Constructor             Closed       Error
             //
             /* None                        */new[] { State.Error,            State.Error,            State.Error,        State.Error,      State.Error,            State.Error,            State.Error,            State.Error,            State.Error, State.Error },
@@ -77,6 +79,7 @@ namespace OOAdvantech.Json
             /* Value (this will be copied) */new[] { State.Start,            State.Object,           State.Error,        State.Error,      State.Array,            State.Array,            State.Constructor,      State.Constructor,      State.Error, State.Error }
         };
 
+        /// <MetaDataID>{cf9dac44-ccb6-4308-8332-b918ac3d8a8d}</MetaDataID>
         internal static State[][] BuildStateArray()
         {
             List<State[]> allStates = StateArrayTempate.ToList();
@@ -112,36 +115,44 @@ namespace OOAdvantech.Json
             return allStates.ToArray();
         }
 
+        /// <MetaDataID>{341f1ce9-29ea-409c-8cc5-a7da4333c426}</MetaDataID>
         static JsonWriter()
         {
             StateArray = BuildStateArray();
         }
 
+        /// <MetaDataID>{22b0ceb0-f27f-438e-b431-9e7b7438c8ac}</MetaDataID>
         private List<JsonPosition> _stack;
+        /// <MetaDataID>{ee965fb7-dad1-4b37-8b21-c4f3a6595096}</MetaDataID>
         private JsonPosition _currentPosition;
+        /// <MetaDataID>{5b501872-dcb7-4eb1-9953-760d0632fc32}</MetaDataID>
         private State _currentState;
+        /// <MetaDataID>{67cbad72-6624-403b-bbbc-274929f53de0}</MetaDataID>
         private Formatting _formatting;
 
         /// <summary>
         /// Gets or sets a value indicating whether the destination should be closed when this writer is closed.
         /// </summary>
         /// <value>
-        /// <c>true</c> to close the destination when this writer is closed; otherwise <c>false</c>. The default is <c>true</c>.
+        ///   <c>true</c> to close the destination when this writer is closed; otherwise <c>false</c>. The default is <c>true</c>.
         /// </value>
+        /// <MetaDataID>{4e4e502c-6e90-4976-a4cf-46feaa3e2868}</MetaDataID>
         public bool CloseOutput { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the JSON should be auto-completed when this writer is closed.
         /// </summary>
         /// <value>
-        /// <c>true</c> to auto-complete the JSON when this writer is closed; otherwise <c>false</c>. The default is <c>true</c>.
+        ///   <c>true</c> to auto-complete the JSON when this writer is closed; otherwise <c>false</c>. The default is <c>true</c>.
         /// </value>
+        /// <MetaDataID>{1c1fc54c-54df-49a5-8679-69932fc3d642}</MetaDataID>
         public bool AutoCompleteOnClose { get; set; }
 
         /// <summary>
         /// Gets the top.
         /// </summary>
         /// <value>The top.</value>
+        /// <MetaDataID>{d2b9ee34-1043-459e-a9e6-6d071b1268f6}</MetaDataID>
         protected internal int Top
         {
             get
@@ -159,6 +170,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Gets the state of the writer.
         /// </summary>
+        /// <MetaDataID>{4f41aa21-a144-4892-9a03-b45060947e18}</MetaDataID>
         public WriteState WriteState
         {
             get
@@ -188,6 +200,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{485ba100-a598-4425-bb1d-fb2417837d0f}</MetaDataID>
         internal string ContainerPath
         {
             get
@@ -204,6 +217,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Gets the path of the writer. 
         /// </summary>
+        /// <MetaDataID>{7d26928e-3695-492e-b217-9edfadec4a24}</MetaDataID>
         public string Path
         {
             get
@@ -223,16 +237,23 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{6cca7a62-89cc-4987-98c7-dcb305762de6}</MetaDataID>
         private DateFormatHandling _dateFormatHandling;
+        /// <MetaDataID>{8d92de4b-ee51-471d-8659-6165bf6bb4f4}</MetaDataID>
         private DateTimeZoneHandling _dateTimeZoneHandling;
+        /// <MetaDataID>{9f4a8a7f-de2a-4813-9b74-855fee1b6e21}</MetaDataID>
         private StringEscapeHandling _stringEscapeHandling;
+        /// <MetaDataID>{ca42ebdf-2abc-421c-993c-3a4b0e6a43c6}</MetaDataID>
         private FloatFormatHandling _floatFormatHandling;
+        /// <MetaDataID>{c2246f7c-b07d-403a-8d2a-acffd5a2b62c}</MetaDataID>
         private string _dateFormatString;
+        /// <MetaDataID>{65b0459c-a62f-4b88-9a01-c727c1e971ef}</MetaDataID>
         private CultureInfo _culture;
 
         /// <summary>
         /// Gets or sets a value indicating how JSON text output should be formatted.
         /// </summary>
+        /// <MetaDataID>{c7c8a218-c27e-4f1c-b75f-430958f62c4f}</MetaDataID>
         public Formatting Formatting
         {
             get => _formatting;
@@ -250,6 +271,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Gets or sets how dates are written to JSON text.
         /// </summary>
+        /// <MetaDataID>{ab778489-e0c3-420c-b551-d50f94e5ec76}</MetaDataID>
         public DateFormatHandling DateFormatHandling
         {
             get => _dateFormatHandling;
@@ -265,8 +287,9 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Gets or sets how <see cref="DateTime"/> time zones are handled when writing JSON text.
+        /// Gets or sets how <see cref="DateTime" /> time zones are handled when writing JSON text.
         /// </summary>
+        /// <MetaDataID>{cd5d21db-4fd3-47dc-8bb4-0448482e4893}</MetaDataID>
         public DateTimeZoneHandling DateTimeZoneHandling
         {
             get => _dateTimeZoneHandling;
@@ -284,6 +307,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Gets or sets how strings are escaped when writing JSON text.
         /// </summary>
+        /// <MetaDataID>{904978fb-4ae1-44e7-a523-011f888eab33}</MetaDataID>
         public StringEscapeHandling StringEscapeHandling
         {
             get => _stringEscapeHandling;
@@ -299,16 +323,18 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{af5392d4-cd49-4543-94a2-84fddc529390}</MetaDataID>
         internal virtual void OnStringEscapeHandlingChanged()
         {
             // hacky but there is a calculated value that relies on StringEscapeHandling
         }
 
         /// <summary>
-        /// Gets or sets how special floating point numbers, e.g. <see cref="Double.NaN"/>,
-        /// <see cref="Double.PositiveInfinity"/> and <see cref="Double.NegativeInfinity"/>,
+        /// Gets or sets how special floating point numbers, e.g. <see cref="Double.NaN" />,
+        /// <see cref="Double.PositiveInfinity" /> and <see cref="Double.NegativeInfinity" />,
         /// are written to JSON text.
         /// </summary>
+        /// <MetaDataID>{3b8e3d94-1742-47f4-bd45-c2dc80aefc93}</MetaDataID>
         public FloatFormatHandling FloatFormatHandling
         {
             get => _floatFormatHandling;
@@ -324,8 +350,9 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Gets or sets how <see cref="DateTime"/> and <see cref="DateTimeOffset"/> values are formatted when writing JSON text.
+        /// Gets or sets how <see cref="DateTime" /> and <see cref="DateTimeOffset" /> values are formatted when writing JSON text.
         /// </summary>
+        /// <MetaDataID>{a6c387f7-e82b-49b1-846a-d81bd4339264}</MetaDataID>
         public string DateFormatString
         {
             get => _dateFormatString;
@@ -333,8 +360,9 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Gets or sets the culture used when writing JSON. Defaults to <see cref="CultureInfo.InvariantCulture"/>.
+        /// Gets or sets the culture used when writing JSON. Defaults to <see cref="CultureInfo.InvariantCulture" />.
         /// </summary>
+        /// <MetaDataID>{3efaca2c-9669-4e54-82be-4ad8ff995d84}</MetaDataID>
         public CultureInfo Culture
         {
             get => _culture ?? CultureInfo.InvariantCulture;
@@ -342,8 +370,9 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonWriter"/> class.
+        /// Initializes a new instance of the <see cref="JsonWriter" /> class.
         /// </summary>
+        /// <MetaDataID>{19cc3987-2689-496c-a51f-792903e89387}</MetaDataID>
         protected JsonWriter()
         {
             _currentState = State.Start;
@@ -354,6 +383,7 @@ namespace OOAdvantech.Json
             AutoCompleteOnClose = true;
         }
 
+        /// <MetaDataID>{3371a736-756c-40ce-b030-8984b1e5baaa}</MetaDataID>
         internal void UpdateScopeWithFinishedValue()
         {
             if (_currentPosition.HasIndex)
@@ -362,6 +392,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{431659c8-ccbb-4d8a-95f3-72788fd8231f}</MetaDataID>
         private void Push(JsonContainerType value)
         {
             if (_currentPosition.Type != JsonContainerType.None)
@@ -377,6 +408,7 @@ namespace OOAdvantech.Json
             _currentPosition = new JsonPosition(value);
         }
 
+        /// <MetaDataID>{aa9b532e-8579-48d2-8154-d307bb7d8bbe}</MetaDataID>
         private JsonContainerType Pop()
         {
             JsonPosition oldPosition = _currentPosition;
@@ -394,6 +426,7 @@ namespace OOAdvantech.Json
             return oldPosition.Type;
         }
 
+        /// <MetaDataID>{35983fef-4291-4576-9e14-6634bacf8699}</MetaDataID>
         private JsonContainerType Peek()
         {
             return _currentPosition.Type;
@@ -402,13 +435,15 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Flushes whatever is in the buffer to the destination and also flushes the destination.
         /// </summary>
+        /// <MetaDataID>{a48757f6-c99f-46f4-aebd-e85944dc98e0}</MetaDataID>
         public abstract void Flush();
 
         /// <summary>
         /// Closes this writer.
-        /// If <see cref="CloseOutput"/> is set to <c>true</c>, the destination is also closed.
-        /// If <see cref="AutoCompleteOnClose"/> is set to <c>true</c>, the JSON is auto-completed.
+        /// If <see cref="CloseOutput" /> is set to <c>true</c>, the destination is also closed.
+        /// If <see cref="AutoCompleteOnClose" /> is set to <c>true</c>, the JSON is auto-completed.
         /// </summary>
+        /// <MetaDataID>{7c8ba991-3f7c-4270-8dd2-c613ca0f4a0d}</MetaDataID>
         public virtual void Close()
         {
             if (AutoCompleteOnClose)
@@ -420,6 +455,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the beginning of a JSON object.
         /// </summary>
+        /// <MetaDataID>{f0c5a1b7-8ce8-4632-8992-6dd1fb71b68c}</MetaDataID>
         public virtual void WriteStartObject()
         {
             InternalWriteStart(JsonToken.StartObject, JsonContainerType.Object);
@@ -428,6 +464,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the end of a JSON object.
         /// </summary>
+        /// <MetaDataID>{b900d370-e6ed-4988-bf88-95c8dd67975b}</MetaDataID>
         public virtual void WriteEndObject()
         {
             InternalWriteEnd(JsonContainerType.Object);
@@ -436,6 +473,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the beginning of a JSON array.
         /// </summary>
+        /// <MetaDataID>{d003f571-7620-4a30-924d-309c171e9f1e}</MetaDataID>
         public virtual void WriteStartArray()
         {
             InternalWriteStart(JsonToken.StartArray, JsonContainerType.Array);
@@ -444,6 +482,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the end of an array.
         /// </summary>
+        /// <MetaDataID>{13b59d7a-a374-4484-bbc7-ef0e9c431b5f}</MetaDataID>
         public virtual void WriteEndArray()
         {
             InternalWriteEnd(JsonContainerType.Array);
@@ -453,6 +492,7 @@ namespace OOAdvantech.Json
         /// Writes the start of a constructor with the given name.
         /// </summary>
         /// <param name="name">The name of the constructor.</param>
+        /// <MetaDataID>{8f306c06-3f5e-479f-884e-def15c0c8594}</MetaDataID>
         public virtual void WriteStartConstructor(string name)
         {
             InternalWriteStart(JsonToken.StartConstructor, JsonContainerType.Constructor);
@@ -461,6 +501,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the end constructor.
         /// </summary>
+        /// <MetaDataID>{d945f112-3ee5-473d-ba10-ff04ed6fa7ce}</MetaDataID>
         public virtual void WriteEndConstructor()
         {
             InternalWriteEnd(JsonContainerType.Constructor);
@@ -470,6 +511,7 @@ namespace OOAdvantech.Json
         /// Writes the property name of a name/value pair of a JSON object.
         /// </summary>
         /// <param name="name">The name of the property.</param>
+        /// <MetaDataID>{b565fa46-0c38-4195-955f-5234ded5eeea}</MetaDataID>
         public virtual void WritePropertyName(string name)
         {
             InternalWritePropertyName(name);
@@ -480,6 +522,7 @@ namespace OOAdvantech.Json
         /// </summary>
         /// <param name="name">The name of the property.</param>
         /// <param name="escape">A flag to indicate whether the text should be escaped when it is written as a JSON property name.</param>
+        /// <MetaDataID>{7b6f1c51-7a4a-43ec-b09e-e8717973473c}</MetaDataID>
         public virtual void WritePropertyName(string name, bool escape)
         {
             WritePropertyName(name);
@@ -488,25 +531,28 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the end of the current JSON object or array.
         /// </summary>
+        /// <MetaDataID>{a44a9fc1-77ef-4d6d-a256-228b9d5bc569}</MetaDataID>
         public virtual void WriteEnd()
         {
             WriteEnd(Peek());
         }
 
         /// <summary>
-        /// Writes the current <see cref="JsonReader"/> token and its children.
+        /// Writes the current <see cref="JsonReader" /> token and its children.
         /// </summary>
-        /// <param name="reader">The <see cref="JsonReader"/> to read the token from.</param>
+        /// <param name="reader">The <see cref="JsonReader" /> to read the token from.</param>
+        /// <MetaDataID>{cdb0539e-aafd-42c3-902f-e5ee86f93230}</MetaDataID>
         public void WriteToken(JsonReader reader)
         {
             WriteToken(reader, true);
         }
 
         /// <summary>
-        /// Writes the current <see cref="JsonReader"/> token.
+        /// Writes the current <see cref="JsonReader" /> token.
         /// </summary>
-        /// <param name="reader">The <see cref="JsonReader"/> to read the token from.</param>
+        /// <param name="reader">The <see cref="JsonReader" /> to read the token from.</param>
         /// <param name="writeChildren">A flag indicating whether the current token's children should be written.</param>
+        /// <MetaDataID>{c9226517-4329-4ad2-8ae2-59d6479ab16b}</MetaDataID>
         public void WriteToken(JsonReader reader, bool writeChildren)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -515,14 +561,15 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes the <see cref="JsonToken"/> token and its value.
+        /// Writes the <see cref="JsonToken" /> token and its value.
         /// </summary>
-        /// <param name="token">The <see cref="JsonToken"/> to write.</param>
+        /// <param name="token">The <see cref="JsonToken" /> to write.</param>
         /// <param name="value">
         /// The value to write.
-        /// A value is only required for tokens that have an associated value, e.g. the <see cref="String"/> property name for <see cref="JsonToken.PropertyName"/>.
-        /// <c>null</c> can be passed to the method for tokens that don't have a value, e.g. <see cref="JsonToken.StartObject"/>.
+        /// A value is only required for tokens that have an associated value, e.g. the <see cref="String" /> property name for <see cref="JsonToken.PropertyName" />.
+        /// <c>null</c> can be passed to the method for tokens that don't have a value, e.g. <see cref="JsonToken.StartObject" />.
         /// </param>
+        /// <MetaDataID>{3408a488-4e94-4487-8994-0ce80c76fd6b}</MetaDataID>
         public void WriteToken(JsonToken token, object value)
         {
             switch (token)
@@ -635,14 +682,16 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes the <see cref="JsonToken"/> token.
+        /// Writes the <see cref="JsonToken" /> token.
         /// </summary>
-        /// <param name="token">The <see cref="JsonToken"/> to write.</param>
+        /// <param name="token">The <see cref="JsonToken" /> to write.</param>
+        /// <MetaDataID>{7edabb23-34b7-48a8-86b5-1fc37890fad4}</MetaDataID>
         public void WriteToken(JsonToken token)
         {
             WriteToken(token, null);
         }
 
+        /// <MetaDataID>{63d65ad7-f9bc-4031-b2af-055345660bdb}</MetaDataID>
         internal virtual void WriteToken(JsonReader reader, bool writeChildren, bool writeDateConstructorAsDate, bool writeComments)
         {
             int initialDepth = CalculateWriteTokenInitialDepth(reader);
@@ -673,6 +722,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{5ee8e035-09b7-4607-b6c9-cf3a6a2edc2c}</MetaDataID>
         private int CalculateWriteTokenInitialDepth(JsonReader reader)
         {
             JsonToken type = reader.TokenType;
@@ -684,6 +734,7 @@ namespace OOAdvantech.Json
             return JsonTokenUtils.IsStartToken(type) ? reader.Depth : reader.Depth + 1;
         }
 
+        /// <MetaDataID>{b9c3c489-c855-4bf7-8aa5-3006fd02cb4b}</MetaDataID>
         private int CalculateWriteTokenFinalDepth(JsonReader reader)
         {
             JsonToken type = reader.TokenType;
@@ -695,6 +746,7 @@ namespace OOAdvantech.Json
             return JsonTokenUtils.IsEndToken(type) ? reader.Depth - 1 : reader.Depth;
         }
 
+        /// <MetaDataID>{c12bf7e8-4d43-4133-9dfd-70e7eefbd185}</MetaDataID>
         private void WriteConstructorDate(JsonReader reader)
         {
             if (!JavaScriptUtils.TryGetDateFromConstructorJson(reader, out DateTime dateTime, out string errorMessage))
@@ -705,6 +757,7 @@ namespace OOAdvantech.Json
             WriteValue(dateTime);
         }
 
+        /// <MetaDataID>{0d84c58f-1c52-4378-b880-4d2a0b2ff10a}</MetaDataID>
         private void WriteEnd(JsonContainerType type)
         {
             switch (type)
@@ -723,6 +776,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{065bedac-7fac-47d4-8ac2-0b0118eaf0e0}</MetaDataID>
         private void AutoCompleteAll()
         {
             while (Top > 0)
@@ -731,6 +785,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{7406d5a8-511e-469e-bb31-79439adaaafa}</MetaDataID>
         private JsonToken GetCloseTokenForType(JsonContainerType type)
         {
             switch (type)
@@ -746,6 +801,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{7dc88776-bcb6-40d9-b156-283afaae1e27}</MetaDataID>
         private void AutoCompleteClose(JsonContainerType type)
         {
             int levelsToComplete = CalculateLevelsToComplete(type);
@@ -773,6 +829,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{1a53434b-eaf0-4e1e-aa3d-195a93bb68e1}</MetaDataID>
         private int CalculateLevelsToComplete(JsonContainerType type)
         {
             int levelsToComplete = 0;
@@ -804,6 +861,7 @@ namespace OOAdvantech.Json
             return levelsToComplete;
         }
 
+        /// <MetaDataID>{b91bfd52-8905-462d-b727-699b86892e8f}</MetaDataID>
         private void UpdateCurrentState()
         {
             JsonContainerType currentLevelType = Peek();
@@ -831,6 +889,7 @@ namespace OOAdvantech.Json
         /// Writes the specified end token.
         /// </summary>
         /// <param name="token">The end token to write.</param>
+        /// <MetaDataID>{23439c65-b76c-4514-9db2-9495fe28532b}</MetaDataID>
         protected virtual void WriteEnd(JsonToken token)
         {
         }
@@ -838,6 +897,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes indent characters.
         /// </summary>
+        /// <MetaDataID>{5bf79769-3ddd-41f4-bd3d-c6cc95cc46c8}</MetaDataID>
         protected virtual void WriteIndent()
         {
         }
@@ -845,6 +905,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes the JSON value delimiter.
         /// </summary>
+        /// <MetaDataID>{be0bc3fe-8516-4dad-ba19-b5100ec1257d}</MetaDataID>
         protected virtual void WriteValueDelimiter()
         {
         }
@@ -852,10 +913,12 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes an indent space.
         /// </summary>
+        /// <MetaDataID>{c50ec9e3-9d36-4e84-b612-ec4d743ae832}</MetaDataID>
         protected virtual void WriteIndentSpace()
         {
         }
 
+        /// <MetaDataID>{6e9721fc-449d-43d0-b482-a0cab66be479}</MetaDataID>
         internal void AutoComplete(JsonToken tokenBeingWritten)
         {
             // gets new state based on the current state and what is being written
@@ -893,6 +956,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes a null value.
         /// </summary>
+        /// <MetaDataID>{277ebda9-8ef4-47c9-96f7-6269acb1a102}</MetaDataID>
         public virtual void WriteNull()
         {
             InternalWriteValue(JsonToken.Null);
@@ -901,6 +965,7 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Writes an undefined value.
         /// </summary>
+        /// <MetaDataID>{50c74c83-e836-4dd8-977e-3d3b9e378fbf}</MetaDataID>
         public virtual void WriteUndefined()
         {
             InternalWriteValue(JsonToken.Undefined);
@@ -910,6 +975,7 @@ namespace OOAdvantech.Json
         /// Writes raw JSON without changing the writer's state.
         /// </summary>
         /// <param name="json">The raw JSON to write.</param>
+        /// <MetaDataID>{93653ea0-2bde-4751-87f5-891c1dd4a452}</MetaDataID>
         public virtual void WriteRaw(string json)
         {
             InternalWriteRaw();
@@ -919,6 +985,7 @@ namespace OOAdvantech.Json
         /// Writes raw JSON where a value is expected and updates the writer's state.
         /// </summary>
         /// <param name="json">The raw JSON to write.</param>
+        /// <MetaDataID>{a6fc50ab-583b-47b6-9d73-fad8d00471a8}</MetaDataID>
         public virtual void WriteRawValue(string json)
         {
             // hack. want writer to change state as if a value had been written
@@ -928,27 +995,30 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="String"/> value.
+        /// Writes a <see cref="String" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="String"/> value to write.</param>
+        /// <param name="value">The <see cref="String" /> value to write.</param>
+        /// <MetaDataID>{cb98e967-c934-4def-83d8-ba161edd7448}</MetaDataID>
         public virtual void WriteValue(string value)
         {
             InternalWriteValue(JsonToken.String);
         }
 
         /// <summary>
-        /// Writes a <see cref="Int32"/> value.
+        /// Writes a <see cref="Int32" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Int32"/> value to write.</param>
+        /// <param name="value">The <see cref="Int32" /> value to write.</param>
+        /// <MetaDataID>{3cf056ea-b394-4d40-a2a6-2fd6b1aea544}</MetaDataID>
         public virtual void WriteValue(int value)
         {
             InternalWriteValue(JsonToken.Integer);
         }
 
         /// <summary>
-        /// Writes a <see cref="UInt32"/> value.
+        /// Writes a <see cref="UInt32" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="UInt32"/> value to write.</param>
+        /// <param name="value">The <see cref="UInt32" /> value to write.</param>
+        /// <MetaDataID>{a37908bf-f231-4c39-b3e9-702f5b51c816}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(uint value)
         {
@@ -956,18 +1026,20 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Int64"/> value.
+        /// Writes a <see cref="Int64" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Int64"/> value to write.</param>
+        /// <param name="value">The <see cref="Int64" /> value to write.</param>
+        /// <MetaDataID>{9f1a6ef8-ac5f-480b-beef-06838bea6df4}</MetaDataID>
         public virtual void WriteValue(long value)
         {
             InternalWriteValue(JsonToken.Integer);
         }
 
         /// <summary>
-        /// Writes a <see cref="UInt64"/> value.
+        /// Writes a <see cref="UInt64" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="UInt64"/> value to write.</param>
+        /// <param name="value">The <see cref="UInt64" /> value to write.</param>
+        /// <MetaDataID>{7804be43-6472-4640-ab96-a5ab41d09bdb}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(ulong value)
         {
@@ -975,45 +1047,50 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Single"/> value.
+        /// Writes a <see cref="Single" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Single"/> value to write.</param>
+        /// <param name="value">The <see cref="Single" /> value to write.</param>
+        /// <MetaDataID>{23e11136-6564-489a-b8a4-ed85af963e64}</MetaDataID>
         public virtual void WriteValue(float value)
         {
             InternalWriteValue(JsonToken.Float);
         }
 
         /// <summary>
-        /// Writes a <see cref="Double"/> value.
+        /// Writes a <see cref="Double" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Double"/> value to write.</param>
+        /// <param name="value">The <see cref="Double" /> value to write.</param>
+        /// <MetaDataID>{3fbb0c10-ad8a-48e5-8062-4f1fffad251f}</MetaDataID>
         public virtual void WriteValue(double value)
         {
             InternalWriteValue(JsonToken.Float);
         }
 
         /// <summary>
-        /// Writes a <see cref="Boolean"/> value.
+        /// Writes a <see cref="Boolean" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Boolean"/> value to write.</param>
+        /// <param name="value">The <see cref="Boolean" /> value to write.</param>
+        /// <MetaDataID>{adb22ec6-0abd-442a-b398-671c36302abe}</MetaDataID>
         public virtual void WriteValue(bool value)
         {
             InternalWriteValue(JsonToken.Boolean);
         }
 
         /// <summary>
-        /// Writes a <see cref="Int16"/> value.
+        /// Writes a <see cref="Int16" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Int16"/> value to write.</param>
+        /// <param name="value">The <see cref="Int16" /> value to write.</param>
+        /// <MetaDataID>{14247797-47a8-4355-9daf-8e66c6b0213e}</MetaDataID>
         public virtual void WriteValue(short value)
         {
             InternalWriteValue(JsonToken.Integer);
         }
 
         /// <summary>
-        /// Writes a <see cref="UInt16"/> value.
+        /// Writes a <see cref="UInt16" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="UInt16"/> value to write.</param>
+        /// <param name="value">The <see cref="UInt16" /> value to write.</param>
+        /// <MetaDataID>{dfd43654-10ee-4e7e-8a53-c6830a4ffd24}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(ushort value)
         {
@@ -1021,27 +1098,30 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Char"/> value.
+        /// Writes a <see cref="Char" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Char"/> value to write.</param>
+        /// <param name="value">The <see cref="Char" /> value to write.</param>
+        /// <MetaDataID>{30a74039-5715-4041-b389-7a76b0cd0230}</MetaDataID>
         public virtual void WriteValue(char value)
         {
             InternalWriteValue(JsonToken.String);
         }
 
         /// <summary>
-        /// Writes a <see cref="Byte"/> value.
+        /// Writes a <see cref="Byte" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Byte"/> value to write.</param>
+        /// <param name="value">The <see cref="Byte" /> value to write.</param>
+        /// <MetaDataID>{3205034d-336a-46dc-96e7-35ce2c82eabf}</MetaDataID>
         public virtual void WriteValue(byte value)
         {
             InternalWriteValue(JsonToken.Integer);
         }
 
         /// <summary>
-        /// Writes a <see cref="SByte"/> value.
+        /// Writes a <see cref="SByte" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="SByte"/> value to write.</param>
+        /// <param name="value">The <see cref="SByte" /> value to write.</param>
+        /// <MetaDataID>{5a2e95b3-2787-4ed7-93ed-8a3546538f34}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(sbyte value)
         {
@@ -1049,18 +1129,20 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Decimal"/> value.
+        /// Writes a <see cref="Decimal" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Decimal"/> value to write.</param>
+        /// <param name="value">The <see cref="Decimal" /> value to write.</param>
+        /// <MetaDataID>{e899e8d5-677a-40df-95da-b213ef7dcb30}</MetaDataID>
         public virtual void WriteValue(decimal value)
         {
             InternalWriteValue(JsonToken.Float);
         }
 
         /// <summary>
-        /// Writes a <see cref="DateTime"/> value.
+        /// Writes a <see cref="DateTime" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> value to write.</param>
+        /// <param name="value">The <see cref="DateTime" /> value to write.</param>
+        /// <MetaDataID>{569a0774-eda8-4bd2-b05b-57f1a144e7a5}</MetaDataID>
         public virtual void WriteValue(DateTime value)
         {
             InternalWriteValue(JsonToken.Date);
@@ -1068,9 +1150,10 @@ namespace OOAdvantech.Json
 
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
-        /// Writes a <see cref="DateTimeOffset"/> value.
+        /// Writes a <see cref="DateTimeOffset" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="DateTimeOffset"/> value to write.</param>
+        /// <param name="value">The <see cref="DateTimeOffset" /> value to write.</param>
+        /// <MetaDataID>{9890ba79-ba58-4be5-812d-bc7d4dd39ed5}</MetaDataID>
         public virtual void WriteValue(DateTimeOffset value)
         {
             InternalWriteValue(JsonToken.Date);
@@ -1078,27 +1161,30 @@ namespace OOAdvantech.Json
 #endif
 
         /// <summary>
-        /// Writes a <see cref="Guid"/> value.
+        /// Writes a <see cref="Guid" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Guid"/> value to write.</param>
+        /// <param name="value">The <see cref="Guid" /> value to write.</param>
+        /// <MetaDataID>{4b172bf8-f951-4cd2-8542-25e61a95f9d6}</MetaDataID>
         public virtual void WriteValue(Guid value)
         {
             InternalWriteValue(JsonToken.String);
         }
 
         /// <summary>
-        /// Writes a <see cref="TimeSpan"/> value.
+        /// Writes a <see cref="TimeSpan" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="TimeSpan"/> value to write.</param>
+        /// <param name="value">The <see cref="TimeSpan" /> value to write.</param>
+        /// <MetaDataID>{d1fde775-1308-4a7d-84ca-1df7c4b421e0}</MetaDataID>
         public virtual void WriteValue(TimeSpan value)
         {
             InternalWriteValue(JsonToken.String);
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Int32"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Int32" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Int32"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Int32" /> value to write.</param>
+        /// <MetaDataID>{4d3c2337-d196-4da9-91f0-59dfbb55dcb7}</MetaDataID>
         public virtual void WriteValue(int? value)
         {
             if (value == null)
@@ -1112,9 +1198,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="UInt32"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="UInt32" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="UInt32"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="UInt32" /> value to write.</param>
+        /// <MetaDataID>{cfa2e3e3-fc59-498e-8c4e-c4b24f14ab6c}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(uint? value)
         {
@@ -1129,9 +1216,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Int64"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Int64" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Int64"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Int64" /> value to write.</param>
+        /// <MetaDataID>{373e7962-6dd9-488b-8296-1d067135b9a8}</MetaDataID>
         public virtual void WriteValue(long? value)
         {
             if (value == null)
@@ -1145,9 +1233,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="UInt64"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="UInt64" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="UInt64"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="UInt64" /> value to write.</param>
+        /// <MetaDataID>{309d97f1-de90-4216-82cf-37190eb67470}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(ulong? value)
         {
@@ -1162,9 +1251,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Single"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Single" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Single"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Single" /> value to write.</param>
+        /// <MetaDataID>{61b388a2-ac9f-49d0-88b4-e1823da05343}</MetaDataID>
         public virtual void WriteValue(float? value)
         {
             if (value == null)
@@ -1178,9 +1268,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Double"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Double" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Double"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Double" /> value to write.</param>
+        /// <MetaDataID>{b8e5f2b8-83d4-4d6e-8821-ff35b3a597ce}</MetaDataID>
         public virtual void WriteValue(double? value)
         {
             if (value == null)
@@ -1194,9 +1285,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Boolean"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Boolean" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Boolean"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Boolean" /> value to write.</param>
+        /// <MetaDataID>{8c2afede-3bcb-424c-b29a-b94ab446cc0f}</MetaDataID>
         public virtual void WriteValue(bool? value)
         {
             if (value == null)
@@ -1210,9 +1302,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Int16"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Int16" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Int16"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Int16" /> value to write.</param>
+        /// <MetaDataID>{aa393ce6-9b90-4d32-a3bb-8e1c8d1ab8d0}</MetaDataID>
         public virtual void WriteValue(short? value)
         {
             if (value == null)
@@ -1226,9 +1319,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="UInt16"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="UInt16" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="UInt16"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="UInt16" /> value to write.</param>
+        /// <MetaDataID>{5225c139-857b-402f-8882-3f527f22bfb6}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(ushort? value)
         {
@@ -1243,9 +1337,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Char"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Char" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Char"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Char" /> value to write.</param>
+        /// <MetaDataID>{20067c9f-1995-40cd-a1ea-63508f50fdbf}</MetaDataID>
         public virtual void WriteValue(char? value)
         {
             if (value == null)
@@ -1259,9 +1354,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Byte"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Byte" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Byte"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Byte" /> value to write.</param>
+        /// <MetaDataID>{123763a5-5ab5-419f-af29-b0fe8a2fe682}</MetaDataID>
         public virtual void WriteValue(byte? value)
         {
             if (value == null)
@@ -1275,9 +1371,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="SByte"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="SByte" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="SByte"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="SByte" /> value to write.</param>
+        /// <MetaDataID>{6f1813db-d32c-43d9-8c19-6bf49ef70eb6}</MetaDataID>
         [CLSCompliant(false)]
         public virtual void WriteValue(sbyte? value)
         {
@@ -1292,9 +1389,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Decimal"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Decimal" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Decimal"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Decimal" /> value to write.</param>
+        /// <MetaDataID>{35cb08ab-e65f-48a0-8823-170de98f7af6}</MetaDataID>
         public virtual void WriteValue(decimal? value)
         {
             if (value == null)
@@ -1308,9 +1406,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="DateTime"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="DateTime" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="DateTime"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="DateTime" /> value to write.</param>
+        /// <MetaDataID>{c86b236a-833a-444f-aecc-bc9a4100149a}</MetaDataID>
         public virtual void WriteValue(DateTime? value)
         {
             if (value == null)
@@ -1325,9 +1424,10 @@ namespace OOAdvantech.Json
 
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="DateTimeOffset" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="DateTimeOffset" /> value to write.</param>
+        /// <MetaDataID>{776805c1-9a10-485e-b3bd-bacc2b772877}</MetaDataID>
         public virtual void WriteValue(DateTimeOffset? value)
         {
             if (value == null)
@@ -1342,9 +1442,10 @@ namespace OOAdvantech.Json
 #endif
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="Guid"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="Guid" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="Guid"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="Guid" /> value to write.</param>
+        /// <MetaDataID>{4cc6e55c-adce-4873-8d02-09830967f8e1}</MetaDataID>
         public virtual void WriteValue(Guid? value)
         {
             if (value == null)
@@ -1358,9 +1459,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Nullable{T}"/> of <see cref="TimeSpan"/> value.
+        /// Writes a <see cref="Nullable{T}" /> of <see cref="TimeSpan" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Nullable{T}"/> of <see cref="TimeSpan"/> value to write.</param>
+        /// <param name="value">The <see cref="Nullable{T}" /> of <see cref="TimeSpan" /> value to write.</param>
+        /// <MetaDataID>{d3d7588b-ad8f-47fd-bbfb-c35e42783c7b}</MetaDataID>
         public virtual void WriteValue(TimeSpan? value)
         {
             if (value == null)
@@ -1374,9 +1476,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Byte"/>[] value.
+        /// Writes a <see cref="Byte" />[] value.
         /// </summary>
-        /// <param name="value">The <see cref="Byte"/>[] value to write.</param>
+        /// <param name="value">The <see cref="Byte" />[] value to write.</param>
+        /// <MetaDataID>{a9bbf611-cd1c-4ec3-b86a-98f8cf2a35b0}</MetaDataID>
         public virtual void WriteValue(byte[] value)
         {
             if (value == null)
@@ -1390,9 +1493,10 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Uri"/> value.
+        /// Writes a <see cref="Uri" /> value.
         /// </summary>
-        /// <param name="value">The <see cref="Uri"/> value to write.</param>
+        /// <param name="value">The <see cref="Uri" /> value to write.</param>
+        /// <MetaDataID>{05e30f81-e833-4e96-ba07-f2ebe896b7f7}</MetaDataID>
         public virtual void WriteValue(Uri value)
         {
             if (value == null)
@@ -1406,10 +1510,11 @@ namespace OOAdvantech.Json
         }
 
         /// <summary>
-        /// Writes a <see cref="Object"/> value.
+        /// Writes a <see cref="Object" /> value.
         /// An error will raised if the value cannot be written as a single JSON token.
         /// </summary>
-        /// <param name="value">The <see cref="Object"/> value to write.</param>
+        /// <param name="value">The <see cref="Object" /> value to write.</param>
+        /// <MetaDataID>{0cedfa97-3a45-4cfa-bb8a-ddab46711ef7}</MetaDataID>
         public virtual void WriteValue(object value)
         {
             if (value == null)
@@ -1436,6 +1541,7 @@ namespace OOAdvantech.Json
         /// Writes a comment <c>/*...*/</c> containing the specified text.
         /// </summary>
         /// <param name="text">Text to place inside the comment.</param>
+        /// <MetaDataID>{15a07e8f-3c4a-49c0-a1c0-662a85fcc014}</MetaDataID>
         public virtual void WriteComment(string text)
         {
             InternalWriteComment();
@@ -1445,11 +1551,13 @@ namespace OOAdvantech.Json
         /// Writes the given white space.
         /// </summary>
         /// <param name="ws">The string of white space characters.</param>
+        /// <MetaDataID>{da7b2eee-607f-4615-888d-0038c7e689fe}</MetaDataID>
         public virtual void WriteWhitespace(string ws)
         {
             InternalWriteWhitespace(ws);
         }
 
+        /// <MetaDataID>{dc009dce-7358-41ae-8a91-26f40a80eed0}</MetaDataID>
         void IDisposable.Dispose()
         {
             Dispose(true);
@@ -1459,7 +1567,9 @@ namespace OOAdvantech.Json
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing">
+        ///   <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <MetaDataID>{62df6a74-1dfe-427f-8eb2-3bae17113953}</MetaDataID>
         protected virtual void Dispose(bool disposing)
         {
             if (_currentState != State.Closed && disposing)
@@ -1468,6 +1578,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{6f97a45b-16eb-414a-a633-796afd1c21b4}</MetaDataID>
         internal static void WriteValue(JsonWriter writer, PrimitiveTypeCode typeCode, object value)
         {
             while (true)
@@ -1661,6 +1772,7 @@ namespace OOAdvantech.Json
         }
 
 #if HAVE_ICONVERTIBLE
+        /// <MetaDataID>{4fb722fc-cb01-4b31-9c7a-1c994d44a9f6}</MetaDataID>
         private static void ResolveConvertibleValue(IConvertible convertible, out PrimitiveTypeCode typeCode, out object value)
         {
             // the value is a non-standard IConvertible
@@ -1674,16 +1786,18 @@ namespace OOAdvantech.Json
         }
 #endif
 
+        /// <MetaDataID>{ed13243f-5c83-4ab2-a1fd-b58a256a8555}</MetaDataID>
         private static JsonWriterException CreateUnsupportedTypeException(JsonWriter writer, object value)
         {
             return JsonWriterException.Create(writer, "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(CultureInfo.InvariantCulture, value.GetType()), null);
         }
 
         /// <summary>
-        /// Sets the state of the <see cref="JsonWriter"/>.
+        /// Sets the state of the <see cref="JsonWriter" />.
         /// </summary>
-        /// <param name="token">The <see cref="JsonToken"/> being written.</param>
+        /// <param name="token">The <see cref="JsonToken" /> being written.</param>
         /// <param name="value">The value being written.</param>
+        /// <MetaDataID>{44924ba8-22f5-4ed1-8e26-f952386b412e}</MetaDataID>
         protected void SetWriteState(JsonToken token, object value)
         {
             switch (token)
@@ -1735,21 +1849,25 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{e7254d3d-1aa5-489c-a6df-0c68b803b1d0}</MetaDataID>
         internal void InternalWriteEnd(JsonContainerType container)
         {
             AutoCompleteClose(container);
         }
 
+        /// <MetaDataID>{7342123a-c9a9-4e4a-ba8f-428083f87f6b}</MetaDataID>
         internal void InternalWritePropertyName(string name)
         {
             _currentPosition.PropertyName = name;
             AutoComplete(JsonToken.PropertyName);
         }
 
+        /// <MetaDataID>{81a8bfd3-e5fb-4422-bd57-9b8cadbc5c5d}</MetaDataID>
         internal void InternalWriteRaw()
         {
         }
 
+        /// <MetaDataID>{e343e082-7421-497b-8de6-3f43b57d68bf}</MetaDataID>
         internal void InternalWriteStart(JsonToken token, JsonContainerType container)
         {
             UpdateScopeWithFinishedValue();
@@ -1757,12 +1875,14 @@ namespace OOAdvantech.Json
             Push(container);
         }
 
+        /// <MetaDataID>{90c7f0e1-1571-4c35-b39e-8df4c0ff362b}</MetaDataID>
         internal void InternalWriteValue(JsonToken token)
         {
             UpdateScopeWithFinishedValue();
             AutoComplete(token);
         }
 
+        /// <MetaDataID>{95675781-0320-4712-98be-3e51a1081694}</MetaDataID>
         internal void InternalWriteWhitespace(string ws)
         {
             if (ws != null)
@@ -1774,6 +1894,7 @@ namespace OOAdvantech.Json
             }
         }
 
+        /// <MetaDataID>{3d862551-e9a2-4d6e-bc5a-6a8f299851bd}</MetaDataID>
         internal void InternalWriteComment()
         {
             AutoComplete(JsonToken.Comment);

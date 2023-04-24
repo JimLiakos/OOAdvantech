@@ -47,9 +47,12 @@ namespace OOAdvantech.Json.Linq
         , IConvertible
 #endif
     {
+        /// <MetaDataID>{31c414ae-f97b-4a53-a811-5ee3b921d135}</MetaDataID>
         private JTokenType _valueType;
+        /// <MetaDataID>{d171f81e-ac71-464e-8b5e-29d2eb68c2dc}</MetaDataID>
         private object _value;
 
+        /// <MetaDataID>{1bf0d41c-0520-46b5-8f0f-bc9a3083ca43}</MetaDataID>
         internal JValue(object value, JTokenType type)
         {
             _value = value;
@@ -57,45 +60,50 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class from another <see cref="JValue"/> object.
+        /// Initializes a new instance of the <see cref="JValue" /> class from another <see cref="JValue" /> object.
         /// </summary>
-        /// <param name="other">A <see cref="JValue"/> object to copy from.</param>
+        /// <param name="other">A <see cref="JValue" /> object to copy from.</param>
+        /// <MetaDataID>{45b82e81-a751-4700-bb18-9433dd6de105}</MetaDataID>
         public JValue(JValue other)
             : this(other.Value, other.Type)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{505ded3b-a74b-4534-8997-6015c5551e5b}</MetaDataID>
         public JValue(long value)
             : this(value, JTokenType.Integer)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{c48b4e59-a685-4ae5-8feb-675fd7fa660d}</MetaDataID>
         public JValue(decimal value)
             : this(value, JTokenType.Float)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{f9f08368-dd75-4e52-8472-cdd870e46a99}</MetaDataID>
         public JValue(char value)
             : this(value, JTokenType.String)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{4fe8f907-4aba-49ac-8e1a-0825435f7753}</MetaDataID>
         [CLSCompliant(false)]
         public JValue(ulong value)
             : this(value, JTokenType.Integer)
@@ -103,27 +111,30 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{31853a4d-453e-44c2-a719-45435919aeca}</MetaDataID>
         public JValue(double value)
             : this(value, JTokenType.Float)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{f1045e8b-1656-4b0f-8ce2-afcffe4fad92}</MetaDataID>
         public JValue(float value)
             : this(value, JTokenType.Float)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{ee2494bd-37f5-4f85-b02a-a1ab4ef5aebe}</MetaDataID>
         public JValue(DateTime value)
             : this(value, JTokenType.Date)
         {
@@ -131,9 +142,10 @@ namespace OOAdvantech.Json.Linq
 
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{30a25cff-0b94-4cbe-a694-98dc0be0d804}</MetaDataID>
         public JValue(DateTimeOffset value)
             : this(value, JTokenType.Date)
         {
@@ -141,59 +153,66 @@ namespace OOAdvantech.Json.Linq
 #endif
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{d7c35c7b-9386-42c7-a25b-e487dcf63ca6}</MetaDataID>
         public JValue(bool value)
             : this(value, JTokenType.Boolean)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{ad34c232-5cc5-4aea-9413-a62a80ad64cd}</MetaDataID>
         public JValue(string value)
             : this(value, JTokenType.String)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{ced4014f-02aa-4521-9644-32fe0be1e279}</MetaDataID>
         public JValue(Guid value)
             : this(value, JTokenType.Guid)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{b5213f2e-d8f4-4dab-8b32-9943fa753e2c}</MetaDataID>
         public JValue(Uri value)
             : this(value, (value != null) ? JTokenType.Uri : JTokenType.Null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{5343c3d7-5f7c-421a-b955-47d1a39a6749}</MetaDataID>
         public JValue(TimeSpan value)
             : this(value, JTokenType.TimeSpan)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
+        /// Initializes a new instance of the <see cref="JValue" /> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <MetaDataID>{033d18aa-113b-4fb7-b2b0-65ab2d289c22}</MetaDataID>
         public JValue(object value)
             : this(value, GetValueType(null, value))
         {
         }
 
+        /// <MetaDataID>{e6b99fb2-5dbc-4237-9064-b0951eb76ce2}</MetaDataID>
         internal override bool DeepEquals(JToken node)
         {
             if (!(node is JValue other))
@@ -212,11 +231,13 @@ namespace OOAdvantech.Json.Linq
         /// Gets a value indicating whether this token has child tokens.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this token has child values; otherwise, <c>false</c>.
+        ///   <c>true</c> if this token has child values; otherwise, <c>false</c>.
         /// </value>
+        /// <MetaDataID>{55b80673-5dbc-4abc-a33e-7e73160986d6}</MetaDataID>
         public override bool HasValues => false;
 
 #if HAVE_BIG_INTEGER
+        /// <MetaDataID>{64d66473-70d6-41fc-ad36-1241123a9e1f}</MetaDataID>
         private static int CompareBigInteger(BigInteger i1, object i2)
         {
             int result = i1.CompareTo(ConvertUtils.ToBigInteger(i2));
@@ -242,6 +263,7 @@ namespace OOAdvantech.Json.Linq
         }
 #endif
 
+        /// <MetaDataID>{6ca23df4-0e56-43f4-a87b-0716b8ee1943}</MetaDataID>
         internal static int Compare(JTokenType valueType, object objA, object objB)
         {
             if (objA == objB)
@@ -393,6 +415,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{da0f2946-c41e-4643-bdc1-6da1ec321469}</MetaDataID>
         private static int CompareFloat(object objA, object objB)
         {
             double d1 = Convert.ToDouble(objA, CultureInfo.InvariantCulture);
@@ -408,6 +431,7 @@ namespace OOAdvantech.Json.Linq
         }
 
 #if HAVE_EXPRESSIONS
+        /// <MetaDataID>{0bde3cc6-75ba-431f-a620-4e2a801e48d0}</MetaDataID>
         private static bool Operation(ExpressionType operation, object objA, object objB, out object result)
         {
             if (objA is string || objB is string)
@@ -555,49 +579,55 @@ namespace OOAdvantech.Json.Linq
         }
 #endif
 
+        /// <MetaDataID>{e2c96601-2c6e-4cba-97b6-0459da32ad44}</MetaDataID>
         internal override JToken CloneToken()
         {
             return new JValue(this);
         }
 
         /// <summary>
-        /// Creates a <see cref="JValue"/> comment with the given value.
+        /// Creates a <see cref="JValue" /> comment with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>A <see cref="JValue"/> comment with the given value.</returns>
+        /// <returns>A <see cref="JValue" /> comment with the given value.</returns>
+        /// <MetaDataID>{43807ff2-4596-4cb5-8094-846a2d497898}</MetaDataID>
         public static JValue CreateComment(string value)
         {
             return new JValue(value, JTokenType.Comment);
         }
 
         /// <summary>
-        /// Creates a <see cref="JValue"/> string with the given value.
+        /// Creates a <see cref="JValue" /> string with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>A <see cref="JValue"/> string with the given value.</returns>
+        /// <returns>A <see cref="JValue" /> string with the given value.</returns>
+        /// <MetaDataID>{7dcc9680-3b76-494e-ae26-294608dbc10e}</MetaDataID>
         public static JValue CreateString(string value)
         {
             return new JValue(value, JTokenType.String);
         }
 
         /// <summary>
-        /// Creates a <see cref="JValue"/> null value.
+        /// Creates a <see cref="JValue" /> null value.
         /// </summary>
-        /// <returns>A <see cref="JValue"/> null value.</returns>
+        /// <returns>A <see cref="JValue" /> null value.</returns>
+        /// <MetaDataID>{eeccb11c-b32b-486c-baff-7cb9772a5adb}</MetaDataID>
         public static JValue CreateNull()
         {
             return new JValue(null, JTokenType.Null);
         }
 
         /// <summary>
-        /// Creates a <see cref="JValue"/> undefined value.
+        /// Creates a <see cref="JValue" /> undefined value.
         /// </summary>
-        /// <returns>A <see cref="JValue"/> undefined value.</returns>
+        /// <returns>A <see cref="JValue" /> undefined value.</returns>
+        /// <MetaDataID>{997fa359-ecbe-4ea2-b88c-b030f1c1718d}</MetaDataID>
         public static JValue CreateUndefined()
         {
             return new JValue(null, JTokenType.Undefined);
         }
 
+        /// <MetaDataID>{227ce6d9-d7f1-40c9-9994-e64a5db529c8}</MetaDataID>
         private static JTokenType GetValueType(JTokenType? current, object value)
         {
             if (value == null)
@@ -667,6 +697,7 @@ namespace OOAdvantech.Json.Linq
             throw new ArgumentException("Could not determine JSON object type for type {0}.".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
         }
 
+        /// <MetaDataID>{94c2a2c9-cf3b-49dc-aa47-8c3475338cf2}</MetaDataID>
         private static JTokenType GetStringValueType(JTokenType? current)
         {
             if (current == null)
@@ -686,15 +717,17 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Gets the node type for this <see cref="JToken"/>.
+        /// Gets the node type for this <see cref="JToken" />.
         /// </summary>
         /// <value>The type.</value>
+        /// <MetaDataID>{a1944b4a-9808-4582-a4b2-701aff7d8196}</MetaDataID>
         public override JTokenType Type => _valueType;
 
         /// <summary>
         /// Gets or sets the underlying token value.
         /// </summary>
         /// <value>The underlying token value.</value>
+        /// <MetaDataID>{5b578497-422c-420b-b9f8-894e5fb6bc5a}</MetaDataID>
         public object Value
         {
             get => _value;
@@ -713,10 +746,11 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Writes this token to a <see cref="JsonWriter"/>.
+        /// Writes this token to a <see cref="JsonWriter" />.
         /// </summary>
-        /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
-        /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when writing the token.</param>
+        /// <param name="writer">A <see cref="JsonWriter" /> into which this method will write.</param>
+        /// <param name="converters">A collection of <see cref="JsonConverter" />s which will be used when writing the token.</param>
+        /// <MetaDataID>{322a5e63-b1de-4de5-a87f-a77fa30de027}</MetaDataID>
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             if (converters != null && converters.Length > 0 && _value != null)
@@ -820,6 +854,7 @@ namespace OOAdvantech.Json.Linq
             throw MiscellaneousUtils.CreateArgumentOutOfRangeException(nameof(Type), _valueType, "Unexpected token type.");
         }
 
+        /// <MetaDataID>{42c25634-4235-4210-bab7-3e796f81a6c2}</MetaDataID>
         internal override int GetDeepHashCode()
         {
             int valueHashCode = (_value != null) ? _value.GetHashCode() : 0;
@@ -828,6 +863,7 @@ namespace OOAdvantech.Json.Linq
             return ((int)_valueType).GetHashCode() ^ valueHashCode;
         }
 
+        /// <MetaDataID>{51a39523-ab7c-4757-b71b-31c03211a3a5}</MetaDataID>
         private static bool ValuesEquals(JValue v1, JValue v2)
         {
             return (v1 == v2 || (v1._valueType == v2._valueType && Compare(v1._valueType, v1._value, v2._value) == 0));
@@ -837,9 +873,10 @@ namespace OOAdvantech.Json.Linq
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <returns>
-        /// <c>true</c> if the current object is equal to the <paramref name="other"/> parameter; otherwise, <c>false</c>.
+        ///   <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
+        /// <MetaDataID>{2212b988-c1f0-4a81-abed-8899fc99e5f4}</MetaDataID>
         public bool Equals(JValue other)
         {
             if (other == null)
@@ -851,12 +888,13 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current <see cref="Object"/>.
+        /// Determines whether the specified <see cref="Object" /> is equal to the current <see cref="Object" />.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current <see cref="Object"/>.</param>
+        /// <param name="obj">The <see cref="Object" /> to compare with the current <see cref="Object" />.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="Object"/> is equal to the current <see cref="Object"/>; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="Object" /> is equal to the current <see cref="Object" />; otherwise, <c>false</c>.
         /// </returns>
+        /// <MetaDataID>{b763335d-22b2-4d4d-8fc3-5994bf0d361e}</MetaDataID>
         public override bool Equals(object obj)
         {
             return Equals(obj as JValue);
@@ -866,8 +904,9 @@ namespace OOAdvantech.Json.Linq
         /// Serves as a hash function for a particular type.
         /// </summary>
         /// <returns>
-        /// A hash code for the current <see cref="Object"/>.
+        /// A hash code for the current <see cref="Object" />.
         /// </returns>
+        /// <MetaDataID>{5edb2b1d-ed0a-4289-9815-a68fad2ee90d}</MetaDataID>
         public override int GetHashCode()
         {
             if (_value == null)
@@ -879,11 +918,12 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents this instance.
+        /// Returns a <see cref="String" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="String"/> that represents this instance.
+        /// A <see cref="String" /> that represents this instance.
         /// </returns>
+        /// <MetaDataID>{1a17289c-6da7-499d-8a9f-3dc8fcf70b32}</MetaDataID>
         public override string ToString()
         {
             if (_value == null)
@@ -895,37 +935,40 @@ namespace OOAdvantech.Json.Linq
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents this instance.
+        /// Returns a <see cref="String" /> that represents this instance.
         /// </summary>
         /// <param name="format">The format.</param>
         /// <returns>
-        /// A <see cref="String"/> that represents this instance.
+        /// A <see cref="String" /> that represents this instance.
         /// </returns>
+        /// <MetaDataID>{cc295d3a-f43d-49ac-ac00-4b90ca12b560}</MetaDataID>
         public string ToString(string format)
         {
             return ToString(format, CultureInfo.CurrentCulture);
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents this instance.
+        /// Returns a <see cref="String" /> that represents this instance.
         /// </summary>
         /// <param name="formatProvider">The format provider.</param>
         /// <returns>
-        /// A <see cref="String"/> that represents this instance.
+        /// A <see cref="String" /> that represents this instance.
         /// </returns>
+        /// <MetaDataID>{2bd6c941-5207-4c62-a89e-d6b97ebc4838}</MetaDataID>
         public string ToString(IFormatProvider formatProvider)
         {
             return ToString(null, formatProvider);
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents this instance.
+        /// Returns a <see cref="String" /> that represents this instance.
         /// </summary>
         /// <param name="format">The format.</param>
         /// <param name="formatProvider">The format provider.</param>
         /// <returns>
-        /// A <see cref="String"/> that represents this instance.
+        /// A <see cref="String" /> that represents this instance.
         /// </returns>
+        /// <MetaDataID>{d78d7c38-2f9c-4a59-9023-c2ace8d94e6f}</MetaDataID>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (_value == null)
@@ -945,12 +988,13 @@ namespace OOAdvantech.Json.Linq
 
 #if HAVE_DYNAMIC
         /// <summary>
-        /// Returns the <see cref="DynamicMetaObject"/> responsible for binding operations performed on this object.
+        /// Returns the <see cref="DynamicMetaObject" /> responsible for binding operations performed on this object.
         /// </summary>
         /// <param name="parameter">The expression tree representation of the runtime value.</param>
         /// <returns>
-        /// The <see cref="DynamicMetaObject"/> to bind this object.
+        /// The <see cref="DynamicMetaObject" /> to bind this object.
         /// </returns>
+        /// <MetaDataID>{e1ec4247-5bd1-483d-8190-1892ee590b60}</MetaDataID>
         protected override DynamicMetaObject GetMetaObject(Expression parameter)
         {
             return new DynamicProxyMetaObject<JValue>(parameter, this, new JValueDynamicProxy());
@@ -1024,6 +1068,7 @@ namespace OOAdvantech.Json.Linq
         }
 #endif
 
+        /// <MetaDataID>{ce6739f9-6707-4d69-87cb-c69c767e9771}</MetaDataID>
         int IComparable.CompareTo(object obj)
         {
             if (obj == null)
@@ -1058,15 +1103,16 @@ namespace OOAdvantech.Json.Linq
         /// Value
         /// Meaning
         /// Less than zero
-        /// This instance is less than <paramref name="obj"/>.
+        /// This instance is less than <paramref name="obj" />.
         /// Zero
-        /// This instance is equal to <paramref name="obj"/>.
+        /// This instance is equal to <paramref name="obj" />.
         /// Greater than zero
-        /// This instance is greater than <paramref name="obj"/>.
+        /// This instance is greater than <paramref name="obj" />.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// 	<paramref name="obj"/> is not of the same type as this instance.
+        ///   <paramref name="obj" /> is not of the same type as this instance.
         /// </exception>
+        /// <MetaDataID>{2b979f9c-e6f7-4106-98ec-ed2f9face1d8}</MetaDataID>
         public int CompareTo(JValue obj)
         {
             if (obj == null)
@@ -1082,6 +1128,7 @@ namespace OOAdvantech.Json.Linq
         }
 
 #if HAVE_ICONVERTIBLE
+        /// <MetaDataID>{9381ba18-01bd-4864-b159-fcf2759891bf}</MetaDataID>
         TypeCode IConvertible.GetTypeCode()
         {
             if (_value == null)
@@ -1097,76 +1144,91 @@ namespace OOAdvantech.Json.Linq
             return TypeCode.Object;
         }
 
+        /// <MetaDataID>{ed6f246f-4dfe-48ed-a3e3-46062b5a5caa}</MetaDataID>
         bool IConvertible.ToBoolean(IFormatProvider provider)
         {
             return (bool)this;
         }
 
+        /// <MetaDataID>{30d5848c-d6f6-4b5d-aa43-1a3bc9361820}</MetaDataID>
         char IConvertible.ToChar(IFormatProvider provider)
         {
             return (char)this;
         }
 
+        /// <MetaDataID>{33328a2a-ec7b-4493-9694-121494a38d9a}</MetaDataID>
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
             return (sbyte)this;
         }
 
+        /// <MetaDataID>{ae0eb78e-f1bf-419c-8367-26424fdc60b8}</MetaDataID>
         byte IConvertible.ToByte(IFormatProvider provider)
         {
             return (byte)this;
         }
 
+        /// <MetaDataID>{6aaaa782-dcdd-42ec-b463-ad6c513b3ea6}</MetaDataID>
         short IConvertible.ToInt16(IFormatProvider provider)
         {
             return (short)this;
         }
 
+        /// <MetaDataID>{08069e42-bbb9-4ff1-9ab4-5007945b7bce}</MetaDataID>
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
             return (ushort)this;
         }
 
+        /// <MetaDataID>{5cc013af-a2d5-440c-bcbd-dbe526adeb17}</MetaDataID>
         int IConvertible.ToInt32(IFormatProvider provider)
         {
             return (int)this;
         }
 
+        /// <MetaDataID>{a142885d-bfb5-4b38-9f33-999cdd98901c}</MetaDataID>
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
             return (uint)this;
         }
 
+        /// <MetaDataID>{6f684772-d730-403a-9fc1-ab1c4128f6bf}</MetaDataID>
         long IConvertible.ToInt64(IFormatProvider provider)
         {
             return (long)this;
         }
 
+        /// <MetaDataID>{21e075e5-7462-49fb-b609-e5192af9788b}</MetaDataID>
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
             return (ulong)this;
         }
 
+        /// <MetaDataID>{8b468114-8c7d-4add-ada5-ecaec69aa3ca}</MetaDataID>
         float IConvertible.ToSingle(IFormatProvider provider)
         {
             return (float)this;
         }
 
+        /// <MetaDataID>{d88c642e-3480-453d-9098-1e0f69b3cec4}</MetaDataID>
         double IConvertible.ToDouble(IFormatProvider provider)
         {
             return (double)this;
         }
 
+        /// <MetaDataID>{ae1a396d-7460-40ee-8246-4a477c8d23d0}</MetaDataID>
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
             return (decimal)this;
         }
 
+        /// <MetaDataID>{a9ec52df-6631-4f5b-a5de-a1335ed03c7a}</MetaDataID>
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
             return (DateTime)this;
         }
 
+        /// <MetaDataID>{b21e7f4b-f1fc-49bc-8625-a699c3896b9f}</MetaDataID>
         object IConvertible.ToType(Type conversionType, IFormatProvider provider)
         {
             return ToObject(conversionType);

@@ -36,12 +36,13 @@ namespace OOAdvantech.Json.Linq
     public partial class JRaw
     {
         /// <summary>
-        /// Asynchronously creates an instance of <see cref="JRaw"/> with the content of the reader's current token.
+        /// Asynchronously creates an instance of <see cref="JRaw" /> with the content of the reader's current token.
         /// </summary>
         /// <param name="reader">The reader.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous creation. The <see cref="Task{TResult}.Result"/>
-        /// property returns an instance of <see cref="JRaw"/> with the content of the reader's current token.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A <see cref="Task{TResult}" /> representing the asynchronous creation. The <see cref="Task{TResult}.Result" />
+        /// property returns an instance of <see cref="JRaw" /> with the content of the reader's current token.</returns>
+        /// <MetaDataID>{9120cb4f-3760-4e49-9a1c-43c02d6dca48}</MetaDataID>
         public static async Task<JRaw> CreateAsync(JsonReader reader, CancellationToken cancellationToken = default)
         {
             using (StringWriter sw = new StringWriter(CultureInfo.InvariantCulture))

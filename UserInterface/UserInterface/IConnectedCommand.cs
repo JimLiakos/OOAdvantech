@@ -16,6 +16,7 @@ namespace OOAdvantech.UserInterface.Runtime
             set;
         }
 
+        /// <MetaDataID>{fa1217ea-f680-4560-8a70-7c97b2704694}</MetaDataID>
         string Name { get; }
 
     }

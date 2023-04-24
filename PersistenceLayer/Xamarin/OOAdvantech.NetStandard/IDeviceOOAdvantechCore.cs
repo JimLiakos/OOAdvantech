@@ -223,6 +223,7 @@ namespace OOAdvantech
         SerializeTaskScheduler SerializeTaskScheduler { get; }
     }
 
+    /// <MetaDataID>{daaea00a-3d3a-4497-bb50-bbc8c45c37cd}</MetaDataID>
     public enum KeybordStatus
     {
         KeyboardHiden,

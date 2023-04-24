@@ -155,6 +155,7 @@ namespace WebSocket4Net
         public WebSocketState State { get => client.State; }
 
     }
+    /// <MetaDataID>{b47cc5b7-8b74-48cd-9f73-6eb8b81bc1af}</MetaDataID>
     public class ErrorEventArgs : EventArgs
     {
         public ErrorEventArgs(Exception exception)
@@ -163,6 +164,7 @@ namespace WebSocket4Net
         }
         public Exception Exception { get; private set; }
     }
+    /// <MetaDataID>{81df97d6-9db2-4e82-9a15-db7aef1a2b0c}</MetaDataID>
     public class MessageReceivedEventArgs : EventArgs
     {
         public MessageReceivedEventArgs(string message)

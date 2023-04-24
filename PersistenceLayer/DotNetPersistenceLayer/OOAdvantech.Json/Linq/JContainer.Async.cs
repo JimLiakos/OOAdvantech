@@ -35,6 +35,7 @@ namespace OOAdvantech.Json.Linq
 {
     public abstract partial class JContainer
     {
+        /// <MetaDataID>{26303a8e-5998-4dd5-a3c9-29fc145fae90}</MetaDataID>
         internal async Task ReadTokenFromAsync(JsonReader reader, JsonLoadSettings options, CancellationToken cancellationToken = default)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -53,6 +54,7 @@ namespace OOAdvantech.Json.Linq
             }
         }
 
+        /// <MetaDataID>{d3faaaff-d51d-4a43-b7bf-06accc489749}</MetaDataID>
         private async Task ReadContentFromAsync(JsonReader reader, JsonLoadSettings settings, CancellationToken cancellationToken = default)
         {
             IJsonLineInfo lineInfo = reader as IJsonLineInfo;

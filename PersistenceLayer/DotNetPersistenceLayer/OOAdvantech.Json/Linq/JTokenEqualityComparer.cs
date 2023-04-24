@@ -36,11 +36,12 @@ namespace OOAdvantech.Json.Linq
         /// <summary>
         /// Determines whether the specified objects are equal.
         /// </summary>
-        /// <param name="x">The first object of type <see cref="JToken"/> to compare.</param>
-        /// <param name="y">The second object of type <see cref="JToken"/> to compare.</param>
+        /// <param name="x">The first object of type <see cref="JToken" /> to compare.</param>
+        /// <param name="y">The second object of type <see cref="JToken" /> to compare.</param>
         /// <returns>
-        /// <c>true</c> if the specified objects are equal; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified objects are equal; otherwise, <c>false</c>.
         /// </returns>
+        /// <MetaDataID>{2d13d80d-cf37-47cd-98bb-90b622c4ba2b}</MetaDataID>
         public bool Equals(JToken x, JToken y)
         {
             return JToken.DeepEquals(x, y);
@@ -49,9 +50,10 @@ namespace OOAdvantech.Json.Linq
         /// <summary>
         /// Returns a hash code for the specified object.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> for which a hash code is to be returned.</param>
+        /// <param name="obj">The <see cref="System.Object" /> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified object.</returns>
-        /// <exception cref="System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is <c>null</c>.</exception>
+        /// <exception cref="System.ArgumentNullException">The type of <paramref name="obj" /> is a reference type and <paramref name="obj" /> is <c>null</c>.</exception>
+        /// <MetaDataID>{436647ad-b282-41e8-99d6-066f10cacde6}</MetaDataID>
         public int GetHashCode(JToken obj)
         {
             if (obj == null)

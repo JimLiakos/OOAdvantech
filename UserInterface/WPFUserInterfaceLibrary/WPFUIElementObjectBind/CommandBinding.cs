@@ -203,6 +203,7 @@ namespace WPFUIElementObjectBind
                 _CanExecuteChanged -= value;
             }
         }
+        /// <MetaDataID>{a372d84a-5d38-4984-8abb-d10322efd625}</MetaDataID>
         public void Refresh()
         {
             _CanExecuteChanged?.Invoke(this, EventArgs.Empty);
@@ -251,6 +252,7 @@ namespace WPFUIElementObjectBind
         }
 
 
+        /// <MetaDataID>{35f6eb18-8176-4274-bdcd-522f947562c0}</MetaDataID>
         string IConnectedCommand.Name
         {
             get => "";
@@ -285,6 +287,7 @@ namespace WPFUIElementObjectBind
             }
         }
 
+        /// <MetaDataID>{88d77d08-04e2-4503-ac96-fea81521b9fc}</MetaDataID>
         public bool CallCanExecute(object parameter)
         {
 

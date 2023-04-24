@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace OOAdvantech
 {
 
+    /// <MetaDataID>{d3aa9fb1-b99f-4872-8176-bd088d5f14b6}</MetaDataID>
     public class BackPressedArgs
     {
         public bool Handled;
