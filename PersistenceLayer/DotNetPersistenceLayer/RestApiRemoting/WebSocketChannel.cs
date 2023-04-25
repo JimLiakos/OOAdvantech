@@ -505,23 +505,33 @@ namespace OOAdvantech.Remoting.RestApi
 
                                 lock (ReplaceWebSocketClientLock)
                                     ReplaceWebSocketClientLockTask=ReplaceWebSocketClient(value);
-
-                                if (!ReplaceWebSocketClientLockTask.Wait(Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout))
+                                try
                                 {
 
-#if DeviceDotNet
-                                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  time out in second :"+ (Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout).TotalSeconds.ToString() });
-#endif
-                                    lock (ReplaceWebSocketClientLock)
+                                    if (!ReplaceWebSocketClientLockTask.Wait(Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout))
                                     {
-                                        if (_WebSocketClient ==value)
+
+#if DeviceDotNet
+                                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  time out in second :"+ (Binding.DefaultBinding.OpenTimeout+Binding.DefaultBinding.SendTimeout).TotalSeconds.ToString() });
+#endif
+                                        lock (ReplaceWebSocketClientLock)
                                         {
-                                            _EndPoint = null;
-                                            _WebSocketClient.Closed -= WebSocketClient_Closed;
-                                            _WebSocketClient.RemoveWebSocketChannel(this);
-                                            _WebSocketClient=null;
+                                            if (_WebSocketClient ==value)
+                                            {
+                                                _EndPoint = null;
+                                                _WebSocketClient.Closed -= WebSocketClient_Closed;
+                                                _WebSocketClient.RemoveWebSocketChannel(this);
+                                                _WebSocketClient=null;
+                                            }
                                         }
                                     }
+                                }
+                                catch (Exception error)
+                                {
+                                    //lock (ReplaceWebSocketClientLock)
+                                    //    ReplaceWebSocketClientLockTask=null;
+
+                                    throw;
                                 }
                             }
                             else
@@ -637,6 +647,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
                     throw;
                 }
+
             });
         }
 
@@ -776,13 +787,31 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
+                
 
                 Task replaceWebSocketClientLockTask = null;
                 lock (ReplaceWebSocketClientLock)
+                {
                     replaceWebSocketClientLockTask= ReplaceWebSocketClientLockTask;
+                    if (replaceWebSocketClientLockTask!=null&& replaceWebSocketClientLockTask.Status==TaskStatus.Faulted)
+                    {
+                        replaceWebSocketClientLockTask=null;
+                        ReplaceWebSocketClientLockTask=null;
+                    }
+                }
+
                 if (replaceWebSocketClientLockTask!=null)
-                    if (!replaceWebSocketClientLockTask.Wait(10000))
-                        throw new TimeoutException(); // or compensate
+                {
+                    try
+                    {
+                        if (!replaceWebSocketClientLockTask.Wait(10000))
+                            throw new TimeoutException(); // or compensate
+                    }
+                    catch (Exception error)
+                    {
+                        throw;
+                    }
+                }
                 return _EndPoint;                                    // work here...
 
 
