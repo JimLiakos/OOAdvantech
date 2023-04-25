@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.7.4</Version>
+      <Version>1.7.5</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Facebook.iOS">
       <Version>9.0.1.5</Version>
