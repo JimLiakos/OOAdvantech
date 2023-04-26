@@ -84,7 +84,7 @@
       <Version>4.3.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.7.4</Version>
+      <Version>1.7.5</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Facebook.Android">
       <Version>7.1.0</Version>
