@@ -19,7 +19,10 @@ namespace UIBaseEx
     [Persistent()]
     public struct FontData
     {
-
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
         /// <exclude>Excluded</exclude>
         string _Uri;
         /// <MetaDataID>{b34aaa7a-87d2-44ef-82a7-c886b5987515}</MetaDataID>
