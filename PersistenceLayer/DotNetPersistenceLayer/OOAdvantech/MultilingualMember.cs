@@ -322,6 +322,20 @@ namespace OOAdvantech
             else
                 return memberValue;
         }
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj is MultilingualMember<T>)
+        //    {
+        //        using (new CultureContext(CultureContext.CurrentCultureInfo,false))
+        //        {
+        //            return this== (obj as MultilingualMember<T>);
+        //        }
+        //    }
+        //    else
+        //        return false;
+
+        //}
+
 
 
 
@@ -414,4 +428,6 @@ namespace OOAdvantech
 
 
     }
+
+
 }
