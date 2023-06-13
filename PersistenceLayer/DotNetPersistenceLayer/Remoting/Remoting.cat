@@ -8961,7 +8961,7 @@
 			    supplier   	"RenewalManager"
 			    quidu      	"5AD2EE7303A1"
 			    messages   	(list Messages
-				(object Message "AddProxy(OOAdvantech.Remoting.IProxy, OOAdvantech.Remoting.IRemotingServices)"
+				(object Message "AddProxy(  )"
 				    quid       	"5AD2EF6A024C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9002,7 +9002,7 @@
 			    supplier   	"RenewalManager"
 			    quidu      	"5AD2EE7303A1"
 			    messages   	(list Messages
-				(object Message "GetSession(string, bool, OOAdvantech.Remoting.IRemotingServices)"
+				(object Message "GetSession(   )"
 				    quid       	"5AD36B130291"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9040,7 +9040,7 @@
 			    supplier   	"$UNNAMED$46"
 			    quidu      	"48DB4F620290"
 			    messages   	(list Messages
-				(object Message "Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+				(object Message "Invoke( )"
 				    quid       	"48DB4F8E0186"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9060,7 +9060,7 @@
 			    supplier   	"$UNNAMED$47"
 			    quidu      	"5C121BE601AF"
 			    messages   	(list Messages
-				(object Message "EventConsumerSubscription(System.Delegate, System.Reflection.EventInfo)"
+				(object Message "EventConsumerSubscription(  )"
 				    quid       	"5C121CBE0361"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9082,7 +9082,7 @@
 			    supplier   	"$UNNAMED$49"
 			    quidu      	"48DB58260290"
 			    messages   	(list Messages
-				(object Message "Subscribe(OOAdvantech.Remoting.ExtObjectUri, System.Reflection.EventInfo)"
+				(object Message "Subscribe(  )"
 				    quid       	"48DB5B67003E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9104,7 +9104,7 @@
 			    supplier   	"$UNNAMED$50"
 			    quidu      	"48DB5EDD033C"
 			    messages   	(list Messages
-				(object Message "EventConsumerProxy(OOAdvantech.Remoting.ExtObjectUri, System.MarshalByRefObject, System.Reflection.EventInfo, OOAdvantech.Remoting.ClientSessionPart)"
+				(object Message "EventConsumerProxy(    )"
 				    quid       	"48DB5F81000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9133,7 +9133,7 @@
 			    supplier   	"$UNNAMED$48"
 			    quidu      	"48DB51A3002E"
 			    messages   	(list Messages
-				(object Message "Subscribe(OOAdvantech.Remoting.Proxy, System.Reflection.EventInfo)"
+				(object Message "Subscribe(  )"
 				    quid       	"48DB639D02CE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9164,7 +9164,7 @@
 			    supplier   	"$UNNAMED$52"
 			    quidu      	"48DB67C7013A"
 			    messages   	(list Messages
-				(object Message "Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+				(object Message "Invoke( )"
 				    quid       	"48DB67C70143"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9184,7 +9184,7 @@
 			    supplier   	"$UNNAMED$53"
 			    quidu      	"5C121E330309"
 			    messages   	(list Messages
-				(object Message "EventConsumerUnsubscribe(System.Delegate, System.Reflection.EventInfo)"
+				(object Message "EventConsumerUnsubscribe(  )"
 				    quid       	"5C121EA601AF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9206,7 +9206,7 @@
 			    supplier   	"$UNNAMED$51"
 			    quidu      	"48DB67C70128"
 			    messages   	(list Messages
-				(object Message "RemoveSubscription(System.MarshalByRefObject)"
+				(object Message "RemoveSubscription( )"
 				    quid       	"48DB67C7012C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9228,7 +9228,7 @@
 			    supplier   	"$UNNAMED$54"
 			    quidu      	"48DB67C7012B"
 			    messages   	(list Messages
-				(object Message "Unsubscribe(OOAdvantech.Remoting.ExtObjectUri, OOAdvantech.Remoting.EventInfoData)"
+				(object Message "Unsubscribe(  )"
 				    quid       	"48DB67FF02EE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9252,7 +9252,7 @@
 			    supplier   	"$UNNAMED$55"
 			    quidu      	"48DB8EA90157"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB922B0148"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9275,7 +9275,7 @@
 			    supplier   	"$UNNAMED$56"
 			    quidu      	"48DB96A803C8"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB96C2000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9311,7 +9311,7 @@
 				    ordinal    	5
 				    quidu      	"48DB905B03D8"
 				    creation   	FALSE)
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBAA56034B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9370,7 +9370,7 @@
 			    supplier   	"$UNNAMED$58"
 			    quidu      	"48DB8F550203"
 			    messages   	(list Messages
-				(object Message "EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "EventCallback(   )"
 				    quid       	"48DB9436004E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9414,7 +9414,7 @@
 			    supplier   	"$UNNAMED$61"
 			    quidu      	"48DB975D000F"
 			    messages   	(list Messages
-				(object Message "Update(System.Collections.Generic.List<OOAdvantech.Remoting.ExtObjectUri>, System.Collections.Generic.List<string>, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<OOAdvantech.Remoting.EventInfoData, System.Collections.Generic.List<object>>>)"
+				(object Message "Update(   )"
 				    quid       	"48DB979300DA"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9428,7 +9428,7 @@
 			    supplier   	"$UNNAMED$62"
 			    quidu      	"48DBAB0E01B5"
 			    messages   	(list Messages
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBAB1C01E4"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9512,7 +9512,7 @@
 			    supplier   	"$UNNAMED$64"
 			    quidu      	"48DB9DC80224"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB9DC80205"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9526,7 +9526,7 @@
 			    supplier   	"$UNNAMED$65"
 			    quidu      	"48DB9DC80229"
 			    messages   	(list Messages
-				(object Message "EventCallback(System.Type, object)"
+				(object Message "EventCallback(  )"
 				    quid       	"48DB9DC80208"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9575,7 +9575,7 @@
 			    supplier   	"$UNNAMED$65"
 			    quidu      	"48DB9DC80229"
 			    messages   	(list Messages
-				(object Message "EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "EventCallback(   )"
 				    quid       	"48DBA0860177"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9589,7 +9589,7 @@
 			    supplier   	"$UNNAMED$66"
 			    quidu      	"48DB9DC8020B"
 			    messages   	(list Messages
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBA14E01B5"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9611,7 +9611,7 @@
 			    supplier   	"$UNNAMED$64"
 			    quidu      	"48DB9DC80224"
 			    messages   	(list Messages
-				(object Message "EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "EventCallback(   )"
 				    quid       	"48DBA082035B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -9625,7 +9625,7 @@
 			    supplier   	"$UNNAMED$69"
 			    quidu      	"48DBA5A90261"
 			    messages   	(list Messages
-				(object Message "PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+				(object Message "PublishEvent(  )"
 				    quid       	"48DBA5E90000"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -11857,7 +11857,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSession(string, bool, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"GetSession(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -11959,7 +11959,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddProxy(OOAdvantech.Remoting.IProxy, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"AddProxy(  )"
 			pctDist    	0.525000
 			height     	100
 			orientation 	0)
@@ -12304,7 +12304,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.650000
 			height     	115
 			orientation 	0)
@@ -12396,7 +12396,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerSubscription(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerSubscription(  )"
 			pctDist    	0.565266
 			height     	90
 			orientation 	0)
@@ -12447,7 +12447,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.ExtObjectUri, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	1.133333
 			height     	51
 			orientation 	0)
@@ -12572,7 +12572,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerProxy(OOAdvantech.Remoting.ExtObjectUri, System.MarshalByRefObject, System.Reflection.EventInfo, OOAdvantech.Remoting.ClientSessionPart)"
+			label      	"EventConsumerProxy(    )"
 			pctDist    	-0.825000
 			height     	69
 			orientation 	0)
@@ -12621,7 +12621,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.Proxy, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	1.168421
 			height     	263
 			orientation 	0)
@@ -12935,7 +12935,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -12977,7 +12977,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.ExtObjectUri, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	0.461756
 			height     	63
 			orientation 	0)
@@ -13019,7 +13019,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Subscribe(OOAdvantech.Remoting.Proxy, System.Reflection.EventInfo)"
+			label      	"Subscribe(  )"
 			pctDist    	0.552147
 			height     	45
 			orientation 	0)
@@ -13061,7 +13061,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerProxy(OOAdvantech.Remoting.ExtObjectUri, System.MarshalByRefObject, System.Reflection.EventInfo, OOAdvantech.Remoting.ClientSessionPart)"
+			label      	"EventConsumerProxy(    )"
 			pctDist    	0.573604
 			height     	130
 			orientation 	0)
@@ -13103,7 +13103,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerSubscription(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerSubscription(  )"
 			pctDist    	0.214689
 			height     	57
 			orientation 	0)
@@ -13367,7 +13367,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.583333
 			height     	79
 			orientation 	0)
@@ -13459,7 +13459,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerUnsubscribe(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerUnsubscribe(  )"
 			pctDist    	0.509785
 			height     	45
 			orientation 	0)
@@ -13510,7 +13510,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"RemoveSubscription(System.MarshalByRefObject)"
+			label      	"RemoveSubscription( )"
 			pctDist    	-0.158333
 			height     	45
 			orientation 	0)
@@ -13559,7 +13559,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Unsubscribe(OOAdvantech.Remoting.ExtObjectUri, OOAdvantech.Remoting.EventInfoData)"
+			label      	"Unsubscribe(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13612,7 +13612,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70142"
 		    width      	300
-		    height     	8385
+		    height     	8415
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13651,7 +13651,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7013A"
 		    width      	300
-		    height     	8385
+		    height     	8415
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13696,7 +13696,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C7012B"
 		    width      	618
-		    height     	8385
+		    height     	8415
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13734,7 +13734,7 @@
 		    fill_color 	13434879
 		    quidu      	"48DB67C70128"
 		    width      	499
-		    height     	8285
+		    height     	8315
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13772,7 +13772,7 @@
 		    fill_color 	13434879
 		    quidu      	"5C121E330309"
 		    width      	662
-		    height     	8385
+		    height     	8415
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -13814,7 +13814,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Invoke(System.Runtime.Remoting.Messaging.IMessage)"
+			label      	"Invoke( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13856,7 +13856,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"RemoveSubscription(System.MarshalByRefObject)"
+			label      	"RemoveSubscription( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -13870,7 +13870,7 @@
 		    ordinal    	3)
 		(object Destruction_Marker @229
 		    Parent_View 	@221
-		    location   	(2672, 8610)
+		    location   	(2672, 8640)
 		    line_color 	3342489
 		    fill_color 	13434879)
 		(object InterMessView "" @230
@@ -13903,7 +13903,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventConsumerUnsubscribe(System.Delegate, System.Reflection.EventInfo)"
+			label      	"EventConsumerUnsubscribe(  )"
 			pctDist    	0.862000
 			height     	52
 			orientation 	0)
@@ -13945,7 +13945,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Unsubscribe(OOAdvantech.Remoting.ExtObjectUri, OOAdvantech.Remoting.EventInfoData)"
+			label      	"Unsubscribe(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -14157,7 +14157,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	-1.525424
 			height     	42
 			orientation 	1)
@@ -14503,7 +14503,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	2.512856
 			height     	216
 			orientation 	0)
@@ -14594,7 +14594,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	1.870025
 			height     	343
 			orientation 	0)
@@ -14685,7 +14685,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -14927,7 +14927,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Update(System.Collections.Generic.List<OOAdvantech.Remoting.ExtObjectUri>, System.Collections.Generic.List<string>, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<OOAdvantech.Remoting.EventInfoData, System.Collections.Generic.List<object>>>)"
+			label      	"Update(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15012,7 +15012,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15683,7 +15683,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15851,7 +15851,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.520000
 			height     	86
 			orientation 	0)
@@ -15935,7 +15935,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -15977,7 +15977,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Update(System.Collections.Generic.List<OOAdvantech.Remoting.ExtObjectUri>, System.Collections.Generic.List<string>, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<OOAdvantech.Remoting.EventInfoData, System.Collections.Generic.List<object>>>)"
+			label      	"Update(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -16019,7 +16019,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -16061,7 +16061,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -16551,7 +16551,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	2.515261
 			height     	217
 			orientation 	0)
@@ -16600,7 +16600,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	-0.657182
 			height     	110
 			orientation 	1)
@@ -16700,7 +16700,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	2.130416
 			height     	128
 			orientation 	0)
@@ -16749,7 +16749,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.853235
 			height     	199
 			orientation 	0)
@@ -16800,7 +16800,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -16849,7 +16849,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -17217,7 +17217,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17259,7 +17259,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(System.Type, object)"
+			label      	"EventCallback(  )"
 			pctDist    	0.489914
 			height     	39
 			orientation 	1)
@@ -17301,7 +17301,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17343,7 +17343,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EventCallback(string, System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"EventCallback(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17385,7 +17385,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17427,7 +17427,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"PublishEvent(System.Reflection.EventInfo, OOAdvantech.Collections.ArrayList)"
+			label      	"PublishEvent(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -17777,7 +17777,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddProxy(OOAdvantech.Remoting.IProxy, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"AddProxy(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -17819,7 +17819,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSession(string, bool, OOAdvantech.Remoting.IRemotingServices)"
+			label      	"GetSession(   )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
