@@ -34,6 +34,13 @@ namespace OOAdvantech.Remoting
         {
             return GetInstance(type, false);
         }
+
+        public static T GetInstance<T>( bool create) where T :MonoStateClass
+        {
+            return GetInstance(typeof(T), create) as T;
+        }
+
+
         public static MonoStateClass GetInstance(System.Type type, bool create)
         {
 
