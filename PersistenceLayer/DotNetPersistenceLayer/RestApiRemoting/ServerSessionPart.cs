@@ -362,17 +362,17 @@ namespace OOAdvantech.Remoting.RestApi
             return MethodCallMessage.GetObjectFromUri(extObjectUri) as MarshalByRefObject;
         }
 
-        /// <MetaDataID>{dc8b5103-ea81-40bb-97d0-3a59ff766059}</MetaDataID>
-        public static DateTime FromUnixTime(long unixTime)
-        {
-            return epoch.AddSeconds(unixTime);
-        }
+        ///// <MetaDataID>{dc8b5103-ea81-40bb-97d0-3a59ff766059}</MetaDataID>
+        //public static DateTime FromUnixTime(long unixTime)
+        //{
+        //    return epoch.AddSeconds(unixTime);
+        //}
 
-        /// <MetaDataID>{6ea4ebf2-c232-465c-92cd-76413220df7c}</MetaDataID>
-        /// <summary>
-        /// Is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)
-        /// </summary>
-        private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        ///// <MetaDataID>{6ea4ebf2-c232-465c-92cd-76413220df7c}</MetaDataID>
+        ///// <summary>
+        ///// Is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)
+        ///// </summary>
+        //private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         /// <MetaDataID>{ed809c8d-6990-4fc9-9d23-d0dbc1d934ee}</MetaDataID>
         public string X_Auth_Token { get; internal set; }
@@ -657,51 +657,7 @@ namespace OOAdvantech.Remoting.RestApi
                 try
                 {
                     AuthUser authUser;
-                    //var handler = new JwtSecurityTokenHandler();
-                    //JwtSecurityToken tokenS = handler.ReadToken(authToken) as JwtSecurityToken;
-                    JwtSecurityToken tokenS = Validate(authToken);
-                    // var validToken= handler.ValidateToken.ValidateToken(tokenS);
-
-                    //dontwait4waiter
-                    //var firebaseJWTAuth = new FirebaseJWTAuth("demomicroneme");
-                    //var firebaseJWTAuth = new FirebaseJWTAuth("dontwait4waiter");
-                    //string res = firebaseJWTAuth.Verify(authToken);
-
-                    authUser = new AuthUser();
-
-                    string kid = tokenS.Header["kid"] as string;
-
-                    string iat = (from claim in tokenS.Claims where claim.Type == "iat" select claim.Value).FirstOrDefault();
-                    if (!string.IsNullOrWhiteSpace(iat))
-                        authUser.IssuedAt = FromUnixTime(int.Parse(iat)).ToLocalTime();
-
-                    string exp = (from claim in tokenS.Claims where claim.Type == "exp" select claim.Value).FirstOrDefault();
-                    if (!string.IsNullOrWhiteSpace(exp))
-                        authUser.ExpirationTime = FromUnixTime(int.Parse(exp)).ToLocalTime();
-
-
-                    string auth_time = (from claim in tokenS.Claims where claim.Type == "auth_time" select claim.Value).FirstOrDefault();
-                    if (!string.IsNullOrWhiteSpace(auth_time))
-                        authUser.Auth_Time = FromUnixTime(int.Parse(auth_time)).ToLocalTime();
-
-                    authUser.Audience = (from claim in tokenS.Claims where claim.Type == "aud" select claim.Value).FirstOrDefault();
-                    authUser.Email = (from claim in tokenS.Claims where claim.Type == "email" select claim.Value).FirstOrDefault();
-
-                    if ((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault() != null)
-                        authUser.Email_Verified = bool.Parse((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault());
-                    authUser.Iss = (from claim in tokenS.Claims where claim.Type == "iss" select claim.Value).FirstOrDefault();
-                    authUser.Name = (from claim in tokenS.Claims where claim.Type == "name" select claim.Value).FirstOrDefault();
-                    authUser.Picture = (from claim in tokenS.Claims where claim.Type == "picture" select claim.Value).FirstOrDefault();
-                    authUser.Subject = (from claim in tokenS.Claims where claim.Type == "sub" select claim.Value).FirstOrDefault();
-                    authUser.User_ID = (from claim in tokenS.Claims where claim.Type == "user_id" select claim.Value).FirstOrDefault();
-
-                    var firebaseAttributes = (from claim in tokenS.Claims where claim.Type == "firebase" select JObject.Parse(claim.Value)).FirstOrDefault();
-
-                    authUser.Firebase_Sign_in_Provider = (from fireBaseProperty in firebaseAttributes.Properties()
-                                                          where fireBaseProperty.Name == "sign_in_provider"
-                                                          select (fireBaseProperty.Value as JValue).Value).FirstOrDefault() as string;
-
-                    authUser.AuthToken = authToken;
+                    authUser=AuthUser.GetAuthUserFromToken(authToken);
 
                     DateTime now = System.DateTime.Now;
                     bool isValidToken = true;
@@ -742,113 +698,164 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
-        /// <MetaDataID>{e61fa8eb-91be-4a85-a431-9b10727e568a}</MetaDataID>
-        static Dictionary<string, string> Cx509Data;
-        /// <MetaDataID>{7c8d195d-94e0-4b21-9f63-7d78fdd660d5}</MetaDataID>
-        public static JwtSecurityToken Validate(string authToken)
-        {
+        //public static AuthUser GetAuthUserFromToken(string authToken)
+        //{
+        //    AuthUser authUser;
+        //    //var handler = new JwtSecurityTokenHandler();
+        //    //JwtSecurityToken tokenS = handler.ReadToken(authToken) as JwtSecurityToken;
+        //    JwtSecurityToken tokenS = Validate(authToken);
+        //    // var validToken= handler.ValidateToken.ValidateToken(tokenS);
 
-            HttpClient client = new HttpClient();
+        //    //dontwait4waiter
+        //    //var firebaseJWTAuth = new FirebaseJWTAuth("demomicroneme");
+        //    //var firebaseJWTAuth = new FirebaseJWTAuth("dontwait4waiter");
+        //    //string res = firebaseJWTAuth.Verify(authToken);
 
-            string encodedJwt = authToken;
-            // 1. Get Google signing keys
-            client.BaseAddress = new Uri("https://www.googleapis.com/robot/v1/metadata/");
+        //    authUser = new AuthUser();
 
+        //    string kid = tokenS.Header["kid"] as string;
 
-            //var task = response.Content.ReadAsStringAsync();
-            //task.Wait();
-            //var responseDataString = task.Result;
+        //    string iat = (from claim in tokenS.Claims where claim.Type == "iat" select claim.Value).FirstOrDefault();
+        //    if (!string.IsNullOrWhiteSpace(iat))
+        //        authUser.IssuedAt = FromUnixTime(int.Parse(iat)).ToLocalTime();
 
-            var task = client.GetAsync(
-              "x509/securetoken@system.gserviceaccount.com");
-            if (!task.Wait(System.TimeSpan.FromSeconds(9)))
-            {
-                if (!task.Wait(Binding.DefaultBinding.SendTimeout))
-                {
-                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
-                }
-
-            }
-
-            HttpResponseMessage response = task.Result;
-            if (!response.IsSuccessStatusCode) { return null; }
-
-            JavaScriptSerializer JSserializer = new JavaScriptSerializer();
-            var x509DataTask = response.Content.ReadAsStringAsync();
-            x509DataTask.Wait();
+        //    string exp = (from claim in tokenS.Claims where claim.Type == "exp" select claim.Value).FirstOrDefault();
+        //    if (!string.IsNullOrWhiteSpace(exp))
+        //        authUser.ExpirationTime = FromUnixTime(int.Parse(exp)).ToLocalTime();
 
 
-            if (!x509DataTask.Wait(System.TimeSpan.FromSeconds(9)))
-            {
-                if (!x509DataTask.Wait(Binding.DefaultBinding.SendTimeout))
-                {
-                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
-                }
+        //    string auth_time = (from claim in tokenS.Claims where claim.Type == "auth_time" select claim.Value).FirstOrDefault();
+        //    if (!string.IsNullOrWhiteSpace(auth_time))
+        //        authUser.Auth_Time = FromUnixTime(int.Parse(auth_time)).ToLocalTime();
 
-            }
+        //    authUser.Audience = (from claim in tokenS.Claims where claim.Type == "aud" select claim.Value).FirstOrDefault();
+        //    authUser.Email = (from claim in tokenS.Claims where claim.Type == "email" select claim.Value).FirstOrDefault();
 
-            var x509Data = JSserializer.Deserialize<Dictionary<string, string>>(x509DataTask.Result);
+        //    if ((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault() != null)
+        //        authUser.Email_Verified = bool.Parse((from claim in tokenS.Claims where claim.Type == "email_verified" select claim.Value).FirstOrDefault());
+        //    authUser.Iss = (from claim in tokenS.Claims where claim.Type == "iss" select claim.Value).FirstOrDefault();
+        //    authUser.Name = (from claim in tokenS.Claims where claim.Type == "name" select claim.Value).FirstOrDefault();
+        //    authUser.Picture = (from claim in tokenS.Claims where claim.Type == "picture" select claim.Value).FirstOrDefault();
+        //    authUser.Subject = (from claim in tokenS.Claims where claim.Type == "sub" select claim.Value).FirstOrDefault();
+        //    authUser.User_ID = (from claim in tokenS.Claims where claim.Type == "user_id" select claim.Value).FirstOrDefault();
 
-            if (Cx509Data == null)
-                Cx509Data = x509Data;
+        //    var firebaseAttributes = (from claim in tokenS.Claims where claim.Type == "firebase" select JObject.Parse(claim.Value)).FirstOrDefault();
 
-            foreach (var dictionaryEntry in x509Data)
-            {
-                string dictionaryData = null;
-                if (Cx509Data.TryGetValue(dictionaryEntry.Key, out dictionaryData))
-                {
-                    if (dictionaryData != dictionaryEntry.Value)
-                    {
+        //    authUser.Firebase_Sign_in_Provider = (from fireBaseProperty in firebaseAttributes.Properties()
+        //                                          where fireBaseProperty.Name == "sign_in_provider"
+        //                                          select (fireBaseProperty.Value as JValue).Value).FirstOrDefault() as string;
 
-                    }
-                }
-                else
-                {
+        //    authUser.AuthToken = authToken;
+        //    return authUser;
+        //}
 
-                }
-            }
-            Cx509Data = x509Data;
+        ///// <MetaDataID>{e61fa8eb-91be-4a85-a431-9b10727e568a}</MetaDataID>
+        //static Dictionary<string, string> Cx509Data;
+        ///// <MetaDataID>{7c8d195d-94e0-4b21-9f63-7d78fdd660d5}</MetaDataID>
+        //public static JwtSecurityToken Validate(string authToken)
+        //{
 
-            SecurityKey[] keys = x509Data.Values.Select(CreateSecurityKeyFromPublicKey).ToArray();
-            // 2. Configure validation parameters
-            string FirebaseProjectId = Authentication.FirebaseProjectId;
+        //    HttpClient client = new HttpClient();
 
-            if (string.IsNullOrWhiteSpace(FirebaseProjectId))
-            {
-                throw new Exception("Empty FirebaseProjectId. Initialize with 'OOAdvantech.Remoting.RestApi.Authentication.InitializeFirebase'");
-            }
-            var parameters = new TokenValidationParameters
-            {
-                ValidIssuer = "https://securetoken.google.com/" + FirebaseProjectId,
-                ValidAudience = FirebaseProjectId,
-                IssuerSigningKeys = keys,
-            };
-            // 3. Use JwtSecurityTokenHandler to validate signature, issuer, audience and lifetime
-            var handler = new JwtSecurityTokenHandler();
-            SecurityToken token;
-            try
-            {
-                ClaimsPrincipal principal = handler.ValidateToken(encodedJwt, parameters, out token);
-                var jwt = (JwtSecurityToken)token;
-                // 4.Validate signature algorithm and other applicable valdiations
-                if (jwt.Header.Alg != SecurityAlgorithms.RsaSha256)
-                {
-                    throw new SecurityTokenInvalidSignatureException(
-                      "The token is not signed with the expected algorithm.");
-                }
-                return jwt;
-            }
-            catch (Exception error)
-            {
+        //    string encodedJwt = authToken;
+        //    // 1. Get Google signing keys
+        //    client.BaseAddress = new Uri("https://www.googleapis.com/robot/v1/metadata/");
 
-                throw;
-            }
-        }
-        /// <MetaDataID>{29f7bb2b-637c-4780-8b24-8dad58ec73b2}</MetaDataID>
-        static SecurityKey CreateSecurityKeyFromPublicKey(string data)
-        {
-            return new X509SecurityKey(new X509Certificate2(Encoding.UTF8.GetBytes(data)));
-        }
+
+        //    //var task = response.Content.ReadAsStringAsync();
+        //    //task.Wait();
+        //    //var responseDataString = task.Result;
+
+        //    var task = client.GetAsync(
+        //      "x509/securetoken@system.gserviceaccount.com");
+        //    if (!task.Wait(System.TimeSpan.FromSeconds(9)))
+        //    {
+        //        if (!task.Wait(Binding.DefaultBinding.SendTimeout))
+        //        {
+        //            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+        //        }
+
+        //    }
+
+        //    HttpResponseMessage response = task.Result;
+        //    if (!response.IsSuccessStatusCode) { return null; }
+
+        //    JavaScriptSerializer JSserializer = new JavaScriptSerializer();
+        //    var x509DataTask = response.Content.ReadAsStringAsync();
+        //    x509DataTask.Wait();
+
+
+        //    if (!x509DataTask.Wait(System.TimeSpan.FromSeconds(9)))
+        //    {
+        //        if (!x509DataTask.Wait(Binding.DefaultBinding.SendTimeout))
+        //        {
+        //            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+        //        }
+
+        //    }
+
+        //    var x509Data = JSserializer.Deserialize<Dictionary<string, string>>(x509DataTask.Result);
+
+        //    if (Cx509Data == null)
+        //        Cx509Data = x509Data;
+
+        //    foreach (var dictionaryEntry in x509Data)
+        //    {
+        //        string dictionaryData = null;
+        //        if (Cx509Data.TryGetValue(dictionaryEntry.Key, out dictionaryData))
+        //        {
+        //            if (dictionaryData != dictionaryEntry.Value)
+        //            {
+
+        //            }
+        //        }
+        //        else
+        //        {
+
+        //        }
+        //    }
+        //    Cx509Data = x509Data;
+
+        //    SecurityKey[] keys = x509Data.Values.Select(CreateSecurityKeyFromPublicKey).ToArray();
+        //    // 2. Configure validation parameters
+        //    string FirebaseProjectId = Authentication.FirebaseProjectId;
+
+        //    if (string.IsNullOrWhiteSpace(FirebaseProjectId))
+        //    {
+        //        throw new Exception("Empty FirebaseProjectId. Initialize with 'OOAdvantech.Remoting.RestApi.Authentication.InitializeFirebase'");
+        //    }
+        //    var parameters = new TokenValidationParameters
+        //    {
+        //        ValidIssuer = "https://securetoken.google.com/" + FirebaseProjectId,
+        //        ValidAudience = FirebaseProjectId,
+        //        IssuerSigningKeys = keys,
+        //    };
+        //    // 3. Use JwtSecurityTokenHandler to validate signature, issuer, audience and lifetime
+        //    var handler = new JwtSecurityTokenHandler();
+        //    SecurityToken token;
+        //    try
+        //    {
+        //        ClaimsPrincipal principal = handler.ValidateToken(encodedJwt, parameters, out token);
+        //        var jwt = (JwtSecurityToken)token;
+        //        // 4.Validate signature algorithm and other applicable valdiations
+        //        if (jwt.Header.Alg != SecurityAlgorithms.RsaSha256)
+        //        {
+        //            throw new SecurityTokenInvalidSignatureException(
+        //              "The token is not signed with the expected algorithm.");
+        //        }
+        //        return jwt;
+        //    }
+        //    catch (Exception error)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+        ///// <MetaDataID>{29f7bb2b-637c-4780-8b24-8dad58ec73b2}</MetaDataID>
+        //static SecurityKey CreateSecurityKeyFromPublicKey(string data)
+        //{
+        //    return new X509SecurityKey(new X509Certificate2(Encoding.UTF8.GetBytes(data)));
+        //}
 #endif
 
         /// <MetaDataID>{8d568766-3fec-4727-bbb1-ba656265a9f2}</MetaDataID>
