@@ -247,6 +247,7 @@
     <Compile Include="RDBMSMappingClass.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RDBMSMappingException.cs" />
     <Compile Include="RDBMSMappingGeneralization.cs">
       <SubType>Code</SubType>
     </Compile>

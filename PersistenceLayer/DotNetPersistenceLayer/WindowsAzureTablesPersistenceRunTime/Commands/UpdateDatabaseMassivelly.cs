@@ -452,6 +452,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             {
                 RDBMSMetaDataRepository.Attribute rdbmsAttribute = (objectStorage.StorageMetaData as RDBMSMetaDataRepository.Storage).GetEquivalentMetaObject(attributeValue.Attribute) as RDBMSMetaDataRepository.Attribute;
                 RDBMSMetaDataRepository.Column column = null;
+                if (rdbmsAttribute==null)
+                    throw new RDBMSMetaDataRepository.RDBMSMappingException(attributeValue.Attribute, $"Missing mapping data for attribute {attributeValue.Attribute.FullName}");
+
+
                 foreach (RDBMSMetaDataRepository.Column attributeColumn in rdbmsAttribute.GetColumnsFor(storageInstance.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell))
                 {
                     if (attributeColumn.CreatorIdentity == attributeValue.PathIdentity)
