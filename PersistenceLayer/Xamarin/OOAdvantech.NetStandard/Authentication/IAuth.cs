@@ -39,7 +39,7 @@ namespace OOAdvantech.Authentication
 
         Task<string> EmailSignUp(string email, string password);
 
-        void SendPasswordResetEmail(string email);
+        Task SendPasswordResetEmail(string email);
 
         List<SignInProvider> Providers { get; }
 

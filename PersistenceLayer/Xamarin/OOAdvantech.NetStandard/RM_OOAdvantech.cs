@@ -395,13 +395,14 @@ public event OOAdvantech.Authentication.IdTokenChangeHandler IdTokenChange
             return this.Proxy.GetValue<System.Threading.Tasks.Task<string>>(retValue);
         }
         
-        public void SendPasswordResetEmail(string email)
+        public System.Threading.Tasks.Task SendPasswordResetEmail(string email)
         {
             object[] args = new object[1];
             System.Type[] argsTypes = new System.Type[1];
             args[0] = email;
             argsTypes[0] = typeof(string);
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Authentication.IAuth), "SendPasswordResetEmail", args, argsTypes);
+            return this.Proxy.GetValue<System.Threading.Tasks.Task>(retValue);
         }
         
         public void SignOut()

@@ -139,9 +139,19 @@ namespace OOAdvantech.Authentication.Droid
 
 
         }
-        internal static void SendPasswordResetEmail(string email)
+        internal static async System.Threading.Tasks.Task SendPasswordResetEmail(string email)
         {
-            FirebaseAuth.SendPasswordResetEmail(email);
+
+            try
+            {
+                await FirebaseAuth.SendPasswordResetEmail(email).AsAsync();
+            }
+            catch (FirebaseAuthException error)
+            {
+
+                throw new OOAdvantech.Remoting.RestApi.ServerException(error.Message,error.ErrorCode);
+            }
+
         }
 
         static GetTokenResult CurrenTokenResult;

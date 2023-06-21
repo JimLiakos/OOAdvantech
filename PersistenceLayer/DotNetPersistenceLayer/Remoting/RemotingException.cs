@@ -32,6 +32,7 @@ namespace OOAdvantech.Remoting
 
 
 
+
 	/// <MetaDataID>{595c337d-cfce-4795-9dcb-5d5efa9c7a98}</MetaDataID>
 	public class MissingServerObjectException : System.Exception
 	{
@@ -47,4 +48,6 @@ namespace OOAdvantech.Remoting
 			DeletedFromStorage
 		}
 	}
+
+	
 }

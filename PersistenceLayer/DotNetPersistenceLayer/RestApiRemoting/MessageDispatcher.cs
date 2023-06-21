@@ -337,7 +337,23 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             return Task<ResponseData>.Run(() =>
                             {
-                                (retVal as Task).Wait();
+                                try
+                                {
+                                    while (true)
+                                    {
+                                        if ((retVal as Task).Wait(100))
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                catch (Exception error)
+                                {
+                                    responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error.InnerException);
+                                        return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+
+                                    
+                                }
                                 object value = null;
                                 if (retVal.GetType().GetMetaData().GetGenericArguments().Length > 0)
                                 {

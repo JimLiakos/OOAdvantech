@@ -76,7 +76,7 @@ namespace OOAdvantech.Authentication.Droid
         }
 
 
-        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter , SignInProvider.Email };
+        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter, SignInProvider.Email };
 
         public Task<string> EmailSignIn(string email, string password)
         {
@@ -97,12 +97,10 @@ namespace OOAdvantech.Authentication.Droid
 
             //return null;
         }
-        public void SendPasswordResetEmail(string email)
+        public async Task SendPasswordResetEmail(string email)
         {
-            Authentication.Droid.FirebaseAuthentication.SendPasswordResetEmail(email);
+            await FirebaseAuthentication.SendPasswordResetEmail(email);
 
-            //OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-            //device.SendPasswordResetEmail(email);
         }
 
 

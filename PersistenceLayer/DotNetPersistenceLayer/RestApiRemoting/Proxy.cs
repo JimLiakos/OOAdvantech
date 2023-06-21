@@ -1126,7 +1126,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         public void InvalidateCachedData()
         {
-            
+
             ObjectRef.InvalidMembersValues=true;
         }
 
@@ -1198,8 +1198,16 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
     /// <MetaDataID>{b955d0ad-6a9e-4997-9fb2-d6cb1d615070}</MetaDataID>
-    class ServerException : Exception
+    public class ServerException : System.Exception
     {
+        public readonly string ErrorCode;
+        public ServerException(string message, string errorCode) : base(message)
+        {
+            ErrorCode=errorCode;
+        }
+
+
+
         /// <MetaDataID>{e9c8b835-f235-4465-91d5-179d858725af}</MetaDataID>
         public ServerException(string message, int hResult) : base(message)
         {

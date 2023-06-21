@@ -17,6 +17,10 @@ namespace OOAdvantech.Remoting.RestApi
             ExceptionCode = exceptionCode;
             if (exception != null)
             {
+                if(exception is ServerException)
+                {
+                    ErrorCode=(exception as ServerException).ErrorCode;
+                }
                 ExceptionMessage = exception.Message;
                 ServerStackTrace = exception.StackTrace;
                 HResult = exception.HResult;
@@ -48,6 +52,7 @@ namespace OOAdvantech.Remoting.RestApi
         public ExceptionCode ExceptionCode;
 
         public string ServerStackTrace;
+        public string ErrorCode;
     }
 
     /// <MetaDataID>{8f1c7bdf-99d4-4d98-a423-55a77f116904}</MetaDataID>
