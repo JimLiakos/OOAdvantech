@@ -1,15 +1,20 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿
 using OOAdvantech.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+
+#if !DeviceDotNet
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+#endif
 
 namespace OOAdvantech.Remoting.RestApi
 {
@@ -108,6 +113,9 @@ namespace OOAdvantech.Remoting.RestApi
 
         /// <MetaDataID>{e61fa8eb-91be-4a85-a431-9b10727e568a}</MetaDataID>
         static Dictionary<string, string> Cx509Data;
+
+#if !DeviceDotNet
+        
         /// <MetaDataID>{7c8d195d-94e0-4b21-9f63-7d78fdd660d5}</MetaDataID>
         static JwtSecurityToken Validate(string authToken)
         {
@@ -213,6 +221,8 @@ namespace OOAdvantech.Remoting.RestApi
         {
             return new X509SecurityKey(new X509Certificate2(Encoding.UTF8.GetBytes(data)));
         }
+
+#endif
         /// <MetaDataID>{dc8b5103-ea81-40bb-97d0-3a59ff766059}</MetaDataID>
         public static DateTime FromUnixTime(long unixTime)
         {
@@ -224,6 +234,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// Is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)
         /// </summary>
         private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+#if !DeviceDotNet
         public static AuthUser GetAuthUserFromToken(string authToken)
         {
             AuthUser authUser;
@@ -275,7 +287,7 @@ namespace OOAdvantech.Remoting.RestApi
             return authUser;
         }
 
-
+#endif
 
     }
 
