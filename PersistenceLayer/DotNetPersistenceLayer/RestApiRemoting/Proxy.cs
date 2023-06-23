@@ -893,7 +893,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (returnMessage.Exception != null)
             {
-                System.Exception exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult);
+                System.Exception exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult, returnMessage.Exception.ErrorCode);
 
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingCollectedFromGC)
                     exception = new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
@@ -1209,9 +1209,10 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{e9c8b835-f235-4465-91d5-179d858725af}</MetaDataID>
-        public ServerException(string message, int hResult) : base(message)
+        public ServerException(string message, int hResult, string errorCode) : base(message)
         {
             this.HResult = hResult;
+            ErrorCode=errorCode;
         }
 
     }
