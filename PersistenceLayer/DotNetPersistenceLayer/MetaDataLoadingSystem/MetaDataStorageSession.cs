@@ -1486,13 +1486,14 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
 
 
-
+                    MetaDataRepository.Component AssemblyMetaObject = null;
 
                     System.Type ObjectCollectionType = ModulePublisher.ClassRepository.GetType(objectCollection.Name.LocalName, objectCollection.GetAttribute("AssemblyFullName"));
                     if (ObjectCollectionType == null)
                     {
                         var assembly = ModulePublisher.ClassRepository.GetAssembly(objectCollection.GetAttribute("AssemblyFullName"));
                         var component = OOAdvantech.DotNetMetaDataRepository.Assembly.GetComponent(assembly);
+                        AssemblyMetaObject=component;
                         var objectCollectionClass = component.Residents.Where(x => x.Identity.ToString().ToLower() == objectCollection.GetAttribute("ClassIdentity").ToLower()).FirstOrDefault();
                         if (objectCollectionClass != null)
                             ObjectCollectionType = objectCollectionClass.GetExtensionMetaObject<Type>();
@@ -1511,15 +1512,15 @@ namespace OOAdvantech.MetaDataLoadingSystem
                         }
                     }
 
-                    MetaDataRepository.Component AssemblyMetaObject = null;
+                    
                     if (ObjectCollectionType == null)
                     {
                         var reflectionAssembly = ModulePublisher.ClassRepository.LoadAssembly(objectCollection.GetAttribute("AssemblyFullName"));
 
                         DotNetMetaDataRepository.Assembly assembly = DotNetMetaDataRepository.Assembly.GetComponent(reflectionAssembly) as DotNetMetaDataRepository.Assembly;
-                        //AssemblyMetaObject = DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(reflectionAssembly) as MetaDataRepository.Component;
+                        //AssemblyMetaObject = DotNetMetaDataRe
+                        //{pository.MetaObjectMapper.FindMetaObjectFor(reflectionAssembly) as MetaDataRepository.Component;
                         //if (AssemblyMetaObject == null)
-                        //{
                         //    DotNetMetaDataRepository.Assembly assembly = new DotNetMetaDataRepository.Assembly(reflectionAssembly);
 
                         //    DotNetMetaDataRepository.MetaObjectMapper.AddTypeMap(reflectionAssembly, assembly);
