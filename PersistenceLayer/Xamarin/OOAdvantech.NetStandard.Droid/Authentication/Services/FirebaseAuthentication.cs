@@ -209,6 +209,12 @@ namespace OOAdvantech.Authentication.Droid
                     CurrenTokenResult = token;
                 }
 
+                string providerId = firebaseUser.ProviderData.Where(x => x.ProviderId!="firebase").Select(x => x.ProviderId).FirstOrDefault();
+                if (providerId == null)
+                    providerId=firebaseUser.ProviderId;
+
+
+
                 var authUser = new OOAdvantech.Authentication.AuthUser()
                 {
                     DisplayName = firebaseUser.DisplayName,
@@ -217,7 +223,7 @@ namespace OOAdvantech.Authentication.Droid
                     IsEmailVerified = firebaseUser.IsEmailVerified,
                     PhoneNumber = firebaseUser.PhoneNumber,
                     PhotoUrl = firebaseUser.PhotoUrl?.ToString(),
-                    ProviderId = firebaseUser.ProviderId,
+                    ProviderId = providerId,
                     Uid = firebaseUser.Uid,
                     //Providers = firebaseUser.Providers.ToList()
                 };
@@ -326,16 +332,23 @@ namespace OOAdvantech.Authentication.Droid
             string authToken = token.Token;
             System.Collections.Generic.List<string> providers = FirebaseAuth.CurrentUser.ProviderData.Select(x => x.ProviderId).ToList();
 
+            string providerId = FirebaseAuth.CurrentUser.ProviderData.Where(x => x.ProviderId!="firebase").Select(x => x.ProviderId).FirstOrDefault();
+            if (providerId == null)
+                providerId=FirebaseAuth.CurrentUser.ProviderId;
+
+
             var authUser = new Remoting.RestApi.AuthUser()
             {
                 AuthToken = authToken,
                 ExpirationTime = expirationTimestamp,
                 Email = FirebaseAuth.CurrentUser.Email,
                 Name = FirebaseAuth.CurrentUser.DisplayName,
-                Firebase_Sign_in_Provider = providers[providers.Count - 1],
+                Firebase_Sign_in_Provider = providerId,
                 User_ID = FirebaseAuth.CurrentUser.Uid,
                 Picture = FirebaseAuth.CurrentUser.PhotoUrl?.ToString()
             };
+
+
             Remoting.RestApi.DeviceAuthentication.SignedIn(authUser);
         }
 
@@ -362,6 +375,7 @@ namespace OOAdvantech.Authentication.Droid
 
             if (FirebaseAuth != null && FirebaseAuth.CurrentUser != null)
             {
+                
                 if (OOAdvantech.Remoting.RestApi.DeviceAuthentication.AuthUser.Firebase_Sign_in_Provider.ToLower() == "google.com")
                     GoogleSignOut();
                 else
