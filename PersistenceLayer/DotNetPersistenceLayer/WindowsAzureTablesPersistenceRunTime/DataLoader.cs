@@ -44,7 +44,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         string BuildFilterString(Dictionary<string, string> columnsNamesMap)
         {
-            
+
 
 
             //TableQuery.CombineFilters()
@@ -665,7 +665,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     }
                     else
                     {
-                        if(objectID.ToString() == "3607914b-85b4-4d0a-b751-18cb41628210")
+                        if (objectID.ToString() == "3607914b-85b4-4d0a-b751-18cb41628210")
                         {
 
                         }
@@ -683,7 +683,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                 loadObjectLinks = true;
                             }
                             //else
-                                //loadObjectLinks = !storageInstanceRef.IsObjectActive;
+                            //loadObjectLinks = !storageInstanceRef.IsObjectActive;
                             else
                             {
                                 if (storageInstanceRef.InstantiateObjectQueryIdentity == DataNode.ObjectQuery.QueryIdentity)
@@ -2210,15 +2210,15 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                                         var mappedAssociationEnd = storageCell.Type.GetRoles(true).Where(x => x.Identity == dataColumn.MappedObject.Identity).FirstOrDefault();
                                         if (mappedAssociationEnd == null)
                                             mappedAssociationEnd = storageCell.Type.GetAssociateRoles(true).Where(x => x.Identity == dataColumn.MappedObject.Identity).FirstOrDefault();
-                                        if (mappedAssociationEnd != null)
+                                        if (mappedAssociationEnd != null&&(mappedAssociationEnd as MetaDataRepository.AssociationEnd).Persistent)
                                             throw new System.Exception("Missing column for " + dataColumn.MappedObject.FullName);
                                     }
-                                    else
+                                    else if ((mappedAttribute as MetaDataRepository.Attribute).Persistent)
                                         throw new System.Exception("Missing column for " + dataColumn.MappedObject.FullName);
                                 }
                                 if (column == null)
                                     continue;
-                                if(!azureTableEntitiesRetriever.SelectionColumns.Contains(column.DataBaseColumnName))
+                                if (!azureTableEntitiesRetriever.SelectionColumns.Contains(column.DataBaseColumnName))
                                     azureTableEntitiesRetriever.SelectionColumns.Add(column.DataBaseColumnName);
                             }
 
@@ -2316,7 +2316,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                         //List<Azure.Data.Tables.TableEntity> entities = null;
                         //entities = azureTable.ExecuteQuery(query.Select(azureTableEntitiesRetriever.SelectionColumns).Where(azureTableEntitiesRetriever.FilterScript)).ToList();
-                         string rtt=HttpUtility.UrlEncode(azureTableEntitiesRetriever.FilterScript);
+                        string rtt = HttpUtility.UrlEncode(azureTableEntitiesRetriever.FilterScript);
                         entities = azureTable_a.Query<Azure.Data.Tables.TableEntity>(azureTableEntitiesRetriever.FilterScript, null, azureTableEntitiesRetriever.SelectionColumns).Select(x => new ElasticTableEntity(x)).ToList();
                         int storageIdentity = QueryStorageIdentities.IndexOf(storageCell.StorageIdentity);
                         foreach (var entity in entities)
