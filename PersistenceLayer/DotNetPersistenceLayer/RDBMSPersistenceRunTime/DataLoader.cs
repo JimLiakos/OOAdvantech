@@ -4030,6 +4030,19 @@ namespace OOAdvantech.RDBMSPersistenceRunTime
                     coloumns.Add(new DataColumn(column.Name, null, column.Type.GetExtensionMetaObject(typeof(System.Type)) as System.Type, column.MappedAttribute, column.CreatorIdentity, null, null, DataNode.ObjectQuery));
                     columnNames.Add(column.Name);
                 }
+                else
+                {
+                    if (column.MappedAttribute!=null)
+                    {
+                        // two concrete classes has defines attribute with same name 
+                        var coloumnExist = coloumns.Where(x => x.MappedObject==column.MappedAttribute).Count()>0;
+                        if (!coloumnExist)
+                        {
+                            coloumns.Add(new DataColumn(concreteClass.Name+"_"+column.Name, null, column.Type.GetExtensionMetaObject(typeof(System.Type)) as System.Type, column.MappedAttribute, column.CreatorIdentity, null, null, DataNode.ObjectQuery));
+                            columnNames.Add(concreteClass.Name+"_"+column.Name);
+                        }
+                    }
+                }
             }
         }
 

@@ -787,7 +787,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <MetaDataID>{cd56dfc7-cf9c-42e6-9e9f-4932d7d37b05}</MetaDataID>
         private ClassMembersMappedColumnsIndices BuildClassMembersMappedColumnsIndices(System.Collections.Generic.Dictionary<string, int> columnsIndices, string columnPrefix)
         {
-            if (DataNode.FullName == "FoodServiceClientSession")
+            if (DataNode.FullName == "ShiftWork.Worker")
             {
 
             }
@@ -3354,7 +3354,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     #endregion
 
 
-                    if (DataNode.FullName == "FoodServiceClientSession")
+                    if (DataNode.FullName == "ShiftWork.Worker")
                     {
 
                     }
@@ -3904,6 +3904,19 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 {
                     coloumns.Add(new DataColumn(column.Name, null, column.Type.GetExtensionMetaObject(typeof(System.Type)) as System.Type, column.MappedAttribute, column.CreatorIdentity, null, null, DataNode.ObjectQuery));
                     columnNames.Add(column.Name);
+                }
+                else
+                {
+                    if (column.MappedAttribute!=null)
+                    {
+                        // two concrete classes has defines attribute with same name 
+                        var coloumnExist = coloumns.Where(x => x.MappedObject==column.MappedAttribute).Count()>0;
+                        if (!coloumnExist)
+                        { 
+                            coloumns.Add(new DataColumn(concreteClass.Name+"_"+column.Name, null, column.Type.GetExtensionMetaObject(typeof(System.Type)) as System.Type, column.MappedAttribute, column.CreatorIdentity, null, null, DataNode.ObjectQuery));
+                            columnNames.Add(concreteClass.Name+"_"+column.Name);
+                        }
+                    }
                 }
             }
         }
