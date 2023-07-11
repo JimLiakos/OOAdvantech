@@ -8,6 +8,8 @@ namespace VivaWalletPos
     public interface IPos
     {
         Task<PaymentData> Sale(decimal total,decimal tips);
+
+        void Confing(POSType terminalType, string ipAddress = "", int port = 0);
     }
 
     public class PaymentData
@@ -20,6 +22,12 @@ namespace VivaWalletPos
         public bool Failed { get; set; }
 
         public string ErrorMessage { get; set; }
+    }
+
+    public enum POSType
+    {
+        AppPOS=1,
+        TerminalPos=2;
     }
 
 
