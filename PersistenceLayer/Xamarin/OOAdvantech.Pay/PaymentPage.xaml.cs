@@ -1,4 +1,5 @@
 ﻿using FinanceFacade;
+using OOAdvantech.Remoting.RestApi;
 //using OOAdvantech.Pay.Viva;
 using OOAdvantech.Web;
 using System;
@@ -47,10 +48,18 @@ namespace OOAdvantech.Pay
         public bool OnPay { get; private set; }
         public IPayment Payment { get; private set; }
         TaskCompletionSource<bool> PayServiceTask;
-        public Task<bool> Pay(FinanceFacade.IPayment payment, string server, bool hasNavigationBar = true)
+        public Task<bool> Pay(IPayment payment, decimal tipAmount, string server, bool hasNavigationBar = true)
         {
             if (payment?.State==PaymentState.Completed)
                 return Task<bool>.FromResult(true);
+
+            //payment.cred
+            payment.PaymentGateway.CreatePaymentGatewayOrder(payment, tipAmount, @"{""color"": ""607d8b""}");
+
+
+            RemotingServices.InvalidateCacheData(payment as OOAdvantech.Remoting.MarshalByRefObject);
+
+
             if (string.IsNullOrWhiteSpace(payment?.PaymentProviderJson))
                 return Task<bool>.FromResult(false);
 
