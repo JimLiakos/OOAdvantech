@@ -54,7 +54,7 @@ namespace OOAdvantech.Pay
                 return Task<bool>.FromResult(true);
 
             //payment.cred
-            payment.PaymentGateway.CreatePaymentGatewayOrder(payment, tipAmount, @"{""color"": ""607d8b""}");
+            payment.PaymentGateway.CreatePaymentOrder(payment, tipAmount, @"{""color"": ""607d8b""}");
 
 
             RemotingServices.InvalidateCacheData(payment as OOAdvantech.Remoting.MarshalByRefObject);

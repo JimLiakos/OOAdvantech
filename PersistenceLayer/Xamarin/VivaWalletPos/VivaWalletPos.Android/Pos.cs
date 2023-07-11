@@ -20,19 +20,22 @@ namespace VivaWalletPos.Android
     {
 
         static VivaWalletAppPos VivaWalletAppPos= new VivaWalletAppPos();
-        public void Confing(POSType terminalType, string ipAddress = "", int port = 0)
+
+        public VivaWalletPaymentTerminal VivaWalletPaymentTerminal { get; private set; }
+
+        public void Confing(POSType terminalType, string ipAddress = "", int port = 0, double waitTimeOutInSec = 0 )
         {
             if (terminalType==POSType.AppPOS)
                 VivaWalletAppPos=new VivaWalletAppPos();
             else
             {
-
+                VivaWalletPaymentTerminal = new VivaWalletPaymentTerminal(ipAddress,port,TimeSpan.FromSeconds(waitTimeOutInSec));
             }
            
             
         }
 
-        public Task<PaymentData> Sale(decimal total, decimal tips)
+        public Task<PaymentData> AcceptPayment(decimal total, decimal tips)
         {
             if(VivaWalletAppPos!=null)
                 return VivaWalletAppPos.Sale(total, tips);

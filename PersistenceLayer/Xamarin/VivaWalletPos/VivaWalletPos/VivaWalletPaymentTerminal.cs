@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VivaWalletPos
 {
-    public class VivaWalletPaymentTerminal : IPos
+    public class VivaWalletPaymentTerminal 
     {
 
         TimeSpan WaitTimeOut;
@@ -23,16 +23,16 @@ namespace VivaWalletPos
         Task<PaymentData> SalesTask;
 
         int Sessionid = 1;
-        public PaymentData Sale(double amount)
+        Task<PaymentData> AcceptPayment(decimal amount, decimal tips)
         {
 #if DEBUG
-            amount = 0.01;
+            amount = 0.01M;
 #endif
 
 
             SalesTask = Task<PaymentData>.Run(() =>
             {
-                txSaleRequest txRequest = new txSaleRequest() { sessionId = Sessionid++, msgType = "200", msgCode = "00", uniqueTxnId = Guid.NewGuid().ToString("N"), amount = amount, msgOpt = "0000" };
+                txSaleRequest txRequest = new txSaleRequest() { sessionId = Sessionid++, msgType = "200", msgCode = "00", uniqueTxnId = Guid.NewGuid().ToString("N"), amount =(double)amount, msgOpt = "0000" };
                 string msm = txRequest.Message;
                 //string message = "0061|002690|200|00|12345678901234567890123456789012|0.10|0000||||";
                 try
@@ -117,14 +117,14 @@ namespace VivaWalletPos
             });
 
             SalesTask.Wait();
-            return SalesTask.Result;
+            return SalesTask;
 
         }
 
-        public Task<PaymentData> Sale(decimal total, decimal tips)
-        {
-            throw new NotImplementedException();
-        }
+  
+      
+
+      
     }
 
 
