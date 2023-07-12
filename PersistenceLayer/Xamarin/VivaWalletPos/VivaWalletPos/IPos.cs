@@ -7,7 +7,7 @@ namespace VivaWalletPos
 {
     public interface IPos
     {
-        Task<PaymentData> AcceptPayment(decimal total, decimal tips);
+        Task<PaymentData> ReceivePayment(decimal total, decimal tips);
 
         void Confing(POSType terminalType, string ipAddress = "", int port = 0, double waitTimeOutInSec = 0);
     }
