@@ -21,6 +21,10 @@ namespace VivaWalletPos.Android
 
         static VivaWalletAppPos VivaWalletAppPos= new VivaWalletAppPos();
 
+        public Pos()
+        {
+        }
+
         public VivaWalletPaymentTerminal VivaWalletPaymentTerminal { get; private set; }
 
         public void Confing(POSType terminalType, string ipAddress = "", int port = 0, double waitTimeOutInSec = 0 )
@@ -35,7 +39,7 @@ namespace VivaWalletPos.Android
             
         }
 
-        public Task<PaymentData> AcceptPayment(decimal total, decimal tips)
+        public Task<PaymentData> ReceivePayment(decimal total, decimal tips)
         {
             if(VivaWalletAppPos!=null)
                 return VivaWalletAppPos.Sale(total, tips);

@@ -21,6 +21,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{72f73b6d-a2e3-48cf-858e-fe6dfe67c782}</MetaDataID>
     public class AuthUser
     {
+        /// <MetaDataID>{9171b279-c37b-4056-8f7c-11e2e93442da}</MetaDataID>
         public AuthUser()
         {
             //123
