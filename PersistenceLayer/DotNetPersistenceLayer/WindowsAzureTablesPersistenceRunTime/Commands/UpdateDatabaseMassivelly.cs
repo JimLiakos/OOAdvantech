@@ -5,38 +5,38 @@ using System.Text;
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 {
     /// <MetaDataID>{f26b8bc9-e252-4ea3-8311-052806a21f95}</MetaDataID>
-    public class UpdateDatabaseMassivelly : PersistenceLayerRunTime.Commands.Command
+    public class UpdateDatabaseMassively : PersistenceLayerRunTime.Commands.Command
     {
         /// <MetaDataID>{59348814-217a-4022-8a7c-3483c029572b}</MetaDataID>
         string _Identity;
         /// <MetaDataID>{434690ea-280b-4a89-8ebb-52bfe7a8681b}</MetaDataID>
-        public UpdateDatabaseMassivelly()
+        public UpdateDatabaseMassively()
         {
             _Identity = "UM_" + Transactions.Transaction.Current.LocalTransactionUri;
 
         }
         /// <MetaDataID>{d6b51e2c-2524-4f78-82c5-f839d5e19454}</MetaDataID>
-        static System.Collections.Generic.Dictionary<string, UpdateDatabaseMassivelly> UpdateDatabaseMassivellyCommands = new Dictionary<string, UpdateDatabaseMassivelly>();
+        static System.Collections.Generic.Dictionary<string, UpdateDatabaseMassively> UpdateDatabaseMassivelyCommands = new Dictionary<string, UpdateDatabaseMassively>();
         /// <MetaDataID>{b87055d5-f7a5-433a-86ab-19f2fbfee1d8}</MetaDataID>
-        public static UpdateDatabaseMassivelly CurrentTransactionCommandUpdateMassivelly
+        public static UpdateDatabaseMassively CurrentTransactionCommandUpdateMassively
         {
             get
             {
                 string localTransactionUri = Transactions.Transaction.Current.LocalTransactionUri;
-                UpdateDatabaseMassivelly updateDatabaseMassivelly = null;
+                UpdateDatabaseMassively updateDatabaseMassivelly = null;
 
                 bool exist = false;
-                lock (UpdateDatabaseMassivellyCommands)
+                lock (UpdateDatabaseMassivelyCommands)
                 {
-                    exist = UpdateDatabaseMassivellyCommands.TryGetValue(Transactions.Transaction.Current.LocalTransactionUri, out updateDatabaseMassivelly);
+                    exist = UpdateDatabaseMassivelyCommands.TryGetValue(Transactions.Transaction.Current.LocalTransactionUri, out updateDatabaseMassivelly);
                 }
                 if (!exist)
                 {
-                    updateDatabaseMassivelly = new UpdateDatabaseMassivelly();
+                    updateDatabaseMassivelly = new UpdateDatabaseMassively();
                     PersistenceLayerRunTime.TransactionContext.CurrentTransactionContext.EnlistCommand(updateDatabaseMassivelly);
-                    lock (UpdateDatabaseMassivellyCommands)
+                    lock (UpdateDatabaseMassivelyCommands)
                     {
-                        UpdateDatabaseMassivellyCommands[localTransactionUri] = updateDatabaseMassivelly;
+                        UpdateDatabaseMassivelyCommands[localTransactionUri] = updateDatabaseMassivelly;
                     }
                     Transactions.Transaction.Current.TransactionCompleted += new OOAdvantech.Transactions.TransactionCompletedEventHandler(OnTransactionCompleted);
                 }
@@ -48,7 +48,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
         static void OnTransactionCompleted(OOAdvantech.Transactions.Transaction transaction)
         {
             transaction.TransactionCompleted -= new OOAdvantech.Transactions.TransactionCompletedEventHandler(OnTransactionCompleted);
-            UpdateDatabaseMassivellyCommands.Remove(transaction.LocalTransactionUri);
+            UpdateDatabaseMassivelyCommands.Remove(transaction.LocalTransactionUri);
 
         }
         /// <MetaDataID>{a18e5042-530e-43f4-8543-fb2fae645b20}</MetaDataID>

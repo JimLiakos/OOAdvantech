@@ -20,7 +20,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
         {
             if (!UpdatedStorageInstanceRef.HasChangeState())
                 return;
-            Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.UpdateStorageInstance(UpdatedStorageInstanceRef);
+            Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.UpdateStorageInstance(UpdatedStorageInstanceRef);
         }
 
     }
