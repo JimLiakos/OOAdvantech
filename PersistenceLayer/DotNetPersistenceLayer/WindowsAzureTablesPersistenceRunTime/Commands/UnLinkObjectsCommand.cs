@@ -84,7 +84,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             /// replace reference columns values with null only if referred to removed assigned object
             foreach (RDBMSMetaDataRepository.IdentityColumn column in linkColumns)
             {
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(RecordOwnerObject, column.Name, DBNull.Value);
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(RecordOwnerObject, column.Name, DBNull.Value);
                 if (RecordOwnerObject.RelationshipColumnsValues.ContainsKey(column))
                 {
                     if (RecordOwnerObject.RelationshipColumnsValues[column] != ((OOAdvantech.PersistenceLayer.ObjectID)AssignedObject.PersistentObjectID).GetMemberValue(column.ColumnType))
@@ -153,13 +153,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 //indexerItem.StorageInstanceRef = RecordOwnerObject;
                 //indexerItem.index = index;
                 //Indexer[transactionUri][collectionOwner][associationEnd].Items.Add(indexerItem);
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(RecordOwnerObject, associationEnd.GetIndexerColumnFor(RecordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, DBNull.Value);
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(RecordOwnerObject, associationEnd.GetIndexerColumnFor(RecordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, DBNull.Value);
                 RecordOwnerObject.RelationshipColumnsValues[associationEnd.GetIndexerColumnFor(RecordOwnerObject.StorageInstanceSet, vaueTypePath)] = DBNull.Value;
 
             }
             foreach (RDBMSMetaDataRepository.IdentityColumn column in linkColumns)
             {
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(RecordOwnerObject, column.Name, DBNull.Value);
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(RecordOwnerObject, column.Name, DBNull.Value);
                 RecordOwnerObject.RelationshipColumnsValues[column] = DBNull.Value;
             }
 

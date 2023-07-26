@@ -221,7 +221,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         if (RecordOwnerObject != null)
                         {
                             foreach (RDBMSMetaDataRepository.IdentityColumn currColumn in deletedObjectRefColumns)
-                                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(RecordOwnerObject, currColumn.DataBaseColumnName, DBNull.Value);
+                                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(RecordOwnerObject, currColumn.DataBaseColumnName, DBNull.Value);
                         }
                         else
                         {

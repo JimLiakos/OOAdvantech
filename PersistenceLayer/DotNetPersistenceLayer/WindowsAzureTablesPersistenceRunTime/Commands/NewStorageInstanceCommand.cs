@@ -21,7 +21,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
             RDBMSMetaDataRepository.Class rdbmsMetadataClass = (OnFlyStorageInstance.ObjectStorage.StorageMetaData as RDBMSMetaDataRepository.Storage).GetEquivalentMetaObject(OnFlyStorageInstance.Class) as RDBMSMetaDataRepository.Class;
           
                 ObjectID objectID = OnFlyStorageInstance.ObjectID as ObjectID;// new OOAdvantech.RDBMSPersistenceRunTime.ObjectID(Guid.NewGuid(), 0);
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.NewStorageInstance(OnFlyStorageInstance, objectID);
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.NewStorageInstance(OnFlyStorageInstance, objectID);
                 OnFlyStorageInstance.PersistentObjectID = objectID;
           
          

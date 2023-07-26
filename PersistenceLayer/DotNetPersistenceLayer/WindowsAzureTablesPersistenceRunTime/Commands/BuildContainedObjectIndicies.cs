@@ -131,7 +131,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                             if (storageCellsLink.ObjectLinksTable == null)
                                 recordOwnerObject = StorageInstanceRef.GetStorageInstanceRef(table, entity.PartitionKey, entity.RowKey);
                             if (recordOwnerObject != null)
-                                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, indexerColumn.DataBaseColumnName, sortIndex);
+                                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, indexerColumn.DataBaseColumnName, sortIndex);
                             else
                             {
 

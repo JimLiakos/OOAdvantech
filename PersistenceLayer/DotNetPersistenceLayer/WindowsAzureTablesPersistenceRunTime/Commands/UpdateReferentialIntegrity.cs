@@ -17,7 +17,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
         {
             //TODO: κατι θα πρέπει να γίνει αν δεν υπάρχει mapping column για reference count
             if((UpdatedStorageInstanceRef.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable.ReferentialIntegrityColumn!=null)
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(UpdatedStorageInstanceRef, (UpdatedStorageInstanceRef.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable.ReferentialIntegrityColumn.Name, UpdatedStorageInstanceRef.ReferentialIntegrityCount);
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(UpdatedStorageInstanceRef, (UpdatedStorageInstanceRef.StorageInstanceSet as RDBMSMetaDataRepository.StorageCell).MainTable.ReferentialIntegrityColumn.Name, UpdatedStorageInstanceRef.ReferentialIntegrityCount);
         }
     }
 }

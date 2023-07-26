@@ -28,7 +28,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 else
                     throw new System.Exception(Error.Message, Error);
             }
-            Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.DeleteStorageInstance(StorageInstanceForDeletion);
+            Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.DeleteStorageInstance(StorageInstanceForDeletion);
 
             //ObjectStorage objectStorage = (ObjectStorage)StorageInstanceForDeletion.ObjectStorage;
             //System.Data.SqlClient.SqlConnection oleDbConnection = objectStorage.DBConnection;

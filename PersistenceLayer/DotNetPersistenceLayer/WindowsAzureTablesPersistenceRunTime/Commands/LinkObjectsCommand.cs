@@ -139,14 +139,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     RoleBIndex = index;
 
 
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, associationEnd.GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, index);
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, associationEnd.GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, index);
                 recordOwnerObject.RelationshipColumnsValues[associationEnd.GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath)] = index;
 
 
             }
             foreach (RDBMSMetaDataRepository.IdentityColumn column in linkColumns)
             {
-                Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, column.DataBaseColumnName, ((OOAdvantech.PersistenceLayer.ObjectID)assignedObject.PersistentObjectID).GetMemberValue(column.ColumnType));
+                Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, column.DataBaseColumnName, ((OOAdvantech.PersistenceLayer.ObjectID)assignedObject.PersistentObjectID).GetMemberValue(column.ColumnType));
                 recordOwnerObject.RelationshipColumnsValues[column] = ((OOAdvantech.PersistenceLayer.ObjectID)assignedObject.PersistentObjectID).GetMemberValue(column.ColumnType);
             }
 
@@ -325,9 +325,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     roleBColumnsValues[column] = (RoleA.PersistentObjectID as OOAdvantech.PersistenceLayer.ObjectID).GetMemberValue(column.ColumnType);
 
                 if (RelationObject != null)
-                    Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.AddRelationRow(objectCollectionsLink, RelationObject.PersistentObjectID as PersistenceLayer.ObjectID, roleAColumnsValues, RoleAIndex, roleBColumnsValues, RoleBIndex);
+                    Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.AddRelationRow(objectCollectionsLink, RelationObject.PersistentObjectID as PersistenceLayer.ObjectID, roleAColumnsValues, RoleAIndex, roleBColumnsValues, RoleBIndex);
                 else
-                    Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.AddRelationRow(objectCollectionsLink, null, roleAColumnsValues, RoleAIndex, roleBColumnsValues, RoleBIndex);
+                    Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.AddRelationRow(objectCollectionsLink, null, roleAColumnsValues, RoleAIndex, roleBColumnsValues, RoleBIndex);
                 objectCollectionsLink.ObjectsLinksCount++;
                 return;
             }
@@ -337,23 +337,23 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
 
                 foreach (RDBMSMetaDataRepository.IdentityColumn column in roleBColumns)
                 {
-                    Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, column.DataBaseColumnName, ((OOAdvantech.PersistenceLayer.ObjectID)RoleB.PersistentObjectID).GetMemberValue(column.ColumnType));
+                    Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, column.DataBaseColumnName, ((OOAdvantech.PersistenceLayer.ObjectID)RoleB.PersistentObjectID).GetMemberValue(column.ColumnType));
                     recordOwnerObject.RelationshipColumnsValues[column] = ((OOAdvantech.PersistenceLayer.ObjectID)RoleB.PersistentObjectID).GetMemberValue(column.ColumnType);
                 }
                 foreach (RDBMSMetaDataRepository.IdentityColumn column in roleAColumns)
                 {
-                    Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, column.DataBaseColumnName, ((OOAdvantech.PersistenceLayer.ObjectID)RoleA.PersistentObjectID).GetMemberValue(column.ColumnType));
+                    Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, column.DataBaseColumnName, ((OOAdvantech.PersistenceLayer.ObjectID)RoleA.PersistentObjectID).GetMemberValue(column.ColumnType));
                     recordOwnerObject.RelationshipColumnsValues[column] = ((OOAdvantech.PersistenceLayer.ObjectID)RoleA.PersistentObjectID).GetMemberValue(column.ColumnType);
                 }
                 if (objectCollectionsLink.Type.RoleA.Indexer)
                 {
 
-                    Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, (objectCollectionsLink.Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, RoleAIndex);
+                    Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, (objectCollectionsLink.Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, RoleAIndex);
                     recordOwnerObject.RelationshipColumnsValues[(objectCollectionsLink.Type.RoleA as RDBMSMetaDataRepository.AssociationEnd).GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath)] = RoleAIndex;
                 }
                 if (objectCollectionsLink.Type.RoleB.Indexer)
                 {
-                    Commands.UpdateDatabaseMassivelly.CurrentTransactionCommandUpdateMassivelly.SetStorageInstanceColumnValue(recordOwnerObject, (objectCollectionsLink.Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, RoleBIndex);
+                    Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(recordOwnerObject, (objectCollectionsLink.Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath).DataBaseColumnName, RoleBIndex);
                     recordOwnerObject.RelationshipColumnsValues[(objectCollectionsLink.Type.RoleB as RDBMSMetaDataRepository.AssociationEnd).GetIndexerColumnFor(recordOwnerObject.StorageInstanceSet, vaueTypePath)] = RoleBIndex;
                 }
                 return;

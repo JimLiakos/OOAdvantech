@@ -13,7 +13,7 @@ namespace OOAdvantech.Remoting.Proxies
     using System;
 
 
-    /// <MetaDataID>{45aa09cc-c5b8-403f-83f1-de4460d663e5}</MetaDataID>
+    /// <MetaDataID>{9758f0cb-3a1e-4f68-a42d-69c265cbb598}</MetaDataID>
     public sealed class Pr_IServerSessionPart : OOAdvantech.Remoting.MarshalByRefObject, OOAdvantech.Remoting.IServerSessionPart, OOAdvantech.Remoting.RestApi.ITransparentProxy
     {
 
@@ -175,9 +175,8 @@ namespace OOAdvantech.Remoting.Proxies
 namespace OOAdvantech.Remoting.RestApi.Proxies
 {
     using System;
-
-
-    /// <MetaDataID>{e4744c03-d42a-45f5-974a-7160c2128481}</MetaDataID>
+    
+    
     public sealed class Pr_IRemotingServer : OOAdvantech.Remoting.MarshalByRefObject, OOAdvantech.Remoting.RestApi.IRemotingServer, OOAdvantech.Remoting.RestApi.ITransparentProxy
     {
 
@@ -246,8 +245,7 @@ namespace OOAdvantech.Remoting.RestApi.Proxies
             return this.Proxy.GetValue<OOAdvantech.Remoting.MarshalByRefObject>(retValue);
         }
     }
-
-    /// <MetaDataID>{5350bc2c-5285-49dd-9aa0-0b9ab94abb7f}</MetaDataID>
+    
     public sealed class CNSPr_IDeviceAuthentication_SignOutRequest : OOAdvantech.Remoting.EventConsumerHandler
     {
 
@@ -276,9 +274,8 @@ namespace OOAdvantech.Remoting.RestApi.Proxies
 namespace OOAdvantech.Authentication.Proxies
 {
     using System;
-
-
-    /// <MetaDataID>{adeefdd6-88a0-4476-bf4d-c71e8a1ec1ed}</MetaDataID>
+    
+    
     public sealed class Pr_IAuth : OOAdvantech.Remoting.MarshalByRefObject, OOAdvantech.Authentication.IAuth, OOAdvantech.Remoting.RestApi.ITransparentProxy
     {
 
@@ -416,8 +413,7 @@ namespace OOAdvantech.Authentication.Proxies
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Authentication.IAuth), "SignOut", args, argsTypes);
         }
     }
-
-    /// <MetaDataID>{2ac4107a-bc3d-42a4-9001-fb37d37f8fed}</MetaDataID>
+    
     public sealed class CNSPr_IAuth_AuthStateChange : OOAdvantech.Remoting.EventConsumerHandler
     {
 
@@ -442,8 +438,7 @@ namespace OOAdvantech.Authentication.Proxies
             eventInfo.RemoveEventHandler(target, new OOAdvantech.Authentication.AuthStateChangeHandler(this.Invoke));
         }
     }
-
-    /// <MetaDataID>{7496b17e-d765-4afa-8c33-f903919246bb}</MetaDataID>
+    
     public sealed class CNSPr_IAuth_IdTokenChange : OOAdvantech.Remoting.EventConsumerHandler
     {
 
