@@ -91,9 +91,17 @@
       <Project>{B8CCD4B1-0C5F-4BED-81EB-213B0C25FBDC}</Project>
       <Name>DotNetMetaDataRepository.NetStandard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MetaDataLoadingSystem.NetStandard\MetaDataLoadingSystem.NetStandard.csproj">
+      <Project>{1d8a0e34-1539-4116-867e-51782d829894}</Project>
+      <Name>MetaDataLoadingSystem.NetStandard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj">
       <Project>{CE986AA7-409F-4863-85C0-AE3628C509CE}</Project>
       <Name>OOAdvantech.Json.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj">
+      <Project>{98C53533-8117-40C2-B9A6-BBE3D5DEE050}</Project>
+      <Name>OOAdvantech.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\PersistenceLayerRunTime.NetStandard\PersistenceLayerRunTime.NetStandard.csproj">
       <Project>{7524D0B9-81D4-44BB-BFF8-C59C1413A048}</Project>

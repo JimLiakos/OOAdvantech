@@ -135,6 +135,11 @@ namespace OOAdvantech.Authentication.iOS
             FirebaseAuthentication.FirebaseAuth.SignOut(out error);
         }
 
+        Task IAuth.SendPasswordResetEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         public IAuthUser CurrentUser
         {
             get
