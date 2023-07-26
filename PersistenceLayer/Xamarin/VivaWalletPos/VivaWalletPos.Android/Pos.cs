@@ -35,7 +35,7 @@ namespace VivaWalletPos.Android
             
         }
 
-        public Task<PaymentData> AcceptPayment(decimal total, decimal tips)
+        public Task<PaymentData> ReceivePayment(decimal total, decimal tips)
         {
             if(VivaWalletAppPos!=null)
                 return VivaWalletAppPos.Sale(total, tips);
