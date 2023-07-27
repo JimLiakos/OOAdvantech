@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OOAdvantech.Pay
 {
+    /// <MetaDataID>{76da7369-f34f-44ac-8226-03f4b4023b32}</MetaDataID>
     public interface IPayService
     {
         event EventHandler<string> OnTokenizationSuccessful;

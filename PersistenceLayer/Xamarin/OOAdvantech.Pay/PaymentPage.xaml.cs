@@ -13,6 +13,7 @@ using Xamarin.Forms.Xaml;
 
 namespace OOAdvantech.Pay
 {
+    /// <MetaDataID>{acfa0cc9-bef7-4cd8-b41e-9dd6f06f4a19}</MetaDataID>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PaymentPage : ContentPage
     {
@@ -41,6 +42,7 @@ namespace OOAdvantech.Pay
 
     }
 
+    /// <MetaDataID>{d2c424d2-96cd-4a4c-b3a5-d5c4bba74596}</MetaDataID>
     public class PaymentService
     {
         PaymentPage PaymentPage;
@@ -142,7 +144,7 @@ namespace OOAdvantech.Pay
                         _ResponseTask = null;
                         _PaySucceeded = true;
                     }
-                   await Close();
+                    await Close();
                     //DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
                 }
                 else if (paymentState==PaymentActionState.Canceled)
@@ -152,7 +154,7 @@ namespace OOAdvantech.Pay
                         _ResponseTask = null;
                         _PaySucceeded = false;
                     }
-                   await Close();
+                    await Close();
                     //DeviceApplication.Current.OnBackPressed(new BackPressedArgs());
                 }
                 else
@@ -207,7 +209,7 @@ namespace OOAdvantech.Pay
 
         private async void BackPressed(BackPressedArgs eventArgs)
         {
-            
+
 
             if (!SuspendGoBackEvent)
             {

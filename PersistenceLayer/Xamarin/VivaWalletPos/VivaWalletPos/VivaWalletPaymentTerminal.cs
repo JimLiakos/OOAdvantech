@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace VivaWalletPos
 {
-    public class VivaWalletPaymentTerminal 
+    /// <MetaDataID>{e91244e9-5502-40e2-b33c-9df2468afb9a}</MetaDataID>
+    public class VivaWalletPaymentTerminal
     {
 
         TimeSpan WaitTimeOut;
@@ -123,13 +124,14 @@ namespace VivaWalletPos
 
         }
 
-  
-      
 
-      
+
+
+
     }
 
 
+    /// <MetaDataID>{d1f78c25-0341-49e2-80bd-ba15d02eeb67}</MetaDataID>
     class txSaleRequest
     {
         public int sessionId;
@@ -199,6 +201,7 @@ namespace VivaWalletPos
 
 
 
+    /// <MetaDataID>{c57c458b-0a4c-42c6-bf2e-3b15dabb6238}</MetaDataID>
     class txSalesResponse
     {
         public int seqTxnId;

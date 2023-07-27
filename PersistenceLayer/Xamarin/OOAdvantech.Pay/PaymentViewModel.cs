@@ -10,6 +10,7 @@ using Xamarin.Forms;
 
 namespace OOAdvantech.Pay
 {
+    /// <MetaDataID>{68e07139-5c50-4252-bb8b-60e2e16e6d0a}</MetaDataID>
     public class PaymentPageViewModel
     {
         public ICommand PayCommand { get; set; }
@@ -94,7 +95,7 @@ namespace OOAdvantech.Pay
             {
                 try
                 {
-                  string response=  await _payService.TokenizeCard();//( CardInfo.CardNumber.Replace(" ", string.Empty), CardInfo.Expiry.Substring(0, 2), $"{DateTime.Now.ToString("yyyy").Substring(0, 2)}{CardInfo.Expiry.Substring(3, 2)}", CardInfo.Cvv);
+                    string response = await _payService.TokenizeCard();//( CardInfo.CardNumber.Replace(" ", string.Empty), CardInfo.Expiry.Substring(0, 2), $"{DateTime.Now.ToString("yyyy").Substring(0, 2)}{CardInfo.Expiry.Substring(3, 2)}", CardInfo.Cvv);
 
                 }
                 catch (Exception error)
@@ -137,6 +138,7 @@ namespace OOAdvantech.Pay
 
     }
 
+    /// <MetaDataID>{745db944-8864-47f2-b973-ef38ce9af865}</MetaDataID>
     public enum PaymentOptionEnum
     {
         CreditCard, Platform, PayPal
