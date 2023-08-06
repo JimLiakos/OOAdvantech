@@ -2943,7 +2943,7 @@
         <member name="P:OOAdvantech.MetaDataRepository.Storage.Name">
             <MetaDataID>{9d795bc6-cc38-4855-9696-3ee92efd1741}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String)">
+        <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String,System.Collections.Generic.List{System.String})">
             <MetaDataID>{5D63290C-FE34-4350-9BC3-05118EDF3807}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String[])">
@@ -2952,7 +2952,7 @@
         <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String,System.Xml.Linq.XDocument)">
             <MetaDataID>{5b2652e1-89ee-41b6-a137-ef68979a6305}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String,System.String)">
+        <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String,System.String,System.Collections.Generic.List{System.String})">
             <MetaDataID>{cc2369af-c102-4755-8ec8-3a74352bfa12}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.Storage.RegisterComponent(System.String[],System.Collections.Generic.Dictionary{System.String,System.Xml.Linq.XDocument})">
@@ -3961,7 +3961,7 @@
         <member name="P:OOAdvantech.PersistenceLayer.Storage.Culture">
             <MetaDataID>{b8a909b5-02fe-47ab-8620-f3f1ff3b6281}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.PersistenceLayer.Storage.RegisterComponent(System.String)">
+        <member name="M:OOAdvantech.PersistenceLayer.Storage.RegisterComponent(System.String,System.Collections.Generic.List{System.String})">
             <summary>With this method add a new component "assembly" to storage
             or update an existing.</summary>
             <MetaDataID>{96B07A32-DC39-4E1B-8D2D-1B714EABB546}</MetaDataID>
@@ -3969,7 +3969,7 @@
         <member name="M:OOAdvantech.PersistenceLayer.Storage.RegisterComponent(System.String[])">
             <MetaDataID>{b2c63a22-6d73-47e2-a3e0-6786a2a3d420}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.PersistenceLayer.Storage.RegisterComponent(System.String,System.String)">
+        <member name="M:OOAdvantech.PersistenceLayer.Storage.RegisterComponent(System.String,System.String,System.Collections.Generic.List{System.String})">
             <MetaDataID>{f81306b9-1a68-42e9-b406-a6fbf84dd95a}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayer.Storage.RegisterComponent(System.String,System.Xml.Linq.XDocument)">

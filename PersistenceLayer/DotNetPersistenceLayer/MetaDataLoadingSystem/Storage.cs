@@ -91,7 +91,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
         //}
 
 
-        public override void RegisterComponent(string assemblyFullName)
+        public override void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null)
         {
             //throw new Exception("The method or operation is not implemented.");
         }

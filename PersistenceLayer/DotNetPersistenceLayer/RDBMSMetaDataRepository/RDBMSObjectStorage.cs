@@ -67,7 +67,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             _Name = name;
         }
         /// <MetaDataID>{b558433a-4ca7-45b6-bdbd-356707e3cb8a}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName)
+        public override void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null)
         {
             throw new System.NotImplementedException();
         }
@@ -82,7 +82,7 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             throw new System.NotImplementedException();
         }
         /// <MetaDataID>{0aa12342-ce25-4d6e-b120-4fda8a88a0e9}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName)
+        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName , System.Collections.Generic.List<string> types)
         {
             System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
             System.Xml.Linq.XDocument mappingDataDocument = null;

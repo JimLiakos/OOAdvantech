@@ -33,14 +33,14 @@ namespace OOAdvantech.PersistenceLayer
         /// <summary>With this method add a new component "assembly" to storage
         /// or update an existing.</summary>
         /// <MetaDataID>{96B07A32-DC39-4E1B-8D2D-1B714EABB546}</MetaDataID>
-        void RegisterComponent(string assemblyFullName);
+        void RegisterComponent(string assemblyFullName,System.Collections.Generic.List<string> types=null);
 
         /// <MetaDataID>{b2c63a22-6d73-47e2-a3e0-6786a2a3d420}</MetaDataID>
 		void RegisterComponent(string[] assembliesFullNames);
 
 
         /// <MetaDataID>{f81306b9-1a68-42e9-b406-a6fbf84dd95a}</MetaDataID>
-        void RegisterComponent(string assemblyFullName, string mappingDataResourceName);
+        void RegisterComponent(string assemblyFullName, string mappingDataResourceName, System.Collections.Generic.List<string> types = null);
         /// <MetaDataID>{f77bf71a-52a7-4c3d-ac3e-785bf0569095}</MetaDataID>
         void RegisterComponent(string assemblyFullName, System.Xml.Linq.XDocument mappingData);
         /// <MetaDataID>{e16fed5d-221a-4506-93ba-c091add5eeac}</MetaDataID>

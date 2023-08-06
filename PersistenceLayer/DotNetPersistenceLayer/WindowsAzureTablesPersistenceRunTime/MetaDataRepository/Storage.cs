@@ -68,7 +68,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
 
         /// <MetaDataID>{ed157954-bff6-4a4d-a28c-934c00fec41b}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName)
+        public override void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null)
         {
             System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
             object[] objects = dotNetAssembly.GetCustomAttributes(typeof(MetaDataRepository.BuildAssemblyMetadata), false);

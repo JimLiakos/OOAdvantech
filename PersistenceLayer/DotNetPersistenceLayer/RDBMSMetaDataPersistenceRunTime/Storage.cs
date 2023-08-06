@@ -276,7 +276,7 @@ namespace OOAdvantech.RDBMSMetaDataPersistenceRunTime
         }
 
         /// <MetaDataID>{DB9584CB-EABD-4EEC-8390-8DAE65B50E2C}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName)
+        public override void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null)
         {
             DotNetMetaDataRepository.Assembly mAssembly = null;
             System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName( assemblyFullName));

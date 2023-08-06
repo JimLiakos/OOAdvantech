@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OOAdvantech.Transactions;
 //using System.Data.OracleClient;
-using Oracle.DataAccess.Client;
+//using Oracle.DataAccess.Client;
 
 namespace OOAdvantech.OracleMetaDataPersistenceRunTime
 {
@@ -209,10 +209,7 @@ namespace OOAdvantech.OracleMetaDataPersistenceRunTime
         }
 
      
-        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName)
-        {
-            throw new NotImplementedException();
-        }
+    
 
 
 
@@ -222,6 +219,16 @@ namespace OOAdvantech.OracleMetaDataPersistenceRunTime
         }
 
         public override void RegisterComponent(string[] assembliesFullNames, Dictionary<string, System.Xml.Linq.XDocument> assembliesMappingData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName, List<string> types = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CheckForVersionUpgrate(string fullName)
         {
             throw new NotImplementedException();
         }

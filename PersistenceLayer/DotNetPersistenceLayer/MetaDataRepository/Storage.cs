@@ -395,7 +395,7 @@ namespace OOAdvantech.MetaDataRepository
             }
         }
         /// <MetaDataID>{5D63290C-FE34-4350-9BC3-05118EDF3807}</MetaDataID>
-        public abstract void RegisterComponent(string assemblyFullName);
+        public abstract void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null);
 
         /// <MetaDataID>{48475591-AD5D-40F4-8739-1C5C11A1E594}</MetaDataID>
         public abstract void RegisterComponent(string[] assembliesFullNames);
@@ -404,7 +404,7 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{5b2652e1-89ee-41b6-a137-ef68979a6305}</MetaDataID>
         public abstract void RegisterComponent(string assemblyFullName, System.Xml.Linq.XDocument mappingData);
         /// <MetaDataID>{cc2369af-c102-4755-8ec8-3a74352bfa12}</MetaDataID>
-        public abstract void RegisterComponent(string assemblyFullName, string mappingDataResourceName);
+        public abstract void RegisterComponent(string assemblyFullName, string mappingDataResourceName, System.Collections.Generic.List<string> types = null);
 
         /// <MetaDataID>{d739df29-b78b-4083-ba3a-9c354aa08337}</MetaDataID>
         public abstract void RegisterComponent(string[] assembliesFullNames, System.Collections.Generic.Dictionary<string, System.Xml.Linq.XDocument> assembliesMappingData);

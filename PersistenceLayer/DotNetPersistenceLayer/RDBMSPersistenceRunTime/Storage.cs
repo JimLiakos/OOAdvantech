@@ -260,9 +260,9 @@ namespace OOAdvantech.RDBMSPersistenceRunTime
 
         }
         /// <MetaDataID>{C9620952-390E-4374-8E7F-672767DCA872}</MetaDataID>
-        public override void RegisterComponent(string Component)
+        public override void RegisterComponent(string Component, System.Collections.Generic.List<string> types = null)
         {
-            RegisterComponent(Component, default(string));
+            RegisterComponent(Component, default(string),types);
 
         }
 

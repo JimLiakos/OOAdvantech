@@ -169,7 +169,7 @@ namespace OOAdvantech.MSSQLFastPersistenceRunTime
         {
             throw new NotImplementedException();
         }
-        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName)
+        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName, System.Collections.Generic.List<string> types = null)
         {
             throw new NotImplementedException();
         }

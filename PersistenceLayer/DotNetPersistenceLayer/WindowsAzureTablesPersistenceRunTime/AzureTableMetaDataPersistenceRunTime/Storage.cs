@@ -213,7 +213,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         /// <MetaDataID>{75aac540-7624-4a9d-9860-822a2c1b8e32}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName)
+        public override void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null)
         {
             DotNetMetaDataRepository.Assembly mAssembly = null;
             System.Reflection.Assembly dotNetAssembly = System.Reflection.Assembly.Load(new System.Reflection.AssemblyName(assemblyFullName));
