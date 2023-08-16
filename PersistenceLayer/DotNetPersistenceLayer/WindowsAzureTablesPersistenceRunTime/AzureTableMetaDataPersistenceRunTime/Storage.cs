@@ -39,11 +39,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         //public readonly CloudTable MetadataIdentitiesTable;
 
-        public readonly Azure.Data.Tables.TableClient ClassBLOBDataTable_a;
+        public readonly Azure.Data.Tables.TableClient ClassBLOBDataTable;
 
-        public readonly Azure.Data.Tables.TableClient ObjectBLOBDataTable_a;
+        public readonly Azure.Data.Tables.TableClient ObjectBLOBDataTable;
 
-        public readonly Azure.Data.Tables.TableClient MetadataIdentitiesTable_a;
+        public readonly Azure.Data.Tables.TableClient MetadataIdentitiesTable;
 
         ///// <MetaDataID>{65a1dbc5-fd0c-4e00-99e3-b67a5be6f106}</MetaDataID>
         //CloudStorageAccount Account;
@@ -81,7 +81,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         /// <MetaDataID>{9e7e3f3b-7172-42c9-b8f2-a102c2954693}</MetaDataID>
-        public Storage(string storageName, string storageLocation, string storageType, bool newStorage,  Azure.Data.Tables.TableServiceClient tablesAccount, StorageMetadata storageMetadata = null)
+        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, Azure.Data.Tables.TableServiceClient tablesAccount, StorageMetadata storageMetadata = null)
         {
             StorageName = storageName;
             StorageLocation = storageLocation;
@@ -93,7 +93,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             //CloudTableClient tableClient = account.CreateCloudTableClient();
 
 
-        
+
 
             if (StorageMetadata == null)
             {
@@ -122,9 +122,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             //ClassBLOBDataTable = tableClient.GetTableReference(ClassBLOBDataTableName);
             //ObjectBLOBDataTable = tableClient.GetTableReference(ObjectBLOBDataTableName);
             //MetadataIdentitiesTable = tableClient.GetTableReference(MetadataIdentityTableName);
-            ClassBLOBDataTable_a = TablesAccount.GetTableClient(ClassBLOBDataTableName);
-            ObjectBLOBDataTable_a = TablesAccount.GetTableClient(ObjectBLOBDataTableName);
-            MetadataIdentitiesTable_a = TablesAccount.GetTableClient(MetadataIdentityTableName);
+            ClassBLOBDataTable = TablesAccount.GetTableClient(ClassBLOBDataTableName);
+            ObjectBLOBDataTable = TablesAccount.GetTableClient(ObjectBLOBDataTableName);
+            MetadataIdentitiesTable = TablesAccount.GetTableClient(MetadataIdentityTableName);
 
             Pageable<TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", MetadataIdentityTableName));
             bool metadataIdentitiesTable_exist = queryTableResults.Count() > 0;
@@ -142,21 +142,21 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 //    ClassBLOBDataTable.CreateIfNotExists();
 
                 if (!classBLOBDataTable_exist)
-                    ClassBLOBDataTable_a.CreateIfNotExists();
+                    ClassBLOBDataTable.CreateIfNotExists();
 
                 //if (!ObjectBLOBDataTable.Exists())
                 //    ObjectBLOBDataTable.CreateIfNotExists();
 
-                if (objectBLOBDataTable_exist)
-                    ObjectBLOBDataTable_a.CreateIfNotExists();
+                if (!objectBLOBDataTable_exist)
+                    ObjectBLOBDataTable.CreateIfNotExists();
 
 
                 if (!metadataIdentitiesTable_exist)
                 {
-                    MetadataIdentitiesTable_a.CreateIfNotExists();
+                    MetadataIdentitiesTable.CreateIfNotExists();
                     MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
                     MetadataIdentities.NextOID = 1;
-                    MetadataIdentitiesTable_a.AddEntity(MetadataIdentities);
+                    MetadataIdentitiesTable.AddEntity(MetadataIdentities);
                 }
 
                 //if (!MetadataIdentitiesTable.Exists())
@@ -170,7 +170,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 //}
                 else
                 {
-                    foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable_a.Query<MetadataIdentities>()
+                    foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable.Query<MetadataIdentities>()
                                                         select metadataIdentities))
                     {
                         MetadataIdentities = metadataIdentities;
@@ -185,10 +185,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             {
                 if (!metadataIdentitiesTable_exist)
                 {
-                    MetadataIdentitiesTable_a.CreateIfNotExists();
+                    MetadataIdentitiesTable.CreateIfNotExists();
                     MetadataIdentities = new MetadataIdentities("AAA", Guid.NewGuid().ToString());
                     MetadataIdentities.NextOID = 1;
-                    MetadataIdentitiesTable_a.AddEntity(MetadataIdentities);
+                    MetadataIdentitiesTable.AddEntity(MetadataIdentities);
                 }
                 //if (!MetadataIdentitiesTable.Exists())
                 //{
@@ -270,7 +270,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         /// <MetaDataID>{afe64c88-69e4-4666-a20f-33a317daaa1b}</MetaDataID>
-        public void RegisterComponent(MetaDataRepository.Component Component)
+        public void RegisterComponent(MetaDataRepository.Component Component, System.Collections.Generic.List<string> types = null)
         {
 
 
@@ -304,8 +304,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                     DotNetMetaDataRepository.Class _class = metaObject as DotNetMetaDataRepository.Class;
                     try
                     {
-                        if (_class != null && _class.Persistent)
-                            RegisterClass(insertedClassBlobs, _class, tableBatchOperations_a);
+                        if (types!=null)
+                        {
+                            if (_class != null&&_class.Persistent&&types.Contains(_class.FullName))
+                                RegisterClass(insertedClassBlobs, _class, tableBatchOperations_a);
+                        }
+                        else
+                        {
+                            if (_class != null && _class.Persistent)
+                                RegisterClass(insertedClassBlobs, _class, tableBatchOperations_a);
+                        }
+
                     }
                     catch (System.Exception Error)
                     {
@@ -322,12 +331,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
 
             foreach (var tableBatchOperation in tableBatchOperations_a)
-                ClassBLOBDataTable_a.SubmitTransaction(tableBatchOperation);
+                ClassBLOBDataTable.SubmitTransaction(tableBatchOperation);
 
 
 
 
-            foreach (var classBLOBData in (from classBLOBData in ClassBLOBDataTable_a.Query<ClassBLOBData>()
+            foreach (var classBLOBData in (from classBLOBData in ClassBLOBDataTable.Query<ClassBLOBData>()
                                            select classBLOBData))
             {
 
@@ -376,7 +385,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         //public Collections.Generic.Dictionary<string, ClassBLOB> ClassBLOBs = new Collections.Generic.Dictionary<string, ClassBLOB>();
         /// <MetaDataID>{d1e28d46-818c-4260-a30e-888cd7d8e85e}</MetaDataID>
-         protected void RegisterClass(System.Collections.Generic.Dictionary<string, OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ClassBLOB> insertedClassBlobs, OOAdvantech.DotNetMetaDataRepository.Class _class, List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations)
+        protected void RegisterClass(System.Collections.Generic.Dictionary<string, OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ClassBLOB> insertedClassBlobs, OOAdvantech.DotNetMetaDataRepository.Class _class, List<List<Azure.Data.Tables.TableTransactionAction>> tableBatchOperations)
         {
             //TableBatchOperation_a.Add(new Azure.Data.Tables.TableTransactionAction(Azure.Data.Tables.TableTransactionActionType.UpsertReplace, objectBLOBData));
 
@@ -443,7 +452,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
 
         /// <MetaDataID>{a71c036b-39eb-4baf-97e3-28453cae9154}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName)
+        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName, System.Collections.Generic.List<string> types = null)
         {
             throw new NotImplementedException();
         }
@@ -482,7 +491,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                 using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
                 {
 
-                    foreach (var classBLOBData in ClassBLOBDataTable_a.Query<ClassBLOBData>())
+                    foreach (var classBLOBData in ClassBLOBDataTable.Query<ClassBLOBData>())
                     {
                         Guid ID = Guid.Parse(classBLOBData.RowKey);
                         string metaObjectIdentity = classBLOBData.MetaObjectIdentity;
@@ -520,7 +529,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             {
                 throw;
             }
-            foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable_a.Query<MetadataIdentities>()
+            foreach (var metadataIdentities in (from metadataIdentities in MetadataIdentitiesTable.Query<MetadataIdentities>()
                                                 select metadataIdentities))
             {
                 MetadataIdentities = metadataIdentities;
@@ -546,7 +555,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         }
 
-        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, Azure.Data.Tables.TableServiceClient tablesAccount, Azure.Data.Tables.TableClient storageMetadataEntry) : this(storageName, storageLocation, storageType, newStorage,  tablesAccount)
+        public Storage(string storageName, string storageLocation, string storageType, bool newStorage, Azure.Data.Tables.TableServiceClient tablesAccount, Azure.Data.Tables.TableClient storageMetadataEntry) : this(storageName, storageLocation, storageType, newStorage, tablesAccount)
         {
             this.storageMetadataEntry = storageMetadataEntry;
         }

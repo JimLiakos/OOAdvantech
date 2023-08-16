@@ -83,7 +83,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         {
 
             //var objectBLOBDataTable = (StorageMetaData as Storage).ObjectBLOBDataTable;
-            var objectBLOBDataTable_a = (StorageMetaData as Storage).ObjectBLOBDataTable_a;
+            var objectBLOBDataTable_a = (StorageMetaData as Storage).ObjectBLOBDataTable;
             int lastOID = 0;
             int count = 0;
             //foreach (var objectBLOBData in (from objectBLOBData in objectBLOBDataTable.CreateQuery<ObjectBLOBData>()
@@ -406,7 +406,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public override void MakeChangesDurable(TransactionContext theTransaction)
         {
 
-            (this.StorageMetaData as Storage).MetadataIdentitiesTable_a.UpdateEntity((this.StorageMetaData as Storage).MetadataIdentities,Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+            (this.StorageMetaData as Storage).MetadataIdentitiesTable.UpdateEntity((this.StorageMetaData as Storage).MetadataIdentities,Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
 
             //if (TableBatchOperations.ContainsKey(theTransaction.Transaction.LocalTransactionUri.ToLower()))
             //{

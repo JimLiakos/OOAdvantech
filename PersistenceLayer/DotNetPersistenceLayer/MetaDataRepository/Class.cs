@@ -1418,10 +1418,7 @@ namespace OOAdvantech.MetaDataRepository
         public override void Synchronize(MetaObject originMetaObject)
         {
 
-            if (FullName == "OOAdvantech.PersistenceLayer.StorageInstanceRef")
-            {
 
-            }
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             RefreshClassHierarchyCollections();
 

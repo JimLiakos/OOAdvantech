@@ -24,6 +24,8 @@ using OOAdvantech.Json;
 using WPFUIElementObjectBind;
 using UIBaseEx;
 using System.IO;
+using CefSharp.DevTools.Network;
+using System.Runtime.Remoting.Messaging;
 //using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace GenWebBrowser
@@ -94,7 +96,7 @@ namespace GenWebBrowser
             if (ChromeBrowser != null && ProcessActiveBrowsers.ContainsKey(ChromeBrowser))
             {
                 ChromeBrowser.Dispose();
-               
+
                 ProcessActiveBrowsers.Remove(ChromeBrowser);
                 ChromeBrowser = null;
             }
@@ -117,7 +119,7 @@ namespace GenWebBrowser
         //     Occurs just before navigation to a document.
         public event NavigatingCancelEventHandler Navigating;
 
-        public object InvockeJSMethod(string methodName, object[] args, bool _async = false)
+        public object InvockeJSMethod(string methodName, object[] args,  bool _async = false)
         {
             //_placementTarget.Dispatcher.BeginInvoke(delegate () => { });
 
@@ -161,6 +163,7 @@ namespace GenWebBrowser
                     {
                         return Application.Current.Dispatcher.Invoke(delegate ()
                          {
+
                              var task = ChromeBrowser.EvaluateScriptAsync(jsScriptMethodCall);
                              task.Wait(10000);
                              result = task.Result.Result;
@@ -173,6 +176,7 @@ namespace GenWebBrowser
                           {
                               JavascriptResponse javascriptResponse = await Application.Current.Dispatcher.Invoke(delegate ()
                                {
+                                   //System.Diagnostics.Debug.WriteLine("#### CallContextID : "+callContextID.ToString());
                                    var task = ChromeBrowser.EvaluateScriptAsync(jsScriptMethodCall);
 
                                    return task;
@@ -280,7 +284,7 @@ namespace GenWebBrowser
             }
             if (e.Key == Key.BrowserBack)
             {
-                InvockeJSMethod("BackButtonPress", new object[0], true);
+                InvockeJSMethod("BackButtonPress", new object[0],  true);
             }
             base.OnKeyUp(e);
         }
@@ -533,7 +537,7 @@ namespace GenWebBrowser
 
         const string JavaScriptFunction = "var result;  function invokeCSharpAction(data){result=null; window.external.notify(data); return result;}  function CSharpCallResult(parameter){result = parameter;}";
         bool EnableRestApi;
-        public WebBrowserOverlay(FrameworkElement placementTarget, BrowserType browserType, bool enableRestApi = false):this()
+        public WebBrowserOverlay(FrameworkElement placementTarget, BrowserType browserType, bool enableRestApi = false) : this()
         {
 
             EnableRestApi = enableRestApi;
@@ -552,7 +556,7 @@ namespace GenWebBrowser
 
             LaunchBrowser(browserType);
 
-        
+
 
             _placementTarget.LayoutUpdated += delegate { OnSizeLocationChanged(); };
             owner.LocationChanged += delegate { OnSizeLocationChanged(); };
@@ -592,7 +596,7 @@ namespace GenWebBrowser
             //owner.LayoutUpdated += new EventHandler(OnOwnerLayoutUpdated);
         }
 
-     
+
 
         private void LaunchBrowser(BrowserType browserType)
         {
@@ -632,7 +636,7 @@ namespace GenWebBrowser
             if (ChromeBrowser != null && ProcessActiveBrowsers.ContainsKey(ChromeBrowser))
             {
                 //ChromeBrowser.Dispose();
-                
+
                 ProcessActiveBrowsers.Remove(ChromeBrowser);
             }
         }
@@ -878,11 +882,19 @@ namespace GenWebBrowser
             return task.Result;
 
         }
-
+        int NextRequestID = 1;
         public Task<ResponseData> SendRequestAsync(RequestData requestData)
         {
+            lock (this)
+                requestData.CallContextID = NextRequestID++;
+
             string requestDatajson = JsonConvert.SerializeObject(requestData);
             requestDatajson = ((int)MessageHeader.Request).ToString() + requestDatajson;
+            if (requestData.RequestType==RequestType.Event)
+            {
+                System.Diagnostics.Debug.WriteLine("#### event CallContextID : "+requestData.CallContextID.ToString());
+
+            }
             InvockeJSMethod("SendMessage", new[] { requestDatajson }, true);
             Task.FromResult(false);
             return Task.FromResult<ResponseData>(null);

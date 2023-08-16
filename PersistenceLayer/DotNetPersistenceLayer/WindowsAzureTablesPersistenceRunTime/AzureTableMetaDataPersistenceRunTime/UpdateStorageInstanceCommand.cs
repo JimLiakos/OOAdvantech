@@ -18,7 +18,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         public override void Execute()
         {
             //var objectBLOBDataTable = ((UpdatedStorageInstanceRef.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable;
-            var objectBLOBDataTable_a = ((UpdatedStorageInstanceRef.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable_a;
+            var objectBLOBDataTable_a = ((UpdatedStorageInstanceRef.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable;
             if (FromNewCommand)
             {
                 ObjectBLOBData objectBLOBData = new ObjectBLOBData("AAA", UpdatedStorageInstanceRef.PersistentObjectID.GetMemberValue("ObjectID").ToString());

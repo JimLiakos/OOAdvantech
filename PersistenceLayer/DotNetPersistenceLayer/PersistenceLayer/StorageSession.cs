@@ -487,6 +487,22 @@ namespace OOAdvantech.PersistenceLayer
             }
             return @object;
         }
+        public static ObjectStorage OpenStorage(string storageIdentity)
+        {
+            var storageMetaData = PersistenceLayer.StorageServerInstanceLocator.Current.GetSorageMetaData(storageIdentity);
+            if (storageMetaData== null)
+            {
+                throw new StorageException("There isn't public record for the objects storage with this identity.",
+                   StorageException.ExceptionReason.StorageDoesnotExist);
+            }
+
+            if (!storageMetaData.MultipleObjectContext)
+                throw new StorageException("Storage cannot be run in multiple object context", StorageException.ExceptionReason.StorageOpensOnlyInSingleObjectContext);
+
+            var objectStorage = PersistenceLayer.ObjectStorage.OpenStorage(storageMetaData.StorageName, storageMetaData.StorageLocation, storageMetaData.StorageType);
+            return objectStorage;
+
+        }
 
         /// <MetaDataID>{2c7035bf-37a9-4ef4-926f-8fe64a7656ed}</MetaDataID>
         public static T GetObjectFromUri<T>(string persistentUri) where T : class

@@ -395,8 +395,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
 
                     #region Load AssociationEnd Realizations
-
-
+                 
                     foreach (Interface _interface in interfaces)
                     {
                         foreach (AssociationEnd associationEnd in _interface.GetAssociateRoles(false))

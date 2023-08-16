@@ -240,6 +240,9 @@ namespace OOAdvantech.Remoting.RestApi
         public static AuthUser GetAuthUserFromToken(string authToken)
         {
             AuthUser authUser;
+            authUser = new AuthUser();
+
+
             //var handler = new JwtSecurityTokenHandler();
             //JwtSecurityToken tokenS = handler.ReadToken(authToken) as JwtSecurityToken;
             JwtSecurityToken tokenS = Validate(authToken);
@@ -250,7 +253,8 @@ namespace OOAdvantech.Remoting.RestApi
             //var firebaseJWTAuth = new FirebaseJWTAuth("dontwait4waiter");
             //string res = firebaseJWTAuth.Verify(authToken);
 
-            authUser = new AuthUser();
+
+
 
             string kid = tokenS.Header["kid"] as string;
 

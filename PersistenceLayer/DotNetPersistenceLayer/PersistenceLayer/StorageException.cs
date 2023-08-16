@@ -15,7 +15,9 @@ namespace OOAdvantech.PersistenceLayer
 			CanotConnectWithStorage,
 			StorageProviderError,
             StorageAlreadyExist,
-            StorageMetadataDotNetTypeMismatch
+            StorageMetadataDotNetTypeMismatch,
+			StorageOpensOnlyInSingleObjectContext
+
         }
 
 		/// <MetaDataID>{3A19C33F-101E-4FD8-B277-88470102E6D7}</MetaDataID>

@@ -132,7 +132,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
 
         /// <MetaDataID>{71544717-9d54-4a6d-b5e3-54cb030a096d}</MetaDataID>
-        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName)
+        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName, System.Collections.Generic.List<string> types = null)
         {
             throw new NotImplementedException();
         }
@@ -173,7 +173,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         }
 
-        public void RegisterComponent(MetaDataRepository.Component Component)
+        public void RegisterComponent(MetaDataRepository.Component Component, System.Collections.Generic.List<string> types = null)
         {
 
 

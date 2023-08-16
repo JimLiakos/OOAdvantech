@@ -38,7 +38,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 					throw  new System.Exception(Error.Message,Error);
 			}
 
-            var objectBLOBDataTable = ((StorageInstanceForDeletion.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable_a;
+            var objectBLOBDataTable = ((StorageInstanceForDeletion.ObjectStorage as ObjectStorage).StorageMetaData as Storage).ObjectBLOBDataTable;
             ObjectBLOBData objectBLOBData = (StorageInstanceForDeletion as StorageInstanceRef).ObjectBLOBData;
 
             try

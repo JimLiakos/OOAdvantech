@@ -167,7 +167,7 @@ namespace OOAdvantech.SQLiteMetaDataPersistenceRunTime
         {
             throw new NotImplementedException();
         }
-        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName)
+        public override void RegisterComponent(string assemblyFullName, string mappingDataResourceName,List<string> types=null)
         {
             throw new NotImplementedException();
         }

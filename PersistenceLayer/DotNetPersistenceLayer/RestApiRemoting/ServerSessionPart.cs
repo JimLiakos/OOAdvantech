@@ -588,6 +588,7 @@ namespace OOAdvantech.Remoting.RestApi
                 if (authToken == null && x_Access_Token == null)
                     return null;
 
+
                 if (!string.IsNullOrWhiteSpace(authToken) && (AuthUser == null || AuthUser.AuthToken != authToken))
                 {
                     //https://stackoverflow.com/questions/39938542/firebase-net-token-verification/48180173
@@ -657,7 +658,21 @@ namespace OOAdvantech.Remoting.RestApi
                 try
                 {
                     AuthUser authUser;
-                    authUser=AuthUser.GetAuthUserFromToken(authToken);
+#if DEBUG
+                    if (!string.IsNullOrWhiteSpace(authToken))
+                    {
+                        authUser = new AuthUser();
+                        authUser.Email_Verified = true;
+                        authUser.Email = "jimliakosgmailcom_1ad56f4a93287@fakeuser.com";
+                        authUser.User_ID = "CT7yu3MpZahWzeF59lb8iPT3iwC2";
+                        authUser.Name = "jim liakos";
+                        authUser.AuthToken = authToken;
+                        AuthUser = authUser;
+                        return;
+                    }
+#endif
+
+                    authUser = AuthUser.GetAuthUserFromToken(authToken);
 
                     DateTime now = System.DateTime.Now;
                     bool isValidToken = true;
