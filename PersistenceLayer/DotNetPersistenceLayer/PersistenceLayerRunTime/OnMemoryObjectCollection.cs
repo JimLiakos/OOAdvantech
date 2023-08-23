@@ -100,14 +100,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
                     relatedObjects.Remove(collectionChangement.Object);
             }
-
-            if (collectionChanges.Count > 0)
-            {
-                collectionChanges.Sort(new CollectionChangesSort());
-                //collectionChanges = collectionChanges.OrderBy(x => x.Index).ToList();
-            }
-
-            foreach (CollectionChange collectionChangement in collectionChanges)
+            collectionChanges.Sort(new CollectionChangesSort());
+            foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x => x.Index))
             {
                 if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && !relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
                 {
@@ -909,7 +903,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         /// <MetaDataID>{42A863A7-2B32-466B-A7E4-1F20D3D78AA2}</MetaDataID>
         public virtual void CommitChanges(OOAdvantech.Transactions.Transaction transaction)
         {
-
+       
             if (Multilingual)
             {
                 lock (MultilingualCollectionChanges)
@@ -945,17 +939,10 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 if (RelResolver == null)
                 {
-                    var collectionChanges = GetCollectionChanges(transaction)?.ToList();
+                    var collectionChanges = GetCollectionChanges(transaction);
                     if (collectionChanges == null)
                         return;
-
-                    if (collectionChanges.Count > 0)
-                    {
-                        collectionChanges.Sort(new CollectionChangesSort());
-                        //collectionChanges = collectionChanges.OrderBy(x => x.Index).ToList();
-                    }
-
-                    foreach (CollectionChange collectionChangement in collectionChanges)
+                    foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x=>x.Index))
                     {
                         //CollectionChangement collectionChangement = entry.Value as CollectionChangement;
                         if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added)
@@ -963,7 +950,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                             if (!ContainObjects.Contains(collectionChangement.Object))
                             {
                                 System.Diagnostics.Debug.Assert(collectionChangement.Index <= ContainObjects.Count, "index is out of bound");
-                                if (collectionChangement.Index == -1 || collectionChangement.Index > ContainObjects.Count)
+                                if (collectionChangement.Index == -1|| collectionChangement.Index> ContainObjects.Count)
                                 {
                                     ContainObjects.Add(collectionChangement.Object);
                                     //System.Diagnostics.Debug.WriteLine("commit Add");
@@ -1162,7 +1149,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1240,7 +1227,7 @@ CheckIndexChangeTransactions:
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1311,7 +1298,7 @@ CheckIndexChangeTransactions:
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1530,7 +1517,7 @@ CheckIndexChangeTransactions:
             #region Get indexChange taransactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
 
-CheckIndexChangeTransactions:
+        CheckIndexChangeTransactions:
 
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1685,8 +1672,8 @@ CheckIndexChangeTransactions:
             {
                 int rer = 0;
             }
-CheckIndexChangeTransactions:
-#region Get indexChange transactions
+        CheckIndexChangeTransactions:
+            #region Get indexChange transactions
             System.Collections.Generic.List<OOAdvantech.Transactions.Transaction> waitForTransactionsComplete = null;
             ReaderWriterLock.AcquireReaderLock(10000);
             try
@@ -1812,13 +1799,13 @@ CheckIndexChangeTransactions:
 
         }
 
-
+   
 
         object ThreadSafeLock = new object();
         Dictionary<string, OOAdvantech.Collections.Generic.List<object>> _ThreadSafeList = new Dictionary<string, List<object>>();
-        Dictionary<string, IList> _ThreadSafeSet = new Dictionary<string, IList>();
+             Dictionary<string, IList> _ThreadSafeSet = new Dictionary<string, IList>();
 
-
+   
         private void SetThreadSafeList(List<object> list)
         {
             lock (ThreadSafeLock)
@@ -1849,7 +1836,7 @@ CheckIndexChangeTransactions:
         {
             lock (ThreadSafeLock)
             {
-
+                
                 string localTransactionUri = "null_transaction";
                 if (Transaction.Current != null)
                     localTransactionUri = Transaction.Current.LocalTransactionUri;
@@ -2128,7 +2115,7 @@ CheckIndexChangeTransactions:
         /// <MetaDataID>{bb368544-7d3a-445e-b13a-be0f087a8906}</MetaDataID>
         public virtual void UndoChanges(OOAdvantech.Transactions.Transaction transaction)
         {
-
+          
 
             if (Multilingual)
             {
@@ -2613,15 +2600,8 @@ CheckIndexChangeTransactions:
                     if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
                         relatedObjects.Remove(collectionChangement.Object);
                 }
-                
-                if (collectionChanges.Count > 0)
-                {
-                    collectionChanges.Reverse();
-                    collectionChanges.Sort(new CollectionChangesSort());
-                    //collectionChanges = collectionChanges.OrderBy(x => x.Index).ToList();
-                }
-
-                foreach (CollectionChange collectionChangement in collectionChanges)
+                collectionChanges.Sort(new CollectionChangesSort());
+                foreach (CollectionChange collectionChangement in collectionChanges.OrderBy(x => x.Index))
                 {
                     if (collectionChangement.TypeOfChange == CollectionChange.ChangeType.Added && !relatedObjects.Contains(collectionChangement.Object) && collectionChangement.Index != -1)
                     {
@@ -3043,14 +3023,14 @@ CheckIndexChangeTransactions:
 
         public System.Collections.Generic.List<IndexChange> GetTheIndexesOfAdditionalObject(string transactionUri)
         {
-
+            
             System.Collections.Generic.List<IndexChange> IndexesOfNewRelatedObject = new System.Collections.Generic.List<IndexChange>();
             if (RelResolver != null)
             {
 
                 if (RelResolver.IsCompleteLoaded)
                 {
-                    foreach (var collectionChange in GetCollectionChanges(Transactions.Transaction.Current).Where(x => x.TypeOfChange == CollectionChange.ChangeType.Added))
+                    foreach(var collectionChange in GetCollectionChanges(Transactions.Transaction.Current).Where(x=>x.TypeOfChange==CollectionChange.ChangeType.Added))
                     {
                         int oldIndex = -1;
                         if (RelResolver.LoadedRelatedObjects.Contains(collectionChange.Object))

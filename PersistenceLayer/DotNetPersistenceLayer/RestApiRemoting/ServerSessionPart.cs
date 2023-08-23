@@ -659,17 +659,17 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     AuthUser authUser;
 #if DEBUG
-                    if (!string.IsNullOrWhiteSpace(authToken))
-                    {
-                        authUser = new AuthUser();
-                        authUser.Email_Verified = true;
-                        authUser.Email = "jimliakosgmailcom_1ad56f4a93287@fakeuser.com";
-                        authUser.User_ID = "CT7yu3MpZahWzeF59lb8iPT3iwC2";
-                        authUser.Name = "jim liakos";
-                        authUser.AuthToken = authToken;
-                        AuthUser = authUser;
-                        return;
-                    }
+                    //if (!string.IsNullOrWhiteSpace(authToken))
+                    //{
+                    //    authUser = new AuthUser();
+                    //    authUser.Email_Verified = true;
+                    //    authUser.Email = "jimliakosgmailcom_1ad56f4a93287@fakeuser.com";
+                    //    authUser.User_ID = "CT7yu3MpZahWzeF59lb8iPT3iwC2";
+                    //    authUser.Name = "jim liakos";
+                    //    authUser.AuthToken = authToken;
+                    //    AuthUser = authUser;
+                    //    return;
+                    //}
 #endif
 
                     authUser = AuthUser.GetAuthUserFromToken(authToken);

@@ -490,7 +490,7 @@ namespace OOAdvantech.PersistenceLayer
         public static ObjectStorage OpenStorage(string storageIdentity)
         {
             var storageMetaData = PersistenceLayer.StorageServerInstanceLocator.Current.GetSorageMetaData(storageIdentity);
-            if (storageMetaData== null)
+            if (storageMetaData == null)
             {
                 throw new StorageException("There isn't public record for the objects storage with this identity.",
                    StorageException.ExceptionReason.StorageDoesnotExist);
@@ -507,6 +507,8 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{2c7035bf-37a9-4ef4-926f-8fe64a7656ed}</MetaDataID>
         public static T GetObjectFromUri<T>(string persistentUri) where T : class
         {
+            if (persistentUri == null)
+                return default(T);
             object @object = null;
             string[] persistentObjectUriParts = persistentUri.Split('\\');
             string storageIdentity = persistentObjectUriParts[0];

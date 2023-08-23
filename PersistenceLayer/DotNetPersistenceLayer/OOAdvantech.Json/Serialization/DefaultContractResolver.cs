@@ -1379,7 +1379,7 @@ namespace OOAdvantech.Json.Serialization
                 }
             }
 
-            IList<JsonProperty> orderedProperties = properties.OrderBy(p => p.Order == null ? -1 : p.Order).ToList();
+            IList<JsonProperty> orderedProperties = properties.OrderBy(p => p.Order ?? -1).ToList();
             return orderedProperties;
         }
 
