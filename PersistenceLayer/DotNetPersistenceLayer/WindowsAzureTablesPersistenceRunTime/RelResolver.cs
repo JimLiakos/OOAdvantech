@@ -22,7 +22,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 if (AssociationEnd.Multiplicity.IsMany)
                     Objects = InternalLoadedRelatedObjects;
                 else
-                {
+                { 
                     Objects = new OOAdvantech.Collections.Generic.List<object>();
                     if (RelatedObject != null)
                         Objects.Add(RelatedObject);
