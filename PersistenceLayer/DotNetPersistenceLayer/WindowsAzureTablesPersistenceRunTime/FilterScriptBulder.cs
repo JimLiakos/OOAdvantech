@@ -18,7 +18,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
             DataLoader = dataLoader;
         }
-
+         
 
 
         /// <MetaDataID>{41b886c6-9f8e-4e2f-9836-a089929586d2}</MetaDataID>

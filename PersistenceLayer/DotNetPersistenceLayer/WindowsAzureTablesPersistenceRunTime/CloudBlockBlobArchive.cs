@@ -21,7 +21,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         {
             _LocalFileName = localFileName;
         }
-
+         
 
         readonly string _LocalFileName;
 
