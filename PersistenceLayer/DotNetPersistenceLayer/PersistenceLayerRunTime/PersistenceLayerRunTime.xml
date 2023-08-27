@@ -149,9 +149,9 @@
             <summary></summary>
         </member>
         <member name="M:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.#ctor(OOAdvantech.PersistenceLayerRunTime.ObjectStorage,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.StorageInstanceAgent,OOAdvantech.PersistenceLayerRunTime.AssociationEndAgent,System.Int32)">
-            multiplicity 0,1 áðü ôçí Üëëç ðëåõñÜ íá Ý÷åé êáé åêåß êáôá ëÜèïò 0,1 áëëÜ ïõóéáóôéêÜ íá åßíáé many
-            èá ðñÝðåé ôï óýóôçìá íá êÜíåé multiplicity check êáé íá ôï ðïéÜíåé áëëéïò  äçìéïõñãïýíôáé 
-            äåõôåñïãåíïß ðñïâëÞìáôá ðïõ äßóêïëá áíé÷íåýåé ï ÷ñÞóôçò ôçí ðñïÝëåõóç ôïõ ðñïâëÞìáôïò.
+            multiplicity 0,1 από την άλλη πλευρά να έχει και εκεί κατα λάθος 0,1 αλλά ουσιαστικά να είναι many
+            θα πρέπει το σύστημα να κάνει multiplicity check και να το ποιάνει αλλιος  δημιουργούνται 
+            δευτερογενοί προβλήματα που δίσκολα ανιχνεύει ο χρήστης την προέλευση του προβλήματος.
             <MetaDataID>{8891573F-7019-41DA-BF44-98177938E19A}</MetaDataID>
         </member>
         <member name="F:OOAdvantech.PersistenceLayerRunTime.Commands.LinkObjectsCommand.RoleAIndex">
