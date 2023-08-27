@@ -26,14 +26,14 @@ gacutil -if "C:\Projects\OpenVersions\PersistenceLayer\DotNetPersistenceLayer\Me
 
 gacutil -if "C:\Projects\OpenVersions\PersistenceLayer\DotNetPersistenceLayer\CodeMetaDataRepository\bin\Net4Debug\CodeMetaDataRepository.dll"
 
-gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\bin\Net4Debug\ConnectableControls.dll"
+gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\bin\Debug\Net4\ConnectableControls.dll"
 
-gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\bin\Net4Debug\UserInterface.dll"
+gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\bin\Debug\Net4\UserInterface.dll"
 
 
 gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\UserInterfaceMetaData\bin\Debug\UserInterfaceMetaData.dll"
 
-gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\DXConnectableControls\bin\Net4Debug\DXConnectableControls.dll"
+gacutil -if "C:\Projects\OpenVersions\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\DXConnectableControls\bin\Debug\Net4\DXConnectableControls.dll"
 
 gacutil -if "C:\Projects\OpenVersions\Visual Studio.NET Projects\VisualStudioEventBridge\bin\Debug\Net4\VisualStudioEventBridge.dll"
 

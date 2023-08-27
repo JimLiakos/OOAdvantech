@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 #if !DeviceDotNet
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Script.Serialization;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 #endif
 namespace OOAdvantech.Remoting.RestApi

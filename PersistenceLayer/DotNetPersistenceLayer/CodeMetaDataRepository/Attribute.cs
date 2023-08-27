@@ -6,7 +6,7 @@ namespace OOAdvantech.CodeMetaDataRepository
 
         /// <MetaDataID>{fb037df8-3b83-4964-85e0-3ce2fb0798ae}</MetaDataID>
         MetaDataRepository.MetaObjectID CodeElementContainer.Identity
-        {
+        { 
             get
             {
 
@@ -16,7 +16,7 @@ namespace OOAdvantech.CodeMetaDataRepository
                 else
                     return new OOAdvantech.MetaDataRepository.MetaObjectID(FullName);
             }
-        }
+        }  
 
         public string CurrentProgramLanguageName
         {
@@ -65,7 +65,7 @@ namespace OOAdvantech.CodeMetaDataRepository
                 base.PutPropertyValue(propertyNamespace, propertyName, PropertyValue);
             }
         }
-
+          
         public override object GetPropertyValue(System.Type propertyType, string propertyNamespace, string propertyName)
         {
             if (propertyNamespace.ToLower() == "MetaData".ToLower() && propertyName.ToLower() == "MetaObjectID".ToLower())
