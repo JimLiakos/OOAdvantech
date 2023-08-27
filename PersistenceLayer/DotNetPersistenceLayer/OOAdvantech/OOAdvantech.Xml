@@ -38,8 +38,8 @@
             <MetaDataID>{958c8312-72fa-4a96-b7d7-2f63c58a7162}</MetaDataID>
         </member>
         <member name="F:OOAdvantech.MetaDataRepository.StorageServer._Users">
-            TODO íá ãñáöôïýí test case óôçí ðåñßðôùóç ðïõ ãßíåôáé attach storage ðïõ Ý÷åé äéìéïõñãçèåß óå Üëëï server
-            êáé test case ðåñßðôùóç ðïõ áëëÜîåé üíïìá ï õðüëéãéóôÞò.
+            TODO να γραφτούν test case στην περίπτωση που γίνεται attach storage που έχει διμιουργηθεί σε άλλο server
+            και test case περίπτωση που αλλάξει όνομα ο υπόλιγιστής.
             <exclude>Excluded</exclude>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.StorageServer.AddUser(OOAdvantech.Security.User)">
@@ -1973,12 +1973,12 @@
             <exclude>Excluded</exclude>
         </member>
         <member name="P:OOAdvantech.MetaDataRepository.MetaObject.Identity">
-            <summary>Åßíáé ç ôáõôüôçôá ôïõ áíôéêåéìÝíïõ. 
-            Ëüãï ôïõ üôé Ýíá ìåôáìïíôÝëï ìðïñåß íá áíáðáñá÷èåß óå ðïëëÜ ìåôáìïíôÝëá 
-            üðùò (ìåôáìïíôÝëï ðïõ ÷ñçóéìåýç ãéá ôçí áðïèÞêåõóç áíôéêåéìÝíùí 
-            óå ó÷åóéáêÞ âÜóç äåäïìÝíùí, óå ìåôáìïíôÝëï ãéá ôçí áðïèÞêåõóç áíôéêåéìÝíùí 
-            óå XML áñ÷åßï) Þ íá åîåëç÷èåß êáé íá ðáñÜãåé ðïëÝò åêäüóçò, 
-            åßíáé áðáñáßôçôç ç ôáõôüôçôá óôá MetaObject ãéá ëüãïõ óõíãñïíéóìïý. </summary>
+            <summary>Είναι η ταυτότητα του αντικειμένου. 
+            Λόγο του ότι ένα μεταμοντέλο μπορεί να αναπαραχθεί σε πολλά μεταμοντέλα 
+            όπως (μεταμοντέλο που χρησιμεύη για την αποθήκευση αντικειμένων 
+            σε σχεσιακή βάση δεδομένων, σε μεταμοντέλο για την αποθήκευση αντικειμένων 
+            σε XML αρχείο) ή να εξεληχθεί και να παράγει πολές εκδόσης, 
+            είναι απαραίτητη η ταυτότητα στα MetaObject για λόγου συνγρονισμού. </summary>
             <MetaDataID>{9124FEAF-E867-478F-8BB7-EAF476B30C77}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.MetaDataRepository.MetaObject.GetExtensionMetaObject(System.Type)">
