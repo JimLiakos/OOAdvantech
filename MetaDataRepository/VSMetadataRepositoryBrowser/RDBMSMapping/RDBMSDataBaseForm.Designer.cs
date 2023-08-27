@@ -42,10 +42,14 @@
             // ConnectionStringTXB
             // 
             this.ConnectionStringTXB.AllowDrag = false;
-            this.ConnectionStringTXB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConnectionStringTXB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConnectionStringTXB.AutoDisable = true;
             this.ConnectionStringTXB.ConnectedObjectAutoUpdate = false;
+            // 
+            // 
+            // 
+            this.ConnectionStringTXB.EnableProperty.Path = null;
             this.ConnectionStringTXB.Location = new System.Drawing.Point(126, 39);
             this.ConnectionStringTXB.Name = "ConnectionStringTXB";
             this.ConnectionStringTXB.Path = "DataBaseConnection.ConnectionString";
@@ -78,8 +82,8 @@
             // 
             this.RDBMSDataBaseTypeCBX.AllowDrag = false;
             this.RDBMSDataBaseTypeCBX.AllowDropOperationCall = ((object)(resources.GetObject("RDBMSDataBaseTypeCBX.AllowDropOperationCall")));
-            this.RDBMSDataBaseTypeCBX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.RDBMSDataBaseTypeCBX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RDBMSDataBaseTypeCBX.AssignPresentationObjectType = "";
             this.RDBMSDataBaseTypeCBX.AutoDisable = true;
             this.RDBMSDataBaseTypeCBX.AutoInsert = false;

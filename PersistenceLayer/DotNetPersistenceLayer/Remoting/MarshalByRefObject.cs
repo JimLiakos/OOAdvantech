@@ -1,6 +1,6 @@
 using System;
 #if !DeviceDotNet
-using Newtonsoft.Json;
+
 #else
 using OOAdvantech.Json;
 #endif

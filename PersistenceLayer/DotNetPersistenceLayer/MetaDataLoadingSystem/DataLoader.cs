@@ -14,7 +14,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.ObjectQueryLanguage
     /// <MetaDataID>{01572173-8598-429a-acd3-88ab58f86da4}</MetaDataID>
     public class DataLoader : PersistenceLayerRunTime.StorageDataLoader
     {
-
+         
         public override OOAdvantech.MetaDataRepository.ObjectIdentityType ObjectIdentityTypeForNewObject
         {
             get { throw new NotImplementedException(); }
