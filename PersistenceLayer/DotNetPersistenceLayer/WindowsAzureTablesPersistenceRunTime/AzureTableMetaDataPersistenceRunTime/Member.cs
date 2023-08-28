@@ -85,7 +85,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
                     entity[Name] = null;
                 else
                     entity[Name] = value;
-                 
+
             }
             else if (Type == typeof(bool))
             {
@@ -704,12 +704,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
             try
             {
-                if(entityProperty.PropertyAsObject!=null&& entityProperty.PropertyAsObject.GetType()!=Type)
+                if (entityProperty.PropertyAsObject != null && entityProperty.PropertyAsObject.GetType() != Type)
                 {
-                    var value= System.Convert.ChangeType(entityProperty.PropertyAsObject, Type);
+                    var value = System.Convert.ChangeType(entityProperty.PropertyAsObject, Type);
                     entityProperty.PropertyAsObject = value;
                 }
-                
+
                 if (Type == typeof(string))
                 {
                     string value = entityProperty.StringValue;
@@ -1066,7 +1066,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             Name = MetaData.Name;
         }
         /// <MetaDataID>{6ac35e6f-4d73-4820-83db-09b80f379743}</MetaDataID>
-        System.Type Type;
+        public readonly System.Type Type;
         /// <MetaDataID>{9D0A9F77-4677-46B9-8EED-5DA990E67949}</MetaDataID>
         public Member(DotNetMetaDataRepository.Class _class, byte[] byteStream, int offset, out int nextAvailablePos)
         {

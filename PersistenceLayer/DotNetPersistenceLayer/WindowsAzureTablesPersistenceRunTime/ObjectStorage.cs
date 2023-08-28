@@ -1339,6 +1339,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         aMember.SaveMemberData(Buffer, entity.RowKey, offset, ref offset);
                     else
                     {
+                        if(!entity.Properties.ContainsKey(aMember.Name))
+                        {
+                            entity.SetNull(aMember.Name, aMember.Type);
+                        }
+                        
                         aMember.SaveMemberData(Buffer, entity.Properties[aMember.Name], offset, ref offset);
                     }
                 }
