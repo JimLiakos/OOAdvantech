@@ -8,10 +8,10 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
+
 
 #if !DeviceDotNet
-
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;

@@ -389,7 +389,7 @@ namespace OOAdvantech.Authentication.Droid
 
         public static void Init(Context context, string googleAuthWebClientID)
         {
-            //FirebaseApp.InitializeApp(firebaseOptions);
+            
             FacebookLoginService.Init(FirebaseAuthEventsConsumer);
             if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
             {

@@ -261,7 +261,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     serializedType = typeof(Dictionary<,>);
                 if (serializedType == typeof(System.Collections.Hashtable))
                     serializedType = typeof(Dictionary<,>);
-
+                if (serializedType?.BaseType?.FullName == "System.Array")
+                    serializedType = serializedType.BaseType;
                 if (TypesNamesDictionary.TryGetValue(serializedType, out typeName))
                     assemblyName = null;
                 else if (serializedType.GetMetaData().IsGenericType && TypesNamesDictionary.TryGetValue(serializedType.GetGenericTypeDefinition(), out typeName))

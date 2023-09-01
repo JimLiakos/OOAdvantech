@@ -87,6 +87,7 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(DateTime)] = "Date";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(string)] = "String";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(object[])] = "Array";
+            Serialization.SerializationBinder.TypesNamesDictionary[typeof(System.Array)] = "Array";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(List<>)] = "Array";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(Collections.Generic.Set<>)] = "Array";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(Dictionary<,>)] = "Map";
