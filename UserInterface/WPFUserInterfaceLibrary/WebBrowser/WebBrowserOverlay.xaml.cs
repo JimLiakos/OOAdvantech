@@ -844,6 +844,8 @@ namespace GenWebBrowser
                 });
         }
 
+        Point previousOffset;
+        Point previousSize;
         public void OnSizeLocationChanged()
         {
             if (Owner == null || Visibility != Visibility.Visible)
@@ -859,6 +861,14 @@ namespace GenWebBrowser
 
                 Win32.POINT screenLocation = new Win32.POINT(offset);
                 Win32.ClientToScreen(hwndSource.Handle, ref screenLocation);
+                offset.X = screenLocation.X;
+                offset.Y = screenLocation.Y;
+                if (previousOffset == offset && previousSize == size)
+                    return;
+                previousOffset = offset;
+                previousSize = size;
+
+
                 Win32.POINT screenSize = new Win32.POINT(size);
                 //System.Diagnostics.Debug.WriteLine(string.Format("x:{0}  y:{1}", screenLocation.X, screenLocation.Y));
                 if (HwndSource.FromVisual(this) is HwndSource)
