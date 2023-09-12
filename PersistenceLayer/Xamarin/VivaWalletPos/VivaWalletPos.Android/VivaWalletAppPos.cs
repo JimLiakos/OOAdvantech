@@ -13,7 +13,7 @@ using Xamarin.Essentials;
 
 namespace VivaWalletPos.Android
 {
-    internal class VivaWalletAppPos
+    public class VivaWalletAppPos
     {
 
         internal static TaskCompletionSource<PaymentData> SalesTask;
