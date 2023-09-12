@@ -266,6 +266,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         private void ResponseTimeCheck(IEndPoint endPoint)
         {
+            return;
             if (endPoint != null &&
                 endPoint is WebSocketClient &&
                     (endPoint as WebSocketClient).State == WebSocketState.Open)
