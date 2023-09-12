@@ -1197,6 +1197,10 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     continue;
 
                 bool isMultilingual = _class.IsMultilingual(attribute);
+                if(!isMultilingual && attribute?.Identity?.ToString() == "{794bbf34-5df9-4ab0-9572-5773309ecc4c}.22")
+                {
+
+                }
                 valueTypePath.Push(attribute.Identity);
                 if (attribute.Type is DotNetMetaDataRepository.Structure && (attribute.Type as DotNetMetaDataRepository.Structure).Persistent)
                 {

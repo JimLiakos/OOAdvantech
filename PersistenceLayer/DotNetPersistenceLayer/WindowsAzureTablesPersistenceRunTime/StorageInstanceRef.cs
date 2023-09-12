@@ -219,6 +219,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
                 if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null && value != DBNull.Value)
                 {
+                    if(valueOfAttribute.Attribute.FullName == "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
+                    {
+
+                    }
                     var attributeType = valueOfAttribute.Attribute.Type.GetExtensionMetaObject<System.Type>();
                     var dictionaryType = typeof(Dictionary<,>).MakeGenericType(typeof(string), attributeType);
                     var multiligualDictionary = OOAdvantech.Json.JsonConvert.DeserializeObject(value as string, dictionaryType) as System.Collections.IDictionary;
