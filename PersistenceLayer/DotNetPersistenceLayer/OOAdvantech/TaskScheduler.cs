@@ -23,13 +23,17 @@ namespace OOAdvantech
             set
             {
                 lock (this)
-                    _Runs=value;
+                    _Runs = value;
             }
         }
 
         Task ActiveTask;
 
         bool SerializeTaskActive;
+        private TaskCompletionSource<bool> TaskCompletionSource;
+
+        object TaskSchedulerLock=new object();
+
         /// <MetaDataID>{7582855a-67f6-414d-b930-e6e5d47a3198}</MetaDataID>
         public void RunAsync()
         {
@@ -46,12 +50,22 @@ namespace OOAdvantech
                         {
                             try
                             {
-                                Func<Task<bool>> function = Tasks.Dequeue();
+
+                                Func<Task<bool>> function = null;
+                                lock (TaskSchedulerLock)
+                                    function = Tasks.Dequeue();
+                                
                                 var task = Task<bool>.Run(function);
                                 task.Wait();
                             }
                             catch (Exception error)
                             {
+                            }
+                            lock (TaskSchedulerLock)
+                            {
+                                if(Tasks.Count==0)
+                                    TaskCompletionSource.SetResult(true);
+
                             }
                         }
                         else
@@ -74,7 +88,40 @@ namespace OOAdvantech
         /// <MetaDataID>{a01a0261-97b0-43a0-9891-ecccf13eaffb}</MetaDataID>
         public void AddTask(Func<Task<bool>> function)
         {
-            Tasks.Enqueue(function);
+            lock (TaskSchedulerLock)
+            {
+                if (TaskCompletionSource == null || TaskCompletionSource.Task.Status != TaskStatus.Running)
+                    TaskCompletionSource = new System.Threading.Tasks.TaskCompletionSource<bool>();
+                Tasks.Enqueue(function);
+            }
+
+        }
+
+        public bool Wait(TimeSpan timeout)
+        {
+            TaskCompletionSource<bool> taskCompletionSource = null;
+
+            lock (TaskSchedulerLock)
+                taskCompletionSource = TaskCompletionSource;
+
+            if (taskCompletionSource != null)
+               return  taskCompletionSource.Task.Wait(timeout);
+
+            return true;
+
+        }
+        public void Wait()
+        {
+            TaskCompletionSource<bool> taskCompletionSource = null;
+
+            lock (TaskSchedulerLock)
+                taskCompletionSource = TaskCompletionSource;
+
+            if (taskCompletionSource != null)
+                taskCompletionSource.Task.Wait();
+
+            return;
+
         }
     }
 }
