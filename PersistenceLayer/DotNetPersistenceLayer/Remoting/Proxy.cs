@@ -618,7 +618,7 @@ namespace OOAdvantech.Remoting
             }
             else if (methodBase.Name.IndexOf("add_") == 0)
             {
-                System.Reflection.EventInfo eventInfo = methodBase.DeclaringType.GetEvent(methodBase.Name.Substring("Add_".Length));
+                EventInfo eventInfo = methodBase.DeclaringType.GetEvent(methodBase.Name.Substring("Add_".Length));
                 if (eventInfo != null && eventInfo.GetAddMethod() == methodBase)
                 {
                     EventConsumingResolver.EventConsumerSubscription((msg as IMethodCallMessage).Args[0] as System.Delegate, eventInfo);
@@ -628,7 +628,7 @@ namespace OOAdvantech.Remoting
             }
             else if (methodBase.Name.IndexOf("remove_") == 0)
             {
-                System.Reflection.EventInfo eventInfo = methodBase.DeclaringType.GetEvent(methodBase.Name.Substring("remove_".Length));
+                EventInfo eventInfo = methodBase.DeclaringType.GetEvent(methodBase.Name.Substring("remove_".Length));
                 if (eventInfo != null && eventInfo.GetRemoveMethod() == methodBase)
                 {
                     EventConsumingResolver.EventConsumerUnsubscribe((msg as IMethodCallMessage).Args[0] as System.Delegate, eventInfo);

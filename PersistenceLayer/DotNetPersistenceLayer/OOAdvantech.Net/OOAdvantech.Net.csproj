@@ -52,6 +52,9 @@
     <None Include="..\OOAdvantech\CultureContext.cs">
       <Link>CultureContext.cs</Link>
     </None>
+    <Compile Include="..\..\Xamarin\OOAdvantech.NetStandard\IDevicePermissions.cs">
+      <Link>IDevicePermissions.cs</Link>
+    </Compile>
     <Compile Include="..\..\Xamarin\OOAdvantech\IDeviceOOAdvantechCore.cs">
       <Link>IDeviceOOAdvantechCore.cs</Link>
     </Compile>
