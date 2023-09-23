@@ -235,7 +235,7 @@ namespace OOAdvantech.Transactions
         }
 
         /// <MetaDataID>{A0BF0D7A-7C01-4F33-AD81-4B05E0F4E682}</MetaDataID>
-        private static void InformEventLog(System.Exception Error)
+        internal static void InformEventLog(System.Exception Error)
         {
 #if !DeviceDotNet
             if (!System.Diagnostics.EventLog.SourceExists("TransactionSystem", "."))

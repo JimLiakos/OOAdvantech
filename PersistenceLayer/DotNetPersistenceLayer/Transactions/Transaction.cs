@@ -174,7 +174,14 @@ namespace OOAdvantech.Transactions
                 handler = (Transaction transaction) =>
                 {
                     transaction.TransactionCompleted -= handler;
-                    action();
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception error)
+                    {
+                        TransactionContext.InformEventLog(error);
+                    }
                 };
 
                 Current.TransactionCompleted += handler;
