@@ -68,6 +68,10 @@
     <Compile Include="TextToSpeechImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OOAdvantechFacade\OOAdvantechFacade -VS10.csproj">
+      <Project>{09083B37-96EF-4867-AA51-4D698AD34344}</Project>
+      <Name>OOAdvantechFacade -VS10</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOAdvantech\OOAdvantech - VS10.csproj">
       <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
       <Name>OOAdvantech - VS10</Name>
