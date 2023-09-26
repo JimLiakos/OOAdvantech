@@ -149,7 +149,7 @@ namespace OOAdvantech.Authentication.Droid
             catch (FirebaseAuthException error)
             {
 
-                throw new OOAdvantech.Remoting.RestApi.ServerException(error.Message,error.ErrorCode);
+                throw new OOAdvantech.Remoting.RestApi.ServerException(error.Message, error.ErrorCode);
             }
 
         }
@@ -375,7 +375,7 @@ namespace OOAdvantech.Authentication.Droid
 
             if (FirebaseAuth != null && FirebaseAuth.CurrentUser != null)
             {
-                
+
                 if (OOAdvantech.Remoting.RestApi.DeviceAuthentication.AuthUser.Firebase_Sign_in_Provider.ToLower() == "google.com")
                     GoogleSignOut();
                 else
