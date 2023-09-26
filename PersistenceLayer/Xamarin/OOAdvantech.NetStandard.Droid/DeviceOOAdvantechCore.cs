@@ -109,10 +109,10 @@ namespace OOAdvantech.Droid
         static bool _IsinSleepMode;
         public bool IsinSleepMode { get => _IsinSleepMode; set => _IsinSleepMode = value; }
 
-        public static void InitFirebase(Context context, string firebaseToken, string googleAuthWebClientID)
+        public static void InitFirebase(Context context, string firebaseToken, string googleAuthWebClientID, List<Authentication.SignInProvider> providers=null)
         {
             _FirebaseToken = firebaseToken;
-            Authentication.Droid.FirebaseAuthentication.Init(context, googleAuthWebClientID);
+            Authentication.Droid.FirebaseAuthentication.Init(context, googleAuthWebClientID, providers);
         }
 
   

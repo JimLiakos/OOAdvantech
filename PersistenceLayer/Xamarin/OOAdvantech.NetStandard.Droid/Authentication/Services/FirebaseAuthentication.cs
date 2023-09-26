@@ -149,7 +149,7 @@ namespace OOAdvantech.Authentication.Droid
             catch (FirebaseAuthException error)
             {
 
-                throw new OOAdvantech.Remoting.RestApi.ServerException(error.Message,error.ErrorCode);
+                throw new OOAdvantech.Remoting.RestApi.ServerException(error.Message, error.ErrorCode);
             }
 
         }
@@ -375,7 +375,7 @@ namespace OOAdvantech.Authentication.Droid
 
             if (FirebaseAuth != null && FirebaseAuth.CurrentUser != null)
             {
-                
+
                 if (OOAdvantech.Remoting.RestApi.DeviceAuthentication.AuthUser.Firebase_Sign_in_Provider.ToLower() == "google.com")
                     GoogleSignOut();
                 else
@@ -387,9 +387,15 @@ namespace OOAdvantech.Authentication.Droid
             }
         }
 
-        public static void Init(Context context, string googleAuthWebClientID)
+        static internal System.Collections.Generic.List<SignInProvider> Providers= new System.Collections.Generic.List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter, SignInProvider.Email
+    };
+
+        public static void Init(Context context, string googleAuthWebClientID, System.Collections.Generic.List<SignInProvider> providers)
         {
-            
+            if (providers!=null)
+                Providers=providers;
+
+
             FacebookLoginService.Init(FirebaseAuthEventsConsumer);
             if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
             {
