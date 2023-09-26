@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using AudioToolbox;
+using OOAdvantech.Authentication;
 
 namespace OOAdvantech.iOS
 {
@@ -191,12 +192,12 @@ namespace OOAdvantech.iOS
             SystemSound systemSound = new SystemSound(1320);
             systemSound.PlayAlertSound();
         }
-        public static void InitFirebase(string firebaseToken, string googleAuthWebClientID)
+        public static void InitFirebase(string firebaseToken, string googleAuthWebClientID, List<SignInProvider> providers=null)
         {
             bool tokenChange = _FirebaseToken != null;
             _FirebaseToken = firebaseToken;
             if(!tokenChange)
-                Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID);
+                Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID, providers);
         }
 
         //Task<string> IDeviceOOAdvantechCore.EmailSignUp(string email, string password)

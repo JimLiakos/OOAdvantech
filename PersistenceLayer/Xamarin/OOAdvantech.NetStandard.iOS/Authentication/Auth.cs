@@ -191,7 +191,7 @@ namespace OOAdvantech.Authentication.iOS
             }
         }
 
-        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Apple, SignInProvider.Facebook, SignInProvider.Google, SignInProvider.Twitter };
+        public List<SignInProvider> Providers { get => FirebaseAuthentication.Providers; } //= new List<SignInProvider>() { SignInProvider.NativeUser, SignInProvider.Apple, SignInProvider.Facebook, SignInProvider.Google, SignInProvider.Twitter };
 
         event AuthStateChangeHandler _AuthStateChange;
 

@@ -386,10 +386,11 @@ namespace OOAdvantech.Authentication.Droid
                     FirebaseAuth.SignOut();
             }
         }
-
-        public static void Init(Context context, string googleAuthWebClientID)
+        static internal System.Collections.Generic.List<SignInProvider> Providers = new System.Collections.Generic.List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter, SignInProvider.Email };
+        public static void Init(Context context, string googleAuthWebClientID, System.Collections.Generic.List<SignInProvider> providers)
         {
-            
+            if(providers!=null)
+                Providers = providers;
             FacebookLoginService.Init(FirebaseAuthEventsConsumer);
             if (!string.IsNullOrWhiteSpace(FacebookLoginService.CurrentFacebookLoginService.AccessToken))
             {

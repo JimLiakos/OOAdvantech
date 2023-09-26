@@ -311,10 +311,13 @@ namespace OOAdvantech.Authentication.iOS
         {
 
         }
-        public static void Init(string googleAuthWebClientID)
+        static internal System.Collections.Generic.List<SignInProvider> Providers = new System.Collections.Generic.List<SignInProvider>() {  SignInProvider.Apple, SignInProvider.Facebook, SignInProvider.Google, SignInProvider.Twitter };
+        public static void Init(string googleAuthWebClientID, System.Collections.Generic.List<SignInProvider> providers)
         {
+            if (providers != null)
+                Providers = providers;
 
-            #region Google provider initialze
+            #region Google provider initialize
 
             if (SignIn.SharedInstance != null)
             {

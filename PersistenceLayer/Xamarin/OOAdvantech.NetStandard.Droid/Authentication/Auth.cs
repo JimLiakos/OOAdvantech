@@ -76,7 +76,7 @@ namespace OOAdvantech.Authentication.Droid
         }
 
 
-        public List<SignInProvider> Providers { get; } = new List<SignInProvider>() { SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter, SignInProvider.Email };
+        public List<SignInProvider> Providers { get => FirebaseAuthentication.Providers; } //   } = new List<SignInProvider>() { SignInProvider.NativeUser, SignInProvider.Google, SignInProvider.Facebook, SignInProvider.Twitter, SignInProvider.Email };
 
         public Task<string> EmailSignIn(string email, string password)
         {
