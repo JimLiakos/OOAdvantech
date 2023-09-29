@@ -9,6 +9,7 @@ namespace OOAdvantech.Remoting
     using System.Reflection;
     using Json;
     using OOAdvantech.Json;
+    using OOAdvantech.Collections.Generic;
 
     /// <MetaDataID>{30FE77F8-D725-4C93-9912-2301D9D22462}</MetaDataID>
     /// <summary>Proxy class is an extension of real proxy. It has the advantage of reconnect with remote object. Client and server machine maybe loose the connection if lease time expired then the server object disconnected from network. If the client and server machine regain the connection the proxy class try to reconnect with remote object, and reconnect with the object if isn't collected from GC. If remote object is persistent then the proxy will reconnect and in case where the object collected. The persistency system will build the object from the storage instance. </summary>
@@ -904,7 +905,7 @@ namespace OOAdvantech.Remoting
 
         public void InvalidateCachedData()
         {
-            
+
         }
     }
 
@@ -934,7 +935,7 @@ namespace OOAdvantech.Remoting
             RemotingServices = remotingServices;
         }
         /// <MetaDataID>{96e428c2-cfd9-4a31-84ac-16e3b52804b9}</MetaDataID>
-      internal  System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming> EventsInvocationLists = null;
+        internal System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming> EventsInvocationLists = null;
 
         /// <MetaDataID>{def51759-90a7-4b0a-92bc-a3c02395f933}</MetaDataID>
         public void PublishEvent(System.Reflection.EventInfo eventInfo, System.Collections.Generic.List<object> args)
@@ -949,7 +950,7 @@ namespace OOAdvantech.Remoting
                         //for(int i=0;i<argsTypes.Length;i++)
                         //{
                         //    if(argsTypes[i].IsValueType)
-                                
+
                         //}
 
 
@@ -977,7 +978,16 @@ namespace OOAdvantech.Remoting
                     {
                         EventsInvocationLists[eventInfo].EventConsumers.Remove(eventHandler);
                         if (EventsInvocationLists[eventInfo].EventConsumers.Count == 0)
+                        {
                             sessionUnsubscribe = true;
+
+                            if (EventsInvocationLists.SelectMany(x => x.Value.EventConsumers).Count() == 0)
+                            {
+                                if (ActiveEventConsumingResolvers.Contains(this))
+                                    ActiveEventConsumingResolvers.Remove(this); //gc can collect and finalize EventConsumingResolver and Proxy
+                            }
+
+                        }
 
                         break;
 
@@ -1015,6 +1025,10 @@ namespace OOAdvantech.Remoting
                 }
             }
         }
+        /// <summary>
+        /// Keeps EventConsumingResolver and Proxy live, protects them from gc
+        /// </summary>
+        static List<EventConsumingResolver> ActiveEventConsumingResolvers = new List<EventConsumingResolver>();
         /// <MetaDataID>{e3a189c2-ec37-4b1e-aff3-a8f3dcbe1b3d}</MetaDataID>
         internal void EventConsumerSubscription(Delegate eventHandler, System.Reflection.EventInfo eventInfo, out bool proceedToSessionSubscription, out bool allowAsynchronous)
         {
@@ -1027,6 +1041,7 @@ namespace OOAdvantech.Remoting
                     EventsInvocationLists = new System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming>();
                 if (!EventsInvocationLists.ContainsKey(eventInfo) || EventsInvocationLists[eventInfo].EventConsumers.Count == 0)
                 {
+
                     if (!EventsInvocationLists.ContainsKey(eventInfo))
                         EventsInvocationLists[eventInfo] = new EventConsuming();
                     proceedToSessionSubscription = true;
@@ -1055,8 +1070,12 @@ namespace OOAdvantech.Remoting
                             EventsInvocationLists[eventInfo].AllAsynchronousCounsumers = false;
                             allowAsynchronous = false;
                         }
-                } 
+                }
             }
+
+
+            if (EventsInvocationLists[eventInfo].EventConsumers.Count == 0 && !ActiveEventConsumingResolvers.Contains(this))
+                ActiveEventConsumingResolvers.Add(this); // Keeps EventConsumingResolver and Proxy live, protects them from gc 
 
             EventsInvocationLists[eventInfo].EventConsumers.Add(eventHandler);
         }
@@ -1069,7 +1088,7 @@ namespace OOAdvantech.Remoting
     public class ExtObjectUri
     {
 
-     
+
         /// <MetaDataID>{46f11066-6e7c-4432-95d6-92440ceb411f}</MetaDataID>
         public ExtObjectUri(string transientUri, string persistentUri, string monoStateTypeFullName, string monoStateClassChannelUri, Guid sessionIDentity)
         {

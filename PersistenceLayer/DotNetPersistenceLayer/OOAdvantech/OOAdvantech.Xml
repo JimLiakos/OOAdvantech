@@ -5920,6 +5920,11 @@
         <member name="M:OOAdvantech.Remoting.EventConsumingResolver.EventConsumerSubscription(System.Delegate,System.Reflection.EventInfo)">
             <MetaDataID>{228c8e61-405d-4204-8cba-25dfbe1756b4}</MetaDataID>
         </member>
+        <member name="F:OOAdvantech.Remoting.EventConsumingResolver.ActiveEventConsumingResolvers">
+            <summary>
+            Keeps EventConsumingResolver and Proxy live, protects them from gc
+            </summary>
+        </member>
         <member name="M:OOAdvantech.Remoting.EventConsumingResolver.EventConsumerSubscription(System.Delegate,System.Reflection.EventInfo,System.Boolean@,System.Boolean@)">
             <MetaDataID>{e3a189c2-ec37-4b1e-aff3-a8f3dcbe1b3d}</MetaDataID>
         </member>
