@@ -259,6 +259,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         break;
                     }
                 }
+
+
+                if (attributeValue.Attribute.FullName == "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
+                {
+                    if (!attributeValue.IsMultilingual)
+                    {
+
+                    }
+                }
+
+
                 dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
 
                 object value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
@@ -462,6 +473,13 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     {
                         column = attributeColumn;
                         break;
+                    }
+                }
+                if(attributeValue.Attribute.FullName== "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
+                {
+                    if(!attributeValue.IsMultilingual)
+                    {
+
                     }
                 }
                 MetaDataRepository.ObjectQueryLanguage.IDataRow dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
