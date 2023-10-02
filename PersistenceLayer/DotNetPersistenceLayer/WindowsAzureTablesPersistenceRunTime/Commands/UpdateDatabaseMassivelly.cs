@@ -264,9 +264,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 if (attributeValue.Attribute.FullName == "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
                 {
                     if (!attributeValue.IsMultilingual)
-                    {
-
-                    }
+                        System.Diagnostics.Debug.Assert(false, "Multilingual FontUri field error");
                 }
 
 
@@ -475,12 +473,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         break;
                     }
                 }
-                if(attributeValue.Attribute.FullName== "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
+                if (attributeValue.Attribute.FullName== "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
                 {
-                    if(!attributeValue.IsMultilingual)
-                    {
+                    if (!attributeValue.IsMultilingual)
+                        System.Diagnostics.Debug.Assert(false, "Multilingual FontUri field error");
 
-                    }
                 }
                 MetaDataRepository.ObjectQueryLanguage.IDataRow dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
                 object value = null;
