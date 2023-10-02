@@ -34,9 +34,14 @@ namespace OOAdvantech
 
         object TaskSchedulerLock=new object();
 
+
+     
+        
+
         /// <MetaDataID>{7582855a-67f6-414d-b930-e6e5d47a3198}</MetaDataID>
         public void RunAsync()
         {
+
             if (SerializeTaskActive)
                 return;
             Task.Run(() =>
