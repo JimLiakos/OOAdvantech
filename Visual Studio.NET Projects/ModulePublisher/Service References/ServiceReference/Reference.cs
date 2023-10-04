@@ -8,45 +8,58 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ModulePublisher.ServiceReference {
-    
-    
+namespace ModulePublisher.ServiceReference
+{
+
+
+    /// <MetaDataID>{44eee45a-11ad-4927-a381-550da4152871}</MetaDataID>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IModulePublisher")]
-    public interface IModulePublisher {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IModulePublisher/ExecudeModulePublishCommand", ReplyAction="http://tempuri.org/IModulePublisher/ExecudeModulePublishCommandResponse")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "ServiceReference.IModulePublisher")]
+    public interface IModulePublisher
+    {
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IModulePublisher/ExecudeModulePublishCommand", ReplyAction = "http://tempuri.org/IModulePublisher/ExecudeModulePublishCommandResponse")]
         int ExecudeModulePublishCommand(string fileName, string arguments);
     }
-    
+
+    /// <MetaDataID>{b16e78fc-3b90-411e-b0df-888d7b53dd35}</MetaDataID>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IModulePublisherChannel : ModulePublisher.ServiceReference.IModulePublisher, System.ServiceModel.IClientChannel {
+    public interface IModulePublisherChannel : ModulePublisher.ServiceReference.IModulePublisher, System.ServiceModel.IClientChannel
+    {
     }
-    
+
+    /// <MetaDataID>{dce5f863-c457-48bf-b4a9-f8ac3645544d}</MetaDataID>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ModulePublisherClient : System.ServiceModel.ClientBase<ModulePublisher.ServiceReference.IModulePublisher>, ModulePublisher.ServiceReference.IModulePublisher {
-        
-        public ModulePublisherClient() {
+    public partial class ModulePublisherClient : System.ServiceModel.ClientBase<ModulePublisher.ServiceReference.IModulePublisher>, ModulePublisher.ServiceReference.IModulePublisher
+    {
+
+        public ModulePublisherClient()
+        {
         }
-        
-        public ModulePublisherClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+
+        public ModulePublisherClient(string endpointConfigurationName) :
+                base(endpointConfigurationName)
+        {
         }
-        
-        public ModulePublisherClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+
+        public ModulePublisherClient(string endpointConfigurationName, string remoteAddress) :
+                base(endpointConfigurationName, remoteAddress)
+        {
         }
-        
-        public ModulePublisherClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+
+        public ModulePublisherClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
+                base(endpointConfigurationName, remoteAddress)
+        {
         }
-        
-        public ModulePublisherClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+
+        public ModulePublisherClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
+                base(binding, remoteAddress)
+        {
         }
-        
-        public int ExecudeModulePublishCommand(string fileName, string arguments) {
+
+        public int ExecudeModulePublishCommand(string fileName, string arguments)
+        {
             return base.Channel.ExecudeModulePublishCommand(fileName, arguments);
         }
     }

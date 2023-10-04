@@ -290,6 +290,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         if (((DateTime)dataRow[column.DataBaseColumnName]).ToUniversalTime() != ((DateTime)attributeValue.Value).ToUniversalTime())
                             dataRow[column.DataBaseColumnName] = ((DateTime)attributeValue.Value).ToUniversalTime();
                     }
+                    if (value is string && (value as string) == "System.Collections.Hashtable")
+                        System.Diagnostics.Debug.Assert(false, "Multilingual field error");
+
 
                 }
 
@@ -487,6 +490,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                     value = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
                 if (value != null)
                 {
+                    if(value is string&&(value as string)== "System.Collections.Hashtable")
+                        System.Diagnostics.Debug.Assert(false, "Multilingual field error");
 
                     dataRow[column.DataBaseColumnName] = value;
                     if (attributeValue.Value is DateTime)

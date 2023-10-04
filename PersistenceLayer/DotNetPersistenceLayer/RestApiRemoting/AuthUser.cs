@@ -219,6 +219,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        /// <MetaDataID>{af714dd6-3278-4a2c-8b4a-c0a7d0134ecf}</MetaDataID>
         static SecurityKey CreateSecurityKeyFromPublicKey(string data)
         {
             return new X509SecurityKey(new X509Certificate2(Encoding.UTF8.GetBytes(data)));
@@ -238,6 +239,7 @@ namespace OOAdvantech.Remoting.RestApi
         private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
 #if !DeviceDotNet
+        /// <MetaDataID>{a83e82f9-70e5-4e68-b3e0-2795d447f9d3}</MetaDataID>
         public static AuthUser GetAuthUserFromToken(string authToken)
         {
             AuthUser authUser;
