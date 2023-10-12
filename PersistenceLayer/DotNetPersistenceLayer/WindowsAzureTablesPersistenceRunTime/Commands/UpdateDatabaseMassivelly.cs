@@ -393,7 +393,23 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                         }
                     }
                     if (attributeValue.Value != null)
-                        StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table][column.DataBaseColumnName] = attributeValue.Value;
+                    {
+                        object attrValue = null;
+                        var dataRow = StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table];
+                        if (attributeValue.IsMultilingual && attributeValue.Value != null)
+                            attrValue = OOAdvantech.Json.JsonConvert.SerializeObject(attributeValue.Value);
+                        else
+                            attrValue = typeDictionary.Convert(attributeValue.Value, dataRow.Table.Columns[column.DataBaseColumnName].DataType);
+
+
+                        if (attrValue is string && (attrValue as string) == "System.Collections.Hashtable")
+                            System.Diagnostics.Debug.Assert(false, "Multilingual field error");
+
+                        if (attrValue is System.Collections.Hashtable )
+                            System.Diagnostics.Debug.Assert(false, "Multilingual field error");
+
+                        StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table][column.DataBaseColumnName] = attrValue;
+                    }
                     else
                         StorageInstanceRefsRows[storageInstance][column.Namespace as RDBMSMetaDataRepository.Table][column.DataBaseColumnName] = System.DBNull.Value;
 
