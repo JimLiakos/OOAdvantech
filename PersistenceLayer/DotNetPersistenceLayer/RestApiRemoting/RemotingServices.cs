@@ -558,6 +558,8 @@ namespace OOAdvantech.Remoting.RestApi
                     remoteRef = returnValue as ObjRef;
                 else
                 {
+                    if (returnValue is IRemotingServer)
+                        return returnValue;
                     SerializedData serData = OOAdvantech.Json.JsonConvert.DeserializeObject<SerializedData>(returnMessage.ReturnObjectJson);
                     remoteRef = serData.Ref;// Newtonsoft.Json.JsonConvert.DeserializeObject<SerializedData>(returnMessage.ReturnObjectJson);
                 }

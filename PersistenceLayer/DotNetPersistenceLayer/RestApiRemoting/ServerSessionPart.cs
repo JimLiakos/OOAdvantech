@@ -482,7 +482,7 @@ namespace OOAdvantech.Remoting.RestApi
                         IChannel channel = null;
                         Channels.TryGetValue(physicalConnectionID, out channel);
 
-                        if (!(channel is WebSocketChannel) || channel.EndPoint== endPoint)
+                        if (!(channel is WebSocketChannel) || channel.EndPoint == endPoint)
                         {
                             channel = new WebSocketChannel(endPoint);
                             Channels[physicalConnectionID] = channel;
@@ -1203,7 +1203,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             Dictionary<string, System.WeakReference> proxies = null;
             lock (Proxies)
-                proxies=Proxies.ToDictionary(x => x.Key, x => x.Value);
+                proxies = Proxies.ToDictionary(x => x.Key, x => x.Value);
             foreach (System.WeakReference weakReference in proxies.Values)
             {
                 try
@@ -1246,6 +1246,23 @@ namespace OOAdvantech.Remoting.RestApi
                 return Bidirectional;
             }
         }
+        public object TryGetLocalObject(ObjRef objRef)
+        {
+
+            if (!string.IsNullOrWhiteSpace(IsolatedContext.CurrentContextID) && objRef?.InternalChannelUri == IsolatedContext.CurrentContextID)
+            {
+                var extObjectUri = ExtObjectUri.Parse(objRef.Uri, ServerSessionPart.ServerProcessIdentity);
+                ServerSessionPart serverSessionPart = global::OOAdvantech.Remoting.RestApi.ServerSessionPart.GetServerSessionPart(ClientProcessIdentity, ChannelUri);
+                if (serverSessionPart != null)
+                {
+                    var value = serverSessionPart.GetObjectFromUri(extObjectUri);
+                    return value;
+                }
+            }
+            return null;
+
+        }
+
 
         /// <MetaDataID>{411c8855-04b2-4331-b801-b03ba8246b02}</MetaDataID>
         bool Bidirectional;

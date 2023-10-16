@@ -96,6 +96,7 @@ namespace DeviceUtilities.NetStandard
     public class ScanCode
     {
 
+        /// <MetaDataID>{acf45ed3-0a82-44b2-8a79-37c323a2290c}</MetaDataID>
         public ScanCode()
         {
             ScanPage.OnScan += async (result) =>
@@ -130,9 +131,13 @@ namespace DeviceUtilities.NetStandard
                     ConnectToServicePointTask.SetResult(null);
             };
         }
+        /// <MetaDataID>{48fd0ee3-3425-43a2-9089-f8b1dff67786}</MetaDataID>
         ScanPage ScanPage = new ScanPage();
+        /// <MetaDataID>{7d21c2b2-2a87-4746-b6a4-51329478c307}</MetaDataID>
         TaskCompletionSource<ZXing.Result> ConnectToServicePointTask;
+        /// <MetaDataID>{2fc3761f-3d5e-488f-9a73-51765746965f}</MetaDataID>
         bool OnScan = false;
+        /// <MetaDataID>{28d86519-8c24-4502-afb4-f851ff15a209}</MetaDataID>
         public Task<ZXing.Result> Scan(string headerText, string footerText, bool? useFrontCameraIfAvailable = null)
         {
             if (!(Xamarin.Forms.Application.Current.MainPage is NavigationPage))

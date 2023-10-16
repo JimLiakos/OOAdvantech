@@ -5246,6 +5246,20 @@
 	    quid       	"5E2FD02100FD"
 	    exportControl 	"Public"
 	    logical_models 	(list unit_reference_list)
+	    logical_presentations 	(list unit_reference_list))
+	(object Class_Category "Authentication"
+	    attributes 	(list Attribute_Set
+		(object Attribute
+		    tool       	"MetaData"
+		    name       	"MetaObjectID"
+		    value      	"OOAdvantech.Authentication")
+		(object Attribute
+		    tool       	"C#"
+		    name       	"FullName"
+		    value      	"OOAdvantech.Authentication"))
+	    quid       	"652A958F0164"
+	    exportControl 	"Public"
+	    logical_models 	(list unit_reference_list)
 	    logical_presentations 	(list unit_reference_list)))
     logical_presentations 	(list unit_reference_list
 	(object ClassDiagram "PersistenceService"

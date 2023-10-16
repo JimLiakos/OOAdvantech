@@ -546,6 +546,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <MetaDataID>{c5ad1a13-ad53-46c0-8dbd-119e573ca91a}</MetaDataID>
         private object GetTrasparentProxy(ObjRef objRef, Type type)
         {
+
             object value;
             string sessionChannelUri = null;
             if (ServerSessionPart != null)
@@ -565,6 +566,18 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 lock (clientSessionPart)
                 {
 
+                    if (!string.IsNullOrWhiteSpace(IsolatedContext.CurrentContextID) && objRef?.InternalChannelUri == IsolatedContext.CurrentContextID)
+                    {
+                        ServerSessionPart serverSessionPart = ServerSessionPart.GetServerSessionPart(clientSessionPart.ClientProcessIdentity, clientSessionPart.ChannelUri);
+                        if (serverSessionPart!=null)
+                        {
+                            var extObjectUri = ExtObjectUri.Parse(objRef.Uri, ServerSessionPart.ServerProcessIdentity);
+                            value = serverSessionPart.GetObjectFromUri(extObjectUri);
+                        }
+                    }
+                    value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
+                    if (value != null)
+                        return value;
                     OOAdvantech.Remoting.RestApi.Proxy proxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri) as Proxy;
                     if (proxy == null)
                     {
@@ -960,8 +973,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
                         {
                             httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
-                            if (ServerSessionPart != null && httpProxyType != null)
-                                ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
+                            //if (ServerSessionPart != null && httpProxyType != null)
+                            //    ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
 
                             var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
 
@@ -982,8 +995,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
                         {
                             httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
-                            if (ServerSessionPart != null && httpProxyType != null)
-                                ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
+                            //if (ServerSessionPart != null && httpProxyType != null)
+                            //    ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
                             var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
 
 
@@ -1416,14 +1429,14 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             TransparentProxy = transparentProxy;
             var proxy = (transparentProxy as ITransparentProxy).GetProxy();
 
-            if(!string.IsNullOrWhiteSpace( proxy?.ObjectUri?.PersistentUri))
+            if (!string.IsNullOrWhiteSpace(proxy?.ObjectUri?.PersistentUri))
             {
                 string uri = System.Runtime.Remoting.RemotingServices.Marshal(this as MarshalByRefObject).URI;
-                PersistentObjectsTransparentProxies[uri]=this;
+                PersistentObjectsTransparentProxies[uri] = this;
             }
         }
 
-       internal static Dictionary<string, TypeScriptProxy> PersistentObjectsTransparentProxies=new Dictionary<string, TypeScriptProxy>();
+        internal static Dictionary<string, TypeScriptProxy> PersistentObjectsTransparentProxies = new Dictionary<string, TypeScriptProxy>();
     }
 
 }
