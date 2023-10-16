@@ -535,7 +535,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 PersistenceLayer.IPersistencyService persistencyService = GetPersistencyServiceOnMachine(storageHostComputerName, instanceName);
                 if (Remoting.RemotingServices.IsOutOfProcess(persistencyService as MarshalByRefObject))
                 {
-                    persistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password,overrideObjectStorage);
+                    persistencyService.Restore(archive, storageName, storageLocation, storageType, InProcess, userName, password, overrideObjectStorage);
                     return;
                 }
 #endif
@@ -704,7 +704,12 @@ namespace OOAdvantech.PersistenceLayerRunTime
                             return objectStorage;
                     }
 
+                    System.DateTime start = System.DateTime.UtcNow;
+
                     PersistenceLayer.ObjectStorage OpenedStorageSession = storageProvider.OpenStorage(storageName, storageLocation, userName, password);
+                    
+                    System.Diagnostics.Debug.WriteLine($"#@% {System.DateTime.Now.ToLongTimeString()} Open  Storage : {storageName} in :   {(System.DateTime.UtcNow-start).TotalMilliseconds}");
+
                     MetaDataRepository.StorageMetaData storageMetaData = new MetaDataRepository.StorageMetaData()
                     {
                         StorageIdentity = OpenedStorageSession.StorageMetaData.StorageIdentity,
