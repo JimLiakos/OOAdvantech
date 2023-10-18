@@ -1100,7 +1100,7 @@ namespace OOAdvantech.Remoting.RestApi
                     var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity, endPoint);
                     var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
 #if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new List<string> { "serverSessionPartUri  : "+serverSessionPartUri });
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string> { "serverSessionPartUri  : " + serverSessionPartUri });
 #endif
                     if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
                     {
@@ -1178,7 +1178,7 @@ namespace OOAdvantech.Remoting.RestApi
                         else
                         {
 #if DeviceDotNet
-                            OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :"+ connectionError.Message, connectionError.StackTrace });
+                            OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :" + connectionError.Message, connectionError.StackTrace });
 #endif
                         }
                     }
@@ -1187,7 +1187,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
 
 #if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :"+ error.Message, error.StackTrace });
+                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :" + error.Message, error.StackTrace });
 #endif
                 }
                 tries--;
@@ -1248,17 +1248,20 @@ namespace OOAdvantech.Remoting.RestApi
         }
         public object TryGetLocalObject(ObjRef objRef)
         {
-
-            if (!string.IsNullOrWhiteSpace(IsolatedContext.CurrentContextID) && objRef?.InternalChannelUri == IsolatedContext.CurrentContextID)
+#if !DeviceDotNet
             {
-                var extObjectUri = ExtObjectUri.Parse(objRef.Uri, ServerSessionPart.ServerProcessIdentity);
-                ServerSessionPart serverSessionPart = global::OOAdvantech.Remoting.RestApi.ServerSessionPart.GetServerSessionPart(ClientProcessIdentity, ChannelUri);
-                if (serverSessionPart != null)
+                if (!string.IsNullOrWhiteSpace(IsolatedContext.CurrentContextID) && objRef?.InternalChannelUri == IsolatedContext.CurrentContextID)
                 {
-                    var value = serverSessionPart.GetObjectFromUri(extObjectUri);
-                    return value;
+                    var extObjectUri = ExtObjectUri.Parse(objRef.Uri, ServerSessionPart.ServerProcessIdentity);
+                    ServerSessionPart serverSessionPart = global::OOAdvantech.Remoting.RestApi.ServerSessionPart.GetServerSessionPart(ClientProcessIdentity, ChannelUri);
+                    if (serverSessionPart != null)
+                    {
+                        var value = serverSessionPart.GetObjectFromUri(extObjectUri);
+                        return value;
+                    }
                 }
             }
+#endif
             return null;
 
         }
