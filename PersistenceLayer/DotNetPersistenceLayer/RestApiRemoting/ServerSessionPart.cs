@@ -1248,6 +1248,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
         public object TryGetLocalObject(ObjRef objRef)
         {
+#if !DeviceDotNet
 
             if (!string.IsNullOrWhiteSpace(IsolatedContext.CurrentContextID) && objRef?.InternalChannelUri == IsolatedContext.CurrentContextID)
             {
@@ -1259,6 +1260,7 @@ namespace OOAdvantech.Remoting.RestApi
                     return value;
                 }
             }
+#endif
             return null;
 
         }

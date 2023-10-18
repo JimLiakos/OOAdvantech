@@ -566,15 +566,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 lock (clientSessionPart)
                 {
 
-                    if (!string.IsNullOrWhiteSpace(IsolatedContext.CurrentContextID) && objRef?.InternalChannelUri == IsolatedContext.CurrentContextID)
-                    {
-                        ServerSessionPart serverSessionPart = ServerSessionPart.GetServerSessionPart(clientSessionPart.ClientProcessIdentity, clientSessionPart.ChannelUri);
-                        if (serverSessionPart!=null)
-                        {
-                            var extObjectUri = ExtObjectUri.Parse(objRef.Uri, ServerSessionPart.ServerProcessIdentity);
-                            value = serverSessionPart.GetObjectFromUri(extObjectUri);
-                        }
-                    }
+               
                     value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
                     if (value != null)
                         return value;
