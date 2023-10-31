@@ -1055,10 +1055,12 @@ namespace OOAdvantech.Remoting
                                 allowAsynchronous = true;
                             else
                                 allowAsynchronous = false;
+                            
 
                         }
                         else
                             allowAsynchronous = false;
+                        EventsInvocationLists[eventInfo].AllAsynchronousCounsumers = allowAsynchronous;
                     }
                 }
                 else

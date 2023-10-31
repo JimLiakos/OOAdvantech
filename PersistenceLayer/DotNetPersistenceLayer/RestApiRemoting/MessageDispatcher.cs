@@ -61,6 +61,7 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.NamesTypesDictionary["Array"] = typeof(object[]);
             Serialization.SerializationBinder.NamesTypesDictionary["String"] = typeof(string);
             Serialization.SerializationBinder.NamesTypesDictionary["Number"] = typeof(double);
+            Serialization.SerializationBinder.NamesTypesDictionary["Boolean"] = typeof(bool);
             Serialization.SerializationBinder.NamesTypesDictionary["Array"] = typeof(List<>);
             Serialization.SerializationBinder.NamesTypesDictionary["Map"] = typeof(Dictionary<,>);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.MetaDataRepository.ProxyType"] = typeof(OOAdvantech.MetaDataRepository.ProxyType);

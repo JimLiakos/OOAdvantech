@@ -306,7 +306,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 #if DeviceDotNet
                             //Type objectDeclareType = serializer.SerializationBinder.BindToType(assemblyName, typeName);
                             if (specifiedType == null)// || (objectDeclareType != null && objectDeclareType != specifiedType)
+                            {
                                 specifiedType = serializer.SerializationBinder.BindToType(assemblyName, typeName);
+                                if(specifiedType==null)
+                                    System.Diagnostics.Debug.Assert(false, $"missing type : {typeFullName} ");
+                            }
 #else
                             if (specifiedType == null)// || (objectDeclareType != null && objectDeclareType != specifiedType))
                                 specifiedType = serializer.Binder.BindToType(assemblyName, typeName);
@@ -601,6 +605,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 string typeFullName = reader.ReadAsString();
                 reader.Read();
                 string type_id = reader.ReadAsString();
+              
                 serializer.ReferenceResolver.AddReference(serializer, type_id, typeFullName);
                 return typeFullName;
             }
@@ -610,6 +615,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 string typeFullName = serializer.ReferenceResolver.ResolveReference(serializer, type_id) as string;
                 if (typeFullName == null)
                 {
+                    typeFullName = serializer.ReferenceResolver.ResolveReference(serializer, type_id) as string;
                     throw new TypeMismatchException(string.Format("Invalid type_ref '{0}'  Check the types of JSON in client and servers side. must be exactly the same.", type_id));
                 }
                 return typeFullName;
