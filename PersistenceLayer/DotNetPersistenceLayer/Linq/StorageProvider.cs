@@ -349,6 +349,31 @@ namespace System.Linq
             return default(TSource);
         }
         /// <MetaDataID>{1a8bf461-2d73-4795-b7d7-25a65da1758b}</MetaDataID>
+        public static dynamic Fetching<TSource>(this TSource source, Expression<System.Func<TSource, dynamic>> expression) 
+        {
+            try
+            {
+                var linqObjectQuery = new OOAdvantech.Linq.LINQStorageObjectQuery(expression, default(OOAdvantech.PersistenceLayer.ObjectStorage));
+
+            }
+            catch (Exception error)
+            {
+
+                
+            }
+            return default(TSource);
+
+        }
+
+
+
+        public static TSource Caching<TSource>(this TSource source, Expression<System.Func<TSource, dynamic>> expression)
+        {
+
+            return default(TSource);
+        }
+
+
         public static TSource Fetching<TSource>(this IEnumerable<TSource> source, params object[] list)
         {
             return default(TSource);

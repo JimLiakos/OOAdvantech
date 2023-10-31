@@ -2142,6 +2142,7 @@ namespace OOAdvantech.Linq.Translators
     public enum ExpressionTreeNodeType
     {
         Select,
+        Caching,
         SelectMany,
         GroupBy,
         OrderBy,
@@ -4540,6 +4541,8 @@ namespace OOAdvantech.Linq.Translators
                 expresionTreeNode = CreateExpressionTreeNode(ExpressionTreeNodeType.OrderBy, methodCallExpression, parent, this);//  new SelectExpressionTreeNode(m, parent, LINQObjectQuery);
             else if (methodCallExpression.Method.Name == "Fetching")
                 expresionTreeNode = CreateExpressionTreeNode(ExpressionTreeNodeType.FetchingPlan, methodCallExpression, parent, this);//  new SelectExpressionTreeNode(m, parent, LINQObjectQuery);
+            else if (methodCallExpression.Method.Name == "Caching")
+                expresionTreeNode = CreateExpressionTreeNode(ExpressionTreeNodeType.Select, methodCallExpression, parent, this);//  new SelectExpressionTreeNode(m, parent, LINQObjectQuery);
             else if (methodCallExpression.Method.Name == "Refresh")
                 expresionTreeNode = CreateExpressionTreeNode(ExpressionTreeNodeType.RefreshPlan, methodCallExpression, parent, this);
             else if ((methodCallExpression.Method.Name == "OrderByDescending" || methodCallExpression.Method.Name == "ThenByDescending") && (methodCallExpression.Method.DeclaringType == typeof(System.Linq.Queryable) || methodCallExpression.Method.DeclaringType == typeof(System.Linq.Enumerable)))

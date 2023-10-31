@@ -413,7 +413,7 @@ namespace OOAdvantech.Linq.QueryExpressions
             }
         }
 
-        
+
         /// <summary>
         /// Creates the necessary data nodes to access data of parameter
         /// </summary>
@@ -430,7 +430,7 @@ namespace OOAdvantech.Linq.QueryExpressions
         internal override DataNode BuildDataNodeTree(DataNode dataNode, ILINQObjectQuery linqObjectQuery)
         {
             DataNode parameterDataNode = null;
-         
+
             #region Gets parameter source DataNode 
             ExpressionTreeNode parameterSource = ExpressionTranslator.ParameterDeclareExpression[Expression as ParameterExpression];
             if ((parameterSource as MethodCallAsCollectionProviderExpressionTreeNode).SourceCollectionParameter == Expression)
@@ -447,10 +447,23 @@ namespace OOAdvantech.Linq.QueryExpressions
 
             if (MemberAccess != null)
             {
+              
                 if (RootDynamicTypeDataRetrieve == null || (!RootDynamicTypeDataRetrieve.IsGrouping && RootDynamicTypeDataRetrieve.Properties == null))
                 {
+
+                    if (dataNode==null)
+                    {
+
+                        dataNode = new DataNode(linqObjectQuery as ObjectQuery);
+                        dataNode.Name = (this.Expression as ParameterExpression).Name;
+                        //dataNode.Alias = Alias;
+                        dataNode.AssignedMetaObject = OOAdvantech.DotNetMetaDataRepository.Type.GetClassifierObject(TypeHelper.GetElementType((Expression as ParameterExpression).Type));
+
+                    }
+
+
                     #region Normal type member access
-                    DataNode memberDataNode = MemberAccess.GetMemberDataNode(dataNode, linqObjectQuery );
+                    DataNode memberDataNode = MemberAccess.GetMemberDataNode(dataNode, linqObjectQuery);
                     DataNode = MemberAccess.BuildDataNodeTree(memberDataNode, null, linqObjectQuery);
                     #endregion
                 }
@@ -497,7 +510,7 @@ namespace OOAdvantech.Linq.QueryExpressions
                                                  where derivedDataNde.OrgDataNode == RootDynamicTypeDataRetrieve.GroupingMetaData.GroupDataNode.GroupedDataNode
                                                  select derivedDataNde).First();
 
-                            
+
                             if (RootDynamicTypeDataRetrieve.GroupingMetaData.GroupCollectionDynamicTypeDataRetrieve == null)
                             {
 
@@ -550,7 +563,7 @@ namespace OOAdvantech.Linq.QueryExpressions
             }
             else
                 DataNode = parameterDataNode;
-             
+
             if (!string.IsNullOrEmpty(Alias))
                 DataNode.Alias = Alias;
             return DataNode;
@@ -572,11 +585,11 @@ namespace OOAdvantech.Linq.QueryExpressions
                     if (parent == null)
                         break;
 
-                    if(parent.DynamicTypeDataRetrieve!=null&& parent.DynamicTypeDataRetrieve.Properties!=null)
+                    if (parent.DynamicTypeDataRetrieve!=null&& parent.DynamicTypeDataRetrieve.Properties!=null)
                     {
-                        var sourceProperty=(from property in parent.DynamicTypeDataRetrieve.Properties.Values
-                         where property.PropertyName == Name && property.Type == this.Type
-                         select property).FirstOrDefault();
+                        var sourceProperty = (from property in parent.DynamicTypeDataRetrieve.Properties.Values
+                                              where property.PropertyName == Name && property.Type == this.Type
+                                              select property).FirstOrDefault();
 
                         if (sourceProperty != null && sourceProperty.PropertyType != null)
                             return sourceProperty.PropertyType.CollectionProviderMethodExpression;
