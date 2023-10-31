@@ -272,6 +272,11 @@ namespace OOAdvantech.Linq
 
 
             Expression = exp;
+            if ((exp as MethodCallExpression)?.Method?.Name=="Caching")
+            {
+
+            }
+            
             ExpressionTranslator.ExpressionTreeNodes[Expression] = this;
             OriginDiscription = exp.ToString();
             Name = OriginDiscription;

@@ -26,7 +26,7 @@ namespace OOAdvantech.Linq.Translators
 {
     /// <MetaDataID>{74ac7caf-9776-4b10-a3c6-3c0b2f243c54}</MetaDataID>
     internal class QueryTranslator : ExpressionVisitor
-    { 
+    {
         /// <MetaDataID>{c0bf4ce6-6aef-4de2-b3a3-f3a3fe6d7938}</MetaDataID>
         internal protected override ExpressionTreeNode CreateExpressionTreeNode(ExpressionTreeNodeType expressionTreeNodeType, Expression exp, ExpressionTreeNode parent, Translators.ExpressionVisitor expressionTranslator)
         {
@@ -72,9 +72,9 @@ namespace OOAdvantech.Linq.Translators
 
                         //    QueryExpressions.SelectExpressionTreeNode newSelectExpressionTreeNode = new OOAdvantech.Linq.QueryExpressions.SelectExpressionTreeNode(derivedMemberSourceColection.Parent.Expression, null, expressionTranslator);
                         //    parent = new QueryExpressions.ParameterExpressionTreeNode(GetParameterTreeNode(memberAccessExpressionTreeNode).Expression, newSelectExpressionTreeNode, expressionTranslator);
-                            
+
                         //    ReplaceExpressionTreeNode(derivedMemberSourceColection.Parent, newSelectExpressionTreeNode);
-                            
+
                         //    //#########################
                         //    //newSelectExpressionTreeNode.Alias = derivedMemberSourceColection.Alias;
                         //    //#########################
@@ -91,15 +91,15 @@ namespace OOAdvantech.Linq.Translators
                         //    memberAccess.Parent.Nodes[0].Parent = memberAccess.Parent.Nodes[1];
                         //    memberAccess.Parent.Nodes.RemoveAt(0);
 
-                            
+
                         //    ReplaceExpressionTreeNode(sourceCollection, derivedMemberSourceColection);
 
-                            
+
 
                         //}
-                        return memberAccessExpressionTreeNode; 
+                        return memberAccessExpressionTreeNode;
 
-                        
+
                     }
                 case ExpressionTreeNodeType.Parameter:
                     {
@@ -123,11 +123,11 @@ namespace OOAdvantech.Linq.Translators
                     }
                 case ExpressionTreeNodeType.OrderBy:
                     {
-                        return new QueryExpressions.OrderByExpressionTreeNode(exp, parent, expressionTranslator,OrderByType.ASC);
+                        return new QueryExpressions.OrderByExpressionTreeNode(exp, parent, expressionTranslator, OrderByType.ASC);
                     }
                 case ExpressionTreeNodeType.OrderByDescending:
                     {
-                        return new QueryExpressions.OrderByExpressionTreeNode(exp, parent, expressionTranslator,OrderByType.DESC);
+                        return new QueryExpressions.OrderByExpressionTreeNode(exp, parent, expressionTranslator, OrderByType.DESC);
                     }
                 case ExpressionTreeNodeType.Where:
                     {
@@ -135,7 +135,7 @@ namespace OOAdvantech.Linq.Translators
                     }
                 case ExpressionTreeNodeType.NewExpression:
                     {
-                        if(parent is QueryExpressions.GroupByExpressionTreeNode)
+                        if (parent is QueryExpressions.GroupByExpressionTreeNode)
                             return new QueryExpressions.GroupKeyExpressionTreeNode(exp, parent, expressionTranslator);
                         else
                             return new QueryExpressions.NewExpressionTreeNode(exp, parent, expressionTranslator);
@@ -147,7 +147,7 @@ namespace OOAdvantech.Linq.Translators
                     }
                 case ExpressionTreeNodeType.ContainsAny:
                     {
-                        
+
                         return new QueryExpressions.ContainsAnyAllExpressionTreeNode(exp, parent, expressionTranslator);
 
                     }
@@ -167,7 +167,7 @@ namespace OOAdvantech.Linq.Translators
                     }
                 case ExpressionTreeNodeType.FetchingPlan:
                     {
-                        QueryExpressions.FetchingExpressionTreeNode  fetchingExpression=new QueryExpressions.FetchingExpressionTreeNode(exp, parent, expressionTranslator);
+                        QueryExpressions.FetchingExpressionTreeNode fetchingExpression = new QueryExpressions.FetchingExpressionTreeNode(exp, parent, expressionTranslator);
                         FetchingExpressions.Add(fetchingExpression);
                         return fetchingExpression;
                     }
@@ -193,7 +193,7 @@ namespace OOAdvantech.Linq.Translators
                     {
                         return new OOAdvantech.Linq.QueryExpressions.TypeAsExpressionTreeNode(exp, parent, expressionTranslator);
                     }
-                
+
                 default:
                     throw new System.NotSupportedException();
             }
@@ -254,7 +254,7 @@ namespace OOAdvantech.Linq.Translators
             //ExtendExpressionVisitor expressionVisitor = new ExtendExpressionVisitor();
 
             query = Visit(query);
-            Root =  new OOAdvantech.Linq.ExpressionTreeNode("Root",this);
+            Root =  new OOAdvantech.Linq.ExpressionTreeNode("Root", this);
             Root.Expression = query;
             Visit(query, ref Root);
             ExpressionTreeNode.lastExpressionTree = Root;
@@ -270,17 +270,17 @@ namespace OOAdvantech.Linq.Translators
 
 
             System.Collections.Generic.Dictionary<DataNode, DataNode> replacedDataNodes = new System.Collections.Generic.Dictionary<DataNode, DataNode>();
-            RemoveAllTemporaryNodes( dataNode.HeaderDataNode, replacedDataNodes);
+            RemoveAllTemporaryNodes(dataNode.HeaderDataNode, replacedDataNodes);
 
             Translators.QueryTranslator.ShowDataNodePathsInOutLog(dataNode);
 
-  
+
             if (dataNode.HeaderDataNode.Temporary && dataNode.HeaderDataNode.Name == "Root" && dataNode.HeaderDataNode.SubDataNodes.Count == 1)
             {
                 replacedDataNodes = new System.Collections.Generic.Dictionary<DataNode, DataNode>();
                 dataNode=dataNode.HeaderDataNode;//.SubDataNodes[0];
                 RemoveTemporaryNodes(ref dataNode, replacedDataNodes);
-                
+
                 dataNode.ParentDataNode = null;
             }
 
@@ -288,19 +288,19 @@ namespace OOAdvantech.Linq.Translators
             RootPaths.Add(dataNode);
 
 
-             LINQObjectQuery.  DataTrees.Add(dataNode);
-             if (LINQObjectQuery is ObjectsContextQuery)
-             {
-                 string errors = null;
-                 (LINQObjectQuery as ObjectsContextQuery).BuildDataNodeTree(ref errors);
-                 BuildSearchCondition();
-             }
-             if (LINQObjectQuery is QueryOnRootObject)
-             {
-                 string errors = null;
-                 (LINQObjectQuery as QueryOnRootObject).BuildDataNodeTree(ref errors);
-                 BuildSearchCondition();
-             }
+            LINQObjectQuery.DataTrees.Add(dataNode);
+            if (LINQObjectQuery is ObjectsContextQuery)
+            {
+                string errors = null;
+                (LINQObjectQuery as ObjectsContextQuery).BuildDataNodeTree(ref errors);
+                BuildSearchCondition();
+            }
+            if (LINQObjectQuery is QueryOnRootObject)
+            {
+                string errors = null;
+                (LINQObjectQuery as QueryOnRootObject).BuildDataNodeTree(ref errors);
+                BuildSearchCondition();
+            }
 
             foreach (DataNode rootDataNode in RootPaths)
                 rootDataNode.MergeSearchConditions();
@@ -322,10 +322,10 @@ namespace OOAdvantech.Linq.Translators
 
 
         /// <MetaDataID>{4b9c192b-ad37-4d48-bdd0-9f7569927b89}</MetaDataID>
-        internal void TranslateDerivedMember(Expression query,DataNode rrootDataNode,ExpressionTreeNode sourceCollectionExpression )
+        internal void TranslateDerivedMember(Expression query, DataNode rrootDataNode, ExpressionTreeNode sourceCollectionExpression)
         {
 
-            Root = new OOAdvantech.Linq.ExpressionTreeNode("Root",this);
+            Root = new OOAdvantech.Linq.ExpressionTreeNode("Root", this);
             Root.Expression = query;
             Visit(query, ref Root);
             ExpressionTreeNode.lastExpressionTree = Root;
@@ -375,7 +375,7 @@ namespace OOAdvantech.Linq.Translators
 
             foreach (DataNode rootDataNode in RootPaths)
                 rootDataNode.MergeSearchConditions();
-            
+
             (LINQObjectQuery as ILINQObjectQuery).QueryResult.ParticipateInQueryResults(null);
             foreach (var fetchingExpression in FetchingExpressions)
                 fetchingExpression.ParticipateInSelectList();
@@ -420,7 +420,7 @@ namespace OOAdvantech.Linq.Translators
             return;
             foreach (DataNode mdataNode in paths)
             {
-                string message = GetFullName( mdataNode)+ " " + mdataNode.Alias;
+                string message = GetFullName(mdataNode)+ " " + mdataNode.Alias;
                 if (mdataNode.ParticipateInWereClause)
                     message += " PW";
                 if (mdataNode.ParticipateInSelectClause)
@@ -537,7 +537,7 @@ namespace OOAdvantech.Linq.Translators
             }
             return null;
         }
-   
+
 
 
 
@@ -565,7 +565,7 @@ namespace OOAdvantech.Linq.Translators
         //{
         //  Visit(query);
 
-     
+
 
         //  return ConvertToExecutableQuery(query);
         //}
@@ -625,7 +625,7 @@ namespace OOAdvantech.Linq.Translators
                (u.Operand.NodeType == ExpressionType.MemberAccess && u.NodeType == ExpressionType.Not)||
                 (u.Operand.NodeType == ExpressionType.Call && u.NodeType == ExpressionType.Not)))
             {
-                parent = CreateExpressionTreeNode(ExpressionTreeNodeType.BinaryExpression,u , parent, this);
+                parent = CreateExpressionTreeNode(ExpressionTreeNodeType.BinaryExpression, u, parent, this);
                 (parent as QueryExpressions.BinaryExpressionTreeNode).NotExpression = true;
             }
             Expression unary = null;
@@ -676,14 +676,14 @@ namespace OOAdvantech.Linq.Translators
                 default:
                     break;
             }
-           
+
 
             return unary;
 
         }
 
         /// <MetaDataID>{62539c9b-d47c-40ea-8900-fd736ef68381}</MetaDataID>
-        protected override Expression VisitMethodCall(MethodCallExpression mc, ref  ExpressionTreeNode parent)
+        protected override Expression VisitMethodCall(MethodCallExpression mc, ref ExpressionTreeNode parent)
         {
             // System.Windows.Forms.MessageBox.Show(mc.Method.Name);
 
@@ -711,8 +711,8 @@ namespace OOAdvantech.Linq.Translators
                 //    if (orderLambda == null)
                 //        break;
 
-                    //VisitOrderBy(orderLambda, DataNode.OrderByType.ASC, ref parent);
-                    //break;
+                //VisitOrderBy(orderLambda, DataNode.OrderByType.ASC, ref parent);
+                //break;
                 //case "OrderByDescending":
                 //case "ThenByDescending":
                 //    Visit(mc.Arguments[0], ref parent);
@@ -740,6 +740,12 @@ namespace OOAdvantech.Linq.Translators
 
                     VisitTake(mc.Arguments[1], ref parent);
                     break;
+
+                //case "Caching":
+
+                //    VisitCaching(mc, ref parent);
+
+                //    break;
 
                 case "First":
                     Visit(mc.Arguments[0], ref parent);
@@ -774,14 +780,83 @@ namespace OOAdvantech.Linq.Translators
 
 
         /// <MetaDataID>{d10a5512-9f5b-4be9-86b0-8e7cf13a9f8c}</MetaDataID>
-        private void VisitOrderBy(LambdaExpression predicate, OrderByType direction, ref  ExpressionTreeNode parent)
+        private void VisitOrderBy(LambdaExpression predicate, OrderByType direction, ref ExpressionTreeNode parent)
         {
-            
+
         }
 
         /// <MetaDataID>{a555f732-263b-400e-9b90-221d115d3ec7}</MetaDataID>
-        private void VisitTake(Expression takeValue, ref  ExpressionTreeNode parent)
+        private void VisitTake(Expression takeValue, ref ExpressionTreeNode parent)
         {
+        }
+
+        private Expression VisitCaching(MethodCallExpression methodCallExpression, ref ExpressionTreeNode parent)
+        {
+
+            var expresionTreeNode = CreateExpressionTreeNode(ExpressionTreeNodeType.Select, methodCallExpression, parent, this);//  new SelectExpressionTreeNode(m, parent, LINQObjectQuery);
+            var tmpExpresionTreeNode = expresionTreeNode;
+            int i = 0;
+            foreach (Expression exp in methodCallExpression.Arguments)
+            {
+                if (i==0)
+                {
+                    ExpressionTreeNode root = null;
+
+
+                    Visit(exp, ref root);
+
+                    while (root.Parent!=null)
+                        root=parent;
+
+                    //if(root is OOAdvantech.Linq.QueryExpressions.ParameterExpressionTreeNode)
+                    //{
+                    //  var ss=new   OOAdvantech.Linq.QueryExpressions.ConstantExpressionTreeNode()
+                    //}
+
+                    i++;
+                }
+                else
+                    Visit(exp, ref expresionTreeNode);
+
+                //if (expresionTreeNode.ReplacingExpressionTreeNode != null)
+                //    expresionTreeNode = expresionTreeNode.ReplacingExpressionTreeNode;
+
+                if (methodCallExpression.Arguments.Count > i && ((methodCallExpression.Arguments[i] is UnaryExpression && (methodCallExpression.Arguments[i] as UnaryExpression).Operand is LambdaExpression) || methodCallExpression.Arguments[i] is LambdaExpression))
+                {
+                    if (expresionTreeNode.Nodes.Count > 0 &&
+                        (expresionTreeNode.Nodes[i - 1] is QueryExpressions.ParameterExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.SelectManyExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.SelectExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.GroupByExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.ConstantExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.OfTypeExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.TypeAsExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.PartitionExpressionTreeNode ||
+                        expresionTreeNode.Nodes[i - 1] is QueryExpressions.WhereExpressionTreeNode))
+                    {
+                        if (methodCallExpression.Arguments[i] is UnaryExpression)
+                        {
+                            if (((methodCallExpression.Arguments[i] as UnaryExpression).Operand as LambdaExpression).Parameters.Count > i - 1)
+                                expresionTreeNode.Nodes[i - 1].Alias = ((methodCallExpression.Arguments[i] as UnaryExpression).Operand as LambdaExpression).Parameters[i - 1].Name;
+                        }
+                        else
+                        {
+                            if ((methodCallExpression.Arguments[i] as LambdaExpression).Parameters.Count > i - 1)
+                                expresionTreeNode.Nodes[i - 1].Alias = (methodCallExpression.Arguments[i] as LambdaExpression).Parameters[i - 1].Name;
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+
+                tmpExpresionTreeNode = expresionTreeNode;
+
+            }
+
+
+
+            return methodCallExpression;
         }
 
 
@@ -843,12 +918,12 @@ namespace OOAdvantech.Linq.Translators
         /// <MetaDataID>{7746c2c3-4849-43be-b02d-dabae5190fdf}</MetaDataID>
         internal static void ShowDataNodePathsInOutLog(DataNode dataNode)
         {
-            
+
             System.Collections.Generic.List<DataNode> paths = new System.Collections.Generic.List<DataNode>();
             Translators.QueryTranslator.GetPaths(dataNode, ref paths);
             foreach (DataNode mdataNode in paths)
             {
-                string message =GetFullName( mdataNode);
+                string message = GetFullName(mdataNode);
                 foreach (string alias in mdataNode.Aliases)
                     message += " " + alias;
 
