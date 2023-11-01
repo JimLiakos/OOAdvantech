@@ -14,9 +14,47 @@ namespace OOAdvantech.Linq.QueryExpressions
         internal ObjectMethodCallExpressionTreeNode(Expression exp, ExpressionTreeNode parent, Translators.ExpressionVisitor expressionTranslator)
             : base(exp, parent, expressionTranslator)
         {
-            if (this.Expression.NodeType != ExpressionType.Call )
+            if (this.Expression.NodeType != ExpressionType.Call)
                 throw new System.Exception("Wrong expression type");
         }
+        internal override DataNode BuildDataNodeTree(DataNode dataNode, ILINQObjectQuery linqObjectQuery)
+        {
+            if (dataNode!=null)
+                return base.BuildDataNodeTree(dataNode, linqObjectQuery);
+            else
+            {
+
+                //ExpressionTreeNode expressionTreeNode = this;
+                //while(string.IsNullOrWhiteSpace(expressionTreeNode.Alias)&&expressionTreeNode.Parent!=null)
+                //    expressionTreeNode= expressionTreeNode.Parent; 
+
+                //Alias
+
+                Type declarationType = (this.Expression as MethodCallExpression).Method.DeclaringType;
+
+                Type returnType = TypeHelper.GetElementType(this.Expression.Type);
+
+                
+                dataNode = new DataNode(linqObjectQuery as ObjectQuery);
+                dataNode.Name = (this.Expression as MethodCallExpression).Method.Name;
+                //dataNode.Alias = Alias;
+                dataNode.AssignedMetaObject = OOAdvantech.DotNetMetaDataRepository.Type.GetClassifierObject(returnType);
+
+                DataNode rootDataNode= new DataNode(linqObjectQuery as ObjectQuery);
+                rootDataNode.AssignedMetaObject = OOAdvantech.DotNetMetaDataRepository.Type.GetClassifierObject(declarationType);
+                rootDataNode.Name = rootDataNode.Classifier.Name;
+                dataNode.ParentDataNode = rootDataNode;
+
+                DataNode =dataNode;
+                return dataNode;
+
+            }
+        }
+        //virtual DataNode BuildDataNodeTree(DataNode dataNode, ILINQObjectQuery linqObjectQuery)
+        //{
+        //    return dataNode;
+        //}
+
 
 
         /// <MetaDataID>{818320b5-e995-4060-b133-94b9f4fe7213}</MetaDataID>
@@ -54,7 +92,7 @@ namespace OOAdvantech.Linq.QueryExpressions
             }
         }
 
-       
+
 
     }
 }

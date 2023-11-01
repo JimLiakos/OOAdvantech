@@ -606,6 +606,11 @@ namespace OOAdvantech.Remoting.RestApi
                             objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);
 
 
+                        if(methodInfo.Name.IndexOf("MealCoursesInProgress")!=-1)
+                        {
+
+                        }
+
                         //if (proxyType != null&&proxyType.HasCachingClientSideProperties)
                         //{
                         //    Dictionary<string, object> newMembersValues = new Dictionary<string, object>();

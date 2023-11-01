@@ -289,6 +289,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (authUser == null)
                 authUser = DeviceAuthentication.AuthUser;
 
+
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
@@ -314,6 +315,11 @@ namespace OOAdvantech.Remoting.RestApi
                 }
             }
             #endregion
+
+            Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
+            if (cachingMetadata != null)
+                requestData.CachingMetadata=Json.JsonConvert.SerializeObject(cachingMetadata);
+
 
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
 
@@ -576,18 +582,16 @@ namespace OOAdvantech.Remoting.RestApi
             }
 
 
+
             AuthUser authUser = System.Runtime.Remoting.Messaging.CallContext.GetData("AutUser") as AuthUser;
             if (authUser == null)
                 authUser = DeviceAuthentication.AuthUser;
 
-            if ((msg as System.Runtime.Remoting.Messaging.IMethodMessage).MethodBase.Name == "get_GraphicMenus" && authUser == null)
-            {
 
-            }
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-        #region Gets authentication data
+            #region Gets authentication data
             if (authUser != null)
             {
                 if (authUser.AuthToken != clientSessionPart.X_Auth_Token)
@@ -607,7 +611,12 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-        #endregion
+            #endregion
+
+            Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
+            if (cachingMetadata != null)
+                requestData.CachingMetadata=Json.JsonConvert.SerializeObject(cachingMetadata);
+
 
             requestData.RequestType = RequestType.MethodCall;
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
@@ -660,12 +669,12 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     try
                     {
-                    OOAdvantech.Remoting.RestApi.RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
+                        OOAdvantech.Remoting.RestApi.RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
                     }
                     catch (Exception error)
                     {
                     }
-                    
+
                 }
                 return message;
             }

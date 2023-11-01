@@ -1139,19 +1139,19 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                     if (!string.IsNullOrWhiteSpace(property))
                     {
-                        if(this.SerializeSession.Path.Peek()==property)
-                        {
+                        //if(this.SerializeSession.Path.Peek()==property)
+                        //{
 
-                        }
-                        if (property == "value")
-                        {
+                        //}
+                        //if (property == "value")
+                        //{
 
-                        }
-                        if(property == "ServicePoint")
-                        {
+                        //}
+                        //if(property == "ServicePoint")
+                        //{
 
-                        }
-                        this.SerializeSession.Path.Push(property);
+                        //}
+                        //this.SerializeSession.Path.Push(property);
                     }
 
                     IReferenceResolver referenceResolver = serializer.ReferenceResolver;
@@ -1230,8 +1230,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 finally
                 {
-                    if (!string.IsNullOrWhiteSpace(property))
-                        this.SerializeSession.Path.Pop();
+                    //if (!string.IsNullOrWhiteSpace(property))
+                    //    this.SerializeSession.Path.Pop();
                 }
 
             }
@@ -1294,7 +1294,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         {
 
                         }
-                        this.SerializeSession.Path.Push(property);
+                        //this.SerializeSession.Path.Push(property);
                     }
                     writer.WriteStartObject();
 
@@ -1333,10 +1333,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 finally
                 {
-                    if (!string.IsNullOrWhiteSpace(property))
-                    {
-                        this.SerializeSession.Path.Push(property);
-                    }
+                    //if (!string.IsNullOrWhiteSpace(property))
+                    //{
+                    //    this.SerializeSession.Path.Push(property);
+                    //}
 
                 }
             }
@@ -1369,13 +1369,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     serializer.Serialize(writer, itemEntry.Key);
                     valueProperty = new JsonProperty() { PropertyName = "value" };
                     valueProperty.WritePropertyName(writer);
-                    if (pathEntries.Last() == "MembersValues")
-                    {
-                        this.SerializeSession.Path.Push(itemEntry.Key.ToString());
-                        serializer.Serialize(writer, itemEntry.Value);
-                        this.SerializeSession.Path.Pop();
-                    }
-                    else
+                    //if (pathEntries.Last() == "MembersValues")
+                    //{
+                    //    this.SerializeSession.Path.Push(itemEntry.Key.ToString());
+                    //    serializer.Serialize(writer, itemEntry.Value);
+                    //    this.SerializeSession.Path.Pop();
+                    //}
+                    //else
                         serializer.Serialize(writer, itemEntry.Value);
 
 

@@ -8,6 +8,8 @@ using System.Collections;
 using System.IO;
 using OOAdvantech.Linq.Translators;
 using OOAdvantech;
+using OOAdvantech.MetaDataRepository.ObjectQueryLanguage;
+
 namespace OOAdvantech.Linq
 {
     /// <MetaDataID>{c0b2a139-5a6e-4b52-8d99-3ba71a4d98a8}</MetaDataID>
@@ -349,23 +351,146 @@ namespace System.Linq
             return default(TSource);
         }
         /// <MetaDataID>{1a8bf461-2d73-4795-b7d7-25a65da1758b}</MetaDataID>
-        public static dynamic Fetching<TSource>(this TSource source, Expression<System.Func<TSource, dynamic>> expression) 
+        public static TResult Fetching<TSource, TResult>(this TSource source, Expression<System.Func<TSource, TResult>> expression) where TResult : class
         {
             try
             {
                 var linqObjectQuery = new OOAdvantech.Linq.LINQStorageObjectQuery(expression, default(OOAdvantech.PersistenceLayer.ObjectStorage));
 
+                var cachingMembers = GetCachingMembers(linqObjectQuery.DataTrees[0].SubDataNodes[0]);
+
+                try
+                {
+                    if (cachingMembers.Count>0)
+                        System.Runtime.Remoting.Messaging.CallContext.SetData("CachingMetadata", cachingMembers);
+
+                    if (source!=null)
+                    {
+                        object returnValue = null;
+                        var sourceExpression = (expression.Body as MethodCallExpression).Arguments[0];
+                        if (sourceExpression is MethodCallExpression)
+                        {
+                            object[] args = new object[(sourceExpression as MethodCallExpression).Arguments.Count];
+                            int i = 0;
+                            foreach (var argument in (sourceExpression as MethodCallExpression).Arguments)
+                            {
+                                if (argument is MemberExpression)
+                                {
+                                    object value = GetValue(argument as MemberExpression);
+                                    args[i]=value;
+                                }
+                                if (argument is ConstantExpression)
+                                {
+                                    args[i]=(argument as ConstantExpression).Value;
+                                }
+                                i++;
+                            }
+                            returnValue=(sourceExpression as MethodCallExpression).Method.Invoke(source, args);
+                            return returnValue as TResult;
+
+                        }
+                        else if (sourceExpression is MemberExpression)
+                        {
+                            if ((sourceExpression as  MemberExpression).Member is PropertyInfo)
+                            {
+                                returnValue=((sourceExpression as  MemberExpression).Member as PropertyInfo).GetValue(source);
+                                return returnValue as TResult;
+                            }
+                            if ((sourceExpression as  MemberExpression).Member is FieldInfo)
+                            {
+                                returnValue=((sourceExpression as  MemberExpression).Member as FieldInfo).GetValue(source);
+                                return returnValue as TResult;
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    if (cachingMembers.Count>0)
+                        System.Runtime.Remoting.Messaging.CallContext.FreeNamedDataSlot("CachingMetadata");
+                }
+
+
+                {
+
+
+                    //if(sourceExpression.NodeType==ExpressionType.MemberAccess )
+
+                    //var sds = sourceExpression.GetType().BaseType;
+
+                    //System.Runtime.Remoting.Messaging.CallContext.SetData("CachingMetadata", cachingMembers);
+                    //var attribute = linqObjectQuery.DataTrees[0].SubDataNodes[0].AssignedMetaObject as OOAdvantech.DotNetMetaDataRepository.Attribute;
+                    //var associationEnd = linqObjectQuery.DataTrees[0].SubDataNodes[0].AssignedMetaObject as OOAdvantech.DotNetMetaDataRepository.AssociationEnd;
+                    //if (attribute != null)
+                    //{
+                    //    object returnValue = null;
+                    //    if (attribute.PropertyMember!=null)
+                    //        returnValue= attribute.PropertyMember.GetValue(source);
+                    //    if (attribute.FieldMember!=null)
+                    //        returnValue=attribute.FieldMember.GetValue(source);
+
+
+                    //    return returnValue as TResult;
+                    //}
+
+                    //if (associationEnd != null)
+                    //{
+                    //    object returnValue = null;
+                    //    if (associationEnd.PropertyMember!=null)
+                    //        returnValue= associationEnd.PropertyMember.GetValue(source);
+                    //    if (associationEnd.FieldMember!=null)
+                    //        returnValue=associationEnd.FieldMember.GetValue(source);
+
+
+                    //    return returnValue as TResult;
+                    //}
+                }
+
             }
             catch (Exception error)
             {
 
-                
+
             }
-            return default(TSource);
+            return default(TResult);
 
         }
+        static Dictionary<string, List<string>> GetCachingMembers(DataNode dataNode, Dictionary<string, List<string>> cachingMemebers = null)
+        {
+            if (cachingMemebers==null)
+                cachingMemebers = new Dictionary<string, List<string>>();
+            if (dataNode.SubDataNodes.Count==0)
+                return cachingMemebers;
+            List<string> members = null;
+
+            if (!cachingMemebers.TryGetValue(dataNode.Classifier.FullName, out members))
+            {
+                members = new List<string>();
+                cachingMemebers[dataNode.Classifier.FullName]= members;
+            }
+
+            foreach (DataNode node in dataNode.SubDataNodes)
+            {
+                string memberName = node.AssignedMetaObject.Name;
+                members.Add(memberName);
+                if (dataNode.Type==DataNode.DataNodeType.Object)
+                    GetCachingMembers(node, cachingMemebers);
+            }
+
+            return cachingMemebers;
+        }
+
+        private static object GetValue(MemberExpression member)
+        {
+            if (member.Expression is ConstantExpression)
+            {
+                return (member.Expression as ConstantExpression).Value.GetType().GetField("param").GetValue((member.Expression as ConstantExpression).Value);
+            }
+
+            return null;
 
 
+        }
 
         public static TSource Caching<TSource>(this TSource source, Expression<System.Func<TSource, dynamic>> expression)
         {
