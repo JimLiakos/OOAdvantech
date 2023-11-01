@@ -926,17 +926,23 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     System.Type type = _Classifier.GetExtensionMetaObject(typeof(System.Type)) as System.Type;
 
 
-                    if (type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]) != null
-                        && (DotNetMetaDataRepository.Type.GetInterface(type.GetMetaData().GetMethod("GetEnumerator").ReturnType, typeof(System.Collections.IEnumerator).FullName) != null
-                        || type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().IsSubclassOf(typeof(System.Collections.IEnumerator)))
-                        && type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().IsGenericType
-                        && type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().GetGenericArguments().Length == 1)
+
+                    if (TypeHelper.IsEnumerable(type))
                     {
-                        type = type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().GetGenericArguments()[0];
+                        type = TypeHelper.GetElementType(type);
+                        //}
+
+                        //    if (type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]) != null
+                        //    && (DotNetMetaDataRepository.Type.GetInterface(type.GetMetaData().GetMethod("GetEnumerator").ReturnType, typeof(System.Collections.IEnumerator).FullName) != null
+                        //    || type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().IsSubclassOf(typeof(System.Collections.IEnumerator)))
+                        //    && type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().IsGenericType
+                        //    && type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().GetGenericArguments().Length == 1)
+                        //{
+                        //    type = type.GetMetaData().GetMethod("GetEnumerator", new System.Type[0]).ReturnType.GetMetaData().GetGenericArguments()[0];
                         _Classifier = OOAdvantech.DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(type) as OOAdvantech.MetaDataRepository.Classifier;
                         if (_Classifier == null)
                         {
-                            DotNetMetaDataRepository.Assembly assembly =DotNetMetaDataRepository.Assembly.GetComponent(type.GetMetaData().Assembly) as DotNetMetaDataRepository.Assembly;
+                            DotNetMetaDataRepository.Assembly assembly = DotNetMetaDataRepository.Assembly.GetComponent(type.GetMetaData().Assembly) as DotNetMetaDataRepository.Assembly;
                             long count = assembly.Residents.Count;
                             _Classifier = OOAdvantech.DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(type) as OOAdvantech.MetaDataRepository.Classifier;
 
@@ -962,7 +968,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 
                     ClassifierFullName = _Classifier.FullName;
                     ClassifierImplementationUnitName = _Classifier.ImplementationUnit.FullName;
-                    if(ClassifierFullName!=null&& ClassifierFullName.IndexOf('.')==-1)
+                    if (ClassifierFullName != null && ClassifierFullName.IndexOf('.') == -1)
                     {
                         System.Type type = _Classifier.GetExtensionMetaObject(typeof(System.Type)) as System.Type;
                     }
@@ -991,7 +997,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
         /// <MetaDataID>{4FBCF911-3D31-4218-B11D-CC1281D1A5FA}</MetaDataID>
         private DataNode _DataNodeWithRootDataSource;
 
-    
+
 
         /// <summary>Defines the root data node for the data sources building. 
         /// The system starts to collect the storage cells which needed to retrieve the data of query, 
@@ -2052,7 +2058,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     {
                         OOAdvantech.DotNetMetaDataRepository.Assembly assembly = DotNetMetaDataRepository.Assembly.GetComponent(type.GetMetaData().Assembly) as DotNetMetaDataRepository.Assembly;
 
-                
+
                         long count = assembly.Residents.Count;
 
                     }
@@ -2292,9 +2298,9 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                                 dataNode._Classifier = MetaDataRepository.Classifier.GetClassifier(ModulePublisher.ClassRepository.GetType(dataNode.ClassifierFullName, dataNode.ClassifierImplementationUnitName));
                                 foreach (MetaDataRepository.AssociationEnd associationEnd in dataNode._Classifier.GetAssociateRoles(true))
                                 {
-                                    if ( associationEnd.GetOtherEnd().Identity == dataNode.AssignedMetaObjectIdenty)
+                                    if (associationEnd.GetOtherEnd().Identity == dataNode.AssignedMetaObjectIdenty)
                                     {
-                                        if(!associationEnd.Navigable )
+                                        if (!associationEnd.Navigable)
                                         {
 
                                         }
@@ -2306,7 +2312,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                                     Valid = false;
                                 continue;
                             }
-                            else if(dataNode.AssignedMetaObject==null)
+                            else if (dataNode.AssignedMetaObject == null)
                                 dataNode.AssignedMetaObject = GetMataObjectForDataNode(dataNode);
                         }
                         else
@@ -2896,7 +2902,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                         catch (Exception error)
                         {
 
-                            
+
                         }
                         if (!queryObjectsContexts.ContainsKey(entry.Value.ObjectsContextIdentity))
                         {

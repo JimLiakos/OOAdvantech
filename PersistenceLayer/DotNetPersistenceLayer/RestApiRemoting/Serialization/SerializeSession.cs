@@ -18,6 +18,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         public JsonSerializationFormat SerializationFormat;
 
         public Dictionary<Type, JsonType> JsonTypes = new Dictionary<Type, JsonType>();
+
+        public Stack<string> Path = new Stack<string>();
     }
 
 

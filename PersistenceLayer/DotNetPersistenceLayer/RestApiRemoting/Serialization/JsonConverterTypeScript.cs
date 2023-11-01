@@ -570,7 +570,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 lock (clientSessionPart)
                 {
 
-                   
+
                     value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
                     if (value != null)
                         return value;
@@ -605,7 +605,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 string typeFullName = reader.ReadAsString();
                 reader.Read();
                 string type_id = reader.ReadAsString();
-              
+
                 serializer.ReferenceResolver.AddReference(serializer, type_id, typeFullName);
                 return typeFullName;
             }
@@ -1109,6 +1109,17 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             SerializeSession.JsonSerializer = serializer;
 
             var pathEntries = writer.Path.Split('.');
+
+            string last = pathEntries.Last();
+            string property = null;
+
+            if (!string.IsNullOrWhiteSpace(last) && last.IndexOf("$value") == -1 &&
+                last.IndexOf("MembersValues") == -1 &&
+                last.IndexOf("TypeMetaData") == -1)
+            {
+                property = last;
+            }
+
             if (pathEntries.Last() == "$id")
             {
                 JsonWriter.WriteValue(writer, ConvertUtils.GetTypeCode(value.GetType()), value);
@@ -1123,10 +1134,30 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
             if (ObjectContruct != null) //|| (DictionaryContract != null && SerializeSession.SerializationFormat == JsonSerializationFormat.NetTypedValuesJsonSerialization))
             {
-                IReferenceResolver referenceResolver = serializer.ReferenceResolver;
-                bool isReferenced = false;
-                if (value is System.MarshalByRefObject || value is ITransparentProxy)
+                try
                 {
+
+                    if (!string.IsNullOrWhiteSpace(property))
+                    {
+                        if(this.SerializeSession.Path.Peek()==property)
+                        {
+
+                        }
+                        if (property == "value")
+                        {
+
+                        }
+                        if(property == "ServicePoint")
+                        {
+
+                        }
+                        this.SerializeSession.Path.Push(property);
+                    }
+
+                    IReferenceResolver referenceResolver = serializer.ReferenceResolver;
+                    bool isReferenced = false;
+                    if (value is System.MarshalByRefObject || value is ITransparentProxy)
+                    {
 #if DeviceDotNet
                     if (value is System.MarshalByRefObject &&!(value is OOAdvantech.Remoting.MarshalByRefObject))
                     {
@@ -1134,65 +1165,74 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         throw new Exception(value.GetType().FullName +" is invalid MarshalByRefObject. You can use OOAdvantech.Remoting.MarshalByRefObject");
                     }
 #endif
-
-                    if (referenceResolver is ReferenceResolver)
-                    {
-                        isReferenced = (referenceResolver as ReferenceResolver).IsReferencedTs(serializer, value);
-                        ObjRef byref = (referenceResolver as ReferenceResolver).GetPoxyObjRef(value);
-                        if (byref == null)
+                        if (pathEntries.Length > 15)
                         {
-                            byref = GetObjectRefValue(value);
-                            (referenceResolver as ReferenceResolver).AssignePoxyObjRef(value, byref);
-                            serializer.Serialize(writer, byref);
+
+                        }
+                        if (referenceResolver is ReferenceResolver)
+                        {
+                            isReferenced = (referenceResolver as ReferenceResolver).IsReferencedTs(serializer, value);
+                            ObjRef byref = (referenceResolver as ReferenceResolver).GetPoxyObjRef(value);
+                            if (byref == null)
+                            {
+                                byref = GetObjectRefValue(value);
+                                (referenceResolver as ReferenceResolver).AssignePoxyObjRef(value, byref);
+                                serializer.Serialize(writer, byref);
+                            }
+                            else
+                                serializer.Serialize(writer, byref);
                         }
                         else
-                            serializer.Serialize(writer, byref);
+                        {
+                            value = GetObjectRefValue(value);
+                            serializer.Serialize(writer, value);
+                        }
+                        return;
                     }
+
+                    writer.WriteStartObject();
+
+
+
+
+                    if (referenceResolver is ReferenceResolver)
+                        isReferenced = (referenceResolver as ReferenceResolver).IsReferencedTs(serializer, value);
                     else
-                    {
-                        value = GetObjectRefValue(value);
-                        serializer.Serialize(writer, value);
-                    }
-                    return;
-                }
+                        isReferenced = referenceResolver.IsReferenced(serializer, value);
 
-                writer.WriteStartObject();
-
-
-
-
-                if (referenceResolver is ReferenceResolver)
-                    isReferenced = (referenceResolver as ReferenceResolver).IsReferencedTs(serializer, value);
-                else
-                    isReferenced = referenceResolver.IsReferenced(serializer, value);
-
-                JObject jObject = new JObject();
-                JsonType jsonType = null;
+                    JObject jObject = new JObject();
+                    JsonType jsonType = null;
 
 #if DeviceDotNet
                 jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #elif Json4
-                jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+                    jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #else
                 jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
 #endif
 
-                WriteJsonType(writer, serializer, jsonType);
+                    WriteJsonType(writer, serializer, jsonType);
 
-                JsonProperty valueProperty = new JsonProperty() { PropertyName = "$value" };
-                if (isReferenced)
-                {
-                    int refIndex = int.Parse(serializer.ReferenceResolver.GetReference(serializer, value));
-                    var indexProperty = new JProperty("ref", refIndex);
-                    indexProperty.WriteTo(writer);
-                }
-                else
-                {
-                    valueProperty.WritePropertyName(writer);
-                    serializer.Serialize(writer, value);
-                }
+                    JsonProperty valueProperty = new JsonProperty() { PropertyName = "$value" };
+                    if (isReferenced)
+                    {
+                        int refIndex = int.Parse(serializer.ReferenceResolver.GetReference(serializer, value));
+                        var indexProperty = new JProperty("ref", refIndex);
+                        indexProperty.WriteTo(writer);
+                    }
+                    else
+                    {
+                        valueProperty.WritePropertyName(writer);
+                        serializer.Serialize(writer, value);
+                    }
 
-                writer.WriteEndObject();
+                    writer.WriteEndObject();
+                }
+                finally
+                {
+                    if (!string.IsNullOrWhiteSpace(property))
+                        this.SerializeSession.Path.Pop();
+                }
 
             }
             else if (this.JsonPrimitiveContract != null)
@@ -1242,12 +1282,26 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
             else if (ArrayContruct != null)
             {
-                writer.WriteStartObject();
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(property))
+                    {
+                        if (property == "value")
+                        {
+
+                        }
+                        if (property == "ServicePoint")
+                        {
+
+                        }
+                        this.SerializeSession.Path.Push(property);
+                    }
+                    writer.WriteStartObject();
 
 #if DeviceDotNet
                 string typeName = ReflectionUtils.GetTypeName(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder);
 #elif Json4
-                string typeName = ReflectionUtils.GetTypeName(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder);
+                    string typeName = ReflectionUtils.GetTypeName(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder);
 #else
                 string typeName = ReflectionUtils.GetTypeName(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder);
 #endif
@@ -1256,26 +1310,35 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 
 #elif Json4
-                JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+                    JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #else
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
 #endif
 
-                WriteJsonType(writer, serializer, jsonType);
+                    WriteJsonType(writer, serializer, jsonType);
 
-                #region Write values in array
-                JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
-                valueProperty.WritePropertyName(writer);
-                writer.WriteStartArray();
+                    #region Write values in array
+                    JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
+                    valueProperty.WritePropertyName(writer);
+                    writer.WriteStartArray();
 
-                foreach (var itemValue in value as System.Collections.IEnumerable)
-                {
-                    serializer.Serialize(writer, itemValue);
+                    foreach (var itemValue in value as System.Collections.IEnumerable)
+                    {
+                        serializer.Serialize(writer, itemValue);
+                    }
+                    writer.WriteEndArray();
+                    #endregion
+
+                    writer.WriteEndObject();
                 }
-                writer.WriteEndArray();
-                #endregion
+                finally
+                {
+                    if (!string.IsNullOrWhiteSpace(property))
+                    {
+                        this.SerializeSession.Path.Push(property);
+                    }
 
-                writer.WriteEndObject();
+                }
             }
             else if (this.DictionaryContract != null)
             {
@@ -1306,7 +1369,15 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     serializer.Serialize(writer, itemEntry.Key);
                     valueProperty = new JsonProperty() { PropertyName = "value" };
                     valueProperty.WritePropertyName(writer);
-                    serializer.Serialize(writer, itemEntry.Value);
+                    if (pathEntries.Last() == "MembersValues")
+                    {
+                        this.SerializeSession.Path.Push(itemEntry.Key.ToString());
+                        serializer.Serialize(writer, itemEntry.Value);
+                        this.SerializeSession.Path.Pop();
+                    }
+                    else
+                        serializer.Serialize(writer, itemEntry.Value);
+
 
                     writer.WriteEndObject();
                 }
