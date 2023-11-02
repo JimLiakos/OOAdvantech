@@ -881,7 +881,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (RemotingServices.InternalEndPointResolver != null && objectRef.ChannelUri != ChannelUri)
             {
-                ObjRef byRef = new ObjRef(objectRef.Uri, RemotingServices.InternalEndPointResolver.TranslateToPublic(objectRef.ChannelUri), objectRef.InternalChannelUri, objectRef.TypeName, objectRef.TypeMetaData);
+                ObjRef byRef = new ObjRef(objectRef.Uri, RemotingServices.InternalEndPointResolver.TranslateToPublic(objectRef.ChannelUri), objectRef.InternalChannelUri, objectRef.TypeName.FullName, objectRef.TypeMetaData);
                 byRef.MembersValues = objectRef.MembersValues;
 
             }
@@ -1291,7 +1291,7 @@ namespace OOAdvantech.Remoting.RestApi
                 Bidirectional = false;
 
             var serverSessionProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(ServerSessionPart) as Proxy;
-            ProxyTypes[serverSessionProxy.ObjectRef.TypeName] = serverSessionProxy.ObjectRef.TypeMetaData;
+            ProxyTypes[serverSessionProxy.ObjectRef.TypeName.FullName] = serverSessionProxy.ObjectRef.TypeMetaData;
 
             if (channelUri.Trim().IndexOf("http://") == 0)
                 channelUri = "ws://" + channelUri.Substring("http://".Length);

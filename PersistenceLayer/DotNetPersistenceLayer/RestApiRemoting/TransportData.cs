@@ -15,6 +15,7 @@ using System.ServiceModel;
 
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi.Serialization;
+using static OOAdvantech.AccessorBuilder;
 #if !DeviceDotNet
 using System.Web;
 #endif
@@ -33,6 +34,10 @@ namespace OOAdvantech.Remoting.RestApi
         {
         }
 
+        static Dictionary<string, ChannelData> Channels = new Dictionary<string, ChannelData>();
+
+        static Dictionary<string, TypeName> Types = new Dictionary<string, TypeName>();
+
         /// <MetaDataID>{ba810e9a-60e1-45fb-befa-b23d487e4fb7}</MetaDataID>
         public ObjRef(string uri, string channelUri, string internalChannelUri, string typeName, ProxyType returnTypeMetaData)
         {
@@ -50,7 +55,28 @@ namespace OOAdvantech.Remoting.RestApi
                 channelUri += "(" + internalChannelUri + ")";
             ChannelUri = channelUri;
             InternalChannelUri = internalChannelUri;
-            TypeName = typeName;
+
+            lock (Channels)
+            {
+
+                if (!Channels.TryGetValue(channelUri, out ChannelData channelData))
+                {
+                    channelData=new ChannelData(channelUri);
+                    Channels[channelUri]=channelData;
+                }
+                ChannelData=channelData;
+            }
+
+            lock (Types)
+            {
+                if (!Types.TryGetValue(typeName, out TypeName _typeName))
+                {
+                    _typeName=new TypeName(typeName);
+                    Types[typeName]=_typeName;
+                }
+                TypeName = _typeName; 
+            }
+
             TypeMetaData = returnTypeMetaData;
             if (TypeMetaData == null)
             {
@@ -92,21 +118,22 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (TypeMetaData == null)
             {
+
                 ClientSessionPart clientSessionPart = RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices) as OOAdvantech.Remoting.RestApi.ClientSessionPart;
 
 
-                if (!clientSessionPart.ProxyTypes.TryGetValue(TypeName, out _TypeMetaData))
+                if (!clientSessionPart.ProxyTypes.TryGetValue(TypeName.FullName, out _TypeMetaData))
                 {
-                    RemotingServices.GetServerSessionPartMarshaledTypes(clientSessionPart, TypeName);
-                    clientSessionPart.ProxyTypes.TryGetValue(TypeName, out _TypeMetaData);
-                   
+                    RemotingServices.GetServerSessionPartMarshaledTypes(clientSessionPart, TypeName.FullName);
+                    clientSessionPart.ProxyTypes.TryGetValue(TypeName.FullName, out _TypeMetaData);
+
                 }
             }
             else
             {
                 ClientSessionPart clientSessionPart = RenewalManager.GetSession(ChannelUri, false, RemotingServices.CurrentRemotingServices) as OOAdvantech.Remoting.RestApi.ClientSessionPart;
                 if (clientSessionPart != null)
-                    clientSessionPart.ProxyTypes[TypeName] = TypeMetaData;
+                    clientSessionPart.ProxyTypes[TypeName.FullName] = TypeMetaData;
             }
             return TypeMetaData;
         }
@@ -117,11 +144,16 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{1f97762b-d6e9-4188-bf25-a06bb91634e2}</MetaDataID>
 
         string _ChannelUri;
-        [JsonProperty(Order = 2)]
+        //[JsonProperty(Order = 2)]
+        [JsonIgnore]
         public string ChannelUri
         {
             get
             {
+                if (_ChannelUri == null)
+                {
+                    _ChannelUri=ChannelData.ChannelUri;
+                }
                 return _ChannelUri;
             }
             set
@@ -137,12 +169,26 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
+
         /// <MetaDataID>{727df9e0-09ba-466a-be73-6f487d6edbe1}</MetaDataID>
-        [JsonProperty(Order = 3)]
-        public string InternalChannelUri { get; set; }
+        //[JsonProperty(Order = 3)]
+        [JsonIgnore]
+        public string InternalChannelUri
+        {
+            get
+            {
+
+                return ChannelData.InternalChannelUri;
+
+
+            }
+            set { }
+        }
+        public ChannelData ChannelData { get; set; }
+
         /// <MetaDataID>{83fc6ec5-c41a-45b2-b5a9-28e2fae8ef3e}</MetaDataID>
         [JsonProperty(Order = 4)]
-        public string TypeName { get; set; }
+        public TypeName TypeName { get; set; }
 
 
         /// <exclude>Excluded</exclude>
@@ -263,7 +309,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         [DataMember]
-        public string CachingMetadata { get;  set; }
+        public string CachingMetadata { get; set; }
 
 
 
@@ -369,4 +415,35 @@ namespace OOAdvantech.Remoting.RestApi
         Disconnect = 3,
         LagTest = 4
     }
+
+    public class ChannelData
+    {
+        public ChannelData(string channelUri)
+        {
+            ChannelUri=channelUri;
+            string internalChannelUri;
+            ObjRef.GetChannelUriParts(ChannelUri, out string publicChannelUri, out internalChannelUri);
+            InternalChannelUri=internalChannelUri;
+        }
+
+        public string ChannelUri { get; }
+
+
+        [JsonIgnore]
+        public string InternalChannelUri { get; }
+        //string InternalChannelUri { get; set; }
+    }
+
+    public class TypeName
+    {
+        public TypeName(string assemblyQualifiedName)
+        {
+            FullName=assemblyQualifiedName;
+        }
+        public string FullName { get; set; }
+    }
+
+
+
+
 }

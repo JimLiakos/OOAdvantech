@@ -146,10 +146,17 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 else
                 {
+                    
                     if (httpProxyType.Paired)
                         typeAlreadyMarshaled = true;
 
+                 
+
+
                 }
+
+                if (ServerSessionPart?.ChannelUri!=null&&ServerSessionPart?.ChannelUri!="local-device")
+                    typeAlreadyMarshaled = true;
             }
             AuthUser authUser = System.Runtime.Remoting.Messaging.CallContext.GetData("AutUser") as AuthUser;
             ObjRef byref = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);

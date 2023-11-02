@@ -189,23 +189,31 @@ namespace OOAdvantech.Remoting.RestApi
                         if (proxy!=null)
                         {
                             var methods = proxy.ObjectRef.GetProxyType().Methods;
+                            
 
-                            if (methods.Contains(MethodName))
+                            if (methods?.Contains(MethodName)==true)
                             {
 
                             }
                             else
                             {
-                                var interfacesMethods = (from _interface in proxy.ObjectRef.GetProxyType().Interfaces
-                                                         where _interface.GetNativeType()!=null
-                                                         from method in _interface.GetNativeType().GetMethods()
-                                                         where method.Name==MethodName
-                                                         select new { _interface, method }).ToList();
-                                foreach (var interfacesMethod in interfacesMethods)
+                                var interfaces = proxy.ObjectRef.GetProxyType().Interfaces;
+                                if (interfaces!=null)
                                 {
-                                    methodInfo=GetMethod(interfacesMethod._interface.GetNativeType());
-                                    if (methodInfo!=null)
-                                        return methodInfo;
+
+
+                                    var interfacesMethods = (from _interface in interfaces
+                                                             where _interface.GetNativeType()!=null
+                                                             from method in _interface.GetNativeType().GetMethods()
+                                                             where method.Name==MethodName
+                                                             select new { _interface, method }).ToList();
+
+                                    foreach (var interfacesMethod in interfacesMethods)
+                                    {
+                                        methodInfo=GetMethod(interfacesMethod._interface.GetNativeType());
+                                        if (methodInfo!=null)
+                                            return methodInfo;
+                                    }
                                 }
                             }
                         }

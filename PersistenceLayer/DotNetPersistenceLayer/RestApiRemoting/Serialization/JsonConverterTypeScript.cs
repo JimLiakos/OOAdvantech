@@ -974,13 +974,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         _obj = (proxy as Proxy).TypeScriptProxy;
                         uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
 
-                        if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
+                        if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName.FullName, out httpProxyType))
                         {
                             httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
                             //if (ServerSessionPart != null && httpProxyType != null)
                             //    ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
 
-                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
+                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName.FullName, (proxy as Proxy).ObjectRef.TypeMetaData);
 
                             objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
 
@@ -988,7 +988,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         }
                         else
                         {
-                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
+                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName.FullName, null);
                             objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
                             return objectRef;
                         }
@@ -996,12 +996,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     }
                     else
                     {
-                        if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName, out httpProxyType))
+                        if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName.FullName, out httpProxyType))
                         {
                             httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
                             //if (ServerSessionPart != null && httpProxyType != null)
                             //    ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
-                            var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, (proxy as Proxy).ObjectRef.TypeMetaData);
+                            var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName.FullName, (proxy as Proxy).ObjectRef.TypeMetaData);
 
 
 
@@ -1011,7 +1011,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         }
                         else
                         {
-                            var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName, null);
+                            var objectRef = new ObjRef((proxy as Proxy).ObjectRef.Uri, (proxy as Proxy).ObjectRef.ChannelUri, (proxy as Proxy).ObjectRef.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName.FullName, null);
                             return objectRef;
                         }
                     }
@@ -1079,7 +1079,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 {
                     if (httpProxyType.Paired)
                         typeAlreadyMarshaled = true;
+
                 }
+
+                if (ServerSessionPart?.ChannelUri!=null&&ServerSessionPart?.ChannelUri!="local-device")
+                    typeAlreadyMarshaled = true;
+
             }
 
             ObjRef byref = new ObjRef(uri, serverChannelUri, internalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
