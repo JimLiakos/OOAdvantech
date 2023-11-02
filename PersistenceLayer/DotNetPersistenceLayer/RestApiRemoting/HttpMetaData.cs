@@ -281,7 +281,7 @@ namespace OOAdvantech.MetaDataRepository
         }
 
         /// <MetaDataID>{ccf8067e-7dc8-4078-bbbb-df645ef09d20}</MetaDataID>
-        public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues)
+        public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, Dictionary<string, List<string>> cachingMetaData)
         {
             foreach (var attribute in CachingClientSideAttributeProperties)
             {
@@ -308,8 +308,33 @@ namespace OOAdvantech.MetaDataRepository
                 membersValues[associationEnd.Name] = value;
             }
 
+            if (cachingMetaData != null)
+            {
+                List<string> cachingClientSideMembers = new List<string>();
+                if (cachingMetaData.TryGetValue(FullName, out cachingClientSideMembers))
+                {
+                    foreach (string memberName in cachingClientSideMembers)
+                    {
+                        if (!membersValues.ContainsKey(memberName))
+                        {
+                            var property = this.Type.GetProperty(memberName);
+                            if (property != null)
+                            {
+                                membersValues[memberName] = property.GetValue(_object);
+                            }
+                            else
+                            {
+                                var field = this.Type.GetField(memberName);
+                                membersValues[memberName] = field.GetValue(_object);
+                            }
+                        }
+
+                    }
+                }
+            }
+
             foreach (var _interface in _Interfaces)
-                _interface.CachingObjectMembersValue(_object, membersValues);
+                _interface.CachingObjectMembersValue(_object, membersValues, cachingMetaData);
         }
 
 
@@ -328,6 +353,7 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{0ebb8b54-9af1-41e6-9823-59eccb5bec71}</MetaDataID>
         public ProxyType(Type type)
         {
+            Type = type;
             var classifier = OOAdvantech.MetaDataRepository.Classifier.GetClassifier(type);
 
             _FullName = type.FullName;
@@ -527,6 +553,8 @@ namespace OOAdvantech.MetaDataRepository
 
         /// <MetaDataID>{2d4f9ce8-dfa1-4a63-aaba-a0a40ed4a03f}</MetaDataID>
         string _AssemblyQualifiedName;
+        private Type Type;
+
         /// <MetaDataID>{1c70c4b8-f87b-4de7-a297-bfed5d513172}</MetaDataID>
         public string AssemblyQualifiedName
         {
@@ -571,25 +599,25 @@ namespace OOAdvantech.MetaDataRepository
         public static Type GetNativeType(this ProxyType proxyType)
         {
             Type type = null;
-            if (!string.IsNullOrWhiteSpace(proxyType.AssemblyQualifiedName)&&NativeTypes.TryGetValue(proxyType.AssemblyQualifiedName, out type))
+            if (!string.IsNullOrWhiteSpace(proxyType.AssemblyQualifiedName) && NativeTypes.TryGetValue(proxyType.AssemblyQualifiedName, out type))
                 return type;
 
-            if (!string.IsNullOrWhiteSpace(proxyType.FullName)&&NativeTypes.TryGetValue(proxyType.FullName, out type))
+            if (!string.IsNullOrWhiteSpace(proxyType.FullName) && NativeTypes.TryGetValue(proxyType.FullName, out type))
                 return type;
 
 
             type = Type.GetType(proxyType.AssemblyQualifiedName);
-            if (type==null)
+            if (type == null)
             {
                 if (!Remoting.RestApi.Serialization.SerializationBinder.NamesTypesDictionary.TryGetValue(proxyType.FullName, out type))
                     type = Type.GetType(proxyType.FullName);
             }
-            if (type!=null)
+            if (type != null)
             {
                 if (!string.IsNullOrWhiteSpace(proxyType.AssemblyQualifiedName))
-                    NativeTypes[proxyType.AssemblyQualifiedName]=type;
+                    NativeTypes[proxyType.AssemblyQualifiedName] = type;
                 else if (!string.IsNullOrWhiteSpace(proxyType.FullName))
-                    NativeTypes[proxyType.FullName]=type;
+                    NativeTypes[proxyType.FullName] = type;
             }
             return type;
         }

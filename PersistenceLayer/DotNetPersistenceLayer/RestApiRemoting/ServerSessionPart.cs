@@ -1010,7 +1010,7 @@ namespace OOAdvantech.Remoting.RestApi
                     throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.UnknownError);
                 }
 
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
                 ObjRef remoteRef = JsonConvert.DeserializeObject<ObjRef>(returnMessage.ReturnObjectJson, jSetttings);
                 Proxy proxy = new Proxy(remoteRef, typeof(IServerSessionPart));// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.IServerSessionPart));
                 IServerSessionPart serverSessionPart = proxy.GetTransparentProxy(typeof(IServerSessionPart)) as IServerSessionPart;// (GetTransparentProxy() as IRomotingServer).GetServerSession(RemotingServices.ProcessIdentity);

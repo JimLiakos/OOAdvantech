@@ -443,7 +443,7 @@ namespace OOAdvantech.Remoting.RestApi
                 //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
                 var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
 #else
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
 #endif
                 var proxyTypes = JsonConvert.DeserializeObject<object>(returnMessage.ReturnObjectJson, jSetttings) as System.Collections.Generic.Dictionary<string, MetaDataRepository.ProxyType>;
 
@@ -547,7 +547,7 @@ namespace OOAdvantech.Remoting.RestApi
 #else
                 //var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
 
-                var jSetttings = new OOAdvantech.Remoting.RestApi.Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+                var jSetttings = new OOAdvantech.Remoting.RestApi.Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
 #endif
                 var returnValue = JsonConvert.DeserializeObject<IRemotingServer>(returnMessage.ReturnObjectJson, jSetttings);
                 if (System.Runtime.Remoting.RemotingServices.GetRealProxy(returnValue) != null)
@@ -665,7 +665,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endregion
                 }
 
-                RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity,  RequestOS=requestData.RequestOS };
+                RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity,  RequestOS=requestData.RequestOS, CachingMetadata = requestData.CachingMetadata };
                 request.SendTimeout = binding.SendTimeout.TotalMilliseconds;
                 var task = webSocket.SendRequestAsync(request);
                 var state = webSocket.State;
@@ -814,7 +814,7 @@ namespace OOAdvantech.Remoting.RestApi
                 // var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
                 //ObjRef remoteRef = JsonConvert.DeserializeObject<ObjRef>(returnMessage.ReturnObjectJson);
 
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
                 ObjRef remoteRef = JsonConvert.DeserializeObject<ObjRef>(returnMessage.ReturnObjectJson, jSetttings);
 
 

@@ -94,15 +94,21 @@ namespace OOAdvantech.Remoting.RestApi
         public string InternalChannelUri { get;  set; }
         public ObjRef ServerSessionObjectRef { get;  set; }
 
-        internal void Marshal()
+        internal void Marshal(Dictionary<string, List<string>> cachingMetadata=null)
         {
+            //if(cachingMetadata== null)
+            //{
+            //    cachingMetadata = new Dictionary<string, List<string>>();
+            //}
             //string internalChannelUri = System.Runtime.Remoting.Messaging.CallContext.GetData("internalChannelUri") as string;
 #if DeviceDotNet
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder= new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, ChannelUri, InternalChannelUri, ServerSession, Web) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, ChannelUri, InternalChannelUri, ServerSession);
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, ChannelUri, InternalChannelUri, ServerSession, cachingMetadata);
 #else
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, ChannelUri, InternalChannelUri, ServerSession);// { TypeNameHandling = ServerSession.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, ChannelUri, InternalChannelUri, ServerSession,Web) };
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, ChannelUri, InternalChannelUri, ServerSession, cachingMetadata);
+            // { TypeNameHandling = ServerSession.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, ChannelUri, InternalChannelUri, ServerSession,Web) };
 #endif
+            jSetttings.CachingMetadata = cachingMetadata;
             //if (Web)
             //{
             //    jSetttings.ReferenceResolver = new ReferenceResolver();

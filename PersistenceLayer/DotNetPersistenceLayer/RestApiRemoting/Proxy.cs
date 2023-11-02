@@ -293,7 +293,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-            #region Gets authentication data
+        #region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -314,7 +314,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-            #endregion
+        #endregion
 
             Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
             if (cachingMetadata != null)
@@ -394,8 +394,8 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                         var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
                         var _object = GetTransparentProxy(Type);
-                        remotingServices.RefreshCacheData(_object  as MarshalByRefObject);
-                        ObjectRef.InvalidMembersValues=false;
+                        remotingServices.RefreshCacheData(_object as MarshalByRefObject);
+                        ObjectRef.InvalidMembersValues = false;
                         ObjectRef.MembersValues.TryGetValue(propertyName, out value);
                     }
 
@@ -613,9 +613,9 @@ namespace OOAdvantech.Remoting.RestApi
             }
             #endregion
 
-            Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
+            Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as Dictionary<string, List<string>>;
             if (cachingMetadata != null)
-                requestData.CachingMetadata=Json.JsonConvert.SerializeObject(cachingMetadata);
+                requestData.CachingMetadata = Json.JsonConvert.SerializeObject(cachingMetadata);
 
 
             requestData.RequestType = RequestType.MethodCall;
@@ -624,13 +624,17 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.ChannelUri = ChannelUri;
 
             var responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData); //RemotingServices.Invoke(requestData.PublicChannelUri, requestData, X_Auth_Token, X_Access_Token);
-
+          
             if (responseData != null)// .IsSuccessStatusCode)
             {
                 ReturnMessage returnMessage = null;
                 try
                 {
                     returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
+                    if (cachingMetadata != null)
+                    {
+
+                    }
                 }
                 catch (Exception error)
                 {
@@ -650,6 +654,8 @@ namespace OOAdvantech.Remoting.RestApi
                         try
                         {
                             returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
+
+                         
                         }
                         catch (Exception error)
                         {
@@ -918,7 +924,7 @@ namespace OOAdvantech.Remoting.RestApi
             MethodInfo method = methodCallMessage.MethodBase as MethodInfo;
 
             object[] args = methodCallMessage.Args;
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
 
 
             object[] outArgs = null;
@@ -1136,7 +1142,7 @@ namespace OOAdvantech.Remoting.RestApi
         public void InvalidateCachedData()
         {
 
-            ObjectRef.InvalidMembersValues=true;
+            ObjectRef.InvalidMembersValues = true;
         }
 
         //IMessage IProxy.Invoke(IMessage msg)
@@ -1212,7 +1218,7 @@ namespace OOAdvantech.Remoting.RestApi
         public readonly string ErrorCode;
         public ServerException(string message, string errorCode) : base(message)
         {
-            ErrorCode=errorCode;
+            ErrorCode = errorCode;
         }
 
 
@@ -1221,7 +1227,7 @@ namespace OOAdvantech.Remoting.RestApi
         public ServerException(string message, int hResult, string errorCode) : base(message)
         {
             this.HResult = hResult;
-            ErrorCode=errorCode;
+            ErrorCode = errorCode;
         }
 
     }

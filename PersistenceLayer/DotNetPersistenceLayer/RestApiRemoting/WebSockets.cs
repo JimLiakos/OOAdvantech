@@ -227,7 +227,7 @@ namespace OOAdvantech.Remoting.RestApi
                         var logicalConnection = (from interConnection in _PublicWebSockets
                                                  where interConnection.SessionIdentity == request.SessionIdentity
                                                  select interConnection).FirstOrDefault();
-                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType,RequestOS=request.RequestOS };
+                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType,RequestOS=request.RequestOS,CachingMetadata=request.CachingMetadata  };
 
                         ResponseData responseData = null;
                         if (logicalConnection != null && logicalConnection.Public != null && logicalConnection.Public.State == WebSocketState.Open)
@@ -620,7 +620,15 @@ namespace OOAdvantech.Remoting.RestApi
                 }
             }
             string message = Json.JsonConvert.SerializeObject(request);
+
+
             message = ((int)MessageHeader.Request).ToString() + message;
+
+            //if (message.IndexOf("GetMealCoursesInProgress") != -1)
+            //{
+
+            //}
+
             nativeWebSocket.Send(message);
             return taskCompletionSource.Task;
 
@@ -1282,6 +1290,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
 
             }
+          
 #endif
             if (string.IsNullOrWhiteSpace(message))
             {
@@ -1292,6 +1301,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 try
                 {
+                  
                     MessageDispatch(message);
                 }
                 catch (Exception)
@@ -1461,7 +1471,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                             System.Diagnostics.Debug.WriteLine(request.ChannelUri + " , " + roleInstanceServerUrl, "Channel");
 
-                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID , RequestOS=request.RequestOS };
+                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID , RequestOS=request.RequestOS, CachingMetadata = request.CachingMetadata };
 
                             if (roleInstanceServerUrl.Trim().IndexOf("http://") == 0)
                                 roleInstanceServerUrl = "ws://" + roleInstanceServerUrl.Substring("http://".Length);

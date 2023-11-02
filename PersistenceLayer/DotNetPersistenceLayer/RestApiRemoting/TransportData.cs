@@ -76,10 +76,10 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{6e1c6091-cbd7-4094-a5f0-5a8ca4e840ad}</MetaDataID>
-        internal void CachingObjectMemberValues(object _obj, Dictionary<string, List<string>> callContextCachingMemebers )
+        internal void CachingObjectMemberValues(object _obj, Dictionary<string, List<string>> cachingMetaData)
         {
-
-            TypeMetaData.CachingObjectMembersValue(_obj, MembersValues);
+            MembersValues.Clear();
+            TypeMetaData.CachingObjectMembersValue(_obj, MembersValues, cachingMetaData);
             if (MembersValues.Count > 0)
             {
 
@@ -260,7 +260,10 @@ namespace OOAdvantech.Remoting.RestApi
         /// </summary>
         [DataMember]
         public string PhysicalConnectionID { get; set; }
-        public string CachingMetadata { get; internal set; }
+
+
+        [DataMember]
+        public string CachingMetadata { get;  set; }
 
 
 

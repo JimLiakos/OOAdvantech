@@ -20,7 +20,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             get
             {
-                var jSetttings = new Json.JsonSerializerSettings() { ReferenceLoopHandling = Json.ReferenceLoopHandling.Serialize, TypeNameHandling = Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null, JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new ReferenceResolver() };
+                var jSetttings = new Json.JsonSerializerSettings() { ReferenceLoopHandling = Json.ReferenceLoopHandling.Serialize, TypeNameHandling = Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null,null ,JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new ReferenceResolver() };
                 jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
                 jSetttings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
                 return jSetttings;
@@ -32,18 +32,20 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             get
             {
-                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Deserialize, null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization) };
+                var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { TypeNameHandling = OOAdvantech.Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new OOAdvantech.Remoting.RestApi.Serialization.JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Deserialize, null,null, OOAdvantech.Remoting.RestApi.Serialization.JsonSerializationFormat.TypeScriptJsonSerialization) };
                 jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
                 jSetttings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
                 return jSetttings;
             }
         }
 
+        public Dictionary<string, List<string>> CachingMetadata { get; internal set; }
+
 
         /// <summary>
         /// Initial json settings 
         /// </summary>
-        /// <param name="jsonContructType">
+        /// <param name="jsonContractType">
         /// Defines the type of json action  Serialize,Deserialize
         /// </param>
         /// <param name="serializationFormat">
@@ -53,24 +55,22 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// Defines the channel server session format
         /// </param>
         /// <param name="argsTypes"></param>
-        public JsonSerializerSettings(JsonContractType jsonContructType, JsonSerializationFormat serializationFormat,/* string channelUri, string internalChannelUri,*/ ServerSessionPart serverSessionPart, Type[] argsTypes = null)
+        public JsonSerializerSettings(JsonContractType jsonContractType, JsonSerializationFormat serializationFormat, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] argsTypes = null)
         {
 
-            //if(serializationFormat==JsonSerializationFormat.NetJsonSerialization)
-            //    serializationFormat = JsonSerializationFormat.NetTypedValuesJsonSerialization;
-            //// serializationFormat = JsonSerializationFormat.TypeScriptJsonSerializationEx;
+            CachingMetadata = cachingMetadata;
 
             SerializationFormat = serializationFormat;
-            JsonContructType = jsonContructType;
+            JsonContructType = jsonContractType;
             TypeNameHandling =( serializationFormat == JsonSerializationFormat.TypeScriptJsonSerialization|| serializationFormat == JsonSerializationFormat.NetTypedValuesJsonSerialization) ? OOAdvantech.Json.TypeNameHandling.None : OOAdvantech.Json.TypeNameHandling.All;
             Binder = new SerializationBinder(serializationFormat);
-            ContractResolver = new JsonContractResolver(jsonContructType,/* channelUri, internalChannelUri,*/ serverSessionPart, argsTypes, serializationFormat);
+            ContractResolver = new JsonContractResolver(jsonContractType, serverSessionPart,cachingMetadata, argsTypes, serializationFormat);
 
             MissingMemberHandling = Json.MissingMemberHandling.Error;
 
             if (serializationFormat == JsonSerializationFormat.TypeScriptJsonSerialization|| serializationFormat == JsonSerializationFormat.NetTypedValuesJsonSerialization)
             {
-                if (jsonContructType == JsonContractType.Serialize)
+                if (jsonContractType == JsonContractType.Serialize)
                 {
                     ReferenceResolver = new ReferenceResolver();
                     ReferenceLoopHandling =OOAdvantech.Json.ReferenceLoopHandling.Serialize;
@@ -78,7 +78,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
                 DateTimeZoneHandling = OOAdvantech.Json.DateTimeZoneHandling.Utc;
-                if (jsonContructType == JsonContractType.Deserialize)
+                if (jsonContractType == JsonContractType.Deserialize)
                     DateTimeZoneHandling = OOAdvantech.Json.DateTimeZoneHandling.Local;
 
             }
@@ -96,8 +96,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         JsonContractType JsonContructType;
 
 
-        public JsonSerializerSettings(JsonContractType jsonContructType, JsonSerializationFormat serializationFormat, string channelUri, string internalChannelUri, ServerSessionPart serverSessionPart)
-            : this(jsonContructType, serializationFormat,/* channelUri,internalChannelUri,*/ serverSessionPart, null)
+        public JsonSerializerSettings(JsonContractType jsonContructType, JsonSerializationFormat serializationFormat, string channelUri, string internalChannelUri, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata)
+            : this(jsonContructType, serializationFormat, serverSessionPart, cachingMetadata, null)
         {
 
             if (serverSessionPart != null)

@@ -52,6 +52,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <MetaDataID>{ddfbf0ee-c47c-4a37-ad98-5f8cc148516c}</MetaDataID>
         Type[] RootArgsTypes;
 
+        Dictionary<string, List<string>> CachingMetadata;
+
+
         /// <summary>
         /// Defines constructor with communication channel data
         /// </summary>
@@ -65,11 +68,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// Defines the server session part of communication channel parameter
         /// </param>
         /// <MetaDataID>{50d948e0-6274-4e96-b15b-2637248cf1cc}</MetaDataID>
-        JsonConverterTypeScript(/*string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart)
+        JsonConverterTypeScript(SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata)
         {
             //ChannelUri = channelUri;
             //InternalChannelUri = internalChannelUri;
             ServerSessionPart = serverSessionPart;
+            CachingMetadata = cachingMetadata;
 
             SerializeSession = serializeSession;
 
@@ -83,6 +87,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         }
         /// <MetaDataID>{3fd028b1-a31a-474b-ae93-47480c04b3d4}</MetaDataID>
         SerializeSession SerializeSession;
+
+        //private Dictionary<string, List<string>> CachingMetadata;
 
         /// <summary>
         /// Defines constructor for JsonObjectContract
@@ -106,8 +112,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{72dab712-850e-493b-964d-46ed05c00e9b}</MetaDataID>
-        public JsonConverterTypeScript(JsonObjectContract contract, Type objectType, /*string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
-            : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
+        public JsonConverterTypeScript(JsonObjectContract contract, Type objectType, SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+            : this(serializeSession, serverSessionPart,cachingMetadata )
         {
             RootArgsTypes = rootArgsTypes;
             ObjectType = objectType;
@@ -144,8 +150,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{f68ee033-d1c0-49de-995d-138c71bcc77c}</MetaDataID>
-        public JsonConverterTypeScript(JsonArrayContract arrayContruct,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
-            : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
+        public JsonConverterTypeScript(JsonArrayContract arrayContruct,SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+            : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart, cachingMetadata)
         {
             ArrayContruct = arrayContruct;
             Contruct = arrayContruct;
@@ -176,8 +182,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{0b46ca43-605a-4429-9801-6e7d30a37aa9}</MetaDataID>
-        public JsonConverterTypeScript(JsonPrimitiveContract jsonPrimitiveContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
-            : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
+        public JsonConverterTypeScript(JsonPrimitiveContract jsonPrimitiveContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+            : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart, cachingMetadata)
         {
             this.JsonPrimitiveContract = jsonPrimitiveContract;
             Contruct = jsonPrimitiveContract;
@@ -209,8 +215,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{2667fa29-7fcf-40b8-a034-74c38e98e3f8}</MetaDataID>
-        public JsonConverterTypeScript(JsonDictionaryContract jsonDictionaryContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, ServerSessionPart serverSessionPart, Type[] rootArgsTypes)
-             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart)
+        public JsonConverterTypeScript(JsonDictionaryContract jsonDictionaryContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart, cachingMetadata)
         {
             this.DictionaryContract = jsonDictionaryContract;
             RootArgsTypes = rootArgsTypes;
@@ -1077,7 +1083,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
 
             ObjRef byref = new ObjRef(uri, serverChannelUri, internalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
-            byref.CachingObjectMemberValues(_obj);
+            
+            byref.CachingObjectMemberValues(_obj, CachingMetadata);
             if (typeAlreadyMarshaled)
                 byref.TypeMetaData = null;
 

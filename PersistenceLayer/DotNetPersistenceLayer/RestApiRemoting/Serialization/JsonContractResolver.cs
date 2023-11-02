@@ -17,7 +17,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         SerializeSession SerializeSession = new SerializeSession();
 
         public int DesirializeIndex = 0;
-
+        private Dictionary<string, List<string>> CachingMetadata;
         JsonContractType JsonContructType;
 
         private OOAdvantech.Remoting.RestApi.ServerSessionPart ServerSessionPart;
@@ -35,8 +35,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         //    Web = web;
         //}
 
-        public JsonContractResolver(JsonContractType jsonContructType,/* string channelUri, string internalChannelUri,*/ ServerSessionPart serverSessionPart, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
+        public JsonContractResolver(JsonContractType jsonContructType,/* string channelUri, string internalChannelUri,*/ ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
         {
+            CachingMetadata = cachingMetadata;
             //TypeEx = typeEx;
             JsonContructType = jsonContructType;
             //this.ChannelUri = channelUri;
@@ -51,8 +52,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             this.SerializeSession.SerializationFormat = SerializationFormat;
         }
 
-        public JsonContractResolver(JsonContractType jsonContructType, /*string channelUri, string internalChannelUri,*/ ServerSessionPart serverSessionPart, Type[] argsTypes, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
-            : this(jsonContructType, /*channelUri, internalChannelUri,*/ serverSessionPart, serializationFormat)
+        public JsonContractResolver(JsonContractType jsonContructType, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] argsTypes, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
+            : this(jsonContructType,  serverSessionPart, cachingMetadata, serializationFormat)
         {
             this.RootArgsTypes = argsTypes;
         }
@@ -83,7 +84,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
             if (isMarshalByRefObject && SerializationFormat == JsonSerializationFormat.NetJsonSerialization)   //Converter for .Net client code and marshal by reference object. 
-                contract.Converter = new JsonSerializerEx(JsonContructType, SerializeSession, ServerSessionPart, SerializationFormat);
+                contract.Converter = new JsonSerializerEx(JsonContructType, SerializeSession, ServerSessionPart,CachingMetadata, SerializationFormat);
             else if (SerializationFormat == JsonSerializationFormat.TypeScriptJsonSerialization)
             {
                 #region  Converter for java script client
@@ -92,7 +93,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 {
                     if (contract is JsonObjectContract)
                     {
-                        var customConverter = new JsonConverterTypeScript(contract as JsonObjectContract, objectType, SerializeSession,/* ChannelUri, InternalChannelUri,*/ ServerSessionPart, RootArgsTypes);
+                        var customConverter = new JsonConverterTypeScript(contract as JsonObjectContract, objectType, SerializeSession,/* ChannelUri, InternalChannelUri,*/ ServerSessionPart,CachingMetadata, RootArgsTypes);
                         contract.Converter = customConverter;
 
                         if (JsonContructType == JsonContractType.Serialize && IsReference)
@@ -118,11 +119,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         //}
                     }
                     else if (contract is JsonArrayContract)
-                        contract.Converter = new JsonConverterTypeScript(contract as JsonArrayContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                        contract.Converter = new JsonConverterTypeScript(contract as JsonArrayContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart,CachingMetadata, RootArgsTypes);
                     else if (contract is JsonPrimitiveContract)
-                        contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                        contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                     else if (contract is JsonDictionaryContract)
-                        contract.Converter = new JsonConverterTypeScript(contract as JsonDictionaryContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                        contract.Converter = new JsonConverterTypeScript(contract as JsonDictionaryContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                 }
                 #endregion
 
@@ -135,7 +136,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 {
                     if (contract is JsonObjectContract)
                     {
-                        var customConverter = new JsonConverterTypeScript(contract as JsonObjectContract, objectType, SerializeSession,/* ChannelUri, InternalChannelUri,*/ ServerSessionPart, RootArgsTypes);
+                        var customConverter = new JsonConverterTypeScript(contract as JsonObjectContract, objectType, SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                         contract.Converter = customConverter;
 
                         if (JsonContructType == JsonContractType.Serialize && IsReference)
@@ -152,7 +153,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                       
                     }
                     else if (contract is JsonArrayContract)
-                        contract.Converter = new JsonConverterTypeScript(contract as JsonArrayContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                        contract.Converter = new JsonConverterTypeScript(contract as JsonArrayContract,SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                     else if (contract is JsonPrimitiveContract)
                     {
                         string path = "";
@@ -165,9 +166,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         if (!string.IsNullOrWhiteSpace(path))
                         {
                             if (path.LastIndexOf("key") == path.Length - "key".Length)
-                                contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                                contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                             if (path.LastIndexOf("value") == path.Length - "value".Length)
-                                contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                                contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                         }
 
 
@@ -175,7 +176,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         //contract.Converter = new JsonConverterTypeScript(contract as JsonPrimitiveContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
                     }
                     else if (contract is JsonDictionaryContract)
-                        contract.Converter = new JsonConverterTypeScript(contract as JsonDictionaryContract,/* ChannelUri, InternalChannelUri,*/SerializeSession, ServerSessionPart, RootArgsTypes);
+                        contract.Converter = new JsonConverterTypeScript(contract as JsonDictionaryContract,SerializeSession, ServerSessionPart, CachingMetadata, RootArgsTypes);
                 }
                 #endregion
 

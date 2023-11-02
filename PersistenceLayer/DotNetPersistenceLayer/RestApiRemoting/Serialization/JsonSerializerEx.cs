@@ -14,14 +14,15 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     public class JsonSerializerEx : OOAdvantech.Json.JsonConverter
     {
         JsonContractType JsonContructType;
-
+        private Dictionary<string, List<string>> CachingMetadata;
         SerializeSession SerializeSession;
         //private string ChannelUri;
         //private string InternalChannelUri;
         private OOAdvantech.Remoting.RestApi.ServerSessionPart ServerSessionPart;
         JsonSerializationFormat SerializationFormat;
-        public JsonSerializerEx(JsonContractType jsonContructType, SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetTypedValuesJsonSerialization)
+        public JsonSerializerEx(JsonContractType jsonContructType, SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetTypedValuesJsonSerialization)
         {
+            CachingMetadata = cachingMetadata;
             SerializeSession = serializeSession;
             JsonContructType = jsonContructType;
             //this.ChannelUri = channelUri;
@@ -150,9 +151,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 }
             }
-
+            AuthUser authUser = System.Runtime.Remoting.Messaging.CallContext.GetData("AutUser") as AuthUser;
             ObjRef byref = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
-            byref.CachingObjectMemberValues(_obj);
+            
+            byref.CachingObjectMemberValues(_obj, CachingMetadata);
             if (typeAlreadyMarshaled)
                 byref.TypeMetaData = null;
             token = GetObjectRefToken(byref, serializer);
