@@ -28,8 +28,19 @@ namespace WebSocket4Net
         {
             var byteMessage = Encoding.UTF8.GetBytes(message);
             var segmnet = new ArraySegment<byte>(byteMessage);
+            //binary webSocket
+            await client.SendAsync(segmnet, WebSocketMessageType.Binary, true, cts.Token);
+            //await client.SendAsync(segmnet, WebSocketMessageType.Text, true, cts.Token);
 
-            await client.SendAsync(segmnet, WebSocketMessageType.Text, true, cts.Token);
+        }
+
+        public async Task Send(byte[] buffer)
+        {
+            
+            var segmnet = new ArraySegment<byte>(buffer);
+            //binary webSocket
+            await client.SendAsync(segmnet, WebSocketMessageType.Binary, true, cts.Token);
+            //await client.SendAsync(segmnet, WebSocketMessageType.Text, true, cts.Token);
 
         }
         public event EventHandler Opened;
@@ -37,6 +48,7 @@ namespace WebSocket4Net
         public event EventHandler<ErrorEventArgs> Error;
         public event EventHandler Closed;
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+        public event EventHandler<DataReceivedEventArgs> DataReceived;
         public void Close()
         {
             //Task.Run(async () =>
@@ -114,20 +126,41 @@ namespace WebSocket4Net
                                         }
                                         if (result.EndOfMessage)
                                         {
-                                            messageBytes = memoryStream.GetBuffer();
-                                            memoryStream.Dispose();
-                                            memoryStream = new System.IO.MemoryStream();
+                                            if (result.MessageType==WebSocketMessageType.Text)
+                                            {
+                                                messageBytes = memoryStream.GetBuffer();
+                                                memoryStream.Dispose();
+                                                memoryStream = new System.IO.MemoryStream();
 
-                                            try
-                                            {
-                                                string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
-                                                this.MessageReceived?.Invoke(this, new MessageReceivedEventArgs(serialisedMessae));
-                                                //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
-                                                //Messages.Add(msg);
+                                                try
+                                                {
+                                                    string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                                                    this.MessageReceived?.Invoke(this, new MessageReceivedEventArgs(serialisedMessae));
+                                                    //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
+                                                    //Messages.Add(msg);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine($"Invalide message format. {ex.Message}");
+                                                }
                                             }
-                                            catch (Exception ex)
+                                            if (result.MessageType==WebSocketMessageType.Binary)
                                             {
-                                                Console.WriteLine($"Invalide message format. {ex.Message}");
+                                                messageBytes = memoryStream.GetBuffer();
+                                                memoryStream.Dispose();
+                                                memoryStream = new System.IO.MemoryStream();
+
+                                                try
+                                                {
+                                                    //string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                                                    this.DataReceived?.Invoke(this, new DataReceivedEventArgs(messageBytes));
+                                                    //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
+                                                    //Messages.Add(msg);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine($"Invalide message format. {ex.Message}");
+                                                }
                                             }
                                         }
 
@@ -173,5 +206,15 @@ namespace WebSocket4Net
         }
 
         public string Message { get; }
+    }
+
+    public class DataReceivedEventArgs : EventArgs
+    {
+        public byte[] Data { get; private set; }
+
+        public DataReceivedEventArgs(byte[] data)
+        {
+            Data = data;
+        }
     }
 }

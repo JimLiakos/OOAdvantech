@@ -10,21 +10,43 @@ namespace OOAdvantech.Remoting.RestApi
 #if !DeviceDotNet
     using System.Runtime.Remoting.Lifetime;
     using SuperSocket.ClientEngine;
+    using System.ServiceModel.Channels;
 #endif
 #if DeviceDotNet
     using WebSocket4Net;
 #endif
     using Json;
     using MetaDataRepository;
-    using WebSocketSendAsync = Func<ArraySegment<byte>, int, bool, CancellationToken, Task>;
-    using WebSocketCloseAsync = Func<
-                                 int, // closeStatus
-                                 string, // closeDescription
-                                 System.Threading.CancellationToken, // cancel
-                                 System.Threading.Tasks.Task>;
+
+
+    // http://owin.org/extensions/owin-WebSocket-Extension-v0.4.0.htm
+    using WebSocketAccept = Action<IDictionary<string, object>, // options
+        Func<IDictionary<string, object>, Task>>; // callback
+    using WebSocketCloseAsync =
+        Func<int /* closeStatus */,
+            string /* closeDescription */,
+            CancellationToken /* cancel */,
+            Task>;
+    using WebSocketReceiveAsync =
+        Func<ArraySegment<byte> /* data */,
+            CancellationToken /* cancel */,
+            Task<Tuple<int /* messageType */,
+                bool /* endOfMessage */,
+                int /* count */>>>;
+    using WebSocketSendAsync =
+        Func<ArraySegment<byte> /* data */,
+            int /* messageType */,
+            bool /* endOfMessage */,
+            CancellationToken /* cancel */,
+            Task>;
+    using WebSocketReceiveResult = Tuple<int, // type
+        bool, // end of message?
+        int>; // count
+
+
     using System.Net.WebSockets;
     using System.Runtime.Remoting.Messaging;
-    using System.ServiceModel.Channels;
+    
 
 
 
@@ -156,7 +178,7 @@ namespace OOAdvantech.Remoting.RestApi
             NativeWebSocket.Closed += OnClosed;
             NativeWebSocket.Error += OnError;
             NativeWebSocket.MessageReceived += OnMessageReceived;
-            NativeWebSocket.DataReceived += NativeWebSocket_DataReceived;
+            NativeWebSocket.DataReceived += OnDataReceived;
 #endif
         }
 
@@ -361,7 +383,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 #else
 
-        private void NativeWebSocket_DataReceived(object sender, WebSocket4Net.DataReceivedEventArgs e)
+        private void OnDataReceived(object sender, WebSocket4Net.DataReceivedEventArgs e)
         {
             Task.Run(() =>
             {
@@ -566,12 +588,14 @@ namespace OOAdvantech.Remoting.RestApi
                 NativeWebSocket.Closed -= OnClosed;
                 NativeWebSocket.Error -= OnError;
                 NativeWebSocket.MessageReceived -= OnMessageReceived;
+                NativeWebSocket.DataReceived -= OnDataReceived;
                 NativeWebSocket = new WebSocket4Net.WebSocket(Uri);
                 NativeWebSocket.Opened += OnOpened;
                 NativeWebSocket.Closed += OnClosed;
 
                 NativeWebSocket.Error += OnError;
                 NativeWebSocket.MessageReceived += OnMessageReceived;
+                NativeWebSocket.DataReceived += OnDataReceived;
 #endif
             }
 #if PORTABLE
@@ -647,9 +671,14 @@ namespace OOAdvantech.Remoting.RestApi
             //}
 
             //binary webSocket
+#if DeviceDotNet
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            nativeWebSocket.Send(messageBytes);
 
+#else
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
             nativeWebSocket.Send(messageBytes, 0, messageBytes.Length);
+#endif
             //nativeWebSocket.Send(message);
             return taskCompletionSource.Task;
 
@@ -757,11 +786,17 @@ namespace OOAdvantech.Remoting.RestApi
             responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
 
             //binary webSocket            
+#if DeviceDotNet
             byte[] messageBytes = Encoding.UTF8.GetBytes(responseDatajson);
+            nativeWebSocket.Send(messageBytes);
 
+#else
+
+            byte[] messageBytes = Encoding.UTF8.GetBytes(responseDatajson);
             nativeWebSocket.Send(messageBytes, 0, messageBytes.Length);
+#endif
 
-            nativeWebSocket.Send(responseDatajson);
+            //nativeWebSocket.Send(responseDatajson);
 
         }
 
