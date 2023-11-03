@@ -10,13 +10,14 @@ using OOAdvantech.Remoting.RestApi.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Proxies;
-using System.Buffers.Text;
+
 using System.IO.Compression;
 using System.IO;
 using System.Text;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
+
 using System.Reflection;
 #endif
 
@@ -992,7 +993,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
 
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(false), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization,null, null);
 
             var outArgs = new object[0];
             if (!string.IsNullOrWhiteSpace(returnMessage.JsonOutArgs))

@@ -66,6 +66,8 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.NamesTypesDictionary["Map"] = typeof(Dictionary<,>);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.MetaDataRepository.ProxyType"] = typeof(OOAdvantech.MetaDataRepository.ProxyType);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.ObjRef"] = typeof(OOAdvantech.Remoting.RestApi.ObjRef);
+            Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.TypeName"] = typeof(OOAdvantech.Remoting.RestApi.TypeName);
+            Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.ChannelData"] = typeof(OOAdvantech.Remoting.RestApi.ChannelData);
 
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.RemotingServicesServer"] = typeof(OOAdvantech.Remoting.RestApi.RemotingServicesServer);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession"] = typeof(OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession);
@@ -94,6 +96,8 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(Dictionary<,>)] = "Map";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.MetaDataRepository.ProxyType)] = "OOAdvantech.MetaDataRepository.ProxyType";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.ObjRef)] = "OOAdvantech.Remoting.RestApi.ObjRef";
+            Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.TypeName)] = "OOAdvantech.Remoting.RestApi.TypeName";
+            Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.ChannelData)] = "OOAdvantech.Remoting.RestApi.ChannelData";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession)] = "OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession";
             //Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Authentication.UserInfo)] = "OOAdvantech.Authentication.UserInfo";
             //Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Authentication.AuthUser)] = "OOAdvantech.Authentication.AuthUser";
@@ -915,7 +919,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             Type[] argsTypes = new Type[1] { typeof(string) };
 #if DeviceDotNet
-                            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession, argsTypes);
+                            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession, null, argsTypes);
 #else
                             var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession, null, argsTypes);
 #endif
@@ -980,7 +984,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Serialize, byref.ChannelUri, byref.InternalChannelUri, null) };
 #if DeviceDotNet
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
-                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);
+                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetJsonSerialization, serverSession.ChannelUri, internalChannelUri, null,null);
 #else
                     var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
 #endif
@@ -1024,7 +1028,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Serialize, byref.ChannelUri, byref.InternalChannelUri, null) };
 #if DeviceDotNet
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
-                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null);
+                    var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null,null);
 #else
                     var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
 

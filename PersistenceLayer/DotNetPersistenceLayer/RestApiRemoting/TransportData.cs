@@ -424,13 +424,17 @@ namespace OOAdvantech.Remoting.RestApi
             string internalChannelUri;
             ObjRef.GetChannelUriParts(ChannelUri, out string publicChannelUri, out internalChannelUri);
             InternalChannelUri=internalChannelUri;
+            PublicChannelUri = publicChannelUri;
         }
 
-        public string ChannelUri { get; }
+        public string ChannelUri { get; set; }
 
 
         [JsonIgnore]
-        public string InternalChannelUri { get; }
+        public string InternalChannelUri { get; set; }
+        
+        [JsonIgnore]
+        public string PublicChannelUri { get; set; }
         //string InternalChannelUri { get; set; }
     }
 

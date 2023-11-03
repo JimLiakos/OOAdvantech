@@ -441,7 +441,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
 #if DeviceDotNet
                 //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
 #else
                 var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
 #endif
@@ -543,7 +543,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 #if DeviceDotNet
                 //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
-                var jSetttings = new OOAdvantech.Remoting.RestApi.Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null);
+                var jSetttings = new OOAdvantech.Remoting.RestApi.Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
 #else
                 //var jSetttings = new OOAdvantech.Json.JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder() };
 

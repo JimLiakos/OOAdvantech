@@ -24,6 +24,7 @@ namespace OOAdvantech.Remoting.RestApi
                                  System.Threading.Tasks.Task>;
     using System.Net.WebSockets;
     using System.Runtime.Remoting.Messaging;
+    using System.ServiceModel.Channels;
 
 
 
@@ -139,7 +140,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{4ae3e486-c4e1-4aaf-9016-4e09ad92061c}</MetaDataID>
         public WebSocketClient(string uri, Binding binding)
         {
-            
+
             Binding = binding;
             Uri = uri;
 #if PORTABLE
@@ -155,8 +156,11 @@ namespace OOAdvantech.Remoting.RestApi
             NativeWebSocket.Closed += OnClosed;
             NativeWebSocket.Error += OnError;
             NativeWebSocket.MessageReceived += OnMessageReceived;
+            NativeWebSocket.DataReceived += NativeWebSocket_DataReceived;
 #endif
         }
+
+
 
 
 
@@ -227,7 +231,7 @@ namespace OOAdvantech.Remoting.RestApi
                         var logicalConnection = (from interConnection in _PublicWebSockets
                                                  where interConnection.SessionIdentity == request.SessionIdentity
                                                  select interConnection).FirstOrDefault();
-                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType,RequestOS=request.RequestOS,CachingMetadata=request.CachingMetadata  };
+                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata };
 
                         ResponseData responseData = null;
                         if (logicalConnection != null && logicalConnection.Public != null && logicalConnection.Public.State == WebSocketState.Open)
@@ -356,6 +360,18 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 #else
+
+        private void NativeWebSocket_DataReceived(object sender, WebSocket4Net.DataReceivedEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string message = Encoding.UTF8.GetString(e.Data);
+                m_MessageRecieveTaskSrc?.SetResult(message);
+                m_MessageRecieveTaskSrc = null;
+                string messageData = message;
+                MessageDispatch(message);
+            });
+        }
         /// <MetaDataID>{aecaf65b-f30c-4840-9e9d-f99753b8bea8}</MetaDataID>
         private void OnMessageReceived(object sender, WebSocket4Net.MessageReceivedEventArgs e)
         {
@@ -365,6 +381,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             Task.Run(() =>
             {
+
                 m_MessageRecieveTaskSrc?.SetResult(e.Message);
                 m_MessageRecieveTaskSrc = null;
                 string messageData = e.Message;
@@ -552,7 +569,7 @@ namespace OOAdvantech.Remoting.RestApi
                 NativeWebSocket = new WebSocket4Net.WebSocket(Uri);
                 NativeWebSocket.Opened += OnOpened;
                 NativeWebSocket.Closed += OnClosed;
-                
+
                 NativeWebSocket.Error += OnError;
                 NativeWebSocket.MessageReceived += OnMessageReceived;
 #endif
@@ -592,16 +609,16 @@ namespace OOAdvantech.Remoting.RestApi
             TaskCompletionSource<ResponseData> taskCompletionSource;
             if (!EnsureConnection())
             {
-            
-                
-                    if (this.SocketException != null)
-                        throw this.SocketException;
-                    ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
-                    responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, SocketException);
-                    taskCompletionSource = new TaskCompletionSource<ResponseData>();
-                    taskCompletionSource.SetResult(new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) });
-                    return taskCompletionSource.Task;
-                
+
+
+                if (this.SocketException != null)
+                    throw this.SocketException;
+                ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
+                responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, SocketException);
+                taskCompletionSource = new TaskCompletionSource<ResponseData>();
+                taskCompletionSource.SetResult(new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) });
+                return taskCompletionSource.Task;
+
             }
 
             WebSocket4Net.WebSocket nativeWebSocket;
@@ -612,7 +629,7 @@ namespace OOAdvantech.Remoting.RestApi
                 taskCompletionSource = new TaskCompletionSource<ResponseData>();
                 lock (RequestTasks)
                 {
-                    if(request.RequestType==RequestType.Disconnect&& RequestTasks.Count>0)
+                    if (request.RequestType == RequestType.Disconnect && RequestTasks.Count > 0)
                     {
 
                     }
@@ -629,7 +646,11 @@ namespace OOAdvantech.Remoting.RestApi
 
             //}
 
-            nativeWebSocket.Send(message);
+            //binary webSocket
+
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            nativeWebSocket.Send(messageBytes, 0, messageBytes.Length);
+            //nativeWebSocket.Send(message);
             return taskCompletionSource.Task;
 
         }
@@ -734,6 +755,12 @@ namespace OOAdvantech.Remoting.RestApi
             }
             string responseDatajson = Json.JsonConvert.SerializeObject(responseData);
             responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
+
+            //binary webSocket            
+            byte[] messageBytes = Encoding.UTF8.GetBytes(responseDatajson);
+
+            nativeWebSocket.Send(messageBytes, 0, messageBytes.Length);
+
             nativeWebSocket.Send(responseDatajson);
 
         }
@@ -744,7 +771,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             var closeTaskSrc = m_CloseTaskSrc;
 
-            if (State != WebSocketState.Closed&& State != WebSocketState.None)
+            if (State != WebSocketState.Closed && State != WebSocketState.None)
             {
                 if (closeTaskSrc != null)
                     return closeTaskSrc.Task;
@@ -761,10 +788,10 @@ namespace OOAdvantech.Remoting.RestApi
                 return closeTaskSrc.Task;
             }
             else
-               return Task<bool>.FromResult(true);
+                return Task<bool>.FromResult(true);
 
-     
-            
+
+
         }
 
         /// <MetaDataID>{079af359-a860-4a56-bfa8-a3d2797c0c02}</MetaDataID>
@@ -1182,7 +1209,7 @@ namespace OOAdvantech.Remoting.RestApi
                 return _State;
             }
         }
-        public bool ConnectionIsOpen { get=>_State==WebSocketState.Open; }
+        public bool ConnectionIsOpen { get => _State == WebSocketState.Open; }
 
 
 
@@ -1281,7 +1308,23 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
 
+        public void OnData(byte[] data)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    string message = Encoding.UTF8.GetString(data, 0, data.Length);
 
+                    MessageDispatch(message);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            });
+        }
         /// <MetaDataID>{f9d2d7da-2331-4587-b2fa-7d7a2fb6488b}</MetaDataID>
         public void OnMessage(string message)
         {
@@ -1290,7 +1333,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
 
             }
-          
+
 #endif
             if (string.IsNullOrWhiteSpace(message))
             {
@@ -1301,7 +1344,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 try
                 {
-                  
+
                     MessageDispatch(message);
                 }
                 catch (Exception)
@@ -1317,18 +1360,27 @@ namespace OOAdvantech.Remoting.RestApi
         {
             lock (this)
             {
-                var bytes = Encoding.UTF8.GetBytes(message);
-                var buffer = new ArraySegment<byte>(new byte[bytes.Length]);
-                Array.Copy(bytes, 0, buffer.Array, 0, bytes.Length);
-                var task = _sendFunc(new ArraySegment<byte>(buffer.Array, 0, bytes.Length), 1, true, _token);
-                if (!task.Wait(TimeSpan.FromSeconds(10)))
+                try
                 {
-                    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+                    var bytes = Encoding.UTF8.GetBytes(message);
+                    var buffer = new ArraySegment<byte>(new byte[bytes.Length]);
+                    Array.Copy(bytes, 0, buffer.Array, 0, bytes.Length);
+                    //binary webSocket
+                    var task = _sendFunc(new ArraySegment<byte>(buffer.Array, 0, bytes.Length), 2, true, _token);
+                    if (!task.Wait(TimeSpan.FromSeconds(10)))
+                    {
+                        throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
 
-                    //if (!task.Wait(Binding.DefaultBinding.SendTimeout))
-                    //{
-                    //    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
-                    //}
+                        //if (!task.Wait(Binding.DefaultBinding.SendTimeout))
+                        //{
+                        //    throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
+                        //}
+                    }
+                }
+                catch (Exception error)
+                {
+
+                    throw;
                 }
             }
         }
@@ -1377,7 +1429,7 @@ namespace OOAdvantech.Remoting.RestApi
                     responseData.DirectConnect = RemotingServices.InternalEndPointResolver.CanBeResolvedLocal(request);
 #if DEBUG
                     if (overrideDirectconnect)
-                        responseData.DirectConnect=false;
+                        responseData.DirectConnect = false;
 #endif
                     var datetime = DateTime.Now;
                     string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
@@ -1388,7 +1440,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //    string id = Microsoft.WindowsAzure.ServiceRuntime.RoleEnvironment.CurrentRoleInstance.Id;
                     //}
                 }
-         
+
                 else
                 {
                     //if (request.SessionIdentity != null)
@@ -1418,10 +1470,10 @@ namespace OOAdvantech.Remoting.RestApi
                                 responseData.ChannelUri = request.ChannelUri;
                                 responseData.CallContextID = request.CallContextID;
 
-                                if (request.PhysicalConnectionID.IndexOf("=>")==-1)
-                                    responseData.DirectConnect=true;
+                                if (request.PhysicalConnectionID.IndexOf("=>") == -1)
+                                    responseData.DirectConnect = true;
                                 else
-                                    responseData.DirectConnect=false;
+                                    responseData.DirectConnect = false;
 
 
 
@@ -1471,7 +1523,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                             System.Diagnostics.Debug.WriteLine(request.ChannelUri + " , " + roleInstanceServerUrl, "Channel");
 
-                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID , RequestOS=request.RequestOS, CachingMetadata = request.CachingMetadata };
+                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata };
 
                             if (roleInstanceServerUrl.Trim().IndexOf("http://") == 0)
                                 roleInstanceServerUrl = "ws://" + roleInstanceServerUrl.Substring("http://".Length);
@@ -1505,7 +1557,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
                                     responseData = task.Result;
                                     responseData.ChannelUri = forwordRequest.ChannelUri;
-                                    if (request.RequestType != RequestType.Disconnect&&request.RequestType != RequestType.LagTest && logicalConnection == null)
+                                    if (request.RequestType != RequestType.Disconnect && request.RequestType != RequestType.LagTest && logicalConnection == null)
                                         EnsureLogicalConnection(responseData, webSocket);
                                 }
                                 if (request.RequestType == RequestType.Disconnect)
