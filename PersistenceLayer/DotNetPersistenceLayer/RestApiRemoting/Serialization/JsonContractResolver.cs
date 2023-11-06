@@ -17,7 +17,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         SerializeSession SerializeSession = new SerializeSession();
 
         public int DesirializeIndex = 0;
-        private Dictionary<string, List<string>> CachingMetadata;
+        private CachingMetaData CachingMetadata;
         JsonContractType JsonContructType;
 
         private OOAdvantech.Remoting.RestApi.ServerSessionPart ServerSessionPart;
@@ -35,7 +35,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         //    Web = web;
         //}
 
-        public JsonContractResolver(JsonContractType jsonContructType,/* string channelUri, string internalChannelUri,*/ ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
+        public JsonContractResolver(JsonContractType jsonContructType,/* string channelUri, string internalChannelUri,*/ ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
         {
             CachingMetadata = cachingMetadata;
             //TypeEx = typeEx;
@@ -52,7 +52,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             this.SerializeSession.SerializationFormat = SerializationFormat;
         }
 
-        public JsonContractResolver(JsonContractType jsonContructType, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] argsTypes, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
+        public JsonContractResolver(JsonContractType jsonContructType, ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata, Type[] argsTypes, JsonSerializationFormat serializationFormat = JsonSerializationFormat.NetJsonSerialization)
             : this(jsonContructType,  serverSessionPart, cachingMetadata, serializationFormat)
         {
             this.RootArgsTypes = argsTypes;

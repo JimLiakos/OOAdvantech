@@ -108,7 +108,7 @@ namespace OOAdvantech.Remoting.RestApi
             var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, Web?JsonSerializationFormat.TypeScriptJsonSerialization:JsonSerializationFormat.NetTypedValuesJsonSerialization, ChannelUri, InternalChannelUri, ServerSession, cachingMetadata);
             // { TypeNameHandling = ServerSession.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, ChannelUri, InternalChannelUri, ServerSession,Web) };
 #endif
-            jSetttings.CachingMetadata = cachingMetadata;
+            jSetttings.CachingMetadata = new CachingMetaData() { CachingMembers = cachingMetadata };
             //if (Web)
             //{
             //    jSetttings.ReferenceResolver = new ReferenceResolver();

@@ -14,6 +14,7 @@ using System.Runtime.Remoting.Proxies;
 using System.IO.Compression;
 using System.IO;
 using System.Text;
+using System.Diagnostics;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -342,6 +343,8 @@ namespace OOAdvantech.Remoting.RestApi
             if (responseData != null)// .IsSuccessStatusCode)
             {
 
+
+
                 ReturnMessage returnMessage = null;
 
                 try
@@ -350,6 +353,31 @@ namespace OOAdvantech.Remoting.RestApi
                     if (returnMessage.ServerSessionObjectRef != null)
                     {
 
+                    }
+                    try
+                    {
+                        returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
+                        if (cachingMetadata != null)
+                        {
+                            var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
+                            var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
+                            Stopwatch timer = new Stopwatch();
+                            timer.Start();
+                            bytes = WebSocketChannel.Compress(bytes);
+                            bytes = WebSocketChannel.DeCompress(bytes);
+                            timer.Stop();
+                            var json = Encoding.UTF8.GetString(bytes);
+
+                            var sp = timer.ElapsedMilliseconds;
+
+                            //var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
+                            //var json = StringCompression.Unzip(mBuffer);
+                        }
+                    }
+                    catch (Exception error)
+                    {
+
+                        throw;
                     }
                 }
                 catch (Exception error)
@@ -397,6 +425,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     if (ObjectRef.InvalidMembersValues)
                     {
+                        
                         var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
                         var _object = GetTransparentProxy(Type);
                         remotingServices.RefreshCacheData(_object as MarshalByRefObject);
@@ -629,7 +658,7 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.ChannelUri = ChannelUri;
 
             var responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData); //RemotingServices.Invoke(requestData.PublicChannelUri, requestData, X_Auth_Token, X_Access_Token);
-          
+
             if (responseData != null)// .IsSuccessStatusCode)
             {
                 ReturnMessage returnMessage = null;
@@ -638,9 +667,19 @@ namespace OOAdvantech.Remoting.RestApi
                     returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
                     if (cachingMetadata != null)
                     {
-                        var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
-                        var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
-                        var json = StringCompression.Unzip(mBuffer);
+                       // var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
+                        var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
+                        Stopwatch timer = new Stopwatch();
+                        timer.Start();
+                        bytes = WebSocketChannel.Compress(bytes);
+                        bytes = WebSocketChannel.DeCompress(bytes);
+                        timer.Stop();
+                        var json = Encoding.UTF8.GetString(bytes);
+
+                        var sp = timer.ElapsedMilliseconds;
+
+                        //var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
+                        //var json = StringCompression.Unzip(mBuffer);
                     }
                 }
                 catch (Exception error)
@@ -662,7 +701,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                             returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
 
-                         
+
                         }
                         catch (Exception error)
                         {
@@ -956,6 +995,10 @@ namespace OOAdvantech.Remoting.RestApi
                 i++;
             }
             object retObject = null;
+            if(returnMessage.ReturnObjectJson.IndexOf("\"MembersValues\":{\"")!= -1)
+            {
+
+            }
             if (returnMessage.ReturnObjectJson != null && returnMessage.ReturnObjectJson != "{}")
             {
                 if (method.ReturnType != typeof(void))
@@ -1239,109 +1282,4 @@ namespace OOAdvantech.Remoting.RestApi
 
     }
 
-
-   
-public static class StringCompression
-    {
-        /// <summary>
-        /// Compresses a string and returns a deflate compressed, Base64 encoded string.
-        /// </summary>
-        /// <param name="uncompressedString">String to compress</param>
-        public static string Compress(string uncompressedString)
-        {
-            byte[] compressedBytes;
-
-            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(uncompressedString)))
-            {
-                using (var compressedStream = new MemoryStream())
-                {
-                    // setting the leaveOpen parameter to true to ensure that compressedStream will not be closed when compressorStream is disposed
-                    // this allows compressorStream to close and flush its buffers to compressedStream and guarantees that compressedStream.ToArray() can be called afterward
-                    // although MSDN documentation states that ToArray() can be called on a closed MemoryStream, I don't want to rely on that very odd behavior should it ever change
-                    using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, true))
-                    {
-                        uncompressedStream.CopyTo(compressorStream);
-                    }
-
-                    // call compressedStream.ToArray() after the enclosing DeflateStream has closed and flushed its buffer to compressedStream
-                    compressedBytes = compressedStream.ToArray();
-                }
-            }
-
-            return Convert.ToBase64String(compressedBytes);
-        }
-
-        /// <summary>
-        /// Decompresses a deflate compressed, Base64 encoded string and returns an uncompressed string.
-        /// </summary>
-        /// <param name="compressedString">String to decompress.</param>
-        public static string Decompress(string compressedString)
-        {
-            byte[] decompressedBytes;
-
-            var compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
-
-            using (var decompressorStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
-            {
-                using (var decompressedStream = new MemoryStream())
-                {
-                    decompressorStream.CopyTo(decompressedStream);
-
-                    decompressedBytes = decompressedStream.ToArray();
-                }
-            }
-
-            return Encoding.UTF8.GetString(decompressedBytes);
-        }
-
-        public static void CopyTo(Stream src, Stream dest)
-        {
-            byte[] bytes = new byte[4096];
-
-            int cnt;
-
-            while ((cnt = src.Read(bytes, 0, bytes.Length)) != 0)
-            {
-                dest.Write(bytes, 0, cnt);
-            }
-        }
-
-        public static byte[] Zip(string str)
-        {
-            var bytes = Encoding.UTF8.GetBytes(str);
-
-            using (var msi = new MemoryStream(bytes))
-            using (var mso = new MemoryStream())
-            {
-                using (var gs = new GZipStream(mso, CompressionMode.Compress))
-                {
-                    //msi.CopyTo(gs);
-                    CopyTo(msi, gs);
-                }
-
-                return mso.ToArray();
-            }
-        }
-
-        public static string Unzip(byte[] bytes)
-        {
-            using (var msi = new MemoryStream(bytes))
-            using (var mso = new MemoryStream())
-            {
-                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
-                {
-                    //gs.CopyTo(mso);
-                    CopyTo(gs, mso);
-                }
-
-                return Encoding.UTF8.GetString(mso.ToArray());
-            }
-        }
-
-        static void Main(string[] args)
-        {
-            byte[] r1 = Zip("StringStringStringStringStringStringStringStringStringStringStringStringStringString");
-            string r2 = Unzip(r1);
-        }
-    }
 }

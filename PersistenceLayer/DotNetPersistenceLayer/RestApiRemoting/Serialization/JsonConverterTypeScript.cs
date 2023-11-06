@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using OOAdvantech.Json;
 using OOAdvantech.Json.Linq;
 using OOAdvantech.Json.Serialization;
@@ -52,7 +53,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <MetaDataID>{ddfbf0ee-c47c-4a37-ad98-5f8cc148516c}</MetaDataID>
         Type[] RootArgsTypes;
 
-        Dictionary<string, List<string>> CachingMetadata;
+        CachingMetaData CachingMetadata;
 
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// Defines the server session part of communication channel parameter
         /// </param>
         /// <MetaDataID>{50d948e0-6274-4e96-b15b-2637248cf1cc}</MetaDataID>
-        JsonConverterTypeScript(SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata)
+        JsonConverterTypeScript(SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata)
         {
             //ChannelUri = channelUri;
             //InternalChannelUri = internalChannelUri;
@@ -112,8 +113,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{72dab712-850e-493b-964d-46ed05c00e9b}</MetaDataID>
-        public JsonConverterTypeScript(JsonObjectContract contract, Type objectType, SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
-            : this(serializeSession, serverSessionPart,cachingMetadata )
+        public JsonConverterTypeScript(JsonObjectContract contract, Type objectType, SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata, Type[] rootArgsTypes)
+            : this(serializeSession, serverSessionPart, cachingMetadata)
         {
             RootArgsTypes = rootArgsTypes;
             ObjectType = objectType;
@@ -150,7 +151,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{f68ee033-d1c0-49de-995d-138c71bcc77c}</MetaDataID>
-        public JsonConverterTypeScript(JsonArrayContract arrayContruct,SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+        public JsonConverterTypeScript(JsonArrayContract arrayContruct, SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata, Type[] rootArgsTypes)
             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart, cachingMetadata)
         {
             ArrayContruct = arrayContruct;
@@ -182,7 +183,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{0b46ca43-605a-4429-9801-6e7d30a37aa9}</MetaDataID>
-        public JsonConverterTypeScript(JsonPrimitiveContract jsonPrimitiveContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+        public JsonConverterTypeScript(JsonPrimitiveContract jsonPrimitiveContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, OOAdvantech.Remoting.RestApi.ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata, Type[] rootArgsTypes)
             : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart, cachingMetadata)
         {
             this.JsonPrimitiveContract = jsonPrimitiveContract;
@@ -215,7 +216,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// defines the Types root array
         /// </param>
         /// <MetaDataID>{2667fa29-7fcf-40b8-a034-74c38e98e3f8}</MetaDataID>
-        public JsonConverterTypeScript(JsonDictionaryContract jsonDictionaryContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] rootArgsTypes)
+        public JsonConverterTypeScript(JsonDictionaryContract jsonDictionaryContract,/* string channelUri, string internalChannelUri,*/SerializeSession serializeSession, ServerSessionPart serverSessionPart, CachingMetaData cachingMetadata, Type[] rootArgsTypes)
              : this(/*channelUri, internalChannelUri,*/serializeSession, serverSessionPart, cachingMetadata)
         {
             this.DictionaryContract = jsonDictionaryContract;
@@ -269,15 +270,23 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             {
 
             }
+            if (objectType == typeof(CachingMembers))
+            {
+
+            }
 
 
-            bool isRoot = string.IsNullOrWhiteSpace(reader.Path);
+                bool isRoot = string.IsNullOrWhiteSpace(reader.Path);
             SerializeSession.JsonSerializer = serializer;
             SerializeSession.JsonReader = reader;
             object value = null;
             if (reader.TokenType == JsonToken.StartObject)
             {
                 reader.Read();
+                if (reader.TokenType == JsonToken.EndObject)
+                {
+                    return null;
+                }
                 Type specifiedType = null; //defines the specified type in type token
                 bool isReference = false;
                 while (reader.TokenType == JsonToken.PropertyName)
@@ -352,12 +361,30 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                             if (valueType == null)
                                 valueType = objectType;
+                            if (valueType == typeof(CachingMembers))
+                            {
+                                var memberValues = new CachingMembers();
+                                reader.Read();
+                                while (reader.TokenType == JsonToken.PropertyName)
+                                {
+                                    string propertyName = reader.Value as string;
+                                    reader.Read();
+                                    object entryValue = GetPropertyValue(reader, typeof(object), serializer);
+                                    reader.Read();
+                                    memberValues[propertyName] = entryValue;
+                                }
+                                value = memberValues;
+
+                            }
+                            else
+                            {
 
 
-                            value = GetPropertyValue(reader, valueType, serializer);
+                                value = GetPropertyValue(reader, valueType, serializer);
 
-                            if (this.JsonPrimitiveContract != null)
-                                value = EnsureType(reader, value, CultureInfo.InvariantCulture, Contruct, objectType);
+                                if (this.JsonPrimitiveContract != null)
+                                    value = EnsureType(reader, value, CultureInfo.InvariantCulture, Contruct, objectType);
+                            }
                         }
 
                         #region convert objectRef to transparentProxy
@@ -384,6 +411,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
                         #region Read a collection  
+                        if (valueType == typeof(CachingMembers))
+                        {
+
+                        }
                         if (valueType == typeof(Dictionary<,>) || valueType.GetMetaData().IsGenericType && valueType.GetGenericTypeDefinition() == typeof(Dictionary<,>))
                         {
                             #region Reads dictionary
@@ -402,6 +433,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                             reader.Read();//Array sub item start object
                             while (reader.TokenType != JsonToken.EndArray)
                             {
+                                if (reader.Path.IndexOf("MembersValues") != -1)
+                                {
+
+                                }
                                 object key = null;
                                 object _obj = null;
                                 reader.Read();//Property
@@ -418,6 +453,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                     reader.Read();
                                     _obj = GetPropertyValue(reader, entryValueType, serializer);
                                     reader.Read();
+                                }
+                                if (key?.ToString() == "Roles")
+                                {
+
                                 }
                                 dictionary.Add(key, _obj);
                                 reader.Read();
@@ -1082,13 +1121,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 }
 
-                if (ServerSessionPart?.ChannelUri!=null&&ServerSessionPart?.ChannelUri!="local-device")
+                if (ServerSessionPart?.ChannelUri != null && ServerSessionPart?.ChannelUri != "local-device")
                     typeAlreadyMarshaled = true;
 
             }
 
             ObjRef byref = new ObjRef(uri, serverChannelUri, internalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
-            
+
             byref.CachingObjectMemberValues(_obj, CachingMetadata);
             if (typeAlreadyMarshaled)
                 byref.TypeMetaData = null;
@@ -1116,6 +1155,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             if (value is IMultilingualMember)
                 value = new Multilingual(value as IMultilingualMember);
+
+
 
             SerializeSession.JsonWriter = writer;
             SerializeSession.JsonSerializer = serializer;
@@ -1354,55 +1395,98 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
             else if (this.DictionaryContract != null)
             {
-                writer.WriteStartObject();
+
+
+
+
+                if (value is CachingMembers)
+                {
+                    writer.WriteStartObject();
+
+                    if ((value as CachingMembers).Count > 0)
+                    {
+#if DeviceDotNet
+                JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+#elif Json4
+                        JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+#else
+                JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
+#endif
+                        WriteJsonType(writer, serializer, jsonType);
+                        ///writer.WriteStartObject();
+                        if ((value as CachingMembers).Count == 8)
+                        {
+                        }
+                        JsonProperty valueProperty = new JsonProperty() { PropertyName = "$value" };
+                        valueProperty.WritePropertyName(writer);
+                        writer.WriteStartObject();
+
+                        IReferenceResolver referenceResolver = serializer.ReferenceResolver;
+                        JProperty typeIdProperty = new JProperty("$id", referenceResolver.GetReference(serializer, value));
+                        typeIdProperty.WriteTo(writer);
+
+                        foreach (var entry in (value as CachingMembers))
+                        {
+                            valueProperty = new JsonProperty() { PropertyName = entry.Key };
+                            valueProperty.WritePropertyName(writer);
+                            serializer.Serialize(writer, entry.Value);
+                        }
+                        writer.WriteEndObject();
+                        writer.WriteEndObject();
+                    }
+                    else
+                    {
+                        writer.WriteEndObject();
+                    }
+                }
+                else
+                {
+                    writer.WriteStartObject();
 
 
 #if DeviceDotNet
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #elif Json4
-                JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+                    JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #else
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
 #endif
-
-                WriteJsonType(writer, serializer, jsonType);
-
-                #region Write key value pair in array
-                JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
-                valueProperty.WritePropertyName(writer);
-
-                writer.WriteStartArray();
-                foreach (System.Collections.DictionaryEntry itemEntry in value as System.Collections.IDictionary)
-                {
-                    writer.WriteStartObject();
-
-                    JsonProperty keyProperty = new JsonProperty() { PropertyName = "key" };
-                    keyProperty.WritePropertyName(writer);
-                    serializer.Serialize(writer, itemEntry.Key);
-                    valueProperty = new JsonProperty() { PropertyName = "value" };
+                    WriteJsonType(writer, serializer, jsonType);
+                    #region Write key value pair in array
+                    JsonProperty valueProperty = new JsonProperty() { PropertyName = "$values" };
                     valueProperty.WritePropertyName(writer);
-                    //if (pathEntries.Last() == "MembersValues")
-                    //{
-                    //    this.SerializeSession.Path.Push(itemEntry.Key.ToString());
-                    //    serializer.Serialize(writer, itemEntry.Value);
-                    //    this.SerializeSession.Path.Pop();
-                    //}
-                    //else
+
+                    writer.WriteStartArray();
+                    foreach (System.Collections.DictionaryEntry itemEntry in value as System.Collections.IDictionary)
+                    {
+                        writer.WriteStartObject();
+
+                        JsonProperty keyProperty = new JsonProperty() { PropertyName = "key" };
+                        keyProperty.WritePropertyName(writer);
+                        serializer.Serialize(writer, itemEntry.Key);
+                        valueProperty = new JsonProperty() { PropertyName = "value" };
+                        valueProperty.WritePropertyName(writer);
+                        //if (pathEntries.Last() == "MembersValues")
+                        //{
+                        //    this.SerializeSession.Path.Push(itemEntry.Key.ToString());
+                        //    serializer.Serialize(writer, itemEntry.Value);
+                        //    this.SerializeSession.Path.Pop();
+                        //}
+                        //else
                         serializer.Serialize(writer, itemEntry.Value);
 
 
+                        writer.WriteEndObject();
+                    }
+                    writer.WriteEndArray();
+                    #endregion
+
                     writer.WriteEndObject();
                 }
-                writer.WriteEndArray();
-                #endregion
-
-                writer.WriteEndObject();
-
-
-
             }
             else
                 serializer.Serialize(writer, value);
+
 
 
 
@@ -1519,5 +1603,53 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         internal static Dictionary<string, TypeScriptProxy> PersistentObjectsTransparentProxies = new Dictionary<string, TypeScriptProxy>();
     }
+
+
+    public class MemberValuesJsonConverter : JsonConverter<Dictionary<string, object>>
+    {
+
+        public override Dictionary<string, object> ReadJson(JsonReader reader, Type objectType, Dictionary<string, object> existingValue, bool hasExistingValue, Json.JsonSerializer serializer)
+        {
+
+            var memberValues = new Dictionary<string, object>();
+
+            if (reader.TokenType == JsonToken.StartObject)
+            {
+                reader.Read();
+                while (reader.TokenType == JsonToken.PropertyName)
+                {
+                    string propertyName = reader.Value as string;
+                    reader.Read();
+                    object value = serializer.Deserialize(reader);
+                    reader.Read();
+                    memberValues[propertyName] = value;
+                }
+
+            }
+            if (memberValues.Count > 0)
+            {
+
+            }
+            return memberValues;
+        }
+
+        public override void WriteJson(JsonWriter writer, Dictionary<string, object> value, Json.JsonSerializer serializer)
+        {
+            writer.WriteStartObject();
+            if (value.Count == 8)
+            {
+
+            }
+            foreach (var entry in value)
+            {
+                JsonProperty valueProperty = new JsonProperty() { PropertyName = entry.Key };
+                valueProperty.WritePropertyName(writer);
+                serializer.Serialize(writer, entry.Value);
+            }
+            writer.WriteEndObject();
+
+        }
+    }
+
 
 }

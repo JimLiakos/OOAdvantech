@@ -29,8 +29,8 @@ namespace WebSocket4Net
             var byteMessage = Encoding.UTF8.GetBytes(message);
             var segmnet = new ArraySegment<byte>(byteMessage);
             //binary webSocket
-            await client.SendAsync(segmnet, WebSocketMessageType.Binary, true, cts.Token);
-            //await client.SendAsync(segmnet, WebSocketMessageType.Text, true, cts.Token);
+            //await client.SendAsync(segmnet, WebSocketMessageType.Binary, true, cts.Token);
+            await client.SendAsync(segmnet, WebSocketMessageType.Text, true, cts.Token);
 
         }
 

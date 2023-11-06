@@ -61,20 +61,20 @@ namespace OOAdvantech.Remoting.RestApi
 
                 if (!Channels.TryGetValue(channelUri, out ChannelData channelData))
                 {
-                    channelData=new ChannelData(channelUri);
-                    Channels[channelUri]=channelData;
+                    channelData = new ChannelData(channelUri);
+                    Channels[channelUri] = channelData;
                 }
-                ChannelData=channelData;
+                ChannelData = channelData;
             }
 
             lock (Types)
             {
                 if (!Types.TryGetValue(typeName, out TypeName _typeName))
                 {
-                    _typeName=new TypeName(typeName);
-                    Types[typeName]=_typeName;
+                    _typeName = new TypeName(typeName);
+                    Types[typeName] = _typeName;
                 }
-                TypeName = _typeName; 
+                TypeName = _typeName;
             }
 
             TypeMetaData = returnTypeMetaData;
@@ -102,7 +102,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{6e1c6091-cbd7-4094-a5f0-5a8ca4e840ad}</MetaDataID>
-        internal void CachingObjectMemberValues(object _obj, Dictionary<string, List<string>> cachingMetaData)
+        internal void CachingObjectMemberValues(object _obj, CachingMetaData cachingMetaData)
         {
             MembersValues.Clear();
             TypeMetaData.CachingObjectMembersValue(_obj, MembersValues, cachingMetaData);
@@ -152,7 +152,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 if (_ChannelUri == null)
                 {
-                    _ChannelUri=ChannelData.ChannelUri;
+                    _ChannelUri = ChannelData.ChannelUri;
                 }
                 return _ChannelUri;
             }
@@ -199,7 +199,10 @@ namespace OOAdvantech.Remoting.RestApi
 
         /// <MetaDataID>{7d7d326b-5a70-4394-8f10-5f6f6b06ae43}</MetaDataID>
         [JsonProperty(Order = 6)]
-        public Dictionary<string, object> MembersValues = new Dictionary<string, object>();
+        //[JsonConverter(typeof(MemberValuesJsonConverter))]
+
+        public CachingMembers MembersValues = new CachingMembers();
+        //public CachingMembers MembersValues = new CachingMembers();
 
         public bool InvalidMembersValues = false;
     }
@@ -420,10 +423,10 @@ namespace OOAdvantech.Remoting.RestApi
     {
         public ChannelData(string channelUri)
         {
-            ChannelUri=channelUri;
+            ChannelUri = channelUri;
             string internalChannelUri;
             ObjRef.GetChannelUriParts(ChannelUri, out string publicChannelUri, out internalChannelUri);
-            InternalChannelUri=internalChannelUri;
+            InternalChannelUri = internalChannelUri;
             PublicChannelUri = publicChannelUri;
         }
 
@@ -432,7 +435,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         [JsonIgnore]
         public string InternalChannelUri { get; set; }
-        
+
         [JsonIgnore]
         public string PublicChannelUri { get; set; }
         //string InternalChannelUri { get; set; }
@@ -442,12 +445,22 @@ namespace OOAdvantech.Remoting.RestApi
     {
         public TypeName(string assemblyQualifiedName)
         {
-            FullName=assemblyQualifiedName;
+            FullName = assemblyQualifiedName;
         }
         public string FullName { get; set; }
     }
 
+    public class CachingMembers : Dictionary<string, object>
+    {
 
+    }
+
+    public class CachingMetaData
+    {
+        public Dictionary<string, List<string>> CachingMembers;
+
+        public Stack<List<string>> ObjectMembersWithRefernceOnlyCaching = new Stack<List<string>>();
+    }
 
 
 }

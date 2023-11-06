@@ -1,3 +1,4 @@
+using OOAdvantech.Remoting.RestApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -281,7 +282,7 @@ namespace OOAdvantech.MetaDataRepository
         }
 
         /// <MetaDataID>{ccf8067e-7dc8-4078-bbbb-df645ef09d20}</MetaDataID>
-        public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, Dictionary<string, List<string>> cachingMetaData)
+        public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, CachingMetaData cachingMetaData)
         {
             foreach (var attribute in CachingClientSideAttributeProperties)
             {
@@ -311,7 +312,7 @@ namespace OOAdvantech.MetaDataRepository
             if (cachingMetaData != null)
             {
                 List<string> cachingClientSideMembers = new List<string>();
-                if (cachingMetaData.TryGetValue(FullName, out cachingClientSideMembers))
+                if (cachingMetaData.CachingMembers.TryGetValue(FullName, out cachingClientSideMembers))
                 {
                     foreach (string memberName in cachingClientSideMembers)
                     {

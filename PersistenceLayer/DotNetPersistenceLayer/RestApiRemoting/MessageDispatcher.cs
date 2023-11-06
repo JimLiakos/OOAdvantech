@@ -66,6 +66,7 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.NamesTypesDictionary["Map"] = typeof(Dictionary<,>);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.MetaDataRepository.ProxyType"] = typeof(OOAdvantech.MetaDataRepository.ProxyType);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.ObjRef"] = typeof(OOAdvantech.Remoting.RestApi.ObjRef);
+            Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.CachingMembers"] = typeof(OOAdvantech.Remoting.RestApi.CachingMembers);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.TypeName"] = typeof(OOAdvantech.Remoting.RestApi.TypeName);
             Serialization.SerializationBinder.NamesTypesDictionary["OOAdvantech.Remoting.RestApi.ChannelData"] = typeof(OOAdvantech.Remoting.RestApi.ChannelData);
 
@@ -96,6 +97,8 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(Dictionary<,>)] = "Map";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.MetaDataRepository.ProxyType)] = "OOAdvantech.MetaDataRepository.ProxyType";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.ObjRef)] = "OOAdvantech.Remoting.RestApi.ObjRef";
+            Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.CachingMembers)] = "OOAdvantech.Remoting.RestApi.CachingMembers";
+            
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.TypeName)] = "OOAdvantech.Remoting.RestApi.TypeName";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.ChannelData)] = "OOAdvantech.Remoting.RestApi.ChannelData";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession)] = "OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession";

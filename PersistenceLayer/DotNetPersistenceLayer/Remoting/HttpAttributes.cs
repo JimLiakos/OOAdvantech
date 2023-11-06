@@ -27,4 +27,16 @@ namespace OOAdvantech.MetaDataRepository
     {
 
     }
+
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class OnDemandCachingDataOnClientSide : System.Attribute
+    {
+
+    }
+    [AttributeUsage(AttributeTargets.Property| AttributeTargets.Field)]
+    public class CachingOnlyReferenceOnClientSide : System.Attribute
+    {
+
+    }
 }

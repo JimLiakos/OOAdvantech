@@ -39,7 +39,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
         }
 
-        public Dictionary<string, List<string>> CachingMetadata { get; internal set; }
+        public CachingMetaData CachingMetadata { get; internal set; }
 
 
         /// <summary>
@@ -58,13 +58,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         public JsonSerializerSettings(JsonContractType jsonContractType, JsonSerializationFormat serializationFormat, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] argsTypes = null)
         {
 
-            CachingMetadata = cachingMetadata;
+            CachingMetadata = new CachingMetaData() { CachingMembers = cachingMetadata };
 
             SerializationFormat = serializationFormat;
             JsonContructType = jsonContractType;
             TypeNameHandling =( serializationFormat == JsonSerializationFormat.TypeScriptJsonSerialization|| serializationFormat == JsonSerializationFormat.NetTypedValuesJsonSerialization) ? OOAdvantech.Json.TypeNameHandling.None : OOAdvantech.Json.TypeNameHandling.All;
             Binder = new SerializationBinder(serializationFormat);
-            ContractResolver = new JsonContractResolver(jsonContractType, serverSessionPart,cachingMetadata, argsTypes, serializationFormat);
+            ContractResolver = new JsonContractResolver(jsonContractType, serverSessionPart, CachingMetadata, argsTypes, serializationFormat);
 
             MissingMemberHandling = Json.MissingMemberHandling.Error;
 

@@ -387,7 +387,11 @@ namespace OOAdvantech.Remoting.RestApi
         {
             Task.Run(() =>
             {
-                string message = Encoding.UTF8.GetString(e.Data);
+                //binary webSocket  
+                var bytes = WebSocketChannel.DeCompress(e.Data);
+                string message = Encoding.UTF8.GetString(bytes);
+
+                //string message = Encoding.UTF8.GetString(e.Data);
                 m_MessageRecieveTaskSrc?.SetResult(message);
                 m_MessageRecieveTaskSrc = null;
                 string messageData = message;
@@ -673,10 +677,14 @@ namespace OOAdvantech.Remoting.RestApi
             //binary webSocket
 #if DeviceDotNet
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            messageBytes = WebSocketChannel.Compress(messageBytes);
+            
+
             nativeWebSocket.Send(messageBytes);
 
 #else
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            messageBytes = WebSocketChannel.Compress(messageBytes);
             nativeWebSocket.Send(messageBytes, 0, messageBytes.Length);
 #endif
             //nativeWebSocket.Send(message);
@@ -788,11 +796,14 @@ namespace OOAdvantech.Remoting.RestApi
             //binary webSocket            
 #if DeviceDotNet
             byte[] messageBytes = Encoding.UTF8.GetBytes(responseDatajson);
+            messageBytes = WebSocketChannel.Compress(messageBytes);
+
             nativeWebSocket.Send(messageBytes);
 
 #else
 
             byte[] messageBytes = Encoding.UTF8.GetBytes(responseDatajson);
+            messageBytes = WebSocketChannel.Compress(messageBytes);
             nativeWebSocket.Send(messageBytes, 0, messageBytes.Length);
 #endif
 
@@ -1342,13 +1353,30 @@ namespace OOAdvantech.Remoting.RestApi
             #endregion
         }
 
+        static object statisticsLock = new object();
 
+        static int InputCompressData;
+
+        static int InputUnCompressData;
+        static int OutputCompressData;
+
+        static int OutputUnCompressData;
         public void OnData(byte[] data)
         {
             Task.Run(() =>
             {
                 try
                 {
+                    //binary webSocket
+
+                    lock (statisticsLock)
+                        InputCompressData += data.Length;
+                    
+                    data = WebSocketChannel.DeCompress(data);
+
+                    lock (statisticsLock)
+                        InputUnCompressData += data.Length;
+
                     string message = Encoding.UTF8.GetString(data, 0, data.Length);
 
                     MessageDispatch(message);
@@ -1397,11 +1425,24 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 try
                 {
-                    var bytes = Encoding.UTF8.GetBytes(message);
-                    var buffer = new ArraySegment<byte>(new byte[bytes.Length]);
-                    Array.Copy(bytes, 0, buffer.Array, 0, bytes.Length);
+                    var messageBytes = Encoding.UTF8.GetBytes(message);
+
+
+                    lock (statisticsLock)
+                        OutputUnCompressData += messageBytes.Length;
+
+                    messageBytes = WebSocketChannel.Compress(messageBytes);
+
+                    lock (statisticsLock)
+                        OutputCompressData += messageBytes.Length;
+
+
+                    
+
+                    var buffer = new ArraySegment<byte>(new byte[messageBytes.Length]);
+                    Array.Copy(messageBytes, 0, buffer.Array, 0, messageBytes.Length);
                     //binary webSocket
-                    var task = _sendFunc(new ArraySegment<byte>(buffer.Array, 0, bytes.Length), 2, true, _token);
+                    var task = _sendFunc(new ArraySegment<byte>(buffer.Array, 0, messageBytes.Length), 2, true, _token);
                     if (!task.Wait(TimeSpan.FromSeconds(10)))
                     {
                         throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
@@ -1936,6 +1977,8 @@ namespace System.Net.WebSockets
     }
 #endif
 }
+
+
 
 
 
