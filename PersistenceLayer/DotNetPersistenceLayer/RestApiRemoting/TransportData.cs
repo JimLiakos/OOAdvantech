@@ -315,6 +315,10 @@ namespace OOAdvantech.Remoting.RestApi
         public string CachingMetadata { get; set; }
 
 
+        [DataMember]
+        public bool HasCachingMembers { get; set; }
+
+
 
         /// <MetaDataID>{8dcafe1d-afcf-43f3-90c3-5a4e39a90391}</MetaDataID>
         public IEndPoint EventCallBackChannel;
@@ -457,7 +461,7 @@ namespace OOAdvantech.Remoting.RestApi
 
     public class CachingMetaData
     {
-        public Dictionary<string, List<string>> CachingMembers;
+        public Dictionary<string, List<string>> CachingMembers=new Dictionary<string, List<string>>();
 
         public Stack<List<string>> ObjectMembersWithReferenceOnlyCaching = new Stack<List<string>>();
     }

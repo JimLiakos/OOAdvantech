@@ -284,6 +284,7 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{ccf8067e-7dc8-4078-bbbb-df645ef09d20}</MetaDataID>
         public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, CachingMetaData cachingMetaData)
         {
+        
             foreach (var attribute in CachingClientSideAttributeProperties)
             {
                 object value = attribute.GetValue(_object);
@@ -312,7 +313,7 @@ namespace OOAdvantech.MetaDataRepository
             if (cachingMetaData != null)
             {
                 List<string> cachingClientSideMembers = new List<string>();
-                if (cachingMetaData.CachingMembers.TryGetValue(FullName, out cachingClientSideMembers))
+                if ( cachingMetaData.CachingMembers?.TryGetValue(FullName, out cachingClientSideMembers)==true)
                 {
                     foreach (string memberName in cachingClientSideMembers)
                     {
@@ -329,9 +330,37 @@ namespace OOAdvantech.MetaDataRepository
                                 membersValues[memberName] = field.GetValue(_object);
                             }
                         }
+                        else
+                        {
+
+                        }
 
                     }
                 }
+
+                if(cachingMetaData.CachingMembers?.TryGetValue("" ,out cachingClientSideMembers)==true)
+                {
+                    foreach (string memberName in cachingClientSideMembers)
+                    {
+                        if (!membersValues.ContainsKey(memberName))
+                        {
+                            var property = this.Type.GetProperty(memberName);
+                            if (property != null)
+                            {
+                                membersValues[memberName] = property.GetValue(_object);
+                            }
+                            else
+                            {
+                                var field = this.Type.GetField(memberName);
+                                if(field!=null)
+                                    membersValues[memberName] = field.GetValue(_object);
+                            }
+                        }
+
+                    }
+
+                }
+
             }
 
             foreach (var _interface in _Interfaces)

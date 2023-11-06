@@ -371,7 +371,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                     reader.Read();
                                     object entryValue = GetPropertyValue(reader, typeof(object), serializer);
                                     reader.Read();
-                                    memberValues[propertyName] = entryValue;
+                                    if(propertyName!="$id")
+                                        memberValues[propertyName] = entryValue;
+                                    else
+                                    {
+
+                                    }
                                 }
                                 value = memberValues;
 
@@ -1165,6 +1170,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
             string last = pathEntries.Last();
             string property = null;
+            if(last=="MealCourse")
+            {
+
+            }
+
 
             if (!string.IsNullOrWhiteSpace(last) && last.IndexOf("$value") == -1 &&
                 last.IndexOf("MembersValues") == -1 &&
@@ -1225,6 +1235,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         if (referenceResolver is ReferenceResolver)
                         {
                             isReferenced = (referenceResolver as ReferenceResolver).IsReferencedTs(serializer, value);
+
+                            if(isReferenced)
+                            {
+
+                            }
+
                             ObjRef byref = (referenceResolver as ReferenceResolver).GetPoxyObjRef(value);
                             if (byref == null)
                             {
@@ -1269,14 +1285,22 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     JsonProperty valueProperty = new JsonProperty() { PropertyName = "$value" };
                     if (isReferenced)
                     {
-                        int refIndex = int.Parse(serializer.ReferenceResolver.GetReference(serializer, value));
+                        if (value is System.MarshalByRefObject || value is ITransparentProxy)
+                        {
+
+                        }
+                            int refIndex = int.Parse(serializer.ReferenceResolver.GetReference(serializer, value));
                         var indexProperty = new JProperty("ref", refIndex);
                         indexProperty.WriteTo(writer);
                     }
                     else
                     {
+
+                        List<string> preventClientSideCachingMembers= GetPreventClientSideCachingMembers(value.GetType());
+                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(preventClientSideCachingMembers);
                         valueProperty.WritePropertyName(writer);
                         serializer.Serialize(writer, value);
+                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop()ff
                     }
 
                     writer.WriteEndObject();
@@ -1490,6 +1514,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
 
+        }
+
+        private List<string> GetPreventClientSideCachingMembers(Type type)
+        {
+            return new List<string>();
         }
 
         /// <MetaDataID>{1c911dd6-a829-4b5b-a5e5-d502f2d01d13}</MetaDataID>

@@ -14,7 +14,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         }
 
-        public MarshalByRefObject RefreshCacheData(MarshalByRefObject obj)
+        public MarshalByRefObject RefreshCacheData(MarshalByRefObject obj )
         {
             return obj;
         }

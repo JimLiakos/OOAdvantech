@@ -1048,7 +1048,12 @@ namespace OOAdvantech.Remoting.RestApi
                     //                    }
                     //                    else
                     {
-                        int refIndex = int.Parse(serializer.ReferenceResolver.GetReference(serializer, value));
+                        if (value is System.MarshalByRefObject || value is ITransparentProxy)
+                        {
+
+                        }
+
+                            int refIndex = int.Parse(serializer.ReferenceResolver.GetReference(serializer, value));
                         var indexProperty = new JProperty("ref", refIndex);
                         indexProperty.WriteTo(writer);
                     }

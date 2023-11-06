@@ -357,7 +357,7 @@ namespace System.Linq
             {
                 var linqObjectQuery = new OOAdvantech.Linq.LINQStorageObjectQuery(expression, default(OOAdvantech.PersistenceLayer.ObjectStorage));
 
-                var cachingMembers = GetCachingMembers(linqObjectQuery.DataTrees[0].SubDataNodes[0]);
+                Dictionary<string,List<string>> cachingMembers = GetCachingMembers(linqObjectQuery.DataTrees[0].SubDataNodes[0]);
 
                 try
                 {

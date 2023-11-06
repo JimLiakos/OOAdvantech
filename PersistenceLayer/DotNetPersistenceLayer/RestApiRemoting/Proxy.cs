@@ -425,7 +425,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     if (ObjectRef.InvalidMembersValues)
                     {
-                        
+
                         var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
                         var _object = GetTransparentProxy(Type);
                         remotingServices.RefreshCacheData(_object as MarshalByRefObject);
@@ -651,9 +651,17 @@ namespace OOAdvantech.Remoting.RestApi
             if (cachingMetadata != null)
                 requestData.CachingMetadata = Json.JsonConvert.SerializeObject(cachingMetadata);
 
+            if (methodCallMessage.MethodName=="RefreshTest")
+            {
+
+            }
 
             requestData.RequestType = RequestType.MethodCall;
+            if (this.ObjectRef.MembersValues?.Count > 0==true)
+                requestData.HasCachingMembers=true;
+
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
+
 
             requestData.ChannelUri = ChannelUri;
 
@@ -667,7 +675,7 @@ namespace OOAdvantech.Remoting.RestApi
                     returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
                     if (cachingMetadata != null)
                     {
-                       // var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
+                        // var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
                         var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
                         Stopwatch timer = new Stopwatch();
                         timer.Start();
@@ -719,9 +727,17 @@ namespace OOAdvantech.Remoting.RestApi
                 var message = UnMarshal((msg as IMethodCallMessage), returnMessage);
                 if (responseData.UpdateCaching)
                 {
+
+                    Dictionary<string, List<string>> cachingMembers = new Dictionary<string, List<string>>();
+                    cachingMembers[""]=this.ObjectRef.MembersValues.Keys.ToList();
+
                     try
                     {
-                        OOAdvantech.Remoting.RestApi.RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
+                        if (cachingMembers.Count>0)
+                            CallContext.SetData("CachingMetadata", cachingMembers);
+
+
+                        RemotingServices.RefreshCacheData(GetTransparentProxy(base.GetProxiedType()) as MarshalByRefObject);
                     }
                     catch (Exception error)
                     {
@@ -933,10 +949,10 @@ namespace OOAdvantech.Remoting.RestApi
             if (localCall)
             {
                 ReturnMessage = new System.Runtime.Remoting.Messaging.ReturnMessage(
-                    returnValue,	//ReturnValue
-                    outArgs,			//Object[] outArgs
-                    outArgs.Length,					//int outArgsCount
-                    (LogicalCallContext)msg.Properties["__CallContext"],				//LogicalCallContext callCtx
+                    returnValue,    //ReturnValue
+                    outArgs,            //Object[] outArgs
+                    outArgs.Length,                 //int outArgsCount
+                    (LogicalCallContext)msg.Properties["__CallContext"],                //LogicalCallContext callCtx
                     (System.Runtime.Remoting.Messaging.IMethodCallMessage)msg);
                 return ReturnMessage;
 
@@ -995,7 +1011,7 @@ namespace OOAdvantech.Remoting.RestApi
                 i++;
             }
             object retObject = null;
-            if(returnMessage.ReturnObjectJson.IndexOf("\"MembersValues\":{\"")!= -1)
+            if (returnMessage.ReturnObjectJson.IndexOf("\"MembersValues\":{\"")!= -1)
             {
 
             }

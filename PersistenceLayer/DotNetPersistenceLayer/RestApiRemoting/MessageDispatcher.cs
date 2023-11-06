@@ -98,7 +98,7 @@ namespace OOAdvantech.Remoting.RestApi
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.MetaDataRepository.ProxyType)] = "OOAdvantech.MetaDataRepository.ProxyType";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.ObjRef)] = "OOAdvantech.Remoting.RestApi.ObjRef";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.CachingMembers)] = "OOAdvantech.Remoting.RestApi.CachingMembers";
-            
+
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.TypeName)] = "OOAdvantech.Remoting.RestApi.TypeName";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.ChannelData)] = "OOAdvantech.Remoting.RestApi.ChannelData";
             Serialization.SerializationBinder.TypesNamesDictionary[typeof(OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession)] = "OOAdvantech.Remoting.RestApi.TypesMetadataCommunicationSession";
@@ -397,7 +397,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.OutArgs = methodCallMessage.GetOutArgs(args);
                             responseMessage.RetVal = retVal;
                             responseMessage.ServerSession = serverSession;
-                            
+
                             Dictionary<string, List<string>> cachingMetadata = null;
                             if (!string.IsNullOrWhiteSpace(request.CachingMetadata))
                                 cachingMetadata = OOAdvantech.Json.JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(request.CachingMetadata);
@@ -606,7 +606,7 @@ namespace OOAdvantech.Remoting.RestApi
                             }
                         }
 
-                        if (proxyType != null && proxyType.HasCachingClientSideProperties)
+                        if (request.HasCachingMembers|| (proxyType != null && proxyType.HasCachingClientSideProperties))
                             objectChangeState = proxyType.GetObjectChangeState();
 
 

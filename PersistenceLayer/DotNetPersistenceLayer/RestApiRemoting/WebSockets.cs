@@ -46,7 +46,7 @@ namespace OOAdvantech.Remoting.RestApi
 
     using System.Net.WebSockets;
     using System.Runtime.Remoting.Messaging;
-    
+
 
 
 
@@ -253,7 +253,7 @@ namespace OOAdvantech.Remoting.RestApi
                         var logicalConnection = (from interConnection in _PublicWebSockets
                                                  where interConnection.SessionIdentity == request.SessionIdentity
                                                  select interConnection).FirstOrDefault();
-                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata };
+                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata, HasCachingMembers=request.HasCachingMembers };
 
                         ResponseData responseData = null;
                         if (logicalConnection != null && logicalConnection.Public != null && logicalConnection.Public.State == WebSocketState.Open)
@@ -1371,7 +1371,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                     lock (statisticsLock)
                         InputCompressData += data.Length;
-                    
+
                     data = WebSocketChannel.DeCompress(data);
 
                     lock (statisticsLock)
@@ -1437,7 +1437,7 @@ namespace OOAdvantech.Remoting.RestApi
                         OutputCompressData += messageBytes.Length;
 
 
-                    
+
 
                     var buffer = new ArraySegment<byte>(new byte[messageBytes.Length]);
                     Array.Copy(messageBytes, 0, buffer.Array, 0, messageBytes.Length);
@@ -1599,7 +1599,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                             System.Diagnostics.Debug.WriteLine(request.ChannelUri + " , " + roleInstanceServerUrl, "Channel");
 
-                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata };
+                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata, HasCachingMembers=request.HasCachingMembers };
 
                             if (roleInstanceServerUrl.Trim().IndexOf("http://") == 0)
                                 roleInstanceServerUrl = "ws://" + roleInstanceServerUrl.Substring("http://".Length);

@@ -362,6 +362,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             WebSocketServer = request.EventCallBackChannel as WebSocketServer;
 
+           
             //...
             return CurrentContextMessageDispatcher.MessageDispatcherInterceptor.DispatchMessage(request);
         }

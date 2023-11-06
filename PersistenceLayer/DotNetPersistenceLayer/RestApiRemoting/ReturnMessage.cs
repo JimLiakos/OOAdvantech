@@ -96,10 +96,9 @@ namespace OOAdvantech.Remoting.RestApi
 
         internal void Marshal(Dictionary<string, List<string>> cachingMetadata=null)
         {
-            //if(cachingMetadata== null)
-            //{
-            //    cachingMetadata = new Dictionary<string, List<string>>();
-            //}
+            if (cachingMetadata== null)
+                cachingMetadata = new Dictionary<string, List<string>>();
+            
             //string internalChannelUri = System.Runtime.Remoting.Messaging.CallContext.GetData("internalChannelUri") as string;
 #if DeviceDotNet
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder= new OOAdvantech.Remoting.RestApi.SerializationBinder(Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, ChannelUri, InternalChannelUri, ServerSession, Web) };

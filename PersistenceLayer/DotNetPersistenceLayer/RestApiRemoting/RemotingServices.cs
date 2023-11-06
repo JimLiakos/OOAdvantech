@@ -665,7 +665,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endregion
                 }
 
-                RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity,  RequestOS=requestData.RequestOS, CachingMetadata = requestData.CachingMetadata };
+                RequestData request = new RequestData() { CallContextID = requestData.CallContextID, ChannelUri = requestData.ChannelUri, CallContextDictionaryData = requestData.CallContextDictionaryData, details = requestData.details, RequestType = requestData.RequestType, SessionIdentity = requestData.SessionIdentity,  RequestOS=requestData.RequestOS, CachingMetadata = requestData.CachingMetadata,HasCachingMembers=requestData.HasCachingMembers };
                 request.SendTimeout = binding.SendTimeout.TotalMilliseconds;
                 var task = webSocket.SendRequestAsync(request);
                 var state = webSocket.State;
