@@ -459,7 +459,7 @@ namespace OOAdvantech.Remoting.RestApi
     {
         public Dictionary<string, List<string>> CachingMembers;
 
-        public Stack<List<string>> ObjectMembersWithRefernceOnlyCaching = new Stack<List<string>>();
+        public Stack<List<string>> ObjectMembersWithReferenceOnlyCaching = new Stack<List<string>>();
     }
 
 
