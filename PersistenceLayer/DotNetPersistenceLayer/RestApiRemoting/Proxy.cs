@@ -669,6 +669,11 @@ namespace OOAdvantech.Remoting.RestApi
 
             if (responseData != null)// .IsSuccessStatusCode)
             {
+
+                if (methodCallMessage.MethodName=="GetDelayedServingBatchesAtTheCounter")
+                {
+
+                }
                 ReturnMessage returnMessage = null;
                 try
                 {

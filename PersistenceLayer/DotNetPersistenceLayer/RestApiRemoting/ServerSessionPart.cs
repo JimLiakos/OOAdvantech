@@ -653,6 +653,9 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{8a30873f-6c9a-4cfd-a701-5c2037449aa2}</MetaDataID>
         private void GetUserFromjwToken(string authToken)
         {
+
+            System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+            timer.Start();
             lock (this)
             {
                 if (AuthUser != null && AuthUser.AuthToken == authToken)
@@ -707,8 +710,9 @@ namespace OOAdvantech.Remoting.RestApi
                     AuthUser = null;
                 }
 
-                double secs = (System.DateTime.Now - startTime).TotalSeconds;
-                if (secs > 05)
+                timer.Stop();
+                //double secs = (System.DateTime.Now - startTime).TotalSeconds;
+                if (timer.ElapsedMilliseconds > 1000)
                 {
 
                 }

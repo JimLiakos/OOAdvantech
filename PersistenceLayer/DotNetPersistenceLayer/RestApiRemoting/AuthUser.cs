@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Diagnostics;
+
 
 
 #if !DeviceDotNet
@@ -132,6 +134,8 @@ namespace OOAdvantech.Remoting.RestApi
             //var task = response.Content.ReadAsStringAsync();
             //task.Wait();
             //var responseDataString = task.Result;
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
 
             var task = client.GetAsync(
               "x509/securetoken@system.gserviceaccount.com");
@@ -141,8 +145,8 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
                 }
-
             }
+          
 
             HttpResponseMessage response = task.Result;
             if (!response.IsSuccessStatusCode) { return null; }
@@ -151,7 +155,11 @@ namespace OOAdvantech.Remoting.RestApi
             var x509DataTask = response.Content.ReadAsStringAsync();
             x509DataTask.Wait();
 
+            timer.Stop();
+            if (timer.ElapsedMilliseconds>100)
+            {
 
+            }
             if (!x509DataTask.Wait(System.TimeSpan.FromSeconds(9)))
             {
                 if (!x509DataTask.Wait(Binding.DefaultBinding.SendTimeout))
@@ -248,7 +256,10 @@ namespace OOAdvantech.Remoting.RestApi
 
             //var handler = new JwtSecurityTokenHandler();
             //JwtSecurityToken tokenS = handler.ReadToken(authToken) as JwtSecurityToken;
+            if (Authentication.OAuth!=null)
+                Authentication.OAuth.VerifyIdToken(authToken);
             JwtSecurityToken tokenS = Validate(authToken);
+            System.Diagnostics.Debug.WriteLine(OOAdvantech.Json.JsonConvert.SerializeObject(tokenS));
             // var validToken= handler.ValidateToken.ValidateToken(tokenS);
 
             //dontwait4waiter
@@ -319,17 +330,29 @@ namespace OOAdvantech.Remoting.RestApi
     {
 
         static string _FirebaseProjectId;
+
+        public static IOAuth OAuth { get; private set; }
+
         static internal string FirebaseProjectId
         {
             get
             {
+                
                 return _FirebaseProjectId;
             }
         }
-        public static void InitializeFirebase(string FirebaseProjectId)
+        public static void InitializeFirebase(string FirebaseProjectId, IOAuth oAuth=null)
         {
             _FirebaseProjectId = FirebaseProjectId;
+
+            OAuth=oAuth;
         }
+
+    }
+
+    public interface IOAuth
+    {
+        Task<AuthUser>  VerifyIdToken(string authToken);
     }
 
 }

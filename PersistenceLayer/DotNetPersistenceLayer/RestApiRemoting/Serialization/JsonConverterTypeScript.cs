@@ -9,6 +9,7 @@ using OOAdvantech.Json;
 using OOAdvantech.Json.Linq;
 using OOAdvantech.Json.Serialization;
 using OOAdvantech.Json.Utilities;
+using System.Diagnostics;
 
 namespace OOAdvantech.Remoting.RestApi.Serialization
 {
@@ -1455,26 +1456,35 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     valueProperty.WritePropertyName(writer);
 
                     writer.WriteStartArray();
-                    foreach (System.Collections.DictionaryEntry itemEntry in value as System.Collections.IDictionary)
+                    try
                     {
-                        writer.WriteStartObject();
+                        foreach (System.Collections.DictionaryEntry itemEntry in value as System.Collections.IDictionary)
+                        {
+                            writer.WriteStartObject();
 
-                        JsonProperty keyProperty = new JsonProperty() { PropertyName = "key" };
-                        keyProperty.WritePropertyName(writer);
-                        serializer.Serialize(writer, itemEntry.Key);
-                        valueProperty = new JsonProperty() { PropertyName = "value" };
-                        valueProperty.WritePropertyName(writer);
-                        //if (pathEntries.Last() == "MembersValues")
-                        //{
-                        //    this.SerializeSession.Path.Push(itemEntry.Key.ToString());
-                        //    serializer.Serialize(writer, itemEntry.Value);
-                        //    this.SerializeSession.Path.Pop();
-                        //}
-                        //else
-                        serializer.Serialize(writer, itemEntry.Value);
+                            JsonProperty keyProperty = new JsonProperty() { PropertyName = "key" };
+                            keyProperty.WritePropertyName(writer);
+                            serializer.Serialize(writer, itemEntry.Key);
+                            valueProperty = new JsonProperty() { PropertyName = "value" };
+                            valueProperty.WritePropertyName(writer);
+                            //if (pathEntries.Last() == "MembersValues")
+                            //{
+                            //    this.SerializeSession.Path.Push(itemEntry.Key.ToString());
+                            //    serializer.Serialize(writer, itemEntry.Value);
+                            //    this.SerializeSession.Path.Pop();
+                            //}
+                            //else
+                            serializer.Serialize(writer, itemEntry.Value);
 
 
-                        writer.WriteEndObject();
+                            writer.WriteEndObject();
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        Debug.Assert(false);
+
+                        throw;
                     }
                     writer.WriteEndArray();
                     #endregion
