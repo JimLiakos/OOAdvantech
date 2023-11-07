@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using OOAdvantech.MetaDataRepository;
 using OOAdvantech.Json;
 using OOAdvantech.Json.Linq;
 using OOAdvantech.Json.Serialization;
@@ -600,47 +600,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <MetaDataID>{c5ad1a13-ad53-46c0-8dbd-119e573ca91a}</MetaDataID>
         private object GetTrasparentProxy(ObjRef objRef, Type type)
         {
-
-            object value;
-            string sessionChannelUri = null;
-            if (ServerSessionPart != null)
-                sessionChannelUri = ServerSessionPart.ChannelUri;
-
-            if (objRef.ChannelUri == sessionChannelUri)
-            {
-                var extObjectUri = ExtObjectUri.Parse(objRef.Uri, ServerSessionPart.ServerProcessIdentity);
-                value = ServerSessionPart.GetObjectFromUri(extObjectUri);
-
-                if (value == null)
-                    throw new System.Exception("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.");
-            }
-            else
-            {
-                OOAdvantech.Remoting.ClientSessionPart clientSessionPart = RenewalManager.GetSession(objRef.ChannelUri, true, RemotingServices.CurrentRemotingServices);
-                lock (clientSessionPart)
-                {
-
-
-                    value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
-                    if (value != null)
-                        return value;
-                    OOAdvantech.Remoting.RestApi.Proxy proxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri) as Proxy;
-                    if (proxy == null)
-                    {
-                        proxy = new Proxy(objRef, type);// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.RestApi.RemotingServicesServer));
-                        proxy.ControlRemoteObjectLifeTime();
-                    }
-                    else
-                    {
-                        proxy.ReconnectToServerObject(objRef);
-
-                        proxy.ObjectRef.MembersValues = objRef.MembersValues;
-                    }
-                    value = proxy.GetTransparentProxy(type);
-                }
-            }
-
-            return value;
+            return ClientSessionPart.GetTrasparentProxy(objRef, type, ServerSessionPart);
         }
 
         /// <MetaDataID>{3ba26fdd-d1e0-4819-be56-337947568321}</MetaDataID>
@@ -1001,7 +961,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
         /// <MetaDataID>{9f327915-9bc6-4a9f-9bac-96bdf29e6dd2}</MetaDataID>
-        public ObjRef GetObjectRefValue(object _obj)
+        public ObjRef GetObjectRefValue(object _obj, bool referenceOnlyCaching)
         {
             OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
             string uri = null;
@@ -1115,7 +1075,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             {
                 if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue(type.AssemblyQualifiedName, out httpProxyType))
                 {
-                    httpProxyType = new OOAdvantech.MetaDataRepository.ProxyType(type);
+                    httpProxyType = ProxyType.GetProxyType(type);
                     if (ServerSessionPart != null)
                         ServerSessionPart.MarshaledTypes[type.AssemblyQualifiedName] = httpProxyType;
                 }
@@ -1132,8 +1092,14 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
 
             ObjRef byref = new ObjRef(uri, serverChannelUri, internalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
+            byref.AllowMembersCaching = !referenceOnlyCaching;
+            if(byref.AllowMembersCaching)
+                byref.CachingObjectMemberValues(_obj, CachingMetadata);
+            else
+            {
 
-            byref.CachingObjectMemberValues(_obj, CachingMetadata);
+            }
+
             if (typeAlreadyMarshaled)
                 byref.TypeMetaData = null;
 
@@ -1172,9 +1138,15 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             string property = null;
             if(last=="MealCourse")
             {
-
+               
             }
+            bool referenceOnlyCaching = false;
 
+            if (CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Count>0)
+            {
+                if(CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Peek().Contains(last))
+                    referenceOnlyCaching=true;
+            }
 
             if (!string.IsNullOrWhiteSpace(last) && last.IndexOf("$value") == -1 &&
                 last.IndexOf("MembersValues") == -1 &&
@@ -1241,10 +1213,12 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                             }
 
-                            ObjRef byref = (referenceResolver as ReferenceResolver).GetPoxyObjRef(value);
+                            ObjRef byref = (referenceResolver as ReferenceResolver).GetPoxyObjRef(value,referenceOnlyCaching);
+                            
                             if (byref == null)
                             {
-                                byref = GetObjectRefValue(value);
+                                byref = GetObjectRefValue(value, referenceOnlyCaching);
+                                byref.AllowMembersCaching = !referenceOnlyCaching;
                                 (referenceResolver as ReferenceResolver).AssignePoxyObjRef(value, byref);
                                 serializer.Serialize(writer, byref);
                             }
@@ -1253,7 +1227,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         }
                         else
                         {
-                            value = GetObjectRefValue(value);
+                            value = GetObjectRefValue(value, referenceOnlyCaching);
                             serializer.Serialize(writer, value);
                         }
                         return;
@@ -1296,11 +1270,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     else
                     {
 
-                        List<string> preventClientSideCachingMembers= GetPreventClientSideCachingMembers(value.GetType());
-                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(preventClientSideCachingMembers);
+                        List<string> clientSideCachingOnlyReferenceMembers= ProxyType.GetProxyType(value.GetType()).ReferenceCachingMembersNames; 
+                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
                         valueProperty.WritePropertyName(writer);
                         serializer.Serialize(writer, value);
-                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop()ff
+                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop();
                     }
 
                     writer.WriteEndObject();
@@ -1432,7 +1406,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 #if DeviceDotNet
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #elif Json4
-                        JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+                JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #else
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
 #endif
@@ -1471,7 +1445,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 #if DeviceDotNet
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #elif Json4
-                    JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+                JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #else
                 JsonType jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
 #endif
@@ -1511,15 +1485,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             else
                 serializer.Serialize(writer, value);
 
-
-
-
         }
 
-        private List<string> GetPreventClientSideCachingMembers(Type type)
-        {
-            return new List<string>();
-        }
+        
 
         /// <MetaDataID>{1c911dd6-a829-4b5b-a5e5-d502f2d01d13}</MetaDataID>
         private static void WriteJsonType(JsonWriter writer, JsonSerializer serializer, JsonType jsonType)

@@ -34,6 +34,9 @@ namespace OOAdvantech.Remoting.RestApi
         {
         }
 
+        [JsonIgnore]
+        internal bool AllowMembersCaching = true;
+
         static Dictionary<string, ChannelData> Channels = new Dictionary<string, ChannelData>();
 
         static Dictionary<string, TypeName> Types = new Dictionary<string, TypeName>();
@@ -104,11 +107,14 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{6e1c6091-cbd7-4094-a5f0-5a8ca4e840ad}</MetaDataID>
         internal void CachingObjectMemberValues(object _obj, CachingMetaData cachingMetaData)
         {
-            MembersValues.Clear();
-            TypeMetaData.CachingObjectMembersValue(_obj, MembersValues, cachingMetaData);
-            if (MembersValues.Count > 0)
+            if (AllowMembersCaching)
             {
+                MembersValues.Clear();
+                TypeMetaData.CachingObjectMembersValue(_obj, MembersValues, cachingMetaData);
+                if (MembersValues.Count > 0)
+                {
 
+                }
             }
             //throw new NotImplementedException();
         }
@@ -137,6 +143,8 @@ namespace OOAdvantech.Remoting.RestApi
             }
             return TypeMetaData;
         }
+
+
 
         /// <MetaDataID>{b124f923-40c6-41b4-9d35-6b1b80502f7c}</MetaDataID>
         [JsonProperty(Order = 1)]
@@ -456,12 +464,22 @@ namespace OOAdvantech.Remoting.RestApi
 
     public class CachingMembers : Dictionary<string, object>
     {
-
+        internal void UpdateCachingData(CachingMembers membersValues)
+        {
+            if (this != membersValues && membersValues != null)
+            {
+                lock (this)
+                {
+                    foreach (var entry in membersValues)
+                        this[entry.Key] = entry.Value;
+                }
+            }
+        }
     }
 
     public class CachingMetaData
     {
-        public Dictionary<string, List<string>> CachingMembers=new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> CachingMembers = new Dictionary<string, List<string>>();
 
         public Stack<List<string>> ObjectMembersWithReferenceOnlyCaching = new Stack<List<string>>();
     }

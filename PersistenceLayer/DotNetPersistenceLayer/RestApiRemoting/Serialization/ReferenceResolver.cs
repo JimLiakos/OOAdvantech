@@ -12,7 +12,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     public class ReferenceResolver : IReferenceResolver
     {
 
-        Dictionary<object, ObjRef> ProxyObjectRefs = new Dictionary<object, ObjRef>();
+        Dictionary<object, ObjRef> AllowCachingProxyObjectRefs = new Dictionary<object, ObjRef>();
+
+        Dictionary<object, ObjRef> WithoutCachingProxyObjectRefs = new Dictionary<object, ObjRef>();
+
         IReferenceResolver InternalReferenceResolver;
         public ReferenceResolver()
         {
@@ -32,14 +35,14 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         public bool IsReferenced(object context, object value)
         {
-            var isRef=  InternalReferenceResolver.IsReferenced(context, value);
-            if(isRef)
+            var isRef = InternalReferenceResolver.IsReferenced(context, value);
+            if (isRef)
             {
 
             }
             return false;
 
-            
+
             //return InternalReferenceResolver.IsReferenced(context, value);
         }
 
@@ -55,13 +58,18 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             return InternalReferenceResolver.IsReferenced(context, value);
         }
 
-        internal ObjRef GetPoxyObjRef(object value)
+        internal ObjRef GetPoxyObjRef(object value, bool referenceOnlyCaching)
         {
             if (value is MarshalByRefObject || value is ITransparentProxy)
             {
+
                 ObjRef objRef = null;
-                if (ProxyObjectRefs.TryGetValue(value, out objRef))
+
+                if (!referenceOnlyCaching && AllowCachingProxyObjectRefs.TryGetValue(value, out objRef))
                     return objRef;
+                if (referenceOnlyCaching && WithoutCachingProxyObjectRefs.TryGetValue(value, out objRef))
+                    return objRef;
+
             }
             return null;
 
@@ -71,7 +79,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         internal void AssignePoxyObjRef(object value, ObjRef byref)
         {
             if (value is MarshalByRefObject || value is ITransparentProxy)
-                ProxyObjectRefs[value] = byref;
+            {
+                if (byref.AllowMembersCaching)
+                    AllowCachingProxyObjectRefs[value] = byref;
+                else
+                    WithoutCachingProxyObjectRefs[value] = byref;
+
+            }
         }
     }
 }

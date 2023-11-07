@@ -1,7 +1,10 @@
 using OOAdvantech.Remoting.RestApi;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace OOAdvantech.MetaDataRepository
 {
@@ -213,6 +216,7 @@ namespace OOAdvantech.MetaDataRepository
             }
             return false;
         }
+
         /// <MetaDataID>{3050eeba-8f94-467d-940b-f3e3a577b219}</MetaDataID>
         public static bool IsHttpCachedMember(this Classifier classifier, Feature feature)
         {
@@ -238,6 +242,203 @@ namespace OOAdvantech.MetaDataRepository
             }
             return false;
 
+        }
+
+        //###
+
+        public static bool IsOnDemandCachedMember(this Classifier classifier, AssociationEnd associationEnd)
+        {
+            if (associationEnd.Namespace == classifier)
+            {
+
+                object[] memberAttributes = null;
+                System.Reflection.MemberInfo memberInfo = (associationEnd).GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+                if (memberInfo != null)
+                {
+                    memberAttributes = memberInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+                    if (memberAttributes.Length > 0)
+                        return true;
+                }
+                memberInfo = (associationEnd).GetExtensionMetaObject<System.Reflection.FieldInfo>();
+                if (memberInfo == null)
+                    return false;
+
+                memberAttributes = memberInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+                if (memberAttributes.Length > 0)
+                    return true;
+                else
+                    return false;
+
+                //System.Reflection.MemberInfo memberInfo = (feature).GetExtensionMetaObject<System.Reflection.FieldInfo>();
+                //if (memberInfo == null)
+                //    memberInfo = (feature).GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+
+                //if (memberInfo == null)
+                //    return false;
+
+
+                //var memberAttributes = memberInfo.GetCustomAttributes(typeof(CachingDataOnClientSide), false);
+                //if (memberAttributes.Length > 0)
+                //    return true;
+                //else
+                //    return false;
+
+            }
+            return false;
+        }
+
+
+        public static bool IsOnDemandCachedMember(this Classifier classifier, Feature feature)
+        {
+            if (feature.Owner == classifier)
+            {
+                object[] memberAttributes = null;
+                System.Reflection.MemberInfo memberInfo = (feature).GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+                if (memberInfo != null)
+                {
+                    memberAttributes = memberInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+                    if (memberAttributes.Length > 0)
+                        return true;
+                }
+                memberInfo = (feature).GetExtensionMetaObject<System.Reflection.FieldInfo>();
+                if (memberInfo == null)
+                    return false;
+
+                memberAttributes = memberInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+                if (memberAttributes.Length > 0)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+
+        }
+
+
+
+
+
+
+
+
+        public static bool IsReferencedCachedMember(this Classifier classifier, Feature feature)
+        {
+            if (feature.Owner == classifier)
+            {
+                object[] memberAttributes = null;
+                System.Reflection.MemberInfo memberInfo = (feature).GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+                if (memberInfo != null)
+                {
+                    memberAttributes = memberInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
+                    if (memberAttributes.Length > 0)
+                        return true;
+                }
+                memberInfo = (feature).GetExtensionMetaObject<System.Reflection.FieldInfo>();
+                if (memberInfo == null)
+                    return false;
+
+                memberAttributes = memberInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
+                if (memberAttributes.Length > 0)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+
+        }
+
+
+
+
+
+
+        public static bool IsReferencedCachedMember(this Classifier classifier, AssociationEnd associationEnd)
+        {
+            if (associationEnd.Namespace == classifier)
+            {
+
+                object[] memberAttributes = null;
+                System.Reflection.MemberInfo memberInfo = (associationEnd).GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+                if (memberInfo != null)
+                {
+                    memberAttributes = memberInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
+                    if (memberAttributes.Length > 0)
+                        return true;
+                }
+                memberInfo = (associationEnd).GetExtensionMetaObject<System.Reflection.FieldInfo>();
+                if (memberInfo == null)
+                    return false;
+
+                memberAttributes = memberInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
+                if (memberAttributes.Length > 0)
+                    return true;
+                else
+                    return false;
+
+                //System.Reflection.MemberInfo memberInfo = (feature).GetExtensionMetaObject<System.Reflection.FieldInfo>();
+                //if (memberInfo == null)
+                //    memberInfo = (feature).GetExtensionMetaObject<System.Reflection.PropertyInfo>();
+
+                //if (memberInfo == null)
+                //    return false;
+
+
+                //var memberAttributes = memberInfo.GetCustomAttributes(typeof(CachingDataOnClientSide), false);
+                //if (memberAttributes.Length > 0)
+                //    return true;
+                //else
+                //    return false;
+
+            }
+            return false;
+        }
+
+
+
+
+        public static bool IsCachedMember(this FieldInfo fieldInfo)
+        {
+            var memberAttributes = fieldInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+            if (memberAttributes.Length > 0)
+                return true;
+            return false;
+        }
+        public static bool IsCachedMember(this PropertyInfo propertyInfo)
+        {
+            var memberAttributes = propertyInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+            if (memberAttributes.Length > 0)
+                return true;
+            return false;
+        }
+        public static bool IsCachedOnDemandMember(this FieldInfo fieldInfo)
+        {
+            var memberAttributes = fieldInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+            if (memberAttributes.Length > 0)
+                return true;
+            return false;
+        }
+
+        public static bool IsCachedOnDemandMember(this PropertyInfo propertyInfo)
+        {
+            var memberAttributes = propertyInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
+            if (memberAttributes.Length > 0)
+                return true;
+            return false;
+        }
+        public static bool IsCachedReferenceOnlyMember(this FieldInfo fieldInfo)
+        {
+            var memberAttributes = fieldInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
+            if (memberAttributes.Length > 0)
+                return true;
+            return false;
+        }
+
+        public static bool IsCachedReferenceOnlyMember(this PropertyInfo propertyInfo)
+        {
+            var memberAttributes = propertyInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
+            if (memberAttributes.Length > 0)
+                return true;
+            return false;
         }
     }
 
@@ -281,10 +482,87 @@ namespace OOAdvantech.MetaDataRepository
             }
         }
 
+        public List<string> CachingMembersNames
+        {
+            get
+            {
+
+                List<string> cachingMembersNames = CachingClientSideAttributeProperties.Select(x => x.Name).
+                    Union(CachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
+                    Union(CachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
+                    Union(CachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
+
+
+
+                if (this.BaseProxyType != null)
+                    cachingMembersNames = cachingMembersNames.Union(BaseProxyType.CachingMembersNames).ToList();
+
+                if (Interfaces != null)
+                    foreach (var _interface in Interfaces)
+                        cachingMembersNames = cachingMembersNames.Union(_interface.CachingMembersNames).ToList();
+
+
+
+
+                return cachingMembersNames;
+
+            }
+        }
+
+        public List<string> ReferenceCachingMembersNames
+        {
+            get
+            {
+
+
+
+                List<string> cachingMembersNames = ReferenceCachingClientSideAttributeProperties.Select(x => x.Name).
+                    Union(ReferenceCachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
+                    Union(ReferenceCachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
+                    Union(ReferenceCachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
+
+
+                if (this.BaseProxyType != null)
+                    cachingMembersNames = cachingMembersNames.Union(BaseProxyType.ReferenceCachingMembersNames).ToList();
+
+                if (Interfaces != null)
+                    foreach (var _interface in Interfaces)
+                        cachingMembersNames = cachingMembersNames.Union(_interface.ReferenceCachingMembersNames).ToList();
+
+
+
+                return cachingMembersNames;
+
+            }
+        }
+
+        public List<string> OnDemandCachingMembersNames
+        {
+            get
+            {
+
+                List<string> cachingMembersNames = OnDemandCachingClientSideAttributeProperties.Select(x => x.Name).
+                    Union(OnDemandCachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
+                    Union(OnDemandCachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
+                    Union(OnDemandCachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
+
+                if (this.BaseProxyType != null)
+                    cachingMembersNames = cachingMembersNames.Union(BaseProxyType.OnDemandCachingMembersNames).ToList();
+
+                if (Interfaces != null)
+                    foreach (var _interface in Interfaces)
+                        cachingMembersNames = cachingMembersNames.Union(_interface.OnDemandCachingMembersNames).ToList();
+
+                return cachingMembersNames;
+
+            }
+        }
+
+
         /// <MetaDataID>{ccf8067e-7dc8-4078-bbbb-df645ef09d20}</MetaDataID>
         public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, CachingMetaData cachingMetaData)
         {
-        
+
             foreach (var attribute in CachingClientSideAttributeProperties)
             {
                 object value = attribute.GetValue(_object);
@@ -313,7 +591,7 @@ namespace OOAdvantech.MetaDataRepository
             if (cachingMetaData != null)
             {
                 List<string> cachingClientSideMembers = new List<string>();
-                if ( cachingMetaData.CachingMembers?.TryGetValue(FullName, out cachingClientSideMembers)==true)
+                if (cachingMetaData.CachingMembers?.TryGetValue(FullName, out cachingClientSideMembers) == true)
                 {
                     foreach (string memberName in cachingClientSideMembers)
                     {
@@ -338,7 +616,7 @@ namespace OOAdvantech.MetaDataRepository
                     }
                 }
 
-                if(cachingMetaData.CachingMembers?.TryGetValue("" ,out cachingClientSideMembers)==true)
+                if (cachingMetaData.CachingMembers?.TryGetValue("", out cachingClientSideMembers) == true)
                 {
                     foreach (string memberName in cachingClientSideMembers)
                     {
@@ -352,7 +630,7 @@ namespace OOAdvantech.MetaDataRepository
                             else
                             {
                                 var field = this.Type.GetField(memberName);
-                                if(field!=null)
+                                if (field != null)
                                     membersValues[memberName] = field.GetValue(_object);
                             }
                         }
@@ -377,11 +655,20 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{9204d227-91eb-4ef7-b081-62a49b331bd3}</MetaDataID>
         List<AssociationEnd> CachingClientSideAssociationEndProperties;
 
+        public List<Attribute> ReferenceCachingClientSideAttributeProperties { get; }
+        public List<AttributeRealization> ReferenceCachingClientSideAttributeRealizationProperties { get; }
+        public List<AssociationEndRealization> ReferenceCachingClientSideAssociationEndRealizationProperties { get; }
+        public List<AssociationEnd> ReferenceCachingClientSideAssociationEndProperties { get; }
+        public List<Attribute> OnDemandCachingClientSideAttributeProperties { get; }
+        public List<AttributeRealization> OnDemandCachingClientSideAttributeRealizationProperties { get; }
+        public List<AssociationEndRealization> OnDemandCachingClientSideAssociationEndRealizationProperties { get; }
+        public List<AssociationEnd> OnDemandCachingClientSideAssociationEndProperties { get; }
+
 
         /// <MetaDataID>{36577234-561a-4d0b-a711-dbb8f771162c}</MetaDataID>
         List<AssociationEndRealization> CachingClientSideAssociationEndRealizationProperties;
         /// <MetaDataID>{0ebb8b54-9af1-41e6-9823-59eccb5bec71}</MetaDataID>
-        public ProxyType(Type type)
+        ProxyType(Type type)
         {
             Type = type;
             var classifier = OOAdvantech.MetaDataRepository.Classifier.GetClassifier(type);
@@ -448,6 +735,52 @@ namespace OOAdvantech.MetaDataRepository
                                                          select associationEnd).Distinct().ToList();
 
 
+            //###
+            ReferenceCachingClientSideAttributeProperties = (from attribute in classifier.GetFeatures(false).OfType<Attribute>()
+                                                             where attribute.Visibility == VisibilityKind.AccessPublic &&
+                                                             classifier.IsReferencedCachedMember(attribute)
+                                                             select attribute).Distinct().ToList();
+
+            ReferenceCachingClientSideAttributeRealizationProperties = (from attribute in classifier.GetFeatures(false).OfType<AttributeRealization>()
+                                                                        where attribute.Visibility == VisibilityKind.AccessPublic &&
+                                                                        classifier.IsReferencedCachedMember(attribute)
+                                                                        select attribute).Distinct().ToList();
+
+            ReferenceCachingClientSideAssociationEndRealizationProperties = (from attribute in classifier.GetFeatures(false).OfType<AssociationEndRealization>()
+                                                                             where attribute.Visibility == VisibilityKind.AccessPublic &&
+                                                                             classifier.IsReferencedCachedMember(attribute)
+                                                                             select attribute).Distinct().ToList();
+
+
+            ReferenceCachingClientSideAssociationEndProperties = (from associationEnd in classifier.GetAssociateRoles(false)
+                                                                  where associationEnd.Visibility == VisibilityKind.AccessPublic &&
+                                                                  classifier.IsReferencedCachedMember(associationEnd)
+                                                                  select associationEnd).Distinct().ToList();
+
+
+            //###
+            OnDemandCachingClientSideAttributeProperties = (from attribute in classifier.GetFeatures(false).OfType<Attribute>()
+                                                            where attribute.Visibility == VisibilityKind.AccessPublic &&
+                                                            classifier.IsOnDemandCachedMember(attribute)
+                                                            select attribute).Distinct().ToList();
+
+            OnDemandCachingClientSideAttributeRealizationProperties = (from attribute in classifier.GetFeatures(false).OfType<AttributeRealization>()
+                                                                       where attribute.Visibility == VisibilityKind.AccessPublic &&
+                                                                       classifier.IsOnDemandCachedMember(attribute)
+                                                                       select attribute).Distinct().ToList();
+
+            OnDemandCachingClientSideAssociationEndRealizationProperties = (from attribute in classifier.GetFeatures(false).OfType<AssociationEndRealization>()
+                                                                            where attribute.Visibility == VisibilityKind.AccessPublic &&
+                                                                            classifier.IsOnDemandCachedMember(attribute)
+                                                                            select attribute).Distinct().ToList();
+
+
+            OnDemandCachingClientSideAssociationEndProperties = (from associationEnd in classifier.GetAssociateRoles(false)
+                                                                 where associationEnd.Visibility == VisibilityKind.AccessPublic &&
+                                                                 classifier.IsOnDemandCachedMember(associationEnd)
+                                                                 select associationEnd).Distinct().ToList();
+
+
 
             _CachingClientSidePropertiesNames = (from attribute in CachingClientSideAttributeProperties select attribute.Name).ToList();
 
@@ -472,6 +805,19 @@ namespace OOAdvantech.MetaDataRepository
         }
 
 
+        static Dictionary<Type, ProxyType> ProxyTypes = new Dictionary<Type, ProxyType>();
+        public static ProxyType GetProxyType(Type type)
+        {
+            lock (ProxyTypes)
+            {
+                if (!ProxyTypes.TryGetValue(type, out ProxyType proxyType))
+                {
+                    proxyType = new ProxyType(type);
+                    ProxyTypes[type] = proxyType;
+                }
+                return proxyType;
+            }
+        }
 
         /// <MetaDataID>{7165299d-d854-4e44-82d2-e208e81c0fe2}</MetaDataID>
         System.Reflection.EventInfo ObjectChangeState;
@@ -517,6 +863,21 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{cf2fbbb2-7361-41e1-b225-e078b0a80de4}</MetaDataID>
         public ProxyType()
         {
+            //  CachingClientSideAssociationEndProperties=new List<AssociationEnd>()
+            ReferenceCachingClientSideAttributeProperties = new List<Attribute>();
+            ReferenceCachingClientSideAttributeRealizationProperties = new List<AttributeRealization>();
+            ReferenceCachingClientSideAssociationEndRealizationProperties = new List<AssociationEndRealization>();
+            ReferenceCachingClientSideAssociationEndProperties = new List<AssociationEnd>();
+
+            CachingClientSideAttributeProperties = new List<Attribute>();
+            CachingClientSideAttributeRealizationProperties = new List<AttributeRealization>();
+            CachingClientSideAssociationEndRealizationProperties = new List<AssociationEndRealization>();
+            CachingClientSideAssociationEndProperties = new List<AssociationEnd>();
+
+            OnDemandCachingClientSideAttributeProperties = new List<Attribute>();
+            OnDemandCachingClientSideAttributeRealizationProperties = new List<AttributeRealization>();
+            OnDemandCachingClientSideAssociationEndRealizationProperties = new List<AssociationEndRealization>();
+            OnDemandCachingClientSideAssociationEndProperties = new List<AssociationEnd>();
 
         }
 

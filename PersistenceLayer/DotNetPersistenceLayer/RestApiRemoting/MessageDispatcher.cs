@@ -271,7 +271,7 @@ namespace OOAdvantech.Remoting.RestApi
                             {
                                 if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                                 {
-                                    proxyType = new ProxyType(methodCallMessage.Object.GetType());
+                                    proxyType = ProxyType.GetProxyType(methodCallMessage.Object.GetType());
                                     serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
                                 }
                             }
@@ -601,7 +601,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 proxyType = ((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy).ProxyType;
                             if (proxyType == null)
                             {
-                                proxyType = new ProxyType(methodCallMessage.Object.GetType());
+                                proxyType = ProxyType.GetProxyType(methodCallMessage.Object.GetType());
                                 serverSession.MarshaledTypes[methodCallMessage.Object.GetType().AssemblyQualifiedName] = proxyType;
                             }
                         }
@@ -934,7 +934,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 if (!serverSession.MarshaledTypes.TryGetValue(typeName, out httpProxyType))
                                 {
                                     var theType = System.Type.GetType(typeName);
-                                    httpProxyType = new OOAdvantech.MetaDataRepository.ProxyType(theType);
+                                    httpProxyType = ProxyType.GetProxyType(theType);
                                     serverSession.MarshaledTypes[theType.AssemblyQualifiedName] = httpProxyType;
                                 }
                             }
@@ -1018,7 +1018,7 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                         if (!serverSession.MarshaledTypes.TryGetValue(instanceType.AssemblyQualifiedName, out httpProxyType))
                         {
-                            httpProxyType = new ProxyType(instanceType);
+                            httpProxyType = ProxyType.GetProxyType(instanceType);
                             serverSession.MarshaledTypes[instanceType.AssemblyQualifiedName] = httpProxyType;
                         }
                     }

@@ -909,7 +909,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                 if (!MarshaledTypes.TryGetValue(instanceType.AssemblyQualifiedName, out httpProxyType))
                 {
-                    httpProxyType = new ProxyType(instanceType);
+                    httpProxyType = ProxyType.GetProxyType(instanceType);
                     MarshaledTypes[instanceType.AssemblyQualifiedName] = httpProxyType;
                 }
             }
@@ -1010,7 +1010,7 @@ namespace OOAdvantech.Remoting.RestApi
                     throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.UnknownError);
                 }
 
-                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
+                var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);
                 ObjRef remoteRef = JsonConvert.DeserializeObject<ObjRef>(returnMessage.ReturnObjectJson, jSetttings);
                 Proxy proxy = new Proxy(remoteRef, typeof(IServerSessionPart));// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.IServerSessionPart));
                 IServerSessionPart serverSessionPart = proxy.GetTransparentProxy(typeof(IServerSessionPart)) as IServerSessionPart;// (GetTransparentProxy() as IRomotingServer).GetServerSession(RemotingServices.ProcessIdentity);
@@ -1264,6 +1264,55 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
             return null;
 
+        }
+
+        internal static object GetTrasparentProxy(ObjRef objRef, Type type, ServerSessionPart serverSessionPart)
+        {
+
+            object value;
+            string sessionChannelUri = null;
+            if (serverSessionPart != null)
+                sessionChannelUri = serverSessionPart.ChannelUri;
+
+            if (objRef.ChannelUri == sessionChannelUri)
+            {
+                var extObjectUri = ExtObjectUri.Parse(objRef.Uri, RestApi.ServerSessionPart.ServerProcessIdentity);
+                value = serverSessionPart.GetObjectFromUri(extObjectUri);
+
+                if (value == null)
+                    throw new System.Exception("The object with ObjUri '" + extObjectUri.TransientUri + "' has been disconnected or does not exist at the server.");
+            }
+            else
+            {
+                OOAdvantech.Remoting.ClientSessionPart clientSessionPart = RenewalManager.GetSession(objRef.ChannelUri, true, RestApi.RemotingServices.CurrentRemotingServices);
+
+                lock (clientSessionPart)
+                {
+
+                    value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
+                    if (value != null)
+                        return value;
+                    OOAdvantech.Remoting.RestApi.Proxy proxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri) as Proxy;
+                    if (proxy == null)
+                    {
+                        proxy = new Proxy(objRef, type);// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.RestApi.RemotingServicesServer));
+                        proxy.ControlRemoteObjectLifeTime();
+                    }
+                    else
+                    {
+                        proxy.ReconnectToServerObject(objRef);
+
+                        if (proxy.ObjectRef.MembersValues == null)
+                            proxy.ObjectRef.MembersValues = objRef.MembersValues;
+                        else
+                            proxy.ObjectRef.MembersValues.UpdateCachingData(objRef.MembersValues);
+
+                    }
+                    value = proxy.GetTransparentProxy(type);
+                }
+            }
+
+            return value;
         }
 
 

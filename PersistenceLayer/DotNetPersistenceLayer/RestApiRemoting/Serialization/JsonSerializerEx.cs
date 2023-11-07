@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OOAdvantech.Json;
 using OOAdvantech.Json.Linq;
 using OOAdvantech.Json.Serialization;
+using OOAdvantech.MetaDataRepository;
 
 namespace OOAdvantech.Remoting.RestApi.Serialization
 {
@@ -140,7 +141,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             {
                 if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue(type.AssemblyQualifiedName, out httpProxyType))
                 {
-                    httpProxyType = new OOAdvantech.MetaDataRepository.ProxyType(type);
+                    httpProxyType = ProxyType.GetProxyType(type);
                     if (ServerSessionPart != null)
                         ServerSessionPart.MarshaledTypes[type.AssemblyQualifiedName] = httpProxyType;
                 }

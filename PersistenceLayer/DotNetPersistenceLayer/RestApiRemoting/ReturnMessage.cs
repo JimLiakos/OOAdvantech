@@ -129,7 +129,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     if (!ServerSession.MarshaledTypes.TryGetValue(MethodInfo.ReturnType.AssemblyQualifiedName, out httpProxyType))
                     {
-                        httpProxyType = new ProxyType(MethodInfo.ReturnType);
+                        httpProxyType = ProxyType.GetProxyType(MethodInfo.ReturnType);
                         ReturnTypeMetaData = httpProxyType;
                         ServerSession.MarshaledTypes[MethodInfo.ReturnType.AssemblyQualifiedName] = httpProxyType;
                     }
@@ -143,7 +143,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     if (!ServerSession.MarshaledTypes.TryGetValue(RetVal.GetType().AssemblyQualifiedName, out httpProxyType))
                     {
-                        httpProxyType = new ProxyType(RetVal.GetType());
+                        httpProxyType = ProxyType.GetProxyType(RetVal.GetType());
                         ReturnTypeMetaData = httpProxyType;
                         ServerSession.MarshaledTypes[RetVal.GetType().AssemblyQualifiedName] = httpProxyType;
                     }
