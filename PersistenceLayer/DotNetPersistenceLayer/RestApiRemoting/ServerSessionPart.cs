@@ -44,6 +44,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{854e0860-1ae9-4a2b-837a-d51482c35f20}</MetaDataID>
         public Dictionary<string, ProxyType> MarshaledTypes = new Dictionary<string, ProxyType>();
 
+        public Dictionary<string, bool> PairedTypes = new Dictionary<string, bool>();
+
         ///// <MetaDataID>{c9d73168-d8bb-406b-a837-cada411fb29b}</MetaDataID>
         //public IChannel Channel;
 
@@ -345,11 +347,14 @@ namespace OOAdvantech.Remoting.RestApi
                     foreach (string cachedType in methodCallMessage.CachedTypes)
                     {
                         ProxyType proxyType = null;
-                        if (MarshaledTypes.TryGetValue(cachedType, out proxyType))
-                            proxyType.Paired = true;
-                        else
-                        {
-                        }
+
+                        PairedTypes[cachedType]=true;
+
+                        //if (MarshaledTypes.TryGetValue(cachedType, out proxyType))
+                        //    proxyType.Paired = true;
+                        //else
+                        //{
+                        //}
                     }
                 }
             }

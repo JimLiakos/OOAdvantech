@@ -1082,15 +1082,15 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 else
                 {
-                    if (httpProxyType.Paired)
-                        typeAlreadyMarshaled = true;
+                    if (ServerSessionPart != null&&ServerSessionPart.PairedTypes.ContainsKey(type.AssemblyQualifiedName))
+                        typeAlreadyMarshaled=ServerSessionPart.PairedTypes[type.AssemblyQualifiedName];
 
                 }
 
                 if (ServerSessionPart?.ChannelUri != null && ServerSessionPart?.ChannelUri != "local-device")
                 {
 
-                    DeviceApplication.Current.Log(new List<string>() { "typeAlreadyMarshaled = true chnl uri"+ ServerSessionPart?.ChannelUri });
+                    //DeviceApplication.Current.Log(new List<string>() { "typeAlreadyMarshaled = true chnl uri"+ ServerSessionPart?.ChannelUri });
                     typeAlreadyMarshaled = true;
                 }
 
@@ -1112,33 +1112,33 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             if (typeAlreadyMarshaled)
             {
                 byref.TypeMetaData = null;
-                if (byref.TypeName?.FullName.IndexOf("WaiterApp.ViewModel.WaiterPresentation") != -1)
-                {
+                //if (byref.TypeName?.FullName.IndexOf("WaiterApp.ViewModel.WaiterPresentation") != -1)
+                //{
 
-                    DeviceApplication.Current.Log(new List<string>() { "Type metadata null" });
+                //    DeviceApplication.Current.Log(new List<string>() { "Type metadata null" });
 
-                }
-                if (byref.TypeName?.FullName.IndexOf("OOAdvantech.Remoting.RestApi.RemotingServicesServer") != -1)
-                {
+                //}
+                //if (byref.TypeName?.FullName.IndexOf("OOAdvantech.Remoting.RestApi.RemotingServicesServer") != -1)
+                //{
 
-                    DeviceApplication.Current.Log(new List<string>() { "RemotingServicesServer Type metadata null" });
+                //    DeviceApplication.Current.Log(new List<string>() { "RemotingServicesServer Type metadata null" });
 
-                }
+                //}
 
                 
             }
             else
             {
-                if (byref.TypeName?.FullName.IndexOf("WaiterApp.ViewModel.WaiterPresentation") != -1)
-                {
-                    DeviceApplication.Current.Log(new List<string>() { "Type metadata" });
-                }
-                if (byref.TypeName?.FullName.IndexOf("OOAdvantech.Remoting.RestApi.RemotingServicesServer") != -1)
-                {
+                //if (byref.TypeName?.FullName.IndexOf("WaiterApp.ViewModel.WaiterPresentation") != -1)
+                //{
+                //    DeviceApplication.Current.Log(new List<string>() { "Type metadata" });
+                //}
+                //if (byref.TypeName?.FullName.IndexOf("OOAdvantech.Remoting.RestApi.RemotingServicesServer") != -1)
+                //{
 
-                    DeviceApplication.Current.Log(new List<string>() { "RemotingServicesServer Type metadata" });
+                //    DeviceApplication.Current.Log(new List<string>() { "RemotingServicesServer Type metadata" });
 
-                }
+                //}
 
             }
 

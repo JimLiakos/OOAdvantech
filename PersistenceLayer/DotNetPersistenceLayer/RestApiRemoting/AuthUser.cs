@@ -120,7 +120,7 @@ namespace OOAdvantech.Remoting.RestApi
         static Dictionary<string, string> Cx509Data;
 
 #if !DeviceDotNet
-        
+
         /// <MetaDataID>{7c8d195d-94e0-4b21-9f63-7d78fdd660d5}</MetaDataID>
         static JwtSecurityToken Validate(string authToken)
         {
@@ -147,7 +147,7 @@ namespace OOAdvantech.Remoting.RestApi
                     throw new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout));
                 }
             }
-          
+
 
             HttpResponseMessage response = task.Result;
             if (!response.IsSuccessStatusCode) { return null; }
@@ -254,13 +254,23 @@ namespace OOAdvantech.Remoting.RestApi
             AuthUser authUser;
             authUser = new AuthUser();
 
-
+            AuthUser mauthUser = null;
             //var handler = new JwtSecurityTokenHandler();
             //JwtSecurityToken tokenS = handler.ReadToken(authToken) as JwtSecurityToken;
             if (Authentication.OAuth!=null)
-                Authentication.OAuth.VerifyIdToken(authToken);
+            {
+                Stopwatch timer = Stopwatch.StartNew();
+                timer.Start();
+                var VerifyIdTokenTask = Authentication.OAuth.VerifyIdToken(authToken);
+                VerifyIdTokenTask.Wait();
+
+                timer.Stop();
+                var elapsed = timer.ElapsedMilliseconds;
+                mauthUser= VerifyIdTokenTask.Result;
+                return mauthUser;
+            }
             JwtSecurityToken tokenS = Validate(authToken);
-            System.Diagnostics.Debug.WriteLine(OOAdvantech.Json.JsonConvert.SerializeObject(tokenS));
+            //System.Diagnostics.Debug.WriteLine(OOAdvantech.Json.JsonConvert.SerializeObject(tokenS));
             // var validToken= handler.ValidateToken.ValidateToken(tokenS);
 
             //dontwait4waiter
@@ -338,11 +348,11 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                
+
                 return _FirebaseProjectId;
             }
         }
-        public static void InitializeFirebase(string FirebaseProjectId, IOAuth oAuth=null)
+        public static void InitializeFirebase(string FirebaseProjectId, IOAuth oAuth)
         {
             _FirebaseProjectId = FirebaseProjectId;
 
@@ -353,7 +363,7 @@ namespace OOAdvantech.Remoting.RestApi
 
     public interface IOAuth
     {
-        Task<AuthUser>  VerifyIdToken(string authToken);
+        Task<AuthUser> VerifyIdToken(string authToken);
     }
 
 }

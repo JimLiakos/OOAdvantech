@@ -147,12 +147,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 else
                 {
-                    
-                    if (httpProxyType.Paired)
-                        typeAlreadyMarshaled = true;
-
-                 
-
+                    if (ServerSessionPart != null&&ServerSessionPart.PairedTypes.ContainsKey(type.AssemblyQualifiedName))
+                        typeAlreadyMarshaled=ServerSessionPart.PairedTypes[type.AssemblyQualifiedName];
 
                 }
 

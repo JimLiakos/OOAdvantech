@@ -446,8 +446,6 @@ namespace OOAdvantech.MetaDataRepository
     public class ProxyType
     {
 
-        /// <MetaDataID>{34b7bbeb-259f-4c26-bf4d-e12ab8480c7c}</MetaDataID>
-        public bool Paired;
 
         /// <MetaDataID>{5f36baf1-46af-4fd4-8dd2-fe6f13753859}</MetaDataID>
         public string ObjectChangeStateEventName { get; set; }
@@ -813,7 +811,7 @@ namespace OOAdvantech.MetaDataRepository
                 if (!ProxyTypes.TryGetValue(type, out ProxyType proxyType))
                 {
                     proxyType = new ProxyType(type);
-                    //ProxyTypes[type] = proxyType;
+                    ProxyTypes[type] = proxyType;
                 }
                 return proxyType;
             }
