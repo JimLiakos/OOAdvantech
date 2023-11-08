@@ -359,7 +359,7 @@ namespace OOAdvantech.Remoting.RestApi
                         returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
                         if (cachingMetadata != null)
                         {
-                            var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
+                            //var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
                             var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
                             Stopwatch timer = new Stopwatch();
                             timer.Start();

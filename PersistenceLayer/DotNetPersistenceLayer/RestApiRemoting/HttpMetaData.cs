@@ -813,7 +813,7 @@ namespace OOAdvantech.MetaDataRepository
                 if (!ProxyTypes.TryGetValue(type, out ProxyType proxyType))
                 {
                     proxyType = new ProxyType(type);
-                    ProxyTypes[type] = proxyType;
+                    //ProxyTypes[type] = proxyType;
                 }
                 return proxyType;
             }

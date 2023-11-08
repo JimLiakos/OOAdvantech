@@ -1088,7 +1088,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
 
                 if (ServerSessionPart?.ChannelUri != null && ServerSessionPart?.ChannelUri != "local-device")
+                {
+
+                    DeviceApplication.Current.Log(new List<string>() { "typeAlreadyMarshaled = true chnl uri"+ ServerSessionPart?.ChannelUri });
                     typeAlreadyMarshaled = true;
+                }
 
             }
 
@@ -1101,8 +1105,42 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
             }
 
+
+
+
+
             if (typeAlreadyMarshaled)
+            {
                 byref.TypeMetaData = null;
+                if (byref.TypeName?.FullName.IndexOf("WaiterApp.ViewModel.WaiterPresentation") != -1)
+                {
+
+                    DeviceApplication.Current.Log(new List<string>() { "Type metadata null" });
+
+                }
+                if (byref.TypeName?.FullName.IndexOf("OOAdvantech.Remoting.RestApi.RemotingServicesServer") != -1)
+                {
+
+                    DeviceApplication.Current.Log(new List<string>() { "RemotingServicesServer Type metadata null" });
+
+                }
+
+                
+            }
+            else
+            {
+                if (byref.TypeName?.FullName.IndexOf("WaiterApp.ViewModel.WaiterPresentation") != -1)
+                {
+                    DeviceApplication.Current.Log(new List<string>() { "Type metadata" });
+                }
+                if (byref.TypeName?.FullName.IndexOf("OOAdvantech.Remoting.RestApi.RemotingServicesServer") != -1)
+                {
+
+                    DeviceApplication.Current.Log(new List<string>() { "RemotingServicesServer Type metadata" });
+
+                }
+
+            }
 
             return byref;
             //return GetObjectRef(byref);
