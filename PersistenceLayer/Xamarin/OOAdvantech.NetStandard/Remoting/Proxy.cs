@@ -145,6 +145,12 @@ namespace OOAdvantech.Remoting
         {
             proceedToSessionSubscription = false;
             allowAsynchronous = false;
+            if(eventHandler == null)
+                throw new ArgumentNullException("eventHandler");
+
+            if (eventInfo == null)
+                throw new ArgumentNullException("eventInfo");
+
 
             if (EventsInvocationLists == null)
                 EventsInvocationLists = new System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming>();
