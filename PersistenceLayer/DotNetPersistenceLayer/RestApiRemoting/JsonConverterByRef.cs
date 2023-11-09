@@ -951,8 +951,11 @@ namespace OOAdvantech.Remoting.RestApi
                 JsonWriter.WriteValue(writer, ConvertUtils.GetTypeCode(value.GetType()), value);
                 return;
             }
+            if (writer.Path.Split('.').Last() == "User")
+            {
 
-            if (ObjectContruct != null)
+            }
+                if (ObjectContruct != null)
             {
                 if (value is MarshalByRefObject)
                 {

@@ -1105,8 +1105,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
             using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
             {
                 AccessorBuilder.FieldPropertyAccessor fastFieldAccessor;
-                if (AttributeFastFieldsAccessors.TryGetValue(attribute, out fastFieldAccessor))
-                    return fastFieldAccessor;
+                lock (FeaturesLock)
+                {
+                    if (AttributeFastFieldsAccessors.TryGetValue(attribute, out fastFieldAccessor))
+                        return fastFieldAccessor;
+                }
 
                 if (attribute.AttributeRealizations.Count == 0)
                 {
@@ -1114,8 +1117,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     //να μεταφερθεί εκεί όστε να μην είναι δυνατόν να κάνω register το assembly σε ένα storage.
                     if (attribute.Persistent == true && Persistent && attribute.FieldMember == null)
                         throw new System.Exception("Class:[" + Name + "] You must declare PersistentMember Attribute for [" + attribute.PropertyMember.DeclaringType.FullName + "." + attribute.PropertyMember.Name + "] realization.");
-                    AttributeFastFieldsAccessors[attribute] = attribute.FastFieldAccessor;
-                    return attribute.FastFieldAccessor;
+                    lock (FeaturesLock)
+                    {
+                        AttributeFastFieldsAccessors[attribute] = attribute.FastFieldAccessor;
+                        return attribute.FastFieldAccessor;
+                    }
                 }
 
                 foreach (MetaDataRepository.Feature feature in Features)
@@ -1125,8 +1131,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     {
                         if (attributeRealization.Specification == attribute && attributeRealization.FieldMember != null)
                         {
-                            AttributeFastFieldsAccessors[attribute] = attributeRealization.FastFieldAccessor;
-                            return attributeRealization.FastFieldAccessor;
+                            lock (FeaturesLock)
+                            {
+                                AttributeFastFieldsAccessors[attribute] = attributeRealization.FastFieldAccessor;
+                                return attributeRealization.FastFieldAccessor;
+                            }
                         }
                     }
                 }
@@ -1139,8 +1148,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     fastFieldAccessor = _class.GetFastFieldAccessor(attribute);
                     if (fastFieldAccessor != null)
                     {
-                        AttributeFastFieldsAccessors[attribute] = fastFieldAccessor;
-                        return fastFieldAccessor;
+                        lock (FeaturesLock)
+                        {
+                            AttributeFastFieldsAccessors[attribute] = fastFieldAccessor;
+                            return fastFieldAccessor;
+                        }
                     }
                 }
                 //TODO: ο παρακάτω κώδικας αποτελή μέρος του κώδικα ελέχγου όρθοτητας του persistent metamodel και πρέπει
@@ -1148,8 +1160,8 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 if (attribute.Persistent == true && Persistent && (attribute.FastFieldAccessor == null || attribute.FastFieldAccessor.GetValue == null))
                     throw new System.Exception("Class:[" + Name + "] You must declare PersistentMember Attribute for [" + attribute.PropertyMember.DeclaringType.FullName + "." + attribute.PropertyMember.Name + "] realization.");
 
-                return attribute.FastFieldAccessor; 
-                stateTransition.Consistent = true;
+                return attribute.FastFieldAccessor;
+
             }
 
         }
@@ -1268,8 +1280,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 {
                     int count = (int)Features.Count;
                 }
-                if (AssociationEndFastFieldsAccessors.TryGetValue(associationEnd, out fastFieldAccessor))
-                    return fastFieldAccessor;
+                lock (RolesLock)
+                {
+                    if (AssociationEndFastFieldsAccessors.TryGetValue(associationEnd, out fastFieldAccessor))
+                        return fastFieldAccessor;
+                }
 
                 if (associationEnd.AssociationEndRealizations.Count == 0)
                 {
@@ -1281,8 +1296,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     //να μεταφερθεί εκεί όστε να μην είναι δυνατόν να κάνω register το assembly σε ένα storage.
                     if (associationEnd.Persistent == true && Persistent && associationEnd.FieldMember == null)
                         throw new System.Exception("Class:[" + Name + "] You must declare PersistentMember Attribute for [" + associationEnd.PropertyMember.DeclaringType.FullName + "." + associationEnd.PropertyMember.Name + "] realization.");
-                    AssociationEndFastFieldsAccessors[associationEnd] = associationEnd.FastFieldAccessor;
-                    return associationEnd.FastFieldAccessor;
+                    lock (RolesLock)
+                    {
+                        AssociationEndFastFieldsAccessors[associationEnd] = associationEnd.FastFieldAccessor;
+                        return associationEnd.FastFieldAccessor;
+                    }
                 }
 
                 foreach (AssociationEndRealization associationEndRealization in associationEnd.AssociationEndRealizations)
@@ -1295,8 +1313,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     {
                         if (associationEndRealization.FieldMember != null)
                         {
-                            AssociationEndFastFieldsAccessors[associationEnd] = associationEndRealization.FastFieldAccessor;
-                            return associationEndRealization.FastFieldAccessor;
+                            lock (RolesLock)
+                            {
+                                AssociationEndFastFieldsAccessors[associationEnd] = associationEndRealization.FastFieldAccessor;
+                                return associationEndRealization.FastFieldAccessor;
+                            }
                         }
                     }
                 }
@@ -1313,17 +1334,22 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     fastFieldAccessor = _class.GetFastFieldAccessor(associationEnd);
                     if (fastFieldAccessor != null)
                     {
-                        AssociationEndFastFieldsAccessors[associationEnd] = fastFieldAccessor;
-                        return fastFieldAccessor;
+                        lock (RolesLock)
+                        {
+                            AssociationEndFastFieldsAccessors[associationEnd] = fastFieldAccessor;
+                            return fastFieldAccessor;
+                        }
                     }
                 }
                 //TODO: ο παρακάτω κώδικας αποτελή μέρος του κώδικα ελέχγου όρθοτητας του persistent metamodel και πρέπει
                 //να μεταφερθεί εκεί όστε να μην είναι δυνατόν να κάνω register το assembly σε ένα storage.
                 if (associationEnd.Persistent == true && Persistent && associationEnd.FieldMember == null)
                     throw new System.Exception("Class:[" + Name + "] You must declare PersistentMember Attribute for [" + associationEnd.PropertyMember.DeclaringType.FullName + "." + associationEnd.PropertyMember.Name + "] realization.");
-
-                AssociationEndFastFieldsAccessors[associationEnd] = associationEnd.FastFieldAccessor;
-                return associationEnd.FastFieldAccessor; 
+                lock (RolesLock)
+                {
+                    AssociationEndFastFieldsAccessors[associationEnd] = associationEnd.FastFieldAccessor;
+                    return associationEnd.FastFieldAccessor;
+                }
                 stateTransition.Consistent = true;
             }
 
@@ -1440,7 +1466,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 {
                     throw error;
 
-                } 
+                }
                 stateTransition.Consistent = true;
             }
 
@@ -1552,7 +1578,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     if (associationEndRealization != null)
                         return associationEndRealization;
                 }
-                return null; 
+                return null;
                 stateTransition.Consistent = true;
             }
 
@@ -1604,7 +1630,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     allNestedClasses.Add(CurrClass);
                     allNestedClasses.AddRange(CurrClass.GetAllNestedClasses());
                 }
-                return allNestedClasses; 
+                return allNestedClasses;
                 stateTransition.Consistent = true;
             }
 

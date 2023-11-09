@@ -16,6 +16,7 @@ using System.ServiceModel;
 using OOAdvantech.Json;
 using OOAdvantech.Remoting.RestApi.Serialization;
 using static OOAdvantech.AccessorBuilder;
+
 #if !DeviceDotNet
 using System.Web;
 #endif
@@ -44,6 +45,10 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{ba810e9a-60e1-45fb-befa-b23d487e4fb7}</MetaDataID>
         public ObjRef(string uri, string channelUri, string internalChannelUri, string typeName, ProxyType returnTypeMetaData)
         {
+            if(string.IsNullOrWhiteSpace(uri))
+            {  
+                throw new ArgumentNullException("uri"); 
+            }
             if (channelUri.LastIndexOf("(") != channelUri.IndexOf("("))
             {
 
@@ -109,8 +114,10 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (AllowMembersCaching)
             {
-                MembersValues.Clear();
-                TypeMetaData.CachingObjectMembersValue(_obj, MembersValues, cachingMetaData);
+
+                CachingMembers membersValues = new CachingMembers();
+                TypeMetaData.CachingObjectMembersValue(_obj, membersValues, cachingMetaData);
+                MembersValues=membersValues;
                 if (MembersValues.Count > 0)
                 {
 
@@ -192,6 +199,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             set { }
         }
+        [JsonProperty(Order = 2)]
         public ChannelData ChannelData { get; set; }
 
         /// <MetaDataID>{83fc6ec5-c41a-45b2-b5a9-28e2fae8ef3e}</MetaDataID>
@@ -206,10 +214,27 @@ namespace OOAdvantech.Remoting.RestApi
         public ProxyType TypeMetaData { get { return _TypeMetaData; } set { _TypeMetaData = value; } }
 
         /// <MetaDataID>{7d7d326b-5a70-4394-8f10-5f6f6b06ae43}</MetaDataID>
-        [JsonProperty(Order = 6)]
+        
         //[JsonConverter(typeof(MemberValuesJsonConverter))]
 
-        public CachingMembers MembersValues = new CachingMembers();
+        [JsonIgnore]
+        CachingMembers _MembersValues = new CachingMembers();
+
+        [JsonProperty(Order = 6)]
+        public CachingMembers MembersValues
+        {
+            get
+            {
+                return _MembersValues.Clone();
+            }
+            set
+            {
+                if (value == null)
+                    _MembersValues=new CachingMembers();
+                else
+                    _MembersValues= value;
+            }
+        }
         //public CachingMembers MembersValues = new CachingMembers();
 
         public bool InvalidMembersValues = false;
@@ -464,6 +489,23 @@ namespace OOAdvantech.Remoting.RestApi
 
     public class CachingMembers : Dictionary<string, object>
     {
+        CachingMembers(CachingMembers cachingMembers) : base(cachingMembers)
+        {
+
+        }
+
+        public CachingMembers()
+        {
+
+        }
+        internal CachingMembers Clone()
+        {
+            lock (this)
+            {
+                return new CachingMembers(this);
+            }
+        }
+
         internal void UpdateCachingData(CachingMembers membersValues)
         {
             if (this != membersValues && membersValues != null)

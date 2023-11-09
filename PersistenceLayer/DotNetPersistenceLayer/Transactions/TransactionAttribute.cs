@@ -10,17 +10,17 @@ using System.Reflection;
 
 namespace OOAdvantech.Transactions
 {
-	/// <summary>Indicates that a class can be participating in transaction context.</summary>
-	/// <MetaDataID>{DD1786DB-E67C-4A8C-8A96-228A1630D512}</MetaDataID>
+    /// <summary>Indicates that a class can be participating in transaction context.</summary>
+    /// <MetaDataID>{DD1786DB-E67C-4A8C-8A96-228A1630D512}</MetaDataID>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-	public class TransactionalAttribute:Attribute
-	{
-		/// <MetaDataID>{CDD3F6D8-75F7-4F26-8B00-5652C1EFFD18}</MetaDataID>
-		public TransactionalAttribute()
-		{
+    public class TransactionalAttribute : Attribute
+    {
+        /// <MetaDataID>{CDD3F6D8-75F7-4F26-8B00-5652C1EFFD18}</MetaDataID>
+        public TransactionalAttribute()
+        {
 
-		}
-	}
+        }
+    }
 
     ///<summary>
     /// Sometimes we want from the transaction system to act on reference field like a value type field (contain by value). 
@@ -32,14 +32,14 @@ namespace OOAdvantech.Transactions
     ///</summary>
 	/// <MetaDataID>{B9EEFD8D-C6FD-4859-BA31-227EB554AD0F}</MetaDataID>
 	[AttributeUsage(AttributeTargets.Field|AttributeTargets.Class|AttributeTargets.Interface)]
-	public class ContainByValue:Attribute
-	{
-		/// <MetaDataID>{CDD3F6D8-75F7-4F26-8B00-5652C1EFFD18}</MetaDataID>
-		public ContainByValue()
-		{
+    public class ContainByValue : Attribute
+    {
+        /// <MetaDataID>{CDD3F6D8-75F7-4F26-8B00-5652C1EFFD18}</MetaDataID>
+        public ContainByValue()
+        {
 
-		}
-	}
+        }
+    }
 
     /// <summary>
     /// Defines the way where system lock an object.
@@ -90,7 +90,7 @@ namespace OOAdvantech.Transactions
         {
             get
             {
-                
+
                 return _Member;
             }
         }
@@ -151,7 +151,7 @@ namespace OOAdvantech.Transactions
         /// <param name="member"></param>
         /// <returns></returns>
         /// <MetaDataID>{be4d8620-c3d7-4bc1-8c69-7da8b4af6080}</MetaDataID>
-        System.Reflection.FieldInfo InitForm(System.Type type,System.Reflection.MemberInfo member)
+        System.Reflection.FieldInfo InitForm(System.Type type, System.Reflection.MemberInfo member)
         {
             if (FieldInfo != null)
                 return FieldInfo;
@@ -165,7 +165,7 @@ namespace OOAdvantech.Transactions
                 else
                 {
                     FieldInfo = GetFieldInfo(type, ImplentationField);
-                    if(FieldInfo ==null)
+                    if (FieldInfo ==null)
                         throw new OOAdvantech.Transactions.TransactionException("System can't find implementation field with name '"+ImplentationField+"' for property '"+member.Name+"' of type '"+ member.DeclaringType.FullName+"'.");
                     FieldMetadata = AccessorBuilder.GetFieldMetadata(FieldInfo);
                 }
@@ -178,7 +178,7 @@ namespace OOAdvantech.Transactions
         /// <MetaDataID>{a5bf9ea2-4a4d-48ea-bc43-4d56d80045c3}</MetaDataID>
         private System.Reflection.FieldInfo GetFieldInfo(System.Type type, string implentationField)
         {
-            
+
             System.Reflection.FieldInfo fieldInfo = type.GetMetaData().GetField(implentationField, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
             if (fieldInfo != null)
                 return fieldInfo;
@@ -189,10 +189,10 @@ namespace OOAdvantech.Transactions
         }
 
         /// <MetaDataID>{d6f687ed-b9d0-4e3e-bc60-f67b6d104d8e}</MetaDataID>
-        static System.Collections.Generic.Dictionary<Type,System.Collections.Generic.Dictionary<System.Reflection.MemberInfo,TransactionalMemberAttribute>> TransactionalMembers=new System.Collections.Generic.Dictionary<Type,System.Collections.Generic.Dictionary<System.Reflection.MemberInfo,TransactionalMemberAttribute>>();
+        static System.Collections.Generic.Dictionary<Type, System.Collections.Generic.Dictionary<System.Reflection.MemberInfo, TransactionalMemberAttribute>> TransactionalMembers = new System.Collections.Generic.Dictionary<Type, System.Collections.Generic.Dictionary<System.Reflection.MemberInfo, TransactionalMemberAttribute>>();
 
         /// <MetaDataID>{58fb70c9-5b4e-4469-917e-22df3f9db616}</MetaDataID>
-        internal static TransactionalMemberAttribute GetTransactionalMember(System.Reflection.MemberInfo memberInfo ,System.Type objectType)
+        internal static TransactionalMemberAttribute GetTransactionalMember(System.Reflection.MemberInfo memberInfo, System.Type objectType)
         {
             if (objectType == null)
             {
@@ -205,32 +205,36 @@ namespace OOAdvantech.Transactions
             if (memberInfo is System.Reflection.FieldInfo)
             {
                 TransactionalMemberAttribute transactionalMember = memberInfo.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).FirstOrDefault() as TransactionalMemberAttribute;
-                transactionalMember.InitForm(objectType,memberInfo);
+                transactionalMember.InitForm(objectType, memberInfo);
                 return transactionalMember;
             }
             else
             {
                 TransactionalMemberAttribute transactionalMember = null;
-                System.Collections.Generic.Dictionary<System.Reflection.MemberInfo,TransactionalMemberAttribute> transactionalMembers=null;
-                if(TransactionalMembers.TryGetValue(objectType,out transactionalMembers))
-                    if (transactionalMembers.TryGetValue(memberInfo, out transactionalMember))
-                        return transactionalMember;
+                System.Collections.Generic.Dictionary<System.Reflection.MemberInfo, TransactionalMemberAttribute> transactionalMembers = null;
+                lock (TransactionalMembers)
+                {
+                    if (TransactionalMembers.TryGetValue(objectType, out transactionalMembers))
+                        if (transactionalMembers.TryGetValue(memberInfo, out transactionalMember))
+                            return transactionalMember;
+                }
 
 
                 if (transactionalMembers == null)
                 {
                     transactionalMembers = new System.Collections.Generic.Dictionary<System.Reflection.MemberInfo, TransactionalMemberAttribute>();
-                  
-                    TransactionalMembers[objectType] = transactionalMembers;
+                    lock (TransactionalMembers)
+                        TransactionalMembers[objectType] = transactionalMembers;
                 }
 
                 transactionalMember = new TransactionalMemberAttribute(memberInfo.GetCustomAttributes(typeof(TransactionalMemberAttribute), true).FirstOrDefault() as TransactionalMemberAttribute);
-                transactionalMember.InitForm(objectType,memberInfo); 
-                TransactionalMembers[objectType][memberInfo] = transactionalMember;
+                transactionalMember.InitForm(objectType, memberInfo);
+                lock (TransactionalMembers)
+                    TransactionalMembers[objectType][memberInfo] = transactionalMember;
                 return transactionalMember;
-                
+
             }
-            
+
         }
 
         /// <MetaDataID>{c2229ffc-6937-4e39-8d18-c4ee5b2173cd}</MetaDataID>

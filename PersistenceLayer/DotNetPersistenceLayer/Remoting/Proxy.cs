@@ -917,7 +917,40 @@ namespace OOAdvantech.Remoting
     internal class EventConsuming
     {
         public bool AllAsynchronousCounsumers = true;
-        public System.Collections.Generic.List<Delegate> EventConsumers = new System.Collections.Generic.List<Delegate>();
+
+        System.Collections.Generic.List<Delegate> _EventConsumers = new System.Collections.Generic.List<Delegate>();
+
+       public System.Collections.Generic.List<Delegate> EventConsumers
+        {
+            get
+            {
+                lock (this)
+                {
+                    return _EventConsumers.ToList();
+                }
+            }
+        }
+
+        public int EventConsumersCount
+        {
+            get
+            {
+                lock (this)
+                    return _EventConsumers.Count;
+            }
+        }
+
+        public void AddEventConsumers(Delegate eventHandler)
+        {
+            lock (this)
+                _EventConsumers.Add(eventHandler);
+        }
+        public void RemoveEventConsumers(Delegate eventHandler)
+        {
+            lock (this)
+                _EventConsumers.Remove(eventHandler);
+        }
+
     }
 
     /// <MetaDataID>{ff215007-4002-4738-9ebe-1ce531dcda56}</MetaDataID>
@@ -976,8 +1009,8 @@ namespace OOAdvantech.Remoting
 
                     if (eventHandler.Target == removedEventHandler.Target && eventHandler.Method == removedEventHandler.Method)
                     {
-                        EventsInvocationLists[eventInfo].EventConsumers.Remove(eventHandler);
-                        if (EventsInvocationLists[eventInfo].EventConsumers.Count == 0)
+                        EventsInvocationLists[eventInfo].RemoveEventConsumers(eventHandler);
+                        if (EventsInvocationLists[eventInfo].EventConsumersCount == 0)
                         {
                             sessionUnsubscribe = true;
 
@@ -1039,7 +1072,7 @@ namespace OOAdvantech.Remoting
 
                 if (EventsInvocationLists == null)
                     EventsInvocationLists = new System.Collections.Generic.Dictionary<System.Reflection.EventInfo, EventConsuming>();
-                if (!EventsInvocationLists.ContainsKey(eventInfo) || EventsInvocationLists[eventInfo].EventConsumers.Count == 0)
+                if (!EventsInvocationLists.ContainsKey(eventInfo) || EventsInvocationLists[eventInfo].EventConsumersCount == 0)
                 {
 
                     if (!EventsInvocationLists.ContainsKey(eventInfo))
@@ -1055,7 +1088,7 @@ namespace OOAdvantech.Remoting
                                 allowAsynchronous = true;
                             else
                                 allowAsynchronous = false;
-                            
+
 
                         }
                         else
@@ -1076,10 +1109,10 @@ namespace OOAdvantech.Remoting
             }
 
 
-            if (EventsInvocationLists[eventInfo].EventConsumers.Count == 0 && !ActiveEventConsumingResolvers.Contains(this))
+            if (EventsInvocationLists[eventInfo].EventConsumersCount == 0 && !ActiveEventConsumingResolvers.Contains(this))
                 ActiveEventConsumingResolvers.Add(this); // Keeps EventConsumingResolver and Proxy live, protects them from gc 
 
-            EventsInvocationLists[eventInfo].EventConsumers.Add(eventHandler);
+            EventsInvocationLists[eventInfo].AddEventConsumers(eventHandler);
         }
     }
 
