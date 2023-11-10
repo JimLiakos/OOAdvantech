@@ -107,8 +107,8 @@ namespace OOAdvantech.iOS
                     var request = new NSUrlRequest(url);
                     webView.LoadRequest(request);
                     
-                    if (Application.Current?.MainPage != null)
-                     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
+                    //if (Application.Current?.MainPage != null)
+                    // Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
 
                     if (webView == Control)
                     {
@@ -152,8 +152,8 @@ namespace OOAdvantech.iOS
                 var request = new NSUrlRequest(url);
                 Control.LoadRequest(request);
 
-                if (Application.Current?.MainPage != null)
-                     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(),"OK");
+                //if (Application.Current?.MainPage != null)
+                //     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(),"OK");
 
 
                 //string url = null;
@@ -393,8 +393,8 @@ namespace OOAdvantech.iOS
             {
                 var request = new NSUrlRequest(ns_url);
                 Control.LoadRequest(request);
-                if (Application.Current?.MainPage != null)
-                     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
+                //if (Application.Current?.MainPage != null)
+                //     Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
             }
 
         }
