@@ -14,7 +14,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
         Dictionary<object, ObjRef> AllowCachingProxyObjectRefs = new Dictionary<object, ObjRef>();
 
-        Dictionary<object, ObjRef> WithoutCachingProxyObjectRefs = new Dictionary<object, ObjRef>();
+        Dictionary<object, ObjRef> ReferenceOnlyCachingProxyObjectRefs = new Dictionary<object, ObjRef>();
 
         IReferenceResolver InternalReferenceResolver;
         public ReferenceResolver()
@@ -67,7 +67,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                 if (!referenceOnlyCaching && AllowCachingProxyObjectRefs.TryGetValue(value, out objRef))
                     return objRef;
-                if (referenceOnlyCaching && WithoutCachingProxyObjectRefs.TryGetValue(value, out objRef))
+                if (referenceOnlyCaching && ReferenceOnlyCachingProxyObjectRefs.TryGetValue(value, out objRef))
                     return objRef;
 
             }
@@ -80,10 +80,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             if (value is MarshalByRefObject || value is ITransparentProxy)
             {
-                if (byref.AllowMembersCaching)
-                    AllowCachingProxyObjectRefs[value] = byref;
+                if (byref.ReferenceOnlyCaching)
+                    ReferenceOnlyCachingProxyObjectRefs[value] = byref;
                 else
-                    WithoutCachingProxyObjectRefs[value] = byref;
+                    AllowCachingProxyObjectRefs[value] = byref;
+
 
             }
         }

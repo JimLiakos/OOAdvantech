@@ -46,6 +46,7 @@ namespace OOAdvantech.Remoting.RestApi
 
     using System.Net.WebSockets;
     using System.Runtime.Remoting.Messaging;
+    using System.Timers;
 
 
 
@@ -1566,6 +1567,7 @@ namespace OOAdvantech.Remoting.RestApi
                                     {
                                         //this.clo
                                         request.EventCallBackChannel = this;
+                                        LifeTimeLeaseTimerElapsed(this,null );
                                         responseData = IsolatedContext.DispatchMessage(request);
                                         responseData.DirectConnect = true;
 #if !DeviceDotNet

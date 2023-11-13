@@ -267,7 +267,7 @@ namespace OOAdvantech.Remoting.RestApi
                 timer.Stop();
                 var elapsed = timer.ElapsedMilliseconds;
                 mauthUser= VerifyIdTokenTask.Result;
-                return mauthUser;
+               // return mauthUser;
             }
             JwtSecurityToken tokenS = Validate(authToken);
             //System.Diagnostics.Debug.WriteLine(OOAdvantech.Json.JsonConvert.SerializeObject(tokenS));
@@ -352,7 +352,7 @@ namespace OOAdvantech.Remoting.RestApi
                 return _FirebaseProjectId;
             }
         }
-        public static void InitializeFirebase(string FirebaseProjectId, IOAuth oAuth)
+        public static void InitializeFirebase(string FirebaseProjectId, IOAuth oAuth=null)
         {
             _FirebaseProjectId = FirebaseProjectId;
 

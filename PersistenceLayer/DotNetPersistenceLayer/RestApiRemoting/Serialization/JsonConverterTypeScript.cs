@@ -266,6 +266,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <MetaDataID>{15415828-2f21-4008-b7b3-b51b5c9dba7a}</MetaDataID>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader.Path == "$values[0].value.$value.Interfaces.$values[0].$value.CachingMembersNames.type_ref")
+            {
+
+            }
+
 
             if (reader.Path == "$value.Shapes")
             {
@@ -372,7 +377,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                     reader.Read();
                                     object entryValue = GetPropertyValue(reader, typeof(object), serializer);
                                     reader.Read();
-                                    if (propertyName!="$id")
+                                    if (propertyName != "$id")
                                         memberValues[propertyName] = entryValue;
                                     else
                                     {
@@ -455,6 +460,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                 }
                                 if (reader.TokenType == JsonToken.PropertyName && (reader.Value as string) == "value")
                                 {
+                                    if (dictionary.GetType().AssemblyQualifiedName == "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[OOAdvantech.MetaDataRepository.ProxyType, RestApiRemoting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=60cdd3bea764f110]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")
+                                    {
+
+                                    }
                                     var entryValueType = dictionary.GetType().GetGenericArguments()[1];
                                     reader.Read();
                                     _obj = GetPropertyValue(reader, entryValueType, serializer);
@@ -559,6 +568,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                 reader.Read();//Array sub item start object
                                 while (reader.TokenType != JsonToken.EndArray)
                                 {
+                                    if (reader.Path == "$values[0].value.$value.Interfaces.$values[0].$value.CachingMembersNames.type_ref")
+                                    {
+
+                                    }
                                     object _obj = GetPropertyValue(reader, elementType, serializer);
                                     collection.Add(_obj);
                                     reader.Read();
@@ -964,6 +977,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// <MetaDataID>{9f327915-9bc6-4a9f-9bac-96bdf29e6dd2}</MetaDataID>
         public ObjRef GetObjectRefValue(object _obj, bool referenceOnlyCaching)
         {
+            if (referenceOnlyCaching)
+            {
+
+            }
             OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
             string uri = null;
             if (_obj is ITransparentProxy)
@@ -1082,8 +1099,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                 }
                 else
                 {
-                    if (ServerSessionPart != null&&ServerSessionPart.PairedTypes.ContainsKey(type.AssemblyQualifiedName))
-                        typeAlreadyMarshaled=ServerSessionPart.PairedTypes[type.AssemblyQualifiedName];
+                    if (ServerSessionPart != null && ServerSessionPart.PairedTypes.ContainsKey(type.AssemblyQualifiedName))
+                        typeAlreadyMarshaled = ServerSessionPart.PairedTypes[type.AssemblyQualifiedName];
 
                 }
 
@@ -1097,13 +1114,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
 
             ObjRef byref = new ObjRef(uri, serverChannelUri, internalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
-            byref.AllowMembersCaching = !referenceOnlyCaching;
-            if (byref.AllowMembersCaching)
-                byref.CachingObjectMemberValues(_obj, CachingMetadata);
-            else
-            {
+            byref.ReferenceOnlyCaching = referenceOnlyCaching;
 
-            }
+            byref.CachingObjectMemberValues(_obj, CachingMetadata);
+
 
 
 
@@ -1175,18 +1189,29 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             var pathEntries = writer.Path.Split('.');
 
             string last = pathEntries.Last();
+
+            if (last == "$values")
+            {
+                if (pathEntries.Length > 1)
+                    last = pathEntries[pathEntries.Length - 2];
+            }
+
             string property = null;
-            if (last=="User")
+            if (pathEntries.Contains("ServingBatches"))
+            {
+
+            }
+            if (last == "ServingBatches")
             {
 
             }
 #endif
             bool referenceOnlyCaching = false;
 
-            if (CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Count>0)
+            if (CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Count > 0)
             {
                 if (CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Peek().Contains(last))
-                    referenceOnlyCaching=true;
+                    referenceOnlyCaching = true;
             }
 
             if (!string.IsNullOrWhiteSpace(last) && last.IndexOf("$value") == -1 &&
@@ -1259,9 +1284,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                             if (byref == null)
                             {
                                 byref = GetObjectRefValue(value, referenceOnlyCaching);
-                                byref.AllowMembersCaching = !referenceOnlyCaching;
+                                byref.ReferenceOnlyCaching = referenceOnlyCaching;
                                 (referenceResolver as ReferenceResolver).AssignePoxyObjRef(value, byref);
+
+                                List<string> clientSideCachingOnlyReferenceMembers = ProxyType.GetProxyType(value.GetType()).ReferenceCachingMembersNames;
+                                CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
                                 serializer.Serialize(writer, byref);
+                                CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop();
                             }
                             else
                                 serializer.Serialize(writer, byref);
@@ -1276,9 +1305,6 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                     writer.WriteStartObject();
 
-
-
-
                     if (referenceResolver is ReferenceResolver)
                         isReferenced = (referenceResolver as ReferenceResolver).IsReferencedTs(serializer, value);
                     else
@@ -1288,11 +1314,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     JsonType jsonType = null;
 
 #if DeviceDotNet
-                jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
+                    jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #elif Json4
                     jsonType = JsonType.GetJsonType(value.GetType(), serializer.TypeNameAssemblyFormatHandling, serializer.SerializationBinder, SerializeSession);
 #else
-                jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
+                    jsonType = JsonType.GetJsonType(value.GetType(), serializer._typeNameAssemblyFormat, serializer.Binder, SerializeSession);
 #endif
 
                     WriteJsonType(writer, serializer, jsonType);
@@ -1310,12 +1336,17 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     }
                     else
                     {
-
-                        List<string> clientSideCachingOnlyReferenceMembers = ProxyType.GetProxyType(value.GetType()).ReferenceCachingMembersNames;
-                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
                         valueProperty.WritePropertyName(writer);
-                        serializer.Serialize(writer, value);
-                        CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop();
+                        if (!(value is ObjRef))
+                        {
+                            List<string> clientSideCachingOnlyReferenceMembers = ProxyType.GetProxyType(value.GetType()).ReferenceCachingMembersNames;
+                            CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
+                            serializer.Serialize(writer, value);
+                            CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop();
+                        }
+                        else
+                            serializer.Serialize(writer, value);
+
                     }
 
                     writer.WriteEndObject();
@@ -1414,18 +1445,18 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     valueProperty.WritePropertyName(writer);
                     writer.WriteStartArray();
                     List<object> tmpArray = null;
-                    
-                       bool tryAgain = false;
+
+                    bool tryAgain = false;
                     do
                     {
-                        tryAgain=false;
+                        tryAgain = false;
                         try
                         {
-                            tmpArray=(value as System.Collections.IEnumerable).OfType<object>().ToList();
+                            tmpArray = (value as System.Collections.IEnumerable).OfType<object>().ToList();
                         }
                         catch (Exception error)
                         {
-                            tryAgain=true;
+                            tryAgain = true;
                         }
                     } while (tryAgain);
                     foreach (var itemValue in value as System.Collections.IEnumerable)
@@ -1513,11 +1544,11 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     try
                     {
                         System.Collections.Generic.Dictionary<object, object> tempDictionary = null;
-                        bool tryAgain=false;
+                        bool tryAgain = false;
                         do
                         {
-                            tryAgain=false;
-                            tempDictionary= new System.Collections.Generic.Dictionary<object, object>();
+                            tryAgain = false;
+                            tempDictionary = new System.Collections.Generic.Dictionary<object, object>();
                             try
                             {
                                 foreach (System.Collections.DictionaryEntry itemEntry in value as System.Collections.IDictionary)
@@ -1527,14 +1558,14 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                             catch (Exception error)
                             {
 
-                                tryAgain=true;
+                                tryAgain = true;
                             }
                         } while (tryAgain);
-                        
-                        
 
 
-                        
+
+
+
                         foreach (var itemEntry in tempDictionary)
                         {
                             writer.WriteStartObject();

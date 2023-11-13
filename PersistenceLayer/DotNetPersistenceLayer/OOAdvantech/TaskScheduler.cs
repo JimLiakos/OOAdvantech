@@ -99,7 +99,6 @@ namespace OOAdvantech
                     TaskCompletionSource = new System.Threading.Tasks.TaskCompletionSource<bool>();
                 Tasks.Enqueue(function);
             }
-
         }
 
         public bool Wait(TimeSpan timeout)

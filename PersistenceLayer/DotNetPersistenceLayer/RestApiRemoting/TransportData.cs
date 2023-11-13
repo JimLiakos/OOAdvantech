@@ -36,7 +36,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
         [JsonIgnore]
-        internal bool AllowMembersCaching = true;
+        internal bool ReferenceOnlyCaching = true;
 
         static Dictionary<string, ChannelData> Channels = new Dictionary<string, ChannelData>();
 
@@ -112,17 +112,16 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{6e1c6091-cbd7-4094-a5f0-5a8ca4e840ad}</MetaDataID>
         internal void CachingObjectMemberValues(object _obj, CachingMetaData cachingMetaData)
         {
-            if (AllowMembersCaching)
-            {
+           
 
                 CachingMembers membersValues = new CachingMembers();
-                TypeMetaData.CachingObjectMembersValue(_obj, membersValues, cachingMetaData);
+                TypeMetaData.CachingObjectMembersValue(_obj, membersValues,ReferenceOnlyCaching, cachingMetaData);
                 MembersValues=membersValues;
                 if (MembersValues.Count > 0)
                 {
 
                 }
-            }
+            
             //throw new NotImplementedException();
         }
 
@@ -480,8 +479,20 @@ namespace OOAdvantech.Remoting.RestApi
 
     public class TypeName
     {
+        public TypeName()
+        {
+
+        }
         public TypeName(string assemblyQualifiedName)
         {
+            if (assemblyQualifiedName==null)
+            {
+
+            }
+            if (assemblyQualifiedName?.IndexOf("OOAdvantech.DotNetMetaDataRepository.AssociationEndRealization")!=-1)
+            {
+
+            }
             FullName = assemblyQualifiedName;
         }
         public string FullName { get; set; }

@@ -1,3 +1,4 @@
+
 using OOAdvantech.Remoting.RestApi;
 using System;
 using System.CodeDom;
@@ -507,7 +508,8 @@ namespace OOAdvantech.MetaDataRepository
             }
         }
 
-        public List<string> ReferenceCachingMembersNames
+        [Json.JsonIgnore]
+        internal List<string> ReferenceCachingMembersNames
         {
             get
             {
@@ -558,63 +560,39 @@ namespace OOAdvantech.MetaDataRepository
 
 
         /// <MetaDataID>{ccf8067e-7dc8-4078-bbbb-df645ef09d20}</MetaDataID>
-        public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, CachingMetaData cachingMetaData)
+        public void CachingObjectMembersValue(object _object, Dictionary<string, object> membersValues, bool referenceOnlyCaching, CachingMetaData cachingMetaData)
         {
+            List<string> cachingClientSideMembers = new List<string>();
 
-            foreach (var attribute in CachingClientSideAttributeProperties)
+            if (!referenceOnlyCaching)
             {
-                object value = attribute.GetValue(_object);
-                membersValues[attribute.Name] = value;
-            }
-
-            foreach (var attributeRealization in CachingClientSideAttributeRealizationProperties)
-            {
-                object value = attributeRealization.GetValue(_object);
-                membersValues[attributeRealization.Name] = value;
-            }
-
-            foreach (var associationEndRealization in CachingClientSideAssociationEndRealizationProperties)
-            {
-                object value = associationEndRealization.GetValue(_object);
-                membersValues[associationEndRealization.Name] = value;
-            }
-
-
-            foreach (var associationEnd in CachingClientSideAssociationEndProperties)
-            {
-                object value = associationEnd.GetValue(_object);
-                membersValues[associationEnd.Name] = value;
-            }
-
-            if (cachingMetaData != null)
-            {
-                List<string> cachingClientSideMembers = new List<string>();
-                if (cachingMetaData.CachingMembers?.TryGetValue(FullName, out cachingClientSideMembers) == true)
+                foreach (var attribute in CachingClientSideAttributeProperties)
                 {
-                    foreach (string memberName in cachingClientSideMembers)
-                    {
-                        if (!membersValues.ContainsKey(memberName))
-                        {
-                            var property = this.Type.GetProperty(memberName);
-                            if (property != null)
-                            {
-                                membersValues[memberName] = property.GetValue(_object);
-                            }
-                            else
-                            {
-                                var field = this.Type.GetField(memberName);
-                                membersValues[memberName] = field.GetValue(_object);
-                            }
-                        }
-                        else
-                        {
-
-                        }
-
-                    }
+                    object value = attribute.GetValue(_object);
+                    membersValues[attribute.Name] = value;
                 }
 
-                if (cachingMetaData.CachingMembers?.TryGetValue("", out cachingClientSideMembers) == true)
+                foreach (var attributeRealization in CachingClientSideAttributeRealizationProperties.Union(ReferenceCachingClientSideAttributeRealizationProperties))
+                {
+                    object value = attributeRealization.GetValue(_object);
+                    membersValues[attributeRealization.Name] = value;
+                }
+
+                foreach (var associationEndRealization in CachingClientSideAssociationEndRealizationProperties.Union(ReferenceCachingClientSideAssociationEndRealizationProperties))
+                {
+                    object value = associationEndRealization.GetValue(_object);
+                    membersValues[associationEndRealization.Name] = value;
+                }
+
+
+                foreach (var associationEnd in CachingClientSideAssociationEndProperties.Union(ReferenceCachingClientSideAssociationEndProperties))
+                {
+                    object value = associationEnd.GetValue(_object);
+                    membersValues[associationEnd.Name] = value;
+                }
+
+                // client side update caching extra members values
+                if (cachingMetaData?.CachingMembers?.TryGetValue("", out cachingClientSideMembers) == true)
                 {
                     foreach (string memberName in cachingClientSideMembers)
                     {
@@ -639,8 +617,37 @@ namespace OOAdvantech.MetaDataRepository
 
             }
 
+            //scoop caching data allowed in reference only request  
+            if (cachingMetaData?.CachingMembers?.TryGetValue(FullName, out cachingClientSideMembers) == true)
+            {
+                foreach (string memberName in cachingClientSideMembers)
+                {
+                    if (!membersValues.ContainsKey(memberName))
+                    {
+                        var property = this.Type.GetProperty(memberName);
+                        if (property != null)
+                        {
+                            membersValues[memberName] = property.GetValue(_object);
+                        }
+                        else
+                        {
+                            var field = this.Type.GetField(memberName);
+                            membersValues[memberName] = field.GetValue(_object);
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            }
+
+
+
+
             foreach (var _interface in _Interfaces)
-                _interface.CachingObjectMembersValue(_object, membersValues, cachingMetaData);
+                _interface.CachingObjectMembersValue(_object, membersValues, referenceOnlyCaching, cachingMetaData);
         }
 
 
@@ -653,14 +660,14 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{9204d227-91eb-4ef7-b081-62a49b331bd3}</MetaDataID>
         List<AssociationEnd> CachingClientSideAssociationEndProperties;
 
-        public List<Attribute> ReferenceCachingClientSideAttributeProperties { get; }
-        public List<AttributeRealization> ReferenceCachingClientSideAttributeRealizationProperties { get; }
-        public List<AssociationEndRealization> ReferenceCachingClientSideAssociationEndRealizationProperties { get; }
-        public List<AssociationEnd> ReferenceCachingClientSideAssociationEndProperties { get; }
-        public List<Attribute> OnDemandCachingClientSideAttributeProperties { get; }
-        public List<AttributeRealization> OnDemandCachingClientSideAttributeRealizationProperties { get; }
-        public List<AssociationEndRealization> OnDemandCachingClientSideAssociationEndRealizationProperties { get; }
-        public List<AssociationEnd> OnDemandCachingClientSideAssociationEndProperties { get; }
+        List<Attribute> ReferenceCachingClientSideAttributeProperties;
+        List<AttributeRealization> ReferenceCachingClientSideAttributeRealizationProperties;
+         List<AssociationEndRealization> ReferenceCachingClientSideAssociationEndRealizationProperties;
+         List<AssociationEnd> ReferenceCachingClientSideAssociationEndProperties;
+         List<Attribute> OnDemandCachingClientSideAttributeProperties;
+         List<AttributeRealization> OnDemandCachingClientSideAttributeRealizationProperties;
+         List<AssociationEndRealization> OnDemandCachingClientSideAssociationEndRealizationProperties;
+         List<AssociationEnd> OnDemandCachingClientSideAssociationEndProperties;
 
 
         /// <MetaDataID>{36577234-561a-4d0b-a711-dbb8f771162c}</MetaDataID>
