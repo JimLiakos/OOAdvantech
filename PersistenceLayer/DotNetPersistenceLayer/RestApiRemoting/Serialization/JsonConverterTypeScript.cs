@@ -1720,6 +1720,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
     }
 
 
+    /// <MetaDataID>{a116172a-f6fd-4dbb-9289-0ddf53c47a33}</MetaDataID>
     public class MemberValuesJsonConverter : JsonConverter<Dictionary<string, object>>
     {
 

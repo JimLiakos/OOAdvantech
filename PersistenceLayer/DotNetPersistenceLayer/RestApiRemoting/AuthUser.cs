@@ -361,6 +361,7 @@ namespace OOAdvantech.Remoting.RestApi
 
     }
 
+    /// <MetaDataID>{de17c9d9-820e-48cf-a4aa-155466399340}</MetaDataID>
     public interface IOAuth
     {
         Task<AuthUser> VerifyIdToken(string authToken);

@@ -29,11 +29,13 @@ namespace OOAdvantech.MetaDataRepository
     }
 
 
+    /// <MetaDataID>{e09c9ca5-ad00-4855-8697-364c875cc2ba}</MetaDataID>
     [AttributeUsage(AttributeTargets.Property)]
     public class OnDemandCachingDataOnClientSide : System.Attribute
     {
 
     }
+    /// <MetaDataID>{7a64cf13-18c8-4cc7-a273-585e6c77a52b}</MetaDataID>
     [AttributeUsage(AttributeTargets.Property| AttributeTargets.Field)]
     public class CachingOnlyReferenceOnClientSide : System.Attribute
     {

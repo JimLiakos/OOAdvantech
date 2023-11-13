@@ -455,6 +455,7 @@ namespace OOAdvantech.Remoting.RestApi
         LagTest = 4
     }
 
+    /// <MetaDataID>{447ba5c0-aa00-44a4-a3b3-0160a8600312}</MetaDataID>
     public class ChannelData
     {
         public ChannelData(string channelUri)
@@ -477,6 +478,7 @@ namespace OOAdvantech.Remoting.RestApi
         //string InternalChannelUri { get; set; }
     }
 
+    /// <MetaDataID>{31b4488e-8241-4a95-b0d5-f6445858db8e}</MetaDataID>
     public class TypeName
     {
         public TypeName()
@@ -498,6 +500,7 @@ namespace OOAdvantech.Remoting.RestApi
         public string FullName { get; set; }
     }
 
+    /// <MetaDataID>{57ce6845-015a-44bf-b923-04fa7d6f66b1}</MetaDataID>
     public class CachingMembers : Dictionary<string, object>
     {
         CachingMembers(CachingMembers cachingMembers) : base(cachingMembers)
@@ -530,6 +533,7 @@ namespace OOAdvantech.Remoting.RestApi
         }
     }
 
+    /// <MetaDataID>{5140d70c-a65e-4d77-a8f1-b784a6655d5b}</MetaDataID>
     public class CachingMetaData
     {
         public Dictionary<string, List<string>> CachingMembers = new Dictionary<string, List<string>>();
