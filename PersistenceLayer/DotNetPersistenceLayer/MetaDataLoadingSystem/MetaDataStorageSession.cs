@@ -7,6 +7,7 @@ using OOAdvantech.PersistenceLayerRunTime;
 using OOAdvantech.Transactions;
 using OOAdvantech.PersistenceLayer;
 
+
 namespace OOAdvantech.MetaDataLoadingSystem
 {
     /// <MetaDataID>{D1F92A93-7119-4CE8-A38F-35F2DFE6F6A9}</MetaDataID>
@@ -360,7 +361,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
             if (associationEnd.Specification.Identity.ToString() == ofTypeIdentity)
                 ofTypeIdentity = null;
 
-            
+
 
             Dictionary<StorageCell, Dictionary<string, List<string>>> storageCellReferenceSerialNumbers = new Dictionary<StorageCell, Dictionary<string, List<string>>>();
             Set<MetaDataRepository.RelatedStorageCell> relatedStorageCells = new Set<OOAdvantech.MetaDataRepository.RelatedStorageCell>();
@@ -547,10 +548,10 @@ namespace OOAdvantech.MetaDataLoadingSystem
             }
             if (ofTypeIdentity != null)
             {
-                var ofTypeClassifier= DotNetMetaDataRepository.MetaObjectMapper.FindMetaObject(new MetaDataRepository.MetaObjectID(ofTypeIdentity)) as OOAdvantech.MetaDataRepository.Classifier;
-                foreach(var storageCell in linkedStorageCells.Keys)
+                var ofTypeClassifier = DotNetMetaDataRepository.MetaObjectMapper.FindMetaObject(new MetaDataRepository.MetaObjectID(ofTypeIdentity)) as OOAdvantech.MetaDataRepository.Classifier;
+                foreach (var storageCell in linkedStorageCells.Keys)
                 {
-                    if(storageCell.Type.IsA(ofTypeClassifier))
+                    if (storageCell.Type.IsA(ofTypeClassifier))
                         relatedStorageCells.Add(linkedStorageCells[storageCell]);
                     else
                     {
@@ -787,7 +788,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
             var storageInstanceRef = operativeObjectCollection[objectID];
             if (storageInstanceRef != null)
             {
-                
+
                 return storageInstanceRef.MemoryInstance;
             }
             else
@@ -1253,8 +1254,12 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 //string XQuery = StorageName + "/ObjectCollections/" + CollectionName +
                 //    "/Object";//[@oid = "+ObjectID.ToString()+"]";
 
-
-                var Nodes = XMLDocument.Root.Element("ObjectCollections").Element(CollectionName).Elements();// XMLDocument.Root.SelectNodes(XQuery);
+                System.Collections.Generic.List<XElement> Nodes = null;
+                XElement classCollectionElement = null;
+                if (this.ObjectCollectionNodes.TryGetValue(ClassCollection, out classCollectionElement))
+                    Nodes=classCollectionElement.Elements().ToList();
+                else
+                    Nodes = XMLDocument.Root.Element("ObjectCollections").Element(CollectionName).Elements().ToList();// XMLDocument.Root.SelectNodes(XQuery);
 
                 System.Type ObjectIDType = ObjectID.GetMemberValue("ObjectID").GetType();
                 foreach (var CurrNode in Nodes)
@@ -1512,7 +1517,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
                         }
                     }
 
-                    
+
                     if (ObjectCollectionType == null)
                     {
                         var reflectionAssembly = ModulePublisher.ClassRepository.LoadAssembly(objectCollection.GetAttribute("AssemblyFullName"));
