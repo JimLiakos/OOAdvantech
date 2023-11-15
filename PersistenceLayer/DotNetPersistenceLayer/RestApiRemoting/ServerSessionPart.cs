@@ -1314,7 +1314,9 @@ namespace OOAdvantech.Remoting.RestApi
                         if (proxy.ObjectRef.MembersValues == null)
                             proxy.ObjectRef.MembersValues = objRef.MembersValues;
                         else
-                            proxy.ObjectRef.MembersValues.UpdateCachingData(objRef.MembersValues);
+                        {
+                            proxy.ObjectRef.UpdateMembersValues(objRef.MembersValues);
+                        }
 
                     }
                     value = proxy.GetTransparentProxy(type);

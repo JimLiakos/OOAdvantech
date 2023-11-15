@@ -45,9 +45,9 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{ba810e9a-60e1-45fb-befa-b23d487e4fb7}</MetaDataID>
         public ObjRef(string uri, string channelUri, string internalChannelUri, string typeName, ProxyType returnTypeMetaData)
         {
-            if(string.IsNullOrWhiteSpace(uri))
-            {  
-                throw new ArgumentNullException("uri"); 
+            if (string.IsNullOrWhiteSpace(uri))
+            {
+                throw new ArgumentNullException("uri");
             }
             if (channelUri.LastIndexOf("(") != channelUri.IndexOf("("))
             {
@@ -112,16 +112,16 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{6e1c6091-cbd7-4094-a5f0-5a8ca4e840ad}</MetaDataID>
         internal void CachingObjectMemberValues(object _obj, CachingMetaData cachingMetaData)
         {
-           
 
-                CachingMembers membersValues = new CachingMembers();
-                TypeMetaData.CachingObjectMembersValue(_obj, membersValues,ReferenceOnlyCaching, cachingMetaData);
-                MembersValues=membersValues;
-                if (MembersValues.Count > 0)
-                {
 
-                }
-            
+            CachingMembers membersValues = new CachingMembers();
+            TypeMetaData.CachingObjectMembersValue(_obj, membersValues, ReferenceOnlyCaching, cachingMetaData);
+            MembersValues=membersValues;
+            if (MembersValues.Count > 0)
+            {
+
+            }
+
             //throw new NotImplementedException();
         }
 
@@ -148,6 +148,12 @@ namespace OOAdvantech.Remoting.RestApi
                     clientSessionPart.ProxyTypes[TypeName.FullName] = TypeMetaData;
             }
             return TypeMetaData;
+        }
+
+        internal void UpdateMembersValues(CachingMembers membersValues)
+        {
+            lock (this)
+                _MembersValues.UpdateCachingData(membersValues);
         }
 
 
@@ -213,7 +219,7 @@ namespace OOAdvantech.Remoting.RestApi
         public ProxyType TypeMetaData { get { return _TypeMetaData; } set { _TypeMetaData = value; } }
 
         /// <MetaDataID>{7d7d326b-5a70-4394-8f10-5f6f6b06ae43}</MetaDataID>
-        
+
         //[JsonConverter(typeof(MemberValuesJsonConverter))]
 
         [JsonIgnore]
@@ -224,14 +230,18 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                return _MembersValues.Clone();
+                lock (_MembersValues)
+                    return _MembersValues.Clone();
             }
             set
             {
-                if (value == null)
-                    _MembersValues=new CachingMembers();
-                else
-                    _MembersValues= value;
+                lock (_MembersValues)
+                {
+                    if (value == null)
+                        _MembersValues=new CachingMembers();
+                    else
+                        _MembersValues= value;
+                }
             }
         }
         //public CachingMembers MembersValues = new CachingMembers();
