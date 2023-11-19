@@ -253,6 +253,7 @@ namespace GenWebBrowser
         }
 
         public bool ConnectionIsOpen => true;
+        public string EndPointID { get => GetHashCode().ToString(); }
 
         public object InvokeScript(string methodName, params object[] args)
         {

@@ -35,6 +35,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{9d246883-4559-44d0-acce-70fa62eee425}</MetaDataID>
         public const string GetTypesMetadata = "e8a30a72b9564fdb9c70abd571454774";
 
+        public const string RenewEventCallbackChanel = "466D7F83576E4133B517ED3C2670A4ED";
+
         /// <MetaDataID>{e5921ca3-b7ac-476b-a52f-df26fedc13d3}</MetaDataID>
         public const string GetAccessToken = "7102b73b057445c6acf5f7c19e03a845";
 

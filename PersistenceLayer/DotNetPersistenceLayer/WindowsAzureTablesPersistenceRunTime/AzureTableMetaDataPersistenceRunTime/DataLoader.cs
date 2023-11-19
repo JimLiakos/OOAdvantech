@@ -52,6 +52,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
         }
         protected override object Convert(object value, System.Type type)
         {
+            if (type.GetMetaData().IsGenericType &&
+          !type.GetMetaData().IsGenericTypeDefinition &&
+          type.GetGenericTypeDefinition() == typeof(System.Nullable<>))
+            {
+
+            }
+            if (type?.BaseType == typeof(Enum))
+            { 
+
+            }
+
+
             if (value == null || value is System.DBNull)
                 return value;
             else
@@ -304,6 +316,6 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             }
         }
 
-        
+
     }
 }

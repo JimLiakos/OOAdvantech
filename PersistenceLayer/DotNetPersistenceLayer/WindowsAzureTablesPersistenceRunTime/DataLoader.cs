@@ -3054,6 +3054,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         /// <MetaDataID>{b26515c1-3531-46e5-8b6f-2b54610b1d43}</MetaDataID>
         protected override object Convert(object value, System.Type type)
         {
+
             if (value == null || value is System.DBNull)
                 return value;
             else

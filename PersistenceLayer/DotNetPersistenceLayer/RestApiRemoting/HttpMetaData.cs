@@ -135,6 +135,7 @@ namespace OOAdvantech.MetaDataRepository
             //return false;
         }
 
+        /// <MetaDataID>{89429b7a-88a5-452e-8f0c-e340bec51a8f}</MetaDataID>
         public static bool IsHttpVisible(this Classifier classifier, AssociationEnd associationEnd)
         {
 
@@ -247,6 +248,7 @@ namespace OOAdvantech.MetaDataRepository
 
         //###
 
+        /// <MetaDataID>{f04a37d5-589e-4c92-aefd-f389c7e1f7a3}</MetaDataID>
         public static bool IsOnDemandCachedMember(this Classifier classifier, AssociationEnd associationEnd)
         {
             if (associationEnd.Namespace == classifier)
@@ -289,6 +291,7 @@ namespace OOAdvantech.MetaDataRepository
         }
 
 
+        /// <MetaDataID>{f15e1451-860f-4096-9983-b8187565d13c}</MetaDataID>
         public static bool IsOnDemandCachedMember(this Classifier classifier, Feature feature)
         {
             if (feature.Owner == classifier)
@@ -322,6 +325,7 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
+        /// <MetaDataID>{5183e9e4-6a1c-43df-b1f7-b0128bb02969}</MetaDataID>
         public static bool IsReferencedCachedMember(this Classifier classifier, Feature feature)
         {
             if (feature.Owner == classifier)
@@ -353,6 +357,7 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
+        /// <MetaDataID>{40fd58f9-3810-417a-8872-290b8c68b411}</MetaDataID>
         public static bool IsReferencedCachedMember(this Classifier classifier, AssociationEnd associationEnd)
         {
             if (associationEnd.Namespace == classifier)
@@ -397,6 +402,7 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
+        /// <MetaDataID>{20598ab8-6a80-4a60-8c67-f62f37125bac}</MetaDataID>
         public static bool IsCachedMember(this FieldInfo fieldInfo)
         {
             var memberAttributes = fieldInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
@@ -404,6 +410,7 @@ namespace OOAdvantech.MetaDataRepository
                 return true;
             return false;
         }
+        /// <MetaDataID>{52c6d9df-e1bb-460d-85fb-26e1066e2a98}</MetaDataID>
         public static bool IsCachedMember(this PropertyInfo propertyInfo)
         {
             var memberAttributes = propertyInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
@@ -411,6 +418,7 @@ namespace OOAdvantech.MetaDataRepository
                 return true;
             return false;
         }
+        /// <MetaDataID>{8bcebbaa-a670-4325-8c76-348ffcc1b212}</MetaDataID>
         public static bool IsCachedOnDemandMember(this FieldInfo fieldInfo)
         {
             var memberAttributes = fieldInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
@@ -419,6 +427,7 @@ namespace OOAdvantech.MetaDataRepository
             return false;
         }
 
+        /// <MetaDataID>{72e05f13-596e-4049-b4d1-3fd4e49aea9b}</MetaDataID>
         public static bool IsCachedOnDemandMember(this PropertyInfo propertyInfo)
         {
             var memberAttributes = propertyInfo.GetCustomAttributes(typeof(OnDemandCachingDataOnClientSide), false);
@@ -426,6 +435,7 @@ namespace OOAdvantech.MetaDataRepository
                 return true;
             return false;
         }
+        /// <MetaDataID>{bf6f28e7-9d7b-48d7-8774-8730d1e1eb40}</MetaDataID>
         public static bool IsCachedReferenceOnlyMember(this FieldInfo fieldInfo)
         {
             var memberAttributes = fieldInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
@@ -434,6 +444,7 @@ namespace OOAdvantech.MetaDataRepository
             return false;
         }
 
+        /// <MetaDataID>{52222978-ecc1-4cae-b3f3-391b9c0cbcc5}</MetaDataID>
         public static bool IsCachedReferenceOnlyMember(this PropertyInfo propertyInfo)
         {
             var memberAttributes = propertyInfo.GetCustomAttributes(typeof(CachingOnlyReferenceOnClientSide), false);
@@ -481,33 +492,31 @@ namespace OOAdvantech.MetaDataRepository
             }
         }
 
-        public List<string> CachingMembersNames
-        {
-            get
-            {
+        // List<string> CachingMembersNames
+        //{
+        //    get
+        //    {
 
-                List<string> cachingMembersNames = CachingClientSideAttributeProperties.Select(x => x.Name).
-                    Union(CachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
-                    Union(CachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
-                    Union(CachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
-
-
-
-                if (this.BaseProxyType != null)
-                    cachingMembersNames = cachingMembersNames.Union(BaseProxyType.CachingMembersNames).ToList();
-
-                if (Interfaces != null)
-                    foreach (var _interface in Interfaces)
-                        cachingMembersNames = cachingMembersNames.Union(_interface.CachingMembersNames).ToList();
+        //        List<string> cachingMembersNames = CachingClientSideAttributeProperties.Select(x => x.Name).
+        //            Union(CachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
+        //            Union(CachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
+        //            Union(CachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
 
 
 
+        //        if (this.BaseProxyType != null)
+        //            cachingMembersNames = cachingMembersNames.Union(BaseProxyType.CachingMembersNames).ToList();
 
-                return cachingMembersNames;
+        //        if (Interfaces != null)
+        //            foreach (var _interface in Interfaces)
+        //                cachingMembersNames = cachingMembersNames.Union(_interface.CachingMembersNames).ToList();
 
-            }
-        }
+        //        return cachingMembersNames;
 
+        //    }
+        //}
+
+        /// <MetaDataID>{eaeebe61-fa1f-456b-9ea2-2dcaa510c7c2}</MetaDataID>
         [Json.JsonIgnore]
         internal List<string> ReferenceCachingMembersNames
         {
@@ -536,25 +545,39 @@ namespace OOAdvantech.MetaDataRepository
             }
         }
 
+
+        /// <MetaDataID>{d705db1a-4a51-4375-ae14-d5c6add72130}</MetaDataID>
+        List<string> _OnDemandCachingMembersNames = new List<string>();
+
+        /// <MetaDataID>{743bfbcf-25d4-43ee-9cff-312fdc187349}</MetaDataID>
         public List<string> OnDemandCachingMembersNames
         {
             get
             {
 
-                List<string> cachingMembersNames = OnDemandCachingClientSideAttributeProperties.Select(x => x.Name).
-                    Union(OnDemandCachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
-                    Union(OnDemandCachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
-                    Union(OnDemandCachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
+                if (Type != null)
+                {
+                    List<string> cachingMembersNames = OnDemandCachingClientSideAttributeProperties.Select(x => x.Name).
+                        Union(OnDemandCachingClientSideAttributeRealizationProperties.Select(x => x.Name)).
+                        Union(OnDemandCachingClientSideAssociationEndRealizationProperties.Select(x => x.Name)).
+                        Union(OnDemandCachingClientSideAssociationEndProperties.Select(x => x.Name)).Distinct().ToList();
 
-                if (this.BaseProxyType != null)
-                    cachingMembersNames = cachingMembersNames.Union(BaseProxyType.OnDemandCachingMembersNames).ToList();
+                    if (this.BaseProxyType != null)
+                        cachingMembersNames = cachingMembersNames.Union(BaseProxyType.OnDemandCachingMembersNames).ToList();
 
-                if (Interfaces != null)
-                    foreach (var _interface in Interfaces)
-                        cachingMembersNames = cachingMembersNames.Union(_interface.OnDemandCachingMembersNames).ToList();
+                    if (Interfaces != null)
+                        foreach (var _interface in Interfaces)
+                            cachingMembersNames = cachingMembersNames.Union(_interface.OnDemandCachingMembersNames).ToList();
 
-                return cachingMembersNames;
+                    return cachingMembersNames;
+                }
+                else
+                    return _OnDemandCachingMembersNames;
 
+            }
+            set
+            {
+                _OnDemandCachingMembersNames = value;
             }
         }
 
@@ -660,14 +683,22 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{9204d227-91eb-4ef7-b081-62a49b331bd3}</MetaDataID>
         List<AssociationEnd> CachingClientSideAssociationEndProperties;
 
+        /// <MetaDataID>{e5ac9d52-fa78-4c06-8253-c246bc21c030}</MetaDataID>
         List<Attribute> ReferenceCachingClientSideAttributeProperties;
+        /// <MetaDataID>{38c99616-fcd6-4d24-899d-eb30b4f5b2b2}</MetaDataID>
         List<AttributeRealization> ReferenceCachingClientSideAttributeRealizationProperties;
-         List<AssociationEndRealization> ReferenceCachingClientSideAssociationEndRealizationProperties;
-         List<AssociationEnd> ReferenceCachingClientSideAssociationEndProperties;
-         List<Attribute> OnDemandCachingClientSideAttributeProperties;
-         List<AttributeRealization> OnDemandCachingClientSideAttributeRealizationProperties;
-         List<AssociationEndRealization> OnDemandCachingClientSideAssociationEndRealizationProperties;
-         List<AssociationEnd> OnDemandCachingClientSideAssociationEndProperties;
+        /// <MetaDataID>{7daf0149-5579-4089-8383-75324f0b1001}</MetaDataID>
+        List<AssociationEndRealization> ReferenceCachingClientSideAssociationEndRealizationProperties;
+        /// <MetaDataID>{4f213b44-2b22-4cd7-a1d8-b2032cdfd344}</MetaDataID>
+        List<AssociationEnd> ReferenceCachingClientSideAssociationEndProperties;
+        /// <MetaDataID>{49002bb3-d9a8-4600-a291-9dd676c36524}</MetaDataID>
+        List<Attribute> OnDemandCachingClientSideAttributeProperties;
+        /// <MetaDataID>{c56f868c-501d-4e68-97b9-588c6fa61973}</MetaDataID>
+        List<AttributeRealization> OnDemandCachingClientSideAttributeRealizationProperties;
+        /// <MetaDataID>{397740f9-ffb8-4ee2-a936-1ff9dc62aa15}</MetaDataID>
+        List<AssociationEndRealization> OnDemandCachingClientSideAssociationEndRealizationProperties;
+        /// <MetaDataID>{fde2e502-0af5-4441-80ee-7e4397369d5e}</MetaDataID>
+        List<AssociationEnd> OnDemandCachingClientSideAssociationEndProperties;
 
 
         /// <MetaDataID>{36577234-561a-4d0b-a711-dbb8f771162c}</MetaDataID>
@@ -787,9 +818,9 @@ namespace OOAdvantech.MetaDataRepository
 
 
 
-            _CachingClientSidePropertiesNames = (from attribute in CachingClientSideAttributeProperties select attribute.Name).ToList();
+            var cachingClientSidePropertiesNames = (from attribute in CachingClientSideAttributeProperties select attribute.Name).ToList();
 
-            if (_CachingClientSidePropertiesNames.Count > 0)
+            if (cachingClientSidePropertiesNames.Count > 0)
                 HasCachingClientSideProperties = true;
 
             if (type.BaseType != null && type.BaseType != typeof(object) && type.BaseType != typeof(MarshalByRefObject))
@@ -810,7 +841,9 @@ namespace OOAdvantech.MetaDataRepository
         }
 
 
+        /// <MetaDataID>{e820c37f-b24f-4c91-9a89-04348c496cb2}</MetaDataID>
         static Dictionary<Type, ProxyType> ProxyTypes = new Dictionary<Type, ProxyType>();
+        /// <MetaDataID>{500ffd8c-5a53-4470-aec8-514ddbe88130}</MetaDataID>
         public static ProxyType GetProxyType(Type type)
         {
             lock (ProxyTypes)
@@ -904,18 +937,18 @@ namespace OOAdvantech.MetaDataRepository
 
         /// <MetaDataID>{629bcfed-ec7e-40f1-b947-3af07d9fc6d3}</MetaDataID>
         List<string> _CachingClientSidePropertiesNames;
-        /// <MetaDataID>{a75edeaf-67de-4f0c-be8a-570866372718}</MetaDataID>
-        public List<string> CachingClientSidePropertiesNames
-        {
-            get
-            {
-                return _CachingClientSidePropertiesNames;
-            }
-            set
-            {
-                _CachingClientSidePropertiesNames = value;
-            }
-        }
+        ///// <MetaDataID>{a75edeaf-67de-4f0c-be8a-570866372718}</MetaDataID>
+        //public List<string> CachingClientSidePropertiesNames
+        //{
+        //    get
+        //    {
+        //        return _CachingClientSidePropertiesNames;
+        //    }
+        //    set
+        //    {
+        //        _CachingClientSidePropertiesNames = value;
+        //    }
+        //}
 
         /// <exclude>Excluded</exclude>
         List<string> _Properties;
@@ -931,6 +964,10 @@ namespace OOAdvantech.MetaDataRepository
                 _Properties = value;
             }
         }
+
+
+
+
 
         /// <exclude>Excluded</exclude>
         List<string> _Events;
@@ -949,6 +986,7 @@ namespace OOAdvantech.MetaDataRepository
 
         /// <MetaDataID>{2d4f9ce8-dfa1-4a63-aaba-a0a40ed4a03f}</MetaDataID>
         string _AssemblyQualifiedName;
+        /// <MetaDataID>{9019fce0-fb81-4a7b-8ee0-452aa3b899d1}</MetaDataID>
         private Type Type;
 
         /// <MetaDataID>{1c70c4b8-f87b-4de7-a297-bfed5d513172}</MetaDataID>
@@ -991,7 +1029,9 @@ namespace OOAdvantech.MetaDataRepository
     /// <MetaDataID>{89b4541c-9b5c-4fd4-8769-537fdfc1970c}</MetaDataID>
     public static class ProxyTypeExtension
     {
+        /// <MetaDataID>{af600952-4383-4661-b093-6a6e03fadb30}</MetaDataID>
         static Dictionary<string, Type> NativeTypes = new Dictionary<string, Type>();
+        /// <MetaDataID>{d2421b08-d3b9-4bed-9756-3feb2556e28d}</MetaDataID>
         public static Type GetNativeType(this ProxyType proxyType)
         {
             Type type = null;

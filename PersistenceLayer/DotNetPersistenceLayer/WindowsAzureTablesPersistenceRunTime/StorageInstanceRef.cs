@@ -217,6 +217,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
                 value = DbDataRecord[metaObjectsColumnsIndices.AttributeIndices[rdbmsAttribute.Identity][valueOfAttribute.PathIdentity]];
+                if (value is DBNull)
+                    value = null;
                 if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null && value != DBNull.Value)
                 {
                     if(valueOfAttribute.Attribute.FullName == "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
@@ -253,6 +255,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         value = null;
                     if (value is DateTime)
                         value = ((DateTime)value).ToUniversalTime().ToLocalTime();
+                 
                     SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
                     SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
                 }

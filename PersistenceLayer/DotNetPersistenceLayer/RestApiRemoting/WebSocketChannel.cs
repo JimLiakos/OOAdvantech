@@ -1256,5 +1256,11 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        internal void RenewEndPoint(IEndPoint eventCallBackChannelEndPoint)
+        {
+            string old_id = _EndPoint.EndPointID;
+            _EndPoint = eventCallBackChannelEndPoint;
+            string new_id = _EndPoint.EndPointID;
+        }
     }
 }
