@@ -15,6 +15,8 @@ using System.IO.Compression;
 using System.IO;
 using System.Text;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.IdentityModel.Tokens.Jwt;
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -973,16 +975,66 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{ac8ceada-ed1e-4696-8818-6460013c8c22}</MetaDataID>
         private static IMessage UnMarshal(IMethodCallMessage methodCallMessage, ReturnMessage returnMessage)
         {
+
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+
             if (returnMessage.Exception != null)
             {
+                //System.Exception innerException = null;
+                Type exceptionType = null;
+                if (returnMessage.Exception.ÅxceptionType!=null)
+                {
+                    try
+                    {
+                        string typeName;
+                        string assemblyName;
+#if DeviceDotNet
+                        var typeNameKey = OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(typeFullName);
+#if NetStandard
+                        typeName = typeNameKey.Value2;
+                        assemblyName = typeNameKey.Value1;
+#else
+                        typeName = typeNameKey.TypeName;
+                        assemblyName = typeNameKey.AssemblyName;
+#endif
+
+#elif Json4
+                        var typeNameKey = OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(returnMessage.Exception.ÅxceptionType);
+                        typeName = typeNameKey.Value2;
+                        assemblyName = typeNameKey.Value1;
+#else
+
+                        OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(typeFullName, out typeName, out assemblyName);
+#endif
+
+                        exceptionType = jSetttings.Binder.BindToType(assemblyName, typeName);
+                    }
+                    catch (Exception error)
+                    {
+                        
+                    }
+
+                }
                 System.Exception exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult, returnMessage.Exception.ErrorCode);
 
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingCollectedFromGC)
                     exception = new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.CollectedFromGC);
-
-
-                if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingDeletedFromStorage)
+                else if (returnMessage.Exception.ExceptionCode == ExceptionCode.MissingDeletedFromStorage)
                     exception = new MissingServerObjectException(returnMessage.Exception.ExceptionMessage, MissingServerObjectException.MissingServerObjectReason.DeletedFromStorage);
+                else if (exceptionType != null)
+                {
+                    try
+                    {
+                        exception= Activator.CreateInstance(exceptionType, returnMessage.Exception.ExceptionMessage, exception) as Exception;
+                    }
+                    catch (Exception error)
+                    {
+
+                        
+                    }
+
+                }
+
 
 
 
@@ -991,7 +1043,7 @@ namespace OOAdvantech.Remoting.RestApi
             MethodInfo method = methodCallMessage.MethodBase as MethodInfo;
 
             object[] args = methodCallMessage.Args;
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+
 
 
             object[] outArgs = null;
