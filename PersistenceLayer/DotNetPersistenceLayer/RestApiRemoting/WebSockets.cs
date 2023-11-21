@@ -546,7 +546,6 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
             }
         }
-        public string EndPointID { get => GetHashCode().ToString(); }
         public bool ConnectionIsOpen { get => State == WebSocketState.Open; }
         /// <MetaDataID>{c7d67a57-65e9-45f3-9f6b-adfc3b1c4b2e}</MetaDataID>
         private System.Threading.Tasks.TaskCompletionSource<bool> m_OpenTaskSrc;
@@ -1281,7 +1280,6 @@ namespace OOAdvantech.Remoting.RestApi
         }
         public bool ConnectionIsOpen { get => _State == WebSocketState.Open; }
 
-        public string EndPointID { get => GetHashCode().ToString(); }
 
         /// <MetaDataID>{f8f62501-8a65-4b98-b08a-0a1dc4a4fed1}</MetaDataID>
         public void OnClose()

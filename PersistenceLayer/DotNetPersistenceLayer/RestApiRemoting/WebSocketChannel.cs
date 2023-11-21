@@ -118,10 +118,19 @@ namespace OOAdvantech.Remoting.RestApi
 
         private static void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            if (e.NetworkAccess!=NetworkAccess.Internet)
-                OffLineDatetime=System.DateTime.UtcNow;
+
+            OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "NetworkAccess " + e.ToString() });
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                OffLineDatetime = System.DateTime.UtcNow;
+                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "NetworkAccess.Internet off line : " + DateTime.Now.ToString() });
+            }
             else
-                OffLineDatetime=null;
+            {
+                OffLineDatetime = null;
+                OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "NetworkAccess.Internet on line : " + DateTime.Now.ToString() });
+            }
 
         }
 #endif
@@ -595,8 +604,11 @@ namespace OOAdvantech.Remoting.RestApi
                         OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "WebSocketClient == null"+ set_WebSocketClientCount });
 #endif
 
+                    
                     var clossingWebSocketClient = _WebSocketClient;
                     clossingWebSocketClient.Closed -= WebSocketClient_Closed;
+                    WebSocketState replacedWebSocketState = clossingWebSocketClient.State;
+
                     lock (ReplaceWebSocketClientLock)
                     {
                         _WebSocketClient=newWebSocketClient;
@@ -634,10 +646,12 @@ namespace OOAdvantech.Remoting.RestApi
                     {
 #if DeviceDotNet
                         OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ClientSessionPart.Reconnect :"+ set_WebSocketClientCount });
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "replaced WebSocket state is :" + replacedWebSocketState.ToString() });
+
 #endif
+                        bool disconnectedChannel = replacedWebSocketState != WebSocketState.Open;
 
-
-                        ClientSessionPart.Reconnect(false, newWebSocketClient);
+                        ClientSessionPart.Reconnect(disconnectedChannel, newWebSocketClient);
                     }
 #if DeviceDotNet
                     OOAdvantech.DeviceApplication.Current.Log(new List<string>() { "ReplaceWebSocketClient  out :"+ set_WebSocketClientCount });
@@ -1258,9 +1272,9 @@ namespace OOAdvantech.Remoting.RestApi
 
         internal void RenewEndPoint(IEndPoint eventCallBackChannelEndPoint)
         {
-            string old_id = _EndPoint.EndPointID;
+            
             _EndPoint = eventCallBackChannelEndPoint;
-            string new_id = _EndPoint.EndPointID;
+            
         }
     }
 }
