@@ -6645,6 +6645,9 @@
         <member name="M:OOAdvantech.SerializeTaskScheduler.Stop">
             <MetaDataID>{d2b6a2c6-235f-440f-bb23-1e03b90e1d1d}</MetaDataID>
         </member>
+        <member name="M:OOAdvantech.SerializeTaskScheduler.AddTask(System.Func{System.Threading.Tasks.Task{System.Boolean}})">
+            <MetaDataID>{a01a0261-97b0-43a0-9891-ecccf13eaffb}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.TypeInfo">
             <MetaDataID>{52cfdc3a-146d-4525-90a4-86fe357bfbbb}</MetaDataID>
         </member>
