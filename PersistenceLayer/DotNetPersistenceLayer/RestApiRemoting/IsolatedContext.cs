@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace OOAdvantech.Remoting.RestApi
     public sealed class IsolatedContext : IDisposable
     {
 
-        public static string CurrentContextID 
+        public static string CurrentContextID
         {
             get
             {
@@ -97,7 +98,7 @@ namespace OOAdvantech.Remoting.RestApi
             Type type = typeof(ContextMessageDispatcher);
 
             _value = ((ContextMessageDispatcher)AppDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName)).CurrentContextMessageDispatcher;
-         
+
 
             _value.ContextID = contextID;
             _value.StartUp(AppDomainInitializeType);
@@ -111,8 +112,8 @@ namespace OOAdvantech.Remoting.RestApi
         {
             add
             {
-                
-                
+
+
                 _IsolatedContextUnloaded += value;
 
                 int count = 0;
@@ -133,14 +134,14 @@ namespace OOAdvantech.Remoting.RestApi
                 else if (_IsolatedContextUnloaded != null)
                     count = 1;
 
-            } 
+            }
         }
         /// <MetaDataID>{f4e2b0cd-337e-4b63-b5ca-2b9aed8ffe10}</MetaDataID>
         public static ResponseData DispatchMessage(RequestData request)
         {
             try
             {
-                
+
                 if (!string.IsNullOrWhiteSpace(request.InternalChannelUri))
                 {
                     if (request.InternalChannelUri == "055980081b674aec9e774e8403cdc972")
@@ -181,7 +182,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             try
             {
-                
+
                 return _value.DispatchMessage(request);
             }
             catch (Exception error)
@@ -191,7 +192,7 @@ namespace OOAdvantech.Remoting.RestApi
                     Type type = typeof(ContextMessageDispatcher);
                     _value = ((ContextMessageDispatcher)AppDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName)).CurrentContextMessageDispatcher;
 
-                 
+
 
                     return _value.DispatchMessage(request);
 
@@ -212,7 +213,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
-        
+
 
 
         /// <MetaDataID>{e87a6298-240f-4206-b03f-e22c7c8d4b99}</MetaDataID>
@@ -234,7 +235,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
             }
             System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel IsolatedContext UnloadIsolatedContext {0}", ContextID));
-            
+
         }
 
         /// <MetaDataID>{77a4ab5c-08b5-4b46-8608-552084ea1256}</MetaDataID>
@@ -249,6 +250,21 @@ namespace OOAdvantech.Remoting.RestApi
                     isolatedContext.Dispose();
                 }
             }
+        }
+
+        internal static void RenewCallBackChannel(RequestData requestData)
+        {
+            List<IsolatedContext> isolatedContexts = null;
+            lock (IsoletedContexts)
+            {
+                isolatedContexts= IsoletedContexts.Values.ToList();
+            }
+            foreach (var isolatedContext in isolatedContexts)
+            {
+                isolatedContext.InternalDispatchMessage(requestData);
+            }
+
+
         }
     }
 
@@ -365,7 +381,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             WebSocketServer = request.EventCallBackChannel as WebSocketServer;
 
-           
+
             //...
             return CurrentContextMessageDispatcher.MessageDispatcherInterceptor.DispatchMessage(request);
         }
@@ -377,7 +393,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             if (CurrentContextMessageDispatcher == this)
             {
-                
+
 
                 if (type != null)
                     (Activator.CreateInstance(type) as IAppDomainInitializer).OnStart(ContextID);

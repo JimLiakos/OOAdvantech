@@ -77,6 +77,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (type == typeof(int)) return new EntityProperty(key, EdmType.Int32, Values);
             if (type == typeof(long)) return new EntityProperty(key, EdmType.Int64, Values);
             if (type == typeof(decimal)) return new EntityProperty(key, EdmType.Double, Values);
+            if (type.BaseType == typeof(Enum)) return new EntityProperty(key, EdmType.Int32, Values);
             throw new Exception("not supported " + type + " for " + key);
         }
 

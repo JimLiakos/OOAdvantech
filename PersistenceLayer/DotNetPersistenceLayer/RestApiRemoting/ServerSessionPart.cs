@@ -270,7 +270,9 @@ namespace OOAdvantech.Remoting.RestApi
 #if !DeviceDotNet
                                       catch (System.Runtime.Remoting.RemotingException error)
                                       {
-
+                                          ChannnelIsInactive(channel);
+                                          retry = true;
+                                          continue;
                                       }
 #endif
                                       catch (Exception error)
@@ -348,7 +350,7 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                         ProxyType proxyType = null;
 
-                        PairedTypes[cachedType]=true;
+                        PairedTypes[cachedType] = true;
 
                         //if (MarshaledTypes.TryGetValue(cachedType, out proxyType))
                         //    proxyType.Paired = true;
@@ -578,6 +580,16 @@ namespace OOAdvantech.Remoting.RestApi
                 }
             }
             return null;
+        }
+        private void ChannnelIsInactive(IChannel channel)
+        {
+            lock (PhysicalConnections)
+            {
+                foreach (var entry in Channels.Where(x => x.Value == channel))
+                {
+                    PhysicalConnections[entry.Key] = false;
+                }
+            }
         }
 
 
@@ -926,6 +938,27 @@ namespace OOAdvantech.Remoting.RestApi
             return byref;
 
         }
+
+        internal void RenewEventCallbackChannel(string physicalConnectionID, IEndPoint eventCallBackChannel)
+        {
+            if (string.IsNullOrEmpty(physicalConnectionID))
+                return;
+
+            lock (PhysicalConnections)
+            {
+                //this.SetConnectionState(physicalConnectionID, true, eventCallBackChannel);
+                IChannel channel = null;
+                if (Channels.TryGetValue(physicalConnectionID, out channel))
+                {
+                    WebSocketChannel webSocketChannel = channel as WebSocketChannel;
+                    if (webSocketChannel != null)
+                    {
+                        webSocketChannel.RenewEndPoint(eventCallBackChannel);
+                        PhysicalConnections[physicalConnectionID] = true;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -969,7 +1002,6 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 Reconnect(false);
                 base.Subscribe(proxy, eventInfoData, allowAsynchronous);
-
             }
             catch (Exception error)
             {
@@ -1143,7 +1175,9 @@ namespace OOAdvantech.Remoting.RestApi
                         SynchronizeSession();
 
                         System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
-
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id) });
+#endif
                         //The reconnection process must have completed when the client code attempts to call a remote object
                         //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
                         Task.Run(() =>
@@ -1155,9 +1189,9 @@ namespace OOAdvantech.Remoting.RestApi
                     else
                     {
 
-                        //#if DeviceDotNet
-                        //                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions " });
-                        //#endif
+                        #if DeviceDotNet
+                                 OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions. disconnectedChannel "+ disconnectedChannel .ToString()});
+                        #endif
                         if (disconnectedChannel)
                         {
                             //The reconnection process must have completed when the client code attempts to call a remote object

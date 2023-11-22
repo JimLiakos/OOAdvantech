@@ -359,6 +359,7 @@ namespace OOAdvantech.Droid
         }
 
         public bool ConnectionIsOpen => true;
+
     }
 
 

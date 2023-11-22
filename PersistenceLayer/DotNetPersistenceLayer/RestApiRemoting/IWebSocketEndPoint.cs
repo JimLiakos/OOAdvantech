@@ -19,6 +19,7 @@ namespace OOAdvantech.Remoting.RestApi
         bool ConnectionIsOpen { get; }
 
 
+
         ///// <MetaDataID>{4d01a536-83bd-4e33-a0ab-8fea1197a922}</MetaDataID>
         //void SendRequestAsync(RequestData requestData);
     }

@@ -11,6 +11,18 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
     {
         public object Convert(object value, System.Type type)
         {
+            try
+            {
+                if (type?.BaseType == typeof(Enum))
+                {
+                    if (value != null)
+                        value = Enum.ToObject(type, value);
+                }
+            }
+            catch (Exception error)
+            {
+                
+            }
             return value;
         }
 

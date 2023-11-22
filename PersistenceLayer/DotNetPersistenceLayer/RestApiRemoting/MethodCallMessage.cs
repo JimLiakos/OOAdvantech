@@ -346,6 +346,7 @@ namespace OOAdvantech.Remoting.RestApi
                     || MethodName == StandardActions.GetRemotingServicesServer
                     || MethodName == StandardActions.GetDataContext
                     || MethodName == StandardActions.GetTypesMetadata
+                    || MethodName == StandardActions.RenewEventCallbackChanel
                     || MethodName == StandardActions.GetCommunicationSessionWithTypesMetadata
                     || MethodName == StandardActions.GetAccessToken
                     || MethodName == StandardActions.SetSubscriptions

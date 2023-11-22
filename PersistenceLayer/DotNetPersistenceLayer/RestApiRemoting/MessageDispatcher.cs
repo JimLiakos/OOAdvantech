@@ -815,6 +815,17 @@ namespace OOAdvantech.Remoting.RestApi
 
                 string internalChannelUri = request.InternalChannelUri;// System.Runtime.Remoting.Messaging.CallContext.GetData("internalChannelUri") as string;
                 bool initCommunicationSession = false;
+
+                if (methodCallMessage.MethodName == StandardActions.RenewEventCallbackChanel)
+                {
+                    lock (ServerSessionPart.ServerSessions)
+                    {
+                        foreach(var serverSessionPart in ServerSessionPart.ServerSessions.Values)
+                            serverSessionPart.RenewEventCallbackChannel(request.PhysicalConnectionID, request.EventCallBackChannel);
+                    }
+                    return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
+                }
+
                 lock (ServerSessionPart.ServerSessions)
                 {
                     if (!string.IsNullOrWhiteSpace(request.SessionIdentity))
@@ -977,7 +988,7 @@ namespace OOAdvantech.Remoting.RestApi
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 }
 
-
+            
                 if (methodCallMessage.MethodName == StandardActions.CreateCommunicationSession)
                 {
                     serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);

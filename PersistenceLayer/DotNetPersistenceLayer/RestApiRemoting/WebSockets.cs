@@ -254,7 +254,7 @@ namespace OOAdvantech.Remoting.RestApi
                         var logicalConnection = (from interConnection in _PublicWebSockets
                                                  where interConnection.SessionIdentity == request.SessionIdentity
                                                  select interConnection).FirstOrDefault();
-                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata, HasCachingMembers=request.HasCachingMembers };
+                        RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata, HasCachingMembers = request.HasCachingMembers };
 
                         ResponseData responseData = null;
                         if (logicalConnection != null && logicalConnection.Public != null && logicalConnection.Public.State == WebSocketState.Open)
@@ -546,7 +546,6 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
             }
         }
-
         public bool ConnectionIsOpen { get => State == WebSocketState.Open; }
         /// <MetaDataID>{c7d67a57-65e9-45f3-9f6b-adfc3b1c4b2e}</MetaDataID>
         private System.Threading.Tasks.TaskCompletionSource<bool> m_OpenTaskSrc;
@@ -679,7 +678,7 @@ namespace OOAdvantech.Remoting.RestApi
 #if DeviceDotNet
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
             messageBytes = WebSocketChannel.Compress(messageBytes);
-            
+
 
             nativeWebSocket.Send(messageBytes);
 
@@ -1183,8 +1182,9 @@ namespace OOAdvantech.Remoting.RestApi
             _State = WebSocketState.Open;
 
 #if !DeviceDotNet
-            LifeTimeLeaseTimer.Interval = TimeSpan.FromMinutes(15).TotalMilliseconds;
+            LifeTimeLeaseTimer.Interval = TimeSpan.FromSeconds(10).TotalMilliseconds;
             LifeTimeLeaseTimer.Elapsed += LifeTimeLeaseTimerElapsed;
+            LifeTimeLeaseTimer.Start();
 #endif
 
             WebSocketServerID = Guid.NewGuid().ToString("N");
@@ -1211,7 +1211,7 @@ namespace OOAdvantech.Remoting.RestApi
                 ILease lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
                 if (lease != null)
                 {
-                    lease.Renew(System.TimeSpan.FromMinutes(17));
+                    lease.Renew(System.TimeSpan.FromSeconds(10));
                     lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
                 }
             });
@@ -1224,15 +1224,37 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
 
-
+        // static bool RenewEnabled = false;
 
 #if !DeviceDotNet
         /// <MetaDataID>{04504810-a7e6-443b-b4f2-5fa704890000}</MetaDataID>
         private void LifeTimeLeaseTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            ILease lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
-            if (lease != null)
-                lease.Renew(System.TimeSpan.FromMinutes(17));
+
+            
+                ILease lease = System.Runtime.Remoting.RemotingServices.GetLifetimeService(this) as ILease;
+                if (lease != null)
+                    lease.Renew(System.TimeSpan.FromSeconds(15));
+
+
+                var methodCallMessage = new MethodCallMessage("callback_channel", "type(RestApiRemoting/OOAdvantech.Remoting.RestApi.RemotingServicesServer)", Remoting.RemotingServices.ProcessIdentity.ToString(), StandardActions.RenewEventCallbackChanel, StandardActions.RenewEventCallbackChanel, new object[0]);
+
+                RequestData requestData = new RequestData();
+
+                requestData.ChannelUri = "callback_channel";
+                requestData.SessionIdentity = Remoting.RemotingServices.ProcessIdentity.ToString();
+                requestData.EventCallBackChannel = this;
+                requestData.details = OOAdvantech.Json.JsonConvert.SerializeObject(methodCallMessage);
+                requestData.RequestType = RequestType.MethodCall;
+                requestData.PhysicalConnectionID = this.WebSocketServerID;
+                IsolatedContext.RenewCallBackChannel(requestData);
+            
+            //InternalDispatchMessage(request);
+            //var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
+                
+            //var responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData);
+
+
 
         }
 #endif
@@ -1257,7 +1279,6 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
         public bool ConnectionIsOpen { get => _State == WebSocketState.Open; }
-
 
 
         /// <MetaDataID>{f8f62501-8a65-4b98-b08a-0a1dc4a4fed1}</MetaDataID>
@@ -1567,7 +1588,9 @@ namespace OOAdvantech.Remoting.RestApi
                                     {
                                         //this.clo
                                         request.EventCallBackChannel = this;
+#if !DeviceDotNet
                                         LifeTimeLeaseTimerElapsed(this,null );
+#endif
                                         responseData = IsolatedContext.DispatchMessage(request);
                                         responseData.DirectConnect = true;
 #if !DeviceDotNet
@@ -1601,7 +1624,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                             System.Diagnostics.Debug.WriteLine(request.ChannelUri + " , " + roleInstanceServerUrl, "Channel");
 
-                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata, HasCachingMembers=request.HasCachingMembers };
+                            RequestData forwordRequest = new RequestData() { SessionIdentity = request.SessionIdentity, ChannelUri = request.ChannelUri, details = request.details, RequestType = request.RequestType, PhysicalConnectionID = request.PhysicalConnectionID, RequestOS = request.RequestOS, CachingMetadata = request.CachingMetadata, HasCachingMembers = request.HasCachingMembers };
 
                             if (roleInstanceServerUrl.Trim().IndexOf("http://") == 0)
                                 roleInstanceServerUrl = "ws://" + roleInstanceServerUrl.Substring("http://".Length);
@@ -1842,6 +1865,9 @@ namespace OOAdvantech.Remoting.RestApi
         {
             lock (this)
             {
+                if (request.RequestType == RequestType.Event)
+                {
+                }
                 request.CallContextID = NextRequestID++;
                 string message = Json.JsonConvert.SerializeObject(request);
                 message = ((int)MessageHeader.Request).ToString() + message;
