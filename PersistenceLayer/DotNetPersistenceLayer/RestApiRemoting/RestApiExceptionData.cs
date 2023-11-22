@@ -12,7 +12,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         public RestApiExceptionData(ExceptionCode exceptionCode, System.Exception exception)
         {
-            ÅxceptionType=  exception.GetType().FullName+","+exception.GetType().Assembly.GetName().Name;
+            ExceptionType=  exception.GetType().FullName+","+exception.GetType().Assembly.GetName().Name;
             //new System.Exception().HResult= exceptionCode;
 
             while (exception is System.Reflection.TargetInvocationException && exception.InnerException != null)
@@ -57,7 +57,7 @@ namespace OOAdvantech.Remoting.RestApi
         public string ServerStackTrace;
         public string ErrorCode;
 
-        public string ÅxceptionType;
+        public string ExceptionType;
     }
 
     /// <MetaDataID>{8f1c7bdf-99d4-4d98-a423-55a77f116904}</MetaDataID>

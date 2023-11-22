@@ -87,6 +87,7 @@ namespace OOAdvantech
                             }
                             catch (Exception error)
                             {
+
                             }
 
 
@@ -198,19 +199,29 @@ namespace OOAdvantech
         public TaskCompletionSource<TResult> taskCompletionSource = new TaskCompletionSource<TResult>();
         public void Run()
         {
-            if (asynchFunction != null)
+            try
             {
-                var task = asynchFunction();
-                task.Wait();
-                taskCompletionSource.SetResult(task.Result);
+                if (asynchFunction != null)
+                {
+                    var task = asynchFunction();
+                    task.Wait();
+                    taskCompletionSource.SetResult(task.Result);
 
+                }
+                if (taskCompletionSource != null)
+                {
+                    var task = Task<TResult>.Run(synchFunction);
+                    task.Wait();
+                    taskCompletionSource.SetResult(synchFunction());
+                }
             }
-            if (taskCompletionSource != null)
+            catch(AggregateException agrError)
             {
-                var task = Task<TResult>.Run(synchFunction);
-                task.Wait();
-                taskCompletionSource.SetResult(synchFunction());
-
+                taskCompletionSource.SetException(agrError.InnerException);
+            }
+            catch (Exception error)
+            {
+                taskCompletionSource.SetException(error);
             }
 
         }

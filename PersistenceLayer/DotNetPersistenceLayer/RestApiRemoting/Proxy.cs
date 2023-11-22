@@ -982,7 +982,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 //System.Exception innerException = null;
                 Type exceptionType = null;
-                if (returnMessage.Exception.ÅxceptionType!=null)
+                if (returnMessage.Exception.ExceptionType!=null)
                 {
                     try
                     {
@@ -999,7 +999,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
 #elif Json4
-                        var typeNameKey = OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(returnMessage.Exception.ÅxceptionType);
+                        var typeNameKey = OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(returnMessage.Exception.ExceptionType);
                         typeName = typeNameKey.Value2;
                         assemblyName = typeNameKey.Value1;
 #else
