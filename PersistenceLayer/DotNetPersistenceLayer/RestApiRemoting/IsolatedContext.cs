@@ -149,6 +149,9 @@ namespace OOAdvantech.Remoting.RestApi
                     if (request.InternalChannelUri == "7f9bde62e6da45dc8c5661ee2220a7b0")
                     {
                     }
+                    if (request.InternalChannelUri == "0470e076603e47b6a82556fe4c1bf335")
+                    {
+                    }
                     var responseData = IsolatedContext.GetIsolatedContext(request.InternalChannelUri).InternalDispatchMessage(request);
                     responseData.BidirectionalChannel = true;
                     return responseData;
