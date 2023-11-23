@@ -16,7 +16,10 @@ using System.IO;
 using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+#if !DeviceDotNet
 using System.IdentityModel.Tokens.Jwt;
+#endif
+
 #if PORTABLE
 using System.PCL.Reflection;
 #else
@@ -301,7 +304,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-        #region Gets authentication data
+            #region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -322,7 +325,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-        #endregion
+            #endregion
 
             Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
             if (cachingMetadata != null)
@@ -1104,12 +1107,12 @@ namespace OOAdvantech.Remoting.RestApi
                 if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                     throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
                 else
-                    throw new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult,"");
+                    throw new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult, "");
 
             }
 
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(false), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization,null, null);
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);
 
             var outArgs = new object[0];
             if (!string.IsNullOrWhiteSpace(returnMessage.JsonOutArgs))

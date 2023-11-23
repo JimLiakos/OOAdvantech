@@ -9,7 +9,7 @@ using OOAdvantech.MetaDataRepository;
 
 using System.Reflection;
 
-#if !NetStandard
+#if !DeviceDotNet
 using System.ServiceModel;
 #endif
 
