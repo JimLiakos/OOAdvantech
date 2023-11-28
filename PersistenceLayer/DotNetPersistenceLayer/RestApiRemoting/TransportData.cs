@@ -238,10 +238,17 @@ namespace OOAdvantech.Remoting.RestApi
                 lock (_MembersValues)
                 {
                     if (value == null)
-                        _MembersValues=new CachingMembers();
+                        _MembersValues = new CachingMembers();
                     else
-                        _MembersValues= value;
+                        _MembersValues = value;
                 }
+            }
+        }
+        internal void SetMemberValue(string key, object value)
+        {
+            lock (_MembersValues)
+            {
+                _MembersValues[key] = value;
             }
         }
         //public CachingMembers MembersValues = new CachingMembers();

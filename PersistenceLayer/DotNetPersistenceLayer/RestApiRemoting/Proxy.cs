@@ -304,7 +304,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-            #region Gets authentication data
+        #region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -325,7 +325,7 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-            #endregion
+        #endregion
 
             Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
             if (cachingMetadata != null)
@@ -401,6 +401,8 @@ namespace OOAdvantech.Remoting.RestApi
                     (clientSessionPart as ClientSessionPart).UpdateServerSessionPart(returnMessage.ServerSessionObjectRef);
 
 
+                CachingOnDemandData(methodName, retval);
+
                 return retval;
 
             }
@@ -411,6 +413,19 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 #endif
+
+        private void CachingOnDemandData(string methodName, object retObject)
+        {
+            if (methodName.IndexOf("get_") == 0)
+            {
+                string propertyName = methodName.Substring("get_".Length);
+
+                if(this.ObjectRef.GetProxyType()?.OnDemandCachingMembersNames.Contains(propertyName)==true)
+                    this.ObjectRef.SetMemberValue(propertyName, retObject);
+
+            }
+        }
+
         /// <MetaDataID>{17ea5e1f-d078-4dad-b2e3-ee1af7f5920a}</MetaDataID>
         private object TryInvokeLocal(Type type, string methodName, object[] args, Type[] argsTypes, out bool localCall)
         {
@@ -976,7 +991,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{ac8ceada-ed1e-4696-8818-6460013c8c22}</MetaDataID>
-        private static IMessage UnMarshal(IMethodCallMessage methodCallMessage, ReturnMessage returnMessage)
+        private  IMessage UnMarshal(IMethodCallMessage methodCallMessage, ReturnMessage returnMessage)
         {
 
             var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
@@ -1088,6 +1103,8 @@ namespace OOAdvantech.Remoting.RestApi
 
             }
 
+            CachingOnDemandData(methodCallMessage.MethodName, retObject);
+
             var message = new System.Runtime.Remoting.Messaging.ReturnMessage(
                                                              retObject, //Object ret
                                                              args,            //Object[] outArgs 
@@ -1097,6 +1114,8 @@ namespace OOAdvantech.Remoting.RestApi
 
             return message;
         }
+
+    
 
 #else
 

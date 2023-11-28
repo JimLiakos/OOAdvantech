@@ -186,11 +186,13 @@ namespace OOAdvantech
         }
     }
 
+    /// <MetaDataID>{43c8700d-9976-4b21-a4a0-dd88e1f64259}</MetaDataID>
     interface ISerializableTask
     {
         void Run();
     }
 
+    /// <MetaDataID>{2c39dc61-9969-473e-90d5-5ea0c9c469b2}</MetaDataID>
     class SerializableTask<TResult> : ISerializableTask
     {
         public Func<Task<TResult>> asynchFunction;
@@ -207,15 +209,14 @@ namespace OOAdvantech
                     task.Wait();
                     taskCompletionSource.SetResult(task.Result);
 
-                }
-                if (taskCompletionSource != null)
+                } else if (taskCompletionSource != null)
                 {
                     var task = Task<TResult>.Run(synchFunction);
                     task.Wait();
                     taskCompletionSource.SetResult(synchFunction());
                 }
             }
-            catch(AggregateException agrError)
+            catch (AggregateException agrError)
             {
                 taskCompletionSource.SetException(agrError.InnerException);
             }

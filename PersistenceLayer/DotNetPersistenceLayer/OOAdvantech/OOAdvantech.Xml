@@ -6645,6 +6645,12 @@
         <member name="M:OOAdvantech.SerializeTaskScheduler.Stop">
             <MetaDataID>{d2b6a2c6-235f-440f-bb23-1e03b90e1d1d}</MetaDataID>
         </member>
+        <member name="T:OOAdvantech.ISerializableTask">
+            <MetaDataID>{43c8700d-9976-4b21-a4a0-dd88e1f64259}</MetaDataID>
+        </member>
+        <member name="T:OOAdvantech.SerializableTask`1">
+            <MetaDataID>{2c39dc61-9969-473e-90d5-5ea0c9c469b2}</MetaDataID>
+        </member>
         <member name="T:OOAdvantech.TypeInfo">
             <MetaDataID>{52cfdc3a-146d-4525-90a4-86fe357bfbbb}</MetaDataID>
         </member>
