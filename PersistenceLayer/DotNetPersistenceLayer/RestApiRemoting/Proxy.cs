@@ -818,6 +818,15 @@ namespace OOAdvantech.Remoting.RestApi
                 object value = null;
                 if (propInfo != null && ObjectRef.MembersValues != null && ObjectRef.MembersValues.TryGetValue(propertyName, out value))
                 {
+                    if (ObjectRef.InvalidMembersValues)
+                    {
+                        var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
+                        var _object = GetTransparentProxy(Type);
+                        remotingServices.RefreshCacheData(_object as MarshalByRefObject);
+                        ObjectRef.InvalidMembersValues = false;
+                        ObjectRef.MembersValues.TryGetValue(propertyName, out value);
+                    }
+
 
                     if (value != null && !propInfo.PropertyType.IsInstanceOfType(value))
                     {

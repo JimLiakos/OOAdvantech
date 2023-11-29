@@ -87,7 +87,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands
                 Commands.UpdateDatabaseMassively.CurrentTransactionCommandUpdateMassively.SetStorageInstanceColumnValue(RecordOwnerObject, column.Name, DBNull.Value);
                 if (RecordOwnerObject.RelationshipColumnsValues.ContainsKey(column))
                 {
-                    if (RecordOwnerObject.RelationshipColumnsValues[column] != ((OOAdvantech.PersistenceLayer.ObjectID)AssignedObject.PersistentObjectID).GetMemberValue(column.ColumnType))
+                    if (RecordOwnerObject.RelationshipColumnsValues[column]?.Equals(((OOAdvantech.PersistenceLayer.ObjectID)AssignedObject.PersistentObjectID).GetMemberValue(column.ColumnType))!=true)
                     {
                         return;
                     }

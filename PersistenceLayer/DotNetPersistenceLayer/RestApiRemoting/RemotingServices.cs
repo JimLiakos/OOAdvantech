@@ -263,7 +263,7 @@ namespace OOAdvantech.Remoting.RestApi
             return null;
         }
 
-        public static void InvalidateCacheData(MarshalByRefObject obj)
+        public static void InvalidateCacheData(object obj)
         {
 
             System.Runtime.Remoting.Proxies.RealProxy RealProxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(obj);
