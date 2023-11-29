@@ -39,6 +39,10 @@ namespace OOAdvantech.Linq.QueryExpressions
 
 
             MethodCallExpression = exp as MethodCallExpression;
+            if (MethodCallExpression.Method.Name=="Caching")
+            {
+
+            }
 
             if (MethodCallExpression.Arguments[0] is MemberExpression)
             {
@@ -46,6 +50,19 @@ namespace OOAdvantech.Linq.QueryExpressions
                 ParameterExpression parameter = Translators.ExpressionVisitor.GetParameter(MethodCallExpression.Arguments[0]);
                 if (!expressionTranslator.ParameterDeclareExpression.ContainsKey(parameter))
                     expressionTranslator.ParameterDeclareExpression.Add(parameter, this);
+            }
+            else
+            {
+                if (MethodCallExpression.Method.Name==nameof(System.Linq.OOAdvantechExtraOperators.Caching))
+                {
+                    ParameterExpression parameter = Translators.ExpressionVisitor.GetParameter(MethodCallExpression.Arguments[0]);
+                    if (parameter!=null)
+                    {
+                        if (!expressionTranslator.ParameterDeclareExpression.ContainsKey(parameter))
+                            expressionTranslator.ParameterDeclareExpression.Add(parameter, this);
+                    }
+                }
+
             }
 
 
@@ -114,7 +131,7 @@ namespace OOAdvantech.Linq.QueryExpressions
                 return SourceCollection.FilterDataCondition;
                 //return SearchCondition.JoinSearchConditions(AncestorsFilterDataCondition, SourceCollection.FilterDataCondition);
 
-                
+
             }
 
         }

@@ -907,6 +907,11 @@ namespace OOAdvantech.Remoting
         {
 
         }
+
+        public void FetchMembersValues(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> cachingMembers)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
@@ -1343,6 +1348,9 @@ namespace OOAdvantech.Remoting
         IMessage Invoke(IMessage msg);
 
         void InvalidateCachedData();
+        void FetchMembersValues(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> cachingMembers);
+
+        
 
 
     }

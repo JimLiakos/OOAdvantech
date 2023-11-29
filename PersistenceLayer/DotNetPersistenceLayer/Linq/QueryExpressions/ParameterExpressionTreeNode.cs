@@ -445,9 +445,11 @@ namespace OOAdvantech.Linq.QueryExpressions
                 parameterDataNode = RootDynamicTypeDataRetrieve.RootDataNode;
             #endregion
 
+
+
             if (MemberAccess != null)
             {
-              
+
                 if (RootDynamicTypeDataRetrieve == null || (!RootDynamicTypeDataRetrieve.IsGrouping && RootDynamicTypeDataRetrieve.Properties == null))
                 {
 
@@ -562,7 +564,30 @@ namespace OOAdvantech.Linq.QueryExpressions
                 }
             }
             else
+            {
                 DataNode = parameterDataNode;
+
+                if (DataNode==null&& parameterSource is MethodCallAsCollectionProviderExpressionTreeNode)
+                {
+                    if((parameterSource as MethodCallAsCollectionProviderExpressionTreeNode).MethodCallExpression.Method.Name==nameof(System.Linq.OOAdvantechExtraOperators.Caching))
+                    {
+                        if (dataNode==null)
+                        {
+
+                            dataNode = new DataNode(linqObjectQuery as ObjectQuery);
+                            dataNode.Name = (this.Expression as ParameterExpression).Name;
+                            //dataNode.Alias = Alias;
+                            dataNode.AssignedMetaObject = OOAdvantech.DotNetMetaDataRepository.Type.GetClassifierObject(TypeHelper.GetElementType((Expression as ParameterExpression).Type));
+                            var rootDataNode= new DataNode(linqObjectQuery as ObjectQuery);
+                            rootDataNode.Name="Root";
+                            dataNode.ParentDataNode=rootDataNode;
+                            DataNode=dataNode;
+                        }
+
+
+                    }
+                }
+            }
 
             if (!string.IsNullOrEmpty(Alias))
                 DataNode.Alias = Alias;
