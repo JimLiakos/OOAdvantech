@@ -484,7 +484,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 if (associationEnd.Identity == relResolver.AssociationEnd.Identity && (relResolver.Owner is PersistenceLayerRunTime.StorageInstanceValuePathRef) && valueTypePath.ToString() == (relResolver.Owner as PersistenceLayerRunTime.StorageInstanceValuePathRef).ValueTypePath.ToString() + ".(" + associationEnd.Identity.ToString() + ")")
                 {
-                    lock (relResolver)
+                    lock (relResolver.loadLock)
                     {
                         if (!relResolver.IsCompleteLoaded)
                         {
@@ -540,7 +540,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 {
                     if (associationEnd.Identity == relResolver.AssociationEnd.Identity)
                     {
-                        lock (relResolver)
+                        lock (relResolver.loadLock)
                         {
                             if (!relResolver.IsCompleteLoaded)
                             {

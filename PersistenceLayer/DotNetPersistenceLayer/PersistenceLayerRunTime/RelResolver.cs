@@ -229,7 +229,7 @@
         /// <summary>This method loads all related objects if there aren't loaded yet. </summary>
         internal protected void CompleteLoad()
         {
-            lock (this)
+            lock (this.loadLock)
             {
                 if (IsCompleteLoaded)
                     return;
@@ -437,7 +437,7 @@
         /// <MetaDataID>{ABF9F91B-6644-4672-B26C-D134194301D1}</MetaDataID>
         internal protected System.Collections.Generic.List<object> Load(string criterion)
         {
-            if(GetType().FullName == "OOAdvantech.WindowsAzureTablesPersistenceRunTime.RelResolver"&& AssociationEnd.Name != "Owner"&& AssociationEnd.Name != "Storages")
+            if (GetType().FullName == "OOAdvantech.WindowsAzureTablesPersistenceRunTime.RelResolver" && AssociationEnd.Name != "Owner" && AssociationEnd.Name != "Storages")
             {
                 System.Diagnostics.Debug.WriteLine("RELATION RESOLVER " + AssociationEnd.FullName);
             }
@@ -1324,6 +1324,7 @@
             }
 
         }
+        internal object loadLock = new object();
 
         public List<CultureInfo> Cultures
         {
