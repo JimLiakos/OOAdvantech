@@ -211,8 +211,10 @@ namespace OOAdvantech
 
                 } else if (taskCompletionSource != null)
                 {
-                    var task = Task<TResult>.Run(synchFunction);
-                    task.Wait();
+                    //var task = Task<TResult>.Run(synchFunction);
+                    //task.Wait();
+
+                    
                     taskCompletionSource.SetResult(synchFunction());
                 }
             }

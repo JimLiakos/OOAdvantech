@@ -11,6 +11,14 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
     public class DistributedObjectQuery : ObjectQuery
     {
 
+        static SerializeTaskScheduler SerializeTaskScheduler = new SerializeTaskScheduler();
+
+        static DistributedObjectQuery()
+        {
+            SerializeTaskScheduler=new SerializeTaskScheduler();
+            SerializeTaskScheduler.RunAsync();
+        }
+
         internal override bool UseStorageIdintityInTablesRelations
         {
             get
@@ -500,7 +508,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 
             }
         }
-
+        
         /// <MetaDataID>{4d7bb0aa-84be-4094-8ca1-81714f42254d}</MetaDataID>
         internal OOAdvantech.Collections.Generic.Dictionary<string, DistributedObjectQuery> DistributedObjectQueries;
         /// <MetaDataID>{df75134d-4ae8-4d76-9cfe-afa307de2083}</MetaDataID>
@@ -509,7 +517,27 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             if (ObjectRelationLinksLoaded)
                 return;
             DistributedObjectQueries = distributedObjectQueries;
-            DataTrees[0].LoadObjectRelationLinks();
+
+
+            var task = SerializeTaskScheduler.AddTask(() => {
+
+                try
+                {
+                    DataTrees[0].LoadObjectRelationLinks();
+                    return true;
+                }
+                catch (Exception error)
+                {
+
+                    throw;
+                }
+
+            });
+
+            task.Wait();
+
+
+
             ObjectRelationLinksLoaded = true;
         }
 

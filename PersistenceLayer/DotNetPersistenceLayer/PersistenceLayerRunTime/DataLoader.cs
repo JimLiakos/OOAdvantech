@@ -17,7 +17,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         public System.Collections.Generic.List<string> QueryStorageIdentities
         {
             get
-            {  
+            {
                 if (DataNode.ObjectQuery is MetaDataRepository.ObjectQueryLanguage.DistributedObjectQuery)
                     return (DataNode.ObjectQuery as MetaDataRepository.ObjectQueryLanguage.DistributedObjectQuery).QueryStorageIdentities;
                 throw new System.NotSupportedException();
@@ -30,7 +30,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         }
         Parser.Parser par;
-   
+
         #region Objects under transaction
 
         ///<summary>
@@ -80,7 +80,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     return new List<StorageInstanceRef>();
 
                 if (DataNode.Type==MetaDataRepository.ObjectQueryLanguage.DataNode.DataNodeType.Object&& DataNode.Classifier == null)
-                    throw new System.Exception("Invalid DataLoader Metadata the DataNode Classifier is null"); 
+                    throw new System.Exception("Invalid DataLoader Metadata the DataNode Classifier is null");
                 if (_NewObjects == null)
                     LoadNewObjectsCollection();
                 return _NewObjects;
@@ -131,7 +131,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         {
             get
             {
-                
+
                 if (_UpdatedObjects == null)
                     LoadUpdatedObjects();
                 return _UpdatedObjects;
@@ -224,7 +224,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
             string RelationIdentityAsString;
             public override int GetHashCode()
             {
-                if(RelationIdentityAsString==null)
+                if (RelationIdentityAsString==null)
                     RelationIdentityAsString=AssociationEnd.Identity.ToString() + ValueTypePath.ToString();
                 return RelationIdentityAsString.GetHashCode();
             }
@@ -303,7 +303,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
 
             if (DataNode != null && DataNode.AssignedMetaObject is MetaDataRepository.Attribute && DataNode.Type == MetaDataRepository.ObjectQueryLanguage.DataNode.DataNodeType.Object)
-                return (GetDataLoader(DataNode.ParentDataNode) as StorageDataLoader).GetRelationChanges(associationEnd,relatedDataNode);
+                return (GetDataLoader(DataNode.ParentDataNode) as StorageDataLoader).GetRelationChanges(associationEnd, relatedDataNode);
 
             MetaDataRepository.ValueTypePath valueTypePath = null;
             if (DataNode.IsParentDataNode(relatedDataNode))
@@ -484,8 +484,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
             {
                 if (associationEnd.Identity == relResolver.AssociationEnd.Identity && (relResolver.Owner is PersistenceLayerRunTime.StorageInstanceValuePathRef) && valueTypePath.ToString() == (relResolver.Owner as PersistenceLayerRunTime.StorageInstanceValuePathRef).ValueTypePath.ToString() + ".(" + associationEnd.Identity.ToString() + ")")
                 {
-                    lock (relResolver.loadLock)
-                    {
+                    //lock (relResolver.loadLock)
+                    //{
                         if (!relResolver.IsCompleteLoaded)
                         {
                             storageInstanceRef.InitializeRelatedObject(relResolver, relatedObject);
@@ -495,7 +495,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                         else
                         {
                         }
-                    }
+                    //}
                     break;
                 }
             }
@@ -540,18 +540,31 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 {
                     if (associationEnd.Identity == relResolver.AssociationEnd.Identity)
                     {
-                        lock (relResolver.loadLock)
+                        //lock (relResolver.loadLock)
+                        //{
+                        //    if (!relResolver.IsCompleteLoaded)
+                        //    {
+                        //        storageInstanceRef.InitializeRelatedObject(relResolver, relatedObject);
+                        //        storageInstanceRef.SetMemberValue(relResolver, relatedObject);
+                        //        relResolver._IsCompleteLoaded = true;
+                        //    }
+                        //    else
+                        //    {
+                        //    }
+                        //}
+
+                        //bool isCompleteLoaded = false;
+                        //lock (relResolver.loadLock)
+                        //    isCompleteLoaded=relResolver.IsCompleteLoaded;
+                        if (!relResolver.IsCompleteLoaded)
                         {
-                            if (!relResolver.IsCompleteLoaded)
-                            {
-                                storageInstanceRef.InitializeRelatedObject(relResolver, relatedObject);
-                                storageInstanceRef.SetMemberValue(relResolver, relatedObject);
-                                relResolver._IsCompleteLoaded = true;
-                            }
-                            else
-                            {
-                            }
+                            storageInstanceRef.InitializeRelatedObject(relResolver, relatedObject);
+                            storageInstanceRef.SetMemberValue(relResolver, relatedObject);
+                            relResolver._IsCompleteLoaded=true;
                         }
+                        //lock (relResolver.loadLock)
+                        //    relResolver._IsCompleteLoaded = true;
+
                         break;
                     }
                 }
@@ -590,7 +603,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         public Dictionary<string, List<MetaDataRepository.ObjectIdentityType>> GetRelationPartsObjectIdentityTypes(MetaDataRepository.ObjectQueryLanguage.DataNode relatedDataNode)
         {
             Dictionary<string, List<MetaDataRepository.ObjectIdentityType>> _objectIdentityTypes = new Dictionary<string, List<OOAdvantech.MetaDataRepository.ObjectIdentityType>>();
-            
+
 
             if (DataNode.IsParentDataNode(relatedDataNode))
             {
@@ -668,9 +681,9 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     relationPartIdentity = (DataNode.AssignedMetaObject as AssociationEnd).Identity.ToString();
                 else
                     relationPartIdentity = (relatedDataNode.AssignedMetaObject as AssociationEnd).Identity.ToString();
-                
+
                 List<MetaDataRepository.ObjectIdentityType> relationPartObjectIdentityTypes = null;
-                if (!_objectIdentityTypes.TryGetValue(relationPartIdentity, out  relationPartObjectIdentityTypes))
+                if (!_objectIdentityTypes.TryGetValue(relationPartIdentity, out relationPartObjectIdentityTypes))
                 {
                     relationPartObjectIdentityTypes = new List<ObjectIdentityType>();
                     _objectIdentityTypes[relationPartIdentity] = relationPartObjectIdentityTypes;

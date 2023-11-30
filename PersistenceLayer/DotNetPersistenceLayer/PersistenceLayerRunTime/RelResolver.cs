@@ -234,7 +234,8 @@
                 if (IsCompleteLoaded)
                     return;
                 Load("");
-                _IsCompleteLoaded = true;
+              
+                    _IsCompleteLoaded = true;
 
             }
         }
@@ -535,7 +536,11 @@
                 }
 
             }
-            if (criterion == null || criterion.Trim().Length == 0)
+            if (_IsCompleteLoaded)
+            {
+
+            }
+                if (criterion == null || criterion.Trim().Length == 0)
                 _IsCompleteLoaded = true;
             return objects;
         }
