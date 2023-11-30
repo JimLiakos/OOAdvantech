@@ -9,6 +9,7 @@ using System.IO;
 using OOAdvantech.Linq.Translators;
 using OOAdvantech;
 using OOAdvantech.MetaDataRepository.ObjectQueryLanguage;
+using OOAdvantech.Remoting;
 
 namespace OOAdvantech.Linq
 {
@@ -357,7 +358,7 @@ namespace System.Linq
             {
                 var linqObjectQuery = new OOAdvantech.Linq.LINQStorageObjectQuery(expression, default(OOAdvantech.PersistenceLayer.ObjectStorage));
 
-                Dictionary<string,List<string>> cachingMembers = GetCachingMembers(linqObjectQuery.DataTrees[0].SubDataNodes[0]);
+                Dictionary<string, List<string>> cachingMembers = GetCachingMembers(linqObjectQuery.DataTrees[0].SubDataNodes[0]);
 
                 try
                 {
@@ -401,6 +402,14 @@ namespace System.Linq
                                 returnValue=((sourceExpression as  MemberExpression).Member as FieldInfo).GetValue(source);
                                 return returnValue as TResult;
                             }
+                        }
+                        else if (sourceExpression is ParameterExpression)
+                        {
+                            IProxy proxy = System.Runtime.Remoting.RemotingServices.GetRealProxy(source) as IProxy;
+                            proxy?.FetchMembersValues(cachingMembers);
+
+                            return source as TResult;
+
                         }
                     }
                 }

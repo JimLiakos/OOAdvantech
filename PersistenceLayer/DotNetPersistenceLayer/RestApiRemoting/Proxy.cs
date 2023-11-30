@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 #if !DeviceDotNet
 using System.IdentityModel.Tokens.Jwt;
+using Newtonsoft.Json.Linq;
 #endif
 
 #if PORTABLE
@@ -1297,6 +1298,14 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
             ObjectRef.InvalidMembersValues = true;
+        }
+
+        public void FetchMembersValues(Dictionary<string, List<string>> cachingMembers)
+        {
+            var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
+            var _object = GetTransparentProxy(Type);
+            remotingServices.RefreshCacheData(_object as MarshalByRefObject);
+            
         }
 
         //IMessage IProxy.Invoke(IMessage msg)
