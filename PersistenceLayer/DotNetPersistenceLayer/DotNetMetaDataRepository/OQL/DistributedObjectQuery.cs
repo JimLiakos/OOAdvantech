@@ -1,9 +1,16 @@
 namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 {
+    
+    using OOAdvantech.DotNetMetaDataRepository;
+    using OOAdvantech.PersistenceLayer;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Policy;
+    using System.Threading;
     using System.Threading.Tasks;
+    using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+    using System.Windows.Forms;
     using PartialRelationIdentity = System.String;
     delegate void LoadDataLocallyHandeler();
 
@@ -11,12 +18,15 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
     public class DistributedObjectQuery : ObjectQuery
     {
 
-        static SerializeTaskScheduler SerializeTaskScheduler = new SerializeTaskScheduler();
+        /// <summary>
+        /// All objects links are restored in ObjectQuery main thread.
+        /// </summary>
+        static SerializeTaskScheduler ObjectQueryMainThreadTaskScheduler = new SerializeTaskScheduler();
 
         static DistributedObjectQuery()
         {
-            SerializeTaskScheduler=new SerializeTaskScheduler();
-            SerializeTaskScheduler.RunAsync();
+            ObjectQueryMainThreadTaskScheduler = new SerializeTaskScheduler();
+            ObjectQueryMainThreadTaskScheduler.RunAsync();
         }
 
         internal override bool UseStorageIdintityInTablesRelations
@@ -508,7 +518,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 
             }
         }
-        
+
         /// <MetaDataID>{4d7bb0aa-84be-4094-8ca1-81714f42254d}</MetaDataID>
         internal OOAdvantech.Collections.Generic.Dictionary<string, DistributedObjectQuery> DistributedObjectQueries;
         /// <MetaDataID>{df75134d-4ae8-4d76-9cfe-afa307de2083}</MetaDataID>
@@ -519,8 +529,16 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             DistributedObjectQueries = distributedObjectQueries;
 
 
-            var task = SerializeTaskScheduler.AddTask(() => {
+            //The object relation links must be loaded in synchronized context
+            //In case multiple threads force the relation resolvers to load the related objects there is a possibility for deadlock.
+            //This happens when we have association with both association end navigable.The first thread access the first "relation resolver"
+            //locks and wait the objects storage.The second  thread access the opposite "relation resolver" and wait the objects storage.when
+            //the query finish with the objects retrieve, restore the objects links.the deadlocks are unavoidable.
+            //If  all objects links restored in one thread  isn't necessary for synchronization locks of "relation resolvers" without lock there aren't deadlocks
 
+
+            var task = ObjectQueryMainThreadTaskScheduler.AddTask(() =>
+            {
                 try
                 {
                     DataTrees[0].LoadObjectRelationLinks();
@@ -528,16 +546,10 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                 }
                 catch (Exception error)
                 {
-
                     throw;
                 }
-
             });
-
             task.Wait();
-
-
-
             ObjectRelationLinksLoaded = true;
         }
 
