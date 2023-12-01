@@ -32,6 +32,7 @@ namespace OOAdvantech.Remoting
         EventConsumingResolver EventConsumingResolver { get; set; }
 
         void InvalidateCachedData();
+        void FetchMembersValues(Dictionary<string, List<string>> cachingMembers);
 
 
         ///// <MetaDataID>{c89837de-4066-4a8d-b244-afc8bd0f41ef}</MetaDataID>

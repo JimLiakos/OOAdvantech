@@ -2,15 +2,10 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 {
     
     using OOAdvantech.DotNetMetaDataRepository;
-    using OOAdvantech.PersistenceLayer;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Policy;
-    using System.Threading;
     using System.Threading.Tasks;
-    using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
-    using System.Windows.Forms;
     using PartialRelationIdentity = System.String;
     delegate void LoadDataLocallyHandeler();
 
