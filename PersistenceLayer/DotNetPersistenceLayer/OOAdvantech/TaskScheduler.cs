@@ -230,4 +230,25 @@ namespace OOAdvantech
         }
 
     }
+
+    /// <MetaDataID>{64c9c8f6-07b9-43bf-86ca-f9cc4621bfc6}</MetaDataID>
+    public class Delay
+    {
+        public static void Do(double after, Action action)
+        {
+            if (after <= 0 || action == null) return;
+
+            var timer = new System.Timers.Timer { Interval = after, Enabled = false };
+
+            timer.Elapsed += (sender, e) =>
+            {
+                timer.Stop();
+                action.Invoke();
+                timer.Dispose();
+                GC.SuppressFinalize(timer);
+            };
+
+            timer.Start();
+        }
+    }
 }

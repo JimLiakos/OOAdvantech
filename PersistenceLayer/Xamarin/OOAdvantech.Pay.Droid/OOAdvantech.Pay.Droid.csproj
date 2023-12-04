@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PayWebViewRenderer.cs" />
     <Compile Include="PayService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +77,18 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OOAdvantech.Json.NetStandard\OOAdvantech.Json.NetStandard.csproj">
+      <Project>{3EF27717-75B9-45E2-99A0-16B54AA8E953}</Project>
+      <Name>OOAdvantech.Json.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech.NetStandard.Droid\OOAdvantech.NetStandard.Droid.csproj">
+      <Project>{C654ADF4-39DE-4084-BC46-2A9268B0068C}</Project>
+      <Name>OOAdvantech.NetStandard.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOAdvantech.NetStandard\OOAdvantech.NetStandard.csproj">
+      <Project>{98C53533-8117-40C2-B9A6-BBE3D5DEE050}</Project>
+      <Name>OOAdvantech.NetStandard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOAdvantech.Pay\OOAdvantech.Pay.csproj">
       <Project>{4065d93b-061b-49ab-8b2e-7df204cfc37d}</Project>
       <Name>OOAdvantech.Pay</Name>

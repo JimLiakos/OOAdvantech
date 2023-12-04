@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:OOAdvantechWeb="clr-namespace:OOAdvantech.Web;assembly=OOAdvantech"
+             xmlns:local="clr-namespace:OOAdvantech.Pay"
              x:Class="OOAdvantech.Pay.PaymentPage">
     <!--xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"-->
     <ContentPage.Content>

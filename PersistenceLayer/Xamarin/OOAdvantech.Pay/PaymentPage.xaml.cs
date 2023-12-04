@@ -97,7 +97,8 @@ namespace OOAdvantech.Pay
         {
             Payment = payment;
             PaymentGatewayUrl =payment.PaymentOrderUrl;// VivaHelper.GetPaymentGatewayUrl(payment);
-            this.PaymentPage.PayWebView.Uri =PaymentGatewayUrl;
+            System.Diagnostics.Debug.WriteLine(PaymentGatewayUrl);
+            this.PaymentPage.PayWebView.Uri =  PaymentGatewayUrl;
             this.PaymentPage.PayWebView.Navigated += PayWebView_Navigated;
         }
         private async void PayWebView_Navigated(object sender, Web.NavigatedEventArgs e)

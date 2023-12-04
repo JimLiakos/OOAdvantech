@@ -4,40 +4,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Android.Webkit;
 
-using OOAdvantech.Droid;
+
 using Java.Interop;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using System.Text;
-using OOAdvantech.Web;
-using OOAdvantech.Json;
-using OOAdvantech.Remoting.RestApi;
-using OOAdvantech.Remoting.RestApi.EmbeddedBrowser;
-using Android.Runtime;
 using Android.Net.Http;
 using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.OS;
+using OOAdvantech.Pay.Droid;
+using OOAdvantech.Pay;
+using OOAdvantech.Remoting.RestApi;
+using OOAdvantech.Json;
+using OOAdvantech.Droid;
+using OOAdvantech.Remoting.RestApi.EmbeddedBrowser;
+using Xamarin.Forms.PlatformConfiguration;
+using static Android.Webkit.WebSettings;
+using OOAdvantech.Web;
+using Android.Graphics;
+using Xamarin.Essentials;
 
-[assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
-namespace OOAdvantech.Droid
+[assembly: ExportRenderer(typeof(PayWebView), typeof(PayWebViewRenderer))]
+namespace OOAdvantech.Pay.Droid
 {
     /// <MetaDataID>{a1637bb6-e65c-43af-95ed-6703b0f1a69d}</MetaDataID>
-    public class HybridWebViewRenderer : ViewRenderer<HybridWebView, Android.Webkit.WebView>, INativeWebBrowser, IEndPoint
+    public class PayWebViewRenderer : ViewRenderer<PayWebView, Android.Webkit.WebView>, INativeWebBrowser, IEndPoint
     {
         Android.Content.Context _context;
-        public HybridWebViewRenderer(Android.Content.Context context) : base(context)
+        public PayWebViewRenderer(Android.Content.Context context) : base(context)
         {
 
             _context = context;
-            OnBackPressed += HybridWebViewRenderer_OnBackPressed;
+            OnBackPressed += PayWebViewRenderer_OnBackPressed;
 
         }
 
         //A3piKEtGw7w6W+FL7pMNzL1rpqE=
 
-        private void HybridWebViewRenderer_OnBackPressed()
+        private void PayWebViewRenderer_OnBackPressed()
         {
 
 
@@ -70,7 +76,7 @@ namespace OOAdvantech.Droid
             }
             catch (ObjectDisposedException e)
             {
-                OnBackPressed -= HybridWebViewRenderer_OnBackPressed;
+                OnBackPressed -= PayWebViewRenderer_OnBackPressed;
                 // now I know object has been disposed
             }
         }
@@ -79,8 +85,8 @@ namespace OOAdvantech.Droid
             try
             {
 
-                if (HybridWebView != null)
-                    HybridWebView.OnNavigated(navigatedEventArgs);
+                if (PayWebView != null)
+                    PayWebView.OnNavigated(navigatedEventArgs);
             }
             catch (Exception error)
             {
@@ -213,7 +219,7 @@ namespace OOAdvantech.Droid
 
         }
         static List<Android.Webkit.WebView> WebViews = new List<Android.Webkit.WebView>();
-        HybridWebView HybridWebView;
+        PayWebView PayWebView;
         static String USER_AGENT = "com.microneme.dontwait.android";// "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19";
 
         string _SessionIdentity;
@@ -227,7 +233,7 @@ namespace OOAdvantech.Droid
             }
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<PayWebView> e)
         {
             base.OnElementChanged(e);
 
@@ -252,7 +258,7 @@ namespace OOAdvantech.Droid
                 //webView.ClearCache(false);
                 webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}", _context));
                 WebViews.Add(webView);
-
+                
 
                 SetNativeControl(webView);
 #if DEBUG
@@ -265,12 +271,12 @@ namespace OOAdvantech.Droid
             if (e.OldElement != null)
             {
                 Control.RemoveJavascriptInterface("jsBridge");
-                var hybridWebView = e.OldElement as HybridWebView;
+                var hybridWebView = e.OldElement as PayWebView;
                 hybridWebView.Cleanup();
                 e.OldElement.NativeWebBrowser = null;
 
             }
-            HybridWebView = e.NewElement;
+            PayWebView = e.NewElement;
             if (e.NewElement != null)
             {
 
@@ -295,7 +301,6 @@ namespace OOAdvantech.Droid
                 // InjectJS(JavaScriptFunction);
             }
         }
-
         internal static void OnDestroy()
         {
             foreach (var webView in WebViews)
@@ -370,11 +375,11 @@ namespace OOAdvantech.Droid
     /// <MetaDataID>{7e4f3217-90f8-4468-ad05-0d367c54c233}</MetaDataID>
     public class JSBridge : Java.Lang.Object
     {
-        readonly WeakReference<HybridWebViewRenderer> hybridWebViewRenderer;
+        readonly WeakReference<PayWebViewRenderer> hybridWebViewRenderer;
 
-        public JSBridge(HybridWebViewRenderer hybridRenderer)
+        public JSBridge(PayWebViewRenderer hybridRenderer)
         {
-            hybridWebViewRenderer = new WeakReference<HybridWebViewRenderer>(hybridRenderer);
+            hybridWebViewRenderer = new WeakReference<PayWebViewRenderer>(hybridRenderer);
         }
 
 
@@ -386,7 +391,7 @@ namespace OOAdvantech.Droid
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
             {
 
-                HybridWebViewRenderer hybridRenderer;
+                PayWebViewRenderer hybridRenderer;
 
                 if (hybridWebViewRenderer != null && hybridWebViewRenderer.TryGetTarget(out hybridRenderer))
                 {
@@ -877,14 +882,14 @@ namespace OOAdvantech.Droid
         string _javascript;
 
         Context Context;
-        public JavascriptWebViewClient(Android.Webkit.WebView view, HybridWebViewRenderer hybridWebViewRenderer, string javascript, Context context)
+        public JavascriptWebViewClient(Android.Webkit.WebView view, PayWebViewRenderer hybridWebViewRenderer, string javascript, Context context)
         {
             Context = context;
             _javascript = javascript;
             View = view;
             this.hybridWebViewRenderer = hybridWebViewRenderer;
         }
-        private HybridWebViewRenderer hybridWebViewRenderer;
+        private PayWebViewRenderer hybridWebViewRenderer;
 
         Android.Webkit.WebView View;
         public override void OnPageFinished(Android.Webkit.WebView view, string url)
@@ -892,8 +897,12 @@ namespace OOAdvantech.Droid
             base.OnPageFinished(view, url);
 
             View = view;
-            view.EvaluateJavascript("csCodeCallDefined()", this);
+            //view.EvaluateJavascript("csCodeCallDefined()", this);
             hybridWebViewRenderer.OnNavigated(new NavigatedEventArgs(view, url, view.CanGoBack(), view.CanGoForward()));
+        }
+        public override void OnPageStarted(Android.Webkit.WebView view, string url, Bitmap favicon)
+        {
+            base.OnPageStarted(view, url, favicon);
         }
 
         public override void OnReceivedError(Android.Webkit.WebView view, IWebResourceRequest request, WebResourceError error)
@@ -942,6 +951,33 @@ namespace OOAdvantech.Droid
         {
 
         }
+
+
+        //public override bool ShouldOverrideUrlLoading(Android.Webkit.WebView view, IWebResourceRequest request)
+        //{
+        //    string url = request.Url?.ToString();
+
+        //    if (!url.ToLower().Contains("google"))
+        //    {
+        //        view.LoadUrl(url);
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred).Wait();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // An unexpected error occured. No browser may be installed on the device.
+        //        }
+
+        //    }
+        //    return true;
+
+        //    return base.ShouldOverrideUrlLoading(view, request);
+        //}
+
         public void OnReceiveValue(Java.Lang.Object value)
         {
             try
@@ -977,13 +1013,7 @@ namespace OOAdvantech.Droid
 
 
 
-    public class CustomWebChromeClient : WebChromeClient
-    {
-        public override bool OnCreateWindow(Android.Webkit.WebView view, bool isDialog, bool isUserGesture, Message resultMsg)
-        {
-            return base.OnCreateWindow(view, isDialog, isUserGesture, resultMsg);
-        }
-    }
+   
 
 }
 
