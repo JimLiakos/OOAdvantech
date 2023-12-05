@@ -6606,6 +6606,12 @@
         <member name="P:OOAdvantech.Multilingual.Values">
             <MetaDataID>{3c81da63-85d4-4f94-8931-5d6aa017e652}</MetaDataID>
         </member>
+        <member name="P:OOAdvantech.Multilingual.HasValue">
+            <MetaDataID>{ab449b7a-121c-4b6c-a043-a87711d821ab}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.Multilingual.OOAdvantech#IMultilingual#Values">
+            <MetaDataID>{dd54c21b-97be-444b-97ce-438edfb46edc}</MetaDataID>
+        </member>
         <member name="M:OOAdvantech.Multilingual.GetValue``1">
             <MetaDataID>{8a2884ff-4d74-41a1-a00d-d83288d9aeeb}</MetaDataID>
         </member>
@@ -6614,6 +6620,12 @@
         </member>
         <member name="T:OOAdvantech.IMultilingual">
             <MetaDataID>{13d8c6b3-06de-42e3-af08-8c8995656ca3}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.IMultilingual.Values">
+            <MetaDataID>{81ba0ca0-8063-496d-83b1-7972aaa08bb5}</MetaDataID>
+        </member>
+        <member name="P:OOAdvantech.IMultilingual.Def">
+            <MetaDataID>{79b3e6bf-a576-45bf-88ab-9a6f96373ac8}</MetaDataID>
         </member>
         <member name="T:OOAdvantech.IMultilingualMember">
             <MetaDataID>{3406db12-480c-4bd9-8340-1da4dda51821}</MetaDataID>

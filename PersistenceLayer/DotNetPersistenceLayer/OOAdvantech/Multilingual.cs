@@ -40,6 +40,7 @@ namespace OOAdvantech
         /// <MetaDataID>{3c81da63-85d4-4f94-8931-5d6aa017e652}</MetaDataID>
         public Dictionary<string, object> Values { get; set; }
 
+        /// <MetaDataID>{ab449b7a-121c-4b6c-a043-a87711d821ab}</MetaDataID>
         [JsonIgnore]
         public bool HasValue
         {
@@ -57,6 +58,7 @@ namespace OOAdvantech
 
 
 
+        /// <MetaDataID>{dd54c21b-97be-444b-97ce-438edfb46edc}</MetaDataID>
         IDictionary IMultilingual.Values => this.Values;
 
 

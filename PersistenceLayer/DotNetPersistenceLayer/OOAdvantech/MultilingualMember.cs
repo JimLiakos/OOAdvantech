@@ -10,8 +10,10 @@ namespace OOAdvantech
     /// <MetaDataID>{13d8c6b3-06de-42e3-af08-8c8995656ca3}</MetaDataID>
     public interface IMultilingual
     {
+        /// <MetaDataID>{81ba0ca0-8063-496d-83b1-7972aaa08bb5}</MetaDataID>
         IDictionary Values { get; }
 
+        /// <MetaDataID>{79b3e6bf-a576-45bf-88ab-9a6f96373ac8}</MetaDataID>
         string Def
         {
             get;
