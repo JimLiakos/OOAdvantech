@@ -102,84 +102,100 @@ namespace OOAdvantech.Web
 
         public static void WebAppUpdate(string url)
         {
-            var webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-
-            if (File.Exists(Path.Combine(webAppPath, "appHeader.txt")))
+            try
             {
-                if (File.ReadAllText(Path.Combine(webAppPath, "appHeader.txt")) == url)
-                    return;
-                File.Delete(Path.Combine(webAppPath, "appHeader.txt"));
-            }
+                var webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            
-
-            
-
-
-            using (var client = new HttpClient())
-            {
-                var downloadStreamTask =  client.GetStreamAsync("http://192.168.1.147/devstoreaccount1/usersfolder/DontWaitWeb.zip");
-                downloadStreamTask.Wait();
-                var downloadStream = downloadStreamTask.Result;
-                //using (MemoryStream memoryStream = new MemoryStream(client.DownloadData("http://192.168.1.147/devstoreaccount1/usersfolder/DontWaitWeb.zip")))
+                if (File.Exists(Path.Combine(webAppPath, "appHeader.txt")))
                 {
-                    ZipArchive zip = new ZipArchive(downloadStream);
-                    if (!Directory.Exists(Path.Combine(webAppPath, "webapp")))
-                        Directory.CreateDirectory(Path.Combine(webAppPath, "webapp"));
-                    else
-                    {
-                        Directory.Delete(Path.Combine(webAppPath, "webapp"), true);
-                        Directory.CreateDirectory(Path.Combine(webAppPath, "webapp"));
-                    }
-
-                    foreach (var entry in zip.Entries)
-                    {
-
-                        webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
-                        webAppPath += "/webapp";
-                        var pathArray = entry.FullName.Split('/');
-                        int i = 0;
-                        foreach (string dir in pathArray)
-                        {
-                            i++;
-                            if (i < pathArray.Length)
-                            {
-                                if (!Directory.Exists(Path.Combine(webAppPath, dir)))
-                                    Directory.CreateDirectory(Path.Combine(webAppPath, dir));
-                                webAppPath += "/" + dir;
-                            }
-
-                        }
-
-                        var filePath = Path.Combine(webAppPath, entry.Name);
-                        var entryStream = entry.Open();
-                        byte[] entryBuffer;
-                        using (var ms = new MemoryStream())
-                        {
-                            entryStream.CopyTo(ms);
-                            entryBuffer = ms.ToArray();
-                        }
-                        entryStream.Read(entryBuffer, 0, entryBuffer.Length);
-                        entryStream.Close();
-
-                        File.WriteAllBytes(filePath, entryBuffer);
-
-                        if (entry.Name.ToLower() == "index.html")
-                        {
-
-                        }
-                    }
+                    //if (File.ReadAllText(Path.Combine(webAppPath, "appHeader.txt")) == url)
+                    //    return;
+                    File.Delete(Path.Combine(webAppPath, "appHeader.txt"));
                 }
 
 
 
+
+                using (WebClient wc = new WebClient())
+                {
+
+                    var webAppBundl = wc.DownloadData(url);
+
+                    //var downloadStream = downloadStreamTask.Result;
+                    using (MemoryStream memoryStream = new MemoryStream(webAppBundl))
+                    {
+                        ZipArchive zip = new ZipArchive(memoryStream);
+                        if (!Directory.Exists(Path.Combine(webAppPath, "webapp")))
+                            Directory.CreateDirectory(Path.Combine(webAppPath, "webapp"));
+                        else
+                        {
+                            if (File.Exists("/var/mobile/Containers/Data/Application/875AE1C5-985A-463B-A71E-151A38DAEC33/Documents/webapp/index.html"))
+                            {
+                                System.Diagnostics.Debug.WriteLine("Exist:  /var/mobile/Containers/Data/Application/875AE1C5-985A-463B-A71E-151A38DAEC33/Documents/webapp/index.html");
+                            }
+                            Directory.Delete(Path.Combine(webAppPath, "webapp"), true);
+                            Directory.CreateDirectory(Path.Combine(webAppPath, "webapp"));
+                        }
+
+                        foreach (var entry in zip.Entries)
+                        {
+
+                            webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); // iOS: Environment.SpecialFolder.Resources
+                            webAppPath += "/webapp";
+                            var pathArray = entry.FullName.Split('/');
+                            int i = 0;
+                            foreach (string dir in pathArray)
+                            {
+                                i++;
+                                if (i < pathArray.Length)
+                                {
+                                    if (!Directory.Exists(Path.Combine(webAppPath, dir)))
+                                        Directory.CreateDirectory(Path.Combine(webAppPath, dir));
+                                    webAppPath += "/" + dir;
+                                }
+
+                            }
+
+                            var filePath = Path.Combine(webAppPath, entry.Name);
+                            var entryStream = entry.Open();
+                            byte[] entryBuffer;
+                            using (var ms = new MemoryStream())
+                            {
+                                entryStream.CopyTo(ms);
+                                entryBuffer = ms.ToArray();
+                            }
+                            entryStream.Read(entryBuffer, 0, entryBuffer.Length);
+                            entryStream.Close();
+
+                            File.WriteAllBytes(filePath, entryBuffer);
+
+                            if (entry.Name.ToLower() == "index.html")
+                            {
+                                bool exist = System.IO.File.Exists(filePath);
+                                System.Diagnostics.Debug.WriteLine(filePath);
+                            }
+                        }
+                    }
+
+
+
+                }
+
+                webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                File.WriteAllText(Path.Combine(webAppPath, "appHeader.txt"), url);
+
+            }
+            catch (Exception error)
+            {
+
+
+            }
+            if (File.Exists("/var/mobile/Containers/Data/Application/875AE1C5-985A-463B-A71E-151A38DAEC33/Documents/webapp/index.html"))
+            {
+                System.Diagnostics.Debug.WriteLine("Exist:  /var/mobile/Containers/Data/Application/875AE1C5-985A-463B-A71E-151A38DAEC33/Documents/webapp/index.html");
             }
 
-            webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-
-            File.WriteAllText(Path.Combine(webAppPath, "appHeader.txt"), url);
-
-            
 
 
 

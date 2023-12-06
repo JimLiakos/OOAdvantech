@@ -284,9 +284,9 @@ namespace OOAdvantech.Droid
                     {
                         url = Element.Uri.Replace(@"local://", @"file:///android_asset/Content/");
                     }
-                    if (Element.Uri.IndexOf(@"webapp://") == 0)
+                    else if (Element.Uri.IndexOf(@"webapp://") == 0)
                     {
-                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
                         url = @"file://" + System.IO.Path.Combine(webAppPath, "webapp/index.html");
                     }
                     else

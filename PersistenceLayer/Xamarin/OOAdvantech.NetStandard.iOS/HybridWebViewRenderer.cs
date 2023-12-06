@@ -53,10 +53,7 @@ namespace OOAdvantech.iOS
                 try
                 {
                     userController = new WKUserContentController();
-                    var script = new WKUserScript(new NSString(JavaScriptFunction), WKUserScriptInjectionTime.AtDocumentEnd, false);
-                    userController.AddUserScript(script);
-                    userController.AddScriptMessageHandler(this, "invokeAction");
-
+                  
                     var config = new WKWebViewConfiguration { UserContentController = userController };
                     ///config.ApplicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5";
 
@@ -64,16 +61,22 @@ namespace OOAdvantech.iOS
 
                     try
                     {
-                        if (Element.Uri.IndexOf(@"local://") == 0)
+                        if (Element.Uri.IndexOf(@"local://") == 0||Element.Uri.IndexOf(@"webapp://")==0)
                         {
                             config.Preferences.SetValueForKey(NSObject.FromObject(true), new NSString("allowFileAccessFromFileURLs"));
-                            config.Preferences.SetValueForKey(NSObject.FromObject(true), new NSString("allowUniversalAccessFromFileURLs"));
+                            
+                            //config.Preferences.SetValueForKey(NSObject.FromObject(true), new NSString("allowUniversalAccessFromFileURLs"));
                         }
+
                     }
                     catch (Exception ex)
                     {
 
                     }
+                    var script = new WKUserScript(new NSString(JavaScriptFunction), WKUserScriptInjectionTime.AtDocumentEnd, false);
+                    userController.AddUserScript(script);
+                    userController.AddScriptMessageHandler(this, "invokeAction");
+
 
 
                     var webView = new WKWebView(Frame, config)
@@ -82,8 +85,8 @@ namespace OOAdvantech.iOS
                     };
                     SetNativeControl(webView);
                     webView.ScrollView.PanGestureRecognizer.Enabled=false;
-                    if(webView.ScrollView.PinchGestureRecognizer!=null)
-                    webView.ScrollView.PinchGestureRecognizer.Enabled=false;
+                    if (webView.ScrollView.PinchGestureRecognizer!=null)
+                        webView.ScrollView.PinchGestureRecognizer.Enabled=false;
                     webView.ScrollView.MaximumZoomScale=1;
                     // webView.ScrollView.PinchGestureRecognizer.Enabled=false;
 
@@ -98,6 +101,21 @@ namespace OOAdvantech.iOS
                             uri = filename;
                             url = new NSUrl(uri, false);
                         }
+                        else if (Element.Uri.IndexOf(@"webapp://") == 0)
+                        {
+                            var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+                            string filePath = System.IO.Path.Combine(System.IO.Path.Combine(webAppPath, "webapp"), "index.html");
+                            bool exist = System.IO.File.Exists(filePath);
+                            if (exist)
+                            {
+                                System.Diagnostics.Debug.WriteLine(filePath);
+                            }
+
+                            uri = filePath;
+                            System.Diagnostics.Debug.WriteLine(uri);
+                            url = new NSUrl(uri, false);
+                        }
+
                         else
                         {
                             uri = Element.Uri;
@@ -106,7 +124,7 @@ namespace OOAdvantech.iOS
                     }
                     var request = new NSUrlRequest(url);
                     webView.LoadRequest(request);
-                    
+
                     //if (Application.Current?.MainPage != null)
                     // Application.Current.MainPage.DisplayAlert("LoadRequest)", url.ToString(), "OK");
 
@@ -380,7 +398,7 @@ namespace OOAdvantech.iOS
 
             throw new NotImplementedException();
 
-            
+
         }
 
         public void Navigate(string url)
