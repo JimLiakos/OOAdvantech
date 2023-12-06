@@ -87,6 +87,7 @@ namespace OOAdvantech
                     var errorFilePath = Path.Combine(libraryPath, errorFileName);
                     File.AppendAllLines(errorFilePath, CachedLines);
 
+
                     var liness= File.ReadAllLines(errorFilePath);
                     CachedLines.Clear();
                     return;

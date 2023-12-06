@@ -19,6 +19,7 @@ using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.OS;
+using WebView = Android.Webkit.WebView;
 
 [assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
 namespace OOAdvantech.Droid
@@ -279,9 +280,15 @@ namespace OOAdvantech.Droid
                 string url = null;
                 if (Element.Uri != null)
                 {
-
                     if (Element.Uri.IndexOf(@"local://") == 0)
+                    {
                         url = Element.Uri.Replace(@"local://", @"file:///android_asset/Content/");
+                    }
+                    if (Element.Uri.IndexOf(@"webapp://") == 0)
+                    {
+                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                        url = @"file://" + System.IO.Path.Combine(webAppPath, "webapp/index.html");
+                    }
                     else
                         url = Element.Uri;
                     //file:///android_asset/Content/index.html
@@ -973,6 +980,11 @@ namespace OOAdvantech.Droid
             View = null;
 
         }
+
+        //public bool shouldOverrideUrlLoading(WebView view, String url)
+        //{
+        //    return false;
+        //}
     }
 
 
