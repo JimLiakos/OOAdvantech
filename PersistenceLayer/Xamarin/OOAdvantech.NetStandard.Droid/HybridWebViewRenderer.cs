@@ -25,7 +25,7 @@ using WebView = Android.Webkit.WebView;
 namespace OOAdvantech.Droid
 {
     /// <MetaDataID>{a1637bb6-e65c-43af-95ed-6703b0f1a69d}</MetaDataID>
-    public class HybridWebViewRenderer : ViewRenderer<HybridWebView, Android.Webkit.WebView>, INativeWebBrowser, IEndPoint
+    public class HybridWebViewRenderer : WebViewRenderer, INativeWebBrowser, IEndPoint
     {
         Android.Content.Context _context;
         public HybridWebViewRenderer(Android.Content.Context context) : base(context)
@@ -228,7 +228,7 @@ namespace OOAdvantech.Droid
             }
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.WebView> e)
         {
             base.OnElementChanged(e);
 
@@ -268,29 +268,36 @@ namespace OOAdvantech.Droid
                 Control.RemoveJavascriptInterface("jsBridge");
                 var hybridWebView = e.OldElement as HybridWebView;
                 hybridWebView.Cleanup();
-                e.OldElement.NativeWebBrowser = null;
+                if (e.OldElement is HybridWebView)
+                    (e.OldElement as HybridWebView).NativeWebBrowser = null;
 
             }
-            HybridWebView = e.NewElement;
+            HybridWebView = e.NewElement as HybridWebView;
             if (e.NewElement != null)
             {
 
-                e.NewElement.NativeWebBrowser = this;
+                if (e.NewElement is HybridWebView)
+                    (e.NewElement as HybridWebView).NativeWebBrowser = this;
+
+                
                 Control.AddJavascriptInterface(new JSBridge(this), "jsBridge");
                 string url = null;
-                if (Element.Uri != null)
+                if ((Element as HybridWebView).Uri != null)
                 {
-                    if (Element.Uri.IndexOf(@"local://") == 0)
+                    if ((Element as HybridWebView).Uri.IndexOf(@"local://") == 0)
                     {
-                        url = Element.Uri.Replace(@"local://", @"file:///android_asset/Content/");
+                        url = (Element as HybridWebView).Uri.Replace(@"local://", @"file:///android_asset/Content/");
                     }
-                    else if (Element.Uri.IndexOf(@"webapp://") == 0)
+                    else if ((Element as HybridWebView).Uri.IndexOf(@"webapp://") == 0)
                     {
-                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+
+                       var ll=  System.IO.File.Exists(System.IO.Path.Combine(webAppPath, "webapp/index.html"));
+
                         url = @"file://" + System.IO.Path.Combine(webAppPath, "webapp/index.html");
                     }
                     else
-                        url = Element.Uri;
+                        url = (Element as HybridWebView).Uri;
                     //file:///android_asset/Content/index.html
                     Control.LoadUrl(url);
 

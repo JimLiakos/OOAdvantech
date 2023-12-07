@@ -390,7 +390,7 @@ namespace OOAdvantech.Remoting
         /// <MetaDataID>{72f20427-0d16-4ebc-bb25-66f7aea8b44f}</MetaDataID>
         internal static ClientSessionPart GetSession(string channelUri, bool create, bool suspendSessionRemove, IRemotingServices remotingServices)
         {
-
+              
 
             Task<ClientSessionPart> task = null;
             ClientSessionPart clientSessionPart = null;
