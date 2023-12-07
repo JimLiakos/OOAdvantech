@@ -9,7 +9,7 @@ using System.Net.Http;
 namespace OOAdvantech.Web
 {
     /// <MetaDataID>{77781d4e-65bc-4132-8ff4-0c1423eb2f84}</MetaDataID>
-    public class HybridWebView : View
+    public class HybridWebView : WebView
     {
 
         public HybridWebView()
