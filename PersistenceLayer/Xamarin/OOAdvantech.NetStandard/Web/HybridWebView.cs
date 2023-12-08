@@ -104,12 +104,12 @@ namespace OOAdvantech.Web
         {
             try
             {
-                var webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
                 if (File.Exists(Path.Combine(webAppPath, "appHeader.txt")))
                 {
-                    //if (File.ReadAllText(Path.Combine(webAppPath, "appHeader.txt")) == url)
-                    //    return;
+                    if (File.ReadAllText(Path.Combine(webAppPath, "appHeader.txt")) == url)
+                        return;
                     File.Delete(Path.Combine(webAppPath, "appHeader.txt"));
                 }
 
@@ -140,7 +140,7 @@ namespace OOAdvantech.Web
                         foreach (var entry in zip.Entries)
                         {
 
-                            webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                            webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); // iOS: Environment.SpecialFolder.Resources
                             webAppPath += "/webapp";
                             var pathArray = entry.FullName.Split('/');
                             int i = 0;
@@ -181,7 +181,7 @@ namespace OOAdvantech.Web
 
                 }
 
-                webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                webAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
                 File.WriteAllText(Path.Combine(webAppPath, "appHeader.txt"), url);
 

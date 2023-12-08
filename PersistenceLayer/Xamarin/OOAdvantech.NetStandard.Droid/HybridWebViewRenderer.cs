@@ -36,6 +36,7 @@ namespace OOAdvantech.Droid
 
         }
 
+
         //A3piKEtGw7w6W+FL7pMNzL1rpqE=
 
         private void HybridWebViewRenderer_OnBackPressed()
@@ -228,41 +229,42 @@ namespace OOAdvantech.Droid
             }
         }
 
+        Android.Webkit.WebView NativeWebView;
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.WebView> e)
         {
             base.OnElementChanged(e);
 
-            if (Control == null)
-            {
+//            if (Control == null)
+//            {
 
 
-                var webView = new Android.Webkit.WebView(Context);
-                //webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
-                webView.Settings.CacheMode = CacheModes.Default;
-                webView.Settings.DomStorageEnabled = true;
-                webView.Settings.AllowFileAccess = true;
-                webView.Settings.AllowFileAccessFromFileURLs = true;
-                var ss = webView.Settings.UserAgentString;
-                //webView.Settings.UserAgentString = USER_AGENT;
+//                var webView = new Android.Webkit.WebView(Context);
+//                //webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
+//                webView.Settings.CacheMode = CacheModes.Default;
+//                webView.Settings.DomStorageEnabled = true;
+//                webView.Settings.AllowFileAccess = true;
+//                webView.Settings.AllowFileAccessFromFileURLs = true;
+//                var ss = webView.Settings.UserAgentString;
+//                //webView.Settings.UserAgentString = USER_AGENT;
 
 
 
-                // webView.Settings.CacheMode =CacheModes.NoCache;//.CacheMode(WebSettings.lo.LOAD_NO_CACHE);
-                //webView.SetWebViewClient(new CustomWebViewClient(this));
-                webView.Settings.JavaScriptEnabled = true;
-                //webView.ClearCache(false);
-                webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}", _context));
-                WebViews.Add(webView);
+//                // webView.Settings.CacheMode =CacheModes.NoCache;//.CacheMode(WebSettings.lo.LOAD_NO_CACHE);
+//                //webView.SetWebViewClient(new CustomWebViewClient(this));
+//                webView.Settings.JavaScriptEnabled = true;
+//                //webView.ClearCache(false);
+//                webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}", _context));
+//                WebViews.Add(webView);
 
 
-                SetNativeControl(webView);
-#if DEBUG
-                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
-                {
-                    Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
-                }
-#endif 
-            }
+//                SetNativeControl(webView);
+//#if DEBUG
+//                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
+//                {
+//                    Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
+//                }
+//#endif 
+//            }
             if (e.OldElement != null)
             {
                 Control.RemoveJavascriptInterface("jsBridge");
@@ -275,6 +277,32 @@ namespace OOAdvantech.Droid
             HybridWebView = e.NewElement as HybridWebView;
             if (e.NewElement != null)
             {
+                if (NativeWebView == null|| NativeWebView!=Control)
+                {
+                    NativeWebView = Control;
+
+                    //NativeWebView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
+                    NativeWebView.Settings.CacheMode = CacheModes.Default;
+                    NativeWebView.Settings.DomStorageEnabled = true;
+                    NativeWebView.Settings.AllowFileAccess = true;
+                    NativeWebView.Settings.AllowFileAccessFromFileURLs = true;
+                    var ss = NativeWebView.Settings.UserAgentString;
+                    //NativeWebView.Settings.UserAgentString = USER_AGENT;
+
+                    // NativeWebView.Settings.CacheMode =CacheModes.NoCache;//.CacheMode(WebSettings.lo.LOAD_NO_CACHE);
+                    //NativeWebView.SetWebViewClient(new CustomWebViewClient(this));
+                    NativeWebView.Settings.JavaScriptEnabled = true;
+                    //NativeWebView.ClearCache(false);
+                    NativeWebView.SetWebViewClient(new JavascriptWebViewClient(NativeWebView, this, $"javascript: {JavaScriptFunction}", _context));
+                    WebViews.Add(NativeWebView);
+                    
+#if DEBUG
+                    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
+                    {
+                        Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
+                    }
+#endif
+                }
 
                 if (e.NewElement is HybridWebView)
                     (e.NewElement as HybridWebView).NativeWebBrowser = this;
@@ -290,7 +318,7 @@ namespace OOAdvantech.Droid
                     }
                     else if ((Element as HybridWebView).Uri.IndexOf(@"webapp://") == 0)
                     {
-                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                        var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
                        var ll=  System.IO.File.Exists(System.IO.Path.Combine(webAppPath, "webapp/index.html"));
 
