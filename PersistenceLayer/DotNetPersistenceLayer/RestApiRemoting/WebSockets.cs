@@ -1591,6 +1591,10 @@ namespace OOAdvantech.Remoting.RestApi
 #if !DeviceDotNet
                                         LifeTimeLeaseTimerElapsed(this,null );
 #endif
+                                        if(request.RequestProcess== "WaWorkerHost")
+                                        {
+
+                                        }
                                         responseData = IsolatedContext.DispatchMessage(request);
                                         responseData.DirectConnect = true;
 #if !DeviceDotNet
