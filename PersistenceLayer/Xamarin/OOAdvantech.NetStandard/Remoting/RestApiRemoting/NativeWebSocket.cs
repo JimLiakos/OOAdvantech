@@ -208,6 +208,7 @@ namespace WebSocket4Net
         public string Message { get; }
     }
 
+    /// <MetaDataID>{3d43cf74-6e52-4c8f-9266-686ba1ce229f}</MetaDataID>
     public class DataReceivedEventArgs : EventArgs
     {
         public byte[] Data { get; private set; }

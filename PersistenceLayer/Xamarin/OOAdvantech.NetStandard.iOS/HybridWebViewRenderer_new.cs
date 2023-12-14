@@ -46,10 +46,11 @@ namespace OOAdvantech.iOS
             userController.AddScriptMessageHandler(this, "invokeAction");
             config.Preferences.SetValueForKey(NSObject.FromObject(true), new NSString("allowFileAccessFromFileURLs"));
         }
-
+        WKWebView NativeWebView;
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
+
 
             if (e.OldElement != null)
             {
@@ -61,7 +62,17 @@ namespace OOAdvantech.iOS
 
             if (e.NewElement != null)
             {
-                 ((HybridWebView)e.NewElement).NativeWebBrowser = this;
+
+                if (NativeWebView == null)
+                {
+                    NativeWebView = this;
+                    NativeWebView.ScrollView.PanGestureRecognizer.Enabled = false;
+                    if (NativeWebView.ScrollView.PinchGestureRecognizer != null)
+                        NativeWebView.ScrollView.PinchGestureRecognizer.Enabled = false;
+                    NativeWebView.ScrollView.MaximumZoomScale = 1;
+                }
+
+                    ((HybridWebView)e.NewElement).NativeWebBrowser = this;
                 if (((HybridWebView)Element).Uri.IndexOf(@"local://") == 0)
                 {
                     string uri = ((HybridWebView)Element).Uri.ToString().Replace(@"local://", "");

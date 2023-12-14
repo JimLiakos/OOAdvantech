@@ -186,11 +186,13 @@ namespace OOAdvantech
         }
     }
 
+    /// <MetaDataID>{5ce5220a-6f15-4bd3-98e0-9df5c3f0a205}</MetaDataID>
     interface ISerializableTask
     {
         void Run();
     }
 
+    /// <MetaDataID>{5cecddd7-e56f-470a-b902-43113b123832}</MetaDataID>
     class SerializableTask<TResult> : ISerializableTask
     {
         public Func<Task<TResult>> asynchFunction;
