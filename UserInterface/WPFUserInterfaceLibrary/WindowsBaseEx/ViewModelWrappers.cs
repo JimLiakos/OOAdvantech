@@ -13,6 +13,8 @@ namespace UIBaseEx
 
         public TValue GetViewModelFor(TKey _object, params object[] args)
         {
+            if(_object == null) 
+                return null;
             TValue value = default(TValue);
             if (!TryGetValue(_object, out value))
             {

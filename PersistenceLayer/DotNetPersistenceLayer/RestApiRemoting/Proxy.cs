@@ -292,7 +292,7 @@ namespace OOAdvantech.Remoting.RestApi
 
             RequestData requestData = new RequestData();
             requestData.ChannelUri = ChannelUri;
-            requestData.SessionIdentity= clientSessionPart.SessionIdentity;
+            requestData.SessionIdentity = clientSessionPart.SessionIdentity;
             string myJson = null;
 
             //System.Net.Http.StringContent content = null;
@@ -305,7 +305,7 @@ namespace OOAdvantech.Remoting.RestApi
             string X_Auth_Token = null;
             string X_Access_Token = null;
 
-        #region Gets authentication data
+            #region Gets authentication data
             if (authUser != null)
             {
                 var exp = authUser.ExpirationTime.ToString();
@@ -326,11 +326,11 @@ namespace OOAdvantech.Remoting.RestApi
                     X_Auth_Token = clientSessionPart.X_Auth_Token;
                 }
             }
-        #endregion
+            #endregion
 
-            Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as  Dictionary<string, List<string>>;
+            Dictionary<string, List<string>> cachingMetadata = System.Runtime.Remoting.Messaging.CallContext.GetData("CachingMetadata") as Dictionary<string, List<string>>;
             if (cachingMetadata != null)
-                requestData.CachingMetadata=Json.JsonConvert.SerializeObject(cachingMetadata);
+                requestData.CachingMetadata = Json.JsonConvert.SerializeObject(cachingMetadata);
 
 
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
@@ -421,7 +421,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 string propertyName = methodName.Substring("get_".Length);
 
-                if(this.ObjectRef.GetProxyType()?.OnDemandCachingMembersNames.Contains(propertyName)==true)
+                if (this.ObjectRef.GetProxyType()?.OnDemandCachingMembersNames.Contains(propertyName) == true)
                     this.ObjectRef.SetMemberValue(propertyName, retObject);
 
             }
@@ -672,14 +672,14 @@ namespace OOAdvantech.Remoting.RestApi
             if (cachingMetadata != null)
                 requestData.CachingMetadata = Json.JsonConvert.SerializeObject(cachingMetadata);
 
-            if (methodCallMessage.MethodName=="RefreshTest")
+            if (methodCallMessage.MethodName == "RefreshTest")
             {
 
             }
 
             requestData.RequestType = RequestType.MethodCall;
-            if (this.ObjectRef.MembersValues?.Count > 0==true)
-                requestData.HasCachingMembers=true;
+            if (this.ObjectRef.MembersValues?.Count > 0 == true)
+                requestData.HasCachingMembers = true;
 
             requestData.details = JsonConvert.SerializeObject(methodCallMessage);
 
@@ -691,7 +691,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (responseData != null)// .IsSuccessStatusCode)
             {
 
-                if (methodCallMessage.MethodName=="GetDelayedServingBatchesAtTheCounter")
+                if (methodCallMessage.MethodName == "GetDelayedServingBatchesAtTheCounter")
                 {
 
                 }
@@ -755,11 +755,11 @@ namespace OOAdvantech.Remoting.RestApi
                 {
 
                     Dictionary<string, List<string>> cachingMembers = new Dictionary<string, List<string>>();
-                    cachingMembers[""]=this.ObjectRef.MembersValues.Keys.ToList();
+                    cachingMembers[""] = this.ObjectRef.MembersValues.Keys.ToList();
 
                     try
                     {
-                        if (cachingMembers.Count>0)
+                        if (cachingMembers.Count > 0)
                             CallContext.SetData("CachingMetadata", cachingMembers);
 
 
@@ -1001,7 +1001,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{ac8ceada-ed1e-4696-8818-6460013c8c22}</MetaDataID>
-        private  IMessage UnMarshal(IMethodCallMessage methodCallMessage, ReturnMessage returnMessage)
+        private IMessage UnMarshal(IMethodCallMessage methodCallMessage, ReturnMessage returnMessage)
         {
 
             var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
@@ -1009,8 +1009,9 @@ namespace OOAdvantech.Remoting.RestApi
             if (returnMessage.Exception != null)
             {
                 //System.Exception innerException = null;
+
                 Type exceptionType = null;
-                if (returnMessage.Exception.ExceptionType!=null)
+                if (returnMessage.Exception.ExceptionType != null)
                 {
                     try
                     {
@@ -1039,7 +1040,7 @@ namespace OOAdvantech.Remoting.RestApi
                     }
                     catch (Exception error)
                     {
-                        
+
                     }
 
                 }
@@ -1053,12 +1054,24 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     try
                     {
-                        exception= Activator.CreateInstance(exceptionType, returnMessage.Exception.ExceptionMessage, exception) as Exception;
+
+                        exception = Activator.CreateInstance(exceptionType, returnMessage.Exception.ExceptionMessage, exception) as Exception;
+                        foreach (var entry in returnMessage.Exception.ExceptionProperties)
+                        {
+                            try
+                            {
+                                var property = exception.GetType().GetProperty(entry.Key);
+                                property.SetValue(exception, entry.Value);
+                            }
+                            catch (Exception error)
+                            {
+                            }
+                        }
+
+
                     }
                     catch (Exception error)
                     {
-
-                        
                     }
 
                 }
@@ -1096,7 +1109,7 @@ namespace OOAdvantech.Remoting.RestApi
                 i++;
             }
             object retObject = null;
-            if (returnMessage.ReturnObjectJson.IndexOf("\"MembersValues\":{\"")!= -1)
+            if (returnMessage.ReturnObjectJson.IndexOf("\"MembersValues\":{\"") != -1)
             {
 
             }
@@ -1125,23 +1138,88 @@ namespace OOAdvantech.Remoting.RestApi
             return message;
         }
 
-    
+
 
 #else
 
         private static object UnMarshal(MethodInfo method, ReturnMessage returnMessage, object[] args)
         {
+            //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(false), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);
             if (returnMessage.Exception != null)
             {
-                if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
-                    throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
-                else
-                    throw new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult, "");
+                Type exceptionType = null;
+                Exception exception = null;
+                if (returnMessage.Exception.ExceptionType != null)
+                {
+                    try
+                    {
+                        string typeName;
+                        string assemblyName;
+#if DeviceDotNet
+                        var typeNameKey = OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(returnMessage.Exception.ExceptionType);
+#if NetStandard
+                        typeName = typeNameKey.Value2;
+                        assemblyName = typeNameKey.Value1;
+#else
+                        typeName = typeNameKey.TypeName;
+                        assemblyName = typeNameKey.AssemblyName;
+#endif
+
+#elif Json4
+                        var typeNameKey = OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(returnMessage.Exception.ExceptionType);
+                        typeName = typeNameKey.Value2;
+                        assemblyName = typeNameKey.Value1;
+#else
+
+                        OOAdvantech.Json.Utilities.ReflectionUtils.SplitFullyQualifiedTypeName(typeFullName, out typeName, out assemblyName);
+#endif
+
+                        exceptionType = jSetttings.Binder.BindToType(assemblyName, typeName);
+
+                    }
+                    catch (Exception error)
+                    {
+
+                    }
+
+                }
+                try
+                {
+                    
+                    if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
+                        exception = new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
+                    else
+                        exception = new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult, "");
+
+
+                    exception = Activator.CreateInstance(exceptionType, returnMessage.Exception.ExceptionMessage, exception) as Exception;
+                    foreach (var entry in returnMessage.Exception.ExceptionProperties)
+                    {
+                        try
+                        {
+                            var property = exception.GetType().GetProperty(entry.Key);
+                            property.SetValue(exception, entry.Value);
+                        }
+                        catch (Exception error)
+                        {
+                        }
+                    }
+                    
+
+                }
+                catch (Exception error)
+                {
+
+                    if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
+                        throw new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
+                    else
+                        throw new ServerException(returnMessage.Exception.ExceptionMessage + Environment.NewLine + returnMessage.Exception.ServerStackTrace, returnMessage.Exception.HResult, "");
+                }
+                throw exception;
 
             }
 
-            //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(false), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);
 
             var outArgs = new object[0];
             if (!string.IsNullOrWhiteSpace(returnMessage.JsonOutArgs))
@@ -1253,7 +1331,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
 
 #if DeviceDotNet
-                if (type ==typeof(OOAdvantech.Remoting.MarshalByRefObject))
+                if (type == typeof(OOAdvantech.Remoting.MarshalByRefObject))
                     return new OOAdvantech.Remoting.MarshalByRefObject(this);
 #endif
 
@@ -1305,7 +1383,7 @@ namespace OOAdvantech.Remoting.RestApi
             var remotingServices = RemotingServices.GetRemotingServices((this).ChannelUri);
             var _object = GetTransparentProxy(Type);
             remotingServices.RefreshCacheData(_object as MarshalByRefObject);
-            
+
         }
 
         //IMessage IProxy.Invoke(IMessage msg)

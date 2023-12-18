@@ -1,18 +1,53 @@
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace OOAdvantech.Remoting.RestApi
 {
     /// <MetaDataID>{100afa59-cf7c-408f-9456-47f429e4153c}</MetaDataID>
-    public class RestApiExceptionData
+    public class RestApiExceptionData:System.Exception
     {
 
         public RestApiExceptionData()
         {
         }
 
+        public RestApiExceptionData(string message):base(message)
+        {
+        }
+
+        public RestApiExceptionData(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
+
+
+        public bool ShouldSerializeInnerException()
+        {
+
+            // don't serialize the Manager property if an employee is their own manager
+            return false;
+        }
+
+       public  Dictionary<string,object> ExceptionProperties = new Dictionary<string,object>();
         public RestApiExceptionData(ExceptionCode exceptionCode, System.Exception exception)
         {
-            ExceptionType=  exception.GetType().FullName+","+exception.GetType().Assembly.GetName().Name;
+            if (exception is SerializableException)
+            {
+                var excType = exception.GetType();
+                while (excType != typeof(SerializableException)) 
+                {
+
+                    foreach (var prop in exception.GetType().GetProperties())
+                    {
+                        ExceptionProperties[prop.Name] = prop.GetValue(exception);
+                    }
+                    excType = excType.BaseType;
+                } 
+            }
+
+                
+
+            ExceptionType =  exception.GetType().FullName+","+exception.GetType().Assembly.GetName().Name;
             //new System.Exception().HResult= exceptionCode;
 
             while (exception is System.Reflection.TargetInvocationException && exception.InnerException != null)
@@ -58,8 +93,27 @@ namespace OOAdvantech.Remoting.RestApi
         public string ErrorCode;
 
         public string ExceptionType;
+
+        
     }
 
+
+    public class SerializableException:Exception
+    {
+        public SerializableException()
+        {
+
+        }
+        public SerializableException(string message):base(message)
+        {
+
+        }
+        public SerializableException(string message, Exception innerException) : base(message, innerException)
+        {
+
+        }
+
+    }
     /// <MetaDataID>{8f1c7bdf-99d4-4d98-a423-55a77f116904}</MetaDataID>
     public enum ExceptionCode
     {
@@ -73,7 +127,7 @@ namespace OOAdvantech.Remoting.RestApi
     }
 
 
-
+  
 
     /// <MetaDataID>{15b03d23-dc51-4586-883e-060fdb44c9b8}</MetaDataID>
     public class EndpointNotFoundException : System.Exception
