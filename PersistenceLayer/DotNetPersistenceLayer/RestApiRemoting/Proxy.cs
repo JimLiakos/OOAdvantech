@@ -701,19 +701,49 @@ namespace OOAdvantech.Remoting.RestApi
                     returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
                     if (cachingMetadata != null)
                     {
-                        // var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
-                        var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
-                        Stopwatch timer = new Stopwatch();
-                        timer.Start();
-                        bytes = WebSocketChannel.Compress(bytes);
-                        bytes = WebSocketChannel.DeCompress(bytes);
-                        timer.Stop();
-                        var json = Encoding.UTF8.GetString(bytes);
 
-                        var sp = timer.ElapsedMilliseconds;
+                        if (returnMessage.Exception != null && returnMessage.Exception.ExceptionCode == ExceptionCode.AccessTokenExpired)
+                        {
+                            methodCallMessage.X_Auth_Token = authUser.AuthToken;
+                            methodCallMessage.X_Access_Token = null;
+                            requestData.RequestType = RequestType.MethodCall;
+                            requestData.details = JsonConvert.SerializeObject(methodCallMessage);
+                            requestData.ChannelUri = ChannelUri;
+                            responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData); //RemotingServices.Invoke(requestData.PublicChannelUri, requestData, X_Auth_Token, X_Access_Token);
+                            if (responseData != null)// .IsSuccessStatusCode)
+                            {
+                                try
+                                {
+                                    returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
 
-                        //var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
-                        //var json = StringCompression.Unzip(mBuffer);
+
+                                }
+                                catch (Exception error)
+                                {
+                                    throw;
+                                }
+                            }
+                            else
+                                throw new InvalidOperationException();
+                        }
+                        //else
+                        //{
+
+
+                        //    // var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
+                        //    var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
+                        //    Stopwatch timer = new Stopwatch();
+                        //    timer.Start();
+                        //    bytes = WebSocketChannel.Compress(bytes);
+                        //    bytes = WebSocketChannel.DeCompress(bytes);
+                        //    timer.Stop();
+                        //    var json = Encoding.UTF8.GetString(bytes);
+
+                        //    var sp = timer.ElapsedMilliseconds;
+
+                        //    //var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
+                        //    //var json = StringCompression.Unzip(mBuffer);
+                        //}
                     }
                 }
                 catch (Exception error)

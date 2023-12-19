@@ -643,19 +643,52 @@ namespace OOAdvantech.MetaDataRepository
             //scoop caching data allowed in reference only request  
             if (cachingMetaData?.CachingMembers?.TryGetValue(FullName, out cachingClientSideMembers) == true)
             {
+
+                Type type = this.Type;
+
                 foreach (string memberName in cachingClientSideMembers)
                 {
                     if (!membersValues.ContainsKey(memberName))
                     {
-                        var property = this.Type.GetProperty(memberName);
-                        if (property != null)
+                        try
                         {
-                            membersValues[memberName] = property.GetValue(_object);
+                            PropertyInfo property = null;
+                            FieldInfo field = null;
+                            property = type.GetProperty(memberName);
+                            if (property == null)
+                                field = this.Type.GetField(memberName);
+
+                            if (field == null && property == null)
+                            {
+                                var classifier = OOAdvantech.MetaDataRepository.Classifier.GetClassifier(type);
+                                var attribute = classifier.GetFeatures(true).OfType<Attribute>().Where(x => x.Name == memberName).FirstOrDefault();
+                                if (attribute != null)
+                                {
+                                    property = attribute.GetExtensionMetaObject(typeof(System.Reflection.PropertyInfo)) as System.Reflection.PropertyInfo;
+                                    if (property == null)
+                                        field = attribute.GetExtensionMetaObject(typeof(System.Reflection.FieldInfo)) as System.Reflection.FieldInfo;
+                                }
+                                else
+                                {
+                                    var associationEnd = classifier.GetAssociateRoles(true).OfType<AssociationEnd>().Where(x => x.Name == memberName).FirstOrDefault();
+                                    if (associationEnd != null)
+                                    {
+                                        property = associationEnd.GetExtensionMetaObject(typeof(System.Reflection.PropertyInfo)) as System.Reflection.PropertyInfo;
+                                        if (property == null)
+                                            field = associationEnd.GetExtensionMetaObject(typeof(System.Reflection.FieldInfo)) as System.Reflection.FieldInfo;
+                                    }
+                                }
+                            }
+                            if (property != null)
+                                membersValues[memberName] = property.GetValue(_object);
+                            else
+                            {
+                                if (field != null)
+                                    membersValues[memberName] = field.GetValue(_object);
+                            }
                         }
-                        else
+                        catch (Exception error)
                         {
-                            var field = this.Type.GetField(memberName);
-                            membersValues[memberName] = field.GetValue(_object);
                         }
                     }
                     else
