@@ -363,22 +363,22 @@ namespace OOAdvantech.Remoting.RestApi
                     try
                     {
                         returnMessage = JsonConvert.DeserializeObject<ReturnMessage>(responseData.details);
-                        if (cachingMetadata != null)
-                        {
-                            //var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
-                            var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
-                            Stopwatch timer = new Stopwatch();
-                            timer.Start();
-                            bytes = WebSocketChannel.Compress(bytes);
-                            bytes = WebSocketChannel.DeCompress(bytes);
-                            timer.Stop();
-                            var json = Encoding.UTF8.GetString(bytes);
+                        //if (cachingMetadata != null)
+                        //{
+                        //    //var cmp = StringCompression.Compress(returnMessage.ReturnObjectJson);
+                        //    var bytes = Encoding.UTF8.GetBytes(returnMessage.ReturnObjectJson);
+                        //    Stopwatch timer = new Stopwatch();
+                        //    timer.Start();
+                        //    bytes = WebSocketChannel.Compress(bytes);
+                        //    bytes = WebSocketChannel.DeCompress(bytes);
+                        //    timer.Stop();
+                        //    var json = Encoding.UTF8.GetString(bytes);
 
-                            var sp = timer.ElapsedMilliseconds;
+                        //    var sp = timer.ElapsedMilliseconds;
 
-                            //var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
-                            //var json = StringCompression.Unzip(mBuffer);
-                        }
+                        //    //var mBuffer = StringCompression.Zip(returnMessage.ReturnObjectJson);
+                        //    //var json = StringCompression.Unzip(mBuffer);
+                        //}
                     }
                     catch (Exception error)
                     {

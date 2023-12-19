@@ -354,10 +354,11 @@ namespace System.Linq
         /// <MetaDataID>{1a8bf461-2d73-4795-b7d7-25a65da1758b}</MetaDataID>
         public static TResult Fetching<TSource, TResult>(this TSource source, Expression<System.Func<TSource, TResult>> expression) where TResult : class
         {
+
+            Exception serverException = null;
             try
             {
                 var linqObjectQuery = new OOAdvantech.Linq.LINQStorageObjectQuery(expression, default(OOAdvantech.PersistenceLayer.ObjectStorage));
-
                 Dictionary<string, List<string>> cachingMembers = GetCachingMembers(linqObjectQuery.DataTrees[0].SubDataNodes[0]);
 
                 try
@@ -386,7 +387,16 @@ namespace System.Linq
                                 }
                                 i++;
                             }
-                            returnValue=(sourceExpression as MethodCallExpression).Method.Invoke(source, args);
+                            try
+                            {
+                                returnValue=(sourceExpression as MethodCallExpression).Method.Invoke(source, args);
+                            }
+                            catch (System.Reflection.TargetInvocationException error)
+                            {
+
+                                serverException= error.InnerException;
+                                throw error.InnerException;
+                            }
                             return returnValue as TResult;
 
                         }
@@ -420,47 +430,14 @@ namespace System.Linq
                 }
 
 
-                {
-
-
-                    //if(sourceExpression.NodeType==ExpressionType.MemberAccess )
-
-                    //var sds = sourceExpression.GetType().BaseType;
-
-                    //System.Runtime.Remoting.Messaging.CallContext.SetData("CachingMetadata", cachingMembers);
-                    //var attribute = linqObjectQuery.DataTrees[0].SubDataNodes[0].AssignedMetaObject as OOAdvantech.DotNetMetaDataRepository.Attribute;
-                    //var associationEnd = linqObjectQuery.DataTrees[0].SubDataNodes[0].AssignedMetaObject as OOAdvantech.DotNetMetaDataRepository.AssociationEnd;
-                    //if (attribute != null)
-                    //{
-                    //    object returnValue = null;
-                    //    if (attribute.PropertyMember!=null)
-                    //        returnValue= attribute.PropertyMember.GetValue(source);
-                    //    if (attribute.FieldMember!=null)
-                    //        returnValue=attribute.FieldMember.GetValue(source);
-
-
-                    //    return returnValue as TResult;
-                    //}
-
-                    //if (associationEnd != null)
-                    //{
-                    //    object returnValue = null;
-                    //    if (associationEnd.PropertyMember!=null)
-                    //        returnValue= associationEnd.PropertyMember.GetValue(source);
-                    //    if (associationEnd.FieldMember!=null)
-                    //        returnValue=associationEnd.FieldMember.GetValue(source);
-
-
-                    //    return returnValue as TResult;
-                    //}
-                }
-
             }
             catch (Exception error)
             {
-
-
             }
+
+            if (serverException!=null)
+                throw serverException;
+
             return default(TResult);
 
         }
@@ -493,7 +470,7 @@ namespace System.Linq
         {
             if (member.Expression is ConstantExpression)
             {
-                return (member.Expression as ConstantExpression).Value.GetType().GetField("param").GetValue((member.Expression as ConstantExpression).Value);
+                return (member.Expression as ConstantExpression).Value.GetType().GetField(member.Member.Name).GetValue((member.Expression as ConstantExpression).Value);
             }
 
             return null;
