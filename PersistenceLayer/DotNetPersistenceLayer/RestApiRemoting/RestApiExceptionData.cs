@@ -98,13 +98,14 @@ namespace OOAdvantech.Remoting.RestApi
     }
 
 
-    public class SerializableException:Exception
+    /// <MetaDataID>{c0b1e68d-9259-46cf-9f2f-73bbd7ff780e}</MetaDataID>
+    public class SerializableException : Exception
     {
         public SerializableException()
         {
 
         }
-        public SerializableException(string message):base(message)
+        public SerializableException(string message) : base(message)
         {
 
         }
