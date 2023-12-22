@@ -16,6 +16,7 @@ using System.IO;
 using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Xamarin.Forms;
 #if !DeviceDotNet
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json.Linq;
@@ -345,6 +346,7 @@ namespace OOAdvantech.Remoting.RestApi
             //    requestData.InternalChannelUri = internalchannelUri;
             //}
             var responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData);
+
             //var responseData = RemotingServices.Invoke(channelUri, requestData, X_Auth_Token, X_Access_Token);
             if (responseData != null)// .IsSuccessStatusCode)
             {
@@ -403,6 +405,10 @@ namespace OOAdvantech.Remoting.RestApi
 
 
                 CachingOnDemandData(methodName, retval);
+#if DeviceDotNet
+                OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+                device.StatusBarColor=Color.LightGreen;
+#endif
 
                 return retval;
 

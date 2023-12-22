@@ -228,6 +228,41 @@ namespace OOAdvantech.iOS
         {
             throw new NotImplementedException();
         }
+        static System.Drawing.Color? StatusBarCurrentColor;
+        public System.Drawing.Color? StatusBarColor
+        {
+            get => StatusBarCurrentColor;
+            set
+            {
+                if (value.HasValue)
+                {
+                    var statusBarColor = value;
+                    if (StatusBarCurrentColor!=statusBarColor)
+                    {
+                        UIView statusBar = new UIView(UIApplication.SharedApplication.StatusBarFrame);
+                        statusBar.BackgroundColor = statusBarColor.Value.ToPlatformColor();
+                        statusBar.TintColor = UIColor.Orange;
+                        foreach (UIScene scene in UIApplication.SharedApplication.ConnectedScenes)
+                        {
+                            if (scene.ActivationState == UISceneActivationState.ForegroundActive)
+                            {
+                                UIWindowScene myScene = (UIWindowScene)scene;
+                                foreach (UIWindow win in myScene.Windows)
+                                {
+                                    if (win.IsKeyWindow)
+                                    {
+                                        win.AddSubview(statusBar);
+                                    }
+                                }
+
+                            }
+                        }
+
+                        StatusBarCurrentColor=statusBarColor;
+                    }
+                }
+            }
+        }
 
         public void SetStatusBarColor(Color statusBarColor)
         {

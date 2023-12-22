@@ -67,7 +67,7 @@ namespace OOAdvantech.Droid
 
             }
         }
-       
+
         public static void KeyboordChangeState(KeybordStatus keybordStatus)
         {
             internalKeyboordChangeState?.Invoke(keybordStatus);
@@ -78,9 +78,9 @@ namespace OOAdvantech.Droid
         }
 
 
-        
 
-        
+
+
         public static void BackPressed(BackPressedArgs eventArgs)
         {
             OOAdvantech.DeviceApplication.Current.OnBackPressed(eventArgs);
@@ -109,13 +109,13 @@ namespace OOAdvantech.Droid
         static bool _IsinSleepMode;
         public bool IsinSleepMode { get => _IsinSleepMode; set => _IsinSleepMode = value; }
 
-        public static void InitFirebase(Context context, string firebaseToken, string googleAuthWebClientID, List<Authentication.SignInProvider> providers=null)
+        public static void InitFirebase(Context context, string firebaseToken, string googleAuthWebClientID, List<Authentication.SignInProvider> providers = null)
         {
             _FirebaseToken = firebaseToken;
             Authentication.Droid.FirebaseAuthentication.Init(context, googleAuthWebClientID, providers);
         }
 
-  
+
         //public System.Threading.Tasks.Task<string> EmailSignUp(string email, string password)
         //{
         //    return Authentication.Droid.FirebaseAuthentication.EmailSignUp(email, password);
@@ -207,7 +207,7 @@ namespace OOAdvantech.Droid
             //    _LinesPhoneNumbers.Add(new OOAdvantech.SIMCardData() { SIMCardIdentity = simIdentity, SIMCardDescription = simDescription });
             //}
 
-            
+
         }
 
         public static void OnDestroy()
@@ -253,9 +253,9 @@ namespace OOAdvantech.Droid
             }
         }
 
-      
 
-      
+
+
 
 
         public SIMCardData GetLinePhoneNumber(int lineIndex)
@@ -263,9 +263,23 @@ namespace OOAdvantech.Droid
             return _LinesPhoneNumbers[lineIndex];
         }
 
-        public void SetStatusBarColor(System.Drawing.Color statusBarColor)
+        static System.Drawing.Color? StatusBarCurrentColor;
+
+        public System.Drawing.Color? StatusBarColor
         {
-          Xamarin.Essentials.Platform.CurrentActivity.Window.SetStatusBarColor(Android.Graphics.Color.Argb(statusBarColor.A, statusBarColor.R,statusBarColor.G , statusBarColor.B)); //here
+            get => StatusBarCurrentColor;
+            set
+            {
+                if (value.HasValue)
+                {
+                    var statusBarColor = value.Value;
+                    if (StatusBarCurrentColor!=statusBarColor)
+                    {
+                        Xamarin.Essentials.Platform.CurrentActivity.Window.SetStatusBarColor(Android.Graphics.Color.Argb(statusBarColor.A, statusBarColor.R, statusBarColor.G, statusBarColor.B)); //here
+                        StatusBarCurrentColor=statusBarColor;
+                    }
+                }
+            }
         }
 
         public IReadOnlyList<SimCard> GetSimCards()
@@ -364,7 +378,7 @@ namespace OOAdvantech.Droid
             if (ForegroundServiceManager != null)
             {
                 return ForegroundServiceManager.Run(action, serviceState);
-                
+
             }
             return false;
         }

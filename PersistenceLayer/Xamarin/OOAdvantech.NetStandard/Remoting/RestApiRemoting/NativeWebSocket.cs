@@ -7,6 +7,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace WebSocket4Net
 {
@@ -36,7 +37,7 @@ namespace WebSocket4Net
 
         public async Task Send(byte[] buffer)
         {
-            
+
             var segmnet = new ArraySegment<byte>(buffer);
             //binary webSocket
             await client.SendAsync(segmnet, WebSocketMessageType.Binary, true, cts.Token);
@@ -53,7 +54,13 @@ namespace WebSocket4Net
         {
             //Task.Run(async () =>
             //{
-            client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cts.Token).Wait();
+            try
+            {
+                client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cts.Token).Wait();
+            }
+            catch (Exception error)
+            {
+            }
 
 
             //});
@@ -90,6 +97,13 @@ namespace WebSocket4Net
 #endif
                             await Task.Factory.StartNew(async () =>
                             {
+#if DeviceDotNet
+                                OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+
+                                if (device.StatusBarColor==Color.DarkViolet)
+                                    device.StatusBarColor=Color.LightSalmon;
+#endif
+
                                 while (true)
                                 {
                                     WebSocketReceiveResult result;
@@ -106,6 +120,12 @@ namespace WebSocket4Net
                                         }
                                         catch (Exception error)
                                         {
+
+                                            device.StatusBarColor=Color.DarkViolet;
+#if DeviceDotNet
+                                            OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Native WebSocket Receive error : "+error.Message });
+#endif
+
                                             this.Error?.Invoke(this, new ErrorEventArgs(error));
 
                                             if (previousState == WebSocketState.Open && client.State != WebSocketState.Open)
@@ -171,6 +191,8 @@ namespace WebSocket4Net
                         }
                         catch (Exception error)
                         {
+
+
 
                             this.Error?.Invoke(this, new ErrorEventArgs(error));
                         }

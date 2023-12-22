@@ -1178,6 +1178,11 @@ namespace OOAdvantech.Remoting.RestApi
 #if DeviceDotNet
                         OOAdvantech.DeviceApplication.Current.Log(new List<string> { Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id) , Environment.NewLine });
 #endif
+
+#if DeviceDotNet
+                        OOAdvantech.IDeviceOOAdvantechCore device =Xamarin.Forms.DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+                        device.StatusBarColor=System.Drawing.Color.LightSkyBlue;
+#endif
                         //The reconnection process must have completed when the client code attempts to call a remote object
                         //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
                         Task.Run(() =>

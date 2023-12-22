@@ -773,7 +773,7 @@ namespace OOAdvantech.Remoting.RestApi
 #endif
 
                             WebSocketClient = webSocketClient;
-                            //ClientSessionPart.Reconnect(true);
+                            ClientSessionPart.Reconnect(true);
                         }
                         else
                         {
