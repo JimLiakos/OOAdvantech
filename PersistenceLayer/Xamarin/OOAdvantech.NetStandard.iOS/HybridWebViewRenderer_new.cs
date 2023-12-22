@@ -58,6 +58,7 @@ namespace OOAdvantech.iOS
                 userController.RemoveScriptMessageHandler("invokeAction");
                 HybridWebView hybridWebView = e.OldElement as HybridWebView;
                 hybridWebView.Cleanup();
+                
             }
 
             if (e.NewElement != null)
@@ -70,6 +71,7 @@ namespace OOAdvantech.iOS
                     if (NativeWebView.ScrollView.PinchGestureRecognizer != null)
                         NativeWebView.ScrollView.PinchGestureRecognizer.Enabled = false;
                     NativeWebView.ScrollView.MaximumZoomScale = 1;
+                    NavigationDelegate = new NavigationDelegate(this);
                 }
 
                     ((HybridWebView)e.NewElement).NativeWebBrowser = this;
@@ -349,6 +351,56 @@ namespace OOAdvantech.iOS
         public ResponseData SendRequest(RequestData requestData)
         {
             throw new NotImplementedException();
+        }
+
+        internal void OnNavigated(NavigatedEventArgs navigatedEventArgs)
+        {
+
+            
+            //Control.EvaluateJavaScriptAsync(javascriptStyle);
+            try
+            {
+                (this.Element as HybridWebView).OnNavigated(navigatedEventArgs);
+
+            }
+            catch (Exception error)
+            {
+            }
+        }
+
+    }
+
+    public class NavigationDelegate : WKNavigationDelegate
+    {
+        private readonly HybridWebViewRenderer _renderer;
+
+        public NavigationDelegate(HybridWebViewRenderer renderer)
+        {
+            _renderer = renderer;
+        }
+
+        public override void DidFailProvisionalNavigation(WKWebView webView, WKNavigation navigation, NSError error)
+        {
+            // call methods of your renderer or its properties like
+            //_renderer.Element.OnNavigating(webView.Url);
+        }
+
+        public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
+        {
+            var task = _renderer.InvockeJSMethod("SendMessage", new[] { "CSCodeCommunicationStart" });
+
+            _renderer.OnNavigated(new NavigatedEventArgs(webView, webView.Url.AbsoluteUrl.AbsoluteString, webView.CanGoBack, webView.CanGoForward));
+            //base.DidFinishNavigation(webView, navigation);
+        }
+
+
+        public override void DidCommitNavigation(WKWebView webView, WKNavigation navigation)
+        {
+            //base.DidCommitNavigation(webView, navigation);
+        }
+        public override void DidFailNavigation(WKWebView webView, WKNavigation navigation, NSError error)
+        {
+            base.DidFailNavigation(webView, navigation, error);
         }
     }
 }

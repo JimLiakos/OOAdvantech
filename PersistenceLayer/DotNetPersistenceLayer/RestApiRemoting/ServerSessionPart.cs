@@ -1174,9 +1174,9 @@ namespace OOAdvantech.Remoting.RestApi
 
                         SynchronizeSession();
 
-                        System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
+                        System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
 #if DeviceDotNet
-                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { string.Format("RestApp channel clientSessionPart Reconnect {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id) });
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id) , Environment.NewLine });
 #endif
                         //The reconnection process must have completed when the client code attempts to call a remote object
                         //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
@@ -1190,7 +1190,9 @@ namespace OOAdvantech.Remoting.RestApi
                     {
 
                         #if DeviceDotNet
-                                 OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Reconnect without channelSubscriptions. disconnectedChannel "+ disconnectedChannel .ToString()});
+                                 //OOAdvantech.DeviceApplication.Current.Log(new List<string> { "RestApp channel clientSessionPart  Reconnected without channelSubscriptions. disconnectedChannel " + disconnectedChannel .ToString()});
+                                OOAdvantech.DeviceApplication.Current.Log(new List<string> {Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected without channelSubscriptions {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id), Environment.NewLine });
+
                         #endif
                         if (disconnectedChannel)
                         {

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using AudioToolbox;
+using Foundation;
 using OOAdvantech.Authentication;
+using UIKit;
+using Xamarin.Essentials;
 
 namespace OOAdvantech.iOS
 {
@@ -68,7 +72,7 @@ namespace OOAdvantech.iOS
                 return _FirebaseToken;
             }
         }
-     
+
 
         public DeviceOOAdvantechCore()
         {
@@ -130,7 +134,7 @@ namespace OOAdvantech.iOS
         public bool IsForegroundServiceStarted => false;
 
         static bool _IsinSleepMode;
-        public bool IsinSleepMode { get =>  _IsinSleepMode; set => _IsinSleepMode=value; }
+        public bool IsinSleepMode { get => _IsinSleepMode; set => _IsinSleepMode = value; }
 
         public bool IsBackgroundServiceStarted => true;
 
@@ -174,9 +178,9 @@ namespace OOAdvantech.iOS
         public static String GetDeviceUniqueID()
         {
 
-           string id = UIKit.UIDevice.CurrentDevice.IdentifierForVendor.AsString();
+            string id = UIKit.UIDevice.CurrentDevice.IdentifierForVendor.AsString();
             return id;
-           
+
         }
 
         public void StartForegroundService()
@@ -192,12 +196,12 @@ namespace OOAdvantech.iOS
             SystemSound systemSound = new SystemSound(1320);
             systemSound.PlayAlertSound();
         }
-        public static void InitFirebase(string firebaseToken, string googleAuthWebClientID, List<SignInProvider> providers=null)
+        public static void InitFirebase(string firebaseToken, string googleAuthWebClientID, List<SignInProvider> providers = null)
         {
             bool tokenChange = _FirebaseToken != null;
             _FirebaseToken = firebaseToken;
-            if(!tokenChange)
-                Authentication.iOS.FirebaseAuthentication.Init( googleAuthWebClientID, providers);
+            if (!tokenChange)
+                Authentication.iOS.FirebaseAuthentication.Init(googleAuthWebClientID, providers);
         }
 
         //Task<string> IDeviceOOAdvantechCore.EmailSignUp(string email, string password)
@@ -223,6 +227,46 @@ namespace OOAdvantech.iOS
         public void StopBackgroundService()
         {
             throw new NotImplementedException();
+        }
+
+        public void SetStatusBarColor(Color statusBarColor)
+        {
+            
+            UIView statusBar = new UIView(UIApplication.SharedApplication.StatusBarFrame);
+            statusBar.BackgroundColor = statusBarColor.ToPlatformColor();
+            statusBar.TintColor = UIColor.Orange;
+            foreach (UIScene scene in UIApplication.SharedApplication.ConnectedScenes)
+            {
+                if (scene.ActivationState == UISceneActivationState.ForegroundActive)
+                {
+                    UIWindowScene myScene = (UIWindowScene)scene;
+                    foreach (UIWindow win in myScene.Windows)
+                    {
+                        if (win.IsKeyWindow)
+                        {
+                            win.AddSubview(statusBar);
+                        }
+                    }
+
+                }
+            }
+
+//            Xamarin.Forms.Color color = Xamarin.Forms.Color.FromRgba(statusBarColor.R, statusBarColor.G, statusBarColor.B, statusBarColor.A);
+//            var red = (int)(statusBarColor.R * 255);
+//            var green = (int)(statusBarColor.G * 255);
+//            var blue = (int)(statusBarColor.B * 255);
+//            var alpha = (int)(statusBarColor.A * 255);
+//            var hex = $"#{alpha:X2}{red:X2}{green:X2}{blue:X2}";
+
+//            UIView statusBar = UIApplication.SharedApplication.ValueForKey(
+//new NSString("statusBar")) as UIView;
+
+//            if (statusBar != null && statusBar.RespondsToSelector(
+//            new ObjCRuntime.Selector("setBackgroundColor:")))
+//            {
+//                // change to your desired color 
+//                statusBar.BackgroundColor = new UIColor(statusBarColor.R, statusBarColor.G, statusBarColor.B, statusBarColor.A);
+//            }
         }
     }
     public class RemoteMessage : IRemoteMessage

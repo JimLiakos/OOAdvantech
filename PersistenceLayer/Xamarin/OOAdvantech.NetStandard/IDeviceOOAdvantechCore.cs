@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,8 @@ namespace OOAdvantech
 
         /// <MetaDataID>{0b5147e0-7478-44ce-ba51-42ed65d5da6c}</MetaDataID>
         IReadOnlyList<SimCard> GetSimCards();
+
+        void SetStatusBarColor( Color statusBarColor);
 
 
         /// <MetaDataID>{4565051e-59de-425c-91e9-99e493ca4c59}</MetaDataID>

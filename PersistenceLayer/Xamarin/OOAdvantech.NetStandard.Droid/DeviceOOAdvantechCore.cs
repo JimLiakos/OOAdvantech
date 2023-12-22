@@ -263,6 +263,11 @@ namespace OOAdvantech.Droid
             return _LinesPhoneNumbers[lineIndex];
         }
 
+        public void SetStatusBarColor(System.Drawing.Color statusBarColor)
+        {
+          Xamarin.Essentials.Platform.CurrentActivity.Window.SetStatusBarColor(Android.Graphics.Color.Argb(statusBarColor.A, statusBarColor.R,statusBarColor.G , statusBarColor.B)); //here
+        }
+
         public IReadOnlyList<SimCard> GetSimCards()
         {
             var results = new List<SimCard>();
