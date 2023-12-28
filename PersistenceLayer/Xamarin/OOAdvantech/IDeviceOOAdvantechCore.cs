@@ -27,6 +27,7 @@ namespace OOAdvantech
         /// <MetaDataID>{4565051e-59de-425c-91e9-99e493ca4c59}</MetaDataID>
         String DeviceID { get; }
         string FirebaseToken { get; }
+        System.Drawing.Color? StatusBarColor { get; set; }
     }
 
     /// <MetaDataID>{d2445458-7d5d-4cc1-ae85-45143f5d2944}</MetaDataID>

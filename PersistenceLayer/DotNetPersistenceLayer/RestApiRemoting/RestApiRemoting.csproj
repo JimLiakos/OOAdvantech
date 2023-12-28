@@ -126,6 +126,7 @@
   <ItemGroup>
     <Compile Include="AuthUser.cs" />
     <Compile Include="Binding.cs" />
+    <Compile Include="Connectivity.cs" />
     <Compile Include="HookRespnose.cs" />
     <Compile Include="IBoundObject.cs" />
     <Compile Include="IChannel.cs" />

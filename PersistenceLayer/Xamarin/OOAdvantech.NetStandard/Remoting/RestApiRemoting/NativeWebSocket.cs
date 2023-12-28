@@ -100,8 +100,8 @@ namespace WebSocket4Net
 #if DeviceDotNet
                                 OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
 
-                                if (device.StatusBarColor==Color.DarkViolet)
-                                    device.StatusBarColor=Color.LightSalmon;
+                                //if (device.StatusBarColor == Color.DarkViolet)
+                                //    device.StatusBarColor = Color.LightSalmon;
 #endif
 
                                 while (true)
@@ -121,7 +121,7 @@ namespace WebSocket4Net
                                         catch (Exception error)
                                         {
 
-                                            device.StatusBarColor=Color.DarkViolet;
+                                            device.StatusBarColor = Color.DarkViolet;
 #if DeviceDotNet
                                             OOAdvantech.DeviceApplication.Current.Log(new List<string> { "Native WebSocket Receive error : "+error.Message });
 #endif

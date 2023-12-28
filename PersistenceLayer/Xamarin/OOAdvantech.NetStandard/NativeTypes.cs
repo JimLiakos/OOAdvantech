@@ -476,6 +476,11 @@ namespace System.Runtime.Remoting.Messaging
         {
             return GetData(name);
         }
+
+        internal static void LogicalSetData(string name, object data)
+        {
+             SetData(name,data);
+        }
     }
 }
 namespace System.Runtime.Remoting.Services

@@ -13,7 +13,7 @@ namespace OOAdvantech.Remoting.RestApi
     /// <MetaDataID>{dc4cd108-0827-4b15-825a-7e5bb0a87266}</MetaDataID>
     public class Binding : IDefaultCommunicationTimeouts
     {
-        public static Binding GetBinding(TimeSpan? openTimeSpan, TimeSpan?  retryOpenTimeout, TimeSpan? sendTimeout, TimeSpan? receiveTimeout)
+        public static Binding GetBinding(TimeSpan? openTimeSpan, TimeSpan? retryOpenTimeout, TimeSpan? sendTimeout, TimeSpan? receiveTimeout)
         {
             Binding binding = new Binding();
             if (openTimeSpan != null)
@@ -23,7 +23,7 @@ namespace OOAdvantech.Remoting.RestApi
                 binding.RetryOpenTimeout = retryOpenTimeout.Value;
 
             if (sendTimeout != null)
-                binding.SendTimeout= sendTimeout.Value;
+                binding.SendTimeout = sendTimeout.Value;
 
             if (receiveTimeout != null)
                 binding.ReceiveTimeout = receiveTimeout.Value;
@@ -111,4 +111,26 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
     }
+
+
+
+    /// <MetaDataID>{52b33eaa-1a23-46ee-be98-d5ea4bf8179c}</MetaDataID>
+    public class RemoteCallContext : System.IDisposable
+    {
+        public RemoteCallContext(TimeSpan? sendTimeout, TimeSpan? openTimeSpan)
+        {
+
+            var binding = Binding.GetBinding(openTimeSpan, null, sendTimeout, null);
+            System.Runtime.Remoting.Messaging.CallContext.LogicalSetData("Binding", binding);
+
+        }
+
+        public void Dispose()
+        {
+            System.Runtime.Remoting.Messaging.CallContext.FreeNamedDataSlot("Binding");
+        }
+    }
+
+
+
 }

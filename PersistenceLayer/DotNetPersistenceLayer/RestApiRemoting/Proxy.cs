@@ -16,10 +16,12 @@ using System.IO;
 using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Xamarin.Forms;
+
 #if !DeviceDotNet
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json.Linq;
+#else
+using Xamarin.Forms;
 #endif
 
 #if PORTABLE
@@ -407,8 +409,9 @@ namespace OOAdvantech.Remoting.RestApi
                 CachingOnDemandData(methodName, retval);
 #if DeviceDotNet
                 OOAdvantech.IDeviceOOAdvantechCore device = DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-                device.StatusBarColor=Color.LightGreen;
+                //device.StatusBarColor = Color.LightGreen;
 #endif
+
 
                 return retval;
 

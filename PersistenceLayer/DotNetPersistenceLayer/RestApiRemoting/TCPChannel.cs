@@ -25,6 +25,8 @@ namespace OOAdvantech.Remoting.RestApi
             }
         }
 
+        public ChannelState ChannelState => ChannelState.None;
+
 
 
         /// <MetaDataID>{c0a8b906-a076-4483-b717-dbc16fa12ae9}</MetaDataID>

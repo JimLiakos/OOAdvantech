@@ -822,7 +822,8 @@ namespace OOAdvantech.Remoting.RestApi
                     try
                     {
                         if (!replaceWebSocketClientLockTask.Wait(10000))
-                            throw new TimeoutException(); // or compensate
+                            if (!replaceWebSocketClientLockTask.Wait(10000))
+                                throw new TimeoutException(); // or compensate
                     }
                     catch (Exception error)
                     {
@@ -1275,6 +1276,33 @@ namespace OOAdvantech.Remoting.RestApi
             
             _EndPoint = eventCallBackChannelEndPoint;
             
+        }
+
+        public ChannelState ChannelState
+        {
+            get
+            {
+                if (this.WebSocketClient != null)
+                {
+                    switch (this.WebSocketClient.State)
+                    {
+                        case WebSocketState.Open:
+                            return ChannelState.Open;
+                        case WebSocketState.Closed:
+                            return ChannelState.Closed;
+                        case WebSocketState.Closing:
+                            return ChannelState.Closed;
+                        case WebSocketState.None:
+                            return ChannelState.None;
+                        case WebSocketState.Connecting:
+                            return ChannelState.Connecting;
+
+                    }
+                    return ChannelState.None;
+                }
+                return ChannelState.None;
+
+            }
         }
     }
 }

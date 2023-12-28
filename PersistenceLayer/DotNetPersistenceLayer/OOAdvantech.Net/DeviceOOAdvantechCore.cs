@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OOAdvantech.Net
 {
     /// <MetaDataID>{1700fcef-9ec0-4ddf-a61d-741d0e275f19}</MetaDataID>
-    public class DeviceOOAdvantechCore: IDeviceOOAdvantechCore
+    public class DeviceOOAdvantechCore : IDeviceOOAdvantechCore
     {
-        
+
         /// <MetaDataID>{0e62da4f-1265-43fc-b94c-560dd2073087}</MetaDataID>
         public static List<SIMCardData> LinesPhoneNumbers = new List<SIMCardData>();
 
@@ -59,8 +62,41 @@ namespace OOAdvantech.Net
             }
         }
 
-        public string FirebaseToken =>  null;
+        public string FirebaseToken => null;
 
+        static System.Drawing.Color? StatusBarCurrentColor;
+
+        public System.Drawing.Color? StatusBarColor
+        {
+            get => StatusBarCurrentColor;
+            set
+            {
+                if (value.HasValue)
+                {
+                    var statusBarColor = value.Value;
+                    if (StatusBarCurrentColor != statusBarColor)
+                    {
+                        Window activeWindow = null;
+                        do
+                        {
+                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                            { /* Your code here */
+
+
+
+                                activeWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+
+                                (activeWindow as IWindowCaption)?.SetCaptionBarColor(statusBarColor);
+                                StatusBarCurrentColor = statusBarColor;
+
+                            }));
+
+                        }
+                        while (activeWindow == null);
+                    }
+                }
+            }
+        }
         /// <MetaDataID>{93227076-f4af-4e03-bf2a-0ea2da10dd89}</MetaDataID>
         public static string GetdeviceID()
         {
@@ -153,5 +189,10 @@ namespace OOAdvantech.Net
         {
             return SimCards.AsReadOnly();
         }
+    }
+
+    public interface IWindowCaption
+    {
+        void SetCaptionBarColor(System.Drawing.Color color);
     }
 }

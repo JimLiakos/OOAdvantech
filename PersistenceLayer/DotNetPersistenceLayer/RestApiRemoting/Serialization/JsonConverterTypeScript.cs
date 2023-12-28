@@ -10,6 +10,7 @@ using OOAdvantech.Json.Linq;
 using OOAdvantech.Json.Serialization;
 using OOAdvantech.Json.Utilities;
 using System.Diagnostics;
+using System.Collections;
 
 namespace OOAdvantech.Remoting.RestApi.Serialization
 {
@@ -1208,7 +1209,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 #endif
             bool referenceOnlyCaching = false;
 
-            if (CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Count > 0)
+            if (CachingMetadata?.ObjectMembersWithReferenceOnlyCaching.Count > 0)
             {
                 if (CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Peek().Contains(last))
                     referenceOnlyCaching = true;
@@ -1288,9 +1289,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                                 (referenceResolver as ReferenceResolver).AssignePoxyObjRef(value, byref);
 
                                 List<string> clientSideCachingOnlyReferenceMembers = ProxyType.GetProxyType(value.GetType()).ReferenceCachingMembersNames;
-                                CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
+                                CachingMetadata?.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
                                 serializer.Serialize(writer, byref);
-                                CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop();
+                                CachingMetadata?.ObjectMembersWithReferenceOnlyCaching.Pop();
                             }
                             else
                                 serializer.Serialize(writer, byref);
@@ -1340,9 +1341,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         if (!(value is ObjRef))
                         {
                             List<string> clientSideCachingOnlyReferenceMembers = ProxyType.GetProxyType(value.GetType()).ReferenceCachingMembersNames;
-                            CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
+                            CachingMetadata?.ObjectMembersWithReferenceOnlyCaching.Push(clientSideCachingOnlyReferenceMembers);
                             serializer.Serialize(writer, value);
-                            CachingMetadata.ObjectMembersWithReferenceOnlyCaching.Pop();
+                            CachingMetadata?.ObjectMembersWithReferenceOnlyCaching.Pop();
                         }
                         else
                             serializer.Serialize(writer, value);
@@ -1543,16 +1544,25 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     writer.WriteStartArray();
                     try
                     {
-                        System.Collections.Generic.Dictionary<object, object> tempDictionary = null;
+                        System.Collections.IDictionary tempDictionary = null;
                         bool tryAgain = false;
                         do
                         {
                             tryAgain = false;
-                            tempDictionary = new System.Collections.Generic.Dictionary<object, object>();
+
+                            tempDictionary = Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(value.GetType().GenericTypeArguments)) as IDictionary;
+                            //tempDictionary = new System.Collections.Generic.Dictionary<object, object>();
                             try
                             {
                                 foreach (System.Collections.DictionaryEntry itemEntry in value as System.Collections.IDictionary)
+                                {
+                                    if (itemEntry.Key == null)
+                                    {
+                                        continue;
+
+                                    }
                                     tempDictionary[itemEntry.Key] = itemEntry.Value;
+                                }
 
                             }
                             catch (Exception error)
@@ -1566,7 +1576,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
 
-                        foreach (var itemEntry in tempDictionary)
+                        foreach (System.Collections.DictionaryEntry  itemEntry in tempDictionary)
                         {
                             writer.WriteStartObject();
 

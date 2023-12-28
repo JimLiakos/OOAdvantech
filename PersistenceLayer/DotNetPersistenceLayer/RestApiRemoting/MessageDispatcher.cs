@@ -183,7 +183,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.Exception = new RestApiExceptionData();
                             responseMessage.Exception.ExceptionMessage = "Broken session";
                             responseMessage.Exception.ExceptionCode = ExceptionCode.BrokenSession;
-                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), BrokenSession = true }; });
+                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), BrokenSession = true }; });
                         }
 
                     }
@@ -229,7 +229,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.Exception = new RestApiExceptionData();
                             responseMessage.Exception.ExceptionMessage = "X_Access_Token expired";
                             responseMessage.Exception.ExceptionCode = ExceptionCode.AccessTokenExpired;
-                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) }; });
+                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { RequestOS= request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) }; });
 
                         }
 
@@ -359,7 +359,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 catch (Exception error)
                                 {
                                     responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error.InnerException);
-                                    return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                                    return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
 
 
                                 }
@@ -423,7 +423,7 @@ namespace OOAdvantech.Remoting.RestApi
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error.InnerException);
                         return Task<ResponseData>.Run(() =>
                         {
-                            return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                            return new ResponseData(request.ChannelUri) {RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                         });
                     }
                     catch (Exception error)
@@ -431,7 +431,7 @@ namespace OOAdvantech.Remoting.RestApi
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error);
                         return Task<ResponseData>.Run(() =>
                         {
-                            return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                            return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                         });
                     }
                     finally
@@ -534,7 +534,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.Exception = new RestApiExceptionData();
                             responseMessage.Exception.ExceptionMessage = "Broken session";
                             responseMessage.Exception.ExceptionCode = ExceptionCode.BrokenSession;
-                            return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), BrokenSession = true };
+                            return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), BrokenSession = true };
                         }
                     }
                     #endregion
@@ -579,7 +579,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.Exception = new RestApiExceptionData();
                             responseMessage.Exception.ExceptionMessage = "X_Access_Token expired";
                             responseMessage.Exception.ExceptionCode = ExceptionCode.AccessTokenExpired;
-                            return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                            return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                         }
 
                         methodCallMessage.UnMarshal();
@@ -680,12 +680,12 @@ namespace OOAdvantech.Remoting.RestApi
                     catch (System.Reflection.TargetInvocationException error)
                     {
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error.InnerException);
-                        return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                        return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                     }
                     catch (Exception error)
                     {
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error);
-                        return new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                        return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                     }
                     finally
                     {
@@ -1379,7 +1379,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             catch (Exception error)
             {
-                ResponseData responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = error.Message };
+                ResponseData responseData = new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = error.Message };
                 return responseData;
 
             }

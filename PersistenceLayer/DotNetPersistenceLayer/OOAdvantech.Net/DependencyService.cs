@@ -9,6 +9,14 @@ namespace Xamarin.Forms
     /// <MetaDataID>{bf9dc752-a6bc-44f3-9e1a-b2ac25911f7c}</MetaDataID>
     public class DependencyService
     {
+
+
+        static DependencyService()
+        {
+            Xamarin.Forms.DependencyService.Register<OOAdvantech.Net.DeviceInstantiator>();
+        }
+
+
         /// <MetaDataID>{00088c1b-92cc-4011-a7be-6346da9ab8b2}</MetaDataID>
         public static T Get<T>() where T : class
         {

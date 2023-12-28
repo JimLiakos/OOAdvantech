@@ -210,7 +210,7 @@ namespace OOAdvantech
                     taskCompletionSource.SetResult(task.Result);
 
                 }
-                if (taskCompletionSource != null)
+                else if (taskCompletionSource != null)
                 {
                     var task = Task<TResult>.Run(synchFunction);
                     task.Wait();

@@ -22,6 +22,9 @@ namespace OOAdvantech.Net
     /// <MetaDataID>{0351e306-3087-46d0-88f6-2e558ba7f369}</MetaDataID>
     public class DeviceInstantiator : IDeviceInstantiator
     {
+
+   
+
         /// <MetaDataID>{ddb5e8ce-0827-477f-b101-761eb1e16e1e}</MetaDataID>
         public object GetDeviceSpecific(System.Type type)
         {

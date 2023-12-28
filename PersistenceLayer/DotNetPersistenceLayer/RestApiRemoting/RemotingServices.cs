@@ -430,7 +430,7 @@ namespace OOAdvantech.Remoting.RestApi
             requestData.RequestType = RequestType.MethodCall;
 
             var myJson = OOAdvantech.Json.JsonConvert.SerializeObject(requestData);
-
+            var binding = CallContext.LogicalGetData("Binding") as Binding;
             requestData.ChannelUri = channelUri;
             var responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData);
             if (responseData != null)
@@ -832,7 +832,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{cf27488f-0faa-4d28-a0ed-2285b9cf63a0}</MetaDataID>
-        public OOAdvantech.Remoting.ClientSessionPart CreateClientSessionPart(string channelUri, Guid clientProcessIdentity, ServerSessionPartInfo serverSessionPartInfo)
+        public Remoting.ClientSessionPart CreateClientSessionPart(string channelUri, Guid clientProcessIdentity, ServerSessionPartInfo serverSessionPartInfo)
         {
             return new ClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo, this);
         }

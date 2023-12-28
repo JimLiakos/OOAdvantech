@@ -1108,6 +1108,9 @@ namespace OOAdvantech.Remoting.RestApi
                 }
             }
         }
+
+        bool ReConnecting = false;
+
         /// <summary>
         /// This method reconnect client session part with the server
         /// 
@@ -1122,130 +1125,141 @@ namespace OOAdvantech.Remoting.RestApi
 
             //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
 
-            bool dedicatedEndPoint = true;
-            if (endPoint == null)
+            try
             {
-                endPoint = Channel.EndPoint;
-                dedicatedEndPoint = false;
-            }
+                lock (this)
+                    ReConnecting = true;
 
-            int tries = 5; //makes five tries to reconnect
-            X_Access_Token = null;
-            while (tries > 0)
-            {
-                try
+                bool dedicatedEndPoint = true;
+                if (endPoint == null)
                 {
-                    var datetime = DateTime.Now;
-                    string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
+                    endPoint = Channel.EndPoint;
+                    dedicatedEndPoint = false;
+                }
 
-                    var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity, endPoint);
-                    var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
-#if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new List<string> { "serverSessionPartUri  : " + serverSessionPartUri });
-#endif
-                    if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
+                int tries = 5; //makes five tries to reconnect
+                X_Access_Token = null;
+                while (tries > 0)
+                {
+                    try
                     {
+                        var datetime = DateTime.Now;
+                        string timestamp = DateTime.Now.ToLongTimeString() + ":" + datetime.Millisecond.ToString();
 
-                        System.Collections.Generic.List<RemoteEventSubscription> channelSubscriptions = new List<RemoteEventSubscription>();
-                        foreach (var entry in EventSubscriptions)
+                        var serverSessionPartInfo = GetServerSession(ChannelUri, ClientProcessIdentity, endPoint);
+                        var serverSessionPartUri = (System.Runtime.Remoting.RemotingServices.GetRealProxy(serverSessionPartInfo.ServerSessionPart) as IProxy)?.Uri;
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "serverSessionPartUri  : " + serverSessionPartUri });
+#endif
+                        if (ServerProcessIdentity != serverSessionPartInfo.ServerProcessIdentity || ServerSessionPartUri != serverSessionPartUri)
                         {
-                            foreach (var subscription in entry.Value)
+
+                            System.Collections.Generic.List<RemoteEventSubscription> channelSubscriptions = new List<RemoteEventSubscription>();
+                            foreach (var entry in EventSubscriptions)
                             {
-                                RemoteEventSubscription remoteEventSubscription = new RemoteEventSubscription();
-                                remoteEventSubscription.AllowAsynchronous = false;
-                                remoteEventSubscription.eventInfo = new EventInfoData(subscription.EventInfo);
-                                remoteEventSubscription.ExtObjectUri = entry.Key;
-                                channelSubscriptions.Add(remoteEventSubscription);
+                                foreach (var subscription in entry.Value)
+                                {
+                                    RemoteEventSubscription remoteEventSubscription = new RemoteEventSubscription();
+                                    remoteEventSubscription.AllowAsynchronous = false;
+                                    remoteEventSubscription.eventInfo = new EventInfoData(subscription.EventInfo);
+                                    remoteEventSubscription.ExtObjectUri = entry.Key;
+                                    channelSubscriptions.Add(remoteEventSubscription);
+                                }
                             }
-                        }
 
-                        //serverSessionPartInfo.ServerSessionPart.Subscribe(channelSubscriptions);
+                            //serverSessionPartInfo.ServerSessionPart.Subscribe(channelSubscriptions);
 
-                        SetSubscriptions(channelSubscriptions, serverSessionPartInfo.SessionIdentity, serverSessionPartUri, endPoint);
+                            SetSubscriptions(channelSubscriptions, serverSessionPartInfo.SessionIdentity, serverSessionPartUri, endPoint);
 
-                        ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
-                        _SessionIdentity = serverSessionPartInfo.SessionIdentity;
-                        ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
-                        ServerSessionPartUri = serverSessionPartUri;
+                            ServerProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
+                            _SessionIdentity = serverSessionPartInfo.SessionIdentity;
+                            ServerSessionPart = serverSessionPartInfo.ServerSessionPart;
+                            ServerSessionPartUri = serverSessionPartUri;
 
-                        //#if DeviceDotNet
-                        //                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
-                        //#endif
+                            //#if DeviceDotNet
+                            //                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { "channelSubscriptions" });
+                            //#endif
 
-                        SynchronizeSession();
+                            SynchronizeSession();
 
-                        System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
+                            System.Diagnostics.Debug.WriteLine(string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1}", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id));
 #if DeviceDotNet
-                        OOAdvantech.DeviceApplication.Current.Log(new List<string> { Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id) , Environment.NewLine });
+                            OOAdvantech.DeviceApplication.Current.Log(new List<string> { Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id), Environment.NewLine });
 #endif
 
 #if DeviceDotNet
-                        OOAdvantech.IDeviceOOAdvantechCore device =Xamarin.Forms.DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
-                        device.StatusBarColor=System.Drawing.Color.LightSkyBlue;
+                            //OOAdvantech.IDeviceOOAdvantechCore device = Xamarin.Forms.DependencyService.Get<OOAdvantech.IDeviceInstantiator>().GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+                            //device.StatusBarColor = System.Drawing.Color.LightSkyBlue;
 #endif
-                        //The reconnection process must have completed when the client code attempts to call a remote object
-                        //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
-                        Task.Run(() =>
-                        {
-
-                            RaiseReconnectEvent();
-                        });
-                    }
-                    else
-                    {
-
-                        #if DeviceDotNet
-                                 //OOAdvantech.DeviceApplication.Current.Log(new List<string> { "RestApp channel clientSessionPart  Reconnected without channelSubscriptions. disconnectedChannel " + disconnectedChannel .ToString()});
-                                OOAdvantech.DeviceApplication.Current.Log(new List<string> {Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected without channelSubscriptions {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id), Environment.NewLine });
-
-                        #endif
-                        if (disconnectedChannel)
-                        {
                             //The reconnection process must have completed when the client code attempts to call a remote object
                             //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
                             Task.Run(() =>
                             {
+
                                 RaiseReconnectEvent();
                             });
-
-                        }
-                    }
-
-                    return;
-                }
-                catch (System.Net.WebException connectionError)
-                {
-                    if (connectionError.Status != System.Net.WebExceptionStatus.ConnectFailure)
-                    {
-
-                        if (dedicatedEndPoint)
-                        {
-#if DeviceDotNet
-                            OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Dedicated EndPoint connection  error :" + connectionError.Message, connectionError.StackTrace });
-#endif
-                            throw connectionError;
                         }
                         else
                         {
-#if DeviceDotNet
-                            OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :" + connectionError.Message, connectionError.StackTrace });
-#endif
-                        }
-                    }
-                }
-                catch (Exception error)
-                {
 
 #if DeviceDotNet
-                    OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :" + error.Message, error.StackTrace });
+                            //OOAdvantech.DeviceApplication.Current.Log(new List<string> { "RestApp channel clientSessionPart  Reconnected without channelSubscriptions. disconnectedChannel " + disconnectedChannel .ToString()});
+                            OOAdvantech.DeviceApplication.Current.Log(new List<string> { Environment.NewLine, string.Format("RestApp channel clientSessionPart Reconnected without channelSubscriptions {0} :({2}) {1} and Raise reconnect event", timestamp, _SessionIdentity, System.Diagnostics.Process.GetCurrentProcess().Id), Environment.NewLine });
+
+#endif
+                            if (disconnectedChannel)
+                            {
+                                //The reconnection process must have completed when the client code attempts to call a remote object
+                                //In the reconnection thread all remote calls must not directly or indirectly use the IChannel.ProcessRequest method due to deadlocks
+                                Task.Run(() =>
+                                {
+                                    RaiseReconnectEvent();
+                                });
+
+                            }
+                        }
+
+                        return;
+                    }
+                    catch (System.Net.WebException connectionError)
+                    {
+                        if (connectionError.Status != System.Net.WebExceptionStatus.ConnectFailure)
+                        {
+
+                            if (dedicatedEndPoint)
+                            {
+#if DeviceDotNet
+                                OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Dedicated EndPoint connection  error :" + connectionError.Message, connectionError.StackTrace });
+#endif
+                                throw connectionError;
+                            }
+                            else
+                            {
+#if DeviceDotNet
+                                OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :" + connectionError.Message, connectionError.StackTrace });
+#endif
+                            }
+                        }
+                    }
+                    catch (Exception error)
+                    {
+
+#if DeviceDotNet
+                        OOAdvantech.DeviceApplication.Current.Log(new List<string>() { $"Reconnect try {tries}   error :" + error.Message, error.StackTrace });
+#endif
+                    }
+                    tries--;
+#if !DeviceDotNet
+                    System.Threading.Thread.Sleep(500);
+#else
+                    System.Threading.Tasks.Task.Delay(500).Wait();
 #endif
                 }
-                tries--;
-#if !DeviceDotNet
-                System.Threading.Thread.Sleep(500);
-#else
-                System.Threading.Tasks.Task.Delay(500).Wait();
-#endif
+            }
+            finally
+            {
+                lock (this)
+                    ReConnecting = false;
             }
         }
 
@@ -1254,13 +1268,21 @@ namespace OOAdvantech.Remoting.RestApi
             Dictionary<string, System.WeakReference> proxies = null;
             lock (Proxies)
                 proxies = Proxies.ToDictionary(x => x.Key, x => x.Value);
+
+
             foreach (System.WeakReference weakReference in proxies.Values)
             {
                 try
                 {
                     if (weakReference.IsAlive)
                     {
+
                         var proxy = weakReference.Target as Proxy;
+
+                        if (proxies.Values.Where(x => x.Target == proxy).Count() > 1)
+                        {
+
+                        }
                         proxy.RaiseReconnectEvent();
                     }
                 }
@@ -1367,6 +1389,30 @@ namespace OOAdvantech.Remoting.RestApi
             return value;
         }
 
+        public ChannelState ChannelState
+        {
+            get
+            {
+                if (Channel == null)
+                    return ChannelState.None;
+
+                if (Channel.ChannelState == ChannelState.Open)
+                {
+                    lock (this)
+                    {
+                        if (ReConnecting)
+                            return ChannelState.Connecting;
+                        else
+                            return Channel.ChannelState;
+
+                    }
+                }
+                else
+                    return Channel.ChannelState;
+
+            }
+        }
+
 
         /// <MetaDataID>{411c8855-04b2-4331-b801-b03ba8246b02}</MetaDataID>
         bool Bidirectional;
@@ -1414,5 +1460,31 @@ namespace OOAdvantech.Remoting.RestApi
     }
 
 
+
+    /// <MetaDataID>{a0b7f149-3c43-422c-8d07-6701ec2ef314}</MetaDataID>
+    public enum ChannelState
+    {
+        //
+        // Summary:
+        //     Reserved for future use.
+        None = 0,
+        //
+        // Summary:
+        //     The connection is negotiating the handshake with the remote endpoint.
+        Connecting = 1,
+        //
+        // Summary:
+        //     The initial state after the HTTP handshake has been completed.
+        Open = 2,
+
+        //
+        // Summary:
+        //     Indicates the WebSocket close handshake completed gracefully.
+        Closed = 5,
+        //
+        // Summary:
+        //     Reserved for future use.
+        Aborted = 6
+    }
 
 }

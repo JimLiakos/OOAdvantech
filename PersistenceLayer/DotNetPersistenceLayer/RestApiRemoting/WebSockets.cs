@@ -644,7 +644,7 @@ namespace OOAdvantech.Remoting.RestApi
                 ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                 responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, SocketException);
                 taskCompletionSource = new TaskCompletionSource<ResponseData>();
-                taskCompletionSource.SetResult(new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) });
+                taskCompletionSource.SetResult(new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) });
                 return taskCompletionSource.Task;
 
             }
@@ -1287,6 +1287,16 @@ namespace OOAdvantech.Remoting.RestApi
             LifeTimeLeaseTimer.Stop();
             _State = WebSocketState.Closed;
 
+
+            lock (callsPair)
+            {
+                if(callsPair.Count > 0)
+                {
+
+
+                }
+            }
+
             lock (_InterConnections)
             {
 
@@ -1508,6 +1518,10 @@ namespace OOAdvantech.Remoting.RestApi
             if (header == MessageHeader.Request)
             {
                 RequestData request = Json.JsonConvert.DeserializeObject<RequestData>(messageData);
+
+                
+                //System.IO.File.AppendAllLines(System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RestApiMessage\\resquestresponse.txt", new List<string>() { $"request:{request.RequestOS} {GetHashCode()}-{request.SessionIdentity}:{request.CallContextID} " });
+
                 if (request.RequestProcess != "WaWorkerHost")
                 {
 
@@ -1616,7 +1630,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                                     responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, error);
-                                    responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                                    responseData = new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                                     #endregion
                                 }
                             }
@@ -1655,7 +1669,7 @@ namespace OOAdvantech.Remoting.RestApi
                                     webSocket.RejectRequest(task);
                                     ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                                     responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, new System.TimeoutException(string.Format("SendTimeout {0} expired", Binding.DefaultBinding.SendTimeout)));
-                                    responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                                    responseData = new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                                     webSocket.RejectRequest(task);
                                 }
                                 else
@@ -1704,7 +1718,7 @@ namespace OOAdvantech.Remoting.RestApi
                     {
                         ReturnMessage responseMessage = new ReturnMessage(request.ChannelUri);
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ConnectionError, error);
-                        responseData = new ResponseData(request.ChannelUri) { CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                        responseData = new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                     }
                 }
                 lock (callsPair)
@@ -1903,6 +1917,8 @@ namespace OOAdvantech.Remoting.RestApi
             string responseDatajson = Json.JsonConvert.SerializeObject(responseData);
             responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
             SendMessage(responseDatajson);
+            
+            //System.IO.File.AppendAllLines(System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RestApiMessage\\resquestresponse.txt", new List<string>() { $"response:{responseData.RequestOS} {GetHashCode()}-{responseData.SessionIdentity}:{responseData.CallContextID} " });
         }
 
         /// <MetaDataID>{a96cc5f7-0c50-47c7-8078-4ca8df27ed67}</MetaDataID>

@@ -143,6 +143,7 @@
     <Compile Include="..\..\DotNetPersistenceLayer\Remoting\Tracker.cs" Link="Remoting\Tracker.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\AuthUser.cs" Link="Remoting\RestApiRemoting\AuthUser.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Binding.cs" Link="Remoting\RestApiRemoting\Binding.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Connectivity.cs" Link="Remoting\RestApiRemoting\Connectivity.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\DeviceAuthentication.cs" Link="Remoting\RestApiRemoting\DeviceAuthentication.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\EventCallbackMessage.cs" Link="Remoting\RestApiRemoting\EventCallbackMessage.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\HttpMetaData.cs" Link="Remoting\RestApiRemoting\HttpMetaData.cs" />
