@@ -1341,7 +1341,7 @@ namespace OOAdvantech.Remoting.RestApi
         internal static object GetTrasparentProxy(ObjRef objRef, Type type, ServerSessionPart serverSessionPart)
         {
 
-            object value;
+            object value=null;
             string sessionChannelUri = null;
             if (serverSessionPart != null)
                 sessionChannelUri = serverSessionPart.ChannelUri;
@@ -1358,32 +1358,32 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 OOAdvantech.Remoting.ClientSessionPart clientSessionPart = RenewalManager.GetSession(objRef.ChannelUri, true, RestApi.RemotingServices.CurrentRemotingServices);
 
-                lock (clientSessionPart)
-                {
+                value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
+                if (value != null)
+                    return value;
 
-                    value = (clientSessionPart as ClientSessionPart)?.TryGetLocalObject(objRef);
-                    if (value != null)
-                        return value;
-                    OOAdvantech.Remoting.RestApi.Proxy proxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri) as Proxy;
-                    if (proxy == null)
-                    {
-                        proxy = new Proxy(objRef, type);// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.RestApi.RemotingServicesServer));
-                        proxy.ControlRemoteObjectLifeTime();
-                    }
+                Proxy proxy = clientSessionPart.GetProxy(ExtObjectUri.Parse(objRef.Uri, clientSessionPart.ServerProcessIdentity).Uri) as Proxy;
+
+                if (proxy == null)
+                {
+                    proxy = new Proxy(objRef, type);// new Proxy(remoteRef.Uri, remoteRef.ChannelUri, typeof(OOAdvantech.Remoting.RestApi.RemotingServicesServer));
+                    proxy = proxy.ControlRemoteObjectLifeTime();
+                }
+                else
+                {
+                    proxy.ReconnectToServerObject(objRef);
+
+                    if (proxy.ObjectRef.MembersValues == null)
+                        proxy.ObjectRef.MembersValues = objRef.MembersValues;
                     else
                     {
-                        proxy.ReconnectToServerObject(objRef);
-
-                        if (proxy.ObjectRef.MembersValues == null)
-                            proxy.ObjectRef.MembersValues = objRef.MembersValues;
-                        else
-                        {
-                            proxy.ObjectRef.UpdateMembersValues(objRef.MembersValues);
-                        }
-
+                        proxy.ObjectRef.UpdateMembersValues(objRef.MembersValues);
                     }
-                    value = proxy.GetTransparentProxy(type);
                 }
+
+                value = proxy.GetTransparentProxy(type);
+
+
             }
 
             return value;
@@ -1425,7 +1425,33 @@ namespace OOAdvantech.Remoting.RestApi
         bool SessionTerminated;
 
         /// <MetaDataID>{e8783fbc-9413-4a30-8894-00aa47713dd7}</MetaDataID>
-        public System.Collections.Generic.Dictionary<string, ProxyType> ProxyTypes = new Dictionary<string, ProxyType>();
+        System.Collections.Generic.Dictionary<string, ProxyType> ProxyTypes = new Dictionary<string, ProxyType>();
+
+
+        public ProxyType GetProxyType(TypeName typeName)
+        {
+
+            ProxyType typeMetaData = null;
+            bool typeMetaDataExist = false;
+            lock (ProxyTypes)
+                typeMetaDataExist = !ProxyTypes.TryGetValue(typeName.FullName, out typeMetaData);
+            if (typeMetaDataExist)
+            {
+                RestApi.RemotingServices.GetServerSessionPartMarshaledTypes(this, typeName.FullName);
+                lock (ProxyTypes)
+                    typeMetaDataExist = !ProxyTypes.TryGetValue(typeName.FullName, out typeMetaData);
+            }
+
+            return typeMetaData;
+        }
+
+        internal void SetProxyType(string typeFullName, ProxyType typeMetaData)
+        {
+            lock (ProxyTypes)
+                ProxyTypes[typeFullName] = typeMetaData;
+        }
+
+
         /// <MetaDataID>{eff5877e-c65e-4a20-9051-6bd38564eea5}</MetaDataID>
         public ClientSessionPart(string channelUri, Guid clientProcessIdentity, ServerSessionPartInfo serverSessionPartInfo, IRemotingServices remotingServices) : base(channelUri, clientProcessIdentity, serverSessionPartInfo, remotingServices)
         {

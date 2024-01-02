@@ -156,7 +156,7 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         /// <MetaDataID>{d43cf8ba-6993-4319-8e65-0b497c15843f}</MetaDataID>
-        internal void ControlRemoteObjectLifeTime()
+        internal Proxy ControlRemoteObjectLifeTime()
         {
 
             int nPos = Uri.IndexOf("#MonoStateClass#");
@@ -211,7 +211,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
 
             }
-            RenewalManager.AddProxy(this, RemotingServices.CurrentRemotingServices);
+            return RenewalManager.AddProxy(this, RemotingServices.CurrentRemotingServices) as Proxy;
         }
 
         /// <MetaDataID>{655e01bc-d385-4c83-9371-1d2796c3580c}</MetaDataID>

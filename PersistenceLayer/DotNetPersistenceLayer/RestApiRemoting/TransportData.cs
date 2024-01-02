@@ -134,18 +134,14 @@ namespace OOAdvantech.Remoting.RestApi
                 ClientSessionPart clientSessionPart = RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices) as OOAdvantech.Remoting.RestApi.ClientSessionPart;
 
 
-                if (!clientSessionPart.ProxyTypes.TryGetValue(TypeName.FullName, out _TypeMetaData))
-                {
-                    RemotingServices.GetServerSessionPartMarshaledTypes(clientSessionPart, TypeName.FullName);
-                    clientSessionPart.ProxyTypes.TryGetValue(TypeName.FullName, out _TypeMetaData);
-
-                }
+                _TypeMetaData = clientSessionPart.GetProxyType(TypeName);
+                
             }
             else
             {
                 ClientSessionPart clientSessionPart = RenewalManager.GetSession(ChannelUri, false, RemotingServices.CurrentRemotingServices) as OOAdvantech.Remoting.RestApi.ClientSessionPart;
                 if (clientSessionPart != null)
-                    clientSessionPart.ProxyTypes[TypeName.FullName] = TypeMetaData;
+                    clientSessionPart.SetProxyType(TypeName.FullName, TypeMetaData);
             }
             return TypeMetaData;
         }

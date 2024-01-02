@@ -462,7 +462,7 @@ namespace OOAdvantech.Remoting
         }
 
         /// <MetaDataID>{71ea5b49-0d6d-489d-8801-e3aba1a65004}</MetaDataID>
-        internal void AddProxy(IProxy proxy)
+        internal IProxy AddProxy(IProxy proxy)
         {
 
             lock (Proxies)
@@ -471,7 +471,8 @@ namespace OOAdvantech.Remoting
                 {
                     IProxy oldProxy = Proxies[proxy.ObjectUri.Uri].Target as IProxy;
                     if (oldProxy != null && oldProxy != proxy)
-                        throw new System.Exception("Alread exist proxy for uri : " + proxy.ObjectUri);
+                        return oldProxy;
+                        
                     if (oldProxy == null)
                     {
                         ServerProcessTerminate = false;
@@ -481,6 +482,7 @@ namespace OOAdvantech.Remoting
                         Proxies[proxy.ObjectUri.Uri] = proxyReference;
 
                     }
+                    return proxy;
                 }
                 else
                 {
@@ -488,6 +490,7 @@ namespace OOAdvantech.Remoting
                     WeakReference proxyReference = new System.WeakReference(proxy);
                     Proxies.Add(proxy.ObjectUri.Uri, proxyReference);
                     JustCreatedProxies.Add(proxy.ObjectUri.TransientUri, proxyReference);
+                    return proxy;
 
                 }
             }

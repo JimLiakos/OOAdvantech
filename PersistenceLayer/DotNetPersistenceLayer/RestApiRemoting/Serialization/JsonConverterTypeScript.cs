@@ -1600,7 +1600,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     }
                     catch (Exception error)
                     {
-                        Debug.Assert(false);
+                       System.Diagnostics.Debug.Assert(false);
 
                         throw;
                     }

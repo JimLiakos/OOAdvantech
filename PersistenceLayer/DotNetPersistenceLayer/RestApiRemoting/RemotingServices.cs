@@ -450,7 +450,7 @@ namespace OOAdvantech.Remoting.RestApi
                 var proxyTypes = JsonConvert.DeserializeObject<object>(returnMessage.ReturnObjectJson, jSetttings) as System.Collections.Generic.Dictionary<string, MetaDataRepository.ProxyType>;
 
                 foreach (var proxyTypeEntry in proxyTypes)
-                    clientSessionPart.ProxyTypes[proxyTypeEntry.Key] = proxyTypeEntry.Value;
+                    clientSessionPart.SetProxyType(proxyTypeEntry.Key, proxyTypeEntry.Value);
 
             }
 

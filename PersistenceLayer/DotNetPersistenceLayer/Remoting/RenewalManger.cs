@@ -109,94 +109,11 @@ namespace OOAdvantech.Remoting
         /// <summary>This method add a proxy of remote object, which the renewal manager will include in the next massive renew.</summary>
         /// <param name="proxy">Parameter defines the proxy object for remote object. The proxy must be attached with an object. If doesn't the renewal manager raise an exception.If there is another proxy attached with the same object then the old proxy removed from the renewal manager control and the new proxy added.</param>
         /// <MetaDataID>{8D260CEE-5104-41C7-9B1C-6414B9C0962E}</MetaDataID>
-        public static void AddProxy(IProxy proxy, IRemotingServices remotingServices)
+        public static IProxy AddProxy(IProxy proxy, IRemotingServices remotingServices)
         {
             string channelUri = proxy.ChannelUri;
             ClientSessionPart clientSessionPart = GetSession(channelUri, remotingServices);
-            clientSessionPart.AddProxy(proxy);
-
-            //Task<ClientSessionPart> task = null;
-            //ClientSessionPart clientSessionPart = null;
-            //lock (SessionsLock)
-            //{
-
-
-            //    if (!Sessions.TryGetValue(channelUri, out clientSessionPart))
-            //    {
-
-            //        if (!SessionsTasks.TryGetValue(channelUri, out task))
-            //        {
-            //            task = new Task<ClientSessionPart>(() =>
-            //            {
-            //                var serverSessionPartInfo = remotingServices.GetServerSession(channelUri, Remoting.RemotingServices.ProcessIdentity);
-            //                var serverSessionPart = serverSessionPartInfo.ServerSessionPart;
-            //                var serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
-            //                var clientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
-            //                bool bidirectionalChannel = false;
-            //                if (serverSessionPartInfo.BidirectionalChannel.HasValue)
-            //                    bidirectionalChannel = serverSessionPartInfo.BidirectionalChannel.Value;
-
-            //                //clientSessionPart = new ClientSessionPart(channelUri, clientProcessIdentity, serverProcessIdentity, serverSessionPart, remotingServices);
-            //                clientSessionPart = remotingServices.CreateClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo);
-            //                Sessions[channelUri] = clientSessionPart;
-
-            //                return clientSessionPart;
-            //            });
-            //            SessionsTasks[channelUri] = task;
-            //        }
-
-            //    }
-            //}
-            //if (task != null)
-            //{
-            //    if (!task.Wait(System.TimeSpan.FromSeconds(5)))
-            //        if (!task.Wait(System.TimeSpan.FromMinutes(1)))
-            //            throw new System.TimeoutException(string.Format("SendTimeout {0} expired", System.TimeSpan.FromMinutes(1)));
-
-            //    clientSessionPart = task.Result;
-            //}
-
-            //clientSessionPart.AddProxy(proxy);
-
-            //if (!System.Threading.Monitor.TryEnter(Sessions, 2000))
-            //    System.Diagnostics.Debug.WriteLine("DeadLock");
-            //try
-            //{
-
-            //    string channelUri = proxy.ChannelUri;
-            //    ClientSessionPart clientSessionPart = null;
-            //    if (!Sessions.TryGetValue(channelUri, out clientSessionPart))
-            //    {
-            //        Task<ClientSessionPart> task = null;
-            //        if (SessionsTasks.TryGetValue(channelUri, out task))
-            //            SessionsTasks[channelUri] =
-            //            var serverSessionPartInfo = remotingServices.GetServerSession(channelUri, Remoting.RemotingServices.ProcessIdentity);
-            //        var serverSessionPart = serverSessionPartInfo.ServerSessionPart;
-            //        var serverProcessIdentity = serverSessionPartInfo.ServerProcessIdentity;
-            //        var clientProcessIdentity = Remoting.RemotingServices.ProcessIdentity;
-            //        bool bidirectionalChannel = false;
-            //        if (serverSessionPartInfo.BidirectionalChannel.HasValue)
-            //            bidirectionalChannel = serverSessionPartInfo.BidirectionalChannel.Value;
-
-            //        //clientSessionPart = new ClientSessionPart(channelUri, clientProcessIdentity, serverProcessIdentity, serverSessionPart, remotingServices);
-            //        clientSessionPart = remotingServices.CreateClientSessionPart(channelUri, clientProcessIdentity, serverSessionPartInfo);
-            //        Sessions[channelUri] = clientSessionPart;
-            //        clientSessionPart.AddProxy(proxy);
-
-            //        //clientSessionPart = NewSession(channelUri, clientProcessIdentity, serverProcessIdentity, serverSessionPart, remotingServices);
-
-            //        //Sessions[channelUri].AttatchToServerSessionPart();
-            //    }
-            //    else
-            //        clientSessionPart.AddProxy(proxy);
-
-
-
-            //}
-            //finally
-            //{
-            //    System.Threading.Monitor.Exit(Sessions);
-            //}
+            return clientSessionPart.AddProxy(proxy);
         }
         //   static System.DateTime LastRenewTime=DateTime.Now;
         /// <summary>This method called from timer for massive renews. </summary>
