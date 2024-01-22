@@ -16,7 +16,8 @@ namespace OOAdvantech.PersistenceLayer
 			StorageProviderError,
             StorageAlreadyExist,
             StorageMetadataDotNetTypeMismatch,
-			StorageOpensOnlyInSingleObjectContext
+			StorageOpensOnlyInSingleObjectContext,
+            DataCorruption
 
         }
 

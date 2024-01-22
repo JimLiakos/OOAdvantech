@@ -125,6 +125,11 @@ namespace OOAdvantech.MetaDataLoadingSystem
             {
                 throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + StorageName + " at location " + StorageLocation + " doesn't exist", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.StorageDoesnotExist);
             }
+            catch (System.Xml.XmlException Error)
+            {
+                throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + StorageName + " at location " + StorageLocation + " is corrupted", OOAdvantech.PersistenceLayer.StorageException.ExceptionReason.DataCorruption);
+
+            }
             catch (System.Exception Error)
             {
                 throw new System.Exception("Could not open Storage " + StorageName, Error);
