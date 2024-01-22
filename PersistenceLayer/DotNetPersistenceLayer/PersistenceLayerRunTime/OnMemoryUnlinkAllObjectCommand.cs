@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace OOAdvantech.PersistenceLayerRunTime.Commands
 {
     /// <MetaDataID>{65EF8648-2591-46B1-AE73-6287CDB0F71D}</MetaDataID>
@@ -170,6 +172,11 @@ namespace OOAdvantech.PersistenceLayerRunTime.Commands
 
                     foreach (StorageInstanceRef currStorageInstanceRef in LinkedObjects)
                     {
+                        if(currStorageInstanceRef==null)
+                        {
+                            Debug.Assert(currStorageInstanceRef==null);
+                            continue;
+                        }
                         if (theResolver.AssociationEnd.Association.LinkClass != null)
                         {
                             StorageInstanceAgent roleA = null, roleB = null;
