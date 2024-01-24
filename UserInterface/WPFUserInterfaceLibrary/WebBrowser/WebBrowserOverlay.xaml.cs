@@ -330,7 +330,7 @@ namespace GenWebBrowser
             //    EdgeWebBrowser.Navigate(source.AbsoluteUri);
 
 
-            if (ChromeBrowser != null)
+            if (ChromeBrowser != null&& ChromeBrowser.Address != source.AbsoluteUri)
                 ChromeBrowser.Address = source.AbsoluteUri;
         }
 
