@@ -206,128 +206,141 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (Connected)
             {
-                Transactions.Transaction.RunOnTransactionCompleted(() =>
-                  {
-                      EventCallbackMessage eventCallbackMessage = new EventCallbackMessage()
-                      {
-                          ServerSession = this,
-                          Args = args,
-                          EventInfoData = new EventInfoData(eventInfo),
-                          EventPublisherUri = eventPublisherUri,
-                          SessionIdentity = SessionIdentity,
-                          Web = this.Web
-                      };
-                      eventCallbackMessage.Marshal();
+                if (!Web)
+                {
+                    Transactions.Transaction.RunOnTransactionCompleted(() =>
+                    {
 
-                      string json = JsonConvert.SerializeObject(eventCallbackMessage);
-
-                      RequestData requestData = new RequestData();
-                      requestData.SessionIdentity = SessionIdentity;
-                      requestData.RequestType = RequestType.Event;
-                      requestData.ChannelUri = ChannelUri;
-
-                      requestData.details = json;
-
-                      bool? ConnectionIsOpen = true;
-
-
-
-                      try
-                      {
-                          ConnectionIsOpen = GetActiveChannel()?.EndPoint?.ConnectionIsOpen;
-                          if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
-                          {
-
-                          }
-                      }
-                      catch (Exception error)
-                      {
-                      }
-
-                      SerializeTaskScheduler.AddTask(async () =>
-                      {
-                          bool retry = false;
-                          do
-                          {
-                              retry = false;
-                              try
-                              {
-                                  IChannel channel = GetActiveChannel();
-                                  //if (channel != Channel)
-                                  //{
-
-                                  //}
-                                  if (channel != null)
-                                  {
-                                      try
-                                      {
-                                          ConnectionIsOpen = channel.EndPoint?.ConnectionIsOpen;
-                                          if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
-                                          {
-
-                                          }
-                                      }
-#if !DeviceDotNet
-                                      catch (System.Runtime.Remoting.RemotingException error)
-                                      {
-                                          ChannnelIsInactive(channel);
-                                          retry = true;
-                                          continue;
-                                      }
-#endif
-                                      catch (Exception error)
-                                      {
-                                      }
-
-                                      if (invokeType == InvokeType.Sync)
-                                          channel.ProcessRequest(requestData);
-                                      else
-                                      {
-                                          requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
-                                          var task = channel.AsyncProcessRequest(requestData);
-                                          if (task == null)
-                                          {
-
-                                          }
-                                          await task;
-                                      }
-                                  }
-                                  else
-                                      return false;
-
-                              }
-                              catch (Exception error)
-                              {
-
-                                  if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
-                                      retry = true;
-                                  System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
-
-#if !DeviceDotNet
-
-                                  if (!System.Diagnostics.EventLog.SourceExists("Rest Api channel", "."))
-                                      System.Diagnostics.EventLog.CreateEventSource("Rest Api channel", "OOAdvance");
-
-                                  System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
-                                  myLog.Source = "Rest Api channel";
-
-                                  if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
-                                      myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
-
-                                  myLog.WriteEntry("RestApi AsyncProcessRequest failed :" + Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
-#endif
-
-
-                              }
-                          } while (retry);
-                          return true;
-                      });
-                  });
+                        SerializeEventCall(eventInfo, eventPublisherUri, args, invokeType);
+                    });
+                }
+                else
+                {
+                    SerializeEventCall(eventInfo, eventPublisherUri, args, invokeType);
+                }
             }
             else
             {
             }
             return true;
+        }
+
+        private void SerializeEventCall(EventInfo eventInfo, ExtObjectUri eventPublisherUri, object[] args, InvokeType invokeType)
+        {
+            EventCallbackMessage eventCallbackMessage = new EventCallbackMessage()
+            {
+                ServerSession = this,
+                Args = args,
+                EventInfoData = new EventInfoData(eventInfo),
+                EventPublisherUri = eventPublisherUri,
+                SessionIdentity = SessionIdentity,
+                Web = this.Web
+            };
+            eventCallbackMessage.Marshal();
+
+            string json = JsonConvert.SerializeObject(eventCallbackMessage);
+
+            RequestData requestData = new RequestData();
+            requestData.SessionIdentity = SessionIdentity;
+            requestData.RequestType = RequestType.Event;
+            requestData.ChannelUri = ChannelUri;
+
+            requestData.details = json;
+
+            bool? ConnectionIsOpen = true;
+
+
+
+            try
+            {
+                ConnectionIsOpen = GetActiveChannel()?.EndPoint?.ConnectionIsOpen;
+                if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
+                {
+
+                }
+            }
+            catch (Exception error)
+            {
+            }
+
+            SerializeTaskScheduler.AddTask(async () =>
+            {
+                bool retry = false;
+                do
+                {
+                    retry = false;
+                    try
+                    {
+                        IChannel channel = GetActiveChannel();
+                        //if (channel != Channel)
+                        //{
+
+                        //}
+                        if (channel != null)
+                        {
+                            try
+                            {
+                                ConnectionIsOpen = channel.EndPoint?.ConnectionIsOpen;
+                                if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
+                                {
+
+                                }
+                            }
+#if !DeviceDotNet
+                            catch (System.Runtime.Remoting.RemotingException error)
+                            {
+                                ChannnelIsInactive(channel);
+                                retry = true;
+                                continue;
+                            }
+#endif
+                            catch (Exception error)
+                            {
+                            }
+
+                            if (invokeType == InvokeType.Sync)
+                                channel.ProcessRequest(requestData);
+                            else
+                            {
+                                requestData.SendTimeout = Binding.DefaultBinding.SendTimeout.TotalMilliseconds;
+                                var task = channel.AsyncProcessRequest(requestData);
+                                if (task == null)
+                                {
+
+                                }
+                                await task;
+                            }
+                        }
+                        else
+                            return false;
+
+                    }
+                    catch (Exception error)
+                    {
+
+                        if (error is System.Net.WebSockets.WebSocketException || error.InnerException is System.Net.WebSockets.WebSocketException)
+                            retry = true;
+                        System.Diagnostics.Debug.Assert(false, "RestApi AsyncProcessRequest failed");
+
+#if !DeviceDotNet
+
+                        if (!System.Diagnostics.EventLog.SourceExists("Rest Api channel", "."))
+                            System.Diagnostics.EventLog.CreateEventSource("Rest Api channel", "OOAdvance");
+
+                        System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
+                        myLog.Source = "Rest Api channel";
+
+                        if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
+                            myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
+
+                        myLog.WriteEntry("RestApi AsyncProcessRequest failed :" + Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
+#endif
+
+
+                    }
+                } while (retry);
+                return true;
+            });
         }
 
 
