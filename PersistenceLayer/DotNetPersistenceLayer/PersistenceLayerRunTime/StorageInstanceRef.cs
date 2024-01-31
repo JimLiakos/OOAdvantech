@@ -20,6 +20,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
     using OOAdvantech.DotNetMetaDataRepository;
     using System.Runtime.InteropServices.ComTypes;
     using System.Threading;
+    using OOAdvantech.Remoting;
 #endif
     internal delegate void StorageInstanceRefChangeState(object sender);
 
@@ -511,7 +512,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     persistentUri = (_ObjectStorage as ObjectStorage).GetPersistentObjectUri(this);
 
 
-                if (MemoryInstance is System.MarshalByRefObject && !string.IsNullOrEmpty(persistentUri))
+                if (MemoryInstance is System.MarshalByRefObject && MemoryInstance is IExtMarshalByRefObject && !string.IsNullOrEmpty(persistentUri))
                 {
                     byte[] data = new byte[0x12];
                     rng.GetBytes(data);

@@ -334,7 +334,11 @@ namespace OOAdvantech.Remoting
             return Proxy;
         }
     }
+    
+    public class ExtMarshalByRefObject: MarshalByRefObject
+    {
 
+    }
 }
 namespace System.Runtime.Remoting.Proxies
 {

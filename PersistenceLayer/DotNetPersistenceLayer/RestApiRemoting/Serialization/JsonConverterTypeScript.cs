@@ -1258,8 +1258,13 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
                     IReferenceResolver referenceResolver = serializer.ReferenceResolver;
                     bool isReferenced = false;
-                    if (value is System.MarshalByRefObject || value is ITransparentProxy)
+                    if (value is System.MarshalByRefObject && !(value is IExtMarshalByRefObject))
                     {
+
+                    }
+                    if ((value is System.MarshalByRefObject && value is IExtMarshalByRefObject) || value is ITransparentProxy)
+                    {
+
 #if DeviceDotNet
                     if (value is System.MarshalByRefObject &&!(value is OOAdvantech.Remoting.MarshalByRefObject))
                     {
@@ -1576,7 +1581,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
 
-                        foreach (System.Collections.DictionaryEntry  itemEntry in tempDictionary)
+                        foreach (System.Collections.DictionaryEntry itemEntry in tempDictionary)
                         {
                             writer.WriteStartObject();
 
@@ -1600,7 +1605,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     }
                     catch (Exception error)
                     {
-                       System.Diagnostics.Debug.Assert(false);
+                        System.Diagnostics.Debug.Assert(false);
 
                         throw;
                     }
