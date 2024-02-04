@@ -383,6 +383,8 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
                     foreach (SortedObject sortedObject in ObjectCollection)
                         collection.Add(sortedObject.LinkedObject);
+                    if (string.IsNullOrWhiteSpace(criterion))
+                        _IsCompleteLoaded = true;
 
                     return collection;
 

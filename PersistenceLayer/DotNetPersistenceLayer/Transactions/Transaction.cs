@@ -2,6 +2,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using OOAdvantech.Remoting;
 using System;
+using System.Collections.Generic;
 #if DeviceDotNet
 using System.Reflection;
 using System.PCL.Reflection;
@@ -164,16 +165,31 @@ namespace OOAdvantech.Transactions
             }
         }
 
-    
+        static Dictionary<string, List< Action>> TransactionOnCompletedActions = new Dictionary<string, List<Action>>();
+
 
         public static void RunOnTransactionCompleted(Action action)
         {
             if (Transaction.Current != null)
             {
+                lock (TransactionOnCompletedActions)
+                {
+                    List<Action> lastActions;
+                    if (TransactionOnCompletedActions.TryGetValue(Transaction.Current.LocalTransactionUri, out lastActions))
+                    {
+                        if (lastActions.Contains(action))
+                            return;
+                    }
+                    lastActions = new List<Action>() { action };
+                    TransactionOnCompletedActions[Transaction.Current.LocalTransactionUri] = lastActions;
+                }
+
+
                 TransactionCompletedEventHandler handler = null;
                 handler = (Transaction transaction) =>
                 {
                     transaction.TransactionCompleted -= handler;
+                    TransactionOnCompletedActions.Remove(transaction.LocalTransactionUri);
                     try
                     {
                         action();

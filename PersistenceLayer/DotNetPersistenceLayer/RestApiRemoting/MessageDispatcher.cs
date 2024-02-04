@@ -304,11 +304,17 @@ namespace OOAdvantech.Remoting.RestApi
                         if (request.GetCallContextData("Transaction") != null)
                         {
 
-                            using (SystemStateTransition stateTransition = new SystemStateTransition(request.GetCallContextData("Transaction") as Transaction))
+
+                            using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
                             {
-                                retVal = methodInfo.Invoke(methodCallMessage.Object, args);
+                                using (SystemStateTransition innerStateTransition = new SystemStateTransition(request.GetCallContextData("Transaction") as Transaction))
+                                {
+                                    retVal = methodInfo.Invoke(methodCallMessage.Object, args);
+                                    innerStateTransition.Consistent = true;
+                                } 
                                 stateTransition.Consistent = true;
                             }
+
                             if (objectChangeState != null && methodCallMessage.Object != null)
                             {
                                 //objectChangeState.RemoveEventHandler(methodCallMessage.Object, handler);

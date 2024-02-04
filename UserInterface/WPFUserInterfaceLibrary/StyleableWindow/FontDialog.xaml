@@ -47,7 +47,9 @@
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="125"/>
-                        <RowDefinition Height="74"/>
+                        <RowDefinition Height="48"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="5"/>
                         <RowDefinition Height="153"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -56,13 +58,13 @@
                         <ColumnDefinition Width="95*"/>
                         <ColumnDefinition Width="156*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Height="181" Width="220" Margin="5,0,0,0">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"   Margin="5,0,10,5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Label  HorizontalAlignment="Left"   Content="Font Family" VerticalAlignment="Top" Grid.Row="0" />
-                        <ListBox Grid.Row="1" x:Name="FontFamiliesListBox" HorizontalAlignment="Stretch" Height="151" VerticalAlignment="Top" 
+                        <ListBox Grid.Row="1" x:Name="FontFamiliesListBox" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" 
                  ContrοlsEx:ListBoxBehavior.ScrollSelectedIntoView="True"
                  ItemsSource="{Binding SystemFontFamilies}"  SelectedValue="{Binding SelectdFontFamily ,Mode=TwoWay}"  ItemTemplate="{StaticResource fontFamilyData}" Grid.RowSpan="2">
                         </ListBox>
@@ -82,13 +84,22 @@
                             </ListBox.Resources>
                         </ListBox>
                     </Grid>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="30" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"  >
-                        <Label>Font Color</Label>
-                        <wpftoolkitex:ColorPicker SelectedColor="{Binding SelectedColor}"  HorizontalAlignment="Left" VerticalAlignment="Top"  Width="70" Height="30" Grid.Row="1" ></wpftoolkitex:ColorPicker>
-                        <Label Margin="4,0,0,0"  Visibility="{Binding StrokeVisibility}">Stroke Color</Label>
-                        <wpftoolkitex:ColorPicker SelectedColor="{Binding SelectedStrokeColor}"  HorizontalAlignment="Left" VerticalAlignment="Top"  Width="70" Height="30" Grid.Row="1"  Visibility="{Binding StrokeVisibility}"></wpftoolkitex:ColorPicker>
+                    <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="32"/>
+                        </Grid.RowDefinitions>
+                        <Label VerticalAlignment="Bottom">Font Color</Label>
+                        <wpftoolkitex:ColorPicker SelectedColor="{Binding SelectedColor}" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Bottom"  Width="100" Height="30"  ></wpftoolkitex:ColorPicker>
+                        <Label Margin="4,0,0,0" VerticalAlignment="Bottom"  Grid.Column="1" Visibility="{Binding StrokeVisibility}">Stroke Color</Label>
+                        <wpftoolkitex:ColorPicker Grid.Column="1" Grid.Row="1" SelectedColor="{Binding SelectedStrokeColor}"  HorizontalAlignment="Left" VerticalAlignment="Bottom"  Width="100" Height="30"   Visibility="{Binding StrokeVisibility}"></wpftoolkitex:ColorPicker>
 
-                    </StackPanel>
+                    </Grid>
+                  
 
 
                     <Grid Grid.Column="2" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Margin="1,0,0,0" Height="60" >
@@ -130,21 +141,18 @@
                         </ComboBox>
                     </Grid>
 
-                    <Grid Grid.Column="2" HorizontalAlignment="Stretch" Visibility="{Binding StrokeVisibility}"  VerticalAlignment="Bottom" Height="80" Grid.RowSpan="2">
+                    <Grid Grid.Column="2" HorizontalAlignment="Stretch" Visibility="{Binding StrokeVisibility}"  VerticalAlignment="Bottom" Height="77" Grid.RowSpan="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="32"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Column="2">
+                        <Label VerticalAlignment="Bottom" Grid.Column="2">
                             <Label.Content>
                                 <AccessText TextWrapping="Wrap" Text="Stroke Thickness" />
                             </Label.Content>
                         </Label>
-                        <ComboBox  Grid.Row="1"   
-                      HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Top" 
-                      
-                        
+                        <ComboBox Background="Green" Grid.Row="1"  
+                      HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
                       ItemsSource="{Binding StrokeThickness}" 
                       SelectedItem="{Binding SelectedStrokeThickness}"
                       
@@ -172,7 +180,7 @@
                         </StackPanel>
 
                     </Grid>
-                    <Border BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" BorderBrush="DarkGray"    Height="120"  Margin="0,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2">
+                    <Border BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" BorderBrush="DarkGray"    Height="122"  Margin="0,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4">
                         <Grid>
 
                             <ContrοlsEx:OutlineTextBlock x:Name="textBox" 
@@ -204,7 +212,7 @@
                         </Grid>
                     </Border>
 
-                    <Grid Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0" Width="205" Height="80" >
+                    <Grid Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="5,0,10,5"   Height="80" >
                         <StackPanel>
                             <Border BorderBrush="DarkGray"  BorderThickness="1" Height="40" >
                                 <Grid Margin="4" Background="#FFF5F5F5">
@@ -221,7 +229,7 @@
                     </Grid>
 
 
-                    <Grid Visibility="{Binding ShadowPropertiesVisibility}" Grid.Column="3" Grid.Row="1" Margin="10,54,5,0" Grid.RowSpan="2" >
+                    <Grid Visibility="{Binding ShadowPropertiesVisibility}" Grid.Column="3" Grid.Row="3" Margin="10,0,5,0" Grid.RowSpan="3" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="71*"/>
                             <ColumnDefinition Width="71*"/>

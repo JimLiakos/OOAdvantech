@@ -1,6 +1,6 @@
 namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 {
-    
+
     using OOAdvantech.DotNetMetaDataRepository;
     using System;
     using System.Collections.Generic;
@@ -532,19 +532,27 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             //If  all objects links restored in one thread  isn't necessary for synchronization locks of "relation resolvers" without lock there aren't deadlocks
 
 
-            var task = ObjectQueryMainThreadTaskScheduler.AddTask(() =>
+            try
             {
-                try
-                {
-                    DataTrees[0].LoadObjectRelationLinks();
-                    return true;
-                }
-                catch (Exception error)
-                {
-                    throw;
-                }
-            });
-            task.Wait();
+                DataTrees[0].LoadObjectRelationLinks();
+            }
+            catch (Exception error)
+            {
+                throw;
+            }
+            //var task = ObjectQueryMainThreadTaskScheduler.AddTask(() =>
+            //{
+            //    try
+            //    {
+            //        DataTrees[0].LoadObjectRelationLinks();
+            //        return true;
+            //    }
+            //    catch (Exception error)
+            //    {
+            //        throw;
+            //    }
+            //});
+            //task.Wait();
             ObjectRelationLinksLoaded = true;
         }
 
