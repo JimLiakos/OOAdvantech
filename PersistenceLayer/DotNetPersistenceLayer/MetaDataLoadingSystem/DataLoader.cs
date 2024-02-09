@@ -1346,6 +1346,10 @@ namespace OOAdvantech.MetaDataLoadingSystem.ObjectQueryLanguage
 
                             }
                             #endregion
+
+                            AssotiationTableRelationshipData relData = null;
+
+                            RelationshipsData.TryGetValue(subDataNode.Identity,out relData);
                         }
                         System.Collections.Generic.Dictionary<string, object> objectValues = null;
                         if (updatedObjects.Count > 0 && updatedObjects.ContainsKey(objectID))

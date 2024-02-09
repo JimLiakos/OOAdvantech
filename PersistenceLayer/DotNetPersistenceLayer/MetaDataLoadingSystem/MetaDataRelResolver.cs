@@ -189,7 +189,148 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 return base.IsCompleteLoaded;
             }
         }
+        public bool HasOutStorageRelation
+        {
+            get
+            {
 
+                System.Collections.Generic.List<DotNetMetaDataRepository.AssociationEnd> associationEnds = new System.Collections.Generic.List<OOAdvantech.DotNetMetaDataRepository.AssociationEnd>();
+                associationEnds.Add(AssociationEnd);
+                foreach (DotNetMetaDataRepository.Association association in AssociationEnd.Association.Specializations)
+                {
+                    if (AssociationEnd.IsRoleA)
+                        if (Owner.Class.IsA(association.RoleA.Namespace as MetaDataRepository.Classifier))
+                            associationEnds.Add(association.RoleA as DotNetMetaDataRepository.AssociationEnd);
+                    if (!AssociationEnd.IsRoleA)
+                        if (Owner.Class.IsA(association.RoleB.Namespace as MetaDataRepository.Classifier))
+                            associationEnds.Add(association.RoleB as DotNetMetaDataRepository.AssociationEnd);
+                }
+                foreach (DotNetMetaDataRepository.AssociationEnd associationEnd in associationEnds)
+                {
+
+                    MetaDataStorageSession OwnerStorageSession = (MetaDataStorageSession)Owner.ObjectStorage;
+                    XElement element = OwnerStorageSession.GetXMLElement(Owner.MemoryInstance.GetType(), (ObjectID)Owner.PersistentObjectID);
+
+                    #region gets role name with backward computability
+
+                    string roleName = OwnerStorageSession.GetMappedTagName(associationEnd.Identity.ToString().ToLower());
+                    if (string.IsNullOrWhiteSpace(roleName))
+                    {
+                        roleName = associationEnd.Name;
+                        if (string.IsNullOrWhiteSpace(roleName))
+                        {
+                            if (associationEnd.IsRoleA)
+                                roleName = associationEnd.Association.Name + "RoleAName";
+                            else
+                                roleName = associationEnd.Association.Name + "RoleBName";
+                        }
+                        OwnerStorageSession.SetMappedTagName(associationEnd.Identity.ToString().ToLower(), roleName);
+                    }
+
+                    #endregion
+
+                    int i = 0;
+                    #region walk through value path to reach the element of the role element
+
+                    if (Owner is PersistenceLayerRunTime.StorageInstanceValuePathRef)
+                    {
+                        MetaDataRepository.MetaObjectID[] path = (Owner as PersistenceLayerRunTime.StorageInstanceValuePathRef).ValueTypePath.ToArray();
+
+                        while (true)
+                        {
+                            if (i < path.Length)
+                            {
+                                MetaDataRepository.MetaObject metaObject = DotNetMetaDataRepository.MetaObjectMapper.FindMetaObject(path[path.Length - i - 1]);
+
+                                #region gets attribute name with backward computability
+
+                                string elementName = OwnerStorageSession.GetMappedTagName(metaObject.Name.ToLower());
+                                if (elementName == null)
+                                {
+                                    elementName = metaObject.Name;
+                                    OwnerStorageSession.SetMappedTagName(metaObject.Identity.ToString().ToLower(), elementName);
+                                }
+
+                                #endregion
+
+                                XElement childElement = element.Element(elementName);
+                                if (childElement == null)
+                                    return false;
+                                else
+                                    element = childElement;
+                                i++;
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    #endregion
+
+
+                    if (Multilingual)
+                    {
+
+                        XElement roleElement = element.Element(roleName);
+                        if (roleElement != null)
+                        {
+                            foreach (var languageElement in roleElement.Elements().Where(x => x.Name.ToString().ToLower() != "oid")) //child's which aren't oid 
+                            {
+                                var culture = System.Globalization.CultureInfo.GetCultureInfo(languageElement.Name.ToString());
+                                using (CultureContext cultureContext = new CultureContext(culture, false))
+                                {
+                                    foreach (var refElement in languageElement.Elements("oid"))
+                                    {
+                                        //Has out storage related object
+                                        if (refElement.HasAttribute("StorageCellReference"))
+                                            return true;
+                                    }
+                                }
+                            }
+                            foreach (var refElement in roleElement.Elements("oid"))
+                            {
+                                //Has out storage related object
+                                if (refElement.HasAttribute("StorageCellReference"))
+                                    return true;
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        XElement roleElement = element.Element(roleName);
+                        if (roleElement != null)
+                        {
+
+                            foreach (var languageElement in roleElement.Elements().Where(x => x.Name.ToString().ToLower() != "oid")) //child's which aren't oid 
+                            {
+                                var culture = System.Globalization.CultureInfo.GetCultureInfo(languageElement.Name.ToString());
+                                foreach (var refElement in languageElement.Elements("oid"))
+                                {
+                                    //Has out storage related object
+                                    if (refElement.HasAttribute("StorageCellReference"))
+                                        return true;
+                                }
+                            }
+
+
+                            foreach (var RefElement in roleElement.Elements())
+                            {
+                                //Has out storage related object
+                                if (RefElement.HasAttribute("StorageCellReference"))
+                                    return true;
+                            }
+                            
+                        }
+                    }
+                }
+
+
+
+
+                return false;
+            }
+        }
         /// <MetaDataID>{B9C35DA4-DD14-477F-AD51-6D207903CF2F}</MetaDataID>
         public override System.Collections.Generic.List<object> GetLinkedObjects(string criterion)
         {
@@ -317,10 +458,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
                         if (Multilingual)
                         {
-                            if (roleName == "Page")
-                            {
-
-                            }
+                           
                             XElement roleElement = element.Element(roleName);
                             if (roleElement != null)
                             {

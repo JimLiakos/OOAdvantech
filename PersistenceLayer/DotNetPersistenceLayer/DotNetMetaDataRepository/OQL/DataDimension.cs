@@ -1828,13 +1828,13 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
 
         /// <MetaDataID>{5cfed660-8206-4c41-bd07-136ca33c1b83}</MetaDataID>
         /// <summary>
-        /// If ParentLoadObjectsLinks is true query engine load relation object links on parent datanode objects activation.
+        /// If ParentLoadsObjectsLinks is true query engine load relation object links on parent datanode objects activation.
         /// </summary>
         /// Has deferent meaning from MembersFetchingObjectActivation property because the MembersFetchingObjectActivation 
         /// defines that the datanode forced from query engine to activate datanode object for prefetching reasons. 
         /// The query engine load relation object links for the data nodes with MembersFetchingObjectActivation true and data nodes 
         /// which originally participate in selection list(activate objects) and has not searching filters.  
-        internal bool ParentLoadObjectsLinks
+        internal bool ParentLoadsObjectsLinks
         {
             get
             {

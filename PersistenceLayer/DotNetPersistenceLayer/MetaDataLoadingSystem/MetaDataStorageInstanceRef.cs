@@ -309,7 +309,18 @@ namespace OOAdvantech.MetaDataLoadingSystem
 
                             if (!orgRelResolver.Owner.Class.IsLazyFetching(orgRelResolver.AssociationEnd) || (orgRelResolver.FieldInfo.DeclaringType.IsValueType && orgRelResolver.ValueTypePath.Count > 0/*&& assoctiationHierarchyAssociationEnd.Multiplicity.IsMany */ ))
                             {
-                                var LinkedObjects = orgRelResolver.GetLinkedObjects("");
+
+                                System.Collections.Generic.List<object> LinkedObjects= orgRelResolver.GetLinkedObjects("");
+                                //System.Collections.Generic.List<object> LinkedObjects = new System.Collections.Generic.List<object>();
+                                //if (!(orgRelResolver as MetaDataRelResolver).HasOutStorageRelation)
+                                //    LinkedObjects = orgRelResolver.GetLinkedObjects("");
+                                //else
+                                //{
+
+                                //}
+
+
+
                                 //Gets relation resolver of this level in association hierarchy
                                 PersistenceLayerRunTime.RelResolver assoctiationHierarchyRelResolver = orgRelResolver;
                                 if (assoctiationHierarchyAssociationEnd != orgRelResolver.AssociationEnd)

@@ -351,7 +351,7 @@ namespace StyleableWindow
         {
             get
             {
-                if (SelectedFontSpacing == 0)
+                if (SelectedFontSpacing == 0|| SelectedFontSpacing<0)
                     return FontStretches.Normal;
                 return FontStretch.FromOpenTypeStretch(SelectedFontSpacing);
 

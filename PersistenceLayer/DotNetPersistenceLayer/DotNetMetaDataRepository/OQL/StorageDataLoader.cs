@@ -345,8 +345,13 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     //objectID = new OOAdvantech.PersistenceLayer.ObjectID(ObjectIdentityTypes[ObjectIdentityTypes.IndexOf(referenceObjectIdentityType)], partValues, 0);
 
 
+
+                    // for other and of relation the the related object is the owner and owner is the related
+
                     dataRow["OwnerObject"] = dataRow["RelatedObject"];
                     dataRow["RelatedObject"] = GetObjectFromIdentity(objectID);// dataRow["RelatedObject"];
+                    
+                    // the table is ready for other end of association initialization
                 }
             }
             return interStorageObjectLinks;

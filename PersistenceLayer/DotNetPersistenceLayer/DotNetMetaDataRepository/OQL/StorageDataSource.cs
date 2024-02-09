@@ -264,7 +264,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             else
             {
                 if (ObjectActivation && (subDataNode.DataSource as StorageDataSource).ObjectActivation &&
-                    ((subDataNode.ParentLoadObjectsLinks && ThereAreObjectsToActivate) || (DataNode.IsThereBackOnConstructionRoute(subDataNode) && (subDataNode.DataSource as StorageDataSource).ThereAreObjectsToActivate)))
+                    ((subDataNode.ParentLoadsObjectsLinks && ThereAreObjectsToActivate) || (DataNode.IsThereBackOnConstructionRoute(subDataNode) && (subDataNode.DataSource as StorageDataSource).ThereAreObjectsToActivate)))
                 {
                     string storageIdentity = ((DataNode.ObjectQuery as DistributedObjectQuery).ObjectsContext as PersistenceLayer.ObjectStorage).StorageMetaData.StorageIdentity;
                     if (!DataLoaders.ContainsKey(storageIdentity))
@@ -887,7 +887,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             else
             {
                 DataNode relationDataNode = dataNodePath.Peek();
-                if (relationDataNode.ParentLoadObjectsLinks)
+                if (relationDataNode.ParentLoadsObjectsLinks)
                 {
                     string storageIdentity = ((DataNode.ObjectQuery as DistributedObjectQuery).ObjectsContext as PersistenceLayer.ObjectStorage).StorageMetaData.StorageIdentity;
                     Guid subDataNodeRelationDataIdentity = relationDataNode.Identity;

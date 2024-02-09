@@ -987,7 +987,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     if (dataNode.Type == DataNode.DataNodeType.Object &&
                         subDataNode.Type == DataNode.DataNodeType.Object)
                     {
-                        if ((subDataNode.ParentLoadObjectsLinks ||
+                        if ((subDataNode.ParentLoadsObjectsLinks ||
                             (dataNode.IsThereBackOnConstructionRoute(subDataNode) && (subDataNode.DataSource as StorageDataSource).ObjectActivation)) &&
                             dataNode.DataSource.ThereAreObjectsToActivate)
                         {
@@ -1089,7 +1089,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
             {
                 GroupDataNode groupDataNode = referenceDataNode as GroupDataNode;
                 prefetchingMemberDataNodes.AddRange(groupDataNode.GroupedDataNode.CreatePrefetchingMemberDataNodes(ref queryStorageIdentities));
-            }
+            } 
 
             if (referenceDataNode.DataSource == null || !referenceDataNode.DataSource.ThereAreObjectsToActivate)
                 return prefetchingMemberDataNodes;

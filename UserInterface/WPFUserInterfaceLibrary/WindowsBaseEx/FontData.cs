@@ -413,6 +413,8 @@ namespace UIBaseEx
                 left.FontFamilyName == right.FontFamilyName &&
                 left.FontSize == right.FontSize &&
                 left.FontSpacing == right.FontSpacing &&
+                left.Underline == right.Underline &&
+                left.Overline == right.Overline &&
                 left.FontStyle == right.FontStyle &&
                 left.FontWeight == right.FontWeight &&
                 left.Foreground == right.Foreground &&

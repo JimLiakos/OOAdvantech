@@ -610,16 +610,17 @@ namespace OOAdvantech.Remoting.RestApi
         internal AuthUser GetAuthData(MethodCallMessage methodCallMessage)
         {
             int threadId = 0;
+            string authToken = methodCallMessage.X_Auth_Token;
+            string x_Access_Token = methodCallMessage.X_Access_Token;
+
+            if (authToken == null && x_Access_Token == null)
+                return null;
             var task = System.Threading.Tasks.Task<AuthUser>.Run(() =>
             {
 #if !DeviceDotNet
                 threadId = AppDomain.GetCurrentThreadId();
 #endif
-                string authToken = methodCallMessage.X_Auth_Token;
-                string x_Access_Token = methodCallMessage.X_Access_Token;
-
-                if (authToken == null && x_Access_Token == null)
-                    return null;
+                
 
 
                 if (!string.IsNullOrWhiteSpace(authToken) && (AuthUser == null || AuthUser.AuthToken != authToken))
