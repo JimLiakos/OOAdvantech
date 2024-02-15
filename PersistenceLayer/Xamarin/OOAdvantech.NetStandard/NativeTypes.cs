@@ -335,10 +335,10 @@ namespace OOAdvantech.Remoting
         }
     }
     
-    public class ExtMarshalByRefObject: MarshalByRefObject
-    {
+    //public class ExtMarshalByRefObject: MarshalByRefObject
+    //{
 
-    }
+    //}
 }
 namespace System.Runtime.Remoting.Proxies
 {

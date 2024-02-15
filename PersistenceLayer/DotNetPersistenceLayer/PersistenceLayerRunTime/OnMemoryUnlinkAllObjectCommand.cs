@@ -174,7 +174,8 @@ namespace OOAdvantech.PersistenceLayerRunTime.Commands
                     {
                         if(currStorageInstanceRef==null)
                         {
-                            Debug.Assert(currStorageInstanceRef==null);
+
+                            System.Diagnostics.Debug.Assert(currStorageInstanceRef==null);
                             continue;
                         }
                         if (theResolver.AssociationEnd.Association.LinkClass != null)
