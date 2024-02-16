@@ -1451,7 +1451,8 @@ namespace OOAdvantech.PersistenceLayerRunTime
                                         Member<object>.SetValueImplicitly(fastFieldAccessor, ref memberOwner, AccessorBuilder.GetDefaultValue((fastFieldAccessor.MemberInfo as FieldInfo).FieldType.GetMetaData().GetGenericArguments()[0]));
                                         owner = Member<object>.GetValue(fastFieldAccessor.GetValue, MemoryInstance);
                                     }
-
+                                    if (owner==null)
+                                        owner=OOAdvantech.AccessorBuilder.GetDefaultValue(attribute.Type.GetExtensionMetaObject<System.Type>());
                                     SetAttributeValue(ref owner, valueOfAttribute, attribute.Type as DotNetMetaDataRepository.Structure, 1, out valueSetted);
                                     if (valueSetted)
                                     {
