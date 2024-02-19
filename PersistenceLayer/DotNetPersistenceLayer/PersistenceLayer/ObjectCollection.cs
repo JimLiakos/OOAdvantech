@@ -6,7 +6,7 @@ namespace OOAdvantech.PersistenceLayer
     /// <MetaDataID>{07703273-1DCE-4FBC-A55F-E9E0D8A061BD}</MetaDataID>
     /// <summary>ObjectCollection  manage the objects of AssociationEnd of a classes relation with multiplicity greater than 1. </summary>
 	public interface ObjectCollection:OOAdvantech.Transactions.ITransactionalObject
-	{
+	{ 
         #if !DeviceDotNet 
         /// <MetaDataID>{3e1e4a8e-1d5c-432d-ab8a-aee79de55e61}</MetaDataID>
         System.Linq.IQueryable QueryableCollection
