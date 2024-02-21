@@ -77,11 +77,11 @@
             this.ModelItemsView.ListConnection.Path = "UnAssignedModelItems";
             this.ModelItemsView.ListConnection.SelectionMember = null;
             this.ModelItemsView.ListConnection.ViewControlObject = this.Connection;
-            this.ModelItemsView.Location = new System.Drawing.Point(0, 67);
-            this.ModelItemsView.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.ModelItemsView.Location = new System.Drawing.Point(0, 60);
+            this.ModelItemsView.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.ModelItemsView.Name = "ModelItemsView";
             this.ModelItemsView.RowHeight = 15;
-            this.ModelItemsView.Size = new System.Drawing.Size(853, 909);
+            this.ModelItemsView.Size = new System.Drawing.Size(767, 818);
             this.ModelItemsView.TabIndex = 0;
             // 
             // Connection
@@ -109,8 +109,8 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(32, 29);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.splitContainer1.Location = new System.Drawing.Point(29, 26);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -122,20 +122,20 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.CodelItemsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.CodeItemsView);
-            this.splitContainer1.Size = new System.Drawing.Size(1725, 975);
-            this.splitContainer1.SplitterDistance = 853;
-            this.splitContainer1.SplitterWidth = 19;
+            this.splitContainer1.Size = new System.Drawing.Size(1552, 878);
+            this.splitContainer1.SplitterDistance = 767;
+            this.splitContainer1.SplitterWidth = 17;
             this.splitContainer1.TabIndex = 1;
             // 
             // ModelItemsLabel
             // 
             this.ModelItemsLabel.AutoSize = true;
             this.ModelItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.ModelItemsLabel.Location = new System.Drawing.Point(8, 17);
-            this.ModelItemsLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.ModelItemsLabel.Location = new System.Drawing.Point(7, 15);
+            this.ModelItemsLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.ModelItemsLabel.Name = "ModelItemsLabel";
             this.ModelItemsLabel.Path = null;
-            this.ModelItemsLabel.Size = new System.Drawing.Size(306, 39);
+            this.ModelItemsLabel.Size = new System.Drawing.Size(267, 36);
             this.ModelItemsLabel.TabIndex = 1;
             this.ModelItemsLabel.Text = "From Model Items";
             // 
@@ -148,11 +148,11 @@
             // 
             this.CodelItemsLabel.AutoSize = true;
             this.CodelItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.CodelItemsLabel.Location = new System.Drawing.Point(35, 17);
-            this.CodelItemsLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.CodelItemsLabel.Location = new System.Drawing.Point(32, 15);
+            this.CodelItemsLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.CodelItemsLabel.Name = "CodelItemsLabel";
             this.CodelItemsLabel.Path = null;
-            this.CodelItemsLabel.Size = new System.Drawing.Size(294, 39);
+            this.CodelItemsLabel.Size = new System.Drawing.Size(255, 36);
             this.CodelItemsLabel.TabIndex = 2;
             this.CodelItemsLabel.Text = "From Code Items";
             // 
@@ -191,11 +191,11 @@
             this.CodeItemsView.ListConnection.Path = "UnAssignedCodeItems";
             this.CodeItemsView.ListConnection.SelectionMember = null;
             this.CodeItemsView.ListConnection.ViewControlObject = this.Connection;
-            this.CodeItemsView.Location = new System.Drawing.Point(0, 67);
-            this.CodeItemsView.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.CodeItemsView.Location = new System.Drawing.Point(0, 60);
+            this.CodeItemsView.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.CodeItemsView.Name = "CodeItemsView";
             this.CodeItemsView.RowHeight = 15;
-            this.CodeItemsView.Size = new System.Drawing.Size(790, 909);
+            this.CodeItemsView.Size = new System.Drawing.Size(698, 818);
             this.CodeItemsView.TabIndex = 1;
             // 
             // DeleteBtn
@@ -204,13 +204,13 @@
             this.DeleteBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.DeleteBtn.ConnectedObjectAutoUpdate = false;
             this.DeleteBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.DeleteBtn.Location = new System.Drawing.Point(752, 1054);
-            this.DeleteBtn.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.DeleteBtn.Location = new System.Drawing.Point(677, 949);
+            this.DeleteBtn.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.OnClickOperationCall = ((object)(resources.GetObject("DeleteBtn.OnClickOperationCall")));
             this.DeleteBtn.Path = "";
             this.DeleteBtn.SaveButton = false;
-            this.DeleteBtn.Size = new System.Drawing.Size(285, 95);
+            this.DeleteBtn.Size = new System.Drawing.Size(256, 86);
             this.DeleteBtn.TabIndex = 2;
             this.DeleteBtn.Text = "Delete";
             // 
@@ -224,12 +224,12 @@
             // 
             // CodeModelSychronizeView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1789, 1178);
+            this.ClientSize = new System.Drawing.Size(1610, 1060);
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.Name = "CodeModelSychronizeView";
             this.Text = "Delete Unassigned Model-Code Items";
             ((System.ComponentModel.ISupportInitialize)(this.ModelItemsView)).EndInit();

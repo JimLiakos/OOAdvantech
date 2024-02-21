@@ -3,8 +3,8 @@ namespace RoseMetaDataRepository
     /// <MetaDataID>{3AF798B5-1D92-4212-85E6-BAE86539523C}</MetaDataID>
     internal class Interface : OOAdvantech.MetaDataRepository.Interface
     {
-
-
+         
+         
         public override void PutPropertyValue(string propertyNamespace, string propertyName, object PropertyValue)
         {
             if (propertyNamespace.ToLower() == "MetaData".ToLower() && propertyName.ToLower() == "MetaObjectID".ToLower())

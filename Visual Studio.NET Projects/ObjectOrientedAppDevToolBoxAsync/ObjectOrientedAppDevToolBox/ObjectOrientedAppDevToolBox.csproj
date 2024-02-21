@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -35,8 +34,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>3</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,7 +43,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClassViewToolWindow.cs" />
@@ -57,45 +54,39 @@
     <Compile Include="MetadataBrowserHost.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MetadataBrowserHost.designer.cs">
-      <DependentUpon>MetadataBrowserHost.cs</DependentUpon>
-    </Compile>
+    <Compile Include="MetadataBrowserHost.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ObjectOrientedAppDevToolBoxPackage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ObjectOrientedAppDevToolBoxSetting.reg" />
-    <None Include="ObjectOrientedAppDevToolBoxSetting64.reg" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Interop.IWshRuntimeLibrary">
-      <HintPath>libs\Interop.IWshRuntimeLibrary.dll</HintPath>
+    <Reference Include="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bdbc2f38dd0f67b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>libs\Interop.IWshRuntimeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.3.32804.24" ExcludeAssets="runtime">
-      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.4.2118">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.0.32112.339" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.9.3174" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="ClassViewToolWindowControl.xaml">
@@ -107,16 +98,15 @@
     <VSCTCompile Include="ObjectOrientedAppDevToolBoxPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
+    <Content Include="libs\Interop.IWshRuntimeLibrary.dll" />
     <Content Include="Resources\ClassViewToolWindowCommand.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MetadataBrowserHost.resx">
-      <DependentUpon>MetadataBrowserHost.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="MetadataBrowserHost.resx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MetaDataRepository\VSMetadataRepositoryBrowser\VSMetadataRepositoryBrowser - VS10.csproj">
-      <Project>{1215DC34-9BAB-4C31-9290-0EC28D0011E7}</Project>
+      <Project>{1215dc34-9bab-4c31-9290-0ec28d0011e7}</Project>
       <Name>VSMetadataRepositoryBrowser - VS10</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\PersistenceLayer\DotNetPersistenceLayer\CodeMetaDataRepository\CodeMetaDataRepository - VS10.csproj">
@@ -128,7 +118,7 @@
       <Name>OOAdvantechFacade -VS10</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantech\OOAdvantech - VS10.csproj">
-      <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
+      <Project>{83492998-8e8b-44a9-bcc8-9a6e979e3eb6}</Project>
       <Name>OOAdvantech - VS10</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\RoseVisual.Net Studio Integrator\RoseAddinFacade\RoseAddinFacade - VS10.csproj">

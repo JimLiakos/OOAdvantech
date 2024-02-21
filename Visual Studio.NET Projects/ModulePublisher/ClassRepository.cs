@@ -720,7 +720,7 @@ namespace ModulePublisher
                 if (assemplyKey == null)
                 {
                     try
-                    {
+                    { 
                         if (ClassesAssemblies.ContainsKey(assemblyFullName))
                             throw new System.IO.FileNotFoundException(assemblyFullName);
 
@@ -728,7 +728,7 @@ namespace ModulePublisher
                         assembly = AppDomain.Load(assemblyFullName);
                     }
                     catch (Exception error)
-                    {
+                    { 
                         try
                         {
                             bool assemblyLoaded = false;

@@ -1,19 +1,22 @@
-﻿using Microneme.ObjectOrientedAppsDevToolBox;
+﻿
+using EnvDTE;
+using Microneme.ObjectOrientedAppsDevToolBox;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.Integration;
 
-namespace OOAppDevToolBox
+namespace ObjectOrientedAppDevToolBox
 {
     /// <summary>
     /// Interaction logic for ClassViewToolWindowControl.
     /// </summary>
     public partial class ClassViewToolWindowControl : UserControl
     {
-
-
         internal MetadataBrowserHost MetadataBrowserHost;
+        private DTE EnvDTE;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ClassViewToolWindowControl"/> class.
         /// </summary>
@@ -23,7 +26,25 @@ namespace OOAppDevToolBox
             MetadataBrowserHost = new MetadataBrowserHost();
             MetadataBrowserHost.LoadMetadataRepositoryBrowser(ObjectOrientedAppDevToolBoxPackage.VSPackage);
             WinformHost.Child = MetadataBrowserHost;
+            Loaded += ClassViewToolWindowControl_Loaded;
+            EnvDTE= ObjectOrientedAppDevToolBoxPackage.VSPackage.DTEConnection.DTEObject;
         }
+
+        private void ClassViewToolWindowControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MetadataBrowserHost.MetadataRepositoryBrowser != null && MetadataBrowserHost.MetadataRepositoryBrowser.DTE == null)
+                {
+
+                    MetadataBrowserHost.MetadataRepositoryBrowser.DTE = EnvDTE;
+                }
+            }
+            catch (Exception error)
+            {
+            }
+        }
+
 
 
         /// <summary>

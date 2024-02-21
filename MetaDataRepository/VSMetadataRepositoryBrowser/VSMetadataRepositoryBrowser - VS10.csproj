@@ -76,10 +76,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConnectableControls, Version=4.0.0.0, Culture=neutral, PublicKeyToken=d8dbedc180c0b9b4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\bin\Debug\Net4\ConnectableControls.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.Data.v9.3, Version=9.3.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v9.3, Version=9.3.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v9.3, Version=9.3.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -538,6 +534,10 @@
     <ProjectReference Include="..\..\PersistenceLayer\DotNetPersistenceLayer\OOAdvantech\OOAdvantech - VS10.csproj">
       <Project>{83492998-8E8B-44A9-BCC8-9A6E979E3EB6}</Project>
       <Name>OOAdvantech - VS10</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserInterface\WindowsUserInterfaceLibrary\ConnectableControls\ConnectableControls - VS10.csproj">
+      <Project>{e83f3b97-6dc3-4744-b246-55174e74daed}</Project>
+      <Name>ConnectableControls - VS10</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Visual Studio.NET Projects\ModulePublisher\ModulePublisher - VS10.csproj">
       <Project>{8D4656BC-51D1-4E2D-AE5B-6F530DF69333}</Project>

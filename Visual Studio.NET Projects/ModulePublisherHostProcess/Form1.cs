@@ -91,7 +91,7 @@ namespace ModulePublisherHostProcess
 
                 }
             }
-           // System.Windows.Forms.MessageBox.Show(assemblyFileName);
+            //System.Windows.Forms.MessageBox.Show(assemblyFileName);
 
             List<string> refrences = new List<string>();
             if(System.IO.File.Exists(errorFile))

@@ -65,11 +65,11 @@
             // 
             // 
             this.textBox1.EnableProperty.Path = null;
-            this.textBox1.Location = new System.Drawing.Point(173, 43);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBox1.Location = new System.Drawing.Point(156, 39);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Path = "Identity";
-            this.textBox1.Size = new System.Drawing.Size(700, 38);
+            this.textBox1.Size = new System.Drawing.Size(630, 35);
             this.textBox1.TabIndex = 0;
             this.textBox1.UpdateStyle = ConnectableControls.UpdateStyle.OnSaveControlsValue;
             this.textBox1.ViewControlObject = this.ConnectionControl;
@@ -77,10 +77,10 @@
             // IdentityLabel
             // 
             this.IdentityLabel.AutoSize = true;
-            this.IdentityLabel.Location = new System.Drawing.Point(32, 50);
-            this.IdentityLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.IdentityLabel.Location = new System.Drawing.Point(29, 45);
+            this.IdentityLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.IdentityLabel.Name = "IdentityLabel";
-            this.IdentityLabel.Size = new System.Drawing.Size(107, 32);
+            this.IdentityLabel.Size = new System.Drawing.Size(89, 29);
             this.IdentityLabel.TabIndex = 1;
             this.IdentityLabel.Text = "Identity";
             // 
@@ -89,13 +89,13 @@
             this.OKBtn.AllowDrag = false;
             this.OKBtn.ConnectedObjectAutoUpdate = false;
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(928, 5);
-            this.OKBtn.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.OKBtn.Location = new System.Drawing.Point(835, 4);
+            this.OKBtn.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.OnClickOperationCall = ((object)(resources.GetObject("OKBtn.OnClickOperationCall")));
             this.OKBtn.Path = "";
             this.OKBtn.SaveButton = false;
-            this.OKBtn.Size = new System.Drawing.Size(200, 55);
+            this.OKBtn.Size = new System.Drawing.Size(180, 50);
             this.OKBtn.TabIndex = 2;
             this.OKBtn.Text = "OK";
             // 
@@ -112,13 +112,13 @@
             this.CancelBtn.AllowDrag = false;
             this.CancelBtn.ConnectedObjectAutoUpdate = false;
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(928, 74);
-            this.CancelBtn.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.CancelBtn.Location = new System.Drawing.Point(835, 67);
+            this.CancelBtn.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.OnClickOperationCall = ((object)(resources.GetObject("CancelBtn.OnClickOperationCall")));
             this.CancelBtn.Path = "";
             this.CancelBtn.SaveButton = false;
-            this.CancelBtn.Size = new System.Drawing.Size(200, 55);
+            this.CancelBtn.Size = new System.Drawing.Size(180, 50);
             this.CancelBtn.TabIndex = 3;
             this.CancelBtn.Text = "Cancel";
             // 
@@ -132,15 +132,15 @@
             // 
             // ModelItemIdentityView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1160, 157);
+            this.ClientSize = new System.Drawing.Size(1054, 141);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.IdentityLabel);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ModelItemIdentityView";

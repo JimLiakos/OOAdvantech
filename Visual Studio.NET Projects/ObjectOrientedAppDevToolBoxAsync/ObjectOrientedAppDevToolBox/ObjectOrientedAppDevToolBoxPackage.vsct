@@ -64,14 +64,14 @@
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidObjectOrientedAppDevToolBoxPackage" value="{94548e33-84ec-4142-9037-a80ee50d84ad}" />
+    <GuidSymbol name="guidObjectOrientedAppDevToolBoxPackage" value="{46a02b40-76a8-4dcb-b831-72ac638474bd}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidObjectOrientedAppDevToolBoxPackageCmdSet" value="{871c27f6-4d41-4f3c-a747-1e8386718098}">
+    <GuidSymbol name="guidObjectOrientedAppDevToolBoxPackageCmdSet" value="{7d793395-1b0e-4541-bc3a-dc4934b605de}">
       <IDSymbol name="ClassViewToolWindowCommandId" value="0x0100" />
     </GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{40eef933-4424-4ca4-a40e-e9383baa25f3}" >
+    <GuidSymbol name="guidImages" value="{c2ce67de-9f5e-4860-8003-7f21050b0602}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />

@@ -71,6 +71,7 @@
             this.MetaObjectsTree.LineColor = System.Drawing.SystemColors.ControlDark;
             this.MetaObjectsTree.LoadOnDemand = true;
             this.MetaObjectsTree.Location = new System.Drawing.Point(0, 0);
+            this.MetaObjectsTree.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MetaObjectsTree.MetaData = ((object)(resources.GetObject("MetaObjectsTree.MetaData")));
             this.MetaObjectsTree.Model = null;
             this.MetaObjectsTree.Name = "MetaObjectsTree";
@@ -82,7 +83,7 @@
             this.MetaObjectsTree.RowHeight = 36D;
             this.MetaObjectsTree.SelectedNode = null;
             this.MetaObjectsTree.SelectionMember = null;
-            this.MetaObjectsTree.Size = new System.Drawing.Size(185, 280);
+            this.MetaObjectsTree.Size = new System.Drawing.Size(432, 625);
             this.MetaObjectsTree.SubNodesProperty = "ContainedObjects";
             this.MetaObjectsTree.TabIndex = 0;
             this.MetaObjectsTree.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
@@ -110,13 +111,14 @@
             // 
             // MetadataRepositoryBrowser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(184, 279);
+            this.ClientSize = new System.Drawing.Size(429, 622);
             this.ControlBox = false;
             this.Controls.Add(this.MetaObjectsTree);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.Name = "MetadataRepositoryBrowser";
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);

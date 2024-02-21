@@ -1,14 +1,14 @@
 ﻿using Microneme.ObjectOrientedAppsDevToolBox;
-using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using OOAdvantech.CodeMetaDataRepository;
 using OOAdvantech.MetaDataRepository;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Task = System.Threading.Tasks.Task;
 
-namespace OOAppDevToolBox
+namespace ObjectOrientedAppDevToolBox
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -29,20 +29,19 @@ namespace OOAppDevToolBox
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(ObjectOrientedAppDevToolBoxPackage.PackageGuidString)]
+    [ProvideAutoLoad(UIContextGuids80.NoSolution, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.NoSolution_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
-
     [ProvideToolWindow(typeof(ClassViewToolWindow))]
-    public sealed class ObjectOrientedAppDevToolBoxPackage : AsyncPackage, VSMetadataRepositoryBrowser.IVSPackage//, IVsSolutionEvents
+    public sealed class ObjectOrientedAppDevToolBoxPackage : AsyncPackage, VSMetadataRepositoryBrowser.IVSPackage
     {
         /// <summary>
         /// ObjectOrientedAppDevToolBoxPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "94548e33-84ec-4142-9037-a80ee50d84ad";
-        internal static VSMetadataRepositoryBrowser.IVSPackage VSPackage;
+        public const string PackageGuidString = "46a02b40-76a8-4dcb-b831-72ac638474bd";
+
+        public static ObjectOrientedAppDevToolBoxPackage VSPackage { get; private set; }
+        public DTEConnection DTEConnection { get; private set; }
+        public IDEManager IDEManager { get; private set; }
 
         public void ShowORMToolWindow(MetaObject metaObject)
         {
@@ -65,11 +64,7 @@ namespace OOAppDevToolBox
             }
         }
 
-
         #region Package Members
-
-        DTEConnection DTEConnection;
-
 
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
@@ -80,23 +75,28 @@ namespace OOAppDevToolBox
         /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+
             VSPackage = this;
-
-
-
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await ClassViewToolWindowCommand.InitializeAsync(this);
 
+           
+
+            //// When initialized asynchronously, the current thread may be a background thread at this point.
+            //// Do any initialization that requires the UI thread after switching to the UI thread.
+            //await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            //await ClassViewToolWindowCommand.InitializeAsync(this);
+
 
 
             if (DTEConnection == null)
             {
-                DTEConnection = new DTEConnection();
+                DTEConnection = new Microneme.ObjectOrientedAppsDevToolBox.DTEConnection();
 
                 EnvDTE.DTE dte = (EnvDTE.DTE)GetService(typeof(EnvDTE.DTE));
-                
+
                 DTEConnection.OnConnection(dte, this);
             }
 
@@ -107,14 +107,8 @@ namespace OOAppDevToolBox
             IDEManager = new OOAdvantech.CodeMetaDataRepository.IDEManager();
 
             //pSolution.AdviseSolutionEvents
-
         }
 
-
-
-        static OOAdvantech.CodeMetaDataRepository.IDEManager IDEManager;
         #endregion
     }
-
-    
 }

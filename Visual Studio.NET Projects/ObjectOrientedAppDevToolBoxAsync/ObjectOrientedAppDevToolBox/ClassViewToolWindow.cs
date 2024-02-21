@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OOAppDevToolBox
+namespace ObjectOrientedAppDevToolBox
 {
     /// <summary>
     /// This class implements the tool window exposed by this package and hosts a user control.
@@ -15,7 +15,7 @@ namespace OOAppDevToolBox
     /// implementation of the IVsUIElementPane interface.
     /// </para>
     /// </remarks>
-    [Guid("1b465c26-cd6b-4022-ba5b-a2c7ef9df285")]
+    [Guid("17b59fbd-d314-4373-8a36-23feced4721a")]
     public class ClassViewToolWindow : ToolWindowPane
     {
         /// <summary>
@@ -23,30 +23,12 @@ namespace OOAppDevToolBox
         /// </summary>
         public ClassViewToolWindow() : base(null)
         {
-            this.Caption = "OOAdvantech";
+            this.Caption = "ClassViewToolWindow";
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on
             // the object returned by the Content property.
             this.Content = new ClassViewToolWindowControl();
-        }
-
-        protected override void OnCreate()
-        {
-            base.OnCreate();
-
-            try
-            {
-                if ((this.Content as ClassViewToolWindowControl).MetadataBrowserHost.MetadataRepositoryBrowser != null && (this.Content as ClassViewToolWindowControl).MetadataBrowserHost.MetadataRepositoryBrowser.DTE == null)
-                {
-                    EnvDTE.DTE dte = (this.GetService(typeof(Microsoft.VisualStudio.Shell.Interop.SDTE))) as EnvDTE.DTE;
-                    (this.Content as ClassViewToolWindowControl).MetadataBrowserHost.MetadataRepositoryBrowser.DTE = dte;
-                }
-            }
-            catch (Exception error)
-            {
-            }
-
         }
     }
 }

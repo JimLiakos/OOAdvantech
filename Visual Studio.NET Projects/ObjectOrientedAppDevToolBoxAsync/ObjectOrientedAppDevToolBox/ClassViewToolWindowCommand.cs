@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
-namespace OOAppDevToolBox
+namespace ObjectOrientedAppDevToolBox
 {
     /// <summary>
     /// Command handler
@@ -22,7 +22,7 @@ namespace OOAppDevToolBox
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("871c27f6-4d41-4f3c-a747-1e8386718098");
+        public static readonly Guid CommandSet = new Guid("7d793395-1b0e-4541-bc3a-dc4934b605de");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -75,7 +75,7 @@ namespace OOAppDevToolBox
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
-            OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
+            OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new ClassViewToolWindowCommand(package, commandService);
         }
 
@@ -86,14 +86,19 @@ namespace OOAppDevToolBox
         /// <param name="e">The event args.</param>
         private void Execute(object sender, EventArgs e)
         {
-            this.package.JoinableTaskFactory.RunAsync(async delegate
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            // Get the instance number 0 of this tool window. This window is single instance so this instance
+            // is actually the only one.
+            // The last flag is set to true so that if the tool window does not exists it will be created.
+            ToolWindowPane window = this.package.FindToolWindow(typeof(ClassViewToolWindow), 0, true);
+            if ((null == window) || (null == window.Frame))
             {
-                ToolWindowPane window = await this.package.ShowToolWindowAsync(typeof(ClassViewToolWindow), 0, true, this.package.DisposalToken);
-                if ((null == window) || (null == window.Frame))
-                {
-                    throw new NotSupportedException("Cannot create tool window");
-                }
-            });
+                throw new NotSupportedException("Cannot create tool window");
+            }
+
+            IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
+            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
     }
 }

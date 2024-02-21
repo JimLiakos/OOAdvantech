@@ -61,21 +61,23 @@
             this.MetaObjectSpecificView.DockHostedView = ConnectableControls.HostedViewDock.Fill;
             this.MetaObjectSpecificView.HostedViewIdentityPath = "MetaObjectView";
             this.MetaObjectSpecificView.Location = new System.Drawing.Point(0, 0);
+            this.MetaObjectSpecificView.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MetaObjectSpecificView.Name = "MetaObjectSpecificView";
             this.MetaObjectSpecificView.Path = "RealObject";
-            this.MetaObjectSpecificView.Size = new System.Drawing.Size(566, 351);
+            this.MetaObjectSpecificView.Size = new System.Drawing.Size(1321, 795);
             this.MetaObjectSpecificView.TabIndex = 0;
             this.MetaObjectSpecificView.ViewControlObject = this.Connection;
             // 
             // RDBMSMappingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(566, 351);
+            this.ClientSize = new System.Drawing.Size(1321, 795);
             this.ControlBox = false;
             this.Controls.Add(this.MetaObjectSpecificView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RDBMSMappingForm";

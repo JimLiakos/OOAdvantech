@@ -32,12 +32,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectView));
-            this.ProjectTabControl = new DevExpress.XtraTab.XtraTabControl();
             this.MappingContext = new DevExpress.XtraTab.XtraTabPage();
             this.MappingContextList = new ConnectableControls.List.ListView();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            ((System.ComponentModel.ISupportInitialize)(this.ProjectTabControl)).BeginInit();
-            this.ProjectTabControl.SuspendLayout();
             this.MappingContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MappingContextList)).BeginInit();
             this.SuspendLayout();
@@ -49,22 +46,6 @@
             this.Connection.ViewControlObjectAssembly = "CodeMetaDataRepository";
             this.Connection.ViewControlObjectType = "OOAdvantech.CodeMetaDataRepository.Project";
             // 
-            // ProjectTabControl
-            // 
-            this.ProjectTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProjectTabControl.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Left;
-            this.ProjectTabControl.HeaderOrientation = DevExpress.XtraTab.TabOrientation.Horizontal;
-            this.ProjectTabControl.Location = new System.Drawing.Point(20, 16);
-            this.ProjectTabControl.Name = "ProjectTabControl";
-            this.ProjectTabControl.SelectedTabPage = this.MappingContext;
-            this.ProjectTabControl.Size = new System.Drawing.Size(589, 272);
-            this.ProjectTabControl.TabIndex = 0;
-            this.ProjectTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.MappingContext,
-            this.xtraTabPage2});
-            // 
             // MappingContext
             // 
             this.MappingContext.Controls.Add(this.MappingContextList);
@@ -74,9 +55,9 @@
             // 
             // MappingContextList
             // 
-            this.MappingContextList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.MappingContextList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MappingContextList.DragDropMarkColor = System.Drawing.Color.Blue;
             // 
             // 
@@ -116,14 +97,12 @@
             // 
             // ProjectView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.ProjectTabControl);
+            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.Name = "ProjectView";
-            this.Size = new System.Drawing.Size(628, 305);
-            ((System.ComponentModel.ISupportInitialize)(this.ProjectTabControl)).EndInit();
-            this.ProjectTabControl.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(1465, 691);
             this.MappingContext.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MappingContextList)).EndInit();
             this.ResumeLayout(false);

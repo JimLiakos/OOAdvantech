@@ -82,7 +82,7 @@ namespace RoseMetaDataRepository
         {
             if (MonoStateObject == null)
             {
-                ModulePublisher.ClassRepository.LoadAssembly("CodeMetaDataRepository, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9ce9f0a461f2c1a5");
+                ModulePublisher.ClassRepository.LoadAssembly("CodeMetaDataRepository,  Version=1.0.2.0, Culture=neutral, PublicKeyToken=9ce9f0a461f2c1a5");
                 MonoStateObject = this;
 
             }
@@ -863,7 +863,7 @@ namespace RoseMetaDataRepository
         {
             if (MonoStateObject == null)
             {
-                ModulePublisher.ClassRepository.LoadAssembly("CodeMetaDataRepository, Version=1.0.2.0, Culture=neutral, PublicKeyToken=a849addb868b59ea");
+                ModulePublisher.ClassRepository.LoadAssembly("CodeMetaDataRepository,Culture=neutral, PublicKeyToken=a849addb868b59ea");
                 MonoStateObject = this;
 
             }

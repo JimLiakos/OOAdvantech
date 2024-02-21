@@ -87,19 +87,19 @@ namespace RoseMetaDataRepository
             this.Members.Margin = new System.Windows.Forms.Padding(0);
             this.Members.Name = "Members";
             this.Members.RowHeight = 15;
-            this.Members.Size = new System.Drawing.Size(779, 467);
+            this.Members.Size = new System.Drawing.Size(701, 420);
             this.Members.TabIndex = 0;
             this.Members.Text = "table1";
             this.Members.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MembersMouseUp);
             // 
             // ClassifierMembersView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(779, 467);
+            this.ClientSize = new System.Drawing.Size(701, 420);
             this.ControlBox = false;
             this.Controls.Add(this.Members);
-            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ClassifierMembersView";

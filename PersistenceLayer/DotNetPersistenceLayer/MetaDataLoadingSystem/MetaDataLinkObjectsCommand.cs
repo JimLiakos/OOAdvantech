@@ -14,7 +14,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
            base(objectStorage, roleA, roleB, relationObject, linkInitiatorAssociationEnd, index)
         {
             if (RoleA.RealStorageInstanceRef.PersistentObjectID != null && RoleB.RealStorageInstanceRef.PersistentObjectID != null && (RoleB.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022" || RoleA.RealStorageInstanceRef.PersistentObjectID.ToString() == "2022"))
-            {
+            { 
 
             }
             Multilingual = IsMultilingualLink(RoleA, RoleB, LinkInitiatorAssociationEnd.Association as DotNetMetaDataRepository.Association);

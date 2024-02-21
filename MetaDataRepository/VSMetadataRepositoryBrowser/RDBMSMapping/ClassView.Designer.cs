@@ -90,14 +90,15 @@
             this.RDBMSMappingContextCBX.FormattingEnabled = true;
             this.RDBMSMappingContextCBX.InsertOperationCall = ((object)(resources.GetObject("RDBMSMappingContextCBX.InsertOperationCall")));
             this.RDBMSMappingContextCBX.IntegralHeight = false;
-            this.RDBMSMappingContextCBX.Location = new System.Drawing.Point(355, 19);
+            this.RDBMSMappingContextCBX.Location = new System.Drawing.Point(828, 42);
+            this.RDBMSMappingContextCBX.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.RDBMSMappingContextCBX.Name = "RDBMSMappingContextCBX";
             this.RDBMSMappingContextCBX.NullValueName = "";
             this.RDBMSMappingContextCBX.OperationCall = ((object)(resources.GetObject("RDBMSMappingContextCBX.OperationCall")));
             this.RDBMSMappingContextCBX.Path = "SelectedRDBMSMappingContext";
             this.RDBMSMappingContextCBX.PreLoaded = true;
             this.RDBMSMappingContextCBX.RemoveOperationCall = ((object)(resources.GetObject("RDBMSMappingContextCBX.RemoveOperationCall")));
-            this.RDBMSMappingContextCBX.Size = new System.Drawing.Size(235, 21);
+            this.RDBMSMappingContextCBX.Size = new System.Drawing.Size(543, 37);
             this.RDBMSMappingContextCBX.TabIndex = 0;
             this.RDBMSMappingContextCBX.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.RDBMSMappingContextCBX.ViewControlObject = this.Connection;
@@ -106,9 +107,10 @@
             // MappingContextLB
             // 
             this.MappingContextLB.AutoSize = true;
-            this.MappingContextLB.Location = new System.Drawing.Point(262, 22);
+            this.MappingContextLB.Location = new System.Drawing.Point(611, 49);
+            this.MappingContextLB.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.MappingContextLB.Name = "MappingContextLB";
-            this.MappingContextLB.Size = new System.Drawing.Size(87, 13);
+            this.MappingContextLB.Size = new System.Drawing.Size(194, 29);
             this.MappingContextLB.TabIndex = 1;
             this.MappingContextLB.Text = "Mapping Context";
             // 
@@ -134,14 +136,15 @@
             this.MainTableCBX.FormattingEnabled = true;
             this.MainTableCBX.InsertOperationCall = ((object)(resources.GetObject("MainTableCBX.InsertOperationCall")));
             this.MainTableCBX.IntegralHeight = false;
-            this.MainTableCBX.Location = new System.Drawing.Point(355, 46);
+            this.MainTableCBX.Location = new System.Drawing.Point(828, 103);
+            this.MainTableCBX.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MainTableCBX.Name = "MainTableCBX";
             this.MainTableCBX.NullValueName = "";
             this.MainTableCBX.OperationCall = ((object)(resources.GetObject("MainTableCBX.OperationCall")));
             this.MainTableCBX.Path = "MainTable";
             this.MainTableCBX.PreLoaded = true;
             this.MainTableCBX.RemoveOperationCall = ((object)(resources.GetObject("MainTableCBX.RemoveOperationCall")));
-            this.MainTableCBX.Size = new System.Drawing.Size(235, 21);
+            this.MainTableCBX.Size = new System.Drawing.Size(543, 37);
             this.MainTableCBX.TabIndex = 2;
             this.MainTableCBX.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.MainTableCBX.ViewControlObject = this.Connection;
@@ -149,9 +152,9 @@
             // 
             // ClassGroupBox
             // 
-            this.ClassGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClassGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ClassGroupBox.Controls.Add(this.RefreshBtn);
             this.ClassGroupBox.Controls.Add(this.label5);
             this.ClassGroupBox.Controls.Add(this.comboBox2);
@@ -175,9 +178,11 @@
             this.ClassGroupBox.Controls.Add(this.MainTableCBX);
             this.ClassGroupBox.Controls.Add(this.RDBMSMappingContextCBX);
             this.ClassGroupBox.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.ClassGroupBox.Location = new System.Drawing.Point(9, 11);
+            this.ClassGroupBox.Location = new System.Drawing.Point(21, 25);
+            this.ClassGroupBox.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.ClassGroupBox.Name = "ClassGroupBox";
-            this.ClassGroupBox.Size = new System.Drawing.Size(671, 446);
+            this.ClassGroupBox.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.ClassGroupBox.Size = new System.Drawing.Size(1566, 995);
             this.ClassGroupBox.TabIndex = 4;
             this.ClassGroupBox.TabStop = false;
             this.ClassGroupBox.Text = "Class Mapping Data";
@@ -186,14 +191,19 @@
             // 
             this.RefreshBtn.AllowDrag = false;
             this.RefreshBtn.ConnectedObjectAutoUpdate = false;
-            this.RefreshBtn.Location = new System.Drawing.Point(596, 19);
+            this.RefreshBtn.Location = new System.Drawing.Point(1391, 42);
+            this.RefreshBtn.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.RefreshBtn.Name = "RefreshBtn";
             this.RefreshBtn.OnClickOperationCall = ((object)(resources.GetObject("RefreshBtn.OnClickOperationCall")));
             this.RefreshBtn.Path = "";
             this.RefreshBtn.SaveButton = false;
-            this.RefreshBtn.Size = new System.Drawing.Size(56, 23);
+            this.RefreshBtn.Size = new System.Drawing.Size(131, 51);
             this.RefreshBtn.TabIndex = 22;
             this.RefreshBtn.Text = "Refresh";
+            // 
+            // 
+            // 
+            this.RefreshBtn.TextProperty.Path = null;
             this.RefreshBtn.TransactionOption = OOAdvantech.Transactions.TransactionOption.Suppress;
             this.RefreshBtn.UseVisualStyleBackColor = true;
             this.RefreshBtn.Value = null;
@@ -201,10 +211,11 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(206, 229);
+            this.label5.Location = new System.Drawing.Point(481, 511);
+            this.label5.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label5.Name = "label5";
             this.label5.Path = null;
-            this.label5.Size = new System.Drawing.Size(143, 23);
+            this.label5.Size = new System.Drawing.Size(334, 51);
             this.label5.TabIndex = 21;
             this.label5.Text = "Indexer column";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -236,14 +247,15 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.InsertOperationCall = ((object)(resources.GetObject("comboBox2.InsertOperationCall")));
             this.comboBox2.IntegralHeight = false;
-            this.comboBox2.Location = new System.Drawing.Point(355, 231);
+            this.comboBox2.Location = new System.Drawing.Point(828, 515);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.NullValueName = "";
             this.comboBox2.OperationCall = ((object)(resources.GetObject("comboBox2.OperationCall")));
             this.comboBox2.Path = "FirstRoleIndexerColumn";
             this.comboBox2.PreLoaded = true;
             this.comboBox2.RemoveOperationCall = ((object)(resources.GetObject("comboBox2.RemoveOperationCall")));
-            this.comboBox2.Size = new System.Drawing.Size(235, 21);
+            this.comboBox2.Size = new System.Drawing.Size(543, 37);
             this.comboBox2.TabIndex = 20;
             this.comboBox2.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.comboBox2.ViewControlObject = this.Connection;
@@ -260,11 +272,12 @@
             // 
             // 
             this.checkBox1.EnableProperty.Path = "ChooseRoleWithReferenceColumns";
-            this.checkBox1.Location = new System.Drawing.Point(265, 181);
+            this.checkBox1.Location = new System.Drawing.Point(618, 404);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Path = "ReferenceColumnsOnRoleB";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkBox1.Size = new System.Drawing.Size(183, 17);
+            this.checkBox1.Size = new System.Drawing.Size(398, 33);
             this.checkBox1.TabIndex = 19;
             this.checkBox1.Text = "Reference columns on other type";
             this.checkBox1.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
@@ -282,11 +295,12 @@
             // 
             // 
             this.ManualSelectRelationReferenceTable.EnableProperty.Path = "ChooseTableWithReferenceColumns";
-            this.ManualSelectRelationReferenceTable.Location = new System.Drawing.Point(482, 181);
+            this.ManualSelectRelationReferenceTable.Location = new System.Drawing.Point(1125, 404);
+            this.ManualSelectRelationReferenceTable.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.ManualSelectRelationReferenceTable.Name = "ManualSelectRelationReferenceTable";
             this.ManualSelectRelationReferenceTable.Path = "SelectManualTableWithReferenceColumns";
             this.ManualSelectRelationReferenceTable.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ManualSelectRelationReferenceTable.Size = new System.Drawing.Size(94, 17);
+            this.ManualSelectRelationReferenceTable.Size = new System.Drawing.Size(197, 33);
             this.ManualSelectRelationReferenceTable.TabIndex = 18;
             this.ManualSelectRelationReferenceTable.Text = "Manual Select";
             this.ManualSelectRelationReferenceTable.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
@@ -295,10 +309,11 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(206, 256);
+            this.label3.Location = new System.Drawing.Point(481, 571);
+            this.label3.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label3.Name = "label3";
             this.label3.Path = null;
-            this.label3.Size = new System.Drawing.Size(143, 23);
+            this.label3.Size = new System.Drawing.Size(334, 51);
             this.label3.TabIndex = 17;
             this.label3.Text = "Reference columns";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -330,14 +345,15 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.InsertOperationCall = ((object)(resources.GetObject("comboBox1.InsertOperationCall")));
             this.comboBox1.IntegralHeight = false;
-            this.comboBox1.Location = new System.Drawing.Point(355, 258);
+            this.comboBox1.Location = new System.Drawing.Point(828, 576);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.NullValueName = "";
             this.comboBox1.OperationCall = ((object)(resources.GetObject("comboBox1.OperationCall")));
             this.comboBox1.Path = "SecondRoleReferenceColumn";
             this.comboBox1.PreLoaded = true;
             this.comboBox1.RemoveOperationCall = ((object)(resources.GetObject("comboBox1.RemoveOperationCall")));
-            this.comboBox1.Size = new System.Drawing.Size(235, 21);
+            this.comboBox1.Size = new System.Drawing.Size(543, 37);
             this.comboBox1.TabIndex = 16;
             this.comboBox1.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.comboBox1.ViewControlObject = this.Connection;
@@ -345,10 +361,11 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(206, 203);
+            this.label4.Location = new System.Drawing.Point(481, 453);
+            this.label4.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label4.Name = "label4";
             this.label4.Path = null;
-            this.label4.Size = new System.Drawing.Size(143, 23);
+            this.label4.Size = new System.Drawing.Size(334, 51);
             this.label4.TabIndex = 15;
             this.label4.Text = "Reference columns";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -380,14 +397,15 @@
             this.ReferenceColumn.FormattingEnabled = true;
             this.ReferenceColumn.InsertOperationCall = ((object)(resources.GetObject("ReferenceColumn.InsertOperationCall")));
             this.ReferenceColumn.IntegralHeight = false;
-            this.ReferenceColumn.Location = new System.Drawing.Point(355, 205);
+            this.ReferenceColumn.Location = new System.Drawing.Point(828, 457);
+            this.ReferenceColumn.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.ReferenceColumn.Name = "ReferenceColumn";
             this.ReferenceColumn.NullValueName = "";
             this.ReferenceColumn.OperationCall = ((object)(resources.GetObject("ReferenceColumn.OperationCall")));
             this.ReferenceColumn.Path = "FirstRoleReferenceColumn";
             this.ReferenceColumn.PreLoaded = true;
             this.ReferenceColumn.RemoveOperationCall = ((object)(resources.GetObject("ReferenceColumn.RemoveOperationCall")));
-            this.ReferenceColumn.Size = new System.Drawing.Size(235, 21);
+            this.ReferenceColumn.Size = new System.Drawing.Size(543, 37);
             this.ReferenceColumn.TabIndex = 13;
             this.ReferenceColumn.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.ReferenceColumn.ViewControlObject = this.Connection;
@@ -396,9 +414,10 @@
             // RelationTableLB
             // 
             this.RelationTableLB.AutoSize = true;
-            this.RelationTableLB.Location = new System.Drawing.Point(203, 154);
+            this.RelationTableLB.Location = new System.Drawing.Point(474, 344);
+            this.RelationTableLB.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.RelationTableLB.Name = "RelationTableLB";
-            this.RelationTableLB.Size = new System.Drawing.Size(146, 13);
+            this.RelationTableLB.Size = new System.Drawing.Size(330, 29);
             this.RelationTableLB.TabIndex = 12;
             this.RelationTableLB.Text = "Table with reference columns";
             // 
@@ -424,14 +443,15 @@
             this.TableWithReferenceColumns.FormattingEnabled = true;
             this.TableWithReferenceColumns.InsertOperationCall = ((object)(resources.GetObject("TableWithReferenceColumns.InsertOperationCall")));
             this.TableWithReferenceColumns.IntegralHeight = false;
-            this.TableWithReferenceColumns.Location = new System.Drawing.Point(355, 154);
+            this.TableWithReferenceColumns.Location = new System.Drawing.Point(828, 344);
+            this.TableWithReferenceColumns.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.TableWithReferenceColumns.Name = "TableWithReferenceColumns";
             this.TableWithReferenceColumns.NullValueName = "";
             this.TableWithReferenceColumns.OperationCall = ((object)(resources.GetObject("TableWithReferenceColumns.OperationCall")));
             this.TableWithReferenceColumns.Path = "TableWithReferenceColumns";
             this.TableWithReferenceColumns.PreLoaded = true;
             this.TableWithReferenceColumns.RemoveOperationCall = ((object)(resources.GetObject("TableWithReferenceColumns.RemoveOperationCall")));
-            this.TableWithReferenceColumns.Size = new System.Drawing.Size(235, 21);
+            this.TableWithReferenceColumns.Size = new System.Drawing.Size(543, 37);
             this.TableWithReferenceColumns.TabIndex = 11;
             this.TableWithReferenceColumns.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.TableWithReferenceColumns.ViewControlObject = this.Connection;
@@ -440,9 +460,10 @@
             // RelatedClassLB
             // 
             this.RelatedClassLB.AutoSize = true;
-            this.RelatedClassLB.Location = new System.Drawing.Point(231, 130);
+            this.RelatedClassLB.Location = new System.Drawing.Point(539, 290);
+            this.RelatedClassLB.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.RelatedClassLB.Name = "RelatedClassLB";
-            this.RelatedClassLB.Size = new System.Drawing.Size(118, 13);
+            this.RelatedClassLB.Size = new System.Drawing.Size(267, 29);
             this.RelatedClassLB.TabIndex = 10;
             this.RelatedClassLB.Text = "Related Concrete Class";
             // 
@@ -468,14 +489,15 @@
             this.RelatedConcreteClass.FormattingEnabled = true;
             this.RelatedConcreteClass.InsertOperationCall = ((object)(resources.GetObject("RelatedConcreteClass.InsertOperationCall")));
             this.RelatedConcreteClass.IntegralHeight = false;
-            this.RelatedConcreteClass.Location = new System.Drawing.Point(355, 127);
+            this.RelatedConcreteClass.Location = new System.Drawing.Point(828, 283);
+            this.RelatedConcreteClass.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.RelatedConcreteClass.Name = "RelatedConcreteClass";
             this.RelatedConcreteClass.NullValueName = "";
             this.RelatedConcreteClass.OperationCall = ((object)(resources.GetObject("RelatedConcreteClass.OperationCall")));
             this.RelatedConcreteClass.Path = "SelectedRelationConcreteClass";
             this.RelatedConcreteClass.PreLoaded = true;
             this.RelatedConcreteClass.RemoveOperationCall = ((object)(resources.GetObject("RelatedConcreteClass.RemoveOperationCall")));
-            this.RelatedConcreteClass.Size = new System.Drawing.Size(235, 21);
+            this.RelatedConcreteClass.Size = new System.Drawing.Size(543, 37);
             this.RelatedConcreteClass.TabIndex = 9;
             this.RelatedConcreteClass.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.RelatedConcreteClass.ViewControlObject = this.Connection;
@@ -484,9 +506,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(220, 76);
+            this.label2.Location = new System.Drawing.Point(513, 170);
+            this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 13);
+            this.label2.Size = new System.Drawing.Size(291, 29);
             this.label2.TabIndex = 8;
             this.label2.Text = "ObjectID Mapped Column";
             // 
@@ -512,14 +535,15 @@
             this.ObjectIDMappedColumnsCBX.FormattingEnabled = true;
             this.ObjectIDMappedColumnsCBX.InsertOperationCall = ((object)(resources.GetObject("ObjectIDMappedColumnsCBX.InsertOperationCall")));
             this.ObjectIDMappedColumnsCBX.IntegralHeight = false;
-            this.ObjectIDMappedColumnsCBX.Location = new System.Drawing.Point(355, 73);
+            this.ObjectIDMappedColumnsCBX.Location = new System.Drawing.Point(828, 163);
+            this.ObjectIDMappedColumnsCBX.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.ObjectIDMappedColumnsCBX.Name = "ObjectIDMappedColumnsCBX";
             this.ObjectIDMappedColumnsCBX.NullValueName = "";
             this.ObjectIDMappedColumnsCBX.OperationCall = ((object)(resources.GetObject("ObjectIDMappedColumnsCBX.OperationCall")));
             this.ObjectIDMappedColumnsCBX.Path = "ObjectIDMappedColumn";
             this.ObjectIDMappedColumnsCBX.PreLoaded = true;
             this.ObjectIDMappedColumnsCBX.RemoveOperationCall = ((object)(resources.GetObject("ObjectIDMappedColumnsCBX.RemoveOperationCall")));
-            this.ObjectIDMappedColumnsCBX.Size = new System.Drawing.Size(235, 21);
+            this.ObjectIDMappedColumnsCBX.Size = new System.Drawing.Size(543, 37);
             this.ObjectIDMappedColumnsCBX.TabIndex = 7;
             this.ObjectIDMappedColumnsCBX.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.ObjectIDMappedColumnsCBX.ViewControlObject = this.Connection;
@@ -528,9 +552,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(224, 103);
+            this.label1.Location = new System.Drawing.Point(523, 230);
+            this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.Size = new System.Drawing.Size(287, 29);
             this.label1.TabIndex = 6;
             this.label1.Text = "Member Mapped Column";
             // 
@@ -556,14 +581,15 @@
             this.MappedColumnsCBX.FormattingEnabled = true;
             this.MappedColumnsCBX.InsertOperationCall = ((object)(resources.GetObject("MappedColumnsCBX.InsertOperationCall")));
             this.MappedColumnsCBX.IntegralHeight = false;
-            this.MappedColumnsCBX.Location = new System.Drawing.Point(355, 100);
+            this.MappedColumnsCBX.Location = new System.Drawing.Point(828, 223);
+            this.MappedColumnsCBX.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MappedColumnsCBX.Name = "MappedColumnsCBX";
             this.MappedColumnsCBX.NullValueName = "";
             this.MappedColumnsCBX.OperationCall = ((object)(resources.GetObject("MappedColumnsCBX.OperationCall")));
             this.MappedColumnsCBX.Path = "MappedColumn";
             this.MappedColumnsCBX.PreLoaded = true;
             this.MappedColumnsCBX.RemoveOperationCall = ((object)(resources.GetObject("MappedColumnsCBX.RemoveOperationCall")));
-            this.MappedColumnsCBX.Size = new System.Drawing.Size(235, 21);
+            this.MappedColumnsCBX.Size = new System.Drawing.Size(543, 37);
             this.MappedColumnsCBX.TabIndex = 5;
             this.MappedColumnsCBX.UpdateStyle = ConnectableControls.UpdateStyle.Immediately;
             this.MappedColumnsCBX.ViewControlObject = this.Connection;
@@ -572,9 +598,10 @@
             // TableLB
             // 
             this.TableLB.AutoSize = true;
-            this.TableLB.Location = new System.Drawing.Point(315, 49);
+            this.TableLB.Location = new System.Drawing.Point(735, 109);
+            this.TableLB.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.TableLB.Name = "TableLB";
-            this.TableLB.Size = new System.Drawing.Size(34, 13);
+            this.TableLB.Size = new System.Drawing.Size(76, 29);
             this.TableLB.TabIndex = 4;
             this.TableLB.Text = "Table";
             // 
@@ -604,7 +631,8 @@
             this.treeView1.InsertNodeOperationCall = ((object)(resources.GetObject("treeView1.InsertNodeOperationCall")));
             this.treeView1.LineColor = System.Drawing.SystemColors.ControlDark;
             this.treeView1.LoadOnDemand = true;
-            this.treeView1.Location = new System.Drawing.Point(6, 19);
+            this.treeView1.Location = new System.Drawing.Point(14, 42);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.treeView1.MetaData = ((object)(resources.GetObject("treeView1.MetaData")));
             this.treeView1.Model = null;
             this.treeView1.Name = "treeView1";
@@ -613,9 +641,10 @@
             this.treeView1.NodeObjectType = "VSMetadataRepositoryBrowser.MetaObjectTreeNode";
             this.treeView1.Path = "ClassAsTreeNode";
             this.treeView1.RecursiveLoadSteps = 0;
+            this.treeView1.RowHeight = 36D;
             this.treeView1.SelectedNode = null;
             this.treeView1.SelectionMember = "SelectedMember";
-            this.treeView1.Size = new System.Drawing.Size(189, 411);
+            this.treeView1.Size = new System.Drawing.Size(436, 912);
             this.treeView1.SubNodesProperty = "ContainedObjects";
             this.treeView1.TabIndex = 3;
             this.treeView1.Text = "treeView1";
@@ -624,11 +653,12 @@
             // 
             // ClassView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ClassGroupBox);
+            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.Name = "ClassView";
-            this.Size = new System.Drawing.Size(690, 467);
+            this.Size = new System.Drawing.Size(1610, 1042);
             this.ClassGroupBox.ResumeLayout(false);
             this.ClassGroupBox.PerformLayout();
             this.ResumeLayout(false);
