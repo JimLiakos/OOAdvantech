@@ -26,6 +26,7 @@ using UIBaseEx;
 using System.IO;
 using CefSharp.DevTools.Network;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 //using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace GenWebBrowser
@@ -119,7 +120,7 @@ namespace GenWebBrowser
         //     Occurs just before navigation to a document.
         public event NavigatingCancelEventHandler Navigating;
 
-        public object InvockeJSMethod(string methodName, object[] args,  bool _async = false)
+        public object InvockeJSMethod(string methodName, object[] args, bool _async = false)
         {
             //_placementTarget.Dispatcher.BeginInvoke(delegate () => { });
 
@@ -284,7 +285,7 @@ namespace GenWebBrowser
             }
             if (e.Key == Key.BrowserBack)
             {
-                InvockeJSMethod("BackButtonPress", new object[0],  true);
+                InvockeJSMethod("BackButtonPress", new object[0], true);
             }
             base.OnKeyUp(e);
         }
@@ -330,7 +331,7 @@ namespace GenWebBrowser
             //    EdgeWebBrowser.Navigate(source.AbsoluteUri);
 
 
-            if (ChromeBrowser != null&& ChromeBrowser.Address != source.AbsoluteUri)
+            if (ChromeBrowser != null && ChromeBrowser.Address != source.AbsoluteUri)
                 ChromeBrowser.Address = source.AbsoluteUri;
         }
 
@@ -473,16 +474,32 @@ namespace GenWebBrowser
                 string cachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format(@"Microneme\{0}\CefSharp\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", "")));
                 if (!string.IsNullOrWhiteSpace(extraCachePath))
                     cachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format(@"Microneme\{0}\{1}\CefSharp\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""), extraCachePath));
-
-                var settings = new CefSettings()
+                
+                var supportedLocales = "af,am,ar,bg,bn,ca,cs,da,de,el,en-GB,en-US,es-419,es,et,fa,fi,fil,fr,gu,he,hi,hr,hu,id,it,ja,kn,ko,lt,lv,ml,mr,ms,nb,nl,pl,pt-BR,pt-PT,ro,ru,sk,sl,sr,sv,sw,ta,te,th,tr,uk,ur,vi,zh-CN,zh-TW,".Split(',');
+                string uiLocale = OOAdvantech.CultureContext.CurrentNeutralCultureInfo.Name;
+                string supportedUILocale= supportedLocales.Where(x => x.StartsWith(uiLocale)).FirstOrDefault();
+                CefSettings settings = null;
+                if (supportedUILocale != null)
                 {
-                    //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
-                    CachePath = cachePath,
-                    RemoteDebuggingPort = 9222,
-                    IgnoreCertificateErrors = true,
-                    Locale = OOAdvantech.CultureContext.CurrentNeutralCultureInfo.Name
-
-                };
+                    settings = new CefSettings()
+                    {
+                        //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
+                        CachePath = cachePath,
+                        RemoteDebuggingPort = 9222,
+                        IgnoreCertificateErrors = true,
+                        Locale = supportedUILocale
+                    };
+                }
+                else
+                {
+                    settings = new CefSettings()
+                    {
+                        //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
+                        CachePath = cachePath,
+                        RemoteDebuggingPort = 9222,
+                        IgnoreCertificateErrors = true
+                    };
+                }
                 //CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), string.Format("Microneme\\{0}\\CefSharp\\Cache", AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ""))),
 
 #if DEBUG
@@ -507,11 +524,23 @@ namespace GenWebBrowser
                     SchemeHandlerFactory = new CustomProtocolSchemeHandlerFactory()
                 });
 
+                var cul = Thread.CurrentThread.CurrentUICulture;
                 //Perform dependency check to make sure all relevant resources are in our output directory.
                 Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
             }
             catch (Exception error)
             {
+
+                if (!System.Diagnostics.EventLog.SourceExists("Web browser cef sharp", "."))
+                    System.Diagnostics.EventLog.CreateEventSource("Web browser cef sharp", "OOAdvance");
+
+                System.Diagnostics.EventLog myLog = new System.Diagnostics.EventLog();
+                myLog.Source = "\"Web browser cef sharp";
+
+                if (myLog.OverflowAction != System.Diagnostics.OverflowAction.OverwriteAsNeeded)
+                    myLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction.OverwriteAsNeeded, 0);
+
+                myLog.WriteEntry("Chromium initialization failed :" + Environment.NewLine + error.Message + Environment.NewLine + error.StackTrace, System.Diagnostics.EventLogEntryType.Error);
 
             }
         }
@@ -900,9 +929,9 @@ namespace GenWebBrowser
 
             string requestDatajson = JsonConvert.SerializeObject(requestData);
             requestDatajson = ((int)MessageHeader.Request).ToString() + requestDatajson;
-            if (requestData.RequestType==RequestType.Event)
+            if (requestData.RequestType == RequestType.Event)
             {
-                System.Diagnostics.Debug.WriteLine("#### event CallContextID : "+requestData.CallContextID.ToString());
+                System.Diagnostics.Debug.WriteLine("#### event CallContextID : " + requestData.CallContextID.ToString());
 
             }
             InvockeJSMethod("SendMessage", new[] { requestDatajson }, true);
