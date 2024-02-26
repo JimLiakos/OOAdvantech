@@ -77,7 +77,7 @@ namespace GenWebBrowser
         public MemoryStream Stream;
     }
 
-
+    public delegate bool ShouldOverrideUrlLoadingHandler(string url);
 
     public delegate void ProcessRequestHandler(Uri requestUri, CustomProtocolResponse response);
 
@@ -102,6 +102,8 @@ namespace GenWebBrowser
                 ChromeBrowser = null;
             }
         }
+
+        public ShouldOverrideUrlLoadingHandler ShouldOverrideUrlLoading;
 
         public event EventHandler<object> DataContexRetrieving;
 
@@ -300,6 +302,19 @@ namespace GenWebBrowser
 
             if (ChromeBrowser != null)
                 ChromeBrowser.Address = source;
+        }
+
+        public string Url
+        { 
+            get
+            {
+
+
+                if (ChromeBrowser != null)
+                    return ChromeBrowser.Address;
+
+                return "";
+            }
         }
         //
         // Summary:
@@ -530,6 +545,9 @@ namespace GenWebBrowser
             }
             catch (Exception error)
             {
+#if DEBUG
+                Debug.Assert(false, "Chromium initialization failed");
+#endif
 
                 if (!System.Diagnostics.EventLog.SourceExists("Web browser cef sharp", "."))
                     System.Diagnostics.EventLog.CreateEventSource("Web browser cef sharp", "OOAdvance");
@@ -621,11 +639,14 @@ namespace GenWebBrowser
                 }
             };
 
+       
 
             //owner.LayoutUpdated += new EventHandler(OnOwnerLayoutUpdated);
         }
 
 
+
+       
 
         private void LaunchBrowser(BrowserType browserType)
         {
@@ -633,10 +654,12 @@ namespace GenWebBrowser
             {
 
 
-
                 ChromeBrowser = new ChromiumWebBrowser();
                 ChromeBrowser.MenuHandler = new CustomMenuHandler();
                 BrowserHostGrid.Children.Add(ChromeBrowser);
+                CefSharp.Handler.RequestHandler requestHandler = new MyBasicRequestHandler(this);
+                ChromeBrowser.RequestHandler = requestHandler;
+
 
             }
             if (browserType == BrowserType.IE)
@@ -973,6 +996,8 @@ namespace GenWebBrowser
         }
     }
 
+
+   
 
     /// <MetaDataID>{8255e316-a87d-44a2-8d74-5a2225a2017a}</MetaDataID>
     public class CustomMenuHandler : CefSharp.IContextMenuHandler
@@ -1411,7 +1436,25 @@ namespace GenWebBrowser
     }
 
 
+    public class MyBasicRequestHandler : CefSharp.Handler.RequestHandler
+    {
+        private readonly WebBrowserOverlay WebBrowserOverlay;
 
+        public MyBasicRequestHandler(WebBrowserOverlay webBrowserOverlay ) {
+
+            this.WebBrowserOverlay = webBrowserOverlay;
+        }
+  
+
+        protected override bool OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
+        {
+
+            if(this.WebBrowserOverlay.ShouldOverrideUrlLoading!=null&& this.WebBrowserOverlay.ShouldOverrideUrlLoading(request.Url)==true)
+               return  true;
+
+            return base.OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
+        }
+    }
 
 
 }

@@ -191,6 +191,7 @@ namespace OOAdvantech.Net
         }
     }
 
+    /// <MetaDataID>{e640e422-a84e-4d86-8703-f71fe8630954}</MetaDataID>
     public interface IWindowCaption
     {
         void SetCaptionBarColor(System.Drawing.Color color);

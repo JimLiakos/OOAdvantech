@@ -27,8 +27,19 @@ namespace OOAdvantech.Web
             }
         }
 
+        public bool OnShouldOverrideUrlLoading(string url)
+        {
+
+            if (ShouldOverrideUrlLoading != null)
+                return ShouldOverrideUrlLoading(url);
+            else
+                return false;
+        }
+
+
         public event NavigatedHandler Navigated;
 
+        public ShouldOverrideUrlLoadingHandler ShouldOverrideUrlLoading;
 
         Action<string> action;
 
@@ -259,4 +270,7 @@ namespace OOAdvantech.Web
     }
 
     public delegate void NavigatedHandler(object sender, NavigatedEventArgs e);
+
+    public delegate bool ShouldOverrideUrlLoadingHandler(string url);
+
 }

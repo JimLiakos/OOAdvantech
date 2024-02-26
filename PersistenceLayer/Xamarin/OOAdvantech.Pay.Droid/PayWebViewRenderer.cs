@@ -1009,6 +1009,9 @@ namespace OOAdvantech.Pay.Droid
             View = null;
 
         }
+
+      
+
     }
 
 

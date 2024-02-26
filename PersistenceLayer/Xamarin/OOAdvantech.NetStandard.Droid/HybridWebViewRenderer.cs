@@ -89,6 +89,14 @@ namespace OOAdvantech.Droid
             }
         }
 
+        public bool OnShouldOverrideUrlLoading(string url)
+        {
+            if (HybridWebView != null)
+                return HybridWebView.OnShouldOverrideUrlLoading(url);
+            else
+                return false;
+        }
+
         delegate void BackPressedandle();
 
         static event BackPressedandle OnBackPressed;
@@ -979,6 +987,13 @@ namespace OOAdvantech.Droid
             alertDialog.Show();
 
         }
+
+
+        public override bool ShouldOverrideUrlLoading(Android.Webkit.WebView view, string url)
+        {
+            return hybridWebViewRenderer.OnShouldOverrideUrlLoading(url);
+        }
+
 
         void handllerNotingButton(object sender, DialogClickEventArgs e)
         {

@@ -8032,11 +8032,11 @@
 	(object ClassDiagram "Main"
 	    quid       	"4265FBCC01D4"
 	    title      	"Main"
-	    zoom       	85
+	    zoom       	100
 	    max_height 	28350
 	    max_width  	21600
 	    origin_x   	0
-	    origin_y   	1678
+	    origin_y   	804
 	    items      	(list diagram_item_list
 		(object ClassView "Class" "Logical View::OOAdvantech::AbstractionsAndPersistency::OrderDetail" @1
 		    ShowCompartmentStereotypes 	TRUE
@@ -8483,7 +8483,7 @@
 			default_color 	TRUE)
 		    label      	(object ItemLabel
 			Parent_View 	@18
-			location   	(815, 2058)
+			location   	(815, 2057)
 			fill_color 	13434879
 			nlines     	1
 			max_width  	338
