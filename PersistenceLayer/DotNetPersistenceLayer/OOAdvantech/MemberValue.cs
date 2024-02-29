@@ -238,7 +238,7 @@ namespace OOAdvantech
 
 
 
-
+        bool OnLazyLoad = false;
 
         ///<exclude>Excluded</exclude>
         protected T _Value;
@@ -257,7 +257,7 @@ namespace OOAdvantech
                         {
 
                             _Initialized = true;
-
+                            OnLazyLoad=true;
                             try
                             {
                                 PersistenceLayer.StorageInstanceRef storageInstanceRef = PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Owner);
@@ -283,6 +283,10 @@ namespace OOAdvantech
                             {
                                 _Initialized = false;
                                 throw;
+                            }
+                            finally
+                            {
+                                OnLazyLoad=false;
                             }
                             _Initialized = true;
                         }
@@ -537,9 +541,9 @@ namespace OOAdvantech
                 {
                     T oldValue = Value;
                     _Value = (T)value;
-                    if (_Value != null && !_Value.Equals(oldValue))
+                    if (!OnLazyLoad&& _Value != null && !_Value.Equals(oldValue))
                         UpgrateReferencialIntegrityInvoke(RelResolver, new object[2] { _Value, true });
-                    if (oldValue != null && !oldValue.Equals(_Value))
+                    if (!OnLazyLoad&& oldValue != null && !oldValue.Equals(_Value))
                     {
                         UpgrateReferencialIntegrityInvoke(RelResolver, new object[2] { oldValue, false });
                     }
@@ -556,9 +560,9 @@ namespace OOAdvantech
                 {
                     T oldValue = Value;
                     _Value = (T)value;
-                    if (_Value != null && !_Value.Equals(oldValue))
+                    if (!OnLazyLoad&&_Value != null && !_Value.Equals(oldValue))
                         UpgrateReferencialIntegrityInvoke(RelResolver, new object[2] { _Value, true });
-                    if (oldValue != null && !oldValue.Equals(_Value))
+                    if (!OnLazyLoad&&oldValue != null && !oldValue.Equals(_Value))
                         UpgrateReferencialIntegrityInvoke(RelResolver, new object[2] { oldValue, false });
                 }
                 else
