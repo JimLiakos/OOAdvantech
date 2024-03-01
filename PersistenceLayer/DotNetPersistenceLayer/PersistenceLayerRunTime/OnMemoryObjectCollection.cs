@@ -296,7 +296,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                     {
                         using (var cultureConext = new OOAdvantech.CultureContext(culture, false))
                         {
-                            var collectionChanges = GetCollectionChanges(Transactions.Transaction.Current);
+                            var collectionChanges = GetCollectionChanges(transaction);
                             if (collectionChanges == null || collectionChanges.Count == 0)
                                 return false;
                             else
@@ -316,7 +316,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 try
                 {
                     ReaderWriterLock.AcquireReaderLock(10000);
-                    var collectionChanges = GetCollectionChanges(Transactions.Transaction.Current);
+                    var collectionChanges = GetCollectionChanges(transaction);
                     if (collectionChanges == null || collectionChanges.Count == 0)
                         return false;
                     else
