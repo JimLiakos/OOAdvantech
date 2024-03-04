@@ -476,6 +476,8 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{148f0b13-fbd5-451a-9cbe-6c98456ad9c4}</MetaDataID>
         public static object GetObjectFromUri(string persistentUri)
         {
+            if(persistentUri == null) 
+                return null;
             object @object = null;
             string[] persistentObjectUriParts = persistentUri.Split('\\');
             string storageIdentity = persistentObjectUriParts[0];
