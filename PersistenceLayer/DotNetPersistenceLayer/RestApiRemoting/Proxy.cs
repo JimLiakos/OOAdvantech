@@ -904,7 +904,7 @@ namespace OOAdvantech.Remoting.RestApi
                 object value = null;
                 if (propInfo != null && ObjectRef.MembersValues != null && ObjectRef.MembersValues.TryGetValue(propertyName, out value))
                 {
-                    ObjectRef.MembersValues[propertyName] = (msg as IMethodCallMessage).Args[0];
+                    ObjectRef.SetMemberValue(propertyName, (msg as IMethodCallMessage).Args[0]);
                 }
             }
             if (!localCall)
