@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace System.Windows.Controls
 {
     /// <MetaDataID>{47bc6c08-7c96-4afa-8ba8-00ce7d382057}</MetaDataID>
-    public class TextBoxNumberWithUnit:TextBox
+    public class TextBoxNumberWithUnit : TextBox
     {
 
         public TextBoxNumberWithUnit()
@@ -27,7 +27,7 @@ namespace System.Windows.Controls
                 Text = Number.ToString();
             else
                 Text = Number.ToString() + Unit;
-            
+
         }
 
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
@@ -36,8 +36,8 @@ namespace System.Windows.Controls
         }
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
         {
-            char decPoint= System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
-            foreach(char ch in e.Text )
+            char decPoint = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            foreach (char ch in e.Text)
             {
                 bool numericTextPart = false;
                 if (Integer)
@@ -51,12 +51,29 @@ namespace System.Windows.Controls
                     break;
                 }
             }
-            
+
+            if (MaxNumber != null)
+            {
+                double.TryParse(Text+e.Text, out double numberDecimal);
+                if (numberDecimal > MaxNumber)
+                    e.Handled = true;
+            }
+
+
             base.OnPreviewTextInput(e);
         }
-        
+        protected override void OnTextChanged(TextChangedEventArgs e)
+        {
 
-        
+            if (MaxNumber != null)
+            {
+                double.TryParse(Text , out double numberDecimal);
+                if (numberDecimal > MaxNumber)
+                    Text="";
+            }
+            base.OnTextChanged(e);
+        }
+
         public decimal Number
         {
             get
@@ -80,7 +97,7 @@ namespace System.Windows.Controls
                     typeof(TextBoxNumberWithUnit),
                     new PropertyMetadata(default(decimal), new PropertyChangedCallback(NumberPropertyChangedCallback)));
 
-        
+
 
         public static void NumberPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -95,6 +112,44 @@ namespace System.Windows.Controls
                 Text = Number.ToString();
             else
                 Text = Number.ToString() + Unit;
+        }
+
+
+        public Double? MaxNumber
+        {
+            get
+            {
+                object value = GetValue(MaxNumberProperty);
+                if (value is double)
+                    return (double)value;
+                else
+                    return null;
+            }
+            set
+            {
+                SetValue(MaxNumberProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty MaxNumberProperty =
+                    DependencyProperty.Register(
+                    "MaxNumber",
+                    typeof(Double?),
+                    typeof(TextBoxNumberWithUnit),
+                    new PropertyMetadata(default(Double?), new PropertyChangedCallback(MaxNumberPropertyChangedCallback)));
+
+
+
+        public static void MaxNumberPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+            if (d is TextBoxNumberWithUnit)
+                (d as TextBoxNumberWithUnit).MaxNumberPropertyChanged();
+        }
+
+        private void MaxNumberPropertyChanged()
+        {
+
         }
 
 

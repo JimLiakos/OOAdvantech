@@ -48,7 +48,7 @@
         <DataTemplate x:Key="DisplayModeTemplate">
             <Grid  PreviewMouseMove="DisplayMode_PreviewMouseMove"    MouseDown="TextBlock_MouseDown" HorizontalAlignment="Stretch" Background="Transparent" >
                 <Grid  HorizontalAlignment="{Binding ElementName=mainControl, Path=LabelHorizontalAlignment, Mode=OneWay}" >
-                    <TextBlock VerticalAlignment="Center" x:Name="TextBlock"    TextAlignment="{Binding ElementName=mainControl, Path=TextAlignment}"   TextDecorations="{Binding ElementName=mainControl, Path=TextDecorations}" Text="{Binding ElementName=mainControl, Path=FormattedText}" 
+                    <TextBlock VerticalAlignment="Center" x:Name="TextBlock"   Foreground="{Binding ElementName=mainControl, Path=Foreground}"   TextAlignment="{Binding ElementName=mainControl, Path=TextAlignment}"   TextDecorations="{Binding ElementName=mainControl, Path=TextDecorations}" Text="{Binding ElementName=mainControl, Path=FormattedText}" 
                            MouseDown="TextBlock_MouseDown" />
                     <Rectangle Margin="0,0,0,-6"  Visibility="{Binding ElementName=mainControl, Path=UnTranslated, Converter={StaticResource BooleanToVisibilityConverter}}"  VerticalAlignment="Bottom" Height="9"  HorizontalAlignment="Stretch" StrokeThickness="17" >
                         <Rectangle.Stroke>
