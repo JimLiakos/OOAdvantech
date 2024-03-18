@@ -123,6 +123,7 @@ namespace WPFUIElementObjectBind
         }
     }
 
+    /// <MetaDataID>{7ae23a39-00a5-415b-9592-5d417412189d}</MetaDataID>
     public interface IDragDropTarget
     {
         /// <MetaDataID>{3a9c7278-11ab-4c80-a064-b9985297fa73}</MetaDataID>

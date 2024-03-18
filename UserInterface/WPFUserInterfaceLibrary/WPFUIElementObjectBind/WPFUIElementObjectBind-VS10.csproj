@@ -100,6 +100,7 @@
     <Compile Include="TextBoxNumberWithUnit.cs" />
     <None Include="ViewModelWrappers.cs" />
     <Compile Include="TreeViewItemBehavior.cs" />
+    <Compile Include="TwoStateButton.cs" />
     <Compile Include="WindowCloseCommand.cs" />
     <Compile Include="WindowMaximizeCommand.cs" />
     <Compile Include="WindowMinimizeCommand.cs" />

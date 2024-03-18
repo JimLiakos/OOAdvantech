@@ -8,17 +8,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPFUIElementObjectBind.Properties {
-    
-    
+namespace WPFUIElementObjectBind.Properties
+{
+
+
+    /// <MetaDataID>{80f5de3c-39b0-4548-aaa8-1022df737c6c}</MetaDataID>
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
-        public static Settings Default {
-            get {
+
+        public static Settings Default
+        {
+            get
+            {
                 return defaultInstance;
             }
         }
