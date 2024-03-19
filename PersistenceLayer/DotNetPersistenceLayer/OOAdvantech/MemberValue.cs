@@ -926,7 +926,7 @@ namespace OOAdvantech
                 else
                 {
                     if (_Value != null)
-                        return _Value.Equals(default(T));
+                        return !_Value.Equals(default(T));
                     else
                         return default(T) != null;
                 }

@@ -40,7 +40,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
             if (RoleB.StorageIdentity == ObjectStorage.StorageIdentity)
             {
                 MetaDataStorageSession ObjectStorageSession = (MetaDataStorageSession)RoleB.ObjectStorage;
-
+                ObjectStorageSession.Dirty = true;
                 if (RoleB.PersistentObjectID != null)
                 {
                     RoleBStorageInstance = ObjectStorageSession.GetXMLElement(RoleB.MemoryInstance.GetType(), (ObjectID)RoleB.PersistentObjectID);//(XElement)ObjectStorageSession.XMLDocument.SelectSingleNode(XQuery);
@@ -63,6 +63,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                     if (string.IsNullOrEmpty(roleBName))
                         roleBName = LinkInitiatorAssociationEnd.Association.Name + "RoleBName";
                     ObjectStorageSession.SetMappedTagName(LinkInitiatorAssociationEnd.Association.RoleB.Identity.ToString().ToLower(), roleBName);
+                    ObjectStorageSession.Dirty = true;
                 }
                 #endregion
 
@@ -92,6 +93,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                                     int.TryParse(refElement.GetAttribute("Sort"), out index);
                             }
                             refElement.Remove();
+                            ObjectStorageSession.Dirty = true;
                         }
                     }
                 }
@@ -140,6 +142,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
                                     int.TryParse(refElement.GetAttribute("Sort"), out index);
                             }
                             refElement.Remove();
+                            ObjectStorageSession.Dirty = true;
                         }
                     }
 

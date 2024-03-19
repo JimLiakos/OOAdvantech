@@ -1121,7 +1121,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.ObjectQueryLanguage
                                 foreach (XElement relationElement in objectElement.Elements())
                                 {
                                     var tagName = (ObjectStorage as MetaDataStorageSession).GetMappedTagName(associationEnd.GetOtherEnd().Identity.ToString());
-                                    if (relationElement.Name == associationEnd.GetOtherEnd().Name
+                                    if ((!string.IsNullOrWhiteSpace( associationEnd.GetOtherEnd().Name)&& relationElement.Name == associationEnd.GetOtherEnd().Name)
                                         || (string.IsNullOrEmpty(associationEnd.GetOtherEnd().Name) && relationElement.Name == associationEnd.Association.Name + associationEnd.GetOtherEnd().Role + "Name")
                                         || relationElement.Name == tagName)
                                     {

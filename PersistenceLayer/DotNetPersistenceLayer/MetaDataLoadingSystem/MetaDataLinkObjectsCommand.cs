@@ -82,6 +82,7 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
 
             if (roleBObjectStorage != null)
             {
+                roleAObjectStorage.Dirty = true;
                 XDocument XmlDocument = roleBObjectStorage.XMLDocument;
                 storageName = XmlDocument.Root.Name.LocalName;
                 RoleBStorageInstance = roleBObjectStorage.GetXMLElement(RoleB.MemoryInstance.GetType(), (ObjectID)RoleB.PersistentObjectID);//(System.Xml.XmlElement)ObjectStorageSession.XMLDocument.SelectSingleNode(XQuery);
@@ -121,8 +122,8 @@ namespace OOAdvantech.MetaDataLoadingSystem.Commands
             string _roleObjectIDAsStr = relatedObjectRef.PersistentObjectID.ToString(CultureInfoHelper.GetCultureInfo(1033));
 
 
-
-
+            if(ownerObjectStorage != null)
+                ownerObjectStorage.Dirty = true;
 
             while (true)
             {
