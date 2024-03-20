@@ -4407,7 +4407,7 @@
             OOAdvantech.MSSQLPersistenceRunTime.StorageProvider. </param>
             <MetaDataID>{58834B72-37CA-4F14-BDEB-3559AE0E665E}</MetaDataID>
         </member>
-        <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.UpdateOperativeOperativeObjects(System.String)">
+        <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.UpdateOperativeObjects(System.String)">
             <MetaDataID>{92d67ee4-f8ed-4548-b696-accbb363d8da}</MetaDataID>
         </member>
         <member name="M:OOAdvantech.PersistenceLayer.ObjectStorage.NewStorage(OOAdvantech.PersistenceLayer.Storage,System.String,System.String,System.String)">

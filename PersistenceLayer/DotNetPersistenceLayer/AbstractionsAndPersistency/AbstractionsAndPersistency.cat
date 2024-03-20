@@ -8065,24 +8065,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"4266033C0203"
-		    compartment 	(object Compartment
-			Parent_View 	@1
-			location   	(2551, 1069)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	5
-			max_width  	459)
 		    width      	468
 		    height     	231
 		    annotation 	8)
@@ -9770,24 +9752,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"438964770359"
-		    compartment 	(object Compartment
-			Parent_View 	@80
-			location   	(1649, 1106)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	4
-			max_width  	909)
 		    width      	471
 		    height     	279
 		    annotation 	8)
@@ -9818,24 +9782,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"4266032F0213"
-		    compartment 	(object Compartment
-			Parent_View 	@81
-			location   	(711, 1146)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	26
-			max_width  	2437)
 		    width      	633
 		    height     	361
 		    annotation 	8)
@@ -9992,24 +9938,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"4265FC600222"
-		    compartment 	(object Compartment
-			Parent_View 	@90
-			location   	(2570, 528)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	3
-			max_width  	403)
 		    width      	456
 		    height     	331
 		    annotation 	8)
@@ -10189,24 +10117,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"529C70EF0107"
-		    compartment 	(object Compartment
-			Parent_View 	@99
-			location   	(57, 1028)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	2
-			max_width  	303)
 		    width      	368
 		    height     	298
 		    annotation 	8)
@@ -10238,24 +10148,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"4265FBFE038A"
-		    compartment 	(object Compartment
-			Parent_View 	@100
-			location   	(764, 509)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	4
-			max_width  	306)
 		    width      	434
 		    height     	360
 		    annotation 	8)
@@ -10791,24 +10683,6 @@
 		    line_color 	3342489
 		    fill_color 	13434879
 		    quidu      	"529C765D030D"
-		    compartment 	(object Compartment
-			Parent_View 	@126
-			location   	(68, 1606)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	161
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			icon_style 	"Icon"
-			fill_color 	16777215
-			anchor     	2
-			nlines     	3
-			max_width  	853)
 		    width      	382
 		    height     	265
 		    annotation 	8)

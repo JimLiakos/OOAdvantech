@@ -92,6 +92,6 @@ namespace OOAdvantech.PersistenceLayer
 
         /// <MetaDataID>{5df88e9a-4d65-41bd-8d6a-f72dd307f287}</MetaDataID>
         void Repair(string storageName, string storageLocation, string storageType, bool InProcess, string userName = "", string password = "");
-        void UpdateOperativeOperativeObjects(string storageIdentity);
+        void UpdateOperativeObjects(string storageIdentity);
     }
 }

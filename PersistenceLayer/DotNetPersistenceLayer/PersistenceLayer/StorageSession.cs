@@ -420,9 +420,9 @@ namespace OOAdvantech.PersistenceLayer
         }
 
         /// <MetaDataID>{92d67ee4-f8ed-4548-b696-accbb363d8da}</MetaDataID>
-        public static void UpdateOperativeOperativeObjects(string storageIdentity)
+        public static void UpdateOperativeObjects(string storageIdentity)
         {
-            PersistencyService.UpdateOperativeOperativeObjects(storageIdentity);
+            PersistencyService.UpdateOperativeObjects(storageIdentity);
         }
 
 

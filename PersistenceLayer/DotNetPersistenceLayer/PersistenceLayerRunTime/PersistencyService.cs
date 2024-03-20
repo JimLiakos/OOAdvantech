@@ -733,7 +733,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
 
         }
 
-        public void UpdateOperativeOperativeObjects(string storageIdentity)
+        public void UpdateOperativeObjects(string storageIdentity)
         {
 
             lock (OpenStorages)

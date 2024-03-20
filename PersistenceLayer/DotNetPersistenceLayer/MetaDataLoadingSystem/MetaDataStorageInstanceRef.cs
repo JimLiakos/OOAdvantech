@@ -972,13 +972,6 @@ namespace OOAdvantech.MetaDataLoadingSystem
                 }
                 innerStateTransition.Consistent = true;
             }
-
-
-
-
-
-
-
         }
 
 
