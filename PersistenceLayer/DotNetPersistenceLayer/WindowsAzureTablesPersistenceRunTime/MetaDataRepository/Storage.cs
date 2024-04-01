@@ -224,7 +224,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         }
                     }
 
-
+                    //CheckForUnusedMetaData();
                     mComponent.Synchronize(Component);
 
                     string myName = (string)mComponent.GetPropertyValue(typeof(string), "Persosnal", "Myname");
@@ -325,9 +325,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             if (realizations.Count > 0)
                 System.Diagnostics.Debug.Assert(false, "garbage realizations.");
 
+
+
+
             foreach (var realization in realizations)
             {
                 PersistenceLayer.ObjectStorage.DeleteObject(realization);
+            }
+            realizations = storageMetaObjects.OfType<MetaDataRepository.Realization>().Where(x => x.Abstarction?.ImplementationUnit == null || (x.Implementor as MetaObject)?.ImplementationUnit == null).ToList();
+            if(realizations.Count > 0)
+            {
+
             }
 
 

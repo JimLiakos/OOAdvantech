@@ -1,3 +1,5 @@
+using System.Security.Principal;
+
 namespace OOAdvantech.RDBMSMetaDataRepository
 {
 	/// <MetaDataID>{2B55942A-75E9-49F0-8FB0-0F3C09B12141}</MetaDataID>
@@ -30,7 +32,11 @@ namespace OOAdvantech.RDBMSMetaDataRepository
 		{
 			if(MetaObjectID==null)
 				return null;
-			MetaDataRepository.MetaObject FindedMetaObject=null;
+            if (MetaObjectID.ToString() == "FlavourBusinessManager.PriceList.PriceList+PriceListPrice")
+            {
+
+            }
+            MetaDataRepository.MetaObject FindedMetaObject=null;
 			if(!MetObjectsLoaded)
 			{
 

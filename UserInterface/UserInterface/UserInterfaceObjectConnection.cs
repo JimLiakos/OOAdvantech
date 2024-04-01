@@ -2100,6 +2100,9 @@ namespace OOAdvantech.UserInterface.Runtime
         /// <MetaDataID>{db571dc9-3cef-4093-b571-1d877ceb8881}</MetaDataID>
         public void Save()
         {
+            var ctrl = this.ContainerControl;
+
+            var lcturi = OOAdvantech.Transactions.Transaction.Current?.LocalTransactionUri;
             if (IniateTransactionOnInstanceSet || MasterViewControlObject == null)
             {
                 if (_Transaction is OOAdvantech.Transactions.CommittableTransaction)

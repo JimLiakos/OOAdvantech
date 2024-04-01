@@ -14,8 +14,9 @@ namespace WPFUIElementObjectBind
 
         public void InsertMenucommand(int index, MenuCommand menuCommand)
         {
-
         }
+
+       public object Tag { get; set; }
 
         string OOAdvantech.UserInterface.Runtime.IConnectedCommand.Name
         {
@@ -148,6 +149,8 @@ namespace WPFUIElementObjectBind
 
             }
         }
+
+        public object Parameter { get; set; }
     }
 
 

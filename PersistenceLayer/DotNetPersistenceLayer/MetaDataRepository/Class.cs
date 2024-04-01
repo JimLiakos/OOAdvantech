@@ -1417,7 +1417,7 @@ namespace OOAdvantech.MetaDataRepository
         /// <MetaDataID>{D0ACF9B2-2AA4-4146-9A1D-ADE2980B99A8}</MetaDataID>
         public override void Synchronize(MetaObject originMetaObject)
         {
-
+         
 
             OOAdvantech.Synchronization.LockCookie lockCookie = ReaderWriterLock.UpgradeToWriterLock(10000);
             RefreshClassHierarchyCollections();
@@ -1437,6 +1437,10 @@ namespace OOAdvantech.MetaDataRepository
                     MetaDataRepository.Class originClass = (MetaDataRepository.Class)originMetaObject;
                     #region Sychronize realization relationship
                     ContainedItemsSynchronizer RealizationSynchronizer = MetaObjectsStack.CurrentMetaObjectCreator.BuildItemsSychronizer(originClass.Realizations, _Realizations, this);
+                    if (Identity.ToString() == "FlavourBusinessManager.PriceList.PriceList+PriceListPrice")
+                    {
+
+                    }
                     RealizationSynchronizer.FindModifications();
                     RealizationSynchronizer.ExecuteAddCommand();
                     RealizationSynchronizer.ExecuteDeleteCommand();

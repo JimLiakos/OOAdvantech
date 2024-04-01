@@ -126,7 +126,7 @@ namespace GenWebBrowser
         {
             //_placementTarget.Dispatcher.BeginInvoke(delegate () => { });
 
-
+            
 
 
 
@@ -302,6 +302,7 @@ namespace GenWebBrowser
 
             if (ChromeBrowser != null)
                 ChromeBrowser.Address = source;
+
         }
 
         public string Url
@@ -994,6 +995,11 @@ namespace GenWebBrowser
             return ProcessActiveBrowsers.Where(x => x.Key.GetBrowser().Identifier == browser.Identifier).Select(x => x.Value).FirstOrDefault();
 
         }
+
+        public void Reload(bool ignoreCache)
+        {
+            ChromeBrowser.Reload(ignoreCache);
+        }
     }
 
 
@@ -1436,21 +1442,23 @@ namespace GenWebBrowser
     }
 
 
+    /// <MetaDataID>{f154d768-689c-4894-9535-9c69f6ddd052}</MetaDataID>
     public class MyBasicRequestHandler : CefSharp.Handler.RequestHandler
     {
         private readonly WebBrowserOverlay WebBrowserOverlay;
 
-        public MyBasicRequestHandler(WebBrowserOverlay webBrowserOverlay ) {
+        public MyBasicRequestHandler(WebBrowserOverlay webBrowserOverlay)
+        {
 
             this.WebBrowserOverlay = webBrowserOverlay;
         }
-  
+
 
         protected override bool OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
         {
 
-            if(this.WebBrowserOverlay.ShouldOverrideUrlLoading!=null&& this.WebBrowserOverlay.ShouldOverrideUrlLoading(request.Url)==true)
-               return  true;
+            if (this.WebBrowserOverlay.ShouldOverrideUrlLoading != null && this.WebBrowserOverlay.ShouldOverrideUrlLoading(request.Url) == true)
+                return true;
 
             return base.OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
         }
