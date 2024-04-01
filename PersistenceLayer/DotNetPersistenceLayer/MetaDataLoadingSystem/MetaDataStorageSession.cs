@@ -1659,6 +1659,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
         {
             _XMLDocument = XDocument.Load(StorageMetaData.StorageLocation);
             _ObjectElement.Clear();
+            ObjectCollectionNodes.Clear();
 
 
             using (ObjectStateTransition stateTransition = new ObjectStateTransition(this))
