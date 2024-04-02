@@ -244,7 +244,7 @@ namespace OOAdvantech.Droid
 
 //            if (Control == null)
 //            {
-
+                
 
 //                var webView = new Android.Webkit.WebView(Context);
 //                //webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
