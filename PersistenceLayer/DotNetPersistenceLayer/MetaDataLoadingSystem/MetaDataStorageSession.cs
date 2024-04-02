@@ -1661,7 +1661,7 @@ namespace OOAdvantech.MetaDataLoadingSystem
             _ObjectElement.Clear();
             ObjectCollectionNodes.Clear();
 
-
+             
             using (ObjectStateTransition stateTransition = new ObjectStateTransition(this))
             {
 
