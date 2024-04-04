@@ -11,6 +11,7 @@ using OOAdvantech.Web;
 using WebKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using UIKit;
 
 [assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
 namespace OOAdvantech.iOS
@@ -67,6 +68,14 @@ namespace OOAdvantech.iOS
                 if (NativeWebView == null)
                 {
                     NativeWebView = this;
+
+
+
+                    if (UIDevice.CurrentDevice.CheckSystemVersion(16, 0))
+                    {
+                        NativeWebView.Inspectable = true;
+                    }
+
                     NativeWebView.ScrollView.PanGestureRecognizer.Enabled = false;
                     if (NativeWebView.ScrollView.PinchGestureRecognizer != null)
                         NativeWebView.ScrollView.PinchGestureRecognizer.Enabled = false;
