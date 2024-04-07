@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace UIBaseEx
 {
@@ -10,6 +11,25 @@ namespace UIBaseEx
     {
 
         public delegate void OnNewViewModelWrapperHandler(ViewModelWrappers<TKey, TValue> sender, TKey key, TValue value);
+
+        public TValue GetViewModelFor(TKey _object, Func<TValue> function)
+        {
+            if (_object == null)
+                return null;
+            TValue value = default(TValue);
+            if (!TryGetValue(_object, out value))
+            {
+                value = function();
+                this[_object] = value;
+
+                OnNewViewModelWrapper?.Invoke(this, _object, value);
+
+
+            }
+            return value;
+        }
+
+        
 
         public TValue GetViewModelFor(TKey _object, params object[] args)
         {

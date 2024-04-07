@@ -89,7 +89,11 @@ namespace OOAdvantech
                             {
 
                             }
-
+                            lock (TaskSchedulerLock)
+                            {
+                                if (Tasks_b.Count == 0)
+                                    TaskCompletionSource.SetResult(true);
+                            }
 
 
                         }
