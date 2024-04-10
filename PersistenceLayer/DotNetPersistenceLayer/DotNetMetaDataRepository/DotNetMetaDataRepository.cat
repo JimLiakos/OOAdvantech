@@ -3565,7 +3565,8 @@
 		    result     	"InterfaceMapping"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Implementation"
-		    uid        	0))
+		    uid        	0
+		    quidu      	"3ECF3D87009A"))
 	    class_attributes 	(list class_attribute_list
 		(object ClassAttribute "IsNestedType"
 		    attributes 	(list Attribute_Set
@@ -12605,7 +12606,7 @@
 			    supplier   	"RoleAType"
 			    quidu      	"5EC585B40323"
 			    messages   	(list Messages
-				(object Message "GetRoles(typeClassifier)"
+				(object Message "GetRoles( )"
 				    quid       	"5EC5861F03DF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -12627,7 +12628,7 @@
 			    supplier   	"RoleAType"
 			    quidu      	"5EC585B40323"
 			    messages   	(list Messages
-				(object Message "CreateAssociationEnd(memberInfo, associationAttribute)"
+				(object Message "CreateAssociationEnd(  )"
 				    quid       	"5EC5888B02EF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -12641,7 +12642,7 @@
 			    supplier   	"RoleBType"
 			    quidu      	"5EC5895E0120"
 			    messages   	(list Messages
-				(object Message "SearchForAssociationEnd(associotionIdentity, excludeMember, searchForName)"
+				(object Message "SearchForAssociationEnd(   )"
 				    quid       	"5EC5896E02D3"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -12655,7 +12656,7 @@
 			    supplier   	"$UNNAMED$41"
 			    quidu      	"5EC58A76006C"
 			    messages   	(list Messages
-				(object Message "Association(associationAttribute, roleA, roleB)"
+				(object Message "Association(   )"
 				    quid       	"5EC58A8F0206"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -12684,7 +12685,7 @@
 			    supplier   	"RoleA"
 			    quidu      	"5EC585B0012C"
 			    messages   	(list Messages
-				(object Message "AddAssociationEnd(theAssociationEnd)"
+				(object Message "AddAssociationEnd( )"
 				    quid       	"5EC58B1F02EF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -12698,7 +12699,7 @@
 			    supplier   	"RoleBType"
 			    quidu      	"5EC58B0C01FF"
 			    messages   	(list Messages
-				(object Message "AddAssociationEnd(theAssociationEnd)"
+				(object Message "AddAssociationEnd( )"
 				    quid       	"5EC58B3F01B7"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -14139,7 +14140,7 @@
 		    quidu      	"3ED72D450203"
 		    compartment 	(object Compartment
 			Parent_View 	@69
-			location   	(1640, 1004)
+			location   	(1640, 1011)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -14154,7 +14155,7 @@
 			fill_color 	16777215
 			anchor     	2
 			nlines     	5
-			max_width  	1237)
+			max_width  	1290)
 		    width      	325
 		    height     	212
 		    annotation 	8)
@@ -14245,7 +14246,7 @@
 		    quidu      	"3ED7378F038A"
 		    compartment 	(object Compartment
 			Parent_View 	@75
-			location   	(2633, 2229)
+			location   	(2633, 2237)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -14260,7 +14261,7 @@
 			fill_color 	16777215
 			anchor     	2
 			nlines     	2
-			max_width  	543)
+			max_width  	553)
 		    width      	343
 		    height     	150
 		    annotation 	8)
@@ -14910,7 +14911,7 @@
 		    height     	406
 		    annotation 	8)
 		(object AssociationViewNew "OperationImplementation" @108
-		    location   	(2463, 2242)
+		    location   	(2463, 2243)
 		    font       	(object Font
 			size       	10
 			face       	"Arial"
@@ -14923,7 +14924,7 @@
 			default_color 	TRUE)
 		    label      	(object SegLabel @109
 			Parent_View 	@108
-			location   	(2397, 2153)
+			location   	(2397, 2154)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -14949,7 +14950,7 @@
 		    roleview_list 	(list RoleViews
 			(object RoleView "Specification" @110
 			    Parent_View 	@108
-			    location   	(1231, 439)
+			    location   	(1231, 440)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -14962,7 +14963,7 @@
 				default_color 	TRUE)
 			    label      	(object SegLabel @111
 				Parent_View 	@110
-				location   	(2196, 2088)
+				location   	(2196, 2089)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -14988,11 +14989,11 @@
 			    client     	@108
 			    supplier   	@107
 			    line_style 	3
-			    origin_attachment 	(2463, 2242)
-			    terminal_attachment 	(2303, 2242)
+			    origin_attachment 	(2463, 2243)
+			    terminal_attachment 	(2303, 2243)
 			    label      	(object SegLabel @112
 				Parent_View 	@110
-				location   	(2320, 2281)
+				location   	(2320, 2282)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -15014,7 +15015,7 @@
 				orientation 	0))
 			(object RoleView "Implementetions" @113
 			    Parent_View 	@108
-			    location   	(1231, 439)
+			    location   	(1231, 440)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -15027,7 +15028,7 @@
 				default_color 	TRUE)
 			    label      	(object SegLabel @114
 				Parent_View 	@113
-				location   	(2620, 2075)
+				location   	(2620, 2076)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -15053,11 +15054,11 @@
 			    client     	@108
 			    supplier   	@75
 			    line_style 	3
-			    origin_attachment 	(2463, 2242)
-			    terminal_attachment 	(2624, 2242)
+			    origin_attachment 	(2463, 2243)
+			    terminal_attachment 	(2624, 2243)
 			    label      	(object SegLabel @115
 				Parent_View 	@113
-				location   	(2607, 2296)
+				location   	(2607, 2297)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -15949,7 +15950,7 @@
 		    quidu      	"45E52C820297"
 		    compartment 	(object Compartment
 			Parent_View 	@157
-			location   	(3419, 2545)
+			location   	(3419, 2553)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -15964,7 +15965,7 @@
 			fill_color 	16777215
 			anchor     	2
 			nlines     	4
-			max_width  	534)
+			max_width  	562)
 		    width      	469
 		    height     	225
 		    annotation 	8)
@@ -16345,7 +16346,7 @@
 		    quidu      	"4608BD2C00AB"
 		    compartment 	(object Compartment
 			Parent_View 	@174
-			location   	(3459, 2917)
+			location   	(3459, 2921)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -16360,7 +16361,7 @@
 			fill_color 	16777215
 			anchor     	2
 			nlines     	5
-			max_width  	996)
+			max_width  	1040)
 		    width      	394
 		    height     	175
 		    annotation 	8)
@@ -21341,7 +21342,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateAssociationEnd(memberInfo, associationAttribute)"
+			label      	"CreateAssociationEnd(  )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -21482,7 +21483,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetRoles(typeClassifier)"
+			label      	"GetRoles( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -21531,7 +21532,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"SearchForAssociationEnd(associotionIdentity, excludeMember, searchForName)"
+			label      	"SearchForAssociationEnd(   )"
 			pctDist    	3.833333
 			height     	71
 			orientation 	0)
@@ -21580,7 +21581,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Association(associationAttribute, roleA, roleB)"
+			label      	"Association(   )"
 			pctDist    	1.954353
 			height     	9
 			orientation 	0)
@@ -21629,7 +21630,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddAssociationEnd(theAssociationEnd)"
+			label      	"AddAssociationEnd( )"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -21678,7 +21679,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddAssociationEnd(theAssociationEnd)"
+			label      	"AddAssociationEnd( )"
 			pctDist    	1.195786
 			height     	140
 			orientation 	0)

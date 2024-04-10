@@ -298,7 +298,15 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         {
                             lock (methodInfo)
                             {
-                                Method method = new Method(methodInfo, operation);
+
+                                Method method = operation.Implementetions.OfType<Method>().Where(x => x.WrMethod == methodInfo).FirstOrDefault();
+                                if(method==null)
+                                    method = new Method(methodInfo, operation);
+                                else
+                                {
+
+                                }
+
                                 features.Add(method);
                                 if (operation.WrMethod == method.WrMethod)
                                     features.Add(operation);

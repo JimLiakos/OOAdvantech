@@ -55153,7 +55153,7 @@
 			    max_height 	28350
 			    max_width  	21600
 			    origin_x   	0
-			    origin_y   	141
+			    origin_y   	191
 			    items      	(list diagram_item_list
 				(object ClassView "Class" "Logical View::UML::Classes::Dependencies::Realization" @2301
 				    ShowCompartmentStereotypes 	TRUE
@@ -62402,8 +62402,8 @@
 			    zoom       	100
 			    max_height 	28350
 			    max_width  	21600
-			    origin_x   	882
-			    origin_y   	981
+			    origin_x   	0
+			    origin_y   	0
 			    items      	(list diagram_item_list
 				(object ClassView "Class" "Logical View::UML::Classes::Dependencies::Abstraction" @2603
 				    ShowCompartmentStereotypes 	TRUE
@@ -62422,14 +62422,14 @@
 					default_color 	TRUE)
 				    label      	(object ItemLabel
 					Parent_View 	@2603
-					location   	(1494, 651)
+					location   	(1497, 651)
 					nlines     	1
-					max_width  	264
+					max_width  	258
 					justify    	0
 					label      	"Abstraction")
 				    icon_style 	"Icon"
 				    quidu      	"3388FE7D006E"
-				    width      	282
+				    width      	276
 				    height     	98
 				    annotation 	8
 				    autoResize 	TRUE)
@@ -62481,19 +62481,19 @@
 					default_color 	TRUE)
 				    label      	(object ItemLabel
 					Parent_View 	@2605
-					location   	(1490, 993)
+					location   	(1486, 993)
 					nlines     	1
-					max_width  	272
+					max_width  	280
 					justify    	0
 					label      	"Manifestation")
 				    icon_style 	"Icon"
 				    quidu      	"3E04533F02DA"
-				    width      	290
+				    width      	298
 				    height     	86
 				    annotation 	8
 				    autoResize 	TRUE)
 				(object AssociationViewNew "$UNNAMED$413" @2606
-				    location   	(1935, 1026)
+				    location   	(1937, 1026)
 				    font       	(object Font
 					size       	8
 					face       	"Arial"
@@ -62509,7 +62509,7 @@
 				    roleview_list 	(list RoleViews
 					(object RoleView "utilizedElement" @2607
 					    Parent_View 	@2606
-					    location   	(1401, 294)
+					    location   	(1403, 294)
 					    font       	(object Font
 						size       	8
 						face       	"Arial"
@@ -62522,7 +62522,7 @@
 						default_color 	TRUE)
 					    label      	(object SegLabel @2608
 						Parent_View 	@2607
-						location   	(1947, 978)
+						location   	(1949, 978)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62563,7 +62563,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.900000
@@ -62571,7 +62571,7 @@
 						orientation 	1)
 					    label      	(object SegLabel @2610
 						Parent_View 	@2607
-						location   	(1997, 1141)
+						location   	(2000, 1141)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62596,7 +62596,7 @@
 						orientation 	1))
 					(object RoleView "$UNNAMED$414" @2611
 					    Parent_View 	@2606
-					    location   	(1401, 294)
+					    location   	(1403, 294)
 					    font       	(object Font
 						size       	8
 						face       	"Arial"
@@ -62614,7 +62614,7 @@
 					    line_style 	0
 					    label      	(object SegLabel @2612
 						Parent_View 	@2611
-						location   	(1802, 1073)
+						location   	(1806, 1073)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62628,7 +62628,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.811828
@@ -62712,15 +62712,32 @@
 					default_color 	TRUE)
 				    label      	(object ItemLabel
 					Parent_View 	@2616
-					location   	(786, 956)
+					location   	(792, 956)
 					nlines     	1
-					max_width  	300
+					max_width  	288
 					justify    	0
 					label      	"Artifact")
 				    icon_style 	"Icon"
 				    fill_color 	16777215
 				    quidu      	"3E0235DA036F"
-				    width      	318
+				    compartment 	(object Compartment
+					Parent_View 	@2616
+					location   	(792, 1008)
+					font       	(object Font
+					    size       	8
+					    face       	"Arial"
+					    charSet    	161
+					    bold       	FALSE
+					    italics    	FALSE
+					    underline  	FALSE
+					    strike     	FALSE
+					    color      	0
+					    default_color 	TRUE)
+					icon_style 	"Decoration"
+					anchor     	2
+					nlines     	1
+					max_width  	241)
+				    width      	306
 				    height     	112
 				    autoResize 	TRUE)
 				(object AssociationViewNew "$UNNAMED$415" @2617
@@ -62802,7 +62819,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.900000
@@ -62841,12 +62858,12 @@
 					    vertices   	(list Points
 						(480, 880)
 						(480, 1002)
-						(777, 1002))
+						(783, 1002))
 					    line_style 	3
 					    origin_attachment 	(480, 880)
-					    terminal_attachment 	(777, 1002))))
+					    terminal_attachment 	(783, 1002))))
 				(object AssociationViewNew "$UNNAMED$417" @2623
-				    location   	(1288, 1027)
+				    location   	(1283, 1027)
 				    font       	(object Font
 					size       	8
 					face       	"Arial"
@@ -62862,7 +62879,7 @@
 				    roleview_list 	(list RoleViews
 					(object RoleView "manifestation" @2624
 					    Parent_View 	@2623
-					    location   	(742, 263)
+					    location   	(737, 263)
 					    font       	(object Font
 						size       	8
 						face       	"Arial"
@@ -62875,7 +62892,7 @@
 						default_color 	TRUE)
 					    label      	(object SegLabel @2625
 						Parent_View 	@2624
-						location   	(1337, 990)
+						location   	(1332, 990)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62900,11 +62917,11 @@
 					    client     	@2623
 					    supplier   	@2605
 					    line_style 	3
-					    origin_attachment 	(1288, 1027)
-					    terminal_attachment 	(1481, 1027)
+					    origin_attachment 	(1283, 1027)
+					    terminal_attachment 	(1477, 1027)
 					    label      	(object SegLabel @2626
 						Parent_View 	@2624
-						location   	(1460, 1063)
+						location   	(1456, 1063)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62918,7 +62935,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.891429
@@ -62926,7 +62943,7 @@
 						orientation 	1)
 					    label      	(object SegLabel @2627
 						Parent_View 	@2624
-						location   	(1322, 912)
+						location   	(1317, 912)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62951,7 +62968,7 @@
 						orientation 	0))
 					(object RoleView "$UNNAMED$418" @2628
 					    Parent_View 	@2623
-					    location   	(742, 263)
+					    location   	(737, 263)
 					    font       	(object Font
 						size       	8
 						face       	"Arial"
@@ -62964,7 +62981,7 @@
 						default_color 	TRUE)
 					    label      	(object SegLabel @2629
 						Parent_View 	@2628
-						location   	(1135, 986)
+						location   	(1128, 986)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -62990,11 +63007,11 @@
 					    client     	@2623
 					    supplier   	@2616
 					    line_style 	3
-					    origin_attachment 	(1288, 1027)
-					    terminal_attachment 	(1095, 1027)
+					    origin_attachment 	(1283, 1027)
+					    terminal_attachment 	(1089, 1027)
 					    label      	(object SegLabel @2630
 						Parent_View 	@2628
-						location   	(1163, 1075)
+						location   	(1158, 1075)
 						font       	(object Font
 						    size       	8
 						    face       	"Arial"
@@ -63008,7 +63025,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.646154
@@ -63110,7 +63127,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.717742
@@ -63197,7 +63214,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"0..1"
 						pctDist    	0.750000
@@ -63302,7 +63319,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.813008
@@ -63393,7 +63410,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"0..1"
 						pctDist    	0.748031
@@ -72092,7 +72109,7 @@
 			(object ClassDiagram "ProtocolStateMachines"
 			    quid       	"3BCAA7A00248"
 			    title      	"ProtocolStateMachines"
-			    zoom       	67
+			    zoom       	100
 			    max_height 	28350
 			    max_width  	21600
 			    origin_x   	0
@@ -103347,6 +103364,24 @@
 				    line_color 	3342489
 				    fill_color 	13434879
 				    quidu      	"3DF12EC000DA"
+				    compartment 	(object Compartment
+					Parent_View 	@4345
+					location   	(529, 831)
+					font       	(object Font
+					    size       	8
+					    face       	"Arial"
+					    charSet    	161
+					    bold       	FALSE
+					    italics    	TRUE
+					    underline  	FALSE
+					    strike     	FALSE
+					    color      	0
+					    default_color 	TRUE)
+					icon_style 	"Decoration"
+					fill_color 	16777215
+					anchor     	2
+					nlines     	1
+					max_width  	471)
 				    width      	616
 				    height     	154)
 				(object ClassView "Class" "Logical View::UML::Actions::BasicActions::OutputPin" @4346
@@ -103494,7 +103529,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.843478
@@ -103707,7 +103742,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.898990
@@ -103868,7 +103903,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.567010
@@ -103933,7 +103968,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.632653
@@ -104069,7 +104104,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.611111
@@ -104134,7 +104169,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.900000
@@ -104238,7 +104273,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"0..1"
 						pctDist    	0.656000
@@ -104303,7 +104338,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.786765
@@ -104429,7 +104464,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"0..1"
 						pctDist    	0.632813
@@ -104494,7 +104529,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.581395
@@ -104620,7 +104655,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"*"
 						pctDist    	0.628571
@@ -104685,7 +104720,7 @@
 						anchor     	2
 						anchor_loc 	1
 						nlines     	1
-						max_width  	15
+						max_width  	100
 						justify    	0
 						label      	"1"
 						pctDist    	0.900000

@@ -430,7 +430,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
         {
 
             WrMethod = Method;
-
+            MetaObjectMapper.AddTypeMap(WrMethod, this);
 
             if (WrMethod.IsPublic)
                 Visibility = MetaDataRepository.VisibilityKind.AccessPublic;
@@ -453,7 +453,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
             if (WrMethod.IsFinal)
                 _OverrideKind = MetaDataRepository.OverrideKind.Sealed;
 
-            DotNetMetaDataRepository.MetaObjectMapper.AddTypeMap(WrMethod, this);
+            
 
             object[] attributes = WrMethod.GetCustomAttributes(typeof(MetaDataRepository.ObjectActivationCall), false);
             if (attributes.Length > 0)
