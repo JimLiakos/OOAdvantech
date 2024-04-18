@@ -382,7 +382,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                         {
                             if (DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(mPropertyInfo) is AssociationEndRealization)
                                 continue;
+
+                            if (DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(mPropertyInfo) is AttributeRealization)
+                                continue;
                             Attribute mAttribute = DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(mPropertyInfo) as Attribute;
+
                             if (mAttribute == null)
                                 mAttribute = new Attribute(mPropertyInfo, typeClassifier);
                             features.Add(mAttribute);
