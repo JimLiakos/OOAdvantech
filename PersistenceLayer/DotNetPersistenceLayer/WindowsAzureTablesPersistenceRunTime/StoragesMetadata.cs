@@ -1,9 +1,12 @@
 ﻿using Azure;
 using Azure.Data.Tables;
+using OOAdvantech.MetaDataRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
+using static OOAdvantech.RDBMSMetaDataRepository.StoreProcedure;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
@@ -34,6 +37,8 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
 
 
+
+
         public string StorageName { get; set; }
 
         public string StorageIdentity { get; set; }
@@ -46,7 +51,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
         public string TemporaryTables { get; set; }
         DateTimeOffset? ITableEntity.Timestamp { get; set; }
-        ETag ITableEntity.ETag { get; set; }
+        public ETag ETag { get; set; }
 
         public void AddTemporaryTable(string tableName)
         {
@@ -96,4 +101,64 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
         }
 
     }
+
+    ///// <MetaDataID>{ae66d492-5ba0-4348-9fe4-89a17fe7ee22}</MetaDataID>
+    //[BackwardCompatibilityID("{ae66d492-5ba0-4348-9fe4-89a17fe7ee22}")]
+    //[Persistent()]
+    //public class StorageAgent : PersistenceLayer.Storage
+    //{
+
+    //    public StorageAgent(Storage storage)
+    //    {
+    //        Storage = storage;
+    //        StateManagerLink = ObjectStateManagerLink.GetExtensionPropertiesFromObject(storage);
+
+    //    }
+
+    //    /// <exclude>Excluded</exclude>
+    //    OOAdvantech.ObjectStateManagerLink StateManagerLink;
+    //    public string StorageIdentity => Storage.StorageIdentity;
+
+    //    public string Culture { get => Storage.Culture; set => Storage.Culture = value; }
+    //    public string StorageLocation { get => Storage.StorageLocation; set => Storage.StorageLocation = value; }
+    //    public string StorageType { get => Storage.StorageType; set => Storage.StorageType = value; }
+    //    public string StorageName { get => Storage.StorageName; set => Storage.StorageName = value; }
+    //    public string NativeStorageID { get => Storage.NativeStorageID; set => Storage.NativeStorageID = value; }
+    //    public Storage Storage { get; private set; }
+
+    //    public bool CheckForVersionUpgrate(string fullName)
+    //    {
+    //        return Storage.CheckForVersionUpgrate(fullName);
+    //    }
+
+    //    public void RegisterComponent(string assemblyFullName, List<string> types = null)
+    //    {
+    //        Storage.RegisterComponent(assemblyFullName, types);
+    //    }
+
+    //    public void RegisterComponent(string[] assembliesFullNames)
+    //    {
+    //        Storage.RegisterComponent(assembliesFullNames);
+
+    //    }
+
+    //    public void RegisterComponent(string assemblyFullName, string mappingDataResourceName, List<string> types = null)
+    //    {
+    //        Storage.RegisterComponent(assemblyFullName, mappingDataResourceName, types);
+
+    //    }
+
+    //    public void RegisterComponent(string assemblyFullName, XDocument mappingData)
+    //    {
+    //        Storage.RegisterComponent(assemblyFullName, mappingData);
+
+    //    }
+
+    //    public void RegisterComponent(string[] assembliesFullNames, Dictionary<string, XDocument> assembliesMappingData)
+    //    {
+    //        Storage.RegisterComponent(assembliesFullNames, assembliesMappingData);
+
+    //    }
+    //}
+
 }

@@ -221,7 +221,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     value = null;
                 if (this.Class.IsMultilingual(valueOfAttribute.Attribute) && value != null && value != DBNull.Value)
                 {
-                    if(valueOfAttribute.Attribute.FullName == "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
+                    if (valueOfAttribute.Attribute.FullName == "FlavourBusinessFacade.RoomService.IItemPreparation.FontUri")
                     {
 
                     }
@@ -255,7 +255,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         value = null;
                     if (value is DateTime)
                         value = ((DateTime)value).ToUniversalTime().ToLocalTime();
-                 
+
                     SetAttributeValue(new ValueOfAttribute(valueOfAttribute.Attribute, valueOfAttribute.IsMultilingual, valueOfAttribute.FieldInfo, valueOfAttribute.FastFieldAccessor, value, valueOfAttribute.ValueTypePath, valueOfAttribute.Path, null));
                     SnapshotStorageInstanceValue(valueOfAttribute.PathIdentity, valueOfAttribute.FieldInfo, value);
                 }
@@ -411,7 +411,14 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             {
                 return _StorageInstanceSet;
             }
+            
         }
+
+        internal void setStorageInstanceSet(MetaDataRepository.StorageCell  storageCell)
+        {
+            _StorageInstanceSet = storageCell;
+        }
+
 
 
         /// <MetaDataID>{90815f6c-db63-4214-9a37-10d40390adf6}</MetaDataID>

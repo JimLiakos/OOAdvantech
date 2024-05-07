@@ -186,7 +186,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             PersistenceLayer.ObjectStorage metaDataStorage = PersistenceLayer.ObjectStorage.NewStorage(StorageName, storageLocation,
                          "OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.StorageProvider", true);
             string assemblyFullName = typeof(OOAdvantech.WindowsAzureTablesPersistenceRunTime.Storage).Assembly.FullName;
-            metaDataStorage.StorageMetaData.RegisterComponent(assemblyFullName);
+            metaDataStorage.RegisterComponent(assemblyFullName);
 
             Storage storage = new Storage(StorageName, storageLocation, this.GetType().FullName, storageMetadata);
             metaDataStorage.CommitTransientObjectState(storage);
@@ -199,7 +199,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 //TableOperation replaceOperation = TableOperation.Replace(storageMetadata);
                 //var result = table.Execute(replaceOperation);
 
-                storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+                storagesMetadataTable_a.UpdateEntity(storageMetadata, storageMetadata.ETag, Azure.Data.Tables.TableUpdateMode.Replace);
             }
 
             return objectStorage;
@@ -338,7 +338,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                 storage.AzureStorageMetadata = storageMetadata;
 
                 objectStorage = new ObjectStorage(storage, tablesAcount,userName,pasword);
-                InitializeDataPartioningMetaData(objectStorage, storage);
+                InitializeDataPartitioningMetaData(objectStorage, storage);
                 objectStorage.ActivateObjectsInPreoadedStorageCells();
                 stateTransition.Consistent = true;
                 if (objectStorage != null)
@@ -351,7 +351,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
         }
 
-        private void InitializeDataPartioningMetaData(ObjectStorage objectStorage, Storage storage)
+        private void InitializeDataPartitioningMetaData(ObjectStorage objectStorage, Storage storage)
         {
 
         }
@@ -491,7 +491,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         OpenStorages.Remove(storageMetadata.StorageName);
                     }
                     storageMetadata.UnderConstruction = true;
-                    storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata, storageMetadata.ETag, Azure.Data.Tables.TableUpdateMode.Replace);
 
                     #endregion
                 }
@@ -536,7 +536,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     storageMetadata.AddTemporaryTables(restoredStorageManager.GetReplacedTablesNames());
 
                     //storagesMetadataTable.UpdateEntity(storageMetadata);
-                    storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+                    storagesMetadataTable_a.UpdateEntity(storageMetadata, storageMetadata.ETag, Azure.Data.Tables.TableUpdateMode.Replace);
                 }
 
                 //foreach (string replacesDataTableName in restoredStorageManager.GetReplacedTablesNames())
@@ -809,7 +809,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             {
                 storageMetadata.UnderConstruction = false;
                 //storagesMetadataTable.UpdateEntity(storageMetadata);
-                storagesMetadataTable_a.UpdateEntity(storageMetadata, Azure.ETag.All, Azure.Data.Tables.TableUpdateMode.Replace);
+                storagesMetadataTable_a.UpdateEntity(storageMetadata, storageMetadata.ETag, Azure.Data.Tables.TableUpdateMode.Replace);
             }
 
         }

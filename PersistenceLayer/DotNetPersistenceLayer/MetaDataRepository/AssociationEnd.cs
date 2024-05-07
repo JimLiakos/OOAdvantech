@@ -580,7 +580,13 @@ namespace OOAdvantech.MetaDataRepository
                 }
                 lock (AssociationEndRealizationsCacheLock)
                 {
-                    AssociationEndRealizationsCache = _AssociationEndRealizations.ToThreadSafeSet();
+
+                    using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
+                    {
+                        AssociationEndRealizationsCache = _AssociationEndRealizations.ToThreadSafeSet(); 
+                        stateTransition.Consistent = true;
+                    }
+
                 }
                 return AssociationEndRealizationsCache;
             }

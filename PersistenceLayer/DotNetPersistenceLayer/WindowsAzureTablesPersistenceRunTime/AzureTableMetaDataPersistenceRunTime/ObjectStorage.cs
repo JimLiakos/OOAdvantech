@@ -24,6 +24,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
             }
         }
 
+     
         public int GetNextOID()
         {
             lock (this)
@@ -594,6 +595,10 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPer
 
         protected override void UpdateOperativeObjects()
         {
+        }
+        protected override void StorageMetaDataUpdated()
+        {
+
         }
     }
 }

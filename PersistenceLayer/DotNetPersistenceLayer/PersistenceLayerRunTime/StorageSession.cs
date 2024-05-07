@@ -821,6 +821,8 @@ using System;
 
         abstract internal protected void UpdateOperativeObjects();
 
+        abstract internal protected void StorageMetaDataUpdated();
+
         /// <MetaDataID>{58845493-8ff9-440d-b716-bee430465f3d}</MetaDataID>
         internal protected abstract OOAdvantech.MetaDataRepository.StorageCellReference GetStorageCellReference(OOAdvantech.MetaDataRepository.StorageCell storageCell);
     }
