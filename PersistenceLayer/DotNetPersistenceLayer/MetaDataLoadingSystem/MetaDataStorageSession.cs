@@ -1655,6 +1655,10 @@ namespace OOAdvantech.MetaDataLoadingSystem
             throw new NotImplementedException();
         }
 
+        protected override void StorageMetaDataUpdated()
+        {
+            
+        }
         protected override void UpdateOperativeObjects()
         {
             _XMLDocument = XDocument.Load(StorageMetaData.StorageLocation);

@@ -261,8 +261,7 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{8F583B55-2366-4B74-9344-27B96729DECF}</MetaDataID>
         public static void DeleteObject(object thePersistentObject)
         {
-            if (thePersistentObject == null)
-                throw new System.Exception("null object can't be deleted");
+          
             DeleteObject(thePersistentObject, DeleteOptions.EnsureObjectDeletion);
         }
 
@@ -395,7 +394,10 @@ namespace OOAdvantech.PersistenceLayer
             return PersistencyService.OpenStorage(storageName, rawStorageData, storageType);
         }
 
-
+        public virtual void RegisterComponent(string assemblyFullName, System.Collections.Generic.List<string> types = null)
+        {
+            StorageMetaData.RegisterComponent(assemblyFullName, types);
+        }
 
         /// <summary>
         /// Open a session to access the storage that defined from the parameters.
@@ -669,6 +671,8 @@ namespace OOAdvantech.PersistenceLayer
         /// <MetaDataID>{5E8CE175-8E8A-424E-801A-2BCED2AA4816}</MetaDataID>
         public static ObjectStorage GetStorageOfObject(object _object)
         {
+            if(null == _object)
+                return null;
             bool remoteObject = false;
 #if !DeviceDotNet
             remoteObject = Remoting.RemotingServices.IsOutOfProcess(_object as System.MarshalByRefObject);

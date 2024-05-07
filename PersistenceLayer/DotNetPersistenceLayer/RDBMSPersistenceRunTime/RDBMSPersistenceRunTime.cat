@@ -2891,8 +2891,7 @@
 				    name       	"MetaObjectID"
 				    value      	"{AEFD47AD-8A89-4BCC-9802-437EB141831E}"))
 			    quid       	"43A2750703B9"
-			    type       	"Map"
-			    quidu      	"3EB3C881032B"))
+			    type       	"Map"))
 		    result     	"StructureSet"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
@@ -2936,8 +2935,7 @@
 				    name       	"MetaObjectID"
 				    value      	"{23218519-69DF-4D34-B8CF-C0B4DB21BE4D}"))
 			    quid       	"43A275080000"
-			    type       	"Stream"
-			    quidu      	"3ECF3D820243")
+			    type       	"Stream")
 			(object Parameter "pointer"
 			    attributes 	(list Attribute_Set
 				(object Attribute
@@ -2953,8 +2951,7 @@
 				    name       	"MetaObjectID"
 				    value      	"{5DACB6C2-5345-4EA9-AA9E-E17BB0CE7BBE}"))
 			    quid       	"43A27508002E"
-			    type       	"SqlConnection"
-			    quidu      	"3ECF3B030026"))
+			    type       	"SqlConnection"))
 		    result     	"void"
 		    concurrency 	"Sequential"
 		    opExportControl 	"Public"
@@ -6849,8 +6846,7 @@
 			    result     	"ArrayList"
 			    concurrency 	"Sequential"
 			    opExportControl 	"Public"
-			    uid        	0
-			    quidu      	"3ECF3D7E0278")
+			    uid        	0)
 			(object Operation "AddTable"
 			    attributes 	(list Attribute_Set
 				(object Attribute
@@ -7475,8 +7471,7 @@
 			    result     	"ArrayList"
 			    concurrency 	"Sequential"
 			    opExportControl 	"Public"
-			    uid        	0
-			    quidu      	"3ECF3D7E0278")
+			    uid        	0)
 			(object Operation "Table"
 			    attributes 	(list Attribute_Set
 				(object Attribute
@@ -9094,8 +9089,7 @@
 			    result     	"ArrayList"
 			    concurrency 	"Sequential"
 			    opExportControl 	"Public"
-			    uid        	0
-			    quidu      	"3ECF3D7E0278")
+			    uid        	0)
 			(object Operation "GetScript"
 			    attributes 	(list Attribute_Set
 				(object Attribute
@@ -15149,7 +15143,7 @@
 			    line_style 	3
 			    origin_attachment 	(1470, 167)
 			    terminal_attachment 	(578, 167))
-			(object RoleView "LifeTimeController" @82
+			(object RoleView "LifeTimeController " @82
 			    Parent_View 	@79
 			    location   	(-760, -190)
 			    font       	(object Font
@@ -15180,7 +15174,7 @@
 				nlines     	1
 				max_width  	355
 				justify    	0
-				label      	"+LifeTimeController"
+				label      	"+LifeTimeController "
 				pctDist    	0.800000
 				height     	42
 				orientation 	0)

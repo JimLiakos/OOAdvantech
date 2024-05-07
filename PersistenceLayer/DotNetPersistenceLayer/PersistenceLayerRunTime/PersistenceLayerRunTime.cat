@@ -12199,7 +12199,7 @@
 		    quid       	"3EA2D2D6011B"
 		    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::StorageInstanceRef"
 		    quidu      	"3EA2AB6203CA")
-		(object Role "LifeTimeController"
+		(object Role "LifeTimeController "
 		    attributes 	(list Attribute_Set
 			(object Attribute
 			    tool       	"MetaData"
@@ -12250,7 +12250,7 @@
 			    name       	"Indexer"
 			    value      	FALSE))
 		    quid       	"3EA2D2D6011D"
-		    label      	"LifeTimeController"
+		    label      	"LifeTimeController "
 		    supplier   	"Logical View::OOAdvantech::PersistenceLayerRunTime::ClassMemoryInstanceCollection"
 		    quidu      	"3E809D4E0137"
 		    is_navigable 	TRUE)))
@@ -25542,7 +25542,7 @@
 			    supplier   	"$UNNAMED$113"
 			    quidu      	"421B52E603B4"
 			    messages   	(list Messages
-				(object Message "NewObject(  )"
+				(object Message "NewObject(Type, params object[])"
 				    quid       	"421B52EB0144"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25562,7 +25562,7 @@
 			    supplier   	"$UNNAMED$114"
 			    quidu      	"421B530600C6"
 			    messages   	(list Messages
-				(object Message "CreateInstance(   )"
+				(object Message "CreateInstance(string, string, params object[])"
 				    quid       	"421B530C03E4"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25571,7 +25571,7 @@
 				    ordinal    	1
 				    quidu      	"3EE57A6202B8"
 				    creation   	FALSE)
-				(object Message "NewObject(  )"
+				(object Message "NewObject(Type, params object[])"
 				    quid       	"421B536E0153"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Return"
@@ -25585,7 +25585,7 @@
 			    supplier   	"$UNNAMED$113"
 			    quidu      	"421B52E603B4"
 			    messages   	(list Messages
-				(object Message "CreateStorageInstanceRef(  )"
+				(object Message "CreateStorageInstanceRef(object, object)"
 				    quid       	"421B546F00F6"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25609,7 +25609,7 @@
 			    supplier   	"$UNNAMED$115"
 			    quidu      	"421B549C01C0"
 			    messages   	(list Messages
-				(object Message "ObjectStateTransition( )"
+				(object Message "ObjectStateTransition(object)"
 				    quid       	"421B54AD0338"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25661,7 +25661,7 @@
 			    supplier   	"$UNNAMED$117"
 			    quidu      	"421B551103E3"
 			    messages   	(list Messages
-				(object Message "EnlistObject( )"
+				(object Message "EnlistObject(object)"
 				    quid       	"421B555002EA"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25697,7 +25697,7 @@
 			    supplier   	"$UNNAMED$117"
 			    quidu      	"421B551103E3"
 			    messages   	(list Messages
-				(object Message "AddParticipatedStorageInstance( )"
+				(object Message "AddParticipatedStorageInstance(StorageInstanceRef)"
 				    quid       	"421B57480318"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25711,7 +25711,7 @@
 			    supplier   	"$UNNAMED$118"
 			    quidu      	"421B56810366"
 			    messages   	(list Messages
-				(object Message "GetStorageInstanceRef( )"
+				(object Message "GetStorageInstanceRef(object)"
 				    quid       	"421B56900328"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25734,7 +25734,7 @@
 			    supplier   	"$UNNAMED$113"
 			    quidu      	"421B52E603B4"
 			    messages   	(list Messages
-				(object Message "CreateNewStorageInstanceCommand( )"
+				(object Message "CreateNewStorageInstanceCommand(StorageInstanceRef)"
 				    quid       	"421B56F301F0"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -25743,7 +25743,7 @@
 				    ordinal    	9
 				    quidu      	"40C55F400102"
 				    creation   	FALSE)
-				(object Message "EnlistObject( )"
+				(object Message "EnlistObject(object)"
 				    quid       	"421B5DDF01DF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26006,7 +26006,7 @@
 			    supplier   	"$UNNAMED$124"
 			    quidu      	"3ED82D0800F4"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3EE0334D03DC"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26020,7 +26020,7 @@
 			    supplier   	"$UNNAMED$123"
 			    quidu      	"3ED82139029C"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3EE0339B00BD"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26234,7 +26234,7 @@
 			    supplier   	"$UNNAMED$130"
 			    quidu      	"3EE16A67033A"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3EE16A67033C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26248,7 +26248,7 @@
 			    supplier   	"$UNNAMED$129"
 			    quidu      	"3EE16A670336"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3EE16A670338"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26384,7 +26384,7 @@
 			    supplier   	"$UNNAMED$135"
 			    quidu      	"3F02B68C0222"
 			    messages   	(list Messages
-				(object Message "EnlistCommand( )"
+				(object Message "EnlistCommand(Command)"
 				    quid       	"3F02B9CE00EB"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26454,7 +26454,7 @@
 			    supplier   	"$UNNAMED$135"
 			    quidu      	"3F02B68C0222"
 			    messages   	(list Messages
-				(object Message "AddParticipatedStorageInstance( )"
+				(object Message "AddParticipatedStorageInstance(StorageInstanceRef)"
 				    quid       	"3F02B9E50252"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26530,7 +26530,7 @@
 			    supplier   	"$UNNAMED$136"
 			    quidu      	"3F02B385031C"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F02BE6B006D"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26631,7 +26631,7 @@
 			    supplier   	"$UNNAMED$140"
 			    quidu      	"400967310213"
 			    messages   	(list Messages
-				(object Message "LinkObject(  )"
+				(object Message "LinkObject(StorageInstanceRef, out bool)"
 				    quid       	"400967390071"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26741,7 +26741,7 @@
 				    Operation  	"Commit"
 				    quidu      	"3ED83D5D0178"
 				    creation   	FALSE)
-				(object Message "EnlistCommand( )"
+				(object Message "EnlistCommand(Command)"
 				    quid       	"3F07CB5C03BF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26790,7 +26790,7 @@
 			    supplier_containment 	"By Value"
 			    client_containment 	"By Value"
 			    messages   	(list Messages
-				(object Message "CreateUpdateStorageInstanceCommand( )"
+				(object Message "CreateUpdateStorageInstanceCommand(StorageInstanceRef)"
 				    quid       	"3F07CAE3004B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26811,7 +26811,7 @@
 			    supplier   	"theRelatedObjects"
 			    quidu      	"3F043F6A0349"
 			    messages   	(list Messages
-				(object Message "Remove( )"
+				(object Message "Remove(object)"
 				    quid       	"3F07CBDF039F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26853,7 +26853,7 @@
 			    supplier   	"$UNNAMED$143"
 			    quidu      	"3F043F6A0334"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F043F6A0332"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26867,7 +26867,7 @@
 			    supplier   	"$UNNAMED$144"
 			    quidu      	"3F043F6A033F"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F043F6A0336"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26890,7 +26890,7 @@
 			    supplier   	"$UNNAMED$146"
 			    quidu      	"3F043F6A034B"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F043F6A0339"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -26984,7 +26984,7 @@
 			    supplier   	"$UNNAMED$147"
 			    quidu      	"3F043F6A0351"
 			    messages   	(list Messages
-				(object Message "DeleteStorageInstanceCommand( )"
+				(object Message "DeleteStorageInstanceCommand(StorageInstanceRef)"
 				    quid       	"3F07BB4C018B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27163,7 +27163,7 @@
 			    supplier   	"theRelatedObjects"
 			    quidu      	"3F043EAE0047"
 			    messages   	(list Messages
-				(object Message "Remove( )"
+				(object Message "Remove(object)"
 				    quid       	"3F043EAE005D"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27209,7 +27209,7 @@
 			    supplier   	"$UNNAMED$150"
 			    quidu      	"3F043EAE0030"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F043EAE002E"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27223,7 +27223,7 @@
 			    supplier   	"$UNNAMED$151"
 			    quidu      	"3F043EAE003C"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F043EAE0033"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27246,7 +27246,7 @@
 			    supplier   	"$UNNAMED$152"
 			    quidu      	"3F043EAE004A"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F043EAE0036"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27340,7 +27340,7 @@
 			    supplier   	"$UNNAMED$153"
 			    quidu      	"3F043EAE0050"
 			    messages   	(list Messages
-				(object Message "DeleteStorageInstanceCommand( )"
+				(object Message "DeleteStorageInstanceCommand(StorageInstanceRef)"
 				    quid       	"3F043EAE004C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27416,7 +27416,7 @@
 			    supplier   	"$UNNAMED$156"
 			    quidu      	"3F07C7640087"
 			    messages   	(list Messages
-				(object Message "GetSubCommands( )"
+				(object Message "GetSubCommands(int)"
 				    quid       	"3F07C7640089"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27449,7 +27449,7 @@
 			    supplier   	"$UNNAMED$157"
 			    quidu      	"3F07C7640081"
 			    messages   	(list Messages
-				(object Message "GetSubCommands(   )"
+				(object Message "GetSubCommands(int, TransactionContext, ref int)"
 				    quid       	"3F07C7640085"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27560,7 +27560,7 @@
 			    supplier   	"$UNNAMED$158"
 			    quidu      	"400A46C90346"
 			    messages   	(list Messages
-				(object Message "LinkObject(  )"
+				(object Message "LinkObject(StorageInstanceRef, out bool)"
 				    quid       	"400A46C90348"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27728,7 +27728,7 @@
 			    supplier   	"$UNNAMED$164"
 			    quidu      	"421B1A3C02E0"
 			    messages   	(list Messages
-				(object Message "CreateStorageInstanceRef(  )"
+				(object Message "CreateStorageInstanceRef(object, object)"
 				    quid       	"421B2497025A"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27805,7 +27805,7 @@
 			    supplier   	"$UNNAMED$166"
 			    quidu      	"421B298803B4"
 			    messages   	(list Messages
-				(object Message "AddOperativeObject(  )"
+				(object Message "AddOperativeObject(object, StorageInstanceRef)"
 				    quid       	"421B2A1C02EA"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27876,7 +27876,7 @@
 			    supplier   	"$UNNAMED$168"
 			    quidu      	"421B729E011B"
 			    messages   	(list Messages
-				(object Message "CommitTransientObjectState( )"
+				(object Message "CommitTransientObjectState(object)"
 				    quid       	"421B741F0059"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27890,7 +27890,7 @@
 			    supplier   	"$UNNAMED$169"
 			    quidu      	"421B729E012A"
 			    messages   	(list Messages
-				(object Message "ObjectStateTransition( )"
+				(object Message "ObjectStateTransition(object)"
 				    quid       	"421B731A0182"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27919,7 +27919,7 @@
 			    supplier   	"$UNNAMED$168"
 			    quidu      	"421B729E011B"
 			    messages   	(list Messages
-				(object Message "CreateStorageInstanceRef(  )"
+				(object Message "CreateStorageInstanceRef(object, object)"
 				    quid       	"421B7493022D"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27951,7 +27951,7 @@
 			    supplier   	"$UNNAMED$171"
 			    quidu      	"421B729E0148"
 			    messages   	(list Messages
-				(object Message "StorageInstanceRef(   )"
+				(object Message "StorageInstanceRef(object, OOAdvantech.PersistenceLayerRunTime.ObjectStorage, OOAdvantech.PersistenceLayer.ObjectID)"
 				    quid       	"421B74B8027D"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -27973,7 +27973,7 @@
 			    supplier   	"$UNNAMED$172"
 			    quidu      	"421B729E0132"
 			    messages   	(list Messages
-				(object Message "EnlistObject( )"
+				(object Message "EnlistObject(object)"
 				    quid       	"421B729E012C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28033,7 +28033,7 @@
 				    ordinal    	9
 				    quidu      	"000000000000"
 				    creation   	FALSE)
-				(object Message "AddParticipatedStorageInstance( )"
+				(object Message "AddParticipatedStorageInstance(StorageInstanceRef)"
 				    quid       	"421B75AC026C"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28051,7 +28051,7 @@
 			    supplier   	"$UNNAMED$168"
 			    quidu      	"421B729E011B"
 			    messages   	(list Messages
-				(object Message "CreateNewStorageInstanceCommand( )"
+				(object Message "CreateNewStorageInstanceCommand(StorageInstanceRef)"
 				    quid       	"421B765A01FF"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28060,7 +28060,7 @@
 				    ordinal    	11
 				    quidu      	"40C55F400102"
 				    creation   	FALSE)
-				(object Message "EnlistCommand( )"
+				(object Message "EnlistCommand(Command)"
 				    quid       	"421B76C20068"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28127,7 +28127,7 @@
 			    supplier_containment 	"By Value"
 			    client_containment 	"By Value"
 			    messages   	(list Messages
-				(object Message "ProcessCommands( )"
+				(object Message "ProcessCommands(int)"
 				    quid       	"421B729E012D"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28160,7 +28160,7 @@
 			    supplier   	"Master"
 			    quidu      	"431C2F920212"
 			    messages   	(list Messages
-				(object Message "ProcessCommands( )"
+				(object Message "ProcessCommands(int)"
 				    quid       	"431C304802B3"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28178,7 +28178,7 @@
 				    ordinal    	3
 				    quidu      	"421CF7BA0271"
 				    creation   	FALSE)
-				(object Message "ProcessCommands( )"
+				(object Message "ProcessCommands(int)"
 				    quid       	"431C5B390366"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28192,7 +28192,7 @@
 			    supplier   	"Slave"
 			    quidu      	"431C30940091"
 			    messages   	(list Messages
-				(object Message "ProcessCommands( )"
+				(object Message "ProcessCommands(int)"
 				    quid       	"431C30FE014F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28201,7 +28201,7 @@
 				    ordinal    	5
 				    quidu      	"41A7A20301A5"
 				    creation   	FALSE)
-				(object Message "ProcessCommands( )"
+				(object Message "ProcessCommands(int)"
 				    quid       	"431C5C0303B8"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28215,7 +28215,7 @@
 			    supplier   	"StorageB"
 			    quidu      	"431C31B102F8"
 			    messages   	(list Messages
-				(object Message "MakeChangesDurable( )"
+				(object Message "MakeChangesDurable(TransactionContext)"
 				    quid       	"431C52B2000F"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28224,7 +28224,7 @@
 				    ordinal    	9
 				    quidu      	"421B24DA03E1"
 				    creation   	FALSE)
-				(object Message "CommitChanges( )"
+				(object Message "CommitChanges(TransactionContext)"
 				    quid       	"431C59B800CE"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28233,7 +28233,7 @@
 				    ordinal    	15
 				    quidu      	"40C55F40018E"
 				    creation   	FALSE)
-				(object Message "BeginChanges( )"
+				(object Message "BeginChanges(TransactionContext)"
 				    quid       	"431C5BAA01A3"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28264,7 +28264,7 @@
 				    ordinal    	1
 				    quidu      	"40FBC34E038A"
 				    creation   	FALSE)
-				(object Message "EnlistObject( )"
+				(object Message "EnlistObject(object)"
 				    quid       	"431C581B0078"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28307,7 +28307,7 @@
 			    supplier   	"StorageA"
 			    quidu      	"431C313C0075"
 			    messages   	(list Messages
-				(object Message "MakeChangesDurable( )"
+				(object Message "MakeChangesDurable(TransactionContext)"
 				    quid       	"431C31A1027B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28316,7 +28316,7 @@
 				    ordinal    	11
 				    quidu      	"421B24DA03E1"
 				    creation   	FALSE)
-				(object Message "CommitChanges( )"
+				(object Message "CommitChanges(TransactionContext)"
 				    quid       	"431C58CB008B"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -28344,7 +28344,7 @@
 			    supplier   	"StorageB"
 			    quidu      	"431C31B102F8"
 			    messages   	(list Messages
-				(object Message "BeginChanges( )"
+				(object Message "BeginChanges(TransactionContext)"
 				    quid       	"431C5BBA00E8"
 				    frequency  	"Aperiodic"
 				    synchronization 	"Simple"
@@ -29193,7 +29193,7 @@
 		    line_color 	3342489
 		    quidu      	"3EA2D2D6011A"
 		    roleview_list 	(list RoleViews
-			(object RoleView "LifeTimeController" @170
+			(object RoleView "LifeTimeController " @170
 			    Parent_View 	@169
 			    location   	(-449, -266)
 			    font       	(object Font
@@ -29224,7 +29224,7 @@
 				nlines     	1
 				max_width  	450
 				justify    	0
-				label      	"+LifeTimeController"
+				label      	"+LifeTimeController "
 				pctDist    	0.644313
 				height     	122
 				orientation 	1)
@@ -31411,7 +31411,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"NewObject(  )"
+			label      	"NewObject(Type, params object[])"
 			pctDist    	0.438356
 			height     	61
 			orientation 	0)
@@ -31453,7 +31453,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateInstance(   )"
+			label      	"CreateInstance(string, string, params object[])"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -31495,7 +31495,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"NewObject(  )"
+			label      	"NewObject(Type, params object[])"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -31537,7 +31537,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateStorageInstanceRef(  )"
+			label      	"CreateStorageInstanceRef(object, object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -31579,7 +31579,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ObjectStateTransition( )"
+			label      	"ObjectStateTransition(object)"
 			pctDist    	0.501412
 			height     	86
 			orientation 	0)
@@ -31621,7 +31621,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistObject( )"
+			label      	"EnlistObject(object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -31663,7 +31663,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetStorageInstanceRef( )"
+			label      	"GetStorageInstanceRef(object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -31747,7 +31747,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateNewStorageInstanceCommand( )"
+			label      	"CreateNewStorageInstanceCommand(StorageInstanceRef)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -31789,7 +31789,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddParticipatedStorageInstance( )"
+			label      	"AddParticipatedStorageInstance(StorageInstanceRef)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -31873,7 +31873,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistObject( )"
+			label      	"EnlistObject(object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -33020,7 +33020,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.500000
 			height     	106
 			orientation 	0)
@@ -33062,7 +33062,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.502066
 			height     	64
 			orientation 	1)
@@ -33947,7 +33947,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.500000
 			height     	106
 			orientation 	0)
@@ -33989,7 +33989,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.502066
 			height     	64
 			orientation 	1)
@@ -34901,7 +34901,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistCommand( )"
+			label      	"EnlistCommand(Command)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -34943,7 +34943,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddParticipatedStorageInstance( )"
+			label      	"AddParticipatedStorageInstance(StorageInstanceRef)"
 			pctDist    	0.657688
 			height     	54
 			orientation 	0)
@@ -35027,7 +35027,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	1.141414
 			height     	78
 			orientation 	1)
@@ -35735,7 +35735,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"LinkObject(  )"
+			label      	"LinkObject(StorageInstanceRef, out bool)"
 			pctDist    	1.404167
 			height     	75
 			orientation 	0)
@@ -36382,7 +36382,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.826667
 			height     	65
 			orientation 	0)
@@ -36424,7 +36424,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -36676,7 +36676,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -36760,7 +36760,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"DeleteStorageInstanceCommand( )"
+			label      	"DeleteStorageInstanceCommand(StorageInstanceRef)"
 			pctDist    	0.715019
 			height     	114
 			orientation 	0)
@@ -36928,7 +36928,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateUpdateStorageInstanceCommand( )"
+			label      	"CreateUpdateStorageInstanceCommand(StorageInstanceRef)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -37054,7 +37054,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistCommand( )"
+			label      	"EnlistCommand(Command)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -37138,7 +37138,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Remove( )"
+			label      	"Remove(object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -37866,7 +37866,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"Remove( )"
+			label      	"Remove(object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -37950,7 +37950,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.826667
 			height     	65
 			orientation 	0)
@@ -38034,7 +38034,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -38286,7 +38286,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -38370,7 +38370,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"DeleteStorageInstanceCommand( )"
+			label      	"DeleteStorageInstanceCommand(StorageInstanceRef)"
 			pctDist    	0.392857
 			height     	116
 			orientation 	0)
@@ -38784,7 +38784,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands( )"
+			label      	"GetSubCommands(int)"
 			pctDist    	0.826667
 			height     	65
 			orientation 	0)
@@ -38826,7 +38826,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"GetSubCommands(   )"
+			label      	"GetSubCommands(int, TransactionContext, ref int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -39438,7 +39438,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"LinkObject(  )"
+			label      	"LinkObject(StorageInstanceRef, out bool)"
 			pctDist    	1.404167
 			height     	75
 			orientation 	0)
@@ -39931,7 +39931,7 @@
 		    fill_color 	13434879
 		    quidu      	"421B246001DC"
 		    width      	499
-		    height     	7648
+		    height     	7678
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -39983,7 +39983,7 @@
 		    fill_color 	4915432
 		    quidu      	"421B1A3C02E0"
 		    width      	488
-		    height     	7748
+		    height     	7778
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -40028,7 +40028,7 @@
 		    fill_color 	4915432
 		    quidu      	"421B266F02BA"
 		    width      	506
-		    height     	7533
+		    height     	7563
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -40093,7 +40093,7 @@
 		    fill_color 	4915432
 		    quidu      	"421B298803B4"
 		    width      	707
-		    height     	7748
+		    height     	7778
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -40131,7 +40131,7 @@
 		    fill_color 	13434879
 		    quidu      	"421B2B5C00B6"
 		    width      	443
-		    height     	6636
+		    height     	6666
 		    icon_height 	0
 		    icon_width 	0
 		    icon_y_offset 	0
@@ -40179,7 +40179,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateStorageInstanceRef(  )"
+			label      	"CreateStorageInstanceRef(object, object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -40413,7 +40413,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddOperativeObject(  )"
+			label      	"AddOperativeObject(object, StorageInstanceRef)"
 			pctDist    	0.498938
 			height     	63
 			orientation 	0)
@@ -40597,7 +40597,7 @@
 		    label      	"This diagram show what happen when persistency system retrieve storage instance raw data and create an operative object for storage instance.")
 		(object Destruction_Marker @793
 		    Parent_View 	@753
-		    location   	(250, 7973)
+		    location   	(250, 8003)
 		    line_color 	3342489
 		    fill_color 	13434879)))
 	(object InteractionDiagram "Make a transient object persistent"
@@ -41044,7 +41044,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistObject( )"
+			label      	"EnlistObject(object)"
 			pctDist    	0.493590
 			height     	35
 			orientation 	0)
@@ -41086,7 +41086,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ObjectStateTransition( )"
+			label      	"ObjectStateTransition(object)"
 			pctDist    	0.513208
 			height     	84
 			orientation 	0)
@@ -41170,7 +41170,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CommitTransientObjectState( )"
+			label      	"CommitTransientObjectState(object)"
 			pctDist    	0.522260
 			height     	87
 			orientation 	0)
@@ -41212,7 +41212,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateStorageInstanceRef(  )"
+			label      	"CreateStorageInstanceRef(object, object)"
 			pctDist    	0.493333
 			height     	60
 			orientation 	0)
@@ -41254,7 +41254,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"StorageInstanceRef(   )"
+			label      	"StorageInstanceRef(object, OOAdvantech.PersistenceLayerRunTime.ObjectStorage, OOAdvantech.PersistenceLayer.ObjectID)"
 			pctDist    	0.522037
 			height     	80
 			orientation 	0)
@@ -41344,7 +41344,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CreateNewStorageInstanceCommand( )"
+			label      	"CreateNewStorageInstanceCommand(StorageInstanceRef)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	1)
@@ -41542,7 +41542,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ProcessCommands( )"
+			label      	"ProcessCommands(int)"
 			pctDist    	0.497006
 			height     	32
 			orientation 	0)
@@ -41668,7 +41668,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"AddParticipatedStorageInstance( )"
+			label      	"AddParticipatedStorageInstance(StorageInstanceRef)"
 			pctDist    	-0.186667
 			height     	39
 			orientation 	0)
@@ -41710,7 +41710,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistCommand( )"
+			label      	"EnlistCommand(Command)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42193,7 +42193,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ProcessCommands( )"
+			label      	"ProcessCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42235,7 +42235,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ProcessCommands( )"
+			label      	"ProcessCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42277,7 +42277,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"MakeChangesDurable( )"
+			label      	"MakeChangesDurable(TransactionContext)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42319,7 +42319,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"MakeChangesDurable( )"
+			label      	"MakeChangesDurable(TransactionContext)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42361,7 +42361,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"EnlistObject( )"
+			label      	"EnlistObject(object)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42445,7 +42445,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CommitChanges( )"
+			label      	"CommitChanges(TransactionContext)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42529,7 +42529,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"CommitChanges( )"
+			label      	"CommitChanges(TransactionContext)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42613,7 +42613,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ProcessCommands( )"
+			label      	"ProcessCommands(int)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42697,7 +42697,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"BeginChanges( )"
+			label      	"BeginChanges(TransactionContext)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42739,7 +42739,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"BeginChanges( )"
+			label      	"BeginChanges(TransactionContext)"
 			pctDist    	0.500000
 			height     	45
 			orientation 	0)
@@ -42781,7 +42781,7 @@
 			nlines     	1
 			max_width  	10
 			justify    	0
-			label      	"ProcessCommands( )"
+			label      	"ProcessCommands(int)"
 			pctDist    	0.699615
 			height     	60
 			orientation 	0)

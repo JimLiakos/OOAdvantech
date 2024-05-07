@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -13,6 +14,7 @@ using OOAdvantech.PersistenceLayer;
 using OOAdvantech.PersistenceLayerRunTime;
 using OOAdvantech.RDBMSMetaDataRepository;
 using OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 {
@@ -33,8 +35,104 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             _StorageMetaData = theStorageMetaData;
         }
 
+        public override void RegisterComponent(string assemblyFullName, List<string> types = null)
+        {
+            Azure.Data.Tables.TableServiceClient tablesAccount = (ObjectStorage.GetStorageOfObject(StorageMetaData) as WindowsAzureTablesPersistenceRunTime.AzureTableMetaDataPersistenceRunTime.ObjectStorage).TablesAccount;
+            Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
+            var storageMetaDataUpdated = (_StorageMetaData as Storage).BeginSynchronous(storagesMetadataTable_a);
+
+            if (storageMetaDataUpdated)
+                StorageMetaDataUpdated();
+
+            try
+            {
+                this.StorageMetaData.RegisterComponent(assemblyFullName, types);
+            }
+            finally
+            {
+                (_StorageMetaData as Storage).EndSynchronous(storagesMetadataTable_a);
+            }
+
+
+
+            
+        }
+
+
         /// <exclude>Excluded</exclude>
-        protected Storage _StorageMetaData;
+        protected PersistenceLayer.Storage _StorageMetaData;
+
+
+        protected override void StorageMetaDataUpdated()
+        {
+
+
+            Azure.Data.Tables.TableServiceClient tablesAccount = (ObjectStorage.GetStorageOfObject(StorageMetaData) as AzureTableMetaDataPersistenceRunTime.ObjectStorage).TablesAccount;
+            Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
+
+            Azure.Pageable<Azure.Data.Tables.Models.TableItem> queryTableResults = tablesAccount.Query(String.Format("TableName eq '{0}'", "StoragesMetadata"));
+            bool storagesMetadataTable_exist = queryTableResults.Count() > 0;
+
+
+
+            if (storagesMetadataTable_exist)
+            {
+                string storageName = _StorageMetaData.StorageName;
+                string storageLocation = _StorageMetaData.StorageLocation;
+
+                StorageMetadata storageMetadata = (from storageMetada in storagesMetadataTable_a.Query<StorageMetadata>()
+                                                   where storageMetada.StorageName == storageName
+                                                   select storageMetada).FirstOrDefault();
+
+                if (storageMetadata == null)
+                    throw new OOAdvantech.PersistenceLayer.StorageException(" Storage " + storageName + " at location " + storageLocation + " doesn't exist", StorageException.ExceptionReason.StorageDoesnotExist, null);
+
+
+
+                PersistenceLayer.ObjectStorage metaDataObjectStorage = new AzureTableMetaDataPersistenceRunTime.ObjectStorage(_StorageMetaData.StorageName, _StorageMetaData.StorageLocation, false, tablesAccount, storageMetadata);
+
+                Collections.StructureSet aStructureSet = metaDataObjectStorage.Execute("SELECT ObjectStorage FROM " + typeof(Storage).FullName + " ObjectStorage ");
+                Storage storage = null;
+                foreach (Collections.StructureSet Rowset in aStructureSet)
+                {
+                    storage = (Storage)Rowset["ObjectStorage"];
+                    break;
+                }
+
+                storage.AzureStorageMetadata = storageMetadata;
+
+                _StorageMetaData = storage;
+                Linq.Storage linqStorage = new Linq.Storage(ObjectStorage.GetStorageOfObject(storage));
+
+                var storageCellsDictionary = (from storageCell in linqStorage.GetObjectCollection<RDBMSMetaDataRepository.StorageCell>()
+                                              select storageCell).ToDictionary(x => x.SerialNumber);
+
+                foreach (System.Collections.Generic.KeyValuePair<System.Type, ClassMemoryInstanceCollection> entry in this.OperativeObjectCollections)
+                {
+                    foreach (var storageInstanceRefEntry in entry.Value.StorageInstanceRefs)
+                    {
+                        if (storageInstanceRefEntry.Value.IsAlive)
+                        {
+                            try
+                            {
+                                StorageInstanceRef storageInstanceRef = storageInstanceRefEntry.Value.Target as StorageInstanceRef;
+                                if (storageInstanceRef != null)
+                                {
+                                    storageInstanceRef.setStorageInstanceSet(storageCellsDictionary[storageInstanceRef.StorageInstanceSet.SerialNumber]);
+                                }
+                            }
+                            catch (Exception error)
+                            {
+
+
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
 
 
 
@@ -46,6 +144,9 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             //Account = account;
             TablesAccount = tablesAccount;
             SetObjectStorage(theStorageMetaData);
+
+
+
             UserName = userName;
             Pasword = pasword;
         }
@@ -670,12 +771,12 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
                             bool canRetry = false;
                             int retryCount = 5;
-                            Retry:
+Retry:
 
                             try
                             {
 
-                                if(tableBatchOperation.Count>0)
+                                if (tableBatchOperation.Count > 0)
                                     transactionTableBatchOperationsEntry.Key.SubmitTransaction(tableBatchOperation);
                                 else
                                 {
@@ -1000,7 +1101,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
             if (storageCells == null)
                 throw new Exception("The method or operation is implemented for classes and interfaces.");
-            foreach (var storageReference in (StorageMetaData as MetaDataRepository.Storage).LinkedStorages)
+            foreach (var storageReference in (StorageMetaData as Storage).LinkedStorages)
             {
                 var openStorage = storageReference.OpenObjectSorage();
                 if (openStorage != this)
@@ -1062,7 +1163,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                     RDBMSMetaDataRepository.StorageCell storageCell = (RDBMSMetaDataRepository.StorageCell)Rowset["StorageCell"];
                     return storageCell;
                 }
-                
+
                 return null;
             }
             catch (Exception error)
@@ -1339,11 +1440,11 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
                         aMember.SaveMemberData(Buffer, entity.RowKey, offset, ref offset);
                     else
                     {
-                        if(!entity.Properties.ContainsKey(aMember.Name))
+                        if (!entity.Properties.ContainsKey(aMember.Name))
                         {
                             entity.SetNull(aMember.Name, aMember.Type);
                         }
-                        
+
                         aMember.SaveMemberData(Buffer, entity.Properties[aMember.Name], offset, ref offset);
                     }
                 }

@@ -125,7 +125,7 @@ namespace OOAdvantech.PersistenceLayerRunTime
         }
 
         /// <MetaDataID>{1e0a8b82-c4f5-4587-a018-a27afd5a6964}</MetaDataID>
-        protected OOAdvantech.MetaDataRepository.StorageCell _StorageInstanceSet;
+        protected StorageCell _StorageInstanceSet;
 
 
         ///<summary>
@@ -2675,6 +2675,10 @@ namespace OOAdvantech.PersistenceLayerRunTime
                 if (!associationEnd.Navigable)
                     continue;
                 OOAdvantech.AccessorBuilder.FieldPropertyAccessor associationEndfastFieldAccessor = Class.GetFastFieldAccessor(associationEnd);
+                if(associationEndfastFieldAccessor==null)
+                {
+
+                }
                 relResolvers.Add(CreateRelationResolver(associationEnd, associationEndfastFieldAccessor));
             }
             MetaDataRepository.ValueTypePath valueTypePath = new MetaDataRepository.ValueTypePath();

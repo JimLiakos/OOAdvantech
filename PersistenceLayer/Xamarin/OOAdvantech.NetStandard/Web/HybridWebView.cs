@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Net.Http;
+using System.Linq;
 
 namespace OOAdvantech.Web
 {
@@ -148,6 +149,9 @@ namespace OOAdvantech.Web
                             Directory.CreateDirectory(Path.Combine(webAppPath, "webapp"));
                         }
 
+
+                        var files= zip.Entries.Select(x => x.FullName).ToArray();
+
                         foreach (var entry in zip.Entries)
                         {
 
@@ -167,6 +171,9 @@ namespace OOAdvantech.Web
 
                             }
                             if (entry.Length == 0)
+                                continue;
+
+                            if (entry.Length==0)
                                 continue;
 
                             var filePath = Path.Combine(webAppPath, entry.Name);
