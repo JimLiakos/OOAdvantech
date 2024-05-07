@@ -166,6 +166,8 @@ namespace OOAdvantech.Web
                                 }
 
                             }
+                            if (entry.Length == 0)
+                                continue;
 
                             var filePath = Path.Combine(webAppPath, entry.Name);
                             var entryStream = entry.Open();
