@@ -41,12 +41,17 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             Azure.Data.Tables.TableClient storagesMetadataTable_a = tablesAccount.GetTableClient("StoragesMetadata");
             var storageMetaDataUpdated = (_StorageMetaData as Storage).BeginSynchronous(storagesMetadataTable_a);
 
-            if (storageMetaDataUpdated)
-                StorageMetaDataUpdated();
-
             try
             {
+                if (storageMetaDataUpdated)
+                    StorageMetaDataUpdated();
+
+
                 this.StorageMetaData.RegisterComponent(assemblyFullName, types);
+            }
+            catch(Exception error)
+            {
+
             }
             finally
             {
@@ -55,7 +60,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
 
 
 
-            
+
         }
 
 

@@ -5,14 +5,14 @@ using System.Reflection;
 namespace OOAdvantech.Remoting.RestApi
 {
     /// <MetaDataID>{100afa59-cf7c-408f-9456-47f429e4153c}</MetaDataID>
-    public class RestApiExceptionData:System.Exception
+    public class RestApiExceptionData : System.Exception
     {
 
         public RestApiExceptionData()
         {
         }
 
-        public RestApiExceptionData(string message):base(message)
+        public RestApiExceptionData(string message) : base(message)
         {
         }
 
@@ -28,13 +28,13 @@ namespace OOAdvantech.Remoting.RestApi
             return false;
         }
 
-       public  Dictionary<string,object> ExceptionProperties = new Dictionary<string,object>();
+        public Dictionary<string, object> ExceptionProperties = new Dictionary<string, object>();
         public RestApiExceptionData(ExceptionCode exceptionCode, System.Exception exception)
         {
             if (exception is SerializableException)
             {
                 var excType = exception.GetType();
-                while (excType != typeof(SerializableException)) 
+                while (excType != typeof(SerializableException))
                 {
 
                     foreach (var prop in exception.GetType().GetProperties())
@@ -42,12 +42,12 @@ namespace OOAdvantech.Remoting.RestApi
                         ExceptionProperties[prop.Name] = prop.GetValue(exception);
                     }
                     excType = excType.BaseType;
-                } 
+                }
             }
 
-                
 
-            ExceptionType =  exception.GetType().FullName+","+exception.GetType().Assembly.GetName().Name;
+            if (exception != null)
+                ExceptionType = exception.GetType().FullName + "," + exception.GetType().Assembly.GetName().Name;
             //new System.Exception().HResult= exceptionCode;
 
             while (exception is System.Reflection.TargetInvocationException && exception.InnerException != null)
@@ -55,14 +55,14 @@ namespace OOAdvantech.Remoting.RestApi
             ExceptionCode = exceptionCode;
             if (exception != null)
             {
-                if(exception is ServerException)
+                if (exception is ServerException)
                 {
-                    ErrorCode=(exception as ServerException).ErrorCode;
+                    ErrorCode = (exception as ServerException).ErrorCode;
                 }
                 ExceptionMessage = exception.Message;
                 ServerStackTrace = exception.StackTrace;
                 HResult = exception.HResult;
-                if(exception is MissingServerObjectException)
+                if (exception is MissingServerObjectException)
                 {
                     if ((exception as MissingServerObjectException).Reason == MissingServerObjectException.MissingServerObjectReason.CollectedFromGC)
                         ExceptionCode = ExceptionCode.MissingCollectedFromGC;
@@ -71,7 +71,7 @@ namespace OOAdvantech.Remoting.RestApi
                         ExceptionCode = ExceptionCode.MissingDeletedFromStorage;
 
                 }
-               
+
 
             }
             else
@@ -94,7 +94,7 @@ namespace OOAdvantech.Remoting.RestApi
 
         public string ExceptionType;
 
-        
+
     }
 
 
@@ -121,14 +121,14 @@ namespace OOAdvantech.Remoting.RestApi
         ServerError = 1,
         AccessTokenExpired = 12,
         ConnectionError = 2,
-        MissingCollectedFromGC=4,
-        MissingDeletedFromStorage=8,
-        BrokenSession=14
+        MissingCollectedFromGC = 4,
+        MissingDeletedFromStorage = 8,
+        BrokenSession = 14
 
     }
 
 
-  
+
 
     /// <MetaDataID>{15b03d23-dc51-4586-883e-060fdb44c9b8}</MetaDataID>
     public class EndpointNotFoundException : System.Exception
