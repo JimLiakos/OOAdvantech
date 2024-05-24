@@ -668,7 +668,11 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
                     }
                     if (AssignedMetaObject is MetaDataRepository.Attribute)
                     {
-                        _Type = DataNodeType.OjectAttribute;
+                        if (SubDataNodes.Count==0)
+                            _Type = DataNodeType.OjectAttribute;
+                        else
+                            _Type = DataNodeType.Object;
+
                         return _Type;
                     }
 
