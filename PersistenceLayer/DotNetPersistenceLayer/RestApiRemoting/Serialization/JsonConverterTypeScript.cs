@@ -1727,7 +1727,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             if (!string.IsNullOrWhiteSpace(proxy?.ObjectUri?.PersistentUri))
             {
                 string uri = System.Runtime.Remoting.RemotingServices.Marshal(this as MarshalByRefObject).URI;
-                PersistentObjectsTransparentProxies[uri] = this;
+                lock(PersistentObjectsTransparentProxies)
+                    PersistentObjectsTransparentProxies[uri] = this;
             }
         }
 
