@@ -518,6 +518,11 @@ namespace OOAdvantech.SQLitePersistenceRunTime
             throw new NotImplementedException();
         }
 
+        protected override void StorageMetaDataUpdated()
+        {
+            throw new NotImplementedException();
+        }
+
         //public static void Test()
         //{
 
