@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOAdvantech.RDBMSPersistenceRunTime
 {
-
+     
     /// <MetaDataID>{62649b2a-8c44-425d-a86a-a34733a82c94}</MetaDataID>
     public class DistributedObjectQuery:MetaDataRepository.ObjectQueryLanguage.DistributedObjectQuery
     {

@@ -1291,6 +1291,11 @@ namespace OOAdvantech.RDBMSMetaDataRepository
             {
 
             }
+
+            if (FullName == "FlavourBusinessManager.Print.ItemsPreparationContextSnapshot")
+            {
+
+            }
             var m_name = OriginMetaObject.FullName;
 
             var sds = Features;

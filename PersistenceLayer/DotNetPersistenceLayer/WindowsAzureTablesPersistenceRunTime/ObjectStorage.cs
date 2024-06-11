@@ -17,9 +17,9 @@ using OOAdvantech.WindowsAzureTablesPersistenceRunTime.Commands;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
-{
-
-
+{ 
+       
+     
     /// <MetaDataID>{5afec19d-78b9-4d20-89f1-fb5b1453b9bc}</MetaDataID>
     public class ObjectStorage : PersistenceLayerRunTime.ObjectStorage
     {
@@ -51,6 +51,7 @@ namespace OOAdvantech.WindowsAzureTablesPersistenceRunTime
             }
             catch(Exception error)
             {
+                throw;
 
             }
             finally

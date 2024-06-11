@@ -13,6 +13,10 @@ namespace OOAdvantech
 
         public TypeInfo(Type type)
         {
+            if(type == null)
+            {
+
+            }
             this.Type = type;
         }
 

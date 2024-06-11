@@ -11,7 +11,6 @@ namespace OOAdvantech.CodeMetaDataRepository
     public class Class : OOAdvantech.MetaDataRepository.Class, CodeElementContainer
     {
 
-
         /// <MetaDataID>{2f18dc65-aefe-477c-b6a3-e2e8bf49cfe7}</MetaDataID>
         public override void PutPropertyValue(string propertyNamespace, string propertyName, object PropertyValue)
         {

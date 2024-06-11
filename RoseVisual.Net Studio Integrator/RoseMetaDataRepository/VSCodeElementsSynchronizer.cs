@@ -505,7 +505,7 @@ namespace RoseMetaDataRepository
         public bool OnSelectedContextMenuItem(RationalRose.RoseApplication roseApplication, string internalName)
         {
             try
-            {
+            { 
                 roseApplication = RoseObjectProxy.ControlRoseObject(roseApplication) as RationalRose.RoseApplication;
                 bool hasNet2ModelItems = false;
                 bool hasNet4ModelItems = false;

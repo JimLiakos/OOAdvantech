@@ -805,6 +805,7 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
             if (type == null)
             {
+                return null;
             }
             bool isGen = type.GetMetaData().IsGenericType;
             bool isGenpar = type.GetMetaData().IsGenericTypeDefinition;

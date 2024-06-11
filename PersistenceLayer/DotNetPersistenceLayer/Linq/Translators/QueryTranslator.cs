@@ -393,7 +393,7 @@ namespace OOAdvantech.Linq.Translators
                     message += " PW";
                 if (mdataNode.ParticipateInSelectClause)
                     message += " SL";
-                System.Diagnostics.Debug.WriteLine(message);
+               // System.Diagnostics.Debug.WriteLine(message);
             }
             ExpressionTreeNode.lastExpressionTree = Root;
         }
@@ -935,7 +935,7 @@ namespace OOAdvantech.Linq.Translators
                     message += " PW";
                 if (mdataNode.ParticipateInSelectClause)
                     message += " SL";
-                System.Diagnostics.Debug.WriteLine(message);
+               // System.Diagnostics.Debug.WriteLine(message);
             }
         }
         ///// <summary>

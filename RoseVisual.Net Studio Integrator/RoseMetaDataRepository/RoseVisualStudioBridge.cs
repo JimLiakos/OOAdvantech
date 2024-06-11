@@ -94,7 +94,7 @@ namespace RoseMetaDataRepository
                     templateParma += ",";
 
                 if (parameterClassifier is OOAdvantech.MetaDataRepository.Classifier)
-                    templateParma +=MetaObjectMapper.GetShortNameFor((parameterClassifier as OOAdvantech.MetaDataRepository.Classifier).FullName);
+                    templateParma += MetaObjectMapper.GetShortNameFor((parameterClassifier as OOAdvantech.MetaDataRepository.Classifier).FullName);
                 else
                     templateParma += parameterClassifier.Name;
 
@@ -163,12 +163,12 @@ namespace RoseMetaDataRepository
                             classifier.Synchronize(codeClassifier);
 
                         }
-                       // stateTransition.Consistent = true;
+                        // stateTransition.Consistent = true;
                     }
                 }
                 System.TimeSpan timeSpan = System.DateTime.Now - startTime;
                 System.Diagnostics.Debug.WriteLine("GetExternalClassifier  " + timeSpan.TotalMilliseconds.ToString());
-                 
+
 
             }
             catch (System.Exception error)
@@ -283,10 +283,10 @@ namespace RoseMetaDataRepository
                                 {
                                     if (roseOperetion != null)
                                     {
-                                        if (feature.Owner==classifier && feature is Operation && (feature as Operation).RoseOperation.Equals(roseOperetion))
+                                        if (feature.Owner == classifier && feature is Operation && (feature as Operation).RoseOperation.Equals(roseOperetion))
                                         {
-                                            OOAdvantech.MetaDataRepository.Feature codeFeature= codeClassifier.GetFeature(feature.Identity.ToString(), false) ;
-                                            OOAdvantech.MetaDataRepository.Operation codeOperation = codeFeature as OOAdvantech.MetaDataRepository.Operation; 
+                                            OOAdvantech.MetaDataRepository.Feature codeFeature = codeClassifier.GetFeature(feature.Identity.ToString(), false);
+                                            OOAdvantech.MetaDataRepository.Operation codeOperation = codeFeature as OOAdvantech.MetaDataRepository.Operation;
 
                                             if (codeOperation != null)
                                                 feature.Synchronize(codeOperation);//.Synchronize(feature);
@@ -391,7 +391,7 @@ namespace RoseMetaDataRepository
 
 
                             //codeClassifier.Synchronize(classifier);
-                           // project.IDEManager.RefreshProject(project.Identity.ToString(), codeClassifier.Identity.ToString());
+                            // project.IDEManager.RefreshProject(project.Identity.ToString(), codeClassifier.Identity.ToString());
 
                         }
                         //stateTransition.Consistent = true;
@@ -445,7 +445,7 @@ namespace RoseMetaDataRepository
 
                             RationalRose.RoseOperation roseOperetion = roseItem as RationalRose.RoseOperation;
                             RationalRose.RoseAttribute roseAttribute = roseItem as RationalRose.RoseAttribute;
-                            RationalRose.RoseRole roseRole =roseItem as RationalRose.RoseRole;
+                            RationalRose.RoseRole roseRole = roseItem as RationalRose.RoseRole;
 
                             RationalRose.RoseClass roseClass = null;
                             if (roseOperetion != null)
@@ -659,9 +659,11 @@ namespace RoseMetaDataRepository
 
                                             codeAssociationEnd.Synchronize(associationEnd.GetOtherEnd());
                                         }
-                                        else
-                                        {
-                                            OOAdvantech.MetaDataRepository.Classifier otherEndCodeClassifier = project.GetExternalClassifier(associationEnd.Specification.FullName);
+                                        else 
+                                        { 
+                                            OOAdvantech.MetaDataRepository.Classifier otherEndCodeClassifier = project.GetClassifier(associationEnd.Specification.Identity.ToString());
+                                            if (otherEndCodeClassifier == null)
+                                                otherEndCodeClassifier = project.GetExternalClassifier(associationEnd.Specification.FullName);
                                             if (otherEndCodeClassifier == null)
                                                 return;
 
@@ -754,7 +756,7 @@ namespace RoseMetaDataRepository
                 OOAdvantech.CodeMetaDataRepository.MetaObjectsStack metaObjectsStack = null;
                 try
                 {
-                    
+
 
                     if (!IsAdmin)
                     {
@@ -823,7 +825,7 @@ namespace RoseMetaDataRepository
 
                         codeModelSychronizeView.Connection.Instance = new CodeModelSychronizer(classifier, codeClassifier);
                         codeModelSychronizeView.ShowDialog();
-                        
+
 
 
                     }
@@ -925,11 +927,11 @@ namespace RoseMetaDataRepository
                             {
 
                                 classifier = MetaObjectMapper.FindMetaObjectFor(roseClass.GetUniqueID()) as OOAdvantech.MetaDataRepository.Classifier;
-                                if(classifier ==null)
+                                if (classifier == null)
                                     classifier = new Interface(roseClass, component);
                                 string ful = classifier.FullName;
                                 (classifier as Interface).LoadCompleteModel();
-                                
+
                             }
                             else if (roseClass.Stereotype.Trim().ToLower() == "Structure".ToLower())
                             {
@@ -1004,7 +1006,7 @@ namespace RoseMetaDataRepository
         }
         /// <MetaDataID>{33f47aba-1e97-4e5e-8c2a-c7de7982bfbf}</MetaDataID>
         internal void Browse(RationalRose.RoseApplication roseApplication)
-        { 
+        {
 
             for (int i = 0; i < roseApplication.AddInManager.AddIns.Count; i++)
             {
@@ -1012,9 +1014,9 @@ namespace RoseMetaDataRepository
                 string rtr = addin.Name;
                 string rtr2 = addin.GetDisplayName();
                 object obj = addin.EventHandler;
-                if (obj!=null)
+                if (obj != null)
                 {
-                    string ty= obj.GetType().FullName;
+                    string ty = obj.GetType().FullName;
                 }
 
             }
@@ -1094,7 +1096,7 @@ namespace RoseMetaDataRepository
                         memberIdentity = (roseItem as RationalRose.RoseRole).Association.GetPropertyValue("C#", "Identity");
 
 
- 
+
 
 
                     EnvDTE.ProjectItem projectItem = (project.GetClassifier(classifier.Identity.ToString()) as OOAdvantech.CodeMetaDataRepository.CodeElementContainer).CodeElement.ProjectItem;
@@ -1233,7 +1235,7 @@ namespace RoseMetaDataRepository
                 WindowsPrincipal principal = new WindowsPrincipal(user);
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
-        }  
+        }
 
 
         /// <MetaDataID>{e62d22ee-dd2a-41e8-b1bf-f931f4436518}</MetaDataID>
@@ -1241,7 +1243,7 @@ namespace RoseMetaDataRepository
         {
             if (!IsAdmin)
             {
-                System.Windows.Forms.MessageBox.Show("You can't access Visual Studio \r\nRun Rose as administrator.", "Rose Visual Studio Synchronizer", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning); 
+                System.Windows.Forms.MessageBox.Show("You can't access Visual Studio \r\nRun Rose as administrator.", "Rose Visual Studio Synchronizer", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                 return;
             }
             OOAdvantech.CodeMetaDataRepository.MetaObjectsStack metaObjectsStack = null;

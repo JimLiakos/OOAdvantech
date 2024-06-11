@@ -401,7 +401,7 @@ namespace OOAdvantech.MetaDataRepository
 
                 if (_Namespace == null && PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Properties) != null)
                     PersistenceLayer.StorageInstanceRef.GetStorageInstanceRef(Properties).LazyFetching("Namespace", typeof(MetaDataRepository.MetaObject));
-                if (_Namespace.Value == null && originMetaObject.Namespace != null)
+                if ((_Namespace.Value == null|| originMetaObject.Namespace?.FullName!= Namespace?.FullName) && originMetaObject.Namespace != null)
                 {
                     _Namespace.Value = MetaDataRepository.MetaObjectsStack.CurrentMetaObjectCreator.FindMetaObjectInPLace(originMetaObject.Namespace, this) as MetaDataRepository.Namespace;
 
