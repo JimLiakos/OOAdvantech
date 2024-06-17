@@ -1043,7 +1043,7 @@ namespace OOAdvantech.Remoting.RestApi
         private IMessage UnMarshal(IMethodCallMessage methodCallMessage, ReturnMessage returnMessage)
         {
 
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
+            var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);// { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
 
             if (returnMessage.Exception != null)
             {

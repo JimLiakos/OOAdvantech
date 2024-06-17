@@ -9,10 +9,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
 
 
     /// <summary>
-    /// Defines the αppropriate Json serializer settings for channel data serialization
+    /// Defines the appropriate JSon serialize settings for channel data serialization
     /// </summary>
     /// /// <MetaDataID>{c359595e-70da-439c-95be-bc62cdaed989}</MetaDataID>
-    public class JsonSerializerSettings : OOAdvantech.Json.JsonSerializerSettings
+    public class JSonSerializeSettings : OOAdvantech.Json.JsonSerializerSettings
     {
 
         
@@ -20,10 +20,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             get
             {
-                var jSetttings = new Json.JsonSerializerSettings() { ReferenceLoopHandling = Json.ReferenceLoopHandling.Serialize, TypeNameHandling = Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null,null ,JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new ReferenceResolver() };
-                jSetttings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
-                jSetttings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
-                return jSetttings;
+                var jSettings = new Json.JsonSerializerSettings() { ReferenceLoopHandling = Json.ReferenceLoopHandling.Serialize, TypeNameHandling = Json.TypeNameHandling.None, Binder = new SerializationBinder(JsonSerializationFormat.TypeScriptJsonSerialization), ContractResolver = new JsonContractResolver(OOAdvantech.Remoting.RestApi.Serialization.JsonContractType.Serialize, null,null ,JsonSerializationFormat.TypeScriptJsonSerialization), ReferenceResolver = new ReferenceResolver() };
+                jSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK";
+                jSettings.DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc;
+                return jSettings;
             }
         }
 
@@ -55,7 +55,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         /// Defines the channel server session format
         /// </param>
         /// <param name="argsTypes"></param>
-        public JsonSerializerSettings(JsonContractType jsonContractType, JsonSerializationFormat serializationFormat, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] argsTypes = null)
+        public JSonSerializeSettings(JsonContractType jsonContractType, JsonSerializationFormat serializationFormat, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata, Type[] argsTypes = null)
         {
 
             CachingMetadata = new CachingMetaData() { CachingMembers = cachingMetadata };
@@ -96,7 +96,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         JsonContractType JsonContructType;
 
 
-        public JsonSerializerSettings(JsonContractType jsonContructType, JsonSerializationFormat serializationFormat, string channelUri, string internalChannelUri, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata)
+        public JSonSerializeSettings(JsonContractType jsonContructType, JsonSerializationFormat serializationFormat, string channelUri, string internalChannelUri, ServerSessionPart serverSessionPart, Dictionary<string, List<string>> cachingMetadata)
             : this(jsonContructType, serializationFormat, serverSessionPart, cachingMetadata, null)
         {
 

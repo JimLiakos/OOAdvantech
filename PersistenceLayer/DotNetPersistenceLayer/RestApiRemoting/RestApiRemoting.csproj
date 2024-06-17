@@ -138,7 +138,7 @@
     <Compile Include="Serialization\JSCallData.cs" />
     <Compile Include="Serialization\JsonConverterTypeScript.cs" />
     <Compile Include="Serialization\JsonSerializerEx.cs" />
-    <Compile Include="Serialization\JsonSerializerSettings.cs" />
+    <Compile Include="Serialization\JSonSerializeSettings.cs" />
     <Compile Include="LogicalConnection.cs" />
     <Compile Include="PerformanceMonitor.cs" />
     <Compile Include="Serialization\JsonContractResolver.cs" />

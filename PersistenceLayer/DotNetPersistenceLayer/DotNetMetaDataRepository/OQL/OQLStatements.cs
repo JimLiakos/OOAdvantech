@@ -657,7 +657,7 @@ namespace OOAdvantech.MetaDataRepository.ObjectQueryLanguage
         }
 
         /// <MetaDataID>{345c7167-62fd-44bf-9f10-ae1293d6be43}</MetaDataID>
-        static string LoadMetadataLock = "lock";
+        static object LoadMetadataLock = new object();
 
 
         ///// <MetaDataID>{840A2F44-C84D-4329-8B65-399CDD011F1E}</MetaDataID>

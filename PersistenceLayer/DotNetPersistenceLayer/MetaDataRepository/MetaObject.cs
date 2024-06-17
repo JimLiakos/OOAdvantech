@@ -115,7 +115,7 @@ namespace OOAdvantech.MetaDataRepository
         }
 
         /// <MetaDataID>{3690d879-4a34-44b1-af38-01f0389aedac}</MetaDataID>
-        protected string LockObject = "lock";
+        protected object LockObject = new object();
         /// <MetaDataID>{D4C7E50E-38F9-487A-B2EA-5AD544335D10}</MetaDataID>
         protected OOAdvantech.Synchronization.ReaderWriterLock ReaderWriterLock = new OOAdvantech.Synchronization.ReaderWriterLock(true);
 

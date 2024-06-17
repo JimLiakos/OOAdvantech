@@ -524,7 +524,7 @@ namespace OOAdvantech.Remoting.RestApi
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
             var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart,null, argsTypes);
 #else
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart,null, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
+            var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart,null, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
 #endif
             //if (Web)
             //{
@@ -662,7 +662,7 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{cfeaf1fa-b207-44f6-91cc-1336b3f13a1b}</MetaDataID>
         internal void Marshal()
         {
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Serialize, Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
+            var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, null,null);
             // { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Serialize, null, null, null) };
             JsonArgs = JsonConvert.SerializeObject(Args, jSetttings);
         }
