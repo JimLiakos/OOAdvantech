@@ -165,7 +165,7 @@
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonContractResolver.cs" Link="Remoting\RestApiRemoting\Serialization\JsonContractResolver.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonConverterTypeScript.cs" Link="Remoting\RestApiRemoting\Serialization\JsonConverterTypeScript.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonSerializerEx.cs" Link="Remoting\RestApiRemoting\Serialization\JsonSerializerEx.cs" />
-    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonSerializerSettings.cs" Link="Remoting\RestApiRemoting\Serialization\JsonSerializerSettings.cs" />
+    <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JSonSerializeSettings.cs" Link="Remoting\RestApiRemoting\Serialization\JSonSerializeSettings.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\JsonType.cs" Link="Remoting\RestApiRemoting\Serialization\JsonType.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\ReferenceResolver.cs" Link="Remoting\RestApiRemoting\Serialization\ReferenceResolver.cs" />
     <Compile Include="..\..\DotNetPersistenceLayer\RestApiRemoting\Serialization\SerializationBinder.cs" Link="Remoting\RestApiRemoting\Serialization\SerializationBinder.cs" />

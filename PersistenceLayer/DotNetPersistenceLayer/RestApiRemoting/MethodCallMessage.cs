@@ -522,7 +522,7 @@ namespace OOAdvantech.Remoting.RestApi
             Type[] argsTypes = (from parameter in parameters select parameter.ParameterType).ToArray();
 #if DeviceDotNet
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart,null, argsTypes);
+            var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart,null, argsTypes);
 #else
             var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Deserialize, web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSessionPart,null, argsTypes);// { TypeNameHandling = Web ? TypeNameHandling.None : TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, ChannelUri, InternalChannelUri, serverSessionPart, argsTypes, Web), Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(Web) };
 #endif

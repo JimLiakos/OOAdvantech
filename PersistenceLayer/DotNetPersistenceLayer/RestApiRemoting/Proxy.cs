@@ -1184,7 +1184,7 @@ namespace OOAdvantech.Remoting.RestApi
         private static object UnMarshal(MethodInfo method, ReturnMessage returnMessage, object[] args)
         {
             //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(false), ContractResolver = new JsonContractResolver(JsonContractType.Deserialize, null, null, null) };
-            var jSetttings = new Serialization.JsonSerializerSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);
+            var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Deserialize, JsonSerializationFormat.NetTypedValuesJsonSerialization, null, null);
             if (returnMessage.Exception != null)
             {
                 Type exceptionType = null;
