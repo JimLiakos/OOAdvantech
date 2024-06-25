@@ -992,7 +992,14 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     if (ServerSessionPart?.ChannelUri == "local-device")
                     {
                         if ((proxy as Proxy).TypeScriptProxy == null)
+                        {
+
                             (proxy as Proxy).TypeScriptProxy = new TypeScriptProxy(_obj);
+                            if((proxy as Proxy).ObjectRef?.TypeMetaData == null)
+                            {
+                                Debug.Assert((proxy as Proxy).ObjectRef?.TypeMetaData == null, "ObjectRef TypeMetaData is null");
+                            }
+                        }
 
                         _obj = (proxy as Proxy).TypeScriptProxy;
                         uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
@@ -1723,6 +1730,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             TransparentProxy = transparentProxy;
             var proxy = (transparentProxy as ITransparentProxy).GetProxy();
+
+            
 
             if (!string.IsNullOrWhiteSpace(proxy?.ObjectUri?.PersistentUri))
             {

@@ -112,6 +112,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (ObjectRef.Uri != objectRef.Uri)
             {
+                asd
                 ObjectRef = objectRef;
                 Uri = objectRef.Uri;
                 ChannelUri = objectRef.ChannelUri;
