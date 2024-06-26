@@ -188,7 +188,7 @@ namespace OOAdvantech.Remoting.RestApi
                         Proxy proxy = (Object as ITransparentProxy).GetProxy() as Proxy;
                         if (proxy!=null)
                         {
-                            var methods = proxy.ObjectRef.GetProxyType().Methods;
+                            var methods = proxy.ObjectRef.GetTypeMetaData().Methods;
                             
 
                             if (methods?.Contains(MethodName)==true)
@@ -197,7 +197,7 @@ namespace OOAdvantech.Remoting.RestApi
                             }
                             else
                             {
-                                var interfaces = proxy.ObjectRef.GetProxyType().Interfaces;
+                                var interfaces = proxy.ObjectRef.GetTypeMetaData().Interfaces;
                                 if (interfaces!=null)
                                 {
 

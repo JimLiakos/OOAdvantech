@@ -265,7 +265,7 @@ namespace OOAdvantech.Remoting.RestApi
                         if (methodCallMessage.Object != null)// && serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
                             if (methodCallMessage.Object is ITransparentProxy)
-                                proxyType = ((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy)?.ProxyType;
+                                proxyType = ((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy)?.TypeMetaData;
 
                             if (proxyType == null)
                             {
@@ -604,7 +604,7 @@ namespace OOAdvantech.Remoting.RestApi
                         if (!serverSession.MarshaledTypes.TryGetValue(methodCallMessage.Object.GetType().AssemblyQualifiedName, out proxyType))
                         {
                             if (methodCallMessage.Object is ITransparentProxy)
-                                proxyType = ((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy).ProxyType;
+                                proxyType = ((methodCallMessage.Object as ITransparentProxy).GetProxy() as Proxy).TypeMetaData;
                             if (proxyType == null)
                             {
                                 proxyType = ProxyType.GetProxyType(methodCallMessage.Object.GetType());

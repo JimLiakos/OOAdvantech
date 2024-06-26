@@ -126,16 +126,12 @@ namespace OOAdvantech.Remoting.RestApi
         }
 
         /// <MetaDataID>{0ae88982-a84f-462d-b27d-f7168110d3e2}</MetaDataID>
-        internal ProxyType GetProxyType()
+        internal ProxyType GetTypeMetaData()
         {
             if (TypeMetaData == null)
             {
-
                 ClientSessionPart clientSessionPart = RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices) as OOAdvantech.Remoting.RestApi.ClientSessionPart;
-
-
                 _TypeMetaData = clientSessionPart.GetProxyType(TypeName);
-                
             }
             else
             {

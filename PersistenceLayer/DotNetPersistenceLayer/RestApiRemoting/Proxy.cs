@@ -81,7 +81,7 @@ namespace OOAdvantech.Remoting.RestApi
         public ObjRef ObjectRef;
 
         /// <MetaDataID>{cbed457e-a960-4e96-9cbe-04def95ff9df}</MetaDataID>
-        internal ProxyType ProxyType;
+        internal ProxyType TypeMetaData;
         /// <MetaDataID>{d3eb0a29-f618-46ad-a29e-e65ff00a3190}</MetaDataID>
         public Proxy(ObjRef objectRef, Type type = null) : base(typeof(MarshalByRefObject))
         {
@@ -89,20 +89,17 @@ namespace OOAdvantech.Remoting.RestApi
             ObjectRef = objectRef;
             Uri = objectRef.Uri;
             ChannelUri = objectRef.ChannelUri;
-            //this.InternalChannelUri = objectRef.InternalChannelUri;
-            ProxyType = objectRef.GetProxyType();
-
-
+            TypeMetaData = objectRef.GetTypeMetaData();
             if (type != null)
             {
                 Type = type;
 #if !DeviceDotNet
-                if (ProxyType != null && ProxyType.AssemblyQualifiedName != null)
-                    ServerObjectType = System.Type.GetType(ProxyType.AssemblyQualifiedName, false);
+                if (TypeMetaData != null && TypeMetaData.AssemblyQualifiedName != null)
+                    ServerObjectType = System.Type.GetType(TypeMetaData.AssemblyQualifiedName, false);
 #endif
             }
             else
-                Type = System.Type.GetType(ProxyType.AssemblyQualifiedName);
+                Type = System.Type.GetType(TypeMetaData.AssemblyQualifiedName);
 
 
         }
@@ -112,12 +109,12 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (ObjectRef.Uri != objectRef.Uri)
             {
-                asd
+               
+                TypeMetaData = objectRef.GetTypeMetaData();
+
                 ObjectRef = objectRef;
                 Uri = objectRef.Uri;
                 ChannelUri = objectRef.ChannelUri;
-
-
 
                 int nPos = Uri.IndexOf("#MonoStateClass#");
                 if (nPos != -1)
@@ -143,13 +140,6 @@ namespace OOAdvantech.Remoting.RestApi
                     else
                         _ObjectUri = new ExtObjectUri(Uri, null, null, null, RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices).ClientProcessIdentity);
 
-                    if (ProxyType?.Name == "PreparationStation")
-                    {
-                        if (nPos == -1)
-                        {
-
-                        }
-                    }
                 }
             }
 
@@ -190,7 +180,7 @@ namespace OOAdvantech.Remoting.RestApi
             }
             else
             {
-                if (ProxyType?.Name == "PreparationStation")
+                if (TypeMetaData?.Name == "PreparationStation")
                 {
                 }
                 nPos = Uri.IndexOf("#PID#");
@@ -203,7 +193,7 @@ namespace OOAdvantech.Remoting.RestApi
                 else
                     _ObjectUri = new ExtObjectUri(Uri, null, null, null, RenewalManager.GetSession(ChannelUri, true, RemotingServices.CurrentRemotingServices).ClientProcessIdentity);
 
-                if (ProxyType?.Name == "PreparationStation")
+                if (TypeMetaData?.Name == "PreparationStation")
                 {
                     if (nPos == -1)
                     {
@@ -236,7 +226,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                return ProxyType.FullName;
+                return TypeMetaData.FullName;
             }
             set
             {
@@ -251,7 +241,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             get
             {
-                return ProxyType.Name;
+                return TypeMetaData.Name;
             }
             set
             {
@@ -431,7 +421,7 @@ namespace OOAdvantech.Remoting.RestApi
             {
                 string propertyName = methodName.Substring("get_".Length);
 
-                if (this.ObjectRef.GetProxyType()?.OnDemandCachingMembersNames.Contains(propertyName) == true)
+                if (this.ObjectRef.GetTypeMetaData()?.OnDemandCachingMembersNames.Contains(propertyName) == true)
                     this.ObjectRef.SetMemberValue(propertyName, retObject);
 
             }
@@ -1401,7 +1391,7 @@ namespace OOAdvantech.Remoting.RestApi
             if (typeof(ITransparentProxy) == fromType)
                 return true;
 
-            bool canCastTo = ProxyType.CanCastTo(fromType);
+            bool canCastTo = TypeMetaData.CanCastTo(fromType);
 
             return canCastTo;
         }

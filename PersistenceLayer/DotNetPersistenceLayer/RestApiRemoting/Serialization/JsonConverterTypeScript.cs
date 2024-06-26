@@ -992,14 +992,7 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                     if (ServerSessionPart?.ChannelUri == "local-device")
                     {
                         if ((proxy as Proxy).TypeScriptProxy == null)
-                        {
-
                             (proxy as Proxy).TypeScriptProxy = new TypeScriptProxy(_obj);
-                            if((proxy as Proxy).ObjectRef?.TypeMetaData == null)
-                            {
-                                Debug.Assert((proxy as Proxy).ObjectRef?.TypeMetaData == null, "ObjectRef TypeMetaData is null");
-                            }
-                        }
 
                         _obj = (proxy as Proxy).TypeScriptProxy;
                         uri = System.Runtime.Remoting.RemotingServices.Marshal(_obj as MarshalByRefObject).URI;
@@ -1007,13 +1000,9 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
                         if (ServerSessionPart == null || !ServerSessionPart.MarshaledTypes.TryGetValue((proxy as Proxy).ObjectRef.TypeName.FullName, out httpProxyType))
                         {
                             httpProxyType = (proxy as Proxy).ObjectRef.TypeMetaData;
-                            //if (ServerSessionPart != null && httpProxyType != null)
-                            //    ServerSessionPart.MarshaledTypes[(proxy as Proxy).ObjectRef.TypeName] = httpProxyType;
 
-                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName.FullName, (proxy as Proxy).ObjectRef.TypeMetaData);
-
+                            var objectRef = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, (proxy as Proxy).ObjectRef.TypeName.FullName, (proxy as Proxy).ObjectRef.GetTypeMetaData());
                             objectRef.MembersValues = (proxy as Proxy).ObjectRef.MembersValues;
-
                             return objectRef;
                         }
                         else
