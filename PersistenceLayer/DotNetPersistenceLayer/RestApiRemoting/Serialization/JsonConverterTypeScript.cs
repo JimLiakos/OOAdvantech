@@ -980,8 +980,8 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
         {
             if (referenceOnlyCaching)
             {
-
             }
+
             OOAdvantech.MetaDataRepository.ProxyType httpProxyType = null;
             string uri = null;
             if (_obj is ITransparentProxy)
