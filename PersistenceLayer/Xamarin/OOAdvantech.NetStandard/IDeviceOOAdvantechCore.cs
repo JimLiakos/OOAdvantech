@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OOAdvantech.MetaDataRepository;
+using Xamarin.Essentials;
 
 namespace OOAdvantech
 {
 
-    delegate void BackPressedandle();
+    //delegate void BackPressedHandle();
 
     /// <MetaDataID>{cfa63701-40aa-4507-824c-30b1d5bc0383}</MetaDataID>
     public interface IDeviceOOAdvantechCore
@@ -241,5 +242,67 @@ namespace OOAdvantech
     {
         public bool Terminate;
 
+    }
+
+    /// <MetaDataID>{1213eee5-6091-4f11-b02a-840c5ba0071b}</MetaDataID>
+    public enum DeviceOS
+    {
+
+        Android,
+        iOS,
+        macOS,
+        Windows,
+        Tizen,
+        tvOS,
+        UWP,
+        Unknown,
+        watchOS
+    }
+
+    public class DeviceCore
+    {
+        public static DeviceOS DeviceOS
+        {
+            get
+            {
+
+
+
+                DeviceOS deviceOS = DeviceOS.Unknown;
+                if (DeviceInfo.Platform == DevicePlatform.iOS)
+                {
+                    deviceOS = DeviceOS.iOS;
+                }
+                if (DeviceInfo.Platform == DevicePlatform.macOS)
+                {
+                    deviceOS = DeviceOS.macOS;
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.Android)
+                {
+                    deviceOS = DeviceOS.Android;
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.Tizen)
+                {
+                    deviceOS = DeviceOS.Android;
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.UWP)
+                {
+                    deviceOS = DeviceOS.UWP;
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.tvOS)
+                {
+                    deviceOS = DeviceOS.tvOS;
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.Unknown)
+                {
+                    deviceOS = DeviceOS.Unknown;
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.watchOS)
+                {
+                    deviceOS = DeviceOS.watchOS;
+                }
+                return deviceOS;
+            }
+        }
     }
 }

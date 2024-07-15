@@ -93,9 +93,9 @@ namespace OOAdvantech.Pay.Droid
             }
         }
 
-        delegate void BackPressedandle();
+        delegate void BackPressedHandle();
 
-        static event BackPressedandle OnBackPressed;
+        static event BackPressedHandle OnBackPressed;
         public static void BackPressed()
         {
             OnBackPressed?.Invoke();

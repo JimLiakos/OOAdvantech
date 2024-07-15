@@ -151,4 +151,33 @@ namespace OOAdvantech
 
         SerializeTaskScheduler SerializeTaskScheduler { get; }
     }
+
+    /// <MetaDataID>{1213eee5-6091-4f11-b02a-840c5ba0071b}</MetaDataID>
+    public enum DeviceOS
+    {
+
+        Android,
+        iOS,
+        macOS,
+        Windows,
+        Tizen,
+        tvOS,
+        UWP,
+        Unknown,
+        watchOS
+    }
+
+    /// <MetaDataID>{610fbe07-c5c5-448b-87ea-681f7285db75}</MetaDataID>
+    public class DeviceCore
+    {
+        public static DeviceOS DeviceOS
+        {
+            get
+            {
+
+
+                return DeviceOS.Windows;
+            }
+        }
+    }
 }
