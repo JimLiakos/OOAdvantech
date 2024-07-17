@@ -15,7 +15,7 @@ namespace OOAdvantech.iOS
     {
 
         static event MessageReceivedHandle internalMessageReceived;
-        public event KeyboardChangeStateHandle KeyboordChangeState;
+        public event KeyboardChangeStateHandle KeyboardChangeState;
 
         event MessageReceivedHandle IDeviceOOAdvantechCore.MessageReceived
         {

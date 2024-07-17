@@ -15,7 +15,10 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Core.App;
 using Java.Security;
+using Xamarin.Essentials;
 using static Android.Content.PM.PackageManager;
+
+using Task = System.Threading.Tasks.Task;
 
 namespace OOAdvantech.Droid
 {
@@ -53,7 +56,7 @@ namespace OOAdvantech.Droid
 
         static event KeyboardChangeStateHandle internalKeyboordChangeState;
 
-        event KeyboardChangeStateHandle IDeviceOOAdvantechCore.KeyboordChangeState
+        event KeyboardChangeStateHandle IDeviceOOAdvantechCore.KeyboardChangeState
         {
             add
             {
@@ -387,6 +390,94 @@ namespace OOAdvantech.Droid
         {
             if (ForegroundServiceManager != null)
                 ForegroundServiceManager.Stop();
+        }
+
+
+        public System.Threading.Tasks.Task<PermissionStatus> RemoteNotificationsPermissionsCheck()
+        {
+
+            if ((int)Build.VERSION.SdkInt < 33)
+                return Task.FromResult(PermissionStatus.Granted);
+            
+            if (Platform.CurrentActivity.CheckSelfPermission(Android.Manifest.Permission.PostNotifications) == Android.Content.PM.Permission.Granted)
+                return Task.FromResult(PermissionStatus.Granted);
+            else
+                return Task.FromResult(PermissionStatus.Denied);
+        }
+
+     
+
+        public System.Threading.Tasks.Task<PermissionStatus> RemoteNotificationsPermissionsRequest()
+        {
+            return NotificationPermissionsRequest();
+        }
+
+
+        static readonly object locker = new object();
+
+        internal const int requestCodeStart = 12000;
+
+        static int requestCode = requestCodeStart;
+
+        internal static int NextRequestCode()
+        {
+            if (++requestCode >= 12999)
+                requestCode = requestCodeStart;
+
+            return requestCode;
+        }
+        static readonly Dictionary<int, System.Threading.Tasks.TaskCompletionSource<PermissionStatus>> requests =
+                new Dictionary<int, System.Threading.Tasks.TaskCompletionSource<PermissionStatus>>();
+
+        internal System.Threading.Tasks.Task<PermissionStatus> NotificationPermissionsRequest()
+        {
+                       
+
+            string[] notifyPermission = { Android.Manifest.Permission.PostNotifications };
+
+            if (Platform.CurrentActivity.CheckSelfPermission(Android.Manifest.Permission.PostNotifications) != Android.Content.PM.Permission.Granted)
+            {
+
+               System.Threading.Tasks.TaskCompletionSource<PermissionStatus> tcs;
+
+                int notificationRequestCode = 0;
+                lock (locker)
+                {
+                    tcs = new System.Threading.Tasks.TaskCompletionSource<PermissionStatus>();
+
+                    notificationRequestCode = NextRequestCode();
+
+                    requests.Add(notificationRequestCode, tcs);
+                }
+
+                if (!MainThread.IsMainThread)
+                    throw new PermissionException("Permission request must be invoked on main thread.");
+
+                Platform.CurrentActivity.RequestPermissions(notifyPermission, notificationRequestCode);
+                return tcs.Task;
+
+            }
+            else
+                return Task.FromResult(PermissionStatus.Granted);
+
+
+        }
+
+        public static void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+
+            lock (locker)
+            {
+                if (requests.ContainsKey(requestCode))
+                {
+                    if (grantResults.Any(g => g == Android.Content.PM.Permission.Denied))
+                        requests[requestCode].TrySetResult(PermissionStatus.Denied);
+                    else
+                        requests[requestCode].TrySetResult(PermissionStatus.Granted);
+
+                    requests.Remove(requestCode);
+                }
+            }
         }
     }
 

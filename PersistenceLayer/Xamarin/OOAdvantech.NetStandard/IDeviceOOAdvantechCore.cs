@@ -25,7 +25,15 @@ namespace OOAdvantech
       
         event MessageReceivedHandle MessageReceived;
 
-        event KeyboardChangeStateHandle KeyboordChangeState;
+        event KeyboardChangeStateHandle KeyboardChangeState;
+
+
+
+        Task<PermissionStatus> RemoteNotificationsPermissionsRequest();
+
+
+        Task<PermissionStatus> RemoteNotificationsPermissionsCheck();
+
 
         /// <MetaDataID>{d03f1e4b-d600-4ac2-b65a-5b2cda8343e0}</MetaDataID>
         double ScreeHeight { get; }
