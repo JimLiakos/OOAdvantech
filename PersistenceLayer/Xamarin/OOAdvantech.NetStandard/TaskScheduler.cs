@@ -9,6 +9,10 @@ namespace OOAdvantech
     /// <MetaDataID>{09d102c4-69a8-4fb2-afb2-65e878048005}</MetaDataID>
     public class SerializeTaskScheduler
     {
+        public SerializeTaskScheduler()
+        {
+
+        }
         /// <MetaDataID>{64e5f331-062a-4eb4-b473-46c5b67ccdbc}</MetaDataID>
         Queue<Func<Task<bool>>> Tasks = new Queue<Func<Task<bool>>>();
         bool _Runs = true;
