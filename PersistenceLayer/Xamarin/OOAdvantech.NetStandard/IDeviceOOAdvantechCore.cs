@@ -67,6 +67,9 @@ namespace OOAdvantech
         bool RunInBackground(Action action, BackgroundServiceState serviceState);
 
         void StopBackgroundService();
+
+
+        void OpenAppSettings();
     }
 
     /// <MetaDataID>{a0246554-4359-4a5a-a501-b3a7824c6b12}</MetaDataID>

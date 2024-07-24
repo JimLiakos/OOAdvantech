@@ -157,7 +157,7 @@ namespace OOAdvantech.Droid
                     var shaDisc = sha.ToString();
 
                     string sha1Fingerprint = null;
-                    sha1Fingerprint=BitConverter.ToString(sha.Digest()).Replace("-", ":");
+                    sha1Fingerprint = BitConverter.ToString(sha.Digest()).Replace("-", ":");
                     //foreach (byte _byte in sha.Digest())
                     //{
                     //    if (sha1Fingerprint!=null)
@@ -276,10 +276,10 @@ namespace OOAdvantech.Droid
                 if (value.HasValue)
                 {
                     var statusBarColor = value.Value;
-                    if (StatusBarCurrentColor!=statusBarColor)
+                    if (StatusBarCurrentColor != statusBarColor)
                     {
                         Xamarin.Essentials.Platform.CurrentActivity.Window.SetStatusBarColor(Android.Graphics.Color.Argb(statusBarColor.A, statusBarColor.R, statusBarColor.G, statusBarColor.B)); //here
-                        StatusBarCurrentColor=statusBarColor;
+                        StatusBarCurrentColor = statusBarColor;
                     }
                 }
             }
@@ -393,19 +393,31 @@ namespace OOAdvantech.Droid
         }
 
 
+        public void OpenAppSettings()
+        {
+            var intent = new Intent(Android.Provider.Settings.ActionApplicationDetailsSettings);
+            intent.AddFlags(ActivityFlags.NewTask);
+            string package_name = Application.Context.PackageName;
+            var uri = Android.Net.Uri.FromParts("package", package_name, null);
+            intent.SetData(uri);
+            Application.Context.StartActivity(intent);
+
+
+        }
+
         public System.Threading.Tasks.Task<PermissionStatus> RemoteNotificationsPermissionsCheck()
         {
 
             if ((int)Build.VERSION.SdkInt < 33)
                 return Task.FromResult(PermissionStatus.Granted);
-            
+
             if (Platform.CurrentActivity.CheckSelfPermission(Android.Manifest.Permission.PostNotifications) == Android.Content.PM.Permission.Granted)
                 return Task.FromResult(PermissionStatus.Granted);
             else
                 return Task.FromResult(PermissionStatus.Denied);
         }
 
-     
+
 
         public System.Threading.Tasks.Task<PermissionStatus> RemoteNotificationsPermissionsRequest()
         {
@@ -431,14 +443,14 @@ namespace OOAdvantech.Droid
 
         internal System.Threading.Tasks.Task<PermissionStatus> NotificationPermissionsRequest()
         {
-                       
+
 
             string[] notifyPermission = { Android.Manifest.Permission.PostNotifications };
 
             if (Platform.CurrentActivity.CheckSelfPermission(Android.Manifest.Permission.PostNotifications) != Android.Content.PM.Permission.Granted)
             {
 
-               System.Threading.Tasks.TaskCompletionSource<PermissionStatus> tcs;
+                System.Threading.Tasks.TaskCompletionSource<PermissionStatus> tcs;
 
                 int notificationRequestCode = 0;
                 lock (locker)

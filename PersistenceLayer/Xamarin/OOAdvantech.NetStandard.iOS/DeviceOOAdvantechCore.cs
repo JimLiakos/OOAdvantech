@@ -303,6 +303,23 @@ namespace OOAdvantech.iOS
 //                statusBar.BackgroundColor = new UIColor(statusBarColor.R, statusBarColor.G, statusBarColor.B, statusBarColor.A);
 //            }
         }
+
+        public async Task<PermissionStatus> RemoteNotificationsPermissionsRequest()
+        {
+            return PermissionStatus.Granted;
+        }
+
+        public async Task<PermissionStatus> RemoteNotificationsPermissionsCheck()
+        {
+            return PermissionStatus.Granted;
+            
+        }
+
+        public void OpenAppSettings()
+        {
+            var url = new NSUrl($"app-settings:");
+            UIApplication.SharedApplication.OpenUrl(url);
+        }
     }
     public class RemoteMessage : IRemoteMessage
     {
