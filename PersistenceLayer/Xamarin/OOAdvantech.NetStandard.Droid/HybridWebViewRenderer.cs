@@ -177,8 +177,13 @@ namespace OOAdvantech.Droid
                     callback.SetTaskResult("lolo");
                 }
             }
+            catch(ObjectDisposedException error)
+            {
+                callback.SetTaskException(error);
+            }
             catch (System.Exception error)
             {
+                
                 callback.SetTaskException(error);
             }
         }

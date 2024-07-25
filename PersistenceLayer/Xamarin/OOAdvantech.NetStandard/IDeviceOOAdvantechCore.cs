@@ -234,6 +234,7 @@ namespace OOAdvantech
         event EventHandler ApplicationResuming;
 
         event EventHandler ApplicationSleeping;
+        
 
         SerializeTaskScheduler SerializeTaskScheduler { get; }
     }
