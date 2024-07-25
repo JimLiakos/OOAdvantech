@@ -562,6 +562,7 @@ namespace OOAdvantech.Remoting.RestApi
                                     _WebSocketClient.AddWebSocketChannel(this);
                                 }
                             }
+                            ClientSessionPart?.Reconnect(true, _WebSocketClient);
                         }
                     }
                     finally
