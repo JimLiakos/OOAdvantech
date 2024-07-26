@@ -41,6 +41,8 @@ namespace OOAdvantech.Remoting.RestApi
         /// <MetaDataID>{d4f67b3d-d782-4539-9fc0-852c652ddfc6}</MetaDataID>
         System.Timers.Timer DisconnectTimer;
 
+        System.Timers.Timer WebViewWatchDogTimer;
+
         /// <MetaDataID>{854e0860-1ae9-4a2b-837a-d51482c35f20}</MetaDataID>
         public Dictionary<string, ProxyType> MarshaledTypes = new Dictionary<string, ProxyType>();
 
@@ -87,7 +89,33 @@ namespace OOAdvantech.Remoting.RestApi
             };
             DisconnectTimer.Elapsed += Elapsed;
 
+            if (web)
+            {
+                WebViewWatchDogTimer = new Timer();
 
+                WebViewWatchDogTimer.Interval = TimeSpan.FromSeconds(10).TotalMilliseconds;
+                WebViewWatchDogElapsed= (object Header, ElapsedEventArgs e) =>
+                {
+                    WebViewWatchDogTimer.Stop();
+                    try
+                    {
+                        if (GetActiveChannel()?.EndPoint?.ConnectionIsOpen == false)
+                        {
+                            ClientProcessTerminates();
+                        }
+                        else
+                            WebViewWatchDogTimer.Start();
+
+                    }
+                    catch (Exception error)
+                    {
+                        WebViewWatchDogTimer.Start();
+                    }                    
+                    
+                };
+                WebViewWatchDogTimer.Elapsed += WebViewWatchDogElapsed;
+                WebViewWatchDogTimer.Start();
+            }
 
             lock (ServerSessions)
             {
@@ -97,6 +125,7 @@ namespace OOAdvantech.Remoting.RestApi
                 ChannelUri = channelUri;
                 InternalChannelUri = internalChannelUri;
                 Web = web;
+
 #if DeviceDotNet
                 string channelID = CRCTool.crcbitbybitfast(System.Text.Encoding.UTF8.GetBytes(channelUri.ToLower())).ToString("X");
 #else
@@ -235,6 +264,7 @@ namespace OOAdvantech.Remoting.RestApi
                 EventPublisherUri = eventPublisherUri,
                 SessionIdentity = SessionIdentity,
                 Web = this.Web
+
             };
             eventCallbackMessage.Marshal();
 
@@ -251,17 +281,17 @@ namespace OOAdvantech.Remoting.RestApi
 
 
 
-            try
-            {
-                ConnectionIsOpen = GetActiveChannel()?.EndPoint?.ConnectionIsOpen;
-                if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
-                {
+            //try
+            //{
+            //    ConnectionIsOpen = GetActiveChannel()?.EndPoint?.ConnectionIsOpen;
+            //    if (ConnectionIsOpen != null && !ConnectionIsOpen.Value)
+            //    {
 
-                }
-            }
-            catch (Exception error)
-            {
-            }
+            //    }
+            //}
+            //catch (Exception error)
+            //{
+            //}
 
             SerializeTaskScheduler.AddTask(async () =>
             {
@@ -457,6 +487,8 @@ namespace OOAdvantech.Remoting.RestApi
 
             //}
         }
+
+        public ElapsedEventHandler WebViewWatchDogElapsed { get; }
 
         /// <summary>
         /// Keeps session physical channels state connected true or false.

@@ -20,6 +20,7 @@ using Android.Content;
 using Android.Views;
 using Android.OS;
 using WebView = Android.Webkit.WebView;
+using System.Reflection;
 
 [assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
 namespace OOAdvantech.Droid
@@ -114,6 +115,7 @@ namespace OOAdvantech.Droid
             if (ThreadHelper.IsOnMainThread)
             {
                 InternalInvokeJS(methodName, args, callback);
+                callback?.Task.Wait();
                 if (callback?.Task?.Exception?.GetBaseException() != null)
                     throw callback.Task.Exception.GetBaseException();
             }
@@ -155,7 +157,7 @@ namespace OOAdvantech.Droid
                     }
                     string jsScriptMethodCall = methodName + "(" + jsScriptArgs + ");";
                     Control.EvaluateJavascript(jsScriptMethodCall, callback);
-
+                    callback.SetTaskResult("OK");
                 }
                 else
                 {
@@ -174,16 +176,16 @@ namespace OOAdvantech.Droid
                     }
                     string jsScriptMethodCall = methodName + "(" + jsScriptArgs + ");";
                     Control.LoadUrl("javascript: " + jsScriptMethodCall);
-                    callback.SetTaskResult("lolo");
+                    callback.SetTaskResult("OK");
                 }
             }
-            catch(ObjectDisposedException error)
+            catch (ObjectDisposedException error)
             {
                 callback.SetTaskException(error);
             }
             catch (System.Exception error)
             {
-                
+
                 callback.SetTaskException(error);
             }
         }
@@ -247,37 +249,37 @@ namespace OOAdvantech.Droid
         {
             base.OnElementChanged(e);
 
-//            if (Control == null)
-//            {
-                
-
-//                var webView = new Android.Webkit.WebView(Context);
-//                //webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
-//                webView.Settings.CacheMode = CacheModes.Default;
-//                webView.Settings.DomStorageEnabled = true;
-//                webView.Settings.AllowFileAccess = true;
-//                webView.Settings.AllowFileAccessFromFileURLs = true;
-//                var ss = webView.Settings.UserAgentString;
-//                //webView.Settings.UserAgentString = USER_AGENT;
+            //            if (Control == null)
+            //            {
 
 
+            //                var webView = new Android.Webkit.WebView(Context);
+            //                //webView.Settings.SetRenderPriority(WebSettings.RenderPriority.High);
+            //                webView.Settings.CacheMode = CacheModes.Default;
+            //                webView.Settings.DomStorageEnabled = true;
+            //                webView.Settings.AllowFileAccess = true;
+            //                webView.Settings.AllowFileAccessFromFileURLs = true;
+            //                var ss = webView.Settings.UserAgentString;
+            //                //webView.Settings.UserAgentString = USER_AGENT;
 
-//                // webView.Settings.CacheMode =CacheModes.NoCache;//.CacheMode(WebSettings.lo.LOAD_NO_CACHE);
-//                //webView.SetWebViewClient(new CustomWebViewClient(this));
-//                webView.Settings.JavaScriptEnabled = true;
-//                //webView.ClearCache(false);
-//                webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}", _context));
-//                WebViews.Add(webView);
 
 
-//                SetNativeControl(webView);
-//#if DEBUG
-//                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
-//                {
-//                    Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
-//                }
-//#endif 
-//            }
+            //                // webView.Settings.CacheMode =CacheModes.NoCache;//.CacheMode(WebSettings.lo.LOAD_NO_CACHE);
+            //                //webView.SetWebViewClient(new CustomWebViewClient(this));
+            //                webView.Settings.JavaScriptEnabled = true;
+            //                //webView.ClearCache(false);
+            //                webView.SetWebViewClient(new JavascriptWebViewClient(webView, this, $"javascript: {JavaScriptFunction}", _context));
+            //                WebViews.Add(webView);
+
+
+            //                SetNativeControl(webView);
+            //#if DEBUG
+            //                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
+            //                {
+            //                    Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
+            //                }
+            //#endif 
+            //            }
             if (e.OldElement != null)
             {
                 Control.RemoveJavascriptInterface("jsBridge");
@@ -290,7 +292,7 @@ namespace OOAdvantech.Droid
             HybridWebView = e.NewElement as HybridWebView;
             if (e.NewElement != null)
             {
-                if (NativeWebView == null|| NativeWebView!=Control)
+                if (NativeWebView == null || NativeWebView != Control)
                 {
                     NativeWebView = Control;
 
@@ -308,7 +310,7 @@ namespace OOAdvantech.Droid
                     //NativeWebView.ClearCache(false);
                     NativeWebView.SetWebViewClient(new JavascriptWebViewClient(NativeWebView, this, $"javascript: {JavaScriptFunction}", _context));
                     WebViews.Add(NativeWebView);
-                    
+
 #if DEBUG
                     if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
                     {
@@ -320,7 +322,7 @@ namespace OOAdvantech.Droid
                 if (e.NewElement is HybridWebView)
                     (e.NewElement as HybridWebView).NativeWebBrowser = this;
 
-                
+
                 Control.AddJavascriptInterface(new JSBridge(this), "jsBridge");
                 string url = null;
                 if ((Element as HybridWebView).Uri != null)
@@ -333,7 +335,7 @@ namespace OOAdvantech.Droid
                     {
                         var webAppPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
-                       var ll=  System.IO.File.Exists(System.IO.Path.Combine(webAppPath, "webapp/index.html"));
+                        var ll = System.IO.File.Exists(System.IO.Path.Combine(webAppPath, "webapp/index.html"));
 
                         url = @"file://" + System.IO.Path.Combine(webAppPath, "webapp/index.html");
                     }
@@ -416,7 +418,52 @@ namespace OOAdvantech.Droid
             }
         }
 
-        public bool ConnectionIsOpen => true;
+        public bool ConnectionIsOpen
+        {
+
+            get
+            {
+                try
+                {
+                    if (ThreadHelper.IsOnMainThread)
+                    {
+                        var url = this.Url;
+                    }
+                    else
+                    {
+                        var task=Device.InvokeOnMainThreadAsync(() =>
+                        {
+
+                            try
+                            {
+                                return this.Url;
+                            }
+                            catch (Exception error)
+                            {
+                                throw;
+                            }
+                        });
+                        task.Wait();
+                        if (task.Exception!=null)
+                            return false;
+                    }
+
+                }
+                catch (System.Exception error)
+                {
+
+                    string errorMessage = error.Message;
+                    string errorStackTrace = error.StackTrace;
+
+
+                   
+
+
+                    return false;
+                }
+                return true;
+            }
+        }
 
     }
 
@@ -546,6 +593,8 @@ namespace OOAdvantech.Droid
 
         public Task<string> Task { get { return source.Task; } }
 
+        bool taskCompleted = false;
+
         public StringCallback()
         {
             source = new TaskCompletionSource<string>();
@@ -553,7 +602,15 @@ namespace OOAdvantech.Droid
 
         public void SetTaskResult(string value)
         {
-            source.SetResult(value);
+            lock (source)
+            {
+                if (!taskCompleted)
+                {
+                    taskCompleted = true;
+                    source.SetResult(value);
+                }
+            }
+
 
         }
         public void SetTaskException(System.Exception exception)
@@ -564,9 +621,18 @@ namespace OOAdvantech.Droid
         {
             try
             {
-                var jstr = (Java.Lang.String)value;
-                var str = new string(jstr.AsEnumerable().ToArray());
-                source.SetResult(StringUtils.Unquote(str));
+                lock (source)
+                {
+                    if (taskCompleted)
+                        return;
+                    taskCompleted = true;
+                }
+
+
+                    var jstr = (Java.Lang.String)value;
+                    var str = new string(jstr.AsEnumerable().ToArray());
+                    source.SetResult(StringUtils.Unquote(str));
+                
             }
             catch (System.Exception ex)
             {
