@@ -20,7 +20,7 @@ namespace OOAdvantech
         //void SignOut();
         
 
-        bool IsinSleepMode { get; set; }
+        bool IsinSleepMode { get;  }
 
       
         event MessageReceivedHandle MessageReceived;
@@ -70,6 +70,13 @@ namespace OOAdvantech
 
 
         void OpenAppSettings();
+        void OnResume();
+        void OnSleep();
+        void OnStart();
+
+        event EventHandler ApplicationResuming;
+
+        event EventHandler ApplicationSleeping;
     }
 
     /// <MetaDataID>{a0246554-4359-4a5a-a501-b3a7824c6b12}</MetaDataID>

@@ -867,6 +867,8 @@ namespace OOAdvantech.Remoting.RestApi
 
 
         static bool LeaseTimeIsSet;
+        public static bool LogWebViewChannel=false;
+
         public static void SetDebugLeaseTime()
         {
             if (!LeaseTimeIsSet)

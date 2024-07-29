@@ -28,6 +28,16 @@ namespace OOAdvantech
         String DeviceID { get; }
         string FirebaseToken { get; }
         System.Drawing.Color? StatusBarColor { get; set; }
+
+        bool IsinSleepMode { get; }
+
+        void OnResume();
+        void OnSleep();
+        void OnStart();
+
+        event EventHandler ApplicationResuming;
+
+        event EventHandler ApplicationSleeping;
     }
 
     /// <MetaDataID>{d2445458-7d5d-4cc1-ae85-45143f5d2944}</MetaDataID>

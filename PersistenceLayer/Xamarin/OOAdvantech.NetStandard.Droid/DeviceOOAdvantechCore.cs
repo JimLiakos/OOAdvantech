@@ -23,7 +23,7 @@ using Task = System.Threading.Tasks.Task;
 namespace OOAdvantech.Droid
 {
     /// <MetaDataID>{3e7a0d67-12af-4707-9a0d-5ccd2a013a7a}</MetaDataID>
-    public class DeviceOOAdvantechCore : IDeviceOOAdvantechCore
+    public class DeviceOOAdvantechCore : IDeviceOOAdvantechCore 
     {
 
 
@@ -54,26 +54,27 @@ namespace OOAdvantech.Droid
 
         }
 
-        static event KeyboardChangeStateHandle internalKeyboordChangeState;
+        static event KeyboardChangeStateHandle internalKeyboardChangeState;
+        
 
         event KeyboardChangeStateHandle IDeviceOOAdvantechCore.KeyboardChangeState
         {
             add
             {
-                internalKeyboordChangeState += value;
+                internalKeyboardChangeState += value;
 
             }
 
             remove
             {
-                internalKeyboordChangeState -= value;
+                internalKeyboardChangeState -= value;
 
             }
         }
 
         public static void KeyboordChangeState(KeybordStatus keybordStatus)
         {
-            internalKeyboordChangeState?.Invoke(keybordStatus);
+            internalKeyboardChangeState?.Invoke(keybordStatus);
         }
         public static void SetFirebaseToken(string firebaseToken)
         {
@@ -110,7 +111,64 @@ namespace OOAdvantech.Droid
             r.Play();
         }
         static bool _IsinSleepMode;
-        public bool IsinSleepMode { get => _IsinSleepMode; set => _IsinSleepMode = value; }
+        public bool IsinSleepMode { get => _IsinSleepMode; }
+
+
+        static event EventHandler _ApplicationResuming;
+
+        public event EventHandler ApplicationResuming
+        {
+            add
+            {
+                _ApplicationResuming += value;
+            }
+            remove
+            {
+                _ApplicationResuming -= value;
+            }
+        }
+        static event EventHandler _ApplicationSleeping;
+        public event EventHandler ApplicationSleeping
+        {
+            add
+            {
+                _ApplicationSleeping += value;
+            }
+            remove
+            {
+                _ApplicationSleeping -= value;
+            }
+
+        }
+
+
+        public void OnResume()
+        {
+
+            if (_IsinSleepMode)
+            {
+                _IsinSleepMode = false;
+                _ApplicationResuming?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void OnSleep()
+        {
+            if (!_IsinSleepMode)
+            {
+                _IsinSleepMode = true;
+                _ApplicationSleeping?.Invoke(this, EventArgs.Empty);
+            }
+
+        }
+        public void OnStart()
+        {
+            if (_IsinSleepMode)
+            {
+                _IsinSleepMode = false;
+                _ApplicationResuming?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         public static void InitFirebase(Context context, string firebaseToken, string googleAuthWebClientID, List<Authentication.SignInProvider> providers = null)
         {
@@ -491,6 +549,8 @@ namespace OOAdvantech.Droid
                 }
             }
         }
+
+      
     }
 
 

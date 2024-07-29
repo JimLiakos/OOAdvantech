@@ -597,10 +597,10 @@ namespace UIBaseEx
                     FontStretch fontStretch = FontStretches.Normal;
                     double fontSize = FontSize;
                     var start = System.DateTime.Now;
-                    object result = HtmlView.InvockeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
+                    object result = HtmlView.InvokeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
                     if (!htmlFontFamilies.ContainsKey(FontFamilyName))
                     {
-                        result = HtmlView.InvockeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
+                        result = HtmlView.InvokeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
                         htmlFontFamilies[FontFamilyName] = true;
                     }
 
@@ -674,10 +674,10 @@ namespace UIBaseEx
                     double fontSize = FontSize;
 
                     var start = System.DateTime.Now;
-                    object result = HtmlView.InvockeJSMethod("GetLetterSpacingCorrection", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString(), textWidth });
+                    object result = HtmlView.InvokeJSMethod("GetLetterSpacingCorrection", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString(), textWidth });
                     if (!htmlLetterSpaceFontFamilies.ContainsKey(FontFamilyName))
                     {
-                        result = HtmlView.InvockeJSMethod("GetLetterSpacingCorrection", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString(), textWidth });
+                        result = HtmlView.InvokeJSMethod("GetLetterSpacingCorrection", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString(), textWidth });
                         htmlLetterSpaceFontFamilies[FontFamilyName] = true;
                     }
 
@@ -709,10 +709,10 @@ namespace UIBaseEx
                     double fontSize = FontSize;
 
                     var start = System.DateTime.Now;
-                    object result = HtmlView.InvockeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
+                    object result = HtmlView.InvokeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
                     if (!htmlFontFamilies.ContainsKey(FontFamilyName))
                     {
-                        result = HtmlView.InvockeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
+                        result = HtmlView.InvokeJSMethod("GetTextMetrics", new object[] { text, FontFamilyName, fontSize, fontStyle.ToString(), fontWeight.ToString() });
                         htmlFontFamilies[FontFamilyName] = true;
                     }
 

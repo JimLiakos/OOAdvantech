@@ -69,7 +69,7 @@ namespace OOAdvantech.Droid
 
 
                 if (HostPageIsVisible)
-                    InvockeJSMethod("BackButtonPress", new object[] { });
+                    InvokeJSMethod("BackButtonPress", new object[] { });
             }
             catch (ObjectDisposedException e)
             {
@@ -107,7 +107,7 @@ namespace OOAdvantech.Droid
         }
         //const string JavaScriptFunction = "var result='mm'; function invokeCSharpAction(data){ jsBridge.invokeAction(data); retutn 'result';}   function CSharpCallResult(parameter){result = parameter;}";
         const string JavaScriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";
-        public Task<string> InvockeJSMethod(string methodName, object[] args)
+        public Task<string> InvokeJSMethod(string methodName, object[] args)
         {
             //webSettings.setDomStorageEnabled(true); 
 
@@ -115,7 +115,7 @@ namespace OOAdvantech.Droid
             if (ThreadHelper.IsOnMainThread)
             {
                 InternalInvokeJS(methodName, args, callback);
-                callback?.Task.Wait();
+                return callback?.Task;
                 if (callback?.Task?.Exception?.GetBaseException() != null)
                     throw callback.Task.Exception.GetBaseException();
             }
@@ -127,7 +127,7 @@ namespace OOAdvantech.Droid
                 });
             }
 
-            return Task<string>.FromResult("Hello");
+            return callback.Task;
         }
 
         private void InternalInvokeJS(string methodName, object[] args, StringCallback callback)
@@ -157,7 +157,7 @@ namespace OOAdvantech.Droid
                     }
                     string jsScriptMethodCall = methodName + "(" + jsScriptArgs + ");";
                     Control.EvaluateJavascript(jsScriptMethodCall, callback);
-                    callback.SetTaskResult("OK");
+                    //callback.SetTaskResult("OK");
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace OOAdvantech.Droid
                     }
                     string jsScriptMethodCall = methodName + "(" + jsScriptArgs + ");";
                     Control.LoadUrl("javascript: " + jsScriptMethodCall);
-                    callback.SetTaskResult("OK");
+                    //callback.SetTaskResult("OK");
                 }
             }
             catch (ObjectDisposedException error)
@@ -380,14 +380,14 @@ namespace OOAdvantech.Droid
             throw new NotImplementedException();
         }
 
-        public Task<ResponseData> SendRequestAsync(RequestData requestData)
+        public async Task<ResponseData> SendRequestAsync(RequestData requestData)
         {
             string requestDatajson = JsonConvert.SerializeObject(requestData);
             requestDatajson = ((int)MessageHeader.Request).ToString() + requestDatajson;
-            InvockeJSMethod("SendMessage", new[] { requestDatajson });
+            string result = await InvokeJSMethod("SendMessage", new[] { requestDatajson });
             // InvockeJSMethod("SendMessage", new[] { responseDatajson });
 
-            return Task.FromResult<ResponseData>(null);
+            return null;
 
 
         }
@@ -431,7 +431,7 @@ namespace OOAdvantech.Droid
                     }
                     else
                     {
-                        var task=Device.InvokeOnMainThreadAsync(() =>
+                        var task = Device.InvokeOnMainThreadAsync(() =>
                         {
 
                             try
@@ -444,7 +444,7 @@ namespace OOAdvantech.Droid
                             }
                         });
                         task.Wait();
-                        if (task.Exception!=null)
+                        if (task.Exception != null)
                             return false;
                     }
 
@@ -456,7 +456,7 @@ namespace OOAdvantech.Droid
                     string errorStackTrace = error.StackTrace;
 
 
-                   
+
 
 
                     return false;
@@ -528,7 +528,7 @@ namespace OOAdvantech.Droid
                                 responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
                                 hybridRenderer.SessionIdentity = responseData.SessionIdentity;
 
-                                await hybridRenderer.InvockeJSMethod("SendMessage", new[] { responseDatajson });
+                                string result = await hybridRenderer.InvokeJSMethod("SendMessage", new[] { responseDatajson });
 
                                 //await Control.InvokeScriptAsync("SendMessage", new[] { responseDatajson });
                                 //retval = await OOAdvantech.Remoting.RestApi.MessageDispatcher.TryProcessMessageAsync(jsCallData.Args, _placementTarget.DataContext);
@@ -537,6 +537,7 @@ namespace OOAdvantech.Droid
                         }
                         catch (Exception error)
                         {
+
                         }
 
                         return;
@@ -558,17 +559,12 @@ namespace OOAdvantech.Droid
                         {
                             if (jsCallData.Args == "OnlyAsyncCall")
                             {
-                                await hybridRenderer.InvockeJSMethod("CSCallBack", new[] { jsCallData.CallID.ToString(), "True" });
+                                string result = await hybridRenderer.InvokeJSMethod("CSCallBack", new[] { jsCallData.CallID.ToString(), "True" });
                             }
                             else
                             {
                                 var retval = await OOAdvantech.Remoting.RestApi.MessageDispatcher.TryProcessMessageAsync(jsCallData.Args, hybridRenderer.Element.BindingContext);
-                                //var task = System.Threading.Tasks.Task.Run(async() =>
-                                //{
-                                await hybridRenderer.InvockeJSMethod("CSCallBack", new object[] { jsCallData.CallID, retval });
-
-                                //  await Control.InvokeScriptAsync("CSCallBack", new[] { jsCallData.CallID.ToString(), retval });
-                                //});
+                                string result = await hybridRenderer.InvokeJSMethod("CSCallBack", new object[] { jsCallData.CallID, retval });
                             }
 
                         }
@@ -629,10 +625,10 @@ namespace OOAdvantech.Droid
                 }
 
 
-                    var jstr = (Java.Lang.String)value;
-                    var str = new string(jstr.AsEnumerable().ToArray());
-                    source.SetResult(StringUtils.Unquote(str));
-                
+                var jstr = (Java.Lang.String)value;
+                var str = new string(jstr.AsEnumerable().ToArray());
+                source.SetResult(StringUtils.Unquote(str));
+
             }
             catch (System.Exception ex)
             {

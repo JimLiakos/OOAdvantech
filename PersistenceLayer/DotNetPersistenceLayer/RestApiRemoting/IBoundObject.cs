@@ -20,5 +20,12 @@ namespace OOAdvantech.Remoting.RestApi
     {
         /// <MetaDataID>{a18e58a4-0272-415d-b81f-d9e328aa1973}</MetaDataID>
         MarshalByRefObject GetObjectFromUri(string uri);
+
+    }
+
+    [HttpVisible]
+    public interface INativeConsole
+    {
+       void Log(List<string> lines);
     }
 }

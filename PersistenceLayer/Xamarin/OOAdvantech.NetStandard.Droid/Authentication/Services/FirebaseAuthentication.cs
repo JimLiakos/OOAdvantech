@@ -20,8 +20,14 @@ namespace OOAdvantech.Authentication.Droid
     {
         static FirebaseAuthentication()
         {
-            if (Xamarin.Forms.Application.Current is IAppLifeTime)
-                (Xamarin.Forms.Application.Current as IAppLifeTime).ApplicationResuming += FirebaseAuthentication_ApplicationResuming;
+            var deviceInstantiator = Xamarin.Forms.DependencyService.Get<OOAdvantech.IDeviceInstantiator>();
+            OOAdvantech.IDeviceOOAdvantechCore device = deviceInstantiator.GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+
+            if (device!=null)
+                device.ApplicationResuming += FirebaseAuthentication_ApplicationResuming;
+
+            //if (Xamarin.Forms.Application.Current is IAppLifeTime)
+            //    (Xamarin.Forms.Application.Current as IAppLifeTime).ApplicationResuming += FirebaseAuthentication_ApplicationResuming;
         }
 
 

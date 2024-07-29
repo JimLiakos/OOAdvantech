@@ -237,7 +237,7 @@ namespace OOAdvantech.Web
     /// <MetaDataID>{c9d9b7f0-348a-4ee3-a5c8-55435ecc2459}</MetaDataID>
     public interface INativeWebBrowser
     {
-        Task<string> InvockeJSMethod(string methodName, object[] args);
+        Task<string> InvokeJSMethod(string methodName, object[] args);
 
         void GoBack();
         void Navigate(string url);

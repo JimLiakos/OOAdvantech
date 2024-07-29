@@ -70,7 +70,10 @@ namespace OOAdvantech
             foreach (var line in lines.ToList())
             {
                 var index = lines.IndexOf(line);
-                lines[index]=DateTime.Now.ToString()+" : "+line;
+
+                var now = DateTime.Now;
+                
+                lines[index]= now.ToShortDateString() + "  " + now.ToString("hh:mm:ss.fff") + " : "+line;
             }
             lock (this)
             {

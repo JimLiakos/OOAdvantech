@@ -9,6 +9,6 @@ namespace UIBaseEx
     public interface IHtmlView
     {
         /// <MetaDataID>{861162d5-97c4-4a6a-b089-3a0f4aa73e3f}</MetaDataID>
-        object InvockeJSMethod(string methodName, object[] args, bool _async = false);
+        object InvokeJSMethod(string methodName, object[] args, bool _async = false);
     }
 }

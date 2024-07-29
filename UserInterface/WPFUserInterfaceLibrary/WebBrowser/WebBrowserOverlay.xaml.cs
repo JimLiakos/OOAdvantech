@@ -122,7 +122,7 @@ namespace GenWebBrowser
         //     Occurs just before navigation to a document.
         public event NavigatingCancelEventHandler Navigating;
 
-        public object InvockeJSMethod(string methodName, object[] args, bool _async = false)
+        public object InvokeJSMethod(string methodName, object[] args, bool _async = false)
         {
             //_placementTarget.Dispatcher.BeginInvoke(delegate () => { });
 
@@ -287,7 +287,7 @@ namespace GenWebBrowser
             }
             if (e.Key == Key.BrowserBack)
             {
-                InvockeJSMethod("BackButtonPress", new object[0], true);
+                InvokeJSMethod("BackButtonPress", new object[0], true);
             }
             base.OnKeyUp(e);
         }
@@ -810,7 +810,7 @@ namespace GenWebBrowser
                     {
                         var task = System.Threading.Tasks.Task.Run(() =>
                         {
-                            InvockeJSMethod("CSCallBack", new[] { jsCallData.CallID.ToString(), "True" }, true);
+                            InvokeJSMethod("CSCallBack", new[] { jsCallData.CallID.ToString(), "True" }, true);
                         });
                     }
                 }
@@ -858,7 +858,7 @@ namespace GenWebBrowser
                             {
                                 string responseDatajson = JsonConvert.SerializeObject(responseData);
                                 responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
-                                InvockeJSMethod("SendMessage", new[] { responseDatajson }, true);
+                               var result= InvokeJSMethod("SendMessage", new[] { responseDatajson }, true);
 
                                 //InvockeJSMethod("CSCallBack", new[] { jsCallData.CallID.ToString(), retval }, true);
                             });
@@ -958,7 +958,7 @@ namespace GenWebBrowser
                 System.Diagnostics.Debug.WriteLine("#### event CallContextID : " + requestData.CallContextID.ToString());
 
             }
-            InvockeJSMethod("SendMessage", new[] { requestDatajson }, true);
+            var result= InvokeJSMethod("SendMessage", new[] { requestDatajson }, true);
             Task.FromResult(false);
             return Task.FromResult<ResponseData>(null);
 

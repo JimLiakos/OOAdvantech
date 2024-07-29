@@ -229,7 +229,7 @@ namespace OOAdvantech.Remoting.RestApi
                             responseMessage.Exception = new RestApiExceptionData();
                             responseMessage.Exception.ExceptionMessage = "X_Access_Token expired";
                             responseMessage.Exception.ExceptionCode = ExceptionCode.AccessTokenExpired;
-                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { RequestOS= request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) }; });
+                            return Task<ResponseData>.Run(() => { return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) }; });
 
                         }
 
@@ -238,6 +238,17 @@ namespace OOAdvantech.Remoting.RestApi
                         var methodInfo = methodCallMessage.MethodInfo;
                         object[] args = methodCallMessage.Args.ToArray();
                         var _params = methodInfo.GetParameters();
+
+#if DeviceDotNet
+                        try
+                        {
+                            if (RemotingServices.LogWebViewChannel)
+                                DeviceApplication.Current.Log(new List<string>() { "invoke method : "+methodInfo.DeclaringType.Name + "." + methodInfo.Name });
+                        }
+                        catch (Exception error)
+                        {
+                        }
+#endif
 
                         if (request.CallContextDictionaryData != null)
                         {
@@ -311,7 +322,7 @@ namespace OOAdvantech.Remoting.RestApi
                                 {
                                     retVal = methodInfo.Invoke(methodCallMessage.Object, args);
                                     innerStateTransition.Consistent = true;
-                                } 
+                                }
                                 stateTransition.Consistent = true;
                             }
 
@@ -429,7 +440,7 @@ namespace OOAdvantech.Remoting.RestApi
                         responseMessage.Exception = new RestApiExceptionData(ExceptionCode.ServerError, error.InnerException);
                         return Task<ResponseData>.Run(() =>
                         {
-                            return new ResponseData(request.ChannelUri) {RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
+                            return new ResponseData(request.ChannelUri) { RequestOS = request.RequestOS, CallContextID = request.CallContextID, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage) };
                         });
                     }
                     catch (Exception error)
@@ -612,7 +623,7 @@ namespace OOAdvantech.Remoting.RestApi
                             }
                         }
 
-                        if (request.HasCachingMembers|| (proxyType != null && proxyType.HasCachingClientSideProperties))
+                        if (request.HasCachingMembers || (proxyType != null && proxyType.HasCachingClientSideProperties))
                             objectChangeState = proxyType.GetObjectChangeState();
 
 
@@ -623,6 +634,18 @@ namespace OOAdvantech.Remoting.RestApi
                          };
                         if (objectChangeState != null && methodCallMessage.Object != null)
                             objectChangeState.AddEventHandler(methodCallMessage.Object, handler);
+
+
+#if DeviceDotNet 
+                        try
+                        {
+                            if (RemotingServices.LogWebViewChannel)
+                                DeviceApplication.Current.Log(new List<string>() { "invoke method : " + methodInfo.Name });
+                        }
+                        catch (Exception error)
+                        {
+                        }
+#endif
 
                         object retVal = methodInfo.Invoke(methodCallMessage.Object, args);
                         if (objectChangeState != null && methodCallMessage.Object != null)
@@ -826,7 +849,7 @@ namespace OOAdvantech.Remoting.RestApi
                 {
                     lock (ServerSessionPart.ServerSessions)
                     {
-                        foreach(var serverSessionPart in ServerSessionPart.ServerSessions.Values)
+                        foreach (var serverSessionPart in ServerSessionPart.ServerSessions.Values)
                             serverSessionPart.RenewEventCallbackChannel(request.PhysicalConnectionID, request.EventCallBackChannel);
                     }
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
@@ -994,7 +1017,7 @@ namespace OOAdvantech.Remoting.RestApi
                     return new ResponseData(request.ChannelUri) { IsSucceeded = responseMessage.Exception == null, SessionIdentity = request.SessionIdentity, details = JsonConvert.SerializeObject(responseMessage), InitCommunicationSession = initCommunicationSession };
                 }
 
-            
+
                 if (methodCallMessage.MethodName == StandardActions.CreateCommunicationSession)
                 {
                     serverSession.SetConnectionState(request.PhysicalConnectionID, true, request.EventCallBackChannel);
@@ -1004,7 +1027,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Serialize, byref.ChannelUri, byref.InternalChannelUri, null) };
 #if DeviceDotNet
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
-                    var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetJsonSerialization, serverSession.ChannelUri, internalChannelUri, null,null);
+                    var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetJsonSerialization, serverSession.ChannelUri, internalChannelUri, null, null);
 #else
                     var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
 #endif
@@ -1048,7 +1071,7 @@ namespace OOAdvantech.Remoting.RestApi
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, ContractResolver = new JsonContractResolver(JsonContractType.Serialize, byref.ChannelUri, byref.InternalChannelUri, null) };
 #if DeviceDotNet
                     //var jSetttings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All, SerializationBinder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
-                    var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null,null);
+                    var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null, null);
 #else
                     var jSetttings = new Serialization.JSonSerializeSettings(JsonContractType.Serialize, methodCallMessage.Web ? JsonSerializationFormat.TypeScriptJsonSerialization : JsonSerializationFormat.NetTypedValuesJsonSerialization, serverSession.ChannelUri, internalChannelUri, null, null);// { TypeNameHandling = methodCallMessage.Web ? TypeNameHandling.None : TypeNameHandling.All, Binder = new OOAdvantech.Remoting.RestApi.SerializationBinder(methodCallMessage.Web), ContractResolver = new JsonContractResolver(JsonContractType.Serialize, serverSession.ChannelUri, internalChannelUri, null, methodCallMessage.Web) };
 

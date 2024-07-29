@@ -97,6 +97,9 @@ namespace OOAdvantech.Net
                 }
             }
         }
+
+        public bool IsinSleepMode {get; private set;}   
+
         /// <MetaDataID>{93227076-f4af-4e03-bf2a-0ea2da10dd89}</MetaDataID>
         public static string GetdeviceID()
         {
@@ -184,10 +187,41 @@ namespace OOAdvantech.Net
         List<SimCard> SimCards = new List<SimCard>();
         public static string DebugDeviceID;
 
+        public event EventHandler ApplicationResuming;
+        public event EventHandler ApplicationSleeping;
+
         /// <MetaDataID>{5b493292-06ab-4cd5-8bbb-5d8fee00fe43}</MetaDataID>
         public IReadOnlyList<SimCard> GetSimCards()
         {
             return SimCards.AsReadOnly();
+        }
+
+        public void OnResume()
+        {
+            if (IsinSleepMode)
+            {
+                IsinSleepMode = false;
+                ApplicationResuming?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void OnSleep()
+        {
+            
+            if (IsinSleepMode)
+            {
+                IsinSleepMode = true;
+                ApplicationSleeping?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void OnStart()
+        {
+            if (IsinSleepMode)
+            {
+                IsinSleepMode = false;
+                ApplicationResuming?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 

@@ -46,10 +46,13 @@ namespace OOAdvantech.Remoting.RestApi
         {
 
 #if DeviceDotNet
+            var deviceInstantiator = Xamarin.Forms.DependencyService.Get<OOAdvantech.IDeviceInstantiator>();
+            OOAdvantech.IDeviceOOAdvantechCore device = deviceInstantiator.GetDeviceSpecific(typeof(OOAdvantech.IDeviceOOAdvantechCore)) as OOAdvantech.IDeviceOOAdvantechCore;
+
             if (Application.Current is IAppLifeTime)
             {
-                (Application.Current as IAppLifeTime).ApplicationResuming +=ApplicationResuming;
-                (Application.Current as IAppLifeTime).ApplicationSleeping +=ApplicationSleeping;
+                device.ApplicationResuming +=ApplicationResuming;
+                device.ApplicationSleeping +=ApplicationSleeping;
             }
 
             OOAdvantech.DeviceApplication.Current.Log(new Collections.Generic.List<string> { "Opens : "+channelUri });

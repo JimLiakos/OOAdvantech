@@ -198,7 +198,7 @@ namespace OOAdvantech.iOS
 
                             string responseDatajson = JsonConvert.SerializeObject(responseData);
                             responseDatajson = ((int)MessageHeader.Response).ToString() + responseDatajson;
-                            await InvockeJSMethod("SendMessage", new[] { responseDatajson });
+                            await InvokeJSMethod("SendMessage", new[] { responseDatajson });
 
                         }
                     }
@@ -242,7 +242,7 @@ namespace OOAdvantech.iOS
             base.Dispose(disposing);
         }
 
-        public async Task<string> InvockeJSMethod(string methodName, object[] args)
+        public async Task<string> InvokeJSMethod(string methodName, object[] args)
         {
             try
             {
@@ -349,12 +349,12 @@ namespace OOAdvantech.iOS
             throw new NotImplementedException();
         }
 
-        public Task<ResponseData> SendRequestAsync(RequestData requestData)
+        public async Task<ResponseData> SendRequestAsync(RequestData requestData)
         {
             string requestDatajson = JsonConvert.SerializeObject(requestData);
             requestDatajson = ((int)MessageHeader.Request).ToString() + requestDatajson;
-            (this as INativeWebBrowser).InvockeJSMethod("SendMessage", new[] { requestDatajson });
-            return Task.FromResult<ResponseData>(null);
+            string result = await (this as INativeWebBrowser).InvokeJSMethod("SendMessage", new[] { requestDatajson });
+            return null;
         }
 
         public ResponseData SendRequest(RequestData requestData)
@@ -396,7 +396,7 @@ namespace OOAdvantech.iOS
 
         public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
         {
-            var task = _renderer.InvockeJSMethod("SendMessage", new[] { "CSCodeCommunicationStart" });
+            var task = _renderer.InvokeJSMethod("SendMessage", new[] { "CSCodeCommunicationStart" });
 
             _renderer.OnNavigated(new NavigatedEventArgs(webView, webView.Url.AbsoluteUrl.AbsoluteString, webView.CanGoBack, webView.CanGoForward));
             //base.DidFinishNavigation(webView, navigation);

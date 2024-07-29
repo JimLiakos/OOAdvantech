@@ -134,7 +134,66 @@ namespace OOAdvantech.iOS
         public bool IsForegroundServiceStarted => false;
 
         static bool _IsinSleepMode;
-        public bool IsinSleepMode { get => _IsinSleepMode; set => _IsinSleepMode = value; }
+        public bool IsinSleepMode { get => _IsinSleepMode; }
+
+
+
+        static event EventHandler _ApplicationResuming;
+
+        public event EventHandler ApplicationResuming
+        {
+            add
+            {
+                _ApplicationResuming += value;
+            }
+            remove
+            {
+                _ApplicationResuming -= value;
+            }
+        }
+        static event EventHandler _ApplicationSleeping;
+        public event EventHandler ApplicationSleeping
+        {
+            add
+            {
+                _ApplicationSleeping += value;
+            }
+            remove
+            {
+                _ApplicationSleeping -= value;
+            }
+        }
+
+
+        public void OnResume()
+        {
+
+            if (_IsinSleepMode)
+            {
+                _IsinSleepMode = false;
+                _ApplicationResuming?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void OnSleep()
+        {
+            if (!_IsinSleepMode)
+            {
+                _IsinSleepMode = true;
+                _ApplicationSleeping?.Invoke(this, EventArgs.Empty);
+            }
+
+        }
+        public void OnStart()
+        {
+            if (_IsinSleepMode)
+            {
+                _IsinSleepMode = false;
+                _ApplicationResuming?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+
 
         public bool IsBackgroundServiceStarted => true;
 
