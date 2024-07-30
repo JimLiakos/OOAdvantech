@@ -620,7 +620,7 @@ namespace OOAdvantech.Remoting.RestApi
 
                 }
 
-            }
+            } 
             if (@object == null && !string.IsNullOrWhiteSpace(extObjectUri.MonoStateTypeFullName))
             {
                 Type monoStateType = ModulePublisher.ClassRepository.GetType(extObjectUri.MonoStateTypeFullName, "");

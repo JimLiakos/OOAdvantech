@@ -404,7 +404,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
             }
 
-        }
+        } 
 
 #if !DeviceDotNet
 #endif
