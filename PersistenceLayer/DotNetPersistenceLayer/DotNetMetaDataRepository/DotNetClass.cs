@@ -192,6 +192,10 @@ namespace OOAdvantech.DotNetMetaDataRepository
             }
             if (member.Name == nameof(RolesLoaded))
             {
+                if (FullName == "DontWaitApp.ApplicationSettings")
+                {
+
+                }
                 if (value == null)
                     RolesLoaded = default(bool);
                 else
@@ -728,7 +732,10 @@ namespace OOAdvantech.DotNetMetaDataRepository
             {
                 lock (RolesLock)
                 {
+                    if(FullName == "DontWaitApp.ApplicationSettings")
+                    {
 
+                    }
                     using (SystemStateTransition suppresStateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {
                         if (RolesLoaded)
@@ -1704,6 +1711,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                     throw new System.Exception("the type '" + theType.WrType.FullName + "' isn't class");
 
                 _ImplementationUnit.Value = Assembly.GetComponent(theType.WrType.GetMetaData().Assembly);
+
+                if (theType.WrType.FullName == "DontWaitApp.ApplicationSettings")
+                {
+
+                }
 
                 RolesLoaded = false;
                 _Persistent = false;

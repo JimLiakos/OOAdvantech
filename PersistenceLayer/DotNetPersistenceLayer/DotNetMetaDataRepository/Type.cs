@@ -824,8 +824,11 @@ namespace OOAdvantech.DotNetMetaDataRepository
                 {
                     using (SystemStateTransition stateTransition = new SystemStateTransition(TransactionOption.Suppress))
                     {
-
-                        classifier = DotNetMetaDataRepository.MetaObjectMapper.FindMetaObjectFor(type) as MetaDataRepository.Classifier;
+                        if (type.FullName == "DontWaitApp.ApplicationSettings")
+                        {
+                            string tt = type.AssemblyQualifiedName;
+                        }
+                        classifier = MetaObjectMapper.FindMetaObjectFor(type) as MetaDataRepository.Classifier;
                         if (classifier != null)
                             return classifier;
 #if !DeviceDotNet

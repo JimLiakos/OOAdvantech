@@ -23,9 +23,10 @@ namespace OOAdvantech.Remoting.RestApi
 
     }
 
+    /// <MetaDataID>{24016d10-9d00-4fad-bb00-e32b96246b51}</MetaDataID>
     [HttpVisible]
     public interface INativeConsole
     {
-       void Log(List<string> lines);
+        void Log(List<string> lines);
     }
 }

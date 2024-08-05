@@ -170,10 +170,13 @@ namespace OOAdvantech.DotNetMetaDataRepository
 
             lock (MetaObjectMapperLock)
             {
-                if (theMetaObject.Identity.ToString().Trim() == "M:{3d5670ae-e925-4c84-801f-de7fc948144b}.GetFlavoursServicesContext[String]")
+                if (theMetaObject.Identity.ToString().Trim() == "263140f9-632e-43dc-a923-9e37a5d9a348RoleB")
                 {
 
+                
                 }
+
+
                 string identityAsString = theMetaObject.Identity.ToString().Trim();
                 string implementationUnitIdentity = "";
                 if (theMetaObject.ImplementationUnit != null)
