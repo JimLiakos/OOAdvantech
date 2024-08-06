@@ -700,7 +700,7 @@ namespace OOAdvantech.MetaDataRepository
             }
 
 
-
+            BaseProxyType?.CachingObjectMembersValue(_object, membersValues, referenceOnlyCaching, cachingMetaData);
 
             foreach (var _interface in _Interfaces)
                 _interface.CachingObjectMembersValue(_object, membersValues, referenceOnlyCaching, cachingMetaData);

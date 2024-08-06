@@ -157,7 +157,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             }
             AuthUser authUser = System.Runtime.Remoting.Messaging.CallContext.GetData("AutUser") as AuthUser;
             ObjRef byref = new ObjRef(uri, ServerSessionPart.ChannelUri, ServerSessionPart.InternalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
-            
+            if (_obj.GetType().Name == "ServingShiftWork")
+            {
+
+            }
             byref.CachingObjectMemberValues(_obj, CachingMetadata);
             if (typeAlreadyMarshaled)
                 byref.TypeMetaData = null;

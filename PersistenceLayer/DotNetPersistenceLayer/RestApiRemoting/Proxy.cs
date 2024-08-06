@@ -109,7 +109,7 @@ namespace OOAdvantech.Remoting.RestApi
         {
             if (ObjectRef.Uri != objectRef.Uri)
             {
-               
+
                 TypeMetaData = objectRef.GetTypeMetaData();
 
                 ObjectRef = objectRef;
@@ -271,7 +271,7 @@ namespace OOAdvantech.Remoting.RestApi
             var clientSessionPart = RenewalManager.GetSession(ChannelUri, false, RemotingServices.CurrentRemotingServices);
 
 
-            if (methodName == "GetLifetimeService")
+            if (methodName == "get_StartsAt")
             {
 
             }
@@ -338,7 +338,18 @@ namespace OOAdvantech.Remoting.RestApi
             //    channelUri = channelUri.Substring(0, channelUri.IndexOf("("));
             //    requestData.InternalChannelUri = internalchannelUri;
             //}
+
+            if (RemotingServices.LogWebViewChannel)
+                DeviceApplication.Current.Log(new List<string>() { $"Begin invoke {type.FullName}   {methodName}" });
+
+
+
+
+
             var responseData = (clientSessionPart as ClientSessionPart).Channel.ProcessRequest(requestData);
+
+            if (RemotingServices.LogWebViewChannel)
+                DeviceApplication.Current.Log(new List<string>() { $"End invoke {type.FullName}   {methodName}" });
 
             //var responseData = RemotingServices.Invoke(channelUri, requestData, X_Auth_Token, X_Access_Token);
             if (responseData != null)// .IsSuccessStatusCode)
@@ -1216,7 +1227,7 @@ namespace OOAdvantech.Remoting.RestApi
                 }
                 try
                 {
-                    
+
                     if (returnMessage.Exception.ExceptionCode == ExceptionCode.ConnectionError)
                         exception = new System.Net.WebException(returnMessage.Exception.ExceptionMessage, System.Net.WebExceptionStatus.ConnectFailure);
                     else
@@ -1235,7 +1246,7 @@ namespace OOAdvantech.Remoting.RestApi
                         {
                         }
                     }
-                    
+
 
                 }
                 catch (Exception error)

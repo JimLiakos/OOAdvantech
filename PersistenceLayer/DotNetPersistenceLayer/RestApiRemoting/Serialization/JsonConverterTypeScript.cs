@@ -1113,6 +1113,10 @@ namespace OOAdvantech.Remoting.RestApi.Serialization
             ObjRef byref = new ObjRef(uri, serverChannelUri, internalChannelUri, _obj.GetType().AssemblyQualifiedName, httpProxyType);
             byref.ReferenceOnlyCaching = referenceOnlyCaching;
 
+            //if(_obj.GetType().Name== "ServingShiftWork")
+            //{
+
+            //}
             byref.CachingObjectMemberValues(_obj, CachingMetadata);
 
 
