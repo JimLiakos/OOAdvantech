@@ -30,6 +30,7 @@ namespace OOAdvantech.Remoting
 
         /// <MetaDataID>{9c120fd9-0499-4e5f-abca-87b642834b6e}</MetaDataID>
         void Subscribe(ExtObjectUri eventPublisherUri, EventInfoData eventInfo);
+        void ButchSubscribe(List<EventSubscription> subscriptions);
 
 #if !DeviceDotNet
 
@@ -42,6 +43,9 @@ namespace OOAdvantech.Remoting
         void Subscribe(System.Collections.Generic.List<RemoteEventSubscription> eventSubscriptions, IRemoteEventHandler remoteEventHandler);
         /// <MetaDataID>{407081c8-a319-4ac7-bb24-0aacc678f070}</MetaDataID>
         void Subscribe(ExtObjectUri eventPublisherUri, EventInfoData eventInfo, IRemoteEventHandler clientSessionPart);
+
+        void Subscribe(List<EventSubscription> subscriptions, IRemoteEventHandler clientSessionPart);
+
         /// <MetaDataID>{f7768c52-64c2-43d4-a3e7-dd45290a0aeb}</MetaDataID>
         void Unsubscribe(System.Collections.Generic.List<RemoteEventSubscription> eventSubscriptions);
 
@@ -112,7 +116,7 @@ namespace OOAdvantech.Remoting
         }
 
         //public readonly string ServerSessionPartID = Guid.NewGuid().ToString();
-        
+
 
 
 
@@ -135,7 +139,7 @@ namespace OOAdvantech.Remoting
         public ServerSessionPart(System.Guid clientProcessIdentity)
         {
             ClientProcessIdentity = clientProcessIdentity;
-            if(UseNetRemotingChannel)
+            if (UseNetRemotingChannel)
                 new WeakReferenceEventPublisher(this, 5000);
 
             _SessionIdentity = clientProcessIdentity.ToString("N") + "." + ServerProcessIdentity.ToString("N");
@@ -192,7 +196,7 @@ namespace OOAdvantech.Remoting
 
 
 
-     
+
 
 
         //#if !DeviceDotNet
@@ -259,14 +263,22 @@ namespace OOAdvantech.Remoting
             {
                 //There isn't server object too remove subscription 
                 //object collected from garbage collector 
-                
+
             }
+        }
+
+        public void Subscribe(List<EventSubscription> subscriptions, IRemoteEventHandler clientSessionPart)
+        {
+
+            foreach (var subscription in subscriptions)
+                Subscribe(subscription.EventPublisherUri, subscription.EventInfoData, clientSessionPart);
+
         }
 
         /// <MetaDataID>{6006ab78-9646-4005-abcb-91db780bcfb7}</MetaDataID>
         public void Subscribe(ExtObjectUri eventPublisherUri, EventInfoData eventInfoData, IRemoteEventHandler clientSessionPart)
         {
-            System.Reflection.EventInfo eventInfo = eventInfoData.EventInfo;
+            EventInfo eventInfo = eventInfoData.EventInfo;
 
             MarshalByRefObject eventPublisherObject = GetObjectFromUri(eventPublisherUri);
             if (eventPublisherObject == null)
@@ -302,6 +314,12 @@ namespace OOAdvantech.Remoting
         {
             Subscribe(eventPublisherUri, eventInfo, null);
         }
+
+        public void ButchSubscribe(List<EventSubscription> subscriptions)
+        {
+            Subscribe(subscriptions, null);
+        }
+
         /// <MetaDataID>{656bfad3-3b1e-4a4f-be9c-023dbd9775c2}</MetaDataID>
         public virtual void ClientProcessTerminates()
         {
@@ -328,11 +346,11 @@ namespace OOAdvantech.Remoting
 
 #else
 
-                       // eventConsumerProxy.RemoveSubscription(eventConsumerProxy.EventPublisherObject);
+                        // eventConsumerProxy.RemoveSubscription(eventConsumerProxy.EventPublisherObject);
 
                         System.Delegate customEventDelegate = System.Delegate.CreateDelegate(eventConsumerProxy.EventInfo.EventHandlerType, eventConsumerProxy.AutoGenEventHandler, "CustomEventHandler");
                         var _object = GetObjectFromUri(eventConsumerProxy.EventPublisherUri);
-                        if(_object!=null)
+                        if (_object != null)
                             eventConsumerProxy.EventInfo.RemoveEventHandler(_object, customEventDelegate);
 
                         System.Reflection.EventInfo commonEventInfo = eventConsumerProxy.AutoGenEventHandler.GetType().GetEvent("CommonEvent");
@@ -479,7 +497,7 @@ namespace OOAdvantech.Remoting
             }
         }
 #if DeviceDotNet
-    
+
         public void Subscribe(List<RemoteEventSubscription> eventSubscriptions)
         {
             throw new NotImplementedException();
@@ -490,7 +508,7 @@ namespace OOAdvantech.Remoting
             throw new NotImplementedException();
         }
 
-     
+
 
         public void Unsubscribe(List<RemoteEventSubscription> eventSubscriptions)
         {
@@ -509,7 +527,7 @@ namespace OOAdvantech.Remoting
                 {
                     Subscribe(eventSubscription.ExtObjectUri, eventSubscription.eventInfo);
                 }
-                catch (Exception error )
+                catch (Exception error)
                 {
                     // massive event subscription on reconnect does not propagate subscription exception
                     //if the server has restarted the transient object did not exist  and  event subscription failed
@@ -537,6 +555,12 @@ namespace OOAdvantech.Remoting
                 Unsubscribe(eventSubscription.ExtObjectUri, eventSubscription.eventInfo);
         }
 #endif
+    }
+    public class EventSubscription
+    {
+        public ExtObjectUri EventPublisherUri { get; set; }
+        public EventInfoData EventInfoData { get; set; }
+
     }
 }
 

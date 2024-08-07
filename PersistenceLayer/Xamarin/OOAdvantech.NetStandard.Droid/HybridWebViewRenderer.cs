@@ -157,7 +157,7 @@ namespace OOAdvantech.Droid
                     }
                     string jsScriptMethodCall = methodName + "(" + jsScriptArgs + ");";
                     Control.EvaluateJavascript(jsScriptMethodCall, callback);
-                    //callback.SetTaskResult("OK");
+                    callback.SetTaskResult("OK");
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace OOAdvantech.Droid
                     }
                     string jsScriptMethodCall = methodName + "(" + jsScriptArgs + ");";
                     Control.LoadUrl("javascript: " + jsScriptMethodCall);
-                    //callback.SetTaskResult("OK");
+                    callback.SetTaskResult("OK");
                 }
             }
             catch (ObjectDisposedException error)

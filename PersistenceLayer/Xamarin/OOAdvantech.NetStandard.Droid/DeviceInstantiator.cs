@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using OOAdvantech.Remoting;
+using OOAdvantech.Remoting.RestApi;
 [assembly: Xamarin.Forms.Dependency(typeof(OOAdvantech.Droid.DeviceInstantiator))]
 namespace OOAdvantech.Droid
 {
@@ -57,6 +59,8 @@ namespace OOAdvantech.Droid
                 GlobalLayoutListener = new KeyboardService.GlobalLayoutListener();
                 Xamarin.Essentials.Platform.CurrentActivity.Window.DecorView.ViewTreeObserver.AddOnGlobalLayoutListener(GlobalLayoutListener);
             }
+
+            var deviceAuthentication = MonoStateClass.GetInstance(typeof(DeviceAuthentication)) as DeviceAuthentication;
 
 
             ThreadHelper.Initialize( System.Environment.CurrentManagedThreadId);
