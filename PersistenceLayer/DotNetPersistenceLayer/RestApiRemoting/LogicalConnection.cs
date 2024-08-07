@@ -31,5 +31,5 @@ namespace OOAdvantech.Remoting.RestApi
         [AssociationClassRole(Roles.RoleB)]
         public WebSocketServer CommunicationEndPoints { get; set; }
 
-    }
+    } 
 }

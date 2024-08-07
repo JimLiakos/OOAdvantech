@@ -556,8 +556,11 @@ namespace OOAdvantech.Remoting
         }
 #endif
     }
+
+
     public class EventSubscription
     {
+        
         public ExtObjectUri EventPublisherUri { get; set; }
         public EventInfoData EventInfoData { get; set; }
 

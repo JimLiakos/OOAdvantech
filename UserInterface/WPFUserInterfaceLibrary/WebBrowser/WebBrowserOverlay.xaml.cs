@@ -755,6 +755,8 @@ namespace GenWebBrowser
                     }
                     else
                         Navigated?.Invoke(sender, new NavigatedEventArgs(ChromeBrowser, ChromeBrowser.Address, false, false));
+
+                    var result = InvokeJSMethod("SendMessage", new[] { "CSCodeCommunicationStart" }, true);
                 };
                 ChromeBrowser.LoadingStateChanged += delegate (object sender, LoadingStateChangedEventArgs e)
                 {
@@ -771,6 +773,8 @@ namespace GenWebBrowser
                     }
                     else
                         Navigated?.Invoke(sender, new NavigatedEventArgs(ChromeBrowser, ChromeBrowser.Address, e.CanGoBack, e.CanGoForward));
+
+                    var result = InvokeJSMethod("SendMessage", new[] { "CSCodeCommunicationStart" }, true);
                 };
 
                 //ChromeBrowser.Loaded += delegate (object sender, RoutedEventArgs e) { Navigated?.Invoke(sender, e); };

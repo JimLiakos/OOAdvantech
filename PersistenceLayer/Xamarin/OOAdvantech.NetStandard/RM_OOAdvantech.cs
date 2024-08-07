@@ -97,6 +97,15 @@ public event OOAdvantech.Remoting.RestApi.ProxyRecconectedHandle Reconnected
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Remoting.IServerSessionPart), "Subscribe", args, argsTypes);
         }
         
+        public void ButchSubscribe(System.Collections.Generic.List<OOAdvantech.Remoting.EventSubscription> subscriptions)
+        {
+            object[] args = new object[1];
+            System.Type[] argsTypes = new System.Type[1];
+            args[0] = subscriptions;
+            argsTypes[0] = typeof(System.Collections.Generic.List<OOAdvantech.Remoting.EventSubscription>);
+            object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Remoting.IServerSessionPart), "ButchSubscribe", args, argsTypes);
+        }
+        
         public void Subscribe(System.Collections.Generic.List<OOAdvantech.Remoting.RemoteEventSubscription> eventSubscriptions)
         {
             object[] args = new object[1];
@@ -127,6 +136,17 @@ public event OOAdvantech.Remoting.RestApi.ProxyRecconectedHandle Reconnected
             argsTypes[1] = typeof(OOAdvantech.Remoting.EventInfoData);
             args[2] = clientSessionPart;
             argsTypes[2] = typeof(OOAdvantech.Remoting.IRemoteEventHandler);
+            object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Remoting.IServerSessionPart), "Subscribe", args, argsTypes);
+        }
+        
+        public void Subscribe(System.Collections.Generic.List<OOAdvantech.Remoting.EventSubscription> subscriptions, OOAdvantech.Remoting.IRemoteEventHandler clientSessionPart)
+        {
+            object[] args = new object[2];
+            System.Type[] argsTypes = new System.Type[2];
+            args[0] = subscriptions;
+            argsTypes[0] = typeof(System.Collections.Generic.List<OOAdvantech.Remoting.EventSubscription>);
+            args[1] = clientSessionPart;
+            argsTypes[1] = typeof(OOAdvantech.Remoting.IRemoteEventHandler);
             object retValue = this.Proxy.Invoke(typeof(OOAdvantech.Remoting.IServerSessionPart), "Subscribe", args, argsTypes);
         }
         
