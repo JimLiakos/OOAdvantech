@@ -213,7 +213,7 @@ namespace OOAdvantech.Droid
 
             StopCommands.Add(notificationData.StopActionID);
 
-            const int Service_Running_Notification_ID = 936;
+             int Service_Running_Notification_ID = 936;
 
             if (Build.VERSION.SdkInt < BuildVersionCodes.Tiramisu)
             {
